@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BaseMovementTools
+  m_EditorClassIdentifier: Assembly-CSharp::ExtraMoveAsset
+  moveControls:
+  - movementName: Neutral Super Jump
+    mtype: 3
+    movementPriority: 2
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 258
+      defaultStringPieces: 320035003800
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: e4a26c87d531aaf4688483f146b352b9, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Forward Super Jump
+    mtype: 5
+    movementPriority: 2
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 159
+      defaultStringPieces: 310035003900
+      possibleActiveInput: 0
+    - directionalComboString: 259
+      defaultStringPieces: 320035003900
+      possibleActiveInput: 0
+    - directionalComboString: 2369
+      defaultStringPieces: 3200330036003900
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: e4a26c87d531aaf4688483f146b352b9, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Back Super Jump
+    mtype: 4
+    movementPriority: 2
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 357
+      defaultStringPieces: 330035003700
+      possibleActiveInput: 0
+    - directionalComboString: 257
+      defaultStringPieces: 320035003700
+      possibleActiveInput: 0
+    - directionalComboString: 2147
+      defaultStringPieces: 3200310034003700
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: e4a26c87d531aaf4688483f146b352b9, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Back Dash
+    mtype: 7
+    movementPriority: 2
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 454
+      defaultStringPieces: 340035003400
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: 078ef246d0a2bd14abd353df9f67c863, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Forward Dash
+    mtype: 6
+    movementPriority: 2
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 656
+      defaultStringPieces: 360035003600
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: 6fd7f238252fa134b81fe701455d2cb1, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Jump
+    mtype: 0
+    movementPriority: 1
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 8
+      defaultStringPieces: 3800
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: e4a26c87d531aaf4688483f146b352b9, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Back Jump
+    mtype: 1
+    movementPriority: 1
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 7
+      defaultStringPieces: 3700
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: e4a26c87d531aaf4688483f146b352b9, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}
+  - movementName: Forward Jump
+    mtype: 2
+    movementPriority: 1
+    curInput: 0
+    possibleInputs:
+    - directionalComboString: 9
+      defaultStringPieces: 3900
+      possibleActiveInput: 0
+    myNeutralAnim:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 7400000, guid: e4a26c87d531aaf4688483f146b352b9, type: 2}
+      animName: 
+      animLength: 0
+      neutralAnimState: 0
+    checkTimer: {fileID: 0}

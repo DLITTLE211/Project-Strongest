@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce781af4dca183f49b5c73dda845874f, type: 3}
+  m_Name: CharacterListBaki Hanma (Teen)_CharacterFolder
+  m_EditorClassIdentifier: 
+  CharacterName: Baki Hanma (Teen)
+  CharacterID: 1
+  CharacterProfileImage: {fileID: 21300000, guid: fb21d43469c422e4799d052c515883f3, type: 3}
+  Mass: 78
+  Height: 68
+  Weight: 145
+  MoveVelocity: 300
+  JumpForce: 70
+  InAirMoveForce: 3.4
+  MaxHealth: 100
+  MaxStunValue: 45
+  DefenseValue: 65
+  HealthRegenRate: 3
+  Animator: {fileID: 0}
+  AllCharacterAnimations: []
+  LayerInfo: []
+  CharacterModel: {fileID: 0}
+  CharacterMoveListPrefab: {fileID: 0}
+  BasicCharacterInteractions: []
+  SpecialCharacterInteractions: []

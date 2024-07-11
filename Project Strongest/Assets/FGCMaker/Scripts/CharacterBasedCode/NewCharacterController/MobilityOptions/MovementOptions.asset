@@ -1,0 +1,295 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868adebbb441e2248a78ddbf8e93d767, type: 3}
+  m_Name: MovementOptions
+  m_EditorClassIdentifier: 
+  mobilityOptions:
+  - movementName: NeutralSuperJump
+    type: 3
+    curInput: 0
+    _movementInputs:
+    - movementString: 8
+      stringCharArray: 3800
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: 1f8b9cd5668dac84484ff45de9a69093, type: 2}
+      - {fileID: 7400000, guid: 1ec7d1d3a6899ed428fc7e566a22008a, type: 2}
+      animName:
+      - Neutral_Jump
+      - Neutral_Fall
+      totalWaitTime: 0.5777778
+      animLength:
+      - 0.13333334
+      - 0.2
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 12
+        lastFrame: 12
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 3
+    isSuperVariant: 1
+    activeMove: 1
+  - movementName: BackSuperJump
+    type: 4
+    curInput: 0
+    _movementInputs:
+    - movementString: 7
+      stringCharArray: 3700
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: f793a6d5bef6a064b88190a21928634f, type: 2}
+      - {fileID: 7400000, guid: 69a25e1542cfd6940b42e5058d712315, type: 2}
+      animName:
+      - Back_Jump
+      - Back_Fall
+      totalWaitTime: 0.61111116
+      animLength:
+      - 0.16666667
+      - 0.2
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 12
+        lastFrame: 12
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 3
+    isSuperVariant: 1
+    activeMove: 0
+  - movementName: ForwardSuperJump
+    type: 5
+    curInput: 0
+    _movementInputs:
+    - movementString: 9
+      stringCharArray: 3900
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: 161f11c7427ec1948bde77b4e30c222a, type: 2}
+      - {fileID: 7400000, guid: 6ad14824e63c4ee499108a38daaeb817, type: 2}
+      animName:
+      - Forward_Jump
+      - Forward_Fall
+      totalWaitTime: 1.0222223
+      animLength:
+      - 0.13333334
+      - 0.4
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 24
+        lastFrame: 24
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 3
+    isSuperVariant: 1
+    activeMove: 1
+  - movementName: ForwardJump
+    type: 2
+    curInput: 0
+    _movementInputs:
+    - movementString: 9
+      stringCharArray: 3900
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: 161f11c7427ec1948bde77b4e30c222a, type: 2}
+      - {fileID: 7400000, guid: 6ad14824e63c4ee499108a38daaeb817, type: 2}
+      animName:
+      - Forward_Jump
+      - Forward_Fall
+      totalWaitTime: 1.0222223
+      animLength:
+      - 0.13333334
+      - 0.4
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 24
+        lastFrame: 24
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 1
+    isSuperVariant: 0
+    activeMove: 1
+  - movementName: BackJump
+    type: 1
+    curInput: 0
+    _movementInputs:
+    - movementString: 7
+      stringCharArray: 3700
+      canCheckInput: 0
+      completedString: 1
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: f793a6d5bef6a064b88190a21928634f, type: 2}
+      - {fileID: 7400000, guid: 69a25e1542cfd6940b42e5058d712315, type: 2}
+      animName:
+      - Back_Jump
+      - Back_Fall
+      totalWaitTime: 0.61111116
+      animLength:
+      - 0.16666667
+      - 0.2
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 12
+        lastFrame: 12
+        _extraPoints:
+        - hitFramePoints: 5
+          call: 10
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 1
+    isSuperVariant: 0
+    activeMove: 0
+  - movementName: Jump
+    type: 0
+    curInput: 0
+    _movementInputs:
+    - movementString: 8
+      stringCharArray: 3800
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: 1f8b9cd5668dac84484ff45de9a69093, type: 2}
+      - {fileID: 7400000, guid: 1ec7d1d3a6899ed428fc7e566a22008a, type: 2}
+      animName:
+      - Neutral_Jump
+      - Neutral_Fall
+      totalWaitTime: 0.5777778
+      animLength:
+      - 0.13333334
+      - 0.2
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 12
+        lastFrame: 12
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 1
+    isSuperVariant: 0
+    activeMove: 0
+  - movementName: ForwardDash
+    type: 6
+    curInput: 0
+    _movementInputs:
+    - movementString: 656
+      stringCharArray: 360035003600
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: 6fd7f238252fa134b81fe701455d2cb1, type: 2}
+      animName:
+      - F_Dash
+      totalWaitTime: 0
+      animLength:
+      - 0.5833333
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 35
+        lastFrame: 35
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+        - hitFramePoints: 34
+          call: 11
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 2
+    isSuperVariant: 0
+    activeMove: 0
+  - movementName: BackDash
+    type: 7
+    curInput: 0
+    _movementInputs:
+    - movementString: 454
+      stringCharArray: 340035003400
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 7400000, guid: 078ef246d0a2bd14abd353df9f67c863, type: 2}
+      animName:
+      - B_Dash
+      totalWaitTime: 0
+      animLength:
+      - 0.41666666
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 10
+          hitFrameBools: 0
+        - hitFramePoints: 24
+          call: 11
+          hitFrameBools: 0
+    cTimer: {fileID: 0}
+    movementPriority: 2
+    isSuperVariant: 0
+    activeMove: 0
