@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1e80011d282984cae526985a9b9a5f, type: 3}
+  m_Name: TempCharacter_HitReactions
+  m_EditorClassIdentifier: Assembly-CSharp::HitAnimations
+  ground_hitAnims:
+  - animClip: {fileID: 7400000, guid: 385ab6c0d2c137740be0226fece4381a, type: 2}
+    animName: Light_Hit
+    animLength: 0.43333334
+    actionableHitPoint: 16000000
+    actionableHitPointInFrames:
+    - 0.36666667
+    timeDifference:
+    - 0.06666667
+  - animClip: {fileID: 7400000, guid: c928177e294a2e54288c9147a2a3b629, type: 2}
+    animName: Medium_Hit
+    animLength: 0.75
+    actionableHitPoint: 2c000000
+    actionableHitPointInFrames:
+    - 0.73333335
+    timeDifference:
+    - 0.016666668
+  - animClip: {fileID: 7400000, guid: 35f64d6679058604abfa7e04884546b2, type: 2}
+    animName: Heavy_Hit
+    animLength: 0.8333333
+    actionableHitPoint: 31000000
+    actionableHitPointInFrames:
+    - 0.81666666
+    timeDifference:
+    - 0.016666647
+  - animClip: {fileID: 7400000, guid: dec3988dbe9e0bf42867a80c86abc7d0, type: 2}
+    animName: Crumple
+    animLength: 1.75
+    actionableHitPoint: 68000000
+    actionableHitPointInFrames:
+    - 1.7333333
+    timeDifference:
+    - 0.016666668
+  - animClip: {fileID: 7400000, guid: 9e576a49dc9b1fe45a652396576df956, type: 2}
+    animName: SpiralHit
+    animLength: 0.6666667
+    actionableHitPoint: 27000000
+    actionableHitPointInFrames:
+    - 0.65
+    timeDifference:
+    - 0.016666686
+  getUp_Anims:
+  - animClip: {fileID: 7400000, guid: 6b825701453b70b4098bce126f2d46a8, type: 2}
+    animName: Landing_Anim
+    animLength: 0.26666668
+    actionableHitPoint: 0f000000
+    actionableHitPointInFrames:
+    - 0.25
+    timeDifference:
+    - 0.01666668
+  - animClip: {fileID: 7400000, guid: 1fd96279d9284c6438407f3b6d89aa09, type: 2}
+    animName: 
+    animLength: 0.4
+    actionableHitPoint: 17000000
+    actionableHitPointInFrames:
+    - 0.38333333
+    timeDifference:
+    - 0.016666673
+  - animClip: {fileID: 7400000, guid: 1200b68899500084d8a197a7e8e74928, type: 2}
+    animName: 
+    animLength: 1.35
+    actionableHitPoint: 50000000
+    actionableHitPointInFrames:
+    - 1.3333334
+    timeDifference:
+    - 0.01666669
+  air_HitAnims:
+  - animClip: {fileID: 7400000, guid: 39ea232fa47b0fe40a24f058ea2d2b3d, type: 2}
+    animName: AirHit_Light
+    animLength: 0.23333333
+    actionableHitPoint: 0d000000
+    actionableHitPointInFrames:
+    - 0.21666667
+    timeDifference:
+    - 0.016666668
+  - animClip: {fileID: 7400000, guid: 245ec4735038cde459b6f9e257b88d0b, type: 2}
+    animName: AirHit_Medium
+    animLength: 0.35
+    actionableHitPoint: 13000000
+    actionableHitPointInFrames:
+    - 0.31666666
+    timeDifference:
+    - 0.033333328
+  air_RecoverAnims:
+  - animClip: {fileID: 7400000, guid: d25f1c6ab408dcd429881bbc8f307049, type: 2}
+    animName: Air_RecoveryGetUp
+    animLength: 0.46666667
+    actionableHitPoint: 1b000000
+    actionableHitPointInFrames:
+    - 0.45
+    timeDifference:
+    - 0.01666667
+  standingblock_Anims:
+  - animClip: {fileID: 7400000, guid: c938c16cc40c42d4096f5d14db2b85de, type: 2}
+    animName: Block_R_Light
+    animLength: 0.33333334
+    actionableHitPoint: 11000000
+    actionableHitPointInFrames:
+    - 0.28333333
+    timeDifference:
+    - 0.05000001
+  - animClip: {fileID: 7400000, guid: 7c325fdb8dcfce24c82fd0e4d7d908e0, type: 2}
+    animName: Block_R_Heavy
+    animLength: 0.41666666
+    actionableHitPoint: 17000000
+    actionableHitPointInFrames:
+    - 0.38333333
+    timeDifference:
+    - 0.033333324
+  crouchingblock_Anims:
+  - animClip: {fileID: 7400000, guid: eac7446140d0e064fa018350d0c26ecf, type: 2}
+    animName: 
+    animLength: 0.13333334
+    actionableHitPoint: 
+    actionableHitPointInFrames: []
+    timeDifference: []
+  - animClip: {fileID: 7400000, guid: f209999e5c2792a408fdfd96f5333bc5, type: 2}
+    animName: 
+    animLength: 0.2
+    actionableHitPoint: 
+    actionableHitPointInFrames: []
+    timeDifference: []
