@@ -249,8 +249,8 @@ public class CharacterSelect_Setup : MonoBehaviour
     void CursorController(CharacterSelect_Cursor currentController) 
     {
         if (currentController.isConnected)
-        {
-            if (currentController.curPlayer.GetButtonDown(18))
+        {;
+            if (currentController.curPlayer.GetButtonDown("C"))
             {
                 if (currentController.profile == null)
                 {
@@ -265,7 +265,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            else if (currentController.curPlayer.GetButton(17))
+            if (currentController.curPlayer.GetButtonDown("D"))
             {
                 if (currentController.profile != null)
                 {
@@ -280,7 +280,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            else if (currentController.curPlayer.GetButtonDown(19))
+            if (currentController.curPlayer.GetButtonDown(19))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                 //{
@@ -288,7 +288,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     currentController.cursorPage.characterAmplify.UpdateInfoUp();
                 //}
             }
-            else if(currentController.curPlayer.GetButtonDown(21))
+            if(currentController.curPlayer.GetButtonDown(21))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                // {

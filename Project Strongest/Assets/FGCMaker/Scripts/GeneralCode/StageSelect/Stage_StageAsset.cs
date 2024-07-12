@@ -9,4 +9,6 @@ public class Stage_StageAsset : ScriptableObject
     public string stageName;
     public Sprite stageImage;
     public GameObject stagePrefab;
+    public GameObject LeftWall,RightWall;
+
 }
