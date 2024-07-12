@@ -1318,7 +1318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &94923329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5590,7 +5590,7 @@ MonoBehaviour:
     _targetCharacter: {fileID: 993311515}
     LW_Distance: 0
     RW_Distance: 0
-    _directionFacing: 0
+    _directionFacing: 2
 --- !u!1 &443929009
 GameObject:
   m_ObjectHideFlags: 0
@@ -14875,7 +14875,7 @@ MonoBehaviour:
     _targetCharacter: {fileID: 94923331}
     LW_Distance: 0
     RW_Distance: 0
-    _directionFacing: 0
+    _directionFacing: 2
 --- !u!1 &1216137436
 GameObject:
   m_ObjectHideFlags: 0
@@ -17203,6 +17203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stageLoadingLocation: {fileID: 417345720}
+  _sideManager: {fileID: 1359521219}
 --- !u!1 &1371640599
 GameObject:
   m_ObjectHideFlags: 0

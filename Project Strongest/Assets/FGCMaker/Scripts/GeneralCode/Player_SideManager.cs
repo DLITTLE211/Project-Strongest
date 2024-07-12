@@ -10,11 +10,8 @@ public class Player_SideManager : MonoBehaviour
     public HitPointCall sideCall;
     private void Start()
     {
-        if (_p1Position != null && _p2Position != null)
-        {
-            SetStartingFaceState();
-        }
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+        StartCoroutine(OnStartSideSwitch());
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {
@@ -27,6 +24,12 @@ public class Player_SideManager : MonoBehaviour
                     break;
             }
         }
+    }
+    IEnumerator OnStartSideSwitch() 
+    {
+        yield return new WaitUntil(() => _p1Position.thisPosition.ModelTransform != null);
+        yield return new WaitUntil(() => _p2Position.thisPosition.ModelTransform != null);
+        SetStartingFaceState();
     }
     public void ForceSideSwitch() 
     {

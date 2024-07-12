@@ -12,6 +12,7 @@ public class Player_SideRecognition : MonoBehaviour
 public class Character_Position
 {
     [SerializeField] private Transform modelTransform;
+    public Transform ModelTransform { get { return modelTransform; } }
     public HitBox[] hitBoxes;
     public HitBox projectile_HitBox;
     public HurtBox extendedHurbox;
@@ -38,6 +39,10 @@ public class Character_Position
 
     void TurnModel(Vector3 direction, float flipSide, Character_Face_Direction _face)
     {
+        if (modelTransform == null)
+        {
+            return;
+        }
         if (DOTween.IsTweening(modelTransform))
         {
             return;

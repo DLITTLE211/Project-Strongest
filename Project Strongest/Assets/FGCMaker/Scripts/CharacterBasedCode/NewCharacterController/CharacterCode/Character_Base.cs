@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Character_Base : MonoBehaviour
 {
-    #region Rewired Controls
+    #region Character Profile Data
     [Header("__________Character Profile Data__________")]
     public Character_Profile characterProfile;
     [Space(20)]
@@ -147,6 +147,7 @@ public class Character_Base : MonoBehaviour
             amplifier = _chosenAmplifier;
         }
         _cAnimator = chosenAnimator;
+        _cHurtBox.SetHurtboxStartSize();
         _cComboDetection.SetAnimator(chosenAnimator);
         _cHitstun.SetAnimator(chosenAnimator);
         _cHitController.SetAnimator(chosenAnimator);
