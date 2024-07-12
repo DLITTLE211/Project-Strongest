@@ -249,8 +249,8 @@ public class CharacterSelect_Setup : MonoBehaviour
     void CursorController(CharacterSelect_Cursor currentController) 
     {
         if (currentController.isConnected)
-        {;
-            if (currentController.curPlayer.GetButtonDown("C"))
+        {
+            if (currentController.curPlayer.GetButtonDown(18))
             {
                 if (currentController.profile == null)
                 {
@@ -265,7 +265,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (currentController.curPlayer.GetButtonDown("D"))
+            if (currentController.curPlayer.GetButton(17))
             {
                 if (currentController.profile != null)
                 {
@@ -284,17 +284,17 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                 //{
-                    StartCoroutine(currentController.cursorPage.DelayResetBool());
-                    currentController.cursorPage.characterAmplify.UpdateInfoUp();
+                StartCoroutine(currentController.cursorPage.DelayResetBool());
+                currentController.cursorPage.characterAmplify.UpdateInfoUp();
                 //}
             }
-            if(currentController.curPlayer.GetButtonDown(21))
+            if (currentController.curPlayer.GetButtonDown(21))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
-               // {
-                    StartCoroutine(currentController.cursorPage.DelayResetBool());
-                    currentController.cursorPage.characterAmplify.UpdateInfoDown();
-               // }
+                // {
+                StartCoroutine(currentController.cursorPage.DelayResetBool());
+                currentController.cursorPage.characterAmplify.UpdateInfoDown();
+                // }
             }
             if (currentController.profile == null)
             {
