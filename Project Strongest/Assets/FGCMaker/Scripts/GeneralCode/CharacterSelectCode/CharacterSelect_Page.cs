@@ -27,6 +27,7 @@ public class CharacterSelect_Page : MonoBehaviour
         chosenCharacter = profile;
         characterBackgroundImage.sprite = profile.CharacterProfileImage;
         characterName.text = $"{profile.CharacterName} \n(Selected)";
+        chosenAmplifier = characterAmplify.chosenAmplifier;
     }
     public void ClearInfo()
     {
@@ -35,6 +36,7 @@ public class CharacterSelect_Page : MonoBehaviour
         characterBackgroundImage.preserveAspect = false;
         characterBackgroundImage.sprite = null;
         characterName.text = "Choose Your Character";
+        chosenAmplifier = null;
     }
 
     public void SetPlayerInfo()

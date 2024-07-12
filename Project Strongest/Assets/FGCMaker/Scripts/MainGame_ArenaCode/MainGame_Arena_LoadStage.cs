@@ -7,11 +7,14 @@ using UnityEngine.Rendering;
 public class MainGame_Arena_LoadStage : MonoBehaviour
 {
     [SerializeField] private Transform _stageLoadingLocation;
+    [SerializeField] private Player_SideManager _sideManager;
     public void LoadStage(Stage_StageAsset stageAsset) 
     {
-        GameObject selectButton = Instantiate(stageAsset.stagePrefab, _stageLoadingLocation.transform);
-        selectButton.gameObject.transform.localPosition = Vector3.zero;
-        selectButton.gameObject.transform.localRotation = Quaternion.identity;
-        selectButton.gameObject.transform.localScale = Vector3.one;
+        GameObject newStage = Instantiate(stageAsset.stagePrefab, _stageLoadingLocation.transform);
+        newStage.gameObject.transform.localPosition = Vector3.zero;
+        newStage.gameObject.transform.localRotation = Quaternion.identity;
+        newStage.gameObject.transform.localScale = Vector3.one;
+        _sideManager.LeftWall = newStage.GetComponent<Stage_StageAsset>().LeftWall;
+        _sideManager.RightWall = newStage.GetComponent<Stage_StageAsset>().RightWall;
     }
 }

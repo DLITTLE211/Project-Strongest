@@ -444,6 +444,20 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public Stage_StageAsset GetChosenStage()
     {
+        if (_chosenStage.stageName == "Random")
+        {
+            for (int i = 0; i < _activeStages.Count; i++)
+            {
+                if (_activeStages[i].stageName == "Random")
+                {
+                    _activeStages.RemoveAt(i);
+                    break; 
+                }
+                continue;
+            }
+            _chosenStage = _activeStages[UnityEngine.Random.Range(0, _activeStages.Count - 1)];
+            return _chosenStage;
+        }
         return _chosenStage;
     }
     #endregion

@@ -635,6 +635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5458266101637155387}
+  - component: {fileID: 3537958316884096584}
   m_Layer: 6
   m_Name: TrainingStage_Prefab
   m_TagString: Untagged
@@ -660,6 +661,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3537958316884096584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905584581088073532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2592e901a98d824493f5c8fbcd13f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageName: Training Stage
+  stageImage: {fileID: 21300000, guid: b99a1b36f55803b4684edda00335d6e9, type: 3}
+  stagePrefab: {fileID: 6905584581088073532}
+  LeftWall: {fileID: 5022414181533207477}
+  RightWall: {fileID: 3036155564416214177}
 --- !u!1 &8204909749646306913
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class CharacterSelect_AmplifySelecter :MonoBehaviour
 
     public void SetInfo(Amplifiers curAmplifier)
     {
+        chosenAmplifier = curAmplifier;
         chosenAmplifierText.text = curAmplifier.amplifier.ToString();
         chosenAmplifier = curAmplifier;
     }

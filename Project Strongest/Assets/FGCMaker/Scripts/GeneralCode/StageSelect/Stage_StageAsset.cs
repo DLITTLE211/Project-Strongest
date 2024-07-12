@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "StageSelect/Stage")]
-public class Stage_StageAsset : ScriptableObject
+public class Stage_StageAsset : MonoBehaviour
 {
     public string stageName;
     public Sprite stageImage;
     public GameObject stagePrefab;
-    public GameObject LeftWall,RightWall;
+    public Transform LeftWall,RightWall;
 
 }
