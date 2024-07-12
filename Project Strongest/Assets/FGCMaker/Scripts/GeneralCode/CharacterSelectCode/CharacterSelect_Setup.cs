@@ -265,7 +265,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (currentController.curPlayer.GetButton(17))
+            else if (currentController.curPlayer.GetButton(17))
             {
                 if (currentController.profile != null)
                 {
@@ -280,7 +280,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (currentController.curPlayer.GetButtonDown(19))
+            else if (currentController.curPlayer.GetButtonDown(19))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                 //{
@@ -288,7 +288,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     currentController.cursorPage.characterAmplify.UpdateInfoUp();
                 //}
             }
-            if (currentController.curPlayer.GetButtonDown(21))
+            else if(currentController.curPlayer.GetButtonDown(21))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                // {
