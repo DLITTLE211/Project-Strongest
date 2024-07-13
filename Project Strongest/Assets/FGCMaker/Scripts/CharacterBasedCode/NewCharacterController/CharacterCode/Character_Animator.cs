@@ -12,6 +12,7 @@ public class Character_Animator : MonoBehaviour
     #endregion
 
     [SerializeField] public Animator myAnim;
+    [SerializeField] public Animator shadowAnim;
     [SerializeField] public Character_Base _base;
     [SerializeField] private Character_InputTimer_Attacks _timer => _base._cAttackTimer;
 
@@ -138,17 +139,19 @@ public class Character_Animator : MonoBehaviour
     {
         if (triggerSet != "") 
         {
+            shadowAnim.SetTrigger(triggerSet);
             myAnim.SetTrigger(triggerSet);
             return;
         }
         if (attackOverride)
         {
+            shadowAnim.Play(animHash,0,0);
             myAnim.Play(animHash, 0, 0);
         }
         else
         {
-            myAnim.gameObject.SetActive(true);
             myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+            shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
         }
     }
 
