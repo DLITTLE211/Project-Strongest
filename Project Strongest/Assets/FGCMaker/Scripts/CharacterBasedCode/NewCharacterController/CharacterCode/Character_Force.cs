@@ -84,6 +84,17 @@ public class Character_Force : MonoBehaviour
         {
             _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
         }
+        if (_myRB.velocity.x != 0)
+        {
+            if (_myRB.velocity.x > _base.MoveForce)
+            {
+                _myRB.velocity = new Vector3(_base.MoveForce/10f, 0f, 0f);
+            }
+            if (_myRB.velocity.x < -_base.MoveForce)
+            {
+                _myRB.velocity = new Vector3(-_base.MoveForce / 10f, 0f, 0f);
+            }
+        }
     }
     public void HandleForceFreeze(bool state)
     {
@@ -137,10 +148,12 @@ public class Character_Force : MonoBehaviour
         switch (dInput.Button_State.directionalInput)
         {
             case 4:
+                _myRB.velocity = new Vector3(-_base.MoveForce, 0f, 0f);
                 _myRB.drag = 1f;
                 _myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
                 break;
             case 6:
+                _myRB.velocity = new Vector3(_base.MoveForce, 0f, 0f);
                 _myRB.drag = 1f;
                 _myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
                 break;
