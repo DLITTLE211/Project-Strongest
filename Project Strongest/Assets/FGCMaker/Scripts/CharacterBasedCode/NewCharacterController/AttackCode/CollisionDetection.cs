@@ -68,8 +68,7 @@ public class CollisionDetection : MonoBehaviour
         if (sizing != null)
         {
             currentCollider.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0.5f);
-            currentCollider.transform.localPosition = new Vector3(sizing.hurtboxPosition.x, sizing.hurtboxPosition.y, sizing.hurtboxPosition.z);
-
+            currentCollider.transform.localPosition = sizing.hurtboxPosition;
             currentCollider.transform.localScale = sizing.hurtboxSizing;
             currentCollider.GetComponent<CapsuleCollider>().radius = sizing.radius;
         }

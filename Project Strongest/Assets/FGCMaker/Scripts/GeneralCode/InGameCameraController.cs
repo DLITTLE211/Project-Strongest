@@ -51,8 +51,8 @@ public class InGameCameraController : MonoBehaviour
     public void InitCameraInformation()
     {
         size = GreatestDistance();
-        minWidth = 1.35f;
-        maxWidth = 1.65f;
+        minWidth = 1.65f;
+        maxWidth = 1.95f;
         smoothTime = 0.215f;
     }
     private void LateUpdate()

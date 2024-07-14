@@ -47,7 +47,7 @@ public class State_Crouch : BaseState
         base.OnExit();
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
 
-        if (nextTransition.To == _base._cStateMachine.idleStateRef) 
+        if (nextTransition.To == _base._cStateMachine.idleStateRef ^ nextTransition.To == _base._cStateMachine.moveStateRef) 
         {
             _cAnim.PlayNextAnimation(C2IHash, 0);
         }
