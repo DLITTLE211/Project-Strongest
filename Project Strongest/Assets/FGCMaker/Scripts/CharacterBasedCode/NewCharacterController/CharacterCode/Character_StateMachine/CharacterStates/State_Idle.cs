@@ -77,10 +77,11 @@ public class State_Idle : BaseState
     }
     void IdleCheck()
     {
-        if (_cAnim.CheckAttackAndMobility())
+        if (_cAnim.CheckAttackAndMobility() && _base.ReturnMovementInputs().Button_State.directionalInput == 5)
         {
             _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
         }
+
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
     }
@@ -88,7 +89,20 @@ public class State_Idle : BaseState
     public override void OnExit()
     {
         Messenger.Broadcast(Events.ClearLastTime);
-
         base.OnExit();
+
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+
+        if (nextTransition.To == _base._cStateMachine.moveStateRef)
+        {
+            if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+            {
+                _cAnim.PlayNextAnimation(moveBHash, _crossFade);
+            }
+            if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
+            {
+                _cAnim.PlayNextAnimation(moveFHash, _crossFade);
+            }
+        }
     }
 }

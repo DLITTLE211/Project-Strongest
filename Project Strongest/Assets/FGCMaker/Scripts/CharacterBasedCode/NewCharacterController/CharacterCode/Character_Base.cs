@@ -93,13 +93,13 @@ public class Character_Base : MonoBehaviour
     [Header("________FORCE VARIABLES_________")]
     public Rigidbody myRb;
     [SerializeField] private float _jumpForce;
-    public float JumpForce { get { return _jumpForce; } set { _jumpForce = value; } }
+    public float JumpForce { get { return _jumpForce; }}
 
     [SerializeField] private float _moveForce;
-    public float MoveForce { get { return _moveForce; } set { _moveForce = value; } }
+    public float MoveForce { get { return _moveForce; }}
 
     [SerializeField] private float _jumpDirForce;
-    public float JumpDirForce { get { return _jumpDirForce; } set { _jumpDirForce = value; } }
+    public float JumpDirForce { get { return _jumpDirForce; }}
 
     public int movementPC; //movement priority check
     [Space(20)]
@@ -146,8 +146,13 @@ public class Character_Base : MonoBehaviour
         {
             amplifier = _chosenAmplifier;
         }
-        _cAnimator = chosenAnimator;
 
+        _moveForce = characterProfile.MoveVelocity;
+        _jumpForce = characterProfile.JumpForce;
+        _jumpDirForce = characterProfile.InAirMoveForce;
+
+
+        _cAnimator = chosenAnimator;
         _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
         _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing);
         _cComboDetection.SetAnimator(chosenAnimator);

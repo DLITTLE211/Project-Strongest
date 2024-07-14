@@ -137,12 +137,21 @@ public class Character_Force : MonoBehaviour
         switch (dInput.Button_State.directionalInput)
         {
             case 4:
+                _myRB.drag = 1f;
                 _myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
                 break;
             case 6:
+                _myRB.drag = 1f;
                 _myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
                 break;
+            default:
+                _myRB.drag = 10000f;
+                break;
         }
+    }
+    public void ForceDragSlow()
+    {
+        _myRB.drag = 10000f;
     }
     public void AddForceOnCommand(float value)
     {
