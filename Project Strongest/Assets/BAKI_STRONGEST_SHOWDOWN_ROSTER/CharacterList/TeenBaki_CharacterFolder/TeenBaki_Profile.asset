@@ -18,6 +18,17 @@ MonoBehaviour:
   Mass: 100
   Height: 168
   Weight: 168
+  hurtboxSizing:
+    radius: 0.25
+    hurtboxPosition: {x: 0, y: 0.08, z: -0.5}
+    hurtboxSizing: {x: 1, y: 2.25, z: 1.7}
+  collisionSizing:
+    headRadius: 0.35
+    headHeight: 0.27
+    headHurtboxPositioning: {x: 0, y: 0.45, z: 0}
+    bodyRadius: 0.75
+    bodyHeight: 1.15
+    bodyHurtboxPositioning: {x: 0, y: 0, z: 0}
   MoveVelocity: 100
   JumpForce: 150
   InAirMoveForce: 100
@@ -27,7 +38,7 @@ MonoBehaviour:
   HealthRegenRate: 3
   characterModel: {fileID: 2619550513160664684, guid: 578bb02657ccb83479060e3c4b62ec43, type: 3}
   characterAnimator: {fileID: 0}
-  cAnimatorScript: {fileID: 2569374614122903550, guid: 578bb02657ccb83479060e3c4b62ec43, type: 3}
+  cAnimatorScript: {fileID: 0}
   AllCharacterAnimations:
   - {fileID: -3977307983880513915, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   - {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}

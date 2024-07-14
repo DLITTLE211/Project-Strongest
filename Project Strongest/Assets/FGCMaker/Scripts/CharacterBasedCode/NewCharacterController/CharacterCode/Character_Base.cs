@@ -147,7 +147,9 @@ public class Character_Base : MonoBehaviour
             amplifier = _chosenAmplifier;
         }
         _cAnimator = chosenAnimator;
-        _cHurtBox.SetHurtboxStartSize();
+
+        _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
+        _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing);
         _cComboDetection.SetAnimator(chosenAnimator);
         _cHitstun.SetAnimator(chosenAnimator);
         _cHitController.SetAnimator(chosenAnimator);
@@ -167,7 +169,7 @@ public class Character_Base : MonoBehaviour
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
         Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
-        pSide.thisPosition.SetModelTransform(_chosneCharacter_Animator.gameObject.transform);
+        pSide.thisPosition.SetModelTransform(this.gameObject.transform);
         SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
     }
     void ResetRemoveList() 
@@ -175,10 +177,12 @@ public class Character_Base : MonoBehaviour
         removeSimpleList.Clear();
         removeSMList.Clear();
     }
+
     void ResetInputLog()
     {
         _timer.inputLogger.ResetAllText();
     }
+
     void InitCombos()
     {
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;

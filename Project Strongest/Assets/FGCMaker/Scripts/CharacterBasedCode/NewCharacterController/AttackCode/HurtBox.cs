@@ -10,9 +10,9 @@ public class HurtBox : CollisionDetection
     public HurtBoxType huBType;
     public ColliderType colliderType;
     private Attack_BaseProperties currentHitProperties;
-    private void Start()
+    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
     {
-        SetHurtBoxSize(this.transform.localScale.x, this.transform.localScale.y,colliderType);
+        SetHurtBoxSize(0,0,ColliderType.Trigger,hu_Sizing);
     }
     void FixedUpdate()
     {

@@ -19,6 +19,8 @@ public class Character_Profile : ScriptableObject
     public int Mass;
     public float Height;
     public float Weight;
+    public Character_HurtBoxSizing hurtboxSizing;
+    public Character_CollisionSizing collisionSizing;
     #endregion
 
     #region Character Movement Info
@@ -71,6 +73,25 @@ public class Character_Profile : ScriptableObject
     }
 }
 
+[Serializable]
+public class Character_HurtBoxSizing 
+{
+    public float radius;
+    public Vector3 hurtboxPosition;
+    public Vector3 hurtboxSizing;
+}
+
+[Serializable]
+public class Character_CollisionSizing
+{
+    public float headRadius;
+    public float headHeight;
+    public Vector3 headHurtboxPositioning;
+
+    public float bodyRadius;
+    public float bodyHeight;
+    public Vector3 bodyHurtboxPositioning;
+}
 [Serializable]
 public class CharacterIntro 
 {

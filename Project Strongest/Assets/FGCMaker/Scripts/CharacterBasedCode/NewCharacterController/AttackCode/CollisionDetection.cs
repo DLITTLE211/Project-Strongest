@@ -49,7 +49,7 @@ public class CollisionDetection : MonoBehaviour
     private HitBox lastHitbox;
     public CollisionType collisionType;
 
-    public void SetHurtBoxSize(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger)
+    public void SetHurtBoxSize(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger, Character_HurtBoxSizing sizing = null)
     {
         if (currentCollider == null)
         {
@@ -65,9 +65,20 @@ public class CollisionDetection : MonoBehaviour
                 currentCollider.isTrigger = false;
             }
         }
-        xSize = sizeX;
-        ySize = sizeY;
-        this.transform.localScale = new Vector3(sizeX, sizeY, sizeY);
+        if (sizing != null)
+        {
+            currentCollider.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0.5f);
+            currentCollider.transform.localPosition = new Vector3(sizing.hurtboxPosition.x, sizing.hurtboxPosition.y, sizing.hurtboxPosition.z);
+
+            currentCollider.transform.localScale = sizing.hurtboxSizing;
+            currentCollider.GetComponent<CapsuleCollider>().radius = sizing.radius;
+        }
+        else
+        {
+            xSize = sizeX;
+            ySize = sizeY;
+            this.transform.localScale = new Vector3(sizeX, sizeY, sizeY);
+        }
     }
     public void SetHitboxSize(HitBox hitboxInfo, float sizeX = 0, float sizeY = 0)
     {

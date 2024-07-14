@@ -19,7 +19,7 @@ public class Character_Position
     public Transform _targetCharacter;
     public float LW_Distance, RW_Distance;
     public Character_Face_Direction _directionFacing;
-    private Vector3 leftFace = new Vector3(0f, 0f, 0f), rightFace = new Vector3(0f, 180f, 0f);
+    private Vector3 leftFace = new Vector3(0f, 180f, 0f), rightFace = new Vector3(0f, 0f, 0f);
     Tween switchFaceDirection;
     public void SetFacingState(Character_Face_Direction face) 
     {

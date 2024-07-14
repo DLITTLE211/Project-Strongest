@@ -8,20 +8,21 @@ public class Base_Collider : CollisionDetection
     public PhysicMaterial physicsMat;
     public Collider headCollider;
     public Transform modelRotation;
-    public void SetBaseCollider(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger)
+    public void SetBaseCollider(float sizeX = 0, float sizeY = 0, Character_CollisionSizing sizing = null,ColliderType collisionType = ColliderType.Trigger)
     {
         if (currentCollider == null)
         {
             this.gameObject.AddComponent<CapsuleCollider>();
             headCollider = this.gameObject.GetComponent<CapsuleCollider>();
-            headCollider.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.27f, 0);
-            headCollider.GetComponent<CapsuleCollider>().radius = 0.35f;
-            headCollider.GetComponent<CapsuleCollider>().height = 0;
+            headCollider.GetComponent<CapsuleCollider>().center = sizing.headHurtboxPositioning;
+            headCollider.GetComponent<CapsuleCollider>().radius = sizing.headRadius;
+            headCollider.GetComponent<CapsuleCollider>().height = sizing.headHeight;
 
             boxColliderSpawnPoint.AddComponent<CapsuleCollider>();
             currentCollider = boxColliderSpawnPoint.GetComponent<CapsuleCollider>();
-            currentCollider.GetComponent<CapsuleCollider>().center = new Vector3(0, -0.15f, 0);
-            currentCollider.GetComponent<CapsuleCollider>().height = 0.83f;
+            currentCollider.GetComponent<CapsuleCollider>().center = sizing.bodyHurtboxPositioning;
+            currentCollider.GetComponent<CapsuleCollider>().radius = sizing.bodyRadius;
+            currentCollider.GetComponent<CapsuleCollider>().height = sizing.bodyHeight;
             if (collisionType == ColliderType.Trigger)
             {
                 currentCollider.isTrigger = true;
