@@ -70,29 +70,24 @@ public class Character_Force : MonoBehaviour
             }
         }
     }
-    /*public void ApplyForceOnCustomCallback(CustomCallback callback) 
-    {
-        if (callback.customCall == HitPointCall.Force_Large) { }
-
-        if (callback.customCall == HitPointCall.Force_Medium) { }
-
-        if (callback.customCall == HitPointCall.Force_Small) { }
-    }*/
     private void Update()
     {
         if (_base._cAnimator != null)
         {
             _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
         }
-        if (_myRB.velocity.x != 0)
+        if (_base._cHurtBox.IsGrounded() && _base._cAnimator.activatedInput == null)
         {
-            if (_myRB.velocity.x > _base.MoveForce)
+            if (_myRB.velocity.x != 0)
             {
-                _myRB.velocity = new Vector3(_base.MoveForce/10f, 0f, 0f);
-            }
-            if (_myRB.velocity.x < -_base.MoveForce)
-            {
-                _myRB.velocity = new Vector3(-_base.MoveForce / 10f, 0f, 0f);
+                if (_myRB.velocity.x > _base.MoveForce)
+                {
+                    _myRB.velocity = new Vector3(_base.MoveForce / 10f, _myRB.velocity.y, 0f);
+                }
+                if (_myRB.velocity.x < -_base.MoveForce)
+                {
+                    _myRB.velocity = new Vector3(-_base.MoveForce / 10f, _myRB.velocity.y, 0f);
+                }
             }
         }
     }
@@ -148,23 +143,14 @@ public class Character_Force : MonoBehaviour
         switch (dInput.Button_State.directionalInput)
         {
             case 4:
-                _myRB.velocity = new Vector3(-_base.MoveForce, 0f, 0f);
-                _myRB.drag = 1f;
+                _myRB.velocity = new Vector3(-_base.MoveForce, _myRB.velocity.y, 0f);
                 _myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
                 break;
             case 6:
-                _myRB.velocity = new Vector3(_base.MoveForce, 0f, 0f);
-                _myRB.drag = 1f;
+                _myRB.velocity = new Vector3(_base.MoveForce, _myRB.velocity.y, 0f);
                 _myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
                 break;
-            default:
-                _myRB.drag = 10000f;
-                break;
         }
-    }
-    public void ForceDragSlow()
-    {
-        _myRB.drag = 10000f;
     }
     public void AddForceOnCommand(float value)
     {
@@ -197,54 +183,57 @@ public class Character_Force : MonoBehaviour
     #endregion
     public void HandleExtraMovement(Character_Mobility _mInput)
     {
-        if (_base.movementPC < _mInput.movementPriority)
+        if (_base._cHurtBox.IsGrounded()) 
         {
-            _base.movementPC = _mInput.movementPriority;
-            switch (_mInput.type)
+            if (_base.movementPC < _mInput.movementPriority)
             {
-                case MovementType.BackJump:
-                    // Back Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                    xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
-                    _myRB.velocity = new Vector3(xVal, yVal);
-                    break;
-                case MovementType.Jump:
-                    // Neutral Jump;
-                    _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
-                    break;
-                case MovementType.ForwardJump:
-                    // Forward Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                    xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
-                    _myRB.velocity = new Vector3(xVal, yVal);
-                    break;
-                case MovementType.NeutralSuperJump:
-                    // Neutral Super Jump;
-                    _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
-                    break;
-                case MovementType.ForwardSuperJump:
-                    // Forward Super Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                    xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
-                    _myRB.velocity = new Vector3(xVal, yVal);
+                _base.movementPC = _mInput.movementPriority;
+                switch (_mInput.type)
+                {
+                    case MovementType.BackJump:
+                        // Back Jump;
+                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
+                        xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
+                        _myRB.velocity = new Vector3(xVal, yVal);
+                        break;
+                    case MovementType.Jump:
+                        // Neutral Jump;
+                        _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
+                        break;
+                    case MovementType.ForwardJump:
+                        // Forward Jump;
+                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
+                        xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
+                        _myRB.velocity = new Vector3(xVal, yVal);
+                        break;
+                    case MovementType.NeutralSuperJump:
+                        // Neutral Super Jump;
+                        _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
+                        break;
+                    case MovementType.ForwardSuperJump:
+                        // Forward Super Jump;
+                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
+                        xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
+                        _myRB.velocity = new Vector3(xVal, yVal);
 
-                    break;
-                case MovementType.BackSuperJump:
-                    // Back Super Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                    xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
-                    _myRB.velocity = new Vector3(xVal, yVal);
-                    break;
-                case MovementType.ForwardDash:
-                    // Forward Dash;
-                    _myRB.AddForce(transform.right * (_base.MoveForce * 20f), ForceMode.VelocityChange);
-                    break;
-                case MovementType.BackDash:
-                    // Back Dash;
-                    _myRB.AddForce(transform.right * -(_base.MoveForce * 20f), ForceMode.VelocityChange);
-                    break;
+                        break;
+                    case MovementType.BackSuperJump:
+                        // Back Super Jump;
+                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
+                        xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
+                        _myRB.velocity = new Vector3(xVal, yVal);
+                        break;
+                    case MovementType.ForwardDash:
+                        // Forward Dash;
+                        _myRB.velocity = new Vector3((_base.DashForce * 2f), _myRB.velocity.y);
+                        break;
+                    case MovementType.BackDash:
+                        // Back Dash;
+                        _myRB.velocity = new Vector3(-(_base.DashForce * 2f), _myRB.velocity.y);
+                        break;
+                }
+                DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
             }
-            DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
         }
     }
     #region Function Summary

@@ -171,6 +171,7 @@ public class Character_Mobility : IMobility
     {
         curInput = 0;
         mobilityAnim.frameData.ResetExtraFrames();
+        mobilityAnim.ReAddCustomCallbacks();
     }
 
     public void ResetOnSuccess()
@@ -225,6 +226,8 @@ public class MobilityAnimation
 
     public List<float> animLength;
     public FrameData frameData;
+    private List<CustomCallback> _customMobilityCallBacks;
+    public List<CustomCallback> MobilityCallbacks { get { return _customMobilityCallBacks; } }  
 
     public MobilityAnimation(Animator _anim, List<AnimationClip> _animClip, List<string> _animName, float _totalWaitTime, List<float> _animLength, FrameData _frameData) 
     {
@@ -236,6 +239,19 @@ public class MobilityAnimation
         frameData = _frameData;
     }
 
+    public void AddCustomCallbacks()
+    {
+        _customMobilityCallBacks = new List<CustomCallback>();
+        for (int i = 0; i < frameData._extraPoints.Count; i++)
+        {
+            frameData._extraPoints[i].hitFrameBool = false;
+            CustomCallback customCallback = new CustomCallback(frameData._extraPoints[i].call, frameData._extraPoints[i].hitFramePoints,
+                frameData._extraPoints[i].hitFrameBool, frameData._extraPoints[i].camPos,
+                frameData._extraPoints[i].camRotation, frameData._extraPoints[i].Force,
+                frameData._extraPoints[i].projectileSpeed);
+            _customMobilityCallBacks.Add(customCallback);
+        }
+    }
     public void SetMobilityAnim(Character_Animator _playerAnim)
     {
         //playerAnim = _playerAnim.myAnim;
@@ -271,5 +287,10 @@ public class MobilityAnimation
                 }
             }
         }
+        AddCustomCallbacks();
+    }
+    public void ReAddCustomCallbacks() 
+    {
+        AddCustomCallbacks();
     }
 }

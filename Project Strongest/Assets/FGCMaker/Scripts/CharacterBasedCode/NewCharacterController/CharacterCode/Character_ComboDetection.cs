@@ -127,7 +127,7 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void CheckPossibleCombos(Character_ButtonInput newInput)
     {
-        //StoreNewInput(newInput);
+        StoreNewInput(newInput);
     }
     public void StoreNewInput(Character_ButtonInput input)
     {
@@ -136,7 +136,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
             {
                 lastInput = input.Button_State.directionalInput.ToString();
-                SpecialInputVerifier(input);
+                //SpecialInputVerifier(input);
                 ExtraMovementVerifier(input);
             }
         }
@@ -314,6 +314,10 @@ public class Character_ComboDetection : MonoBehaviour
         {
             _base.comboList3_0.stanceSpecials[i].ResetCombo();
             _base.stanceAttackList[i].ResetCombo();
+        }
+        for (int i = 0; i < _base._extraMoveControls.Count; i++)
+        {
+            _base._extraMoveControls[i].ResetCurrentInput();
         }
     }
 }

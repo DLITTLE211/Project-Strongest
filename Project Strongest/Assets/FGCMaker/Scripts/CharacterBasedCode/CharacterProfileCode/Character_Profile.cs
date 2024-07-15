@@ -28,6 +28,7 @@ public class Character_Profile : ScriptableObject
     public float MoveVelocity;
     public float JumpForce;
     public float InAirMoveForce;
+    public float dashSpeed;
     #endregion
 
     #region Character Health Info

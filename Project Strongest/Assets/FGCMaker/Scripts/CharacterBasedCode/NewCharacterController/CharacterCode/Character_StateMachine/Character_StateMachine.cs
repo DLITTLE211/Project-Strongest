@@ -9,6 +9,7 @@ public class Character_StateMachine : MonoBehaviour
     public Character_ComboCounter opponentComboCounter;
     [HideInInspector]public State_Idle idleStateRef;
     [HideInInspector] public State_Move moveStateRef;
+    [HideInInspector] public State_Dash dashStateRef;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class Character_StateMachine : MonoBehaviour
         var JumpState = new State_Jump(_base);
         var AttackState = new State_Attacking(_base);
         var DashState = new State_Dash(_base);
+        dashStateRef = DashState;
         var Hitstate = new State_Hit(_base);
         var CrouchState = new State_Crouch(_base);
         var S_BlockState = new State_Block(_base);// S = Stand
@@ -36,6 +38,7 @@ public class Character_StateMachine : MonoBehaviour
         At(S_BlockState, IdleState, new Predicate(() => At_2Idle()));
         At(Hitstate, IdleState, new Predicate(() => At_2Idle()));
 
+        At(DashState, MoveState, new Predicate(() => At_2Move()));
         At(AttackState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));

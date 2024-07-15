@@ -12,7 +12,7 @@ public class State_Jump : BaseState
     {
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter JumpState");
-        _cAnim.PlayNextAnimation(jumpHash, _crossFade);
+        //_cAnim.PlayNextAnimation(jumpHash, _crossFade);
         _baseForce.SetWalkForce(_base.ReturnMovementInputs());
     }
     public override void OnRecov()

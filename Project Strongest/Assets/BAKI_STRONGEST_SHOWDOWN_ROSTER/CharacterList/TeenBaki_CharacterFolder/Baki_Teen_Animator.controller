@@ -219,7 +219,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Y_Float
-    m_EventTreshold: -2
+    m_EventTreshold: -0.2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1988888144814224928}
   m_Solo: 0
@@ -742,7 +742,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Y_Float
-    m_EventTreshold: -2
+    m_EventTreshold: -0.2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1988888144814224928}
   m_Solo: 0
@@ -890,7 +890,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jumping_Backward
+  m_Name: Teen_Baki_Hanma|Baki_Jumping_Backward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1152,7 +1152,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dash_Backward
+  m_Name: Teen_Baki_Hanma|Baki_Dash_Backward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1256,7 +1256,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jumping_Forward
+  m_Name: Teen_Baki_Hanma|Baki_Jumping_Forward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1588,7 +1588,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jumping_Neutral
+  m_Name: Teen_Baki_Hanma|Baki_Jumping_Neutral
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1900,8 +1900,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jumping_Falling
-  m_Speed: 1
+  m_Name: Teem_Baki_Hanma|Baki_Jumping_Falling
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -2444,7 +2444,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dash_Forward
+  m_Name: Teen_Baki_Hanma|Baki_Dash_Forward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2732,7 +2732,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Y_Float
-    m_EventTreshold: -1
+    m_EventTreshold: -0.2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1988888144814224928}
   m_Solo: 0

@@ -8,6 +8,7 @@ public class Character_MobilityAsset : ScriptableObject
 {
     [SerializeField]private List<Character_Mobility> mobilityOptions;
     float frameCount;
+    List<CustomCallback> customMobilityCallBacks;
     public List<Character_Mobility> MobilityOptions 
     {
         get 
@@ -55,17 +56,25 @@ public class Character_MobilityAsset : ScriptableObject
             for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
             {
                 ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
-                if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBool == false)
+                if (frameCount >= waitTime * anim.frameData._extraPoints[i].hitFramePoints && anim.frameData._extraPoints[i].hitFrameBool == false)
                 {
-                    inputToActivate.baseCharacter._extraMoveAsset.CallMobilityAction(inputToActivate);
-                    newHitPoint.hitFrameBool = true;
+                    if (anim.frameData._extraPoints[i].call == HitPointCall.ActivateMobilityAction)
+                    {
+                        inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0], inputToActivate);
+                    }
+                    else 
+                    {
+                        Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
+                    }
+                    anim.MobilityCallbacks.RemoveAt(0);
+                    anim.frameData._extraPoints[i].hitFrameBool = true;
                 }
             }
             frameCount += waitTime;
             yield return new WaitForSeconds(waitTime);
             #endregion
         }
-        endFunc();
+        //endFunc();
     }
 }
 

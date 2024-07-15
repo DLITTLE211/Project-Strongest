@@ -59,6 +59,7 @@ public class Character_Base : MonoBehaviour
     [Header("______DIRECTIONAL INPUT DETECTION________")]
     public Character_MobilityAsset _extraMoveAsset;
     public List<Character_Mobility> _extraMoveControls;
+    public HitPointCall activationCall;
     [SerializeField] public List<Character_Mobility> _removeList;
     [SerializeField] public float xVal, yVal;
     [SerializeField, Range(0f, 1f)] public float xYield, yYield;
@@ -96,7 +97,9 @@ public class Character_Base : MonoBehaviour
     public float JumpForce { get { return _jumpForce; }}
 
     [SerializeField] private float _moveForce;
-    public float MoveForce { get { return _moveForce; }}
+    public float MoveForce { get { return _moveForce; } }
+    [SerializeField] private float _dashForce;
+    public float DashForce { get { return _dashForce; } }
 
     [SerializeField] private float _jumpDirForce;
     public float JumpDirForce { get { return _jumpDirForce; }}
@@ -147,6 +150,7 @@ public class Character_Base : MonoBehaviour
             amplifier = _chosenAmplifier;
         }
 
+        _dashForce = characterProfile.dashSpeed;
         _moveForce = characterProfile.MoveVelocity;
         _jumpForce = characterProfile.JumpForce;
         _jumpDirForce = characterProfile.InAirMoveForce;
@@ -165,6 +169,7 @@ public class Character_Base : MonoBehaviour
         _cMobiltyTimer.ResetTimer();
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();
+        _extraMoveAsset = characterProfile._CharacterMobility;
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier)
     {
@@ -306,6 +311,22 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
+    public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob)
+    {
+        if (activationCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.ActivateMobilityAction:
+                    _extraMoveAsset.CallMobilityAction(_mob);
+                    break;
+            }
+        }
+    }
+    public void ActivateMobilityAction() 
+    {
+
+    }
     private void Update()
     {
         _cADetection.CheckButtonPressed();

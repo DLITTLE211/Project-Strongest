@@ -30,8 +30,9 @@ MonoBehaviour:
     bodyHeight: 1.15
     bodyHurtboxPositioning: {x: 0, y: 0, z: 0}
   MoveVelocity: 1.25
-  JumpForce: 150
+  JumpForce: 250
   InAirMoveForce: 100
+  dashSpeed: 4
   MaxHealth: 100
   MaxStunValue: 80
   DefenseValue: 30
