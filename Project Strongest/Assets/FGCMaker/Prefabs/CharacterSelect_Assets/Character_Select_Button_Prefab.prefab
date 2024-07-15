@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5218581074657688147}
   - component: {fileID: 2114172365186209476}
   - component: {fileID: 1185934736671872117}
-  - component: {fileID: 430958276886050455}
   - component: {fileID: 1133922391732543638}
   m_Layer: 5
   m_Name: Character_Image_Button
@@ -78,23 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &430958276886050455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3897038701620376269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bfb25d3b53e3448820b6c5ecbf8b15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectionState: {fileID: 1133922391732543638}
-  characterProfile: {fileID: 0}
-  hoverImage: {fileID: 723604421338464387}
-  leftCursor: {fileID: 0}
-  rightCursor: {fileID: 0}
 --- !u!114 &1133922391732543638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1706616755865041666}
+  - component: {fileID: 6801110678225887376}
   m_Layer: 0
   m_Name: Character_Select_Button_Prefab
   m_TagString: Untagged
@@ -299,3 +282,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6801110678225887376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9206346132393860188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bfb25d3b53e3448820b6c5ecbf8b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionState: {fileID: 1133922391732543638}
+  characterProfile: {fileID: 0}
+  hoverImage: {fileID: 723604421338464387}
+  hoverCollider2D: {fileID: 4126583600705893281}
+  leftCursor: {fileID: 0}
+  rightCursor: {fileID: 0}
+  _hoverState: 0
+  buttonSize: {x: 0, y: 0, z: 0}

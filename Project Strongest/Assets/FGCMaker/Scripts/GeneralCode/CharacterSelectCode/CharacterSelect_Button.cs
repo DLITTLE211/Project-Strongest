@@ -16,12 +16,18 @@ public class CharacterSelect_Button : MonoBehaviour
     [SerializeField] private Transform leftCursor, rightCursor;
     public enum hoverState {none,left,right,both }
     public hoverState _hoverState;
+    public Vector3 buttonSize;
 
     bool leftHover,rightHover;
     public void Start()
     {
         hoverCollider2D = hoverImage.GetComponent<BoxCollider2D>();
         Messenger.AddListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);
+    }
+
+    public void SetPosition() 
+    {
+        buttonSize = this.GetComponent<Transform>().localPosition;
     }
     public void GetLeftCursor(Transform Cursor) 
     {
@@ -37,7 +43,7 @@ public class CharacterSelect_Button : MonoBehaviour
         SetHoverColor();
     }
     void CheckCursorPos() 
-    {
+    { 
         if (leftCursor != null && leftCursor.gameObject.activeInHierarchy)
         {
             if (CheckCursorOverlap(leftCursor))
@@ -146,9 +152,10 @@ public class CharacterSelect_Button : MonoBehaviour
     }
     bool CheckCursorOverlap(Transform cursor) 
     {
-        Bounds buttonSize = new Bounds(Vector3.zero, hoverCollider2D.transform.lossyScale);
-        if (cursor.GetComponent<BoxCollider2D>().transform.localPosition.x < buttonSize.max.x + 60 && cursor.GetComponent<BoxCollider2D>().transform.localPosition.x > buttonSize.min.x - 60
-            && cursor.GetComponent<BoxCollider2D>().transform.localPosition.y < buttonSize.max.y + 60 && cursor.GetComponent<BoxCollider2D>().transform.localPosition.y > buttonSize.min.y - 110)
+        float cursorXPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.x;
+        float cursorYPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.y;
+
+        if (cursorXPos <= buttonSize.x + 60 && cursorXPos > buttonSize.x - 60 && cursorYPos < buttonSize.y + 60 && cursorYPos > buttonSize.y - 110)
         {
             return true;
         }

@@ -72,9 +72,9 @@ public class CharacterSelect_Setup : MonoBehaviour
             selectButton.GetComponentInChildren<Button>().image.sprite = _activeProfiles[i].CharacterProfileImage;
             selectButton.GetComponentInChildren<Button>().interactable = true;
             GameObject _selectButtonInfo = selectButton;
-            _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
-            _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().GetLeftCursor(_leftPlayer.cursorObject.transform);
-            _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().GetRightCursor(_rightPlayer.cursorObject.transform);
+            _selectButtonInfo.GetComponent<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
+            _selectButtonInfo.GetComponent<CharacterSelect_Button>().GetLeftCursor(_leftPlayer.cursorObject.transform);
+            _selectButtonInfo.GetComponent<CharacterSelect_Button>().GetRightCursor(_rightPlayer.cursorObject.transform);
             activeCharacterSelectButtons.Add(_selectButtonInfo);
         }
         StartCoroutine(CascadeScaleSelectButtons());
@@ -88,6 +88,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             activeCharacterSelectButtons[i].transform.DOScale(selectButtonFirstSize, 0.15f);
             yield return new WaitForSeconds(0.025f);
             activeCharacterSelectButtons[i].transform.DOScale(Vector3.one, 0.15f);
+            activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
         }
         SetPlayerControllers();
     }
