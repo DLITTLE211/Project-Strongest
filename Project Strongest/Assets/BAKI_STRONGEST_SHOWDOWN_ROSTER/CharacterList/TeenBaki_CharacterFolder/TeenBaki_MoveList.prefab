@@ -588,8 +588,8 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 0
-          active: 0
-          inactive: 0
+          active: 1
+          inactive: 40
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -656,9 +656,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 2
+                  active: 3
+                  inactive: 9
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -722,9 +722,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 9
+          active: 10
+          inactive: 30
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -776,7 +776,7 @@ MonoBehaviour:
               _moveType: 3
               AttackAnims:
                 playerAnim: {fileID: 0}
-                animClip: {fileID: -354913261071876262, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+                animClip: {fileID: -8630824136790676082, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
@@ -791,17 +791,17 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 28
+                  active: 29
+                  inactive: 41
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
                 _hitCount:
                   _count: 0
-                  _startCount: 0
+                  _startCount: 3
                   _refreshRate: 0
-                  _startRefreshRate: 0
+                  _startRefreshRate: 0.15
               lateralKBP:
                 lateralKBP: 3
                 Value: 6
@@ -1245,9 +1245,9 @@ MonoBehaviour:
           hu_size: {x: 0, y: 0}
           _frameData:
             init: 0
-            startup: 0
-            active: 0
-            inactive: 0
+            startup: 8
+            active: 10
+            inactive: 16
             recovery: 0
             lastFrame: 0
             _extraPoints: []
@@ -1310,9 +1310,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 15
+                  active: 16
+                  inactive: 21
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -1374,9 +1374,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 10
+                  active: 11
+                  inactive: 18
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -1442,9 +1442,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 3
+          active: 4
+          inactive: 9
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -1508,9 +1508,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 17
+          active: 18
+          inactive: 25
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -1574,9 +1574,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 18
+          active: 19
+          inactive: 25
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -1640,9 +1640,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 26
+          active: 27
+          inactive: 40
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -1708,7 +1708,7 @@ MonoBehaviour:
           init: 0
           startup: 0
           active: 0
-          inactive: 0
+          inactive: 145
           recovery: 0
           lastFrame: 0
           _extraPoints: []
