@@ -36,6 +36,7 @@ public class Character_StateMachine : MonoBehaviour
         #region Define Transitions
         #region At States (Can move from State A -> State B upon Bool Check being Met)
         At(S_BlockState, IdleState, new Predicate(() => At_2Idle()));
+        At(BlockReact, IdleState, new Predicate(() => At_2Idle()));
         At(Hitstate, IdleState, new Predicate(() => At_2Idle()));
 
         At(DashState, MoveState, new Predicate(() => At_2Move()));
@@ -48,6 +49,9 @@ public class Character_StateMachine : MonoBehaviour
         At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
         At(MoveState, JumpState, new Predicate(() => At_2Jump()));
+
+
+        At(MoveState, DashState, new Predicate(() => ToDashState()));
 
         At(IdleState, CrouchState, new Predicate(() => At_2Crouch()));
         At(JumpState, CrouchState, new Predicate(() => At_2Crouch()));
@@ -67,7 +71,6 @@ public class Character_StateMachine : MonoBehaviour
         At(S_BlockState, BlockReact, new Predicate(() => At_2BlockReact()));
         At(C_BlockState, BlockReact, new Predicate(() => At_2BlockReact()));
 
-        At(BlockReact, IdleState, new Predicate(() => At_2Idle()));
         At(BlockReact, S_BlockState, new Predicate(() => At_2SBlock()));
         At(BlockReact, C_BlockState, new Predicate(() => At_2CBlock()));
 

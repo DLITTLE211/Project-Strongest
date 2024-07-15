@@ -376,7 +376,7 @@ MonoBehaviour:
         _extraPoints:
         - hitFramePoints: 4
           call: 1024
-          hitFrameBool: 1
+          hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -388,9 +388,9 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
-        - hitFramePoints: 13
+        - hitFramePoints: 15
           call: 2048
-          hitFrameBool: 1
+          hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -411,7 +411,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 454
-      stringCharArray: 340035003400
+      stringCharArray: 
       canCheckInput: 0
       completedString: 0
     mobilityAnim:

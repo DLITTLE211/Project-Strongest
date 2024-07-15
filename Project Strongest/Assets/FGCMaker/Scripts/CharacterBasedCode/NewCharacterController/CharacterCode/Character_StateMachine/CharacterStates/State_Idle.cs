@@ -77,13 +77,20 @@ public class State_Idle : BaseState
     }
     void IdleCheck()
     {
-        if (_cAnim.CheckAttackAndMobility() && _base.ReturnMovementInputs().Button_State.directionalInput == 5)
+        try
         {
-            _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
-        }
+            if (_cAnim.CheckAttackAndMobility() && _base.ReturnMovementInputs().Button_State.directionalInput == 5)
+            {
+                _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
+            }
 
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+            _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+            _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+        }
+        catch (NullReferenceException) 
+        {
+            return;
+        }
     }
 
     public override void OnExit()

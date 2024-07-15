@@ -225,16 +225,24 @@ public class Character_Force : MonoBehaviour
                         break;
                     case MovementType.ForwardDash:
                         // Forward Dash;
-                        _myRB.velocity = new Vector3((_base.DashForce * 2f), _myRB.velocity.y);
+                        StartCoroutine(OnDelayDash(_base.DashForce * 2f));
                         break;
                     case MovementType.BackDash:
                         // Back Dash;
-                        _myRB.velocity = new Vector3(-(_base.DashForce * 2f), _myRB.velocity.y);
+                        StartCoroutine(OnDelayDash(-_base.DashForce * 2f));
+
                         break;
                 }
                 DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
             }
         }
+    }
+    IEnumerator OnDelayDash(float speed)
+    {
+        _myRB.velocity = new Vector3(0, 0);
+        yield return new WaitForSeconds(1 / 60f);
+        _myRB.velocity = new Vector3(speed, _myRB.velocity.y);
+
     }
     #region Function Summary
     /// <summary>

@@ -56,18 +56,23 @@ public class Character_MobilityAsset : ScriptableObject
             for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
             {
                 ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
-                if (frameCount >= waitTime * anim.frameData._extraPoints[i].hitFramePoints && anim.frameData._extraPoints[i].hitFrameBool == false)
+                if (frameCount >= waitTime * newHitPoint.hitFramePoints)
                 {
-                    if (anim.frameData._extraPoints[i].call == HitPointCall.ActivateMobilityAction)
+                    if (newHitPoint.call == HitPointCall.ActivateMobilityAction && newHitPoint.hitFrameBool == false)
                     {
+                        newHitPoint.hitFrameBool = true;
                         inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0], inputToActivate);
+                        anim.MobilityCallbacks.RemoveAt(0);
                     }
                     else 
                     {
-                        Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
+                        if (newHitPoint.hitFrameBool == false)
+                        {
+                            newHitPoint.hitFrameBool = true;
+                            Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
+                            anim.MobilityCallbacks.RemoveAt(0);
+                        }
                     }
-                    anim.MobilityCallbacks.RemoveAt(0);
-                    anim.frameData._extraPoints[i].hitFrameBool = true;
                 }
             }
             frameCount += waitTime;

@@ -76,6 +76,6 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     {
         _stageAsset = chosenStage;
         _stageImageSlot.sprite = chosenStage.stageImage;
-        _stageNameText.text = $"{chosenStage.name}"; 
+        _stageNameText.text = $"{chosenStage.stageName}"; 
     }
 }
