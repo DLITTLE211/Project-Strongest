@@ -47,8 +47,9 @@ public class Character_Position
         {
             return;
         }
-        if (modelTransform.localEulerAngles == direction) 
+        if (modelTransform.localEulerAngles == direction)
         {
+            _directionFacing = _face;
             return;
         }
         modelTransform.localScale = new Vector3(1f, 1f, flipSide);

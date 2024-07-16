@@ -40,7 +40,6 @@ public class Character_StateMachine : MonoBehaviour
         At(Hitstate, IdleState, new Predicate(() => At_2Idle()));
 
         At(DashState, MoveState, new Predicate(() => At_2Move()));
-        At(AttackState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
@@ -77,11 +76,11 @@ public class Character_StateMachine : MonoBehaviour
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
+        Any(AttackState, new Predicate(() => ToAttackState()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
         Any(IdleState, new Predicate(() => At_2Idle()));
-        Any(AttackState, new Predicate(() => ToAttackState()));
         Any(Hitstate, new Predicate(() => ToHitState()));
         #endregion
 
@@ -246,7 +245,8 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = IdleReturnBool();
             }
-            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !inputtedDash && lastAttackValue && !_canRecover && notRecovering;
+            bool fullCheck = !_isHit && !_isBlocking && _currentInput && _isGrounded && !inputtedDash && lastAttackValue && !_canRecover && notRecovering;
+            return fullCheck;
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -382,7 +382,8 @@ public class Character_StateMachine : MonoBehaviour
         }
         else 
         {
-            return !isHit && lastAttackValue && !_canRecover && notRecovering;
+            bool fullcheck = !isHit && lastAttackValue && !_canRecover && notRecovering;
+            return fullcheck;
         }
     }
     bool ToHitState() 

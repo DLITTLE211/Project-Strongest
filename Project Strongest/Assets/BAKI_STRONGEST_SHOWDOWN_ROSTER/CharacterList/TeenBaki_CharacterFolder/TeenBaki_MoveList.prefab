@@ -2181,7 +2181,7 @@ MonoBehaviour:
           directionalInput: 0
       - _correctSequence: 5C
         correctAttack: 0
-        correctInput: 0
+        correctInput: 110
         moveInput: 0
         attackInput: 0
         property:
@@ -2507,7 +2507,7 @@ MonoBehaviour:
   - SpecialAttackName: Standing Light Kick
     _attackInput:
       _correctInput:
-      - _correctSequence: 5C
+      - _correctSequence: 5D
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -2702,7 +2702,7 @@ MonoBehaviour:
   - SpecialAttackName: Standing Heavy Kick
     _attackInput:
       _correctInput:
-      - _correctSequence: 5D
+      - _correctSequence: 5C
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -4475,7 +4475,16 @@ MonoBehaviour:
     curAttack: 0
     lastDirection: 0
     curBase: {fileID: 0}
-  movelistBaseProperties: []
+  simpleAttackProperties: []
+  basicSpecialProperties: []
+  rekkaBaseProperties: []
+  rekkaSubAttackProperties: []
+  stanceMainProperties: []
+  stanceAttackProperties: []
+  stanceKillProperties: []
+  counterProperties: []
+  commandThrowProperties: []
+  basicSuperAttackProperties: []
   currentPathData:
     _curInputPath: 0
     _curAttackPath: 0

@@ -22,19 +22,22 @@ public class CharacterSelect_LoadArena : MonoBehaviour
 
     async Task LoadArena()
     {
-        leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
-        rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();
-        chosenStage = _characterSelectSetup.GetChosenStage();
-        Task[] tasks = new Task[]
+        if (SceneManager.GetActiveScene().name == "MainGame_CharacterSelect")
         {
+            leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
+            rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();
+            chosenStage = _characterSelectSetup.GetChosenStage();
+            Task[] tasks = new Task[]
+            {
             _characterSelectSetup.ClearStageSelect(),
             _characterSelectSetup.ClearCharacterSelectInfo(),
             _characterSelectSetup.ClearLeftPlayerInfo(),
             _characterSelectSetup.ClearRightPlayerInfo(),
-        };
-        await Task.WhenAll(tasks);
-        SceneManager.UnloadSceneAsync("MainGame_CharacterSelect");
-        SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
+            };
+            await Task.WhenAll(tasks);
+            SceneManager.UnloadSceneAsync("MainGame_CharacterSelect");
+            SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
+        }
     }
     public void OnApplicationQuit()
     {
