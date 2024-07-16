@@ -21,7 +21,7 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void PrimeCombos()
     {
-       // PrimeNormal();
+        PrimeNormal();
         ResetComboList();
         PrimeMobility();
        // PrimeSpecialMoves();
