@@ -25,7 +25,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     [SerializeField] internal Vector3 hu_orientation = new Vector3(0, 0, 0);
     [SerializeField] internal Vector2 hu_size;
     #endregion
-
+    private Character_Animator _playerCAnimator;
     public FrameData _frameData;
     public HitCount _hitCount;
     private float bias;
@@ -41,6 +41,7 @@ public class AttackHandler_Attack : AttackHandler_Base
 
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
+        _playerCAnimator = _playerAnim;
         playerAnim = _playerAnim.myAnim;
         animLength = animClip.length;
         _frameData.SetRecoveryFrames(animClip.frameRate, animLength);
@@ -104,6 +105,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             HitBox.hitboxProperties = newAttackProperties;
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
+        _playerCAnimator.SetCanTransitionIdle(false);
     }
     public override void OnStartup(Character_Base curBase)
     {
@@ -227,6 +229,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             frameCount += 1f * waitTime;
             yield return new WaitForSeconds(waitTime);
         }
+        _playerCAnimator.SetCanTransitionIdle(true);
         if (requiredHitboxCallBacks.Count == 1)
         {
             requiredHitboxCallBacks[0].func();

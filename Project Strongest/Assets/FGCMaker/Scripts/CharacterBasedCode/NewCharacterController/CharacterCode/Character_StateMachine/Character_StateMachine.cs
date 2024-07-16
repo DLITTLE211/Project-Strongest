@@ -232,6 +232,7 @@ public class Character_StateMachine : MonoBehaviour
         bool inputtedDash;
         bool lastAttackValue;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
+        bool _canTransitionIdle = _base._cAnimator.canTransitionIdle;
         inputtedDash = CheckLastMovementValue();
         lastAttackValue = checkAttackValue(Character_Animator.lastAttackState.nullified);
         try
@@ -240,13 +241,14 @@ public class Character_StateMachine : MonoBehaviour
             {
                 _currentInput = true;
                 _isBlocking = false;
+                _canTransitionIdle = true;
             }
             else
             {
                 _isBlocking = _CheckBlockButton();
                 _currentInput = IdleReturnBool();
             }
-            bool fullCheck = !_isHit && !_isBlocking && _currentInput && _isGrounded && !inputtedDash && lastAttackValue && !_canRecover && notRecovering;
+            bool fullCheck = !_isHit && !_isBlocking && _currentInput && _isGrounded && !inputtedDash && lastAttackValue && !_canRecover && notRecovering && _canTransitionIdle;
             return fullCheck;
         }
         catch (ArgumentOutOfRangeException)

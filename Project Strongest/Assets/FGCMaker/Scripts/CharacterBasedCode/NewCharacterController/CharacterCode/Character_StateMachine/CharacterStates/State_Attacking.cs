@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class State_Attacking : BaseState
@@ -44,6 +46,15 @@ public class State_Attacking : BaseState
         _base._cComboDetection.inRekka = false;
         _base._cComboDetection.inStance = false;
         _base._cAttackTimer.SetTimerType();
+
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+
+        if (nextTransition.To == _base._cStateMachine.idleStateRef)
+        {
+            Debug.Log("Back To Idle");
+            _base.AwaitCanTransitionIdle(() => base.OnExit());
+            return;
+        }
         base.OnExit();
     }
 }

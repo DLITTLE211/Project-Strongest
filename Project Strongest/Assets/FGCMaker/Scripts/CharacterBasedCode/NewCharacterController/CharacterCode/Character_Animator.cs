@@ -35,9 +35,13 @@ public class Character_Animator : MonoBehaviour
     public bool canTick;
     public bool inputWindowOpen;
     public bool _canRecover;
+    public bool canTransitionIdle;
 
     internal int negativeFrameCount;
     Vector3 startPos;
+
+    [SerializeField] private Cancel_State curretnAttackLevel;
+
 
     [SerializeField] private HitPointCall FreezeCall;
     [SerializeField] private HitPointCall mobilityCall;
@@ -289,6 +293,7 @@ public class Character_Animator : MonoBehaviour
                 lastAttack.AttackAnims.HitBox.hitboxProperties = _attack;
             }
             _lastAttackState = lastAttackState.populated;
+            curretnAttackLevel = lastAttack.cancelProperty.cancelFrom;
         }
     }
 
@@ -325,6 +330,11 @@ public class Character_Animator : MonoBehaviour
     public void AddForceOnAttack(float forceValue)
     {
         _base._cForce.AddForceOnCommand(forceValue);
+    }
+
+    public void SetCanTransitionIdle(bool state) 
+    {
+        canTransitionIdle = state;
     }
 
     #region Projectile Code
@@ -375,10 +385,14 @@ public class Character_Animator : MonoBehaviour
         }
         if (lastAttack != null)
         {
-            if (lastAttack._moveType == MoveType.Stance && _base.comboList3_0.GetInnerStanceAttack(lastAttack).Item1.inStanceState) 
-            {
+            //if (lastAttack._moveType == MoveType.Stance && _base.comboList3_0.GetInnerStanceAttack(lastAttack).Item1.inStanceState)
+            //{
                 return;
-            }
+           // }
+            
+        }
+        else 
+        {
             ClearLastAttack();
         }
     }
@@ -395,6 +409,8 @@ public class Character_Animator : MonoBehaviour
         _base._cForce.CallUnlockKinematic();
         _lastAttackState = lastAttackState.nullified;
         inputWindowOpen = true;
+
+        curretnAttackLevel = Cancel_State.NotCancellable;
     }
     public void EndAnim()
     {

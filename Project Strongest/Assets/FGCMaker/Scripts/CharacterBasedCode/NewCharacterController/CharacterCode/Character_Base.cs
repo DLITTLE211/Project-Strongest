@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Rewired;
 using System.Threading.Tasks;
@@ -139,6 +140,7 @@ public class Character_Base : MonoBehaviour
         ResetRemoveList();
         InitCombos();
         _cComboCounter.SetStartComboCounter();
+        _cAnimator.canTransitionIdle = true;
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -373,6 +375,26 @@ public class Character_Base : MonoBehaviour
             return null;
         }
         return attackButtons[0];
+    }
+
+    public void AwaitCanTransitionIdle(Callback func) 
+    {
+        StartCoroutine(WaitUntilCanTransitionIdle(func));
+    }
+    IEnumerator WaitUntilCanTransitionIdle(Callback func)
+    {
+        while (!_cAnimator.canTransitionIdle) 
+        {
+            yield return new WaitForSeconds(1f / 60f);
+        }
+        if (_cAnimator._lastAttackState == Character_Animator.lastAttackState.populated)
+        {
+            _cAnimator.canTransitionIdle = false;
+        }
+        else
+        {
+            func();
+        }
     }
 }
 [Serializable]
