@@ -62,15 +62,6 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.comboList3_0.simpleAttacks.Count; i++)
         {
             _base.simpleAttackList.Add(_base.comboList3_0.simpleAttacks[i]);
-            _base.simpleAttackList[i].SetComboTimer(_base._cAttackTimer);
-            _base.simpleAttackList[i].SetStarterInformation();
-        }
-        for (int i = 0; i < _base.simpleAttackList.Count; i++)
-        {
-            for (int j = 0; j < _base.simpleAttackList[i]._attackInput._correctInput.Count; j++)
-            {
-                _base.simpleAttackList[i]._attackInput._correctInput[j].SetInnerAttackAnimations(_base._cAnimator);
-            }
         }
     }
     void PrimeMobility() 
@@ -145,7 +136,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (_base._cAnimator.inputWindowOpen)
             {
                 SimpleInputVerifier(input);
-                SpecialInputVerifier(input);
+                //SpecialInputVerifier(input);
             }
         }
     }
@@ -300,6 +291,7 @@ public class Character_ComboDetection : MonoBehaviour
             _base.comboList3_0.simpleAttacks[i].ResetCombo();
             _base.simpleAttackList[i].ResetCombo();
         }
+        /*
         for (int i = 0; i < _base.specialMoveAttackTest.Count; i++)
         {
             _base.comboList3_0.special_Simple[i].ResetCombo();
@@ -319,5 +311,6 @@ public class Character_ComboDetection : MonoBehaviour
         {
             _base._extraMoveControls[i].ResetCurrentInput();
         }
+        */
     }
 }

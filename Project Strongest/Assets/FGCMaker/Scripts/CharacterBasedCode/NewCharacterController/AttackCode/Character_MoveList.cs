@@ -49,6 +49,7 @@ public class Character_MoveList : MonoBehaviour
     {
         #region Simple Attacks Storage
         simpleAttackProperties = new List<Attack_BaseProperties>();
+        GetNormalAttacks(baseCharacterInfo);
         for (int i = 0; i < simpleAttacks.Count; i++)
         {
             for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
@@ -136,7 +137,21 @@ public class Character_MoveList : MonoBehaviour
             basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
         }*/
         #endregion
-        
+
+    }
+
+    public List<Attack_NonSpecialAttack> GetNormalAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            simpleAttacks[i].SetStarterInformation();
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+        return simpleAttacks;
     }
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)
     {

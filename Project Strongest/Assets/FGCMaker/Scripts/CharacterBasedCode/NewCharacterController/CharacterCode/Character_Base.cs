@@ -197,6 +197,7 @@ public class Character_Base : MonoBehaviour
     {
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
+        comboList3_0.ExtractBaseProperties(this);
         _cComboDetection.PrimeCombos();
     }
     void GetCharacterMoveList()
