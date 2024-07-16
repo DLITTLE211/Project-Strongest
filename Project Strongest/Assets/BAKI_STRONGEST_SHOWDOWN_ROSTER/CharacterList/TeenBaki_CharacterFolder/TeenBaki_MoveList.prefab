@@ -2333,7 +2333,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 2
+            cancelFrom: 1
             cancelTo: 2
           _moveType: 0
           AttackAnims:
@@ -2650,7 +2650,7 @@ MonoBehaviour:
           attackScalingPercent: 11
           dashCancelable: 0
           JumpCancelable: 0
-          _airInfo: 2
+          _airInfo: 1
           cancelProperty:
             cancelFrom: 2
             cancelTo: 0
@@ -3323,7 +3323,7 @@ MonoBehaviour:
   - SpecialAttackName: Air Light Kick
     _attackInput:
       _correctInput:
-      - _correctSequence: 5C
+      - _correctSequence: 5D
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3394,7 +3394,7 @@ MonoBehaviour:
   - SpecialAttackName: Air Heavy Kick
     _attackInput:
       _correctInput:
-      - _correctSequence: 5D
+      - _correctSequence: 5C
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3912,7 +3912,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 2
+            cancelFrom: 1
             cancelTo: 2
           _moveType: 0
           AttackAnims:
@@ -4041,7 +4041,7 @@ MonoBehaviour:
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
-            animClip: {fileID: -3463777277716834404, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+            animClip: {fileID: 3642804766188552297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
