@@ -402,9 +402,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 4
+          active: 5
+          inactive: 16
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -437,12 +437,96 @@ MonoBehaviour:
       hu_size: {x: 0, y: 0}
       _frameData:
         init: 0
-        startup: 0
-        active: 0
-        inactive: 0
+        startup: 2
+        active: 3
+        inactive: 122
         recovery: 0
         lastFrame: 0
-        _extraPoints: []
+        _extraPoints:
+        - hitFramePoints: 22
+          call: 1048576
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 5
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 36
+          call: 0
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 7
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 60
+          call: 1048576
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 10
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 2
+        - hitFramePoints: 87
+          call: 8
+          hitFrameBool: 0
+          Force: -7
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 10
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 2
       _hitCount:
         _count: 0
         _startCount: 0
@@ -497,9 +581,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 4
+          active: 5
+          inactive: 12
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -537,7 +621,91 @@ MonoBehaviour:
         inactive: 0
         recovery: 0
         lastFrame: 0
-        _extraPoints: []
+        _extraPoints:
+        - hitFramePoints: 22
+          call: 1048576
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 7
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 36
+          call: 1048576
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 8
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 60
+          call: 1048576
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 15
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 2
+        - hitFramePoints: 87
+          call: 16
+          hitFrameBool: 0
+          Force: -7
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -853,9 +1021,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 9
+                  active: 10
+                  inactive: 16
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -915,9 +1083,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 8
+                  active: 9
+                  inactive: 15
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -981,9 +1149,9 @@ MonoBehaviour:
         hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 9
+          active: 10
+          inactive: 30
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -1050,9 +1218,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 28
+                  active: 29
+                  inactive: 41
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -1112,9 +1280,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 9
+                  active: 10
+                  inactive: 16
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
@@ -1174,9 +1342,9 @@ MonoBehaviour:
                 hu_size: {x: 0, y: 0}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 8
+                  active: 9
+                  inactive: 15
                   recovery: 0
                   lastFrame: 0
                   _extraPoints: []
