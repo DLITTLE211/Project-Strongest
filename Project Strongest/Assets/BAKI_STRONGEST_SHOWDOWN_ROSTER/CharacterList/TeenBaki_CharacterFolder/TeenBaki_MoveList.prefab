@@ -3607,7 +3607,7 @@ MonoBehaviour:
   - SpecialAttackName: High Roundhouse
     _attackInput:
       _correctInput:
-      - _correctSequence: 3D
+      - _correctSequence: 3C
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3662,6 +3662,77 @@ MonoBehaviour:
           lateralKBP:
             lateralKBP: 3
             Value: 5
+          verticalKBP:
+            verticalKBP: 0
+            Value: 0
+          KnockDown: 0
+        attackInputState:
+          _state: 0
+          directionalInput: 0
+    _pathdata:
+      _curInputPath: 0
+      _curAttackPath: 0
+    curInput: 0
+    curAttack: 0
+    lastDirection: 0
+  - SpecialAttackName: High Kick
+    _attackInput:
+      _correctInput:
+      - _correctSequence: 4D
+        correctAttack: 0
+        correctInput: 0
+        moveInput: 0
+        attackInput: 0
+        property:
+          _attackName: 
+          _cTimer: {fileID: 0}
+          rawAttackDamage: 9
+          counterHitDamageMult: 1.035
+          hitstopValue: 15
+          hitstunValue: 13
+          hitLevel: 2
+          attackHashes: 
+          _meterRequirement: 0
+          _meterAwardedOnHit: 7
+          attackScalingPercent: 12
+          dashCancelable: 0
+          JumpCancelable: 1
+          _airInfo: 0
+          cancelProperty:
+            cancelFrom: 1
+            cancelTo: 2
+          _moveType: 0
+          AttackAnims:
+            playerAnim: {fileID: 0}
+            animClip: {fileID: -5794839040343668778, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+            animName: 
+            animLength: 0
+            HitBox: {fileID: 0}
+            attackType: 1
+            hb_placement: {x: 0, y: 0, z: 0}
+            hb_orientation: {x: 0, y: 0, z: 0}
+            hb_size: {x: 0, y: 0}
+            extendedHitBox: {fileID: 0}
+            hurtType: 3
+            hu_placement: {x: 0, y: 0, z: 0}
+            hu_orientation: {x: 0, y: 0, z: 0}
+            hu_size: {x: 0, y: 0}
+            _frameData:
+              init: 0
+              startup: 12
+              active: 13
+              inactive: 18
+              recovery: 0
+              lastFrame: 0
+              _extraPoints: []
+            _hitCount:
+              _count: 0
+              _startCount: 0
+              _refreshRate: 0
+              _startRefreshRate: 0
+          lateralKBP:
+            lateralKBP: 0
+            Value: 0
           verticalKBP:
             verticalKBP: 0
             Value: 0

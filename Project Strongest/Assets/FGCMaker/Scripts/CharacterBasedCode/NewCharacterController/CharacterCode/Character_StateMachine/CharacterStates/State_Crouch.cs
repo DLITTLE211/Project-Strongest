@@ -11,21 +11,18 @@ public class State_Crouch : BaseState
 
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
-        {
-            _cAnim.PlayNextAnimation(0, 0,false, I2CHash);
-        }
         await WaitToChargeSuperMobility();
     }
     async Task WaitToChargeSuperMobility() 
     {
         float OneFrame = 1 / 60f;
-        float waitTime = 10 * OneFrame;
+        float waitTime = 2 * OneFrame;
         int timeInMS = (int)(waitTime * 1000f);
         await Task.Delay(timeInMS);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
             _base._cComboDetection.superMobilityOption = true;
+            _cAnim.PlayNextAnimation(0, 0, false, I2CHash);
         }
     }
     public override void OnUpdate()
