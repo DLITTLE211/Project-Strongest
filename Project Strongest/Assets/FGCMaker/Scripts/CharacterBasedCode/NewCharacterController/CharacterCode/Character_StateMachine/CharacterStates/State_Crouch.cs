@@ -22,6 +22,12 @@ public class State_Crouch : BaseState
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
             _base._cComboDetection.superMobilityOption = true;
+        }
+        float TenwaitTime = 10 * OneFrame;
+        int TentimeInMS = (int)(TenwaitTime * 1000f);
+        await Task.Delay(TentimeInMS);
+        if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+        {
             _cAnim.PlayNextAnimation(0, 0, false, I2CHash);
         }
     }

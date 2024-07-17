@@ -24,8 +24,9 @@ public class Attack_Manager : MonoBehaviour
         _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
         CanTransitionAnimation = true;
     }
-    public void ClearAttacks() 
-    {
+    public void ClearAttacks()
+    { 
+        _AttackAnimQueue.Clear();
         _cAnimator.inputWindowOpen = true;
         _cAnimator.EndAnim();
         Combo.Clear();
@@ -240,12 +241,9 @@ public class Attack_Manager : MonoBehaviour
     IEnumerator AwaitClear(Attack_BaseProperties _newAttack)
     {
         _AttackAnimQueue.Enqueue(_newAttack);
-        while (!CanTransitionAnimation) 
+        while (_AttackAnimQueue.Count > 0)
         {
-            yield return new WaitForSeconds(1f / 60f);
-        }
-        if (_AttackAnimQueue.Count > 0)
-        {
+            yield return new WaitForSeconds(5 * (1f / 60f));
             PlayAttack(_AttackAnimQueue.Dequeue());
         }
     }

@@ -143,9 +143,12 @@ public class Character_Animator : MonoBehaviour
     {
         if (triggerSet != "") 
         {
-            shadowAnim.SetTrigger(triggerSet);
-            myAnim.SetTrigger(triggerSet);
-            return;
+            if (lastAttack == null)
+            {
+                shadowAnim.SetTrigger(triggerSet);
+                myAnim.SetTrigger(triggerSet);
+                return;
+            }
         }
         if (attackOverride)
         {
