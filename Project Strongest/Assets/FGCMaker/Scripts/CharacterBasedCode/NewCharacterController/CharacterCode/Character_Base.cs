@@ -14,6 +14,7 @@ public class Character_Base : MonoBehaviour
     #endregion
     #region Script References
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
+    public Character_Hitstop _cHitstop;
     public Character_AttackDetection _cADetection;
     public Character_ComboDetection _cComboDetection;
     public Character_Animator _cAnimator;
@@ -183,6 +184,7 @@ public class Character_Base : MonoBehaviour
         Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
         pSide.thisPosition.SetModelTransform(this.gameObject.transform);
         SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
+        _cHitstop.SetCharacterAnimator(playerID, _chosneCharacter_Animator);
     }
     void ResetRemoveList() 
     {

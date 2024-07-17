@@ -243,6 +243,7 @@ public class HurtBox : CollisionDetection
         {
             if (_hitbox.HBType != HitBoxType.nullified)
             {
+                currentHitProperties.hitConnected = true;
                 StartCoroutine(DoMultiHit_OnBlock(_hitbox, hitCount, Base_Target, Base_Attacker));
             }
         }
@@ -252,6 +253,7 @@ public class HurtBox : CollisionDetection
             {
                 Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
 
+                currentAttack.hitConnected = true;
                 Base_Target.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,true);
                 await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue/5f, Base_Target);
                 Base_Target._cHitController.HandleBlockState(currentAttack);
@@ -269,6 +271,7 @@ public class HurtBox : CollisionDetection
         {
             if (_hitbox.HBType != HitBoxType.nullified)
             {
+                currentHitProperties.hitConnected = true;
                 StartCoroutine(DoMultiHit(_hitbox, hitCount, Base_Target, Base_Attacker));
             }
         }
@@ -277,7 +280,7 @@ public class HurtBox : CollisionDetection
             if (_hitbox.HBType != HitBoxType.nullified)
             {
                 Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
-
+                currentAttack.hitConnected = true;
                 Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,false);
                 await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
                 Base_Target._cHitController.HandleHitState(currentAttack);

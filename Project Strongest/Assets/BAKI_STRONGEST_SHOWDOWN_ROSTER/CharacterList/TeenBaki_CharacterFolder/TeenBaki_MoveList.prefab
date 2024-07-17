@@ -120,6 +120,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 2
         Value: 2
@@ -326,6 +327,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 1
         Value: 2
@@ -422,6 +424,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -623,6 +626,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -802,6 +806,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -976,6 +981,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -1045,6 +1051,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 6
@@ -1111,6 +1118,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -1180,6 +1188,7 @@ MonoBehaviour:
                   _startCount: 3
                   _refreshRate: 0
                   _startRefreshRate: 0.15
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 6
@@ -1242,6 +1251,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 5
@@ -1304,6 +1314,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 4
@@ -1370,6 +1381,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -1439,6 +1451,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 6
@@ -1501,6 +1514,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 5
@@ -1563,6 +1577,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 4
@@ -1634,6 +1649,7 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+        hitConnected: 0
         lateralKBP:
           lateralKBP: 2
           Value: 3
@@ -1699,6 +1715,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 2
                 Value: 3
@@ -1763,6 +1780,7 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+              hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
                 Value: 4
@@ -1831,6 +1849,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 3
         Value: 6
@@ -1897,6 +1916,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 3
         Value: 2
@@ -1963,6 +1983,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 3
         Value: 5
@@ -2029,6 +2050,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 4
         Value: 9
@@ -2095,6 +2117,7 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+      hitConnected: 0
       lateralKBP:
         lateralKBP: 0
         Value: 0
@@ -2148,14 +2171,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.55, y: 0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.35, y: 0.35}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.55, y: 0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.4, y: 0.4}
             _frameData:
               init: 0
               startup: 5
@@ -2169,6 +2192,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -2201,7 +2225,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             cancelFrom: 2
-            cancelTo: 2
+            cancelTo: 3
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -2231,6 +2255,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 3
             Value: 4
@@ -2262,8 +2287,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 2
-            cancelTo: 3
+            cancelFrom: 3
+            cancelTo: 4
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -2293,6 +2318,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 3
             Value: 7
@@ -2364,6 +2390,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 4
@@ -2396,7 +2423,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             cancelFrom: 2
-            cancelTo: 2
+            cancelTo: 3
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -2426,6 +2453,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 1
@@ -2457,7 +2485,7 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 2
+            cancelFrom: 3
             cancelTo: 0
           _moveType: 0
           AttackAnims:
@@ -2488,6 +2516,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -2559,6 +2588,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -2591,7 +2621,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             cancelFrom: 2
-            cancelTo: 2
+            cancelTo: 3
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -2621,6 +2651,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -2652,7 +2683,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 1
           cancelProperty:
-            cancelFrom: 2
+            cancelFrom: 3
             cancelTo: 0
           _moveType: 0
           AttackAnims:
@@ -2683,6 +2714,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 4
             Value: 9
@@ -2754,6 +2786,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 3
             Value: 5
@@ -2786,7 +2819,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             cancelFrom: 2
-            cancelTo: 2
+            cancelTo: 3
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -2816,6 +2849,7 @@ MonoBehaviour:
               _startCount: 6
               _refreshRate: 0
               _startRefreshRate: 0.2
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -2847,8 +2881,8 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 2
-            cancelTo: 3
+            cancelFrom: 3
+            cancelTo: 4
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -2878,6 +2912,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -2949,6 +2984,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3020,6 +3056,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -3091,6 +3128,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3162,6 +3200,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3233,6 +3272,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3304,6 +3344,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -3375,6 +3416,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3446,6 +3488,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3517,6 +3560,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -3588,6 +3632,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 1
             Value: 7
@@ -3659,6 +3704,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 3
             Value: 5
@@ -3730,6 +3776,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -3801,6 +3848,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -3872,6 +3920,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -3943,6 +3992,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 4
@@ -3975,7 +4025,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             cancelFrom: 2
-            cancelTo: 2
+            cancelTo: 3
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4005,6 +4055,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 2
@@ -4036,8 +4087,8 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 2
-            cancelTo: 3
+            cancelFrom: 3
+            cancelTo: 4
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4067,6 +4118,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 2
             Value: 3
@@ -4138,6 +4190,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -4209,6 +4262,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -4281,6 +4335,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -4441,6 +4496,7 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+          hitConnected: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0

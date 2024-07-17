@@ -39,7 +39,7 @@ public class Attack_Manager : MonoBehaviour
     }
     public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack)
     {
-        if (Combo.Count == 0)
+        if (Combo.Count == 0 && currentCount == 0)
         {
             Combo.Add(newAttack);
             ChecFirstAttackCriteria(newAttack);
@@ -95,12 +95,16 @@ public class Attack_Manager : MonoBehaviour
     }
     public bool CheckStringPriority(Cancel_State lastState, Attack_BaseProperties newAttack)
     {
-        if (lastState == Cancel_State.String_Normal_Attack && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Attack)
+        if ((lastState == Cancel_State.String_Normal_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Start) || (lastState == Cancel_State.Stance_Input_Start && newAttack.cancelProperty.cancelFrom == Cancel_State.Normal_Attack))
         {
             return true;
         }
-        else 
+        else
         {
+            if (lastState == Cancel_State.String_Normal_Start)
+            {
+                return true;
+            }
             if (lastState == Cancel_State.Rekka_Input_FollowUp)
             {
                 if (_base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count-1]).inRekkaState)
@@ -110,7 +114,7 @@ public class Attack_Manager : MonoBehaviour
                 _base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count - 1]).usedRekkas.Add(newAttack);
             }
 
-            return true;
+            return false;
         }
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 

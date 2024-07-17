@@ -1332,6 +1332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProfile: {fileID: 0}
+  _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 498465949}
   _cComboDetection: {fileID: 566836026}
   _cAnimator: {fileID: 0}
@@ -1408,6 +1409,7 @@ MonoBehaviour:
   myRb: {fileID: 94923330}
   _jumpForce: 250
   _moveForce: 0.3
+  _dashForce: 0
   _jumpDirForce: 100
   movementPC: 0
   _subState: 2
@@ -12542,6 +12544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProfile: {fileID: 0}
+  _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 510088399}
   _cComboDetection: {fileID: 89504893}
   _cAnimator: {fileID: 0}
@@ -12618,6 +12621,7 @@ MonoBehaviour:
   myRb: {fileID: 993311522}
   _jumpForce: 250
   _moveForce: 0.3
+  _dashForce: 0
   _jumpDirForce: 100
   movementPC: 0
   _subState: 2

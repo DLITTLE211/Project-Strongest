@@ -42,7 +42,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         CheckForInput = true;
     }
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         TimerTickDown();
     }
@@ -96,6 +96,18 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                     _base._cAnimator.ClearLastAttack();
                     SetTimerType();
                 }
+                ResetTimer();
+            }
+            else
+            {
+                _frameCountTimer -= 1 / 60f;
+                FrameCountTimer = _frameCountTimer;
+            }
+        }
+        else 
+        {
+            if (_frameCountTimer <= 0f)
+            {
                 ResetTimer();
             }
             else

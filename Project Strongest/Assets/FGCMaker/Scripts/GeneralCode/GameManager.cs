@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
         playerProfiles = new List<ChosenCharacter>();
         playerProfiles.Add(CharacterSelect_LoadArena.leftPlayerChosenProfile);
         playerProfiles.Add(CharacterSelect_LoadArena.rightPlayerChosenProfile);
-
     }
 
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)

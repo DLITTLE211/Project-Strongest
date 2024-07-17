@@ -39,6 +39,7 @@ public class Attack_BaseProperties
     public Attack_CancelInfo cancelProperty;
     public MoveType _moveType;
     public AttackHandler_Attack AttackAnims;
+    public bool hitConnected;
     #endregion
 
     #region KnockBack/KnockDown Variables
@@ -50,10 +51,10 @@ public class Attack_BaseProperties
     #endregion
     public void SetAttackAnims(Character_Animator animator)
     {
+        hitConnected = false;
         attackHashes = new List<int>();
         AttackAnims.SetAttackAnim(animator);
         attackHashes.Add(Animator.StringToHash(AttackAnims.animName));
-
     }
 }
 [Serializable]

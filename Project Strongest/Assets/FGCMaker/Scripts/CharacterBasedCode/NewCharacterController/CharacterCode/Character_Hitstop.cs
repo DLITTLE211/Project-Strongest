@@ -22,6 +22,21 @@ public class Character_Hitstop : MonoBehaviour
     {
         Time.timeScale = TimeScale;
     }
+    public void SetCharacterAnimator(int id, Character_Animator anim) 
+    {
+        if (id == 0) 
+        {
+            p1 = anim;
+        }
+        if(id == 1) 
+        {
+            p2 = anim;
+        }
+        else 
+        {
+            p2 = anim;
+        }
+    }
     public async Task CallHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease = 0, Character_Base targetBase = null)
     {
         //Sets Total HitstopTime
