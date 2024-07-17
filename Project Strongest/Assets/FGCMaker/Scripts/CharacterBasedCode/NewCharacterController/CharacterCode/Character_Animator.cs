@@ -325,6 +325,7 @@ public class Character_Animator : MonoBehaviour
     }
     public void StartFrameCount()
     {
+        PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate), true);
         StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
     }
     public void AddForceOnAttack(float forceValue)
@@ -383,7 +384,7 @@ public class Character_Animator : MonoBehaviour
         {
             NullifyMobilityOption();
         }
-        if (lastAttack != null)
+        if (lastAttack == null)
         {
             //if (lastAttack._moveType == MoveType.Stance && _base.comboList3_0.GetInnerStanceAttack(lastAttack).Item1.inStanceState)
             //{

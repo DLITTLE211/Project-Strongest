@@ -13,11 +13,16 @@ public class Attack_Manager : MonoBehaviour
     public List<Attack_BaseProperties> Combo;
     //public Attack_BaseProperties newAttack, lastAttack;
     public int currentCount;
+    private bool CanTransitionAnimation;
+
+    Queue<Attack_BaseProperties> _AttackAnimQueue;
     // Start is called before the first frame update
     void Start()
     {
         SetHitBoxStartState();
         Combo = new List<Attack_BaseProperties>();
+        _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
+        CanTransitionAnimation = true;
     }
     public void ClearAttacks() 
     {
@@ -216,16 +221,38 @@ public class Attack_Manager : MonoBehaviour
             }
         }
     }
+    public void SetStartNextAttack(bool state) 
+    {
+        CanTransitionAnimation = state;
+    }
     void DoAttack(Attack_BaseProperties _newAttack)
     {
         currentCount = Combo.Count;
-        PlayAttack(_newAttack);
+        if (CanTransitionAnimation)
+        {
+            PlayAttack(_newAttack);
+        }
+        else 
+        {
+           StartCoroutine(AwaitClear(_newAttack));
+        }
+    }
+    IEnumerator AwaitClear(Attack_BaseProperties _newAttack)
+    {
+        _AttackAnimQueue.Enqueue(_newAttack);
+        while (!CanTransitionAnimation) 
+        {
+            yield return new WaitForSeconds(1f / 60f);
+        }
+        if (_AttackAnimQueue.Count > 0)
+        {
+            PlayAttack(_AttackAnimQueue.Dequeue());
+        }
     }
     void PlayAttack(Attack_BaseProperties attack)
     {
         if (attack.attackHashes.Count != 0)
         {
-            _cAnimator.PlayNextAnimation(attack.attackHashes[0], 2 * (1f / attack.AttackAnims.animClip.frameRate), true);
             _cAnimator.SetNextAttackStartVariables(attack);
         }
     }

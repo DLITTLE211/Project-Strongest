@@ -106,6 +106,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
         _playerCAnimator.SetCanTransitionIdle(false);
+        _playerCAnimator._base._aManager.SetStartNextAttack(false);
     }
     public override void OnStartup(Character_Base curBase)
     {
@@ -129,6 +130,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         inactive = true;
         HitBox.DestroyHitbox(HitBox, extendedHitBox);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
+        _playerCAnimator._base._aManager.SetStartNextAttack(true);
     }
     public override void OnExit()
     {
