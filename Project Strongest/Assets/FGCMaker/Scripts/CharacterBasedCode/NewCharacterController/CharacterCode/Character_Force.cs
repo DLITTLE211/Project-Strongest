@@ -76,20 +76,6 @@ public class Character_Force : MonoBehaviour
         {
             _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
         }
-       /* if (_base._cHurtBox.IsGrounded() && _base._cAnimator.activatedInput == null)
-        {
-            if (_myRB.velocity.x != 0)
-            {
-                if (_myRB.velocity.x > _base.MoveForce)
-                {
-                    _myRB.velocity = new Vector3(_base.MoveForce / 10f, _myRB.velocity.y, 0f);
-                }
-                if (_myRB.velocity.x < -_base.MoveForce)
-                {
-                    _myRB.velocity = new Vector3(-_base.MoveForce / 10f, _myRB.velocity.y, 0f);
-                }
-            }
-        }*/
     }
     public void HandleForceFreeze(bool state)
     {
@@ -140,16 +126,19 @@ public class Character_Force : MonoBehaviour
     #endregion
     public void SetWalkForce(Character_ButtonInput dInput)
     {
-        switch (dInput.Button_State.directionalInput)
+        if (_base._cAnimator._lastAttackState == Character_Animator.lastAttackState.nullified)
         {
-            case 4:
-                _myRB.velocity = new Vector3(-_base.MoveForce, _myRB.velocity.y, 0f);
-                //_myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
-                break;
-            case 6:
-                _myRB.velocity = new Vector3(_base.MoveForce, _myRB.velocity.y, 0f);
-                //_myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
-                break;
+            switch (dInput.Button_State.directionalInput)
+            {
+                case 4:
+                    _myRB.velocity = new Vector3(-_base.MoveForce, _myRB.velocity.y, 0f);
+                    //_myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
+                    break;
+                case 6:
+                    _myRB.velocity = new Vector3(_base.MoveForce, _myRB.velocity.y, 0f);
+                    //_myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
+                    break;
+            }
         }
     }
     public void AddForceOnCommand(float value, bool forceDirection = false)
