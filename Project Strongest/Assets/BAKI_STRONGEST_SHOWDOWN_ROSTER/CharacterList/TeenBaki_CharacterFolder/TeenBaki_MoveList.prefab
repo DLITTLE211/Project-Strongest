@@ -3025,7 +3025,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 1
+            cancelFrom: 2
             cancelTo: 3
           _moveType: 0
           AttackAnims:
@@ -3169,8 +3169,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 1
-            cancelTo: 1
+            cancelFrom: 2
+            cancelTo: 3
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3242,7 +3242,7 @@ MonoBehaviour:
           _airInfo: 2
           cancelProperty:
             cancelFrom: 1
-            cancelTo: 1
+            cancelTo: 0
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3313,7 +3313,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 2
           cancelProperty:
-            cancelFrom: 1
+            cancelFrom: 2
             cancelTo: 0
           _moveType: 0
           AttackAnims:
@@ -3457,7 +3457,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 2
           cancelProperty:
-            cancelFrom: 1
+            cancelFrom: 2
             cancelTo: 0
           _moveType: 0
           AttackAnims:
@@ -3529,7 +3529,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 1
+            cancelFrom: 3
             cancelTo: 0
           _moveType: 0
           AttackAnims:
@@ -3601,8 +3601,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 1
-            cancelTo: 0
+            cancelFrom: 2
+            cancelTo: 8
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3673,8 +3673,8 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 1
-            cancelTo: 2
+            cancelFrom: 3
+            cancelTo: 8
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3745,8 +3745,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 2
           cancelProperty:
-            cancelFrom: 1
-            cancelTo: 1
+            cancelFrom: 3
+            cancelTo: 0
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3817,8 +3817,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 2
           cancelProperty:
-            cancelFrom: 1
-            cancelTo: 1
+            cancelFrom: 3
+            cancelTo: 8
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
