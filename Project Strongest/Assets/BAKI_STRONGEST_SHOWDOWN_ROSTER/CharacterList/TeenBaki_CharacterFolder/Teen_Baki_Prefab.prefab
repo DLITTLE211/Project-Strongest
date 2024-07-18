@@ -233,6 +233,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -7834733329589398620, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c280f540ed37c15449adb492c0e2f937, type: 2}
@@ -513,12 +517,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5552215626756779168, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552215626756779168, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0fe221bd9e486004facbc91ff4cc1ec6, type: 2}
     - target: {fileID: 5695735803674598497, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911144657728685357, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5911144657728685357, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       propertyPath: m_RenderingLayerMask
@@ -737,6 +749,7 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
+    hitConnected: 0
     lateralKBP:
       lateralKBP: 0
       Value: 0
@@ -750,6 +763,8 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 1
   _canRecover: 0
+  canTransitionIdle: 0
+  curretnAttackLevel: 0
   FreezeCall: 61440
   mobilityCall: 2048
   attackCall: 66
