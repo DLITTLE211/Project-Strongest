@@ -95,15 +95,23 @@ public class Attack_Manager : MonoBehaviour
     }
     public bool CheckStringPriority(Cancel_State lastState, Attack_BaseProperties newAttack)
     {
-        if ((lastState == Cancel_State.String_Normal_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Start) || (lastState == Cancel_State.Stance_Input_Start && newAttack.cancelProperty.cancelFrom == Cancel_State.Normal_Attack))
+        //(lastState == Cancel_State.String_Normal_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Start) || (lastState == Cancel_State.Stance_Input_Start && newAttack.cancelProperty.cancelFrom == Cancel_State.Normal_Attack))
+        if (StateComparison(lastState, newAttack, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_Normal_Attack))
+        {
+            return true;
+        }
+        if (StateComparison(lastState, newAttack, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_Normal_Attack))
         {
             return true;
         }
         else
         {
-            if (lastState == Cancel_State.String_Normal_Start)
+            if (lastState == Cancel_State.Light_Normal_Attack)
             {
-                return true;
+                if (newAttack.cancelProperty.cancelFrom == Cancel_State.Heavy_Normal_Attack || newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
+                {
+                    return true;
+                }
             }
             if (lastState == Cancel_State.Rekka_Input_FollowUp)
             {
@@ -116,6 +124,10 @@ public class Attack_Manager : MonoBehaviour
 
             return false;
         }
+    }
+    bool StateComparison(Cancel_State lastState, Attack_BaseProperties newAttack, Cancel_State desiredLastState, Cancel_State desiredNextState) 
+    {
+        return lastState == desiredLastState && newAttack.cancelProperty.cancelFrom == desiredNextState;
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {
