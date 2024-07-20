@@ -50,6 +50,7 @@ public class Attack_BaseInput
         E = 'E',
         F = 'F',
         G = 'G',
+        H = 'H',
     }
     public string _correctSequence;
     public int correctAttack;
