@@ -195,6 +195,7 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
             _attackInput._correctInput[i].property.InputTimer = timer;
         }
         curBase = timer._base;
+        _throwAnimation[0].SetAttackAnim(timer._base._cAnimator);
     }
 
     public void UpdateLastDirectional(Character_ButtonInput newDirection)

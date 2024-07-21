@@ -59,6 +59,18 @@ public class Character_MoveList : MonoBehaviour
         }
         #endregion
 
+        #region Throw Attack Storage
+        basicSpecialProperties = new List<Attack_BaseProperties>();
+        GetThrows(baseCharacterInfo);
+        for (int i = 0; i < BasicThrows.Count; i++)
+        {
+            for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
+            {
+                basicSpecialProperties.Add(BasicThrows[i]._attackInput._correctInput[j].property);
+            }
+        }
+        #endregion
+
         //Under Development
         #region Simple Special Moves Storage
         /*basicSpecialProperties = new List<Attack_BaseProperties>();
@@ -140,7 +152,7 @@ public class Character_MoveList : MonoBehaviour
 
     }
 
-    public List<Attack_NonSpecialAttack> GetNormalAttacks(Character_Base baseCharacterInfo)
+    public void GetNormalAttacks(Character_Base baseCharacterInfo)
     {
         for (int i = 0; i < simpleAttacks.Count; i++)
         {
@@ -151,7 +163,18 @@ public class Character_MoveList : MonoBehaviour
                 simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
             }
         }
-        return simpleAttacks;
+    }
+    public void GetThrows(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < BasicThrows.Count; i++)
+        {
+            BasicThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            BasicThrows[i].SetStarterInformation();
+            for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
+            {
+                BasicThrows[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
     }
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)
     {

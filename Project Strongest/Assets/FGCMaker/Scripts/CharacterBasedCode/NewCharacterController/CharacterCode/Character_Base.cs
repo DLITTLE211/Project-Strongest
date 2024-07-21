@@ -78,6 +78,9 @@ public class Character_Base : MonoBehaviour
     [SerializeField] private Amplifiers amplifier;
     public Character_MoveList comboList3_0;
 
+    public List<Attack_ThrowBase> BasicThrows;
+    public List<Attack_ThrowBase> removeThrowList;
+
     public List<Attack_NonSpecialAttack> simpleAttackList;
     public List<Attack_NonSpecialAttack> removeSimpleList;
 

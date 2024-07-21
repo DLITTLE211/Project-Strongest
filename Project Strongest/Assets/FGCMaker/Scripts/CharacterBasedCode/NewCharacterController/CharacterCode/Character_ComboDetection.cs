@@ -63,6 +63,10 @@ public class Character_ComboDetection : MonoBehaviour
         {
             _base.simpleAttackList.Add(_base.comboList3_0.simpleAttacks[i]);
         }
+        for (int i = 0; i < _base.comboList3_0.BasicThrows.Count; i++)
+        {
+            _base.BasicThrows.Add(_base.comboList3_0.BasicThrows[i]);
+        }
     }
     void PrimeMobility() 
     {
@@ -95,6 +99,11 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.comboList3_0.simpleAttacks.Count; i++)
         {
             _base.simpleAttackList.Add(_base.comboList3_0.simpleAttacks[i]);
+        }
+        _base.BasicThrows.Clear();
+        for (int i = 0; i < _base.comboList3_0.BasicThrows.Count; i++)
+        {
+            _base.BasicThrows.Add(_base.comboList3_0.BasicThrows[i]);
         }
     }
     void SetSpecialButtons()
@@ -142,6 +151,7 @@ public class Character_ComboDetection : MonoBehaviour
     }
     void SimpleInputVerifier(Character_ButtonInput input)
     {
+        #region Simple Attacks
         for (int i = 0; i < _base.simpleAttackList.Count; i++)
         {
             Attack_NonSpecialAttack c = _base.simpleAttackList[i];
@@ -169,6 +179,36 @@ public class Character_ComboDetection : MonoBehaviour
             ResetComboList();
             //Messenger.Broadcast(Events.ComboReset);
         }
+        #endregion
+        #region Throws Attacks
+        for (int i = 0; i < _base.BasicThrows.Count; i++)
+        {
+            Attack_ThrowBase c = _base.BasicThrows[i];
+            if (c.ContinueCombo(_base.moveAxes[0], input, _base))
+            {
+                //Current input is correct");
+            }
+            else
+            {
+                _base.removeThrowList.Add(_base.BasicThrows[i]);
+            }
+            if (_base.removeThrowList.Count >= _base.BasicThrows.Count)
+            {
+                // c.ResetCombo();
+                _base.removeSimpleList.Clear();
+            }
+        }
+        foreach (Attack_ThrowBase possibleAttack in _base.removeThrowList)
+        {
+            _base.BasicThrows.Remove(possibleAttack);
+        }
+        if (_base.BasicThrows.Count <= _base.comboList3_0.BasicThrows.Count)
+        {
+            _base.BasicThrows.Clear();
+            ResetComboList();
+            //Messenger.Broadcast(Events.ComboReset);
+        }
+        #endregion
     }
     void SpecialInputVerifier(Character_ButtonInput input)
     {
@@ -290,6 +330,11 @@ public class Character_ComboDetection : MonoBehaviour
         {
             _base.comboList3_0.simpleAttacks[i].ResetCombo();
             _base.simpleAttackList[i].ResetCombo();
+        }
+        for (int i = 0; i < _base.BasicThrows.Count; i++)
+        {
+            _base.comboList3_0.BasicThrows[i].ResetCombo();
+            _base.BasicThrows[i].ResetCombo();
         }
         /*
         for (int i = 0; i < _base.specialMoveAttackTest.Count; i++)

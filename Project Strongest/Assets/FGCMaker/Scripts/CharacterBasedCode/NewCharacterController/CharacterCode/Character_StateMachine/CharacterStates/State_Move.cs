@@ -31,26 +31,62 @@ public class State_Move : BaseState
     }
     public override void OnUpdate()
     {
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {
-            if (onBack == false)
-            {
-                onForward = false;
-                onBack = true;
-                _cAnim.PlayNextAnimation(moveBHash, 0);
-            }
+            CheckRightFaceState();
         }
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 6 )
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
-            if (onForward == false)
-            {
-                onForward = true;
-                onBack = false;
-                _cAnim.PlayNextAnimation(moveFHash, 0);
-            }
+            CheckLeftFaceState();
         }
         _baseForce.SetWalkForce(_base.ReturnMovementInputs());
         base.OnUpdate();
+    }
+    void CheckRightFaceState()
+    {
+        if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+        {
+            if (!onBack)
+            {
+                HandleBackwardAnimation();
+            }
+        }
+        if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
+        {
+            if (!onForward)
+            {
+                HandleForwardAnimation();
+            }
+        }
+    }
+    void CheckLeftFaceState() 
+    {
+        if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+        {
+            if (!onForward)
+            {
+                HandleForwardAnimation();
+            }
+        }
+        if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
+        {
+            if (!onBack)
+            {
+                HandleBackwardAnimation();
+            }
+        }
+    }
+    void HandleForwardAnimation() 
+    {
+        onForward = true;
+        onBack = false;
+        _cAnim.PlayNextAnimation(moveFHash, 0);
+    }
+    void HandleBackwardAnimation()
+    {
+        onBack = true;
+        onForward = false;
+        _cAnim.PlayNextAnimation(moveBHash, 0);
     }
     public override void OnRecov()
     {
