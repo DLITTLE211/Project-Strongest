@@ -22,11 +22,11 @@ public class Character_DamageCalculator : MonoBehaviour
     public HitPointCall customDamageCall;
     private void Start()
     {
-        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyCustomDamage);
     }
-    void ApplyForceOnCustomCallback(CustomCallback callback)
+    void ApplyCustomDamage(CustomCallback callback)
     {
-        if (customDamageCall.HasFlag(callback.customCall))
+       /* if (customDamageCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
             {
@@ -34,7 +34,7 @@ public class Character_DamageCalculator : MonoBehaviour
                     TakeDamage(callback.customDamage);
                     break;
             }
-        }
+        }*/
     }
 
     #region Damage Functions
@@ -65,6 +65,7 @@ public class Character_DamageCalculator : MonoBehaviour
     }
     public void TakeDamage(Attack_BaseProperties currentAttack)
     {
+        
         curRawDamage = currentAttack.rawAttackDamage;
         if (CheckAfflictionState())
         {
@@ -89,9 +90,12 @@ public class Character_DamageCalculator : MonoBehaviour
             float scaledMeterValue = Mathf.Abs((currentAttack._meterAwardedOnHit - calculatedMeterScaling));
             _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
         }
-
-        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         UpdateDamageText(calculatedDamage);
+        if (calculatedRecovDamage == Mathf.Infinity)
+        {
+            calculatedRecovDamage = 0;
+        }
+        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
         ApplyScalingForNextAttack(currentAttack);
     }

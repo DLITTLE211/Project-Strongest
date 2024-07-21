@@ -202,7 +202,7 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
     {
         _throwAnimation[0].SetAttackAnim(curBase._cAnimator);
         _throwAnimation[0].AddRequiredCallbacks(curBase);
-        _throwAnimation[0].AddCustomCallbacks();
+        _throwAnimation[0].AddCustomCallbacks(_throwAnimation[0]);
         curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
     }
     public void UpdateLastDirectional(Character_ButtonInput newDirection)

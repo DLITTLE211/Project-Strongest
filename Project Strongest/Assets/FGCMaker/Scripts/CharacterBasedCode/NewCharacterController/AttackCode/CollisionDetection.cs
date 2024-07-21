@@ -144,7 +144,7 @@ public class CollisionDetection : MonoBehaviour
     }
     public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox)
     {
-        CheckForCollision(_hitbox);
+        //CheckForCollision(_hitbox);
         lastHitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
         hurtbox.gameObject.SetActive(false);
         _hitbox = lastHitbox;

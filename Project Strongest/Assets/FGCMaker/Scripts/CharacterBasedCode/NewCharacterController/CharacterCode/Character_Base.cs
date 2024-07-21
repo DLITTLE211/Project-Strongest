@@ -140,6 +140,7 @@ public class Character_Base : MonoBehaviour
     {
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
+        _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         ResetRemoveList();
         InitCombos();
@@ -155,7 +156,7 @@ public class Character_Base : MonoBehaviour
         {
             amplifier = _chosenAmplifier;
         }
-
+        _cHealth.SetHealthInformation(characterProfile);
         _dashForce = characterProfile.dashSpeed;
         _moveForce = characterProfile.MoveVelocity;
         _jumpForce = characterProfile.JumpForce;
@@ -187,7 +188,6 @@ public class Character_Base : MonoBehaviour
         Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
         pSide.thisPosition.SetModelTransform(this.gameObject.transform);
         SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
-        _cHitstop.SetCharacterAnimator(playerID, _chosneCharacter_Animator);
     }
     void ResetRemoveList() 
     {
@@ -319,6 +319,18 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
+    public void ReceiveCustomCallBack(CustomCallback callback) 
+    {
+        if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.DealCustomDamage:
+                    opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                    break;
+            }
+        }
+    }
     public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob)
     {
         if (activationCall.HasFlag(callback.customCall))
@@ -330,10 +342,6 @@ public class Character_Base : MonoBehaviour
                     break;
             }
         }
-    }
-    public void ActivateMobilityAction() 
-    {
-
     }
     private void Update()
     {

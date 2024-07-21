@@ -43,9 +43,12 @@ public class Character_Animator : MonoBehaviour
     [SerializeField] private Cancel_State currentAttackLevel;
 
 
-    [SerializeField] private HitPointCall FreezeCall;
-    [SerializeField] private HitPointCall mobilityCall;
-    [SerializeField] private HitPointCall attackCall;
+    [SerializeField] private HitPointCall _freezeCall;
+    [SerializeField] private HitPointCall _mobilityCall;
+    [SerializeField] private HitPointCall _attackCall;
+    public HitPointCall FreezeCall { get { return _freezeCall; } }
+    public HitPointCall MobilityCall { get { return _mobilityCall; } }
+    public HitPointCall AttackCall { get { return _attackCall; } }
     private void Start()
     {
         inputWindowOpen = true;
@@ -55,7 +58,7 @@ public class Character_Animator : MonoBehaviour
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {
-        if (FreezeCall.HasFlag(callback.customCall))
+        if (_freezeCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
             {
@@ -74,7 +77,7 @@ public class Character_Animator : MonoBehaviour
                     break;
             }
         }
-        if (mobilityCall.HasFlag(callback.customCall))
+        if (_mobilityCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
             {
@@ -83,7 +86,7 @@ public class Character_Animator : MonoBehaviour
                     break;
             }
         }
-        if (attackCall.HasFlag(callback.customCall))
+        if (_attackCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
             {
@@ -348,7 +351,7 @@ public class Character_Animator : MonoBehaviour
     }
 
     #region Projectile Code
-    void ShootProjectile()
+    public void ShootProjectile()
     {
         GameObject projectile = Instantiate(_base.pSide.thisPosition.projectile_HitBox.gameObject, _base.gameObject.transform);
         projectile.gameObject.transform.localPosition = lastAttack.AttackAnims.hu_placement;
