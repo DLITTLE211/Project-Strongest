@@ -197,11 +197,12 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
         curBase = timer._base;
         _throwAnimation[0].SetAttackAnim(timer._base._cAnimator);
     }
-    public void HandleThrowAnimAttackInfo(Character_Base target, bool blockedAttack = false)
+    public void HandleThrowAnimAttackInfo()
     {
         _throwAnimation[0].SetAttackAnim(curBase._cAnimator);
         _throwAnimation[0].AddRequiredCallbacks(curBase);
         _throwAnimation[0].AddCustomCallbacks();
+        curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
     }
     public void UpdateLastDirectional(Character_ButtonInput newDirection)
     {

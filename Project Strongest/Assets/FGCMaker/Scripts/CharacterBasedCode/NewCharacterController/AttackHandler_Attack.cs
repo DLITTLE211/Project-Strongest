@@ -239,7 +239,56 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks.RemoveAt(0);
         }
         Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
-
+    }
+    public IEnumerator TickAnimThrowCount(AttackHandler_Attack throwProp)
+    {
+        frameCount = 0;
+        float waitTime = 1f / 60f;
+        while (frameCount <= throwProp.animLength)
+        {
+            try
+            {
+                float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
+                if (requiredHitboxCallBacks.Count > 0)
+                {
+                    if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                    {
+                        requiredHitboxCallBacks[0].func();
+                        requiredHitboxCallBacks.RemoveAt(0);
+                    }
+                }
+                if (customHitboxCallBacks != null)
+                {
+                    if (customHitboxCallBacks.Count > 0)
+                    {
+                        if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                        {
+                            Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+                            customHitboxCallBacks.RemoveAt(0);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.ToString());
+                frameCount = throwProp.animLength + 1f;
+                Debug.Log("Null Check");
+                Debug.Log($"Inactive frame: {throwProp._frameData.inactive}");
+                Debug.Log($"Last Attack null?: {throwProp == null}");
+                Debug.Log($"Inactive bool state: {inactive}");
+                Debug.Break();
+            }
+            frameCount += 1f * waitTime;
+            yield return new WaitForSeconds(waitTime);
+        }
+        _playerCAnimator.SetCanTransitionIdle(true);
+        if (requiredHitboxCallBacks.Count == 1)
+        {
+            requiredHitboxCallBacks[0].func();
+            requiredHitboxCallBacks.RemoveAt(0);
+        }
+        Messenger.Broadcast<int>(Events.AddNegativeFrames, throwProp._frameData.recovery);
     }
 }
 

@@ -211,7 +211,7 @@ public class Character_MoveList : MonoBehaviour
                                 attacker._cComboCounter.OnHit_CountUp();
                                 BasicThrows[i].SendCounterHitInfo(currentPathData, target);
                                 BasicThrows[i].SendSuccessfulDamageInfo(currentPathData, target);
-                                BasicThrows[i].HandleThrowAnimAttackInfo(target);
+                                BasicThrows[i].HandleThrowAnimAttackInfo();
                                 return;
                             }
                             else { continue; }

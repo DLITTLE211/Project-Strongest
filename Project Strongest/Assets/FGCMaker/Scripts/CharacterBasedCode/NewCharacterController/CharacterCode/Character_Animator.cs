@@ -331,6 +331,12 @@ public class Character_Animator : MonoBehaviour
         PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate), true);
         StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
     }
+    public void StartThrowFrameCount(Attack_BaseProperties throwProperty, AttackHandler_Attack throwCustom)
+    {
+        lastAttack = throwProperty;
+        PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
+        StartCoroutine(throwCustom.TickAnimThrowCount(throwCustom));
+    }
     public void AddForceOnAttack(float forceValue)
     {
         _base._cForce.AddForceOnCommand(forceValue);
