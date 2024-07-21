@@ -208,7 +208,6 @@ public class Character_MoveList : MonoBehaviour
                         {
                             if (BasicThrows[i]._attackInput._correctInput[0].property.AttackAnims.animName == attack.AttackAnims.animName)
                             {
-                                attacker._cComboCounter.OnHit_CountUp();
                                 BasicThrows[i].SendCounterHitInfo(currentPathData, target);
                                 BasicThrows[i].SendSuccessfulDamageInfo(currentPathData, target);
                                 BasicThrows[i].HandleThrowAnimAttackInfo();

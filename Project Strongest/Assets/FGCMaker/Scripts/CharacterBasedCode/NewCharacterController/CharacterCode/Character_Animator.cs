@@ -40,7 +40,7 @@ public class Character_Animator : MonoBehaviour
     internal int negativeFrameCount;
     Vector3 startPos;
 
-    [SerializeField] private Cancel_State curretnAttackLevel;
+    [SerializeField] private Cancel_State currentAttackLevel;
 
 
     [SerializeField] private HitPointCall FreezeCall;
@@ -296,7 +296,7 @@ public class Character_Animator : MonoBehaviour
                 lastAttack.AttackAnims.HitBox.hitboxProperties = _attack;
             }
             _lastAttackState = lastAttackState.populated;
-            curretnAttackLevel = lastAttack.cancelProperty.cancelFrom;
+            currentAttackLevel = lastAttack.cancelProperty.cancelFrom;
         }
     }
 
@@ -395,14 +395,11 @@ public class Character_Animator : MonoBehaviour
         }
         if (lastAttack == null)
         {
-            //if (lastAttack._moveType == MoveType.Stance && _base.comboList3_0.GetInnerStanceAttack(lastAttack).Item1.inStanceState)
-            //{
-                return;
-           // }
-            
+            return;
         }
-        else 
+        else
         {
+            
             ClearLastAttack();
         }
     }
@@ -420,7 +417,7 @@ public class Character_Animator : MonoBehaviour
         _lastAttackState = lastAttackState.nullified;
         inputWindowOpen = true;
 
-        curretnAttackLevel = Cancel_State.NotCancellable;
+        currentAttackLevel = Cancel_State.NotCancellable;
     }
     public void EndAnim()
     {

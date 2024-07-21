@@ -238,7 +238,17 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+        if (lastAttack._moveType == MoveType.Throw)
+        {
+            if (!lastAttack.hitConnected)
+            {
+                Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+            }
+        }
+        else
+        {
+            Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+        }
     }
     public IEnumerator TickAnimThrowCount(AttackHandler_Attack throwProp)
     {

@@ -40,6 +40,7 @@ public class Character_DamageCalculator : MonoBehaviour
     #region Damage Functions
     public void TakeDamage(CustomDamageField currentAttack)
     {
+        _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = currentAttack.rawAttackDamage;
         if (CheckAfflictionState())
         {

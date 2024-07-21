@@ -46,6 +46,7 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
     {
         curInput = 0;
         curAttack = 0;
+        _attackInput._correctInput[0].property.hitConnected = false;
     }
 
     public override void ResetMoveCombo()

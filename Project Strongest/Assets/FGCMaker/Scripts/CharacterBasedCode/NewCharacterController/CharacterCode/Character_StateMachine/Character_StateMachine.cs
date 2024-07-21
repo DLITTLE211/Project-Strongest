@@ -24,6 +24,7 @@ public class Character_StateMachine : MonoBehaviour
         moveStateRef = MoveState;
         var JumpState = new State_Jump(_base);
         var AttackState = new State_Attacking(_base);
+        var ThrowState = new State_Throw(_base);
         var DashState = new State_Dash(_base);
         dashStateRef = DashState;
         var Hitstate = new State_Hit(_base);
@@ -45,6 +46,7 @@ public class Character_StateMachine : MonoBehaviour
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
         At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(AttackState, MoveState, new Predicate(() => At_2Move()));
+        At(AttackState, ThrowState, new Predicate(() => At_2Throw()));
 
         At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
@@ -77,7 +79,8 @@ public class Character_StateMachine : MonoBehaviour
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
-        Any(AttackState, new Predicate(() => ToAttackState()));
+        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw()));
+        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
@@ -191,6 +194,20 @@ public class Character_StateMachine : MonoBehaviour
             return !_isHit && _isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
         }
 
+    }
+    bool At_2Throw()
+    {
+        bool _attackIsThrow = false;
+        if (_base._subState != Character_SubStates.Controlled)
+        {
+            return false;
+        }
+        if(_base._cAnimator.lastAttack != null) 
+        {
+            _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Throw && _base._cAnimator.lastAttack.hitConnected;
+            return _attackIsThrow;
+        }
+        return false;
     }
     bool At_2Crouch()
     {
