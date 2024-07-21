@@ -201,6 +201,25 @@ public class Character_MoveList : MonoBehaviour
                         { continue; }
                     }
                     break;
+                case MoveType.Throw:
+                    for (int i = 0; i < BasicThrows.Count; i++)
+                    {
+                        try
+                        {
+                            if (BasicThrows[i]._attackInput._correctInput[0].property.AttackAnims.animName == attack.AttackAnims.animName)
+                            {
+                                attacker._cComboCounter.OnHit_CountUp();
+                                BasicThrows[i].SendCounterHitInfo(currentPathData, target);
+                                BasicThrows[i].SendSuccessfulDamageInfo(currentPathData, target);
+                                BasicThrows[i].HandleThrowAnimAttackInfo(target);
+                                return;
+                            }
+                            else { continue; }
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        { continue; }
+                    }
+                    break;
                 case MoveType.BasicSpeical:
 
                     for (int i = 0; i < special_Simple.Count; i++)
