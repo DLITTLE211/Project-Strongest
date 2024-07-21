@@ -32,6 +32,7 @@ public class Character_Force : MonoBehaviour
     private float forwardSpeed;
     [SerializeField] bool isFrozen;
     private bool canToggleKinematic;
+    public float xSpeed;
     public void Start()
     {
         isFrozen = false;
@@ -76,6 +77,7 @@ public class Character_Force : MonoBehaviour
         {
             _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
         }
+        xSpeed = _myRB.velocity.x;
     }
     public void HandleForceFreeze(bool state)
     {
@@ -131,11 +133,11 @@ public class Character_Force : MonoBehaviour
             switch (dInput.Button_State.directionalInput)
             {
                 case 4:
-                    _myRB.velocity = new Vector3(-_base.MoveForce, _myRB.velocity.y, 0f);
+                    _myRB.velocity = new Vector3(-Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
                     //_myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
                     break;
                 case 6:
-                    _myRB.velocity = new Vector3(_base.MoveForce, _myRB.velocity.y, 0f);
+                    _myRB.velocity = new Vector3(Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
                     //_myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
                     break;
             }
@@ -217,12 +219,25 @@ public class Character_Force : MonoBehaviour
                         break;
                     case MovementType.ForwardDash:
                         // Forward Dash;
-                        StartCoroutine(OnDelayDash(_base.DashForce * 2f));
+                        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                        {
+                            StartCoroutine(OnDelayDash(_base.DashForce * 2f));
+                        }
+                        else
+                        {
+                            StartCoroutine(OnDelayDash(-_base.DashForce * 2f));
+                        }
                         break;
                     case MovementType.BackDash:
                         // Back Dash;
-                        StartCoroutine(OnDelayDash(-_base.DashForce * 2f));
-
+                        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                        {
+                            StartCoroutine(OnDelayDash(-_base.DashForce * 2f));
+                        }
+                        else 
+                        {
+                            StartCoroutine(OnDelayDash(_base.DashForce * 2f));
+                        }
                         break;
                 }
                 DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
@@ -231,10 +246,11 @@ public class Character_Force : MonoBehaviour
     }
     IEnumerator OnDelayDash(float speed)
     {
-        _myRB.velocity = new Vector3(0, 0);
+        _myRB.isKinematic = true;
+        _myRB.velocity = new Vector3(0, _myRB.velocity.y);
         yield return new WaitForSeconds(1 / 60f);
-        _myRB.velocity = new Vector3(speed, _myRB.velocity.y);
-
+        _myRB.isKinematic = false;
+        _myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);
     }
     #region Function Summary
     /// <summary>

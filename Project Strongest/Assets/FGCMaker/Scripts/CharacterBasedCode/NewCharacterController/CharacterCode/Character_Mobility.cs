@@ -132,14 +132,22 @@ public class Character_Mobility : IMobility
         }
         return switchValue;
     }
-    public bool IsCorrectInput(Character_ButtonInput newInput, int curInput) 
+    public bool IsCorrectInput(Character_ButtonInput newInput, int curInput)
     {
-        for (int i = 0; i < _movementInputs.Count; i++) 
+        for (int i = 0; i < _movementInputs.Count; i++)
         {
             try
             {
-                bool moveInput =  _movementInputs[i].stringCharArray[curInput].ToString() == newInput.Button_State.directionalInput.ToString();
-                if (moveInput == true) 
+                bool moveInput = false;
+                if (baseCharacter.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                {
+                    moveInput = _movementInputs[0].stringCharArray[curInput].ToString() == newInput.Button_State.directionalInput.ToString();
+                }
+                else
+                {
+                    moveInput = _movementInputs[0].stringCharArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(newInput).ToString();
+                }
+                if (moveInput == true)
                 {
                     return true;
                 }

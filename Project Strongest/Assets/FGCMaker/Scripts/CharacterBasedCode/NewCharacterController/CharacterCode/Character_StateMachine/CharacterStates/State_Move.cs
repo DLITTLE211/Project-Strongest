@@ -12,19 +12,13 @@ public class State_Move : BaseState
     public override void OnEnter()
     {
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {
-            onForward = false;
-            onBack = true;
-            _cAnim.PlayNextAnimation(moveBHash, _crossFade);
-            //_baseAnim.CrossFade(moveBHash, _crossFade);
+            CheckRightFaceState();
         }
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
-            onForward = true;
-            onBack = false;
-            _cAnim.PlayNextAnimation(moveFHash, _crossFade);
-           // _baseAnim.CrossFade(moveFHash, _crossFade);
+            CheckLeftFaceState();
         }
         _baseForce.SetWalkForce(_base.ReturnMovementInputs());
 
@@ -80,13 +74,13 @@ public class State_Move : BaseState
     {
         onForward = true;
         onBack = false;
-        _cAnim.PlayNextAnimation(moveFHash, 0);
+        _cAnim.PlayNextAnimation(moveFHash, 0.05f);
     }
     void HandleBackwardAnimation()
     {
         onBack = true;
         onForward = false;
-        _cAnim.PlayNextAnimation(moveBHash, 0);
+        _cAnim.PlayNextAnimation(moveBHash, 0.05f);
     }
     public override void OnRecov()
     {
