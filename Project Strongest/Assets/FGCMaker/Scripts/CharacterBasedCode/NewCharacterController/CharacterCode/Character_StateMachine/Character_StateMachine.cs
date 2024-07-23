@@ -8,6 +8,7 @@ public class Character_StateMachine : MonoBehaviour
     [SerializeField] public string curState;
     public Character_ComboCounter opponentComboCounter;
     [HideInInspector]public State_Idle idleStateRef;
+    [HideInInspector] public State_Crouch crouchStateRef;
     [HideInInspector] public State_Move moveStateRef;
     [HideInInspector] public State_Dash dashStateRef;
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class Character_StateMachine : MonoBehaviour
         dashStateRef = DashState;
         var Hitstate = new State_Hit(_base);
         var CrouchState = new State_Crouch(_base);
+        crouchStateRef = CrouchState;
         var S_BlockState = new State_Block(_base);// S = Stand
         var C_BlockState = new State_CrouchBlock(_base); // C = Crouch 
         var BlockReact = new State_BlockReact(_base); // C = Crouch 

@@ -20,7 +20,8 @@ public abstract class BaseState : IState
     public List<string> allAnimationNames;
     protected static readonly int groundIdleHash = Animator.StringToHash("Idle");
     //protected static readonly int airIdleHash = Animator.StringToHash("AirIdle");
-    protected static readonly string I2CHash = "IdleToCrouch";
+    protected static readonly string I2CString = "IdleToCrouch";
+    protected static readonly int I2CHash = Animator.StringToHash("IdleToCrouch");
     protected static readonly int C2IHash = Animator.StringToHash("CrouchToIdle");
     protected static readonly int crouchHash = Animator.StringToHash("Crouch");
     protected static readonly int sblockHash = Animator.StringToHash("Standing_Block");
