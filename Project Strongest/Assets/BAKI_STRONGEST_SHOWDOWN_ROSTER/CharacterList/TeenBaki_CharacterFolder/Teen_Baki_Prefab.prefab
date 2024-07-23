@@ -764,10 +764,10 @@ MonoBehaviour:
   inputWindowOpen: 1
   _canRecover: 0
   canTransitionIdle: 0
-  curretnAttackLevel: 0
-  FreezeCall: 61440
-  mobilityCall: 2048
-  attackCall: 66
+  currentAttackLevel: 0
+  _freezeCall: 30720
+  _mobilityCall: 1536
+  _attackCall: 34
 --- !u!4 &6671258260722767068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd8d640d58542c341979d4546d6979fd, type: 3}

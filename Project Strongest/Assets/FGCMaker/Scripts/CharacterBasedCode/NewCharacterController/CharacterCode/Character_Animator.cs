@@ -308,7 +308,6 @@ public class Character_Animator : MonoBehaviour
         if (activatedInput != null)
         {
             NullifyMobilityOption();
-            //CountUpNegativeFrames(activatedInput.mobilityAnim.frameData.recovery);
         }
     }
     public void HaltTimer()
@@ -343,7 +342,7 @@ public class Character_Animator : MonoBehaviour
     }
     public void AddForceOnAttack(float forceValue)
     {
-        _base._cForce.AddForceOnCommand(forceValue);
+        _base._cForce.AddLateralForceOnCommand(forceValue);
     }
 
     public void SetCanTransitionIdle(bool state) 
@@ -391,8 +390,6 @@ public class Character_Animator : MonoBehaviour
     #region End Of Animation Clean-Up
     void CountUpNegativeFrames(int lastNegativeFrames)
     {
-        Debug.Log("Hit AddFrameCount");
-
         negativeFrameCount += lastNegativeFrames;
         if (lastAttack == null)
         {

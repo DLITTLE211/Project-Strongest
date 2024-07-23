@@ -310,7 +310,7 @@ public class HurtBox : CollisionDetection
             {
                 Character_Base thisBase = this.gameObject.transform.root.GetComponent<Character_Base>();
                 Player_SideRecognition thisPSide = this.gameObject.transform.root.GetComponent<Character_Base>().pSide;
-                thisBase._cForce.AddForceOnCommand(0.75f);
+                thisBase._cForce.AddLateralForceOnCommand(0.75f);
                 Debug.Log("Hit Wall Frame 1");
             }
         }

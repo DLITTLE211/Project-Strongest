@@ -48,14 +48,11 @@ public class Character_Force : MonoBehaviour
         {
             switch (callback.customCall) 
             {
-                case HitPointCall.Force_Small:
-                    AddForceOnCommand(callback.forceFloat);
+                case HitPointCall.Force_Up:
+                    AddVerticalForceOnCommand(callback.forceFloat);
                     break;
-                case HitPointCall.Force_Medium:
-                    AddForceOnCommand(callback.forceFloat);
-                    break;
-                case HitPointCall.Force_Large:
-                    AddForceOnCommand(callback.forceFloat);
+                case HitPointCall.Force_Right:
+                    AddLateralForceOnCommand(callback.forceFloat);
                     break;
             }
         }
@@ -141,7 +138,11 @@ public class Character_Force : MonoBehaviour
             }
         }
     }
-    public void AddForceOnCommand(float value, bool forceDirection = false)
+    public void AddVerticalForceOnCommand(float value)
+    {
+        _myRB.AddForce(transform.up * value, ForceMode.VelocityChange);
+    }
+    public void AddLateralForceOnCommand(float value, bool forceDirection = false)
     {
         if (!forceDirection)
         {
@@ -345,7 +346,7 @@ public class Character_Force : MonoBehaviour
         if (_base.ReturnMovementInputs().Button_State.directionalInput == 4 
             ^_base.ReturnMovementInputs().Button_State.directionalInput == 4)
         {
-            AddForceOnCommand(4);
+            AddLateralForceOnCommand(4);
         }
     }
 }
