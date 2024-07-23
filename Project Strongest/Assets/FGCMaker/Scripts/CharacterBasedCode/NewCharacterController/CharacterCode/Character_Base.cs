@@ -186,7 +186,7 @@ public class Character_Base : MonoBehaviour
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
         Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
-        pSide.thisPosition.SetModelTransform(this.gameObject.transform);
+        pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
         SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
     }
     void ResetRemoveList() 
