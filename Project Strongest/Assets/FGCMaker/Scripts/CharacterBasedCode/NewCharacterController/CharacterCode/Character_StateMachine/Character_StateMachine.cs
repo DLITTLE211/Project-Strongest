@@ -310,7 +310,6 @@ public class Character_StateMachine : MonoBehaviour
     bool At_2Jump()
     {
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
-        bool _canRecover = _base._cAnimator._canRecover;
         bool _isHit = _base._cAnimator.isHit; 
         bool _currentInput;
         bool _isBlocking;
@@ -324,15 +323,16 @@ public class Character_StateMachine : MonoBehaviour
             else
             {
                 _isBlocking = _CheckBlockButton();
-                _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput >= 7;
+                _currentInput = _base._cHurtBox.IsGrounded() == true ?_base.ReturnMovementInputs().Button_State.directionalInput >= 7 : true;
             }
-            return !_isHit && !_isBlocking && _currentInput && !_canRecover && notRecovering;
+            bool fullCheck = !_isHit && !_isBlocking && _currentInput && notRecovering;
+            return fullCheck;
         }
         catch (ArgumentOutOfRangeException)
         {
             _currentInput = false;
             _isBlocking = false;
-            return !_isHit && !_isBlocking && _currentInput && !_canRecover && notRecovering;
+            return !_isHit && !_isBlocking && _currentInput  && notRecovering;
         }
     }
     bool At_Jump2Move()

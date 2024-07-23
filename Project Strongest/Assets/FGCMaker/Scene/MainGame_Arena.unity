@@ -5586,7 +5586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisPosition:
-    modelTransform: {fileID: 0}
+    CollisionDetectionTransform: {fileID: 475772376}
+    modelTransform: {fileID: 475772376}
     hitBoxes:
     - {fileID: 281274105}
     - {fileID: 967627800}
@@ -14878,6 +14879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisPosition:
+    CollisionDetectionTransform: {fileID: 405498831}
     modelTransform: {fileID: 0}
     hitBoxes:
     - {fileID: 2056785899}

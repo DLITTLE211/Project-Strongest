@@ -121,7 +121,7 @@ public class Character_Base : MonoBehaviour
 
     #region Side Recognition
     [Header("______SIDE RECOGNITION________")]
-    public Player_SideRecognition pSide; 
+    public Player_SideRecognition pSide;
     [Space(20)]
     #endregion
 

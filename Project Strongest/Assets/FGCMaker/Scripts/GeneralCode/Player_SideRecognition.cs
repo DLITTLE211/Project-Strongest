@@ -11,6 +11,7 @@ public class Player_SideRecognition : MonoBehaviour
 [System.Serializable]
 public class Character_Position
 {
+    [SerializeField] private Transform CollisionDetectionTransform;
     [SerializeField] private Transform modelTransform;
     public Transform ModelTransform { get { return modelTransform; } }
     public HitBox[] hitBoxes;
@@ -55,7 +56,15 @@ public class Character_Position
         modelTransform.localScale = new Vector3(1f, 1f, flipSide);
         modelTransform.DORotate(direction, 0.25f).OnComplete(() =>
         {
-            _directionFacing = _face;
+            _directionFacing = _face; 
+            if (_directionFacing == Character_Face_Direction.FacingRight)
+            {
+                CollisionDetectionTransform.localPosition = new Vector3(-1 * 0.25f, 0, 0);
+            }
+            else if (_directionFacing == Character_Face_Direction.FacingLeft)
+            {
+                CollisionDetectionTransform.localPosition = new Vector3(1 * 0.25f, 0, 0);
+            }
         });
     }
     public void SetModelTransform(Transform _modelTransform) 
