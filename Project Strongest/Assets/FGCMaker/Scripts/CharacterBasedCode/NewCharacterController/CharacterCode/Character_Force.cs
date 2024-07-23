@@ -134,11 +134,9 @@ public class Character_Force : MonoBehaviour
             {
                 case 4:
                     _myRB.velocity = new Vector3(-Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
-                    //_myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
                     break;
                 case 6:
                     _myRB.velocity = new Vector3(Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
-                    //_myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
                     break;
             }
         }
@@ -181,6 +179,15 @@ public class Character_Force : MonoBehaviour
         {
             if (_base.movementPC < _mInput.movementPriority)
             {
+                int forwardMult = 0;
+                if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                {
+                    forwardMult = 1;
+                }
+                else 
+                {
+                    forwardMult = -1;
+                }
                 _base.movementPC = _mInput.movementPriority;
                 switch (_mInput.type)
                 {
@@ -188,56 +195,42 @@ public class Character_Force : MonoBehaviour
                         // Back Jump;
                         yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
                         xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
-                        _myRB.velocity = new Vector3(xVal, yVal);
+                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
                         break;
                     case MovementType.Jump:
                         // Neutral Jump;
-                        _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
+                        _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
                         break;
                     case MovementType.ForwardJump:
                         // Forward Jump;
                         yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
                         xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
-                        _myRB.velocity = new Vector3(xVal, yVal);
+                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
                         break;
                     case MovementType.NeutralSuperJump:
                         // Neutral Super Jump;
-                        _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
+                        _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
                         break;
                     case MovementType.ForwardSuperJump:
                         // Forward Super Jump;
                         yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
                         xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
-                        _myRB.velocity = new Vector3(xVal, yVal);
+                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
 
                         break;
                     case MovementType.BackSuperJump:
                         // Back Super Jump;
                         yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
                         xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
-                        _myRB.velocity = new Vector3(xVal, yVal);
+                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
                         break;
                     case MovementType.ForwardDash:
                         // Forward Dash;
-                        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
-                        {
-                            StartCoroutine(OnDelayDash(_base.DashForce * 2f));
-                        }
-                        else
-                        {
-                            StartCoroutine(OnDelayDash(-_base.DashForce * 2f));
-                        }
+                        StartCoroutine(OnDelayDash(forwardMult * _base.DashForce * 2f));
                         break;
                     case MovementType.BackDash:
                         // Back Dash;
-                        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
-                        {
-                            StartCoroutine(OnDelayDash(-_base.DashForce * 2f));
-                        }
-                        else 
-                        {
-                            StartCoroutine(OnDelayDash(_base.DashForce * 2f));
-                        }
+                        StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
                         break;
                 }
                 DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");

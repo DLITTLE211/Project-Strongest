@@ -1386,7 +1386,7 @@ MonoBehaviour:
   attackButtons: []
   _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
   _extraMoveControls: []
-  activationCall: 1024
+  activationCall: 3072
   _removeList: []
   xVal: 0
   yVal: 0
@@ -1398,6 +1398,8 @@ MonoBehaviour:
   sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   amplifier: {fileID: 0}
   comboList3_0: {fileID: 0}
+  BasicThrows: []
+  removeThrowList: []
   simpleAttackList: []
   removeSimpleList: []
   specialMoveAttackTest: []
@@ -6364,6 +6366,7 @@ MonoBehaviour:
   forceHitCall: 56
   teleportCall: 64
   isFrozen: 0
+  xSpeed: 0
 --- !u!1 &498465947
 GameObject:
   m_ObjectHideFlags: 0
@@ -12598,7 +12601,7 @@ MonoBehaviour:
   attackButtons: []
   _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
   _extraMoveControls: []
-  activationCall: 1024
+  activationCall: 3072
   _removeList: []
   xVal: 0
   yVal: 0
@@ -12610,6 +12613,8 @@ MonoBehaviour:
   sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   amplifier: {fileID: 0}
   comboList3_0: {fileID: 0}
+  BasicThrows: []
+  removeThrowList: []
   simpleAttackList: []
   removeSimpleList: []
   specialMoveAttackTest: []
@@ -13450,6 +13455,7 @@ MonoBehaviour:
   forceHitCall: 56
   teleportCall: 64
   isFrozen: 0
+  xSpeed: 0
 --- !u!1 &1064684077
 GameObject:
   m_ObjectHideFlags: 0

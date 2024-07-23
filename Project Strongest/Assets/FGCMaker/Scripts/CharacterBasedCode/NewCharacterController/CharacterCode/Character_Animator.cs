@@ -307,7 +307,8 @@ public class Character_Animator : MonoBehaviour
     {
         if (activatedInput != null)
         {
-            CountUpNegativeFrames(activatedInput.mobilityAnim.frameData.recovery);
+            NullifyMobilityOption();
+            //CountUpNegativeFrames(activatedInput.mobilityAnim.frameData.recovery);
         }
     }
     public void HaltTimer()
@@ -391,18 +392,14 @@ public class Character_Animator : MonoBehaviour
     void CountUpNegativeFrames(int lastNegativeFrames)
     {
         Debug.Log("Hit AddFrameCount");
+
         negativeFrameCount += lastNegativeFrames;
-        if(activatedInput != null) 
-        {
-            NullifyMobilityOption();
-        }
         if (lastAttack == null)
         {
             return;
         }
         else
         {
-            
             ClearLastAttack();
         }
     }

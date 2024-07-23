@@ -69,7 +69,8 @@ public class Character_MobilityAsset : ScriptableObject
                         if (newHitPoint.hitFrameBool == false)
                         {
                             newHitPoint.hitFrameBool = true;
-                            Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
+                            inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0]);
+                            //Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
                             anim.MobilityCallbacks.RemoveAt(0);
                         }
                     }

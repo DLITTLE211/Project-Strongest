@@ -331,7 +331,7 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
-    public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob)
+    public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob = null)
     {
         if (activationCall.HasFlag(callback.customCall))
         {
@@ -339,6 +339,12 @@ public class Character_Base : MonoBehaviour
             {
                 case HitPointCall.ActivateMobilityAction:
                     _extraMoveAsset.CallMobilityAction(_mob);
+                    break;
+            }
+            switch (callback.customCall)
+            {
+                case HitPointCall.ClearMobility:
+                    _cAnimator.ClearLastActivatedInput();
                     break;
             }
         }
