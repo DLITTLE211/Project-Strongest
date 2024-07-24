@@ -30,7 +30,7 @@ public class Character_GravityScaler : MonoBehaviour
             if (isFrozen)
             {
                 isFrozen = false;
-                gravity = 5f;
+                gravity = 10f;
             }
         }
     }
