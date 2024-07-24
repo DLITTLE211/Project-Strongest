@@ -2320,10 +2320,10 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitConnected: 0
           lateralKBP:
-            lateralKBP: 3
+            lateralKBP: 2
             Value: 7
           verticalKBP:
-            verticalKBP: 2
+            verticalKBP: 0
             Value: 5
           KnockDown: 0
         attackInputState:
@@ -3724,7 +3724,7 @@ MonoBehaviour:
   - SpecialAttackName: Flying Knee
     _attackInput:
       _correctInput:
-      - _correctSequence: 2C
+      - _correctSequence: 2D
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3796,7 +3796,7 @@ MonoBehaviour:
   - SpecialAttackName: DiveKick
     _attackInput:
       _correctInput:
-      - _correctSequence: 2D
+      - _correctSequence: 2C
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3842,7 +3842,28 @@ MonoBehaviour:
               inactive: 24
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 7
+                call: 8
+                hitFrameBool: 0
+                Force: -5
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0

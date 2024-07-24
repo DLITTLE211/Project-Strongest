@@ -195,7 +195,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (_base.removeThrowList.Count >= _base.BasicThrows.Count)
             {
                 // c.ResetCombo();
-                _base.removeSimpleList.Clear();
+                _base.removeThrowList.Clear();
             }
         }
         foreach (Attack_ThrowBase possibleAttack in _base.removeThrowList)

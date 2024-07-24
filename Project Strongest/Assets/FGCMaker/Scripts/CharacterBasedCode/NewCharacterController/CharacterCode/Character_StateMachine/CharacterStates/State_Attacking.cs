@@ -51,24 +51,32 @@ public class State_Attacking : BaseState
 
         if (nextTransition.To == _base._cStateMachine.idleStateRef)
         {
-            Debug.Log("Back To Idle");
+           /* Debug.Log("Back To Idle");
             if (_base._cAnimator.lastAttack != null)
             {
                 _base._cAnimator.ClearLastAttack();
                 _cAnim.PlayNextAnimation(groundIdleHash, 0, false);
-            }
+            }*/
             _base.AwaitCanTransitionIdle(() => base.OnExit());
             return;
         }
         if (nextTransition.To == _base._cStateMachine.crouchStateRef)
         {
-            Debug.Log("Back To Crouch"); 
+            /*Debug.Log("Back To Crouch"); 
             if (_base._cAnimator.lastAttack != null)
             {
                 _base._cAnimator.ClearLastAttack();
                 _cAnim.PlayNextAnimation(I2CHash, 0, false);
-            }
+            }*/
             _base.AwaitCanTransitionIdle(() => base.OnExit());
+            return;
+        }
+
+        if (nextTransition.To == _base._cStateMachine.jumpRef)
+        {
+            Debug.Log("Back To Jump");
+            _base.AwaitCanTransition_OutAttack(() => base.OnExit());
+
             return;
         }
         base.OnExit();

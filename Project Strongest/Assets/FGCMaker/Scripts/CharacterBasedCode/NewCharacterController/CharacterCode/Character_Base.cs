@@ -330,6 +330,18 @@ public class Character_Base : MonoBehaviour
                     break;
             }
         }
+        if (_cForce.ForceCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.Force_Right:
+                    _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                    break;
+                case HitPointCall.Force_Up:
+                    _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                    break;
+            }
+        }
     }
     public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob = null)
     {
@@ -412,6 +424,30 @@ public class Character_Base : MonoBehaviour
         }
         else
         {
+            func();
+        }
+    }
+    public void AwaitCanTransition_OutAttack(Callback func)
+    {
+        StartCoroutine(WaitUntilCanTransition(func));
+    }
+    IEnumerator WaitUntilCanTransition(Callback func)
+    {
+        while (!_cHurtBox.IsGrounded())
+        {
+            yield return new WaitForSeconds(1f / 60f);
+        }
+        IState nextTransition = _cStateMachine._playerState.current.State;
+
+        if (nextTransition == _cStateMachine.idleStateRef)
+        {
+            _cAnimator.PlayNextAnimation(0, 0, true, "ForceIdleAfterAttackComplete");
+            func();
+        }
+        if (nextTransition == _cStateMachine.crouchStateRef)
+        {
+           _cAnimator.PlayNextAnimation(0, 0, true, "ForceCrouchAfterAttackComplete");
+
             func();
         }
     }

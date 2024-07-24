@@ -46,6 +46,7 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
+            Combo.Add(newAttack);
             CheckNextAttackCriteria(newAttack, false, Combo.Count -1);
         }
     }
@@ -70,10 +71,25 @@ public class Attack_Manager : MonoBehaviour
     }
     void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
     {
-        if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+        Attack_BaseProperties lastBase = Combo[index - 1];
+        if (lastBase.cancelProperty.cancelTo == Cancel_State.Heavy_String_Normal_Start ^ lastBase.cancelProperty.cancelTo == Cancel_State.Light_String_Normal_Start)
         {
-            Combo.RemoveAt(index);
-            return;
+            if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
+            {
+                if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+                {
+                    Combo.RemoveAt(index);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
         }
         if (!CheckMeterCriteria(newAttack))
         {
@@ -102,11 +118,11 @@ public class Attack_Manager : MonoBehaviour
         else
         {
             //(lastState == Cancel_State.String_Normal_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Start) || (lastState == Cancel_State.Stance_Input_Start && newAttack.cancelProperty.cancelFrom == Cancel_State.Normal_Attack))
-            if (StateComparison(lastState, newAttack, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_Normal_Attack))
+            if (StateComparison(lastState, newAttack, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
             {
                 return true;
             }
-            if (StateComparison(lastState, newAttack, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_Normal_Attack))
+            if (StateComparison(lastState, newAttack, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
             {
                 return true;
             }
@@ -141,7 +157,7 @@ public class Attack_Manager : MonoBehaviour
     }
     bool StateComparison(Cancel_State lastState, Attack_BaseProperties newAttack, Cancel_State desiredLastState, Cancel_State desiredNextState) 
     {
-        return lastState == desiredLastState && newAttack.cancelProperty.cancelFrom == desiredNextState;
+        return lastState == desiredNextState && newAttack.cancelProperty.cancelFrom == desiredLastState;
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {

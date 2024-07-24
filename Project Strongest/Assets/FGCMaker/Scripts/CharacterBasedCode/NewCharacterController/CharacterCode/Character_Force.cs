@@ -28,6 +28,8 @@ public class Character_Force : MonoBehaviour
     [SerializeField] private Player_SideRecognition _side => _base.pSide;
     [SerializeField] private HitPointCall forceHitCall;
     [SerializeField] private HitPointCall teleportCall;
+    public HitPointCall ForceCall {get { return forceHitCall; }}
+    public HitPointCall TeleportCall { get { return teleportCall; }}
     private float jumpSpeed;
     private float forwardSpeed;
     [SerializeField] bool isFrozen;

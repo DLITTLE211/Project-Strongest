@@ -231,7 +231,9 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
-                            Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+                            //Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+
+                            character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
                             customHitboxCallBacks.RemoveAt(0);
                         }
                     }

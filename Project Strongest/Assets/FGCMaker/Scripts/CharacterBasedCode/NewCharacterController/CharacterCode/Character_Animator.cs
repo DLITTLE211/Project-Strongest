@@ -142,7 +142,7 @@ public class Character_Animator : MonoBehaviour
     }
     #endregion
 
-    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, string triggerSet = "")
+    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, string triggerSet = "", int overrideTime = 0)
     {
         if (triggerSet != "") 
         {
@@ -155,8 +155,8 @@ public class Character_Animator : MonoBehaviour
         }
         if (attackOverride)
         {
-            shadowAnim.Play(animHash,0,0);
-            myAnim.Play(animHash, 0, 0);
+            shadowAnim.Play(animHash,0, overrideTime);
+            myAnim.Play(animHash, 0, overrideTime);
         }
         else
         {
@@ -413,6 +413,7 @@ public class Character_Animator : MonoBehaviour
         _base._cForce.CallUnlockKinematic();
         _lastAttackState = lastAttackState.nullified;
         inputWindowOpen = true;
+        _base._cForce.ResetPriority();
 
         currentAttackLevel = Cancel_State.NotCancellable;
     }

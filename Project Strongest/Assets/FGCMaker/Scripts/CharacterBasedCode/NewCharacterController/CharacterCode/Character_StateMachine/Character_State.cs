@@ -6,7 +6,7 @@ using System;
 public class Character_State 
 {
     #region StateNode
-    class StateNode 
+    public class StateNode 
     {
         public IState State { get; }
         public HashSet<ITransition> Transitions { get; }
@@ -25,7 +25,7 @@ public class Character_State
     [SerializeField] private Character_Base _base;
     [SerializeField] Dictionary<Type, StateNode> nodes = new Dictionary<Type, StateNode>(); 
     HashSet<ITransition> anyTransition = new HashSet<ITransition>();
-    StateNode current;
+    public StateNode current;
     public IState nextState;
     public string CurrentStateString;
     public Character_State(Character_Base newbase) 
