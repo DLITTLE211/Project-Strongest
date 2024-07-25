@@ -29,6 +29,8 @@ public class State_Crouch : BaseState
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
             _cAnim.PlayNextAnimation(0, 0, false, I2CString);
+
+            _cAnim.myAnim.SetBool("ForceCrouch", false);
         }
     }
     public override void OnUpdate()

@@ -441,13 +441,12 @@ public class Character_Base : MonoBehaviour
 
         if (nextTransition == _cStateMachine.idleStateRef)
         {
-            _cAnimator.PlayNextAnimation(0, 0, true, "ForceIdleAfterAttackComplete");
+            _cAnimator.PlayNextAnimation(Animator.StringToHash("Idle"), 0, true);
             func();
         }
         if (nextTransition == _cStateMachine.crouchStateRef)
         {
-           _cAnimator.PlayNextAnimation(0, 0, true, "ForceCrouchAfterAttackComplete");
-
+            _cAnimator.PlayNextAnimation(Animator.StringToHash("Crouch"), 0, true);
             func();
         }
     }

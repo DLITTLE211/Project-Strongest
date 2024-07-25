@@ -107,14 +107,6 @@ public class Character_Animator : MonoBehaviour
         {
             StartCoroutine(CallShake());
         }
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            PlayNextAnimation(Animator.StringToHash("Walk_Backward"), 0.25f,false);
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            PlayNextAnimation(Animator.StringToHash("Walk_Forward"), 0.25f, false);
-        }
     }
     IEnumerator CallShake()
     {
@@ -144,14 +136,11 @@ public class Character_Animator : MonoBehaviour
 
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, string triggerSet = "", int overrideTime = 0)
     {
-        if (triggerSet != "") 
+        if (triggerSet != "")
         {
-            if (lastAttack == null)
-            {
-                shadowAnim.SetTrigger(triggerSet);
-                myAnim.SetTrigger(triggerSet);
-                return;
-            }
+            shadowAnim.SetBool(triggerSet,true);
+            myAnim.SetBool(triggerSet, true);
+            return;
         }
         if (attackOverride)
         {

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public class State_Idle : BaseState
 {
+    private bool isAnimatingIdle;
     public State_Idle(Character_Base playerBase) : base(playerBase){ }
     public override async void OnEnter()
     {
@@ -75,13 +76,24 @@ public class State_Idle : BaseState
         await Task.Delay(timeInMS);
         _base._cComboDetection.superMobilityOption = false;
     }
+
+    public override void OnUpdate()
+    {
+        if (!isAnimatingIdle) 
+        {
+            IdleCheck();
+        }
+        base.OnUpdate();
+    }
     void IdleCheck()
     {
         try
         {
-            if (_cAnim.CheckAttackAndMobility() && _base.ReturnMovementInputs().Button_State.directionalInput == 5)
+            if (_cAnim.CheckAttackAndMobility() && (_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
             {
                 _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
+                isAnimatingIdle = true;
+
             }
 
             _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
@@ -97,7 +109,7 @@ public class State_Idle : BaseState
     {
         Messenger.Broadcast(Events.ClearLastTime);
         base.OnExit();
-
+        isAnimatingIdle = false;
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
 
         if (nextTransition.To == _base._cStateMachine.moveStateRef)

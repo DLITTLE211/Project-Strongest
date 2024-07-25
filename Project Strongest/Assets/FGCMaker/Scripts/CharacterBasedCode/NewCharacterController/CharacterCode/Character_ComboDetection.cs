@@ -137,8 +137,8 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 lastInput = input.Button_State.directionalInput.ToString();
                 //SpecialInputVerifier(input);
-                ExtraMovementVerifier(input);
             }
+            ExtraMovementVerifier(input);
         }
         else
         {

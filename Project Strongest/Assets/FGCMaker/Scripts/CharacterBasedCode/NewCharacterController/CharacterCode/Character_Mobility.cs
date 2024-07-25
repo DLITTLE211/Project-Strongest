@@ -17,7 +17,6 @@ public class Character_Mobility : IMobility
     public int movementPriority;
     public bool isSuperVariant;
     public bool activeMove;
-
     public Character_Mobility Clone() 
     {
         return new Character_Mobility(baseCharacter,movementName,type,curInput,
@@ -173,6 +172,14 @@ public class Character_Mobility : IMobility
             {
                 curBase._cAnimator.SetActivatedInput(_mobilityAnim, mobilityAnim, mobilityAnim.totalWaitTime);
             }
+            else
+            {
+                Debug.LogError("Still Populated");
+            }
+        }
+        else
+        {
+            Debug.LogError("Still AirBorn");
         }
     }
     public void ResetCurrentInput()

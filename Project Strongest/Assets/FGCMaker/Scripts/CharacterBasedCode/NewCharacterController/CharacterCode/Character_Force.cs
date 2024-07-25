@@ -35,10 +35,12 @@ public class Character_Force : MonoBehaviour
     [SerializeField] bool isFrozen;
     private bool canToggleKinematic;
     public float xSpeed;
+    bool sendingForce;
     public void Start()
     {
-        isFrozen = false;
-        canToggleKinematic = true;
+        isFrozen = false; 
+        sendingForce = false;
+         canToggleKinematic = true;
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
 
@@ -77,6 +79,22 @@ public class Character_Force : MonoBehaviour
             _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
         }
         xSpeed = _myRB.velocity.x;
+        ForceStillPlayer();
+    }
+    void ForceStillPlayer() 
+    {
+        if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
+        {
+            if (_base._cAnimator.activatedInput == null)
+            {
+                if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                {
+                    _myRB.drag = 100000;
+                    return;
+                }
+            }
+        }
+        _myRB.drag = 1;
     }
     public void HandleForceFreeze(bool state)
     {
@@ -132,9 +150,11 @@ public class Character_Force : MonoBehaviour
             switch (dInput.Button_State.directionalInput)
             {
                 case 4:
+                    _myRB.drag = 1;
                     _myRB.velocity = new Vector3(-Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
                     break;
                 case 6:
+                    _myRB.drag = 1;
                     _myRB.velocity = new Vector3(Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
                     break;
             }
@@ -176,76 +196,99 @@ public class Character_Force : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     #endregion
+    IEnumerator DoForceOnDelay(Character_Mobility _mInput)
+    {
+        int forwardMult = 0;
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+        {
+            forwardMult = 1;
+        }
+        else
+        {
+            forwardMult = -1;
+        }
+        sendingForce = true;
+        yield return new WaitForSeconds(2 / 60f);
+
+        switch (_mInput.type)
+        {
+            case MovementType.BackJump:
+                // Back Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
+                xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+                break;
+            case MovementType.Jump:
+                // Neutral Jump;
+                _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
+                break;
+            case MovementType.ForwardJump:
+                // Forward Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
+                xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+                break;
+            case MovementType.NeutralSuperJump:
+                // Neutral Super Jump;
+                _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
+                break;
+            case MovementType.ForwardSuperJump:
+                // Forward Super Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
+                xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+
+                break;
+            case MovementType.BackSuperJump:
+                // Back Super Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
+                xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+                break;
+            case MovementType.ForwardDash:
+                // Forward Dash;
+                StartCoroutine(OnDelayDash(forwardMult * _base.DashForce * 2f));
+                break;
+            case MovementType.BackDash:
+                // Back Dash;
+                StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
+                break;
+        }
+        yield return new WaitForSeconds(2 / 60f);
+        sendingForce = false;
+    }
     public void HandleExtraMovement(Character_Mobility _mInput)
     {
-        if (_base._cHurtBox.IsGrounded()) 
-        {
-            if (_base.movementPC < _mInput.movementPriority)
-            {
-                int forwardMult = 0;
-                if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
-                {
-                    forwardMult = 1;
-                }
-                else 
-                {
-                    forwardMult = -1;
-                }
-                _base.movementPC = _mInput.movementPriority;
-                switch (_mInput.type)
-                {
-                    case MovementType.BackJump:
-                        // Back Jump;
-                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                        xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
-                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-                        break;
-                    case MovementType.Jump:
-                        // Neutral Jump;
-                        _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
-                        break;
-                    case MovementType.ForwardJump:
-                        // Forward Jump;
-                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                        xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
-                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-                        break;
-                    case MovementType.NeutralSuperJump:
-                        // Neutral Super Jump;
-                        _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
-                        break;
-                    case MovementType.ForwardSuperJump:
-                        // Forward Super Jump;
-                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                        xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
-                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
 
-                        break;
-                    case MovementType.BackSuperJump:
-                        // Back Super Jump;
-                        yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                        xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
-                        _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-                        break;
-                    case MovementType.ForwardDash:
-                        // Forward Dash;
-                        StartCoroutine(OnDelayDash(forwardMult * _base.DashForce * 2f));
-                        break;
-                    case MovementType.BackDash:
-                        // Back Dash;
-                        StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
-                        break;
+        if (_base._cHurtBox.IsGrounded())
+        {
+            if (_mInput.movementPriority == 2)
+            {
+                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.dashStateRef)
+                {
+                    sendingForce = false;
+                    return;
                 }
+            }
+            else
+            {
+                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.jumpRef)
+                {
+                    sendingForce = false;
+                    return;
+                }
+            }
+            _base.movementPC = _mInput.movementPriority;
+            if (sendingForce == false)
+            {
+                StartCoroutine(DoForceOnDelay(_mInput));
                 DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
             }
         }
     }
     IEnumerator OnDelayDash(float speed)
     {
-        _myRB.isKinematic = true;
-        _myRB.velocity = new Vector3(0, _myRB.velocity.y);
-        yield return new WaitForSeconds(1 / 60f);
-        _myRB.isKinematic = false;
+        yield return new WaitForSeconds(2 / 60f);
         _myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);
     }
     #region Function Summary
