@@ -142,8 +142,8 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (_base._cAnimator.inputWindowOpen)
             {
-                SimpleInputVerifier(input);
                 SpecialInputVerifier(input);
+                SimpleInputVerifier(input);
             }
         }
     }
