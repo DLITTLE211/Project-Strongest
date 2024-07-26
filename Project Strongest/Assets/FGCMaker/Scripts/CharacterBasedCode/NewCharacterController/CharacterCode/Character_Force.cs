@@ -101,6 +101,20 @@ public class Character_Force : MonoBehaviour
                 }
             }
         }
+        if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
+        {
+            if (_base._cAnimator.activatedInput == null)
+            {
+                if (_base.ReturnMovementInputs() != null)
+                {
+                    if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
+                    {
+                        _myRB.drag = 100000;
+                        return;
+                    }
+                }
+            }
+        }
         _myRB.drag = 1;
     }
     public void HandleForceFreeze(bool state)
