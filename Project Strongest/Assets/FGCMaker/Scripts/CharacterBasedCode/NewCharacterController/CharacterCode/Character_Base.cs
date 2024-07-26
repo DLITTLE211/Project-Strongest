@@ -84,7 +84,7 @@ public class Character_Base : MonoBehaviour
     public List<Attack_NonSpecialAttack> simpleAttackList;
     public List<Attack_NonSpecialAttack> removeSimpleList;
 
-    public List<Attack_BasicSpecialMove> specialMoveAttackTest;
+    public List<Attack_BasicSpecialMove> specialMoveList;
     public List<Attack_BasicSpecialMove> removeSMList;
 
     public List<Attack_RekkaSpecialMove> rekkaAttackList;

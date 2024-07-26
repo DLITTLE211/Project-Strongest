@@ -24,12 +24,12 @@ public class Character_ComboDetection : MonoBehaviour
         PrimeNormal();
         ResetComboList();
         PrimeMobility();
-       // PrimeSpecialMoves();
+        PrimeSpecialMoves();
     }
 
     void PrimeSpecialMoves()
     {
-        for (int i = 0; i < _base.stanceAttackList.Count; i++)
+        /*for (int i = 0; i < _base.stanceAttackList.Count; i++)
         {
             _base.stanceAttackList[i].SetComboTimer(_base._cAttackTimer);
             _base.stanceAttackList[i].TurnInputsToString();
@@ -49,12 +49,10 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 _base.rekkaAttackList[i].rekkaInput._rekkaPortion[j].individualRekkaAttack ._correctInput[0].SetInnerAttackAnimations(_base._cAnimator);
             }
-        }
-        for (int i = 0; i < _base.specialMoveAttackTest.Count; i++)
+        }*/
+        for (int i = 0; i < _base.comboList3_0.special_Simple.Count; i++)
         {
-            _base.specialMoveAttackTest[i].SetComboTimer(_base._cAttackTimer);
-            _base.specialMoveAttackTest[i].TurnInputsToString();
-            _base.specialMoveAttackTest[i].property.SetAttackAnims(_base._cAnimator);
+            _base.specialMoveList.Add(_base.comboList3_0.special_Simple[i]);
         }
     }
     void PrimeNormal() 
@@ -108,13 +106,13 @@ public class Character_ComboDetection : MonoBehaviour
     }
     void SetSpecialButtons()
     {
-        _base.specialMoveAttackTest.Clear();
+        _base.specialMoveList.Clear();
         _base.rekkaAttackList.Clear();
         _base.stanceAttackList.Clear();
 
         for (int i = 0; i < _base.comboList3_0.special_Simple.Count; i++)
         {
-            _base.specialMoveAttackTest.Add(_base.comboList3_0.special_Simple[i]);
+            _base.specialMoveList.Add(_base.comboList3_0.special_Simple[i]);
         }
         for (int i = 0; i < _base.comboList3_0.rekkaSpecials.Count; i++)
         {
@@ -136,7 +134,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
             {
                 lastInput = input.Button_State.directionalInput.ToString();
-                //SpecialInputVerifier(input);
+                SpecialInputVerifier(input);
             }
             ExtraMovementVerifier(input);
         }
@@ -213,18 +211,18 @@ public class Character_ComboDetection : MonoBehaviour
     void SpecialInputVerifier(Character_ButtonInput input)
     {
         #region Basic Special Moves
-        for (int i = 0; i < _base.specialMoveAttackTest.Count; i++)
+        for (int i = 0; i < _base.specialMoveList.Count; i++)
         {
-            Attack_BasicSpecialMove c = _base.specialMoveAttackTest[i];
+            Attack_BasicSpecialMove c = _base.specialMoveList[i];
             if (c.ContinueCombo(input,_base))
             {
                 //Current input is correct");
             }
             else
             {
-                _base.removeSMList.Add(_base.specialMoveAttackTest[i]);
+                _base.removeSMList.Add(_base.specialMoveList[i]);
             }
-            if (_base.removeSMList.Count >= _base.specialMoveAttackTest.Count)
+            if (_base.removeSMList.Count >= _base.specialMoveList.Count)
             {
                // c.ResetCombo();
                 _base.removeSMList.Clear();
@@ -232,15 +230,15 @@ public class Character_ComboDetection : MonoBehaviour
         }
         foreach (Attack_BasicSpecialMove possibleAttack in _base.removeSMList)
         {
-            _base.specialMoveAttackTest.Remove(possibleAttack);
+            _base.specialMoveList.Remove(possibleAttack);
         }
-        if (_base.specialMoveAttackTest.Count <= _base.comboList3_0.simpleAttacks.Count)
+        if (_base.specialMoveList.Count <= _base.comboList3_0.simpleAttacks.Count)
         {
             ResetComboList();
             _base.removeSMList.Clear();
         }
         #endregion
-
+        /*
         #region Rekka Special Moves
         for (int i = 0; i < _base.rekkaAttackList.Count; i++)
         {
@@ -298,6 +296,7 @@ public class Character_ComboDetection : MonoBehaviour
             _base.stanceRemoveList.Clear();
         }
         #endregion
+        */
     }
 
     void ExtraMovementVerifier(Character_ButtonInput input)
@@ -336,13 +335,13 @@ public class Character_ComboDetection : MonoBehaviour
             _base.comboList3_0.BasicThrows[i].ResetCombo();
             _base.BasicThrows[i].ResetCombo();
         }
-        /*
-        for (int i = 0; i < _base.specialMoveAttackTest.Count; i++)
+        
+        for (int i = 0; i < _base.specialMoveList.Count; i++)
         {
             _base.comboList3_0.special_Simple[i].ResetCombo();
-            _base.specialMoveAttackTest[i].ResetCombo();
+            _base.specialMoveList[i].ResetCombo();
         }
-        for (int i = 0; i < _base.rekkaAttackList.Count; i++)
+        /*for (int i = 0; i < _base.rekkaAttackList.Count; i++)
         {
             _base.comboList3_0.rekkaSpecials[i].ResetCombo();
             _base.rekkaAttackList[i].ResetCombo();

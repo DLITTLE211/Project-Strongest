@@ -73,13 +73,14 @@ public class Character_MoveList : MonoBehaviour
 
         //Under Development
         #region Simple Special Moves Storage
-        /*basicSpecialProperties = new List<Attack_BaseProperties>();
+        GetSimpleSpecials(baseCharacterInfo);
+        basicSpecialProperties = new List<Attack_BaseProperties>();
         for (int i = 0; i < special_Simple.Count; i++)
         {
             basicSpecialProperties.Add(special_Simple[i].property);
         }
         #endregion
-
+        /*
         #region Rekka Move Storage
         rekkaBaseProperties = new List<Attack_BaseProperties>();
         for (int i = 0; i < rekkaSpecials.Count; i++)
@@ -147,9 +148,9 @@ public class Character_MoveList : MonoBehaviour
         for (int i = 0; i < BasicSuperAttacks.Count; i++)
         {
             basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
-        }*/
-        #endregion
-
+        }
+#endregion
+        */
     }
 
     public void GetNormalAttacks(Character_Base baseCharacterInfo)
@@ -174,6 +175,15 @@ public class Character_MoveList : MonoBehaviour
             {
                 BasicThrows[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
             }
+        }
+    }
+    public void GetSimpleSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < special_Simple.Count; i++)
+        {
+            special_Simple[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            special_Simple[i].TurnInputsToString();
+            special_Simple[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
         }
     }
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)
