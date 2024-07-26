@@ -29,16 +29,6 @@ public class State_Jump : BaseState
 
     public override void OnExit()
     {
-        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
-
-        if (nextTransition.To == _base._cStateMachine.idleStateRef)
-        {
-            _base._cAnimator.PlayNextAnimation(0, 0, true, "ForceIdle");
-        }
-        if (nextTransition.To == _base._cStateMachine.crouchStateRef)
-        {
-            _base._cAnimator.PlayNextAnimation(0, 0, true, "ForceCrouch");
-        }
         base.OnExit();
     }
 }

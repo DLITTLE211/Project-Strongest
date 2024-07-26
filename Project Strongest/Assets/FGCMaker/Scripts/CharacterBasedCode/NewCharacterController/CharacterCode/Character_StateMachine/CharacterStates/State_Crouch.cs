@@ -23,22 +23,16 @@ public class State_Crouch : BaseState
         {
             _base._cComboDetection.superMobilityOption = true;
         }
-        float TenwaitTime = 10 * OneFrame;
+        float TenwaitTime = 2 * OneFrame;
         int TentimeInMS = (int)(TenwaitTime * 1000f);
         await Task.Delay(TentimeInMS);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            _cAnim.PlayNextAnimation(0, 0, false, I2CString);
-
-            _cAnim.myAnim.SetBool("ForceCrouch", false);
+            _cAnim.PlayNextAnimation(crouchHash, 0, true);
         }
     }
     public override void OnUpdate()
     {
-        if (_base._cAnimator._lastMovementState != Character_Animator.lastMovementState.nullified)
-        {
-           // _base._cAnimator.NullifyMobilityOption();
-        }
         base.OnUpdate();
     }
     public override void OnRecov()
