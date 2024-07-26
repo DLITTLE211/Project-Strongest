@@ -129,7 +129,15 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void StoreNewInput(Character_ButtonInput input)
     {
-        if (input.Button_State._state == ButtonStateMachine.InputState.directional)
+        if (input.Button_State._state != ButtonStateMachine.InputState.directional)
+        {
+            if (_base._cAnimator.inputWindowOpen)
+            {
+                SpecialInputVerifier(input);
+                SimpleInputVerifier(input);
+            }
+        }
+        else
         {
             if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
             {
@@ -137,14 +145,6 @@ public class Character_ComboDetection : MonoBehaviour
                 SpecialInputVerifier(input);
             }
             ExtraMovementVerifier(input);
-        }
-        else
-        {
-            if (_base._cAnimator.inputWindowOpen)
-            {
-                SpecialInputVerifier(input);
-                SimpleInputVerifier(input);
-            }
         }
     }
     void SimpleInputVerifier(Character_ButtonInput input)

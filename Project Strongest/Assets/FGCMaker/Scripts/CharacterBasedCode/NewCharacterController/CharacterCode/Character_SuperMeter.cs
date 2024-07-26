@@ -20,7 +20,21 @@ public class Character_SuperMeter : MonoBehaviour
     {
         SetStartValue();
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            IncreaseMeterValue(10);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            IncreaseMeterValue(20);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            IncreaseMeterValue(30);
+        }
+    }
     void SetStartValue()
     {
         meterTier = 0;

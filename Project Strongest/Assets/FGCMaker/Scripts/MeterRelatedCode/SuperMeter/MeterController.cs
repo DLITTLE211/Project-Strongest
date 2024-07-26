@@ -130,7 +130,6 @@ public class MeterController : MonoBehaviour
     }
     void Update()
     {
-        
     }
     void TestCalculation(KeyCode code)
     {
