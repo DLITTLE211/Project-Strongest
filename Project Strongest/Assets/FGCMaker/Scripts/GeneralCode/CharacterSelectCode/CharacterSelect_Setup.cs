@@ -251,7 +251,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         if (currentController.isConnected)
         {
-            if (currentController.curPlayer.GetButtonDown(18))
+            if (currentController.curPlayer.GetButtonDown(17))
             {
                 if (currentController.profile == null)
                 {
@@ -266,7 +266,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (currentController.curPlayer.GetButton(17))
+            if (currentController.curPlayer.GetButton(18))
             {
                 if (currentController.profile != null)
                 {
