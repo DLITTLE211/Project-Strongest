@@ -166,7 +166,7 @@ public class Character_Mobility : IMobility
 
     public void PlayAnimation(Character_Mobility _mobilityAnim, Character_Base curBase)
     {
-        if (curBase._cHurtBox.IsGrounded() == true)
+        if (curBase._cHurtBox.IsGrounded() == true && curBase._cForce.CanSendForce())
         {
             if (curBase._cAnimator._lastMovementState == Character_Animator.lastMovementState.nullified)
             {

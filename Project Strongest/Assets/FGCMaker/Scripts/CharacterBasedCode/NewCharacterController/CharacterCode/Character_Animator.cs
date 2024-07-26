@@ -39,7 +39,6 @@ public class Character_Animator : MonoBehaviour
 
     internal int negativeFrameCount;
     Vector3 startPos;
-
     [SerializeField] private Cancel_State currentAttackLevel;
 
 
@@ -49,6 +48,7 @@ public class Character_Animator : MonoBehaviour
     public HitPointCall FreezeCall { get { return _freezeCall; } }
     public HitPointCall MobilityCall { get { return _mobilityCall; } }
     public HitPointCall AttackCall { get { return _attackCall; } }
+    bool hitNewAnim;
     private void Start()
     {
         inputWindowOpen = true;
@@ -238,29 +238,35 @@ public class Character_Animator : MonoBehaviour
 
     public void SetActivatedInput(Character_Mobility inputToActivate, MobilityAnimation anim, float totalWaitTime)
     {
-        if (lastAttack != null)
+        if (!hitNewAnim)
         {
-            if ((CheckAttackState(lastAttack.dashCancelable) && inputToActivate.movementPriority == 2))
+            if (lastAttack != null)
             {
+                if ((CheckAttackState(lastAttack.dashCancelable) && inputToActivate.movementPriority == 2))
+                {
+                    hitNewAnim = true;
+                       activatedInput = inputToActivate;
+                    _lastMovementState = lastMovementState.populated;
+                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
+                }
+                else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
+                {
+                    hitNewAnim = true;
+                    activatedInput = inputToActivate;
+                    SetSelfUnfreeze();
+                    _base._cForce.CallLockKinematic();
+                    ClearLastAttack();
+                    _lastMovementState = lastMovementState.populated;
+                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
+                }
+            }
+            else
+            {
+                hitNewAnim = true;
                 activatedInput = inputToActivate;
                 _lastMovementState = lastMovementState.populated;
                 StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
             }
-            else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
-            {
-                activatedInput = inputToActivate;
-                SetSelfUnfreeze();
-                _base._cForce.CallLockKinematic();
-                ClearLastAttack();
-                _lastMovementState = lastMovementState.populated;
-                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
-            }
-        }
-        else
-        {
-            activatedInput = inputToActivate;
-            _lastMovementState = lastMovementState.populated;
-            StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
         }
     }
     public void KillInput(float totalWaitTime)
@@ -389,9 +395,10 @@ public class Character_Animator : MonoBehaviour
             ClearLastAttack();
         }
     }
-    public void NullifyMobilityOption() 
+    public void NullifyMobilityOption()
     {
         _base._cForce.ResetPriority();
+        hitNewAnim = false;
         activatedInput.activeMove = false;
         activatedInput = null;
         _lastMovementState = lastMovementState.nullified;

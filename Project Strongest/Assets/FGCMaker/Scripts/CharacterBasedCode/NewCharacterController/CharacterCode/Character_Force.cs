@@ -46,6 +46,10 @@ public class Character_Force : MonoBehaviour
 
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
     }
+    public bool CanSendForce()
+    {
+        return !sendingForce;
+    }
     void ApplyForceOnCustomCallback(CustomCallback callback) 
     {
         if (forceHitCall.HasFlag(callback.customCall)) 
@@ -87,10 +91,13 @@ public class Character_Force : MonoBehaviour
         {
             if (_base._cAnimator.activatedInput == null)
             {
-                if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                if (_base.ReturnMovementInputs() != null)
                 {
-                    _myRB.drag = 100000;
-                    return;
+                    if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                    {
+                        _myRB.drag = 100000;
+                        return;
+                    }
                 }
             }
         }
@@ -259,7 +266,6 @@ public class Character_Force : MonoBehaviour
     }
     public void HandleExtraMovement(Character_Mobility _mInput)
     {
-
         if (_base._cHurtBox.IsGrounded())
         {
             if (_mInput.movementPriority == 2)

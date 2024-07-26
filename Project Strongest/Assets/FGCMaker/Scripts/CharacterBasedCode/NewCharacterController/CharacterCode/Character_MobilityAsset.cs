@@ -9,6 +9,7 @@ public class Character_MobilityAsset : ScriptableObject
     [SerializeField]private List<Character_Mobility> mobilityOptions;
     float frameCount;
     List<CustomCallback> customMobilityCallBacks;
+    bool animRunning = false;
     public List<Character_Mobility> MobilityOptions 
     {
         get 
@@ -46,39 +47,48 @@ public class Character_MobilityAsset : ScriptableObject
     }
     public IEnumerator TickMobilityAnimation(Character_Mobility inputToActivate, MobilityAnimation anim, float totalWaitTime, Callback endFunc)
     {
-        float waitTime = 1f / 60f;
-        frameCount = 0;
-
-        inputToActivate.baseCharacter._cAnimator.PlayNextAnimation(Animator.StringToHash(anim.animName[0]), 0.25f);
-        while (frameCount <= anim.animLength[0])
+        if (!animRunning)
         {
-            #region Mobility Anim Checks
-            for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
+            float waitTime = 1f / 60f;
+            frameCount = 0;
+            inputToActivate.baseCharacter._cAnimator.PlayNextAnimation(Animator.StringToHash(anim.animName[0]), 0.25f, true);
+            while (frameCount <= anim.animLength[0])
             {
-                ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
-                if (frameCount >= waitTime * newHitPoint.hitFramePoints)
+                animRunning = true;
+                #region Mobility Anim Checks
+                for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
                 {
-                    if (newHitPoint.call == HitPointCall.ActivateMobilityAction && newHitPoint.hitFrameBool == false)
+                    ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
+                    if (frameCount >= waitTime * newHitPoint.hitFramePoints)
                     {
-                        newHitPoint.hitFrameBool = true;
-                        inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0], inputToActivate);
-                        anim.MobilityCallbacks.RemoveAt(0);
-                    }
-                    else 
-                    {
-                        if (newHitPoint.hitFrameBool == false)
+                        if (newHitPoint.call == HitPointCall.ActivateMobilityAction && newHitPoint.hitFrameBool == false)
                         {
                             newHitPoint.hitFrameBool = true;
-                            inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0]);
-                            //Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
+                            inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0], inputToActivate);
                             anim.MobilityCallbacks.RemoveAt(0);
+                        }
+                        else
+                        {
+                            if (newHitPoint.hitFrameBool == false)
+                            {
+                                newHitPoint.hitFrameBool = true;
+                                inputToActivate.baseCharacter.ApplyForceOnCustomCallback(anim.MobilityCallbacks[0]);
+                                //Messenger.Broadcast<CustomCallback>(Events.CustomCallback, anim.MobilityCallbacks[0]);
+                                anim.MobilityCallbacks.RemoveAt(0);
+                            }
                         }
                     }
                 }
+                frameCount += waitTime;
+                yield return new WaitForSeconds(waitTime);
+                #endregion
             }
-            frameCount += waitTime;
-            yield return new WaitForSeconds(waitTime);
-            #endregion
+            animRunning = false;
+
+        }
+        else 
+        {
+            inputToActivate.baseCharacter._cAnimator.NullifyMobilityOption();
         }
         //endFunc();
     }
