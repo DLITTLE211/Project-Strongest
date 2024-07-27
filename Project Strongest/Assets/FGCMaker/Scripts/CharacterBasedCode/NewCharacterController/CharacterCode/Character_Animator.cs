@@ -236,7 +236,7 @@ public class Character_Animator : MonoBehaviour
     }
     #endregion
 
-    public void SetActivatedInput(Character_Mobility inputToActivate, MobilityAnimation anim, float totalWaitTime)
+    public void SetActivatedInput(Character_Mobility inputToActivate)
     {
         if (!hitNewAnim)
         {
@@ -245,9 +245,9 @@ public class Character_Animator : MonoBehaviour
                 if ((CheckAttackState(lastAttack.dashCancelable) && inputToActivate.movementPriority == 2))
                 {
                     hitNewAnim = true;
-                       activatedInput = inputToActivate;
+                    activatedInput = inputToActivate;
                     _lastMovementState = lastMovementState.populated;
-                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
+                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
                 }
                 else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
                 {
@@ -257,7 +257,7 @@ public class Character_Animator : MonoBehaviour
                     _base._cForce.CallLockKinematic();
                     ClearLastAttack();
                     _lastMovementState = lastMovementState.populated;
-                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
+                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
                 }
             }
             else
@@ -265,18 +265,9 @@ public class Character_Animator : MonoBehaviour
                 hitNewAnim = true;
                 activatedInput = inputToActivate;
                 _lastMovementState = lastMovementState.populated;
-                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
+                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
             }
         }
-    }
-    public void KillInput(float totalWaitTime)
-    {
-        StartCoroutine(WaitToKillInput(totalWaitTime));
-    }
-    IEnumerator WaitToKillInput(float time)
-    {
-        yield return new WaitForSeconds(time);
-        NullifyMobilityOption();
     }
     public Character_Mobility returnActivatedInput()
     {

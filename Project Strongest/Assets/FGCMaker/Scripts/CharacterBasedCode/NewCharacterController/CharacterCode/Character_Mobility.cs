@@ -170,7 +170,11 @@ public class Character_Mobility : IMobility
         {
             if (curBase._cAnimator._lastMovementState == Character_Animator.lastMovementState.nullified)
             {
-                curBase._cAnimator.SetActivatedInput(_mobilityAnim, mobilityAnim, mobilityAnim.totalWaitTime);
+                if (mobilityAnim._customMobilityCallBacks.Count <= 0)
+                {
+                    mobilityAnim.ReAddCustomCallbacks();
+                }
+                curBase._cAnimator.SetActivatedInput(_mobilityAnim);
             }
             else
             {
@@ -186,12 +190,16 @@ public class Character_Mobility : IMobility
     {
         curInput = 0;
         mobilityAnim.frameData.ResetExtraFrames();
-        mobilityAnim.ReAddCustomCallbacks();
     }
 
     public void ResetOnSuccess()
     {
         cTimer.ResetTimerSuccess();
+
+        if (mobilityAnim._customMobilityCallBacks.Count <= 0)
+        {
+            mobilityAnim.ReAddCustomCallbacks();
+        }
     }
 
     public void SetAnims(Character_Animator animator)
@@ -241,8 +249,7 @@ public class MobilityAnimation
 
     public List<float> animLength;
     public FrameData frameData;
-    private List<CustomCallback> _customMobilityCallBacks;
-    public List<CustomCallback> MobilityCallbacks { get { return _customMobilityCallBacks; } }  
+    public List<CustomCallback> _customMobilityCallBacks;
 
     public MobilityAnimation(Animator _anim, List<AnimationClip> _animClip, List<string> _animName, float _totalWaitTime, List<float> _animLength, FrameData _frameData) 
     {

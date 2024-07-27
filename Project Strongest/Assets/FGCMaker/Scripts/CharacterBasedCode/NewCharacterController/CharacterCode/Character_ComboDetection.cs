@@ -178,6 +178,7 @@ public class Character_ComboDetection : MonoBehaviour
             //Messenger.Broadcast(Events.ComboReset);
         }
         #endregion
+
         #region Throws Attacks
         for (int i = 0; i < _base.BasicThrows.Count; i++)
         {
@@ -307,7 +308,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (c.ContinueCombo(input,_base, superMobilityOption))
                 {/*Current Input Is Correct Per (i) MovementOption*/}
 
-            else{ _base._removeList.Add(_base._extraMoveControls[i]); }
+            //else{ _base._removeList.Add(_base._extraMoveControls[i]); }
         }
         foreach (Character_Mobility i in _base._removeList)
         {
