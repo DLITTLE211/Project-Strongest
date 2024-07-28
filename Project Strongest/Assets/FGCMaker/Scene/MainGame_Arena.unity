@@ -1227,9 +1227,10 @@ GameObject:
   m_Component:
   - component: {fileID: 94634923}
   - component: {fileID: 94634924}
+  - component: {fileID: 94634925}
   m_Layer: 7
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: CollisionBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1301,6 +1302,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &94634925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94634922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8811220bcd7c51344ba4bf9d3d478795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _base: {fileID: 0}
+  tempColliders: []
+  pushBackMultiplier: 0
 --- !u!1 &94923318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1418,7 @@ MonoBehaviour:
   removeThrowList: []
   simpleAttackList: []
   removeSimpleList: []
-  specialMoveAttackTest: []
+  specialMoveList: []
   removeSMList: []
   rekkaAttackList: []
   rekkaRemoveList: []
@@ -5880,7 +5896,7 @@ GameObject:
   - component: {fileID: 453776459}
   m_Layer: 7
   m_Name: CollisionBoxes
-  m_TagString: Untagged
+  m_TagString: CollisionBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6368,6 +6384,7 @@ MonoBehaviour:
   teleportCall: 64
   isFrozen: 0
   xSpeed: 0
+  beingPushed: 0
 --- !u!1 &498465947
 GameObject:
   m_ObjectHideFlags: 0
@@ -8200,7 +8217,7 @@ GameObject:
   - component: {fileID: 695894838}
   m_Layer: 7
   m_Name: CollisionBoxes
-  m_TagString: Untagged
+  m_TagString: CollisionBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11487,7 +11504,7 @@ GameObject:
   - component: {fileID: 953094821}
   m_Layer: 7
   m_Name: HurtBox_
-  m_TagString: Untagged
+  m_TagString: CollisionBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11530,6 +11547,7 @@ MonoBehaviour:
   physicsMat: {fileID: 13400000, guid: 296607c0064467e4eb5f49ed2b0702b9, type: 2}
   headCollider: {fileID: 0}
   modelRotation: {fileID: 0}
+  pushCollider: {fileID: 2121281156}
 --- !u!1 &953835059
 GameObject:
   m_ObjectHideFlags: 0
@@ -12618,7 +12636,7 @@ MonoBehaviour:
   removeThrowList: []
   simpleAttackList: []
   removeSimpleList: []
-  specialMoveAttackTest: []
+  specialMoveList: []
   removeSMList: []
   rekkaAttackList: []
   rekkaRemoveList: []
@@ -13457,6 +13475,7 @@ MonoBehaviour:
   teleportCall: 64
   isFrozen: 0
   xSpeed: 0
+  beingPushed: 0
 --- !u!1 &1064684077
 GameObject:
   m_ObjectHideFlags: 0
@@ -19291,7 +19310,7 @@ GameObject:
   - component: {fileID: 1592021134}
   m_Layer: 7
   m_Name: HurtBox_
-  m_TagString: Untagged
+  m_TagString: CollisionBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19334,6 +19353,7 @@ MonoBehaviour:
   physicsMat: {fileID: 13400000, guid: 296607c0064467e4eb5f49ed2b0702b9, type: 2}
   headCollider: {fileID: 0}
   modelRotation: {fileID: 0}
+  pushCollider: {fileID: 94634925}
 --- !u!1 &1595171262
 GameObject:
   m_ObjectHideFlags: 0
@@ -23238,9 +23258,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2121281154}
   - component: {fileID: 2121281155}
+  - component: {fileID: 2121281156}
   m_Layer: 7
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: CollisionBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23312,6 +23333,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2121281156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121281153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8811220bcd7c51344ba4bf9d3d478795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _base: {fileID: 0}
+  tempColliders: []
+  pushBackMultiplier: 0
 --- !u!1 &2147138393
 GameObject:
   m_ObjectHideFlags: 0

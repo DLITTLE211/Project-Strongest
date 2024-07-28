@@ -8,6 +8,7 @@ public class Base_Collider : CollisionDetection
     public PhysicMaterial physicsMat;
     public Collider headCollider;
     public Transform modelRotation;
+    public Character_ColliderPush pushCollider;
     public void SetBaseCollider(float sizeX = 0, float sizeY = 0, Character_CollisionSizing sizing = null,ColliderType collisionType = ColliderType.Trigger)
     {
         if (currentCollider == null)
@@ -31,6 +32,7 @@ public class Base_Collider : CollisionDetection
             {
                 currentCollider.isTrigger = false;
             }
+            pushCollider.SetCharacterBase(this.gameObject.GetComponentInParent<Character_Base>());
         }
         headCollider.GetComponent<CapsuleCollider>().material = physicsMat;
         xSize = sizeX;

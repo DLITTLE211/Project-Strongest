@@ -54,15 +54,15 @@ public class Character_Position
             return;
         }
         modelTransform.localScale = new Vector3(1f, 1f, flipSide);
-        modelTransform.DORotate(direction, 0.25f).OnStart(() =>
+        modelTransform.DORotate(direction, 0.15f).OnStart(() =>
         {
             if (_face == Character_Face_Direction.FacingRight)
             {
-                CollisionDetectionTransform.DOLocalMoveX(-0.25f, 0.25f);
+                CollisionDetectionTransform.DOLocalMoveX(-0.25f, 0.15f);
             }
             else if (_face == Character_Face_Direction.FacingLeft)
             {
-                CollisionDetectionTransform.DOLocalMoveX(0.25f, 0.25f);
+                CollisionDetectionTransform.DOLocalMoveX(0.25f, 0.15f);
             }
         }).OnComplete(() =>
         {

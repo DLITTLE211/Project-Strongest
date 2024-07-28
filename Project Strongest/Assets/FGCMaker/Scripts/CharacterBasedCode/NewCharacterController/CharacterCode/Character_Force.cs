@@ -36,6 +36,7 @@ public class Character_Force : MonoBehaviour
     private bool canToggleKinematic;
     public float xSpeed;
     bool sendingForce;
+    public bool beingPushed;
     public void Start()
     {
         isFrozen = false; 
@@ -87,30 +88,33 @@ public class Character_Force : MonoBehaviour
     }
     void ForceStillPlayer() 
     {
-        if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
+        if (!beingPushed)
         {
-            if (_base._cAnimator.activatedInput == null)
+            if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
             {
-                if (_base.ReturnMovementInputs() != null)
+                if (_base._cAnimator.activatedInput == null)
                 {
-                    if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                    if (_base.ReturnMovementInputs() != null)
                     {
-                        _myRB.drag = 100000;
-                        return;
+                        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                        {
+                            _myRB.drag = 100000;
+                            return;
+                        }
                     }
                 }
             }
-        }
-        if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
-        {
-            if (_base._cAnimator.activatedInput == null)
+            if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
             {
-                if (_base.ReturnMovementInputs() != null)
+                if (_base._cAnimator.activatedInput == null)
                 {
-                    if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
+                    if (_base.ReturnMovementInputs() != null)
                     {
-                        _myRB.drag = 100000;
-                        return;
+                        if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
+                        {
+                            _myRB.drag = 100000;
+                            return;
+                        }
                     }
                 }
             }
@@ -195,6 +199,27 @@ public class Character_Force : MonoBehaviour
             }
         }
         _myRB.AddForce(transform.right * value, ForceMode.VelocityChange);
+        if (beingPushed)
+        {
+            beingPushed = false;
+        }
+    }
+    public void InstantForceAway(float value, bool forceDirection = false)
+    {
+        if (!forceDirection)
+        {
+            if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+            {
+                value *= -1;
+            }
+        }
+        Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos = new Vector3(_myRB.transform.position.x + value, _myRB.transform.position.y, _myRB.transform.position.z);
+        _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
+        if (beingPushed)
+        {
+            beingPushed = false;
+        }
     }
     void TeleportOnCommand(float value)
     {
