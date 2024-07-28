@@ -54,17 +54,19 @@ public class Character_Position
             return;
         }
         modelTransform.localScale = new Vector3(1f, 1f, flipSide);
-        modelTransform.DORotate(direction, 0.25f).OnComplete(() =>
+        modelTransform.DORotate(direction, 0.25f).OnStart(() =>
+        {
+            if (_face == Character_Face_Direction.FacingRight)
+            {
+                CollisionDetectionTransform.DOLocalMoveX(-0.25f, 0.25f);
+            }
+            else if (_face == Character_Face_Direction.FacingLeft)
+            {
+                CollisionDetectionTransform.DOLocalMoveX(0.25f, 0.25f);
+            }
+        }).OnComplete(() =>
         {
             _directionFacing = _face; 
-            if (_directionFacing == Character_Face_Direction.FacingRight)
-            {
-                CollisionDetectionTransform.localPosition = new Vector3(-1 * 0.25f, 0, 0);
-            }
-            else if (_directionFacing == Character_Face_Direction.FacingLeft)
-            {
-                CollisionDetectionTransform.localPosition = new Vector3(1 * 0.25f, 0, 0);
-            }
         });
     }
     public void SetModelTransform(Transform _modelTransform) 
