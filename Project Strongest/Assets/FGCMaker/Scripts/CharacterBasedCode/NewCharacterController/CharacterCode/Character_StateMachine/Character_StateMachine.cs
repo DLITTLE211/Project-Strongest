@@ -48,13 +48,15 @@ public class Character_StateMachine : MonoBehaviour
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
-        At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
+        //At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(AttackState, MoveState, new Predicate(() => At_2Move()));
+
         At(AttackState, ThrowState, new Predicate(() => At_2Throw()));
 
         At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
         At(MoveState, JumpState, new Predicate(() => At_2Jump()));
+        At(CrouchState, JumpState, new Predicate(() => At_2Jump()));
 
 
         At(MoveState, DashState, new Predicate(() => ToDashState()));
@@ -65,6 +67,7 @@ public class Character_StateMachine : MonoBehaviour
         At(C_BlockState, CrouchState, new Predicate(() => At_2Crouch()));
         At(S_BlockState, CrouchState, new Predicate(() => At_2Crouch()));
         At(Hitstate, CrouchState, new Predicate(() => At_2Crouch()));
+        At(DashState, CrouchState, new Predicate(() => At_2Crouch()));
 
         At(AttackState, Hitstate, new Predicate(() => checkAttackValue(Character_Animator.lastAttackState.nullified) && At_2Crouch()));
         At(IdleState, Hitstate, new Predicate(() => ToHitState()));

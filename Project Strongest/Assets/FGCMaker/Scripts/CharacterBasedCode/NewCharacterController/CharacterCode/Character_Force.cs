@@ -280,20 +280,27 @@ public class Character_Force : MonoBehaviour
     }
     public void HandleExtraMovement(Character_Mobility _mInput)
     {
+        List<IState> acceptableStates = new List<IState>();
         if (_base._cHurtBox.IsGrounded())
         {
             if (_mInput.movementPriority == 2)
             {
-                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.dashStateRef)
+                acceptableStates.Add(_base._cStateMachine.dashStateRef);
+                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
                 {
+                    acceptableStates.Clear();
                     sendingForce = false;
                     return;
                 }
             }
             else
             {
-                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.jumpRef)
+                acceptableStates.Add(_base._cStateMachine.jumpRef);
+                acceptableStates.Add(_base._cStateMachine.crouchStateRef);
+                acceptableStates.Add(_base._cStateMachine.idleStateRef);
+                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
                 {
+                    acceptableStates.Clear();
                     sendingForce = false;
                     return;
                 }
