@@ -109,7 +109,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         _base._cComboDetection.inStance = true;
         if (time > 0)
         {
-            ResetTimeOnSpecialMove((time * (1 / 60f)));
+            ResetTimeOnSpecialMove((time));
             permanentStance = false;
         }
         else 
