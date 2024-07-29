@@ -1316,7 +1316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 0}
   tempColliders: []
-  pushBackMultiplier: 0
 --- !u!1 &94923318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1406,7 @@ MonoBehaviour:
   xVal: 0
   yVal: 0
   xYield: 0.25
-  yYield: 0.25
+  yYield: 0.85
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
   comboInstantiatedSpot: {fileID: 1073604928}
@@ -12625,7 +12624,7 @@ MonoBehaviour:
   xVal: 0
   yVal: 0
   xYield: 0.25
-  yYield: 0.25
+  yYield: 0.85
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
   comboInstantiatedSpot: {fileID: 398680612}
@@ -23347,7 +23346,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 0}
   tempColliders: []
-  pushBackMultiplier: 0
 --- !u!1 &2147138393
 GameObject:
   m_ObjectHideFlags: 0
