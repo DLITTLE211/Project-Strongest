@@ -231,8 +231,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
-                            //Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
-
                             character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
                             customHitboxCallBacks.RemoveAt(0);
                         }
@@ -274,6 +272,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         frameCount = 0;
         float waitTime = 1f / 60f;
+        character._cAttackTimer.PauseTimerOnThrowSuccess();
         while (frameCount <= throwProp.animLength)
         {
             try
@@ -293,8 +292,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
-                            character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
-                            //Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+                            character.ReceiveCustomCallBack(customHitboxCallBacks[0]); 
                             customHitboxCallBacks.RemoveAt(0);
                         }
                     }
@@ -313,6 +311,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             frameCount += 1f * waitTime;
             yield return new WaitForSeconds(waitTime);
         }
+        character._cAttackTimer.ClearThrowLanded();
         _playerCAnimator.SetCanTransitionIdle(true);
         if (requiredHitboxCallBacks.Count == 1)
         {

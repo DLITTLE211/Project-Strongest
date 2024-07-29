@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class State_Move : BaseState
 {
@@ -9,7 +10,7 @@ public class State_Move : BaseState
     {
 
     }
-    public override void OnEnter()
+    public override async void OnEnter()
     {
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");
         if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
@@ -20,6 +21,9 @@ public class State_Move : BaseState
         {
             CheckLeftFaceState();
         }
+        float fourFrameWaitTime = 4 * (1 / 60f);
+        int fourtimeInMS = (int)(fourFrameWaitTime * 1000f);
+        await Task.Delay(fourtimeInMS);
         _baseForce.SetWalkForce(_base.ReturnMovementInputs());
 
     }

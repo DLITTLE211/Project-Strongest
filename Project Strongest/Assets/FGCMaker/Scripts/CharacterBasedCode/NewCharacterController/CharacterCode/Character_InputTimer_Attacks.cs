@@ -7,9 +7,14 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 {
     public Character_Base _base;
     public TimerType _type;
+    private bool throwLanded;
     // Start is called before the first frame update
     public void ResetTimer()
     {
+        if (throwLanded)
+        {
+            throwLanded = false;
+        }
         FrameCountTimer = StartFrameCountTimer;
         CheckForInput = false;
         _base._cComboDetection.ResetCombos();
@@ -75,6 +80,16 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         }
         _type = newType;
     }
+    public void PauseTimerOnThrowSuccess()
+    {
+        throwLanded = true;
+        FrameCountTimer = 0;
+    }
+    public void ClearThrowLanded()
+    {
+        throwLanded = false;
+        CountDownTimer();
+    }
 
     void SetStartStanceTimerValues() 
     {
@@ -87,33 +102,36 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 
     public void CountDownTimer()
     {
-        if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
+        if (!throwLanded)
         {
-            if (FrameCountTimer <= 0f)
+            if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
             {
-                if (_type == TimerType.InRekka)
+                if (FrameCountTimer <= 0f)
                 {
-                    //_base._cAnimator.ClearLastAttack();
-                    SetTimerType();
+                    if (_type == TimerType.InRekka)
+                    {
+                        //_base._cAnimator.ClearLastAttack();
+                        SetTimerType();
+                    }
+                    ResetTimer();
                 }
-                ResetTimer();
+                else
+                {
+                    FrameCountTimer -= 1 / 60f;
+                    // FrameCountTimer = _frameCountTimer;
+                }
             }
             else
             {
-                FrameCountTimer -= 1 / 60f;
-               // FrameCountTimer = _frameCountTimer;
-            }
-        }
-        else 
-        {
-            if (FrameCountTimer <= 0f)
-            {
-                ResetTimer();
-            }
-            else
-            {
-                FrameCountTimer -= 1 / 60f;
-               // FrameCountTimer = _frameCountTimer;
+                if (FrameCountTimer <= 0f)
+                {
+                    ResetTimer();
+                }
+                else
+                {
+                    FrameCountTimer -= 1 / 60f;
+                    // FrameCountTimer = _frameCountTimer;
+                }
             }
         }
     }
