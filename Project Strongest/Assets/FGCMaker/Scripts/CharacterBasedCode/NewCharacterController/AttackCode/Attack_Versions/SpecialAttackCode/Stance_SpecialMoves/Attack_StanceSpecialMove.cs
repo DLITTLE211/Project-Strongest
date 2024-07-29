@@ -10,6 +10,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     [SerializeField] private char finalAttackButton;
     [SerializeField] private bool moveComplete;
     [SerializeField] internal bool inStanceState;
+    [SerializeField] internal int stanceHeldTime;
     (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
 
 
@@ -133,6 +134,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
                 if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceAttack, attackInput))
                 {
                     inStanceState = false;
+                    
                     PreformAttack(curBase, stanceInput.stanceAttack);
                     return true;
                 }
@@ -140,8 +142,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
                 {
                     if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceKill, attackInput))
                     {
-
-                        stanceStartProperty.InputTimer._base._cAttackTimer.SetTimerType(TimerType.Normal, 0.1f);
+                        stanceStartProperty.InputTimer._base._cAttackTimer.SetTimerType(TimerType.Normal);
                         PreformAttack(curBase, stanceInput.stanceKill);
                         ResetCombo();
                         return true;
@@ -203,13 +204,22 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     public void SetAttackAnims(Character_Animator animator)
     {
         stanceStartProperty.SetAttackAnims(animator);
-        stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo(StanceSpecialAttack_Name);
-        stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(StanceSpecialAttack_Name);
+        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(animator);
+            stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceAttack._stanceButtonInput._correctInput[i].property._attackName);
+        }
+        for (int i = 0; i < stanceInput.stanceKill._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(animator);
+            stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceKill._stanceButtonInput._correctInput[i].property._attackName);
+        }
     }
     public override void ResetCombo()
     {
         stanceStartProperty.InputTimer._base._cAnimator._lastAttackState = Character_Animator.lastAttackState.nullified;
-       curInput = 0;
+        stanceStartProperty.InputTimer._base._cAnimator.myAnim.SetBool("Stance_Release", false);
+        curInput = 0;
         inStanceState = false;
         moveComplete = false;
     }

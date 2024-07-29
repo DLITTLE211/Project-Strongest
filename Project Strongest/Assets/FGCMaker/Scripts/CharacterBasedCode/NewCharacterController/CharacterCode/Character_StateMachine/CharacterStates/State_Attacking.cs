@@ -22,7 +22,7 @@ public class State_Attacking : BaseState
             case MoveType.Stance:
                 SetStance();
                 _base._cComboDetection.inStance = true;
-                _base._cAttackTimer.SetTimerType(TimerType.InStance);
+                _base._cAttackTimer.SetTimerType(TimerType.InStance,newStanceAttack.stanceHeldTime * (1 / 60f));
                 break;
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter IdleState");

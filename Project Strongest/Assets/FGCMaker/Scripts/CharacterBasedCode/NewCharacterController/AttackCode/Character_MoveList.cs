@@ -71,7 +71,6 @@ public class Character_MoveList : MonoBehaviour
         }
         #endregion
 
-        //Under Development
         #region Simple Special Moves Storage
         GetSimpleSpecials(baseCharacterInfo);
         basicSpecialProperties = new List<Attack_BaseProperties>();
@@ -88,8 +87,6 @@ public class Character_MoveList : MonoBehaviour
         {
             rekkaBaseProperties.Add(rekkaSpecials[i].rekkaInput.mainAttackProperty);
         }
-        #endregion
-
         #region Rekka SubAttack Storage
         rekkaSubAttackProperties = new List<Attack_BaseProperties>();
         foreach (Attack_RekkaSpecialMove rekka in rekkaSpecials)
@@ -103,55 +100,53 @@ public class Character_MoveList : MonoBehaviour
             }
         }
         #endregion
-        /*
+        #endregion
+
+
+        //Under Development
         #region Stance Special Storage
+        GetStanceAttacks(baseCharacterInfo);
         stanceMainProperties = new List<Attack_BaseProperties>();
         stanceAttackProperties = new List<Attack_BaseProperties>();
         stanceKillProperties = new List<Attack_BaseProperties>();
-        for (int i = 0; i < stanceSpecials.Count; i++)
+        for (int i = 0; i < stanceSpecials.Count; i++) 
         {
             stanceMainProperties.Add(stanceSpecials[i].stanceStartProperty);
-            if (stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput != null)
+            for (int j = 0; j < stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; j++)
             {
-                if (stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0) 
-                {
-                    stanceAttackProperties.Add(stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
-                }
+                stanceAttackProperties.Add(stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
             }
-            if (stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput != null)
+            for (int j = 0; j < stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput.Count; j++)
             {
-                if (stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
-                {
-                    stanceKillProperties.Add(stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
-                }
+                stanceKillProperties.Add(stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
             }
         }
         #endregion
+        /*
+               #region Counter Property Storage
+               counterProperties = new List<Attack_BaseProperties>();
+               for (int i = 0; i < CounterAttacks.Count; i++) 
+               {
+                   counterProperties.Add(CounterAttacks[i].property);
+               }
+               #endregion
 
-        #region Counter Property Storage
-        counterProperties = new List<Attack_BaseProperties>();
-        for (int i = 0; i < CounterAttacks.Count; i++) 
-        {
-            counterProperties.Add(CounterAttacks[i].property);
-        }
-        #endregion
+               #region Command Throw Property Storage
+               commandThrowProperties = new List<Attack_BaseProperties>();
+               for (int i = 0; i < CommandThrows.Count; i++)
+               {
+                   commandThrowProperties.Add(CommandThrows[i].property);
+               }
+               #endregion
 
-        #region Command Throw Property Storage
-        commandThrowProperties = new List<Attack_BaseProperties>();
-        for (int i = 0; i < CommandThrows.Count; i++)
-        {
-            commandThrowProperties.Add(CommandThrows[i].property);
-        }
-        #endregion
-
-        #region Base Super Property Storage
-        basicSuperAttackProperties = new List<Attack_BaseProperties>();
-        for (int i = 0; i < BasicSuperAttacks.Count; i++)
-        {
-            basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
-        }
-#endregion
-        */
+               #region Base Super Property Storage
+               basicSuperAttackProperties = new List<Attack_BaseProperties>();
+               for (int i = 0; i < BasicSuperAttacks.Count; i++)
+               {
+                   basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
+               }
+       #endregion
+               */
     }
 
     public void GetNormalAttacks(Character_Base baseCharacterInfo)
@@ -198,6 +193,15 @@ public class Character_MoveList : MonoBehaviour
             {
                 rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
             }
+        }
+    }
+    public void GetStanceAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < stanceSpecials.Count; i++)
+        {
+            stanceSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            stanceSpecials[i].TurnInputsToString();
+            stanceSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator);
         }
     }
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)

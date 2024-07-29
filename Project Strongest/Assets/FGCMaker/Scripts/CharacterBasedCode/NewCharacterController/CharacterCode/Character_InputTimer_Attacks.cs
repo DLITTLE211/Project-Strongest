@@ -8,6 +8,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public Character_Base _base;
     public TimerType _type;
     private bool throwLanded;
+    private bool permanentStance;
     // Start is called before the first frame update
     public void ResetTimer()
     {
@@ -37,7 +38,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         FrameCountTimer = StartFrameCountTimer;
     }
 
-    public void ResetTimeOnRekka(float time)
+    public void ResetTimeOnSpecialMove(float time)
     {
         FrameCountTimer = time;
     }
@@ -53,7 +54,11 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     }
     public void TimerTickDown()
     {
-        if (!_base._cComboDetection.inStance)
+        if (_base._cComboDetection.inStance && permanentStance)
+        {
+            return;
+        }
+        else if (_base._cComboDetection.inStance && !permanentStance)
         {
             if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
             {
@@ -71,7 +76,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
             if (newType == TimerType.InStance)
             {
-                SetStartStanceTimerValues();
+                SetStartStanceTimerValues(newTime);
             }
         }
         else
@@ -91,13 +96,22 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         CountDownTimer();
     }
 
-    void SetStartStanceTimerValues() 
+    void SetStartStanceTimerValues(float time) 
     {
         _base._cComboDetection.inStance = true;
+        if (time > 0)
+        {
+            ResetTimeOnSpecialMove((time * (1 / 60f)));
+            permanentStance = false;
+        }
+        else 
+        {
+            permanentStance = true;
+        }
     }
     void SetStartRekkaTimerValues(float time)
     {
-        ResetTimeOnRekka((time * (1/60f)));
+        ResetTimeOnSpecialMove((time * (1/60f)));
     }
 
     public void CountDownTimer()

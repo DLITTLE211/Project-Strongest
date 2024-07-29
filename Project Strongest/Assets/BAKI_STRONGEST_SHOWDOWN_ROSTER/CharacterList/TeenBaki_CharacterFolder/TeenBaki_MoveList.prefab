@@ -1070,6 +1070,7 @@ MonoBehaviour:
     finalAttackButton: 0
     moveComplete: 0
     inStanceState: 0
+    stanceHeldTime: 25
   - StanceSpecialAttack_Name: Flash Step (Light Series)
     stanceStartProperty:
       _attackName: Flash Step (Teleport)
@@ -1333,6 +1334,7 @@ MonoBehaviour:
     finalAttackButton: 0
     moveComplete: 0
     inStanceState: 0
+    stanceHeldTime: 0
   - StanceSpecialAttack_Name: Flash Step (Heavy Series)
     stanceStartProperty:
       _attackName: Flash Step (Teleport)
@@ -1596,6 +1598,7 @@ MonoBehaviour:
     finalAttackButton: 0
     moveComplete: 0
     inStanceState: 0
+    stanceHeldTime: 0
   rekkaSpecials:
   - RekkaSpecialAttack_Name: Hanma Assault
     rekkaInput:

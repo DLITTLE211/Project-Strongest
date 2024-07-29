@@ -150,7 +150,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
                         return false;
                     }
                     curRekkaInput++;
-                    rekkaInput.mainAttackProperty.InputTimer.ResetTimeOnRekka((leewayTime * (1 / 60f)));
+                    rekkaInput.mainAttackProperty.InputTimer.ResetTimeOnSpecialMove((leewayTime * (1 / 60f)));
                     PreformAttack(curBase, confirmedRekkaAttack);
                      return true;
                 }
