@@ -43,8 +43,9 @@ public class State_Attacking : BaseState
         newStanceAttack = _base.comboList3_0.GetStanceAttack(_base._cAnimator.lastAttack);
     }
 
-    public override void OnExit()
+    public override async void OnExit()
     {
+        await WaitIfAttackNull();
         _base._cComboDetection.inRekka = false;
         _base._cComboDetection.inStance = false;
         _base._cAttackTimer.SetTimerType();
@@ -53,12 +54,12 @@ public class State_Attacking : BaseState
 
         if (nextTransition.To == _base._cStateMachine.idleStateRef)
         {
-           /* Debug.Log("Back To Idle");
-            if (_base._cAnimator.lastAttack != null)
-            {
-                _base._cAnimator.ClearLastAttack();
-                _cAnim.PlayNextAnimation(groundIdleHash, 0, false);
-            }*/
+            /* Debug.Log("Back To Idle");
+             if (_base._cAnimator.lastAttack != null)
+             {
+                 _base._cAnimator.ClearLastAttack();
+                 _cAnim.PlayNextAnimation(groundIdleHash, 0, false);
+             }*/
             _base.AwaitCanTransitionIdle(() => base.OnExit());
             return;
         }
@@ -82,5 +83,15 @@ public class State_Attacking : BaseState
             return;
         }
         base.OnExit();
+    }
+    async Task WaitIfAttackNull() 
+    {
+        float TenwaitTime = 4 * (1/60f);
+        int TentimeInMS = (int)(TenwaitTime * 1000f);
+        await Task.Delay(TentimeInMS); 
+        if (_cAnim.lastAttack != null)
+        {
+            return;
+        }
     }
 }

@@ -266,7 +266,6 @@ public class Character_Animator : MonoBehaviour
                     activatedInput = inputToActivate;
                     SetSelfUnfreeze();
                     _base._cForce.CallLockKinematic();
-                    ClearLastAttack();
                     _lastMovementState = lastMovementState.populated;
                     StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
                 }
@@ -394,7 +393,7 @@ public class Character_Animator : MonoBehaviour
         }
         else
         {
-            ClearLastAttack();
+            //ClearLastAttack();
         }
     }
     public void NullifyMobilityOption()
@@ -413,14 +412,6 @@ public class Character_Animator : MonoBehaviour
         inputWindowOpen = true;
         _base._cForce.ResetPriority();
         currentAttackLevel = Cancel_State.NotCancellable;
-        if (inRekkaState)
-        {
-            SetRekkaBool(false);
-        }
-        if (inStanceState)
-        {
-            SetStanceBool(false);
-        }
     }
     public void EndAnim()
     {

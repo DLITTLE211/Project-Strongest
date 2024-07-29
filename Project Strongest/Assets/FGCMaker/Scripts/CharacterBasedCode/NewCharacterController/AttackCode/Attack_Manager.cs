@@ -46,7 +46,10 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
-            
+            if (Combo[Combo.Count - 1] == newAttack)
+            {
+                return;
+            }
             Combo.Add(newAttack);
             CheckNextAttackCriteria(newAttack, false, Combo.Count -1);
         }

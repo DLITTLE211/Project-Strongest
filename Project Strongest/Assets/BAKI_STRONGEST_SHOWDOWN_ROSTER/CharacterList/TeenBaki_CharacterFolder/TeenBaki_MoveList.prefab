@@ -1618,8 +1618,8 @@ MonoBehaviour:
         JumpCancelable: 0
         _airInfo: 0
         cancelProperty:
-          cancelFrom: 4
-          cancelTo: 6
+          cancelFrom: 9
+          cancelTo: 11
         _moveType: 2
         AttackAnims:
           playerAnim: {fileID: 0}
@@ -1684,8 +1684,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                cancelFrom: 4
-                cancelTo: 6
+                cancelFrom: 11
+                cancelTo: 13
               _moveType: 2
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -1749,8 +1749,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                cancelFrom: 4
-                cancelTo: 6
+                cancelFrom: 11
+                cancelTo: 13
               _moveType: 2
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2862,7 +2862,7 @@ MonoBehaviour:
           directionalInput: 0
       - _correctSequence: 4D
         correctAttack: 0
-        correctInput: 0
+        correctInput: 588
         moveInput: 0
         attackInput: 0
         property:

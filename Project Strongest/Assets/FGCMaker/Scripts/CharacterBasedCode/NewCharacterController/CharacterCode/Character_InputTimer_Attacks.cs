@@ -89,33 +89,37 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     {
         if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
         {
-            if (_frameCountTimer <= 0f)
+            if (FrameCountTimer <= 0f)
             {
                 if (_type == TimerType.InRekka)
                 {
-                    _base._cAnimator.ClearLastAttack();
+                    //_base._cAnimator.ClearLastAttack();
                     SetTimerType();
                 }
                 ResetTimer();
             }
             else
             {
-                _frameCountTimer -= 1 / 60f;
-                FrameCountTimer = _frameCountTimer;
+                FrameCountTimer -= 1 / 60f;
+               // FrameCountTimer = _frameCountTimer;
             }
         }
         else 
         {
-            if (_frameCountTimer <= 0f)
+            if (FrameCountTimer <= 0f)
             {
                 ResetTimer();
             }
             else
             {
-                _frameCountTimer -= 1 / 60f;
-                FrameCountTimer = _frameCountTimer;
+                FrameCountTimer -= 1 / 60f;
+               // FrameCountTimer = _frameCountTimer;
             }
         }
+    }
+    public bool ReturnTimerIsZero() 
+    {
+        return FrameCountTimer <= 0f;
     }
 }
 [Serializable]

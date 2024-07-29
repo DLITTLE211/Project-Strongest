@@ -71,7 +71,7 @@ public class HurtBox : CollisionDetection
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
         hitCount.ResetHitCount();
-        Base_Attacker._cAnimator.ClearLastAttack();
+        //Base_Attacker._cAnimator.ClearLastAttack();
     }
     async void HandleMultiHitProperties(HitBox _hitbox,HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
     {
@@ -96,7 +96,7 @@ public class HurtBox : CollisionDetection
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
         hitCount.ResetHitCount();
-        Base_Attacker._cAnimator.ClearLastAttack();
+        //Base_Attacker._cAnimator.ClearLastAttack();
     }
     async void HandleMultiHitProperties_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
     {

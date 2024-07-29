@@ -93,7 +93,7 @@ public class State_Idle : BaseState
             {
                 _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
                 isAnimatingIdle = true;
-
+                _cAnim.ClearLastAttack();
             }
 
             _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
