@@ -55,7 +55,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     {
         if (!_base._cComboDetection.inStance)
         {
-            if (CheckForInput && _base._cAnimator.inputWindowOpen)
+            if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
             {
                 CountDownTimer();
             }
@@ -83,11 +83,11 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public void PauseTimerOnThrowSuccess()
     {
         throwLanded = true;
-        FrameCountTimer = 0;
     }
     public void ClearThrowLanded()
     {
         throwLanded = false;
+        FrameCountTimer = 0;
         CountDownTimer();
     }
 
@@ -102,36 +102,33 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 
     public void CountDownTimer()
     {
-        if (!throwLanded)
+        if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
         {
-            if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
+            if (FrameCountTimer <= 0f)
             {
-                if (FrameCountTimer <= 0f)
+                if (_type == TimerType.InRekka)
                 {
-                    if (_type == TimerType.InRekka)
-                    {
-                        //_base._cAnimator.ClearLastAttack();
-                        SetTimerType();
-                    }
-                    ResetTimer();
+                    //_base._cAnimator.ClearLastAttack();
+                    SetTimerType();
                 }
-                else
-                {
-                    FrameCountTimer -= 1 / 60f;
-                    // FrameCountTimer = _frameCountTimer;
-                }
+                ResetTimer();
             }
             else
             {
-                if (FrameCountTimer <= 0f)
-                {
-                    ResetTimer();
-                }
-                else
-                {
-                    FrameCountTimer -= 1 / 60f;
-                    // FrameCountTimer = _frameCountTimer;
-                }
+                FrameCountTimer -= 1 / 60f;
+                // FrameCountTimer = _frameCountTimer;
+            }
+        }
+        else
+        {
+            if (FrameCountTimer <= 0f)
+            {
+                ResetTimer();
+            }
+            else
+            {
+                FrameCountTimer -= 1 / 60f;
+                // FrameCountTimer = _frameCountTimer;
             }
         }
     }
