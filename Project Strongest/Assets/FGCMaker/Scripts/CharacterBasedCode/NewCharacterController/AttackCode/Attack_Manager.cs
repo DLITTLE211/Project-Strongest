@@ -86,29 +86,34 @@ public class Attack_Manager : MonoBehaviour
                     return;
                 }
             }
-        }
-        else
-        {
-            if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+            if (!CheckMeterCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
+            if (!CheckGroundCriteria(newAttack))
             {
                 Combo.RemoveAt(index);
                 return;
             }
         }
-        if (!CheckMeterCriteria(newAttack))
+        else
         {
-            Combo.RemoveAt(index);
-            return;
-        }
-        if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
-        {
-            Combo.RemoveAt(index);
-            return;
-        }
-        if (!CheckGroundCriteria(newAttack))
-        {
-            Combo.RemoveAt(index);
-            return;
+            if (!(CheckCancelCriteria(lastBase.cancelProperty.cancelTo, newAttack)))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
+            if (!CheckMeterCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
+            if (!CheckGroundCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
         }
         if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState) 
         {
