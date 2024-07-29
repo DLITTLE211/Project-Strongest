@@ -97,6 +97,7 @@ public class Attack_Manager : MonoBehaviour
                 return;
             }
         }
+
         else
         {
             if (!(CheckCancelCriteria(lastBase.cancelProperty.cancelTo, newAttack)))
@@ -115,7 +116,7 @@ public class Attack_Manager : MonoBehaviour
                 return;
             }
         }
-        if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState) 
+        if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState)
         {
             _cAnimator.SetRekkaBool(false);
         }

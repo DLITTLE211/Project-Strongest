@@ -43,9 +43,8 @@ public class State_Attacking : BaseState
         newStanceAttack = _base.comboList3_0.GetStanceAttack(_base._cAnimator.lastAttack);
     }
 
-    public override async void OnExit()
+    public override void OnExit()
     {
-        await WaitIfAttackNull();
         _base._cComboDetection.inRekka = false;
         _base._cComboDetection.inStance = false;
         _base._cAttackTimer.SetTimerType();
@@ -83,15 +82,5 @@ public class State_Attacking : BaseState
             return;
         }
         base.OnExit();
-    }
-    async Task WaitIfAttackNull() 
-    {
-        float TenwaitTime = 4 * (1/60f);
-        int TentimeInMS = (int)(TenwaitTime * 1000f);
-        await Task.Delay(TentimeInMS); 
-        if (_cAnim.lastAttack != null)
-        {
-            return;
-        }
     }
 }

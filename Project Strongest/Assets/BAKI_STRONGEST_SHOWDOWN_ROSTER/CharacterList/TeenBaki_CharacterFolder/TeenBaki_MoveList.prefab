@@ -1797,7 +1797,7 @@ MonoBehaviour:
     movementPortionLength: 0
     finalAttackButton: 0
     moveComplete: 0
-    leewayTime: 500
+    leewayTime: 50
     inRekkaState: 0
     usedRekkas: []
   special_Simple:
@@ -3076,7 +3076,7 @@ MonoBehaviour:
   - SpecialAttackName: Crouching Light Kick
     _attackInput:
       _correctInput:
-      - _correctSequence: 2D
+      - _correctSequence: 2C
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   - SpecialAttackName: Crouching Heavy Kick
     _attackInput:
       _correctInput:
-      - _correctSequence: 2C
+      - _correctSequence: 2D
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3817,7 +3817,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 2
           cancelProperty:
-            cancelFrom: 3
+            cancelFrom: 1
             cancelTo: 8
           _moveType: 0
           AttackAnims:

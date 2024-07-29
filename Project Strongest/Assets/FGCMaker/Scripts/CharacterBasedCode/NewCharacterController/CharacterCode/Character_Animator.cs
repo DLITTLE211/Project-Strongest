@@ -421,10 +421,7 @@ public class Character_Animator : MonoBehaviour
             canTick = false;
             if (lastAttack != null)
             {
-                if (lastAttack._moveType == MoveType.Normal)
-                {
-                    ClearLastAttack();
-                }
+                ClearLastAttack();
             }
         }
     }
