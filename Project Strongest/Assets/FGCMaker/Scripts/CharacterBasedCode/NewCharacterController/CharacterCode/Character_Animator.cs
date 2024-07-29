@@ -31,6 +31,7 @@ public class Character_Animator : MonoBehaviour
     public bool ISShaking { get { return Shake; } }
 
     public Transform _model;
+    public bool inRekkaState,inStanceState;
     public bool canBlock;
     public bool canTick;
     public bool inputWindowOpen;
@@ -55,6 +56,16 @@ public class Character_Animator : MonoBehaviour
         startPos = _model.localPosition;
         Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames); 
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+        inRekkaState = false;
+        inStanceState = false;
+    }
+    public void SetStanceBool(bool state) 
+    {
+        inStanceState = state; 
+    }
+    public void SetRekkaBool(bool state)
+    {
+        inRekkaState = state;
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {
@@ -401,8 +412,15 @@ public class Character_Animator : MonoBehaviour
         _lastAttackState = lastAttackState.nullified;
         inputWindowOpen = true;
         _base._cForce.ResetPriority();
-
         currentAttackLevel = Cancel_State.NotCancellable;
+        if (inRekkaState)
+        {
+            SetRekkaBool(false);
+        }
+        if (inStanceState)
+        {
+            SetStanceBool(false);
+        }
     }
     public void EndAnim()
     {

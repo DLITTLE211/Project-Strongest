@@ -224,6 +224,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput;
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
+        bool _inRekkaOrStance = _base._cAnimator.inStanceState || _base._cAnimator.inRekkaState;
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -236,13 +237,13 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
             }
-            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering;
+            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance;
         }
         catch (ArgumentOutOfRangeException)
         {
             _currentInput = false;
             _isBlocking = false;
-            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
+            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance;
         }
 
     }

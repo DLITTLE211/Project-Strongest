@@ -46,6 +46,7 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
+            
             Combo.Add(newAttack);
             CheckNextAttackCriteria(newAttack, false, Combo.Count -1);
         }
@@ -105,6 +106,14 @@ public class Attack_Manager : MonoBehaviour
         {
             Combo.RemoveAt(index);
             return;
+        }
+        if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState) 
+        {
+            _cAnimator.SetRekkaBool(false);
+        }
+        if (newAttack._moveType != MoveType.Stance && _cAnimator.inStanceState)
+        {
+            _cAnimator.SetStanceBool(false);
         }
         Combo.Add(newAttack);
         DoAttack(newAttack);

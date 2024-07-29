@@ -62,7 +62,6 @@ public class Character_Base : MonoBehaviour
     public Character_MobilityAsset _extraMoveAsset;
     public List<Character_Mobility> _extraMoveControls;
     public HitPointCall activationCall;
-    [SerializeField] public List<Character_Mobility> _removeList;
     [SerializeField] public float xVal, yVal;
     [SerializeField, Range(0f, 1f)] public float xYield, yYield;
     [SerializeField] public int numpadValue;

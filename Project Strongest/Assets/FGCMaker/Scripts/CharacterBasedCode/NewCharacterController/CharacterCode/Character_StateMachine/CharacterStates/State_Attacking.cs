@@ -31,13 +31,15 @@ public class State_Attacking : BaseState
     {
         base.OnRecov();
     }
-    void SetRekka() 
+    void SetRekka()
     {
+        _cAnim.SetRekkaBool(true);
         newRekkaAttack = _base.comboList3_0.GetRekkaAttack(_base._cAnimator.lastAttack);
         newRekkaAttack.SetRekkaStateTrue();
     }
     void SetStance()
     {
+        _cAnim.SetStanceBool(true);
         newStanceAttack = _base.comboList3_0.GetStanceAttack(_base._cAnimator.lastAttack);
     }
 
