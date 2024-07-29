@@ -54,11 +54,19 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     }
     public void TimerTickDown()
     {
-        if (_base._cComboDetection.inStance && permanentStance)
+        if (_base._cComboDetection.inStance)
         {
+            if (!permanentStance)
+            {
+                if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
+                {
+                    CountDownTimer();
+                    return;
+                }
+            }
             return;
         }
-        else if (_base._cComboDetection.inStance && !permanentStance)
+        else 
         {
             if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
             {

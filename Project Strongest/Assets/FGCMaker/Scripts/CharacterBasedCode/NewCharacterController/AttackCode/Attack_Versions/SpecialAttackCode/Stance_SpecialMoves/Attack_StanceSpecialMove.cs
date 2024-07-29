@@ -57,29 +57,36 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     }
     public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
     {
-        if (moveComplete == false)
+        try
         {
-            bool moveInput = false;
-            if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+            if (moveComplete == false)
             {
-                moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                bool moveInput = false;
+                if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                {
+                    moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                }
+                else
+                {
+                    moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                }
+
+                // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
+                bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
+                bool thisMove = moveInput && moveState;
+                return thisMove;
             }
             else
             {
-                moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                bool buttonInput = finalAttackButton.ToString() == attackInput.Button_Name.ToString();
+                bool CorrectState = attackInput.Button_State._state == stanceInput._stanceInputState._state;
+                bool thisAttack = buttonInput && CorrectState;
+                return thisAttack;
             }
-
-            // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
-            bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
-            bool thisMove = moveInput && moveState;
-            return thisMove;
         }
-        else
+        catch (NullReferenceException) 
         {
-            bool buttonInput = finalAttackButton.ToString() == attackInput.Button_Name.ToString();
-            bool CorrectState = attackInput.Button_State._state == stanceInput._stanceInputState._state;
-            bool thisAttack = buttonInput && CorrectState;
-            return thisAttack;
+            return false;
         }
     }
 
