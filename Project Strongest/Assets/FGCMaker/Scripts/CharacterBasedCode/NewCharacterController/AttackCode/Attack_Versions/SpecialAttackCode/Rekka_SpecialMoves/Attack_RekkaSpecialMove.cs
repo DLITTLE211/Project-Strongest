@@ -142,11 +142,15 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         #region In Rekka Input Check
         else
         {
-            Start4FrameDelay();
+            if (curRekkaInput == 0)
+            {
+                Start4FrameDelay();
+            }
             if (attackInput != null)
             {
                 if (IsRekkaCorrectInput(Input, curBase, curInput, attackInput) != null)
                 {
+                    rekkaInput.mainAttackProperty.InputTimer.ResetTimeOnSpecialMove(leewayTime * (1/60f));
                     RekkaAttack confirmedRekkaAttack = IsRekkaCorrectInput(Input, curBase, curInput, attackInput);
                     if (curRekkaInput > rekkaInputCount)
                     {
@@ -155,9 +159,8 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
                         return false;
                     }
                     curRekkaInput++;
-                    rekkaInput.mainAttackProperty.InputTimer.ResetTimeOnSpecialMove((leewayTime * (1 / 60f)));
                     PreformAttack(curBase, confirmedRekkaAttack);
-                     return true;
+                    return true;
                 }
                 else { return false; }
             }

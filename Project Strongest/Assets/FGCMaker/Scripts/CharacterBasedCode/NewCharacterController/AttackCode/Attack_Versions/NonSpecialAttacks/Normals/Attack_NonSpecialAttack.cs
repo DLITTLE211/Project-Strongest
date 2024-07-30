@@ -62,7 +62,11 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
             }
             if (this._attackInput._correctInput[0].property._airInfo == AirAttackInfo.GroundOnly && !_base._cHurtBox.IsGrounded()) 
             {
-               // return false;
+                // return false;
+            }
+            if (_base._cComboDetection.inRekka == true || _base._cComboDetection.inStance == true)
+            {
+                 return false;
             }
             if (curAttack > 0)
             {

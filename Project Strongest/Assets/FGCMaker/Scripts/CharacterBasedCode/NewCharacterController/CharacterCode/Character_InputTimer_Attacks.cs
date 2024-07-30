@@ -12,6 +12,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     // Start is called before the first frame update
     public void ResetTimer()
     {
+        
         if (throwLanded)
         {
             throwLanded = false;
@@ -40,9 +41,8 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 
     public void ResetTimeOnSpecialMove(float time)
     {
-        FrameCountTimer = time;
+        _frameCountTimer = time;
     }
-
     public void ResumeTimer()
     {
         CheckForInput = true;
@@ -51,6 +51,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     private void Update()
     {
         TimerTickDown();
+      
     }
     public void TimerTickDown()
     {
@@ -66,7 +67,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
             return;
         }
-        else 
+        else
         {
             if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
             {
@@ -126,11 +127,10 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     {
         if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
         {
-            if (FrameCountTimer <= 0f)
+            if (FrameCountTimer <= -1 / 60f)
             {
                 if (_type == TimerType.InRekka)
                 {
-                    //_base._cAnimator.ClearLastAttack();
                     SetTimerType();
                 }
                 ResetTimer();
@@ -138,19 +138,17 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             else
             {
                 FrameCountTimer -= 1 / 60f;
-                // FrameCountTimer = _frameCountTimer;
             }
         }
         else
         {
-            if (FrameCountTimer <= 0f)
+            if (FrameCountTimer <= -1 / 60f)
             {
                 ResetTimer();
             }
             else
             {
                 FrameCountTimer -= 1 / 60f;
-                // FrameCountTimer = _frameCountTimer;
             }
         }
     }
