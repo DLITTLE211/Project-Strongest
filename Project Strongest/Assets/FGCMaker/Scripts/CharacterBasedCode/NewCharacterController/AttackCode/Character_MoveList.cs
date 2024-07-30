@@ -193,6 +193,7 @@ public class Character_MoveList : MonoBehaviour
             {
                 rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
             }
+            rekkaSpecials[i].rekkaInput.SetRekkaProperties();
         }
     }
     public void GetStanceAttacks(Character_Base baseCharacterInfo)

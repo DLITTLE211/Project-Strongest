@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [Serializable]
 public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuctionality
@@ -34,6 +35,10 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         {
             DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step...");
         }
+    }
+    public bool ReturnMoveComplete()
+    {
+        return moveComplete;
     }
     public void SetAttackAnims(Character_Animator animator) 
     {
@@ -134,10 +139,10 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
             }
         }
         #endregion
-
         #region In Rekka Input Check
         else
         {
+            Start4FrameDelay();
             if (attackInput != null)
             {
                 if (IsRekkaCorrectInput(Input, curBase, curInput, attackInput) != null)
@@ -161,7 +166,16 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         #endregion
     }
     #endregion
-
+    public async void Start4FrameDelay()
+    {
+        await Delay4Frames();
+    }
+    public async Task Delay4Frames() 
+    {
+        float fourFrames = 4 * (1f/60f);
+        int FourFramesInMS = (int)(fourFrames * 1000f);
+        await Task.Delay(FourFramesInMS);
+    }
 
     #region Interface Functions
 
@@ -200,9 +214,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         bool checkButtonState = attack.Button_State._state != ButtonStateMachine.InputState.released;
         if (checkButtonState) 
         {
-            return true;
+            return attack.Button_State._state == curRekkaAttack.individualRekkaAttack._correctInput[0].attackInputState._state;
         }
-        return attack.Button_State._state == curRekkaAttack.individualRekkaAttack._correctInput[0].attackInputState._state;
+        return false;
     }
     bool itemCheck(RekkaAttack curRekkaAttack)
     {
@@ -262,6 +276,8 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
     {
         for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
         {
+            RekkaAttack curRekkaAttack = rekkaInput._rekkaPortion[i];
+            Attack_BaseProperties attackProperty = curRekkaAttack.individualRekkaAttack._correctInput[0].property;
             int _lastDirection = testInput.Button_State.directionalInput;
             _newinput.Item1 = (Attack_BaseInput.MoveInput)_lastDirection;
             char buttonInput = attackInput.Button_Name.ToCharArray()[0];

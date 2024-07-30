@@ -26,6 +26,10 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
             return CheckCombo(input, curBase, attackInput);
         }
     }
+    public bool ReturnMoveComplete()
+    {
+        return moveComplete;
+    }
     int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
     {
         int switchValue = 5;

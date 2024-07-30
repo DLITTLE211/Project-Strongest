@@ -325,4 +325,38 @@ public class Character_ComboDetection : MonoBehaviour
             _base.stanceAttackList[i].ResetCombo();
         }
     }
+    public void OnSuccessfulSpecialMove(Attack_BaseProperties attack)
+    {
+        for (int i = 0; i < _base.specialMoveList.Count; i++)
+        {
+            if (_base.comboList3_0.special_Simple[i].ReturnMoveComplete() && _base.comboList3_0.special_Simple[i].property != attack)
+            {
+                _base.comboList3_0.special_Simple[i].ResetCombo();
+                _base.specialMoveList[i].ResetCombo();
+            }
+            else { continue; }
+        }
+        for (int i = 0; i < _base.comboList3_0.rekkaSpecials.Count; i++)
+        {
+            if (_base.comboList3_0.rekkaSpecials[i].ReturnMoveComplete() && _base.comboList3_0.rekkaSpecials[i].rekkaInput.mainAttackProperty != attack)
+            {
+                if (_base.comboList3_0.rekkaSpecials[i].rekkaInput._rekkaProperties.Contains(attack)) 
+                {
+                    continue;
+                }
+                _base.comboList3_0.rekkaSpecials[i].ResetCombo();
+                _base.rekkaAttackList[i].ResetCombo();
+            }
+            else { continue; }
+        }
+        for (int i = 0; i < _base.comboList3_0.stanceSpecials.Count; i++)
+        {
+            if (_base.comboList3_0.stanceSpecials[i].ReturnMoveComplete() && _base.comboList3_0.stanceSpecials[i].stanceStartProperty != attack)
+            {
+                _base.comboList3_0.stanceSpecials[i].ResetCombo();
+                _base.stanceAttackList[i].ResetCombo();
+            }
+            else { continue; }
+        }
+    }
 }

@@ -212,6 +212,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         frameCount = 0;
         float waitTime = 1f / 60f;
+        character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
             try
