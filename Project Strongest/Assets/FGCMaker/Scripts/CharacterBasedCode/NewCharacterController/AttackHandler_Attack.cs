@@ -133,6 +133,10 @@ public class AttackHandler_Attack : AttackHandler_Base
         HitBox.DestroyHitbox(HitBox, extendedHitBox);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
         _playerCAnimator._base._aManager.SetStartNextAttack(true);
+        if (HitBox.hitboxProperties._moveType == MoveType.Counter)
+        {
+            extendedHitBox.CounterMoveProperty = null;
+        }
 
     }
     public override void OnExit()
@@ -210,6 +214,10 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
+        if (lastAttack._moveType == MoveType.Counter) 
+        {
+            extendedHitBox.SetCounterMoveProperty(lastAttack);
+        }
         frameCount = 0;
         float waitTime = 1f / 60f;
         character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);

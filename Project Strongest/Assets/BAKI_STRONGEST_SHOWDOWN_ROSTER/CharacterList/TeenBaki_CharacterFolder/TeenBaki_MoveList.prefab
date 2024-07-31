@@ -597,7 +597,7 @@ MonoBehaviour:
       cancelProperty:
         cancelFrom: 1
         cancelTo: 0
-      _moveType: 1
+      _moveType: 6
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: 4710477040780991208, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -605,17 +605,17 @@ MonoBehaviour:
         animLength: 0
         HitBox: {fileID: 0}
         attackType: 7
-        hb_placement: {x: 0, y: 0, z: 0}
+        hb_placement: {x: 0.5, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0, y: 0}
+        hb_size: {x: 1, y: 2.15}
         extendedHitBox: {fileID: 0}
         hurtType: 9
-        hu_placement: {x: 0, y: 0, z: 0}
+        hu_placement: {x: 0.5, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0, y: 0}
+        hu_size: {x: 1, y: 2.15}
         _frameData:
           init: 0
-          startup: 4
+          startup: 1
           active: 5
           inactive: 16
           recovery: 0
@@ -777,7 +777,7 @@ MonoBehaviour:
       cancelProperty:
         cancelFrom: 1
         cancelTo: 0
-      _moveType: 1
+      _moveType: 6
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: 4710477040780991208, guid: fd8d640d58542c341979d4546d6979fd, type: 3}

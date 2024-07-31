@@ -10,9 +10,14 @@ public class HurtBox : CollisionDetection
     public HurtBoxType huBType;
     public ColliderType colliderType;
     private Attack_BaseProperties currentHitProperties;
+    public Attack_BaseProperties CounterMoveProperty;
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
     {
         SetHurtBoxSize(0,0,ColliderType.Trigger,hu_Sizing);
+    }
+    public void SetCounterMoveProperty(Attack_BaseProperties counterProperty) 
+    {
+        CounterMoveProperty = counterProperty;
     }
     void FixedUpdate()
     {
@@ -199,6 +204,23 @@ public class HurtBox : CollisionDetection
                     }
                 }
                 break;
+            case HurtBoxType.FullParry:
+                if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable ^ _hitbox.HBType == HitBoxType.Low)
+                {
+                    OnSuccessfulHit(_hitbox, hitCount, target);
+                }
+                else
+                {
+                    if (_hitbox.HBType == HitBoxType.Throw)
+                    {
+                        //Send Throw With Counter Hit;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    {
+                        //Send Command Throw With Counter Hit;
+                    }
+                }
+                break;
             case HurtBoxType.SoftKnockdown:
                 //Send Hit on SoftKnockdown
                 break;
@@ -290,6 +312,29 @@ public class HurtBox : CollisionDetection
             }
         }
     }
+    
+    public async void OnSuccessfulCounter(HitBox _hitbox, HitCount hitCount, Transform target)
+    {
+        Character_Base Base_Target = _hitbox.GetComponent<Character_Base>();
+        Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
+        if (Base_Attacker._cAnimator.lastAttack != null) 
+        {
+            CounterMoveProperty = Base_Attacker._cAnimator.lastAttack;
+        }
+        
+        if (_hitbox.HBType != HitBoxType.nullified)
+        {
+            Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
+            currentAttack.hitConnected = true;
+            Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker, false);
+            await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
+            Base_Target._cHitController.HandleHitState(currentAttack);
+            Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
+            await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
+            _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
+        }
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Wall")
