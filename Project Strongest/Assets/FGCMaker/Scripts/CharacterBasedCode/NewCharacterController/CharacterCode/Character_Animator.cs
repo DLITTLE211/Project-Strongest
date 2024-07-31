@@ -191,7 +191,7 @@ public class Character_Animator : MonoBehaviour
     }
     public void SetHurtBoxToNoBlock() //Called in AnimEvent
     {
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._cHurtBox.SetHurboxState();
     }
     public void SetHurtBoxToBlockHigh() //Called in AnimEvent
     {

@@ -135,7 +135,7 @@ public class Character_HurtboxController : MonoBehaviour
     #endregion
 
     #region Hurtbox State Manipulation
-    public void SetHurboxState(HurtBoxType newType)
+    public void SetHurboxState(HurtBoxType newType = HurtBoxType.NoBlock)
     {
         newHurtboxType = newType;
         UpdateHurtboxStateText(newHurtboxType);

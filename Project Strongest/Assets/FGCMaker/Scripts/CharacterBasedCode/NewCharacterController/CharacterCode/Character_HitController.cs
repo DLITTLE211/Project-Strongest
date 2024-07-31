@@ -341,7 +341,7 @@ public class Character_HitController : MonoBehaviour
             bigHitRecovering = false;
         }
         _base._cAnimator.SetCanRecover(false);
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._cHurtBox.SetHurboxState();
     }
     public void SetHurtboxOnHit(Attack_KnockDown knockDown)
     {

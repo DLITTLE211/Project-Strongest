@@ -207,7 +207,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.FullParry:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable ^ _hitbox.HBType == HitBoxType.Low)
                 {
-                    OnSuccessfulHit(_hitbox, hitCount, target);
+                    OnSuccessfulCounter(_hitbox, hitCount, target);
                 }
                 else
                 {
@@ -315,7 +315,7 @@ public class HurtBox : CollisionDetection
     
     public async void OnSuccessfulCounter(HitBox _hitbox, HitCount hitCount, Transform target)
     {
-        Character_Base Base_Target = _hitbox.GetComponent<Character_Base>();
+        Character_Base Base_Target = _hitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
         if (Base_Attacker._cAnimator.lastAttack != null) 
         {

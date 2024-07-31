@@ -66,7 +66,7 @@ public class State_CrouchBlock : BaseState
 
     public override void OnExit()
     {
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._cHurtBox.SetHurboxState();
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         base.OnExit();
     }

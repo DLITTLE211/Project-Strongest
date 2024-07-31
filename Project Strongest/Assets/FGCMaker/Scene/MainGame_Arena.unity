@@ -1422,6 +1422,8 @@ MonoBehaviour:
   rekkaRemoveList: []
   stanceAttackList: []
   stanceRemoveList: []
+  counterAttackList: []
+  counterRemoveList: []
   myRb: {fileID: 94923330}
   _jumpForce: 250
   _moveForce: 0.3
@@ -3092,6 +3094,61 @@ MonoBehaviour:
   testText: {fileID: 152502581}
   huBType: 0
   colliderType: 0
+  CounterMoveProperty:
+    _attackName: 
+    _cTimer: {fileID: 0}
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
+    _meterRequirement: 0
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
+    dashCancelable: 0
+    JumpCancelable: 0
+    _airInfo: 0
+    cancelProperty:
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
+    AttackAnims:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    hitConnected: 0
+    lateralKBP:
+      lateralKBP: 0
+      Value: 0
+    verticalKBP:
+      verticalKBP: 0
+      Value: 0
+    KnockDown: 0
 --- !u!1 &273827943
 GameObject:
   m_ObjectHideFlags: 0
@@ -7416,6 +7473,61 @@ MonoBehaviour:
   testText: {fileID: 982141380}
   huBType: 0
   colliderType: 0
+  CounterMoveProperty:
+    _attackName: 
+    _cTimer: {fileID: 0}
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
+    _meterRequirement: 0
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
+    dashCancelable: 0
+    JumpCancelable: 0
+    _airInfo: 0
+    cancelProperty:
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
+    AttackAnims:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    hitConnected: 0
+    lateralKBP:
+      lateralKBP: 0
+      Value: 0
+    verticalKBP:
+      verticalKBP: 0
+      Value: 0
+    KnockDown: 0
 --- !u!1 &607290435
 GameObject:
   m_ObjectHideFlags: 0
@@ -12639,6 +12751,8 @@ MonoBehaviour:
   rekkaRemoveList: []
   stanceAttackList: []
   stanceRemoveList: []
+  counterAttackList: []
+  counterRemoveList: []
   myRb: {fileID: 993311522}
   _jumpForce: 250
   _moveForce: 0.3
@@ -22048,6 +22162,61 @@ MonoBehaviour:
   testText: {fileID: 882403983}
   huBType: 0
   colliderType: 0
+  CounterMoveProperty:
+    _attackName: 
+    _cTimer: {fileID: 0}
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
+    _meterRequirement: 0
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
+    dashCancelable: 0
+    JumpCancelable: 0
+    _airInfo: 0
+    cancelProperty:
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
+    AttackAnims:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    hitConnected: 0
+    lateralKBP:
+      lateralKBP: 0
+      Value: 0
+    verticalKBP:
+      verticalKBP: 0
+      Value: 0
+    KnockDown: 0
 --- !u!1 &1999147359
 GameObject:
   m_ObjectHideFlags: 0
@@ -22737,6 +22906,61 @@ MonoBehaviour:
   testText: {fileID: 1256147683}
   huBType: 0
   colliderType: 0
+  CounterMoveProperty:
+    _attackName: 
+    _cTimer: {fileID: 0}
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
+    _meterRequirement: 0
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
+    dashCancelable: 0
+    JumpCancelable: 0
+    _airInfo: 0
+    cancelProperty:
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
+    AttackAnims:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    hitConnected: 0
+    lateralKBP:
+      lateralKBP: 0
+      Value: 0
+    verticalKBP:
+      verticalKBP: 0
+      Value: 0
+    KnockDown: 0
 --- !u!1 &2071144932
 GameObject:
   m_ObjectHideFlags: 0

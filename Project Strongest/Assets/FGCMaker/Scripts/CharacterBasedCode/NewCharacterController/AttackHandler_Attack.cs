@@ -114,6 +114,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         startup = true;
         extendedHitBox.ActivateHurtbox(extendedHitBox);
+        character._cHurtBox.SetHurboxState(extendedHitBox.huBType);
         HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
     }
@@ -133,11 +134,14 @@ public class AttackHandler_Attack : AttackHandler_Base
         HitBox.DestroyHitbox(HitBox, extendedHitBox);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
         _playerCAnimator._base._aManager.SetStartNextAttack(true);
-        if (HitBox.hitboxProperties._moveType == MoveType.Counter)
+        if (HitBox != null)
         {
-            extendedHitBox.CounterMoveProperty = null;
+            if (HitBox.hitboxProperties._moveType == MoveType.Counter)
+            {
+                extendedHitBox.CounterMoveProperty = null;
+                character._cHurtBox.SetHurboxState();
+            }
         }
-
     }
     public override void OnExit()
     {
