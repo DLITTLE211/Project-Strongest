@@ -36,6 +36,7 @@ public class Character_StateMachine : MonoBehaviour
         var S_BlockState = new State_Block(_base);// S = Stand
         var C_BlockState = new State_CrouchBlock(_base); // C = Crouch 
         var BlockReact = new State_BlockReact(_base); // C = Crouch 
+        var CounterState = new State_Counter(_base); // C = Crouch 
         #endregion
 
         #region Define Transitions
@@ -83,11 +84,16 @@ public class Character_StateMachine : MonoBehaviour
         At(BlockReact, S_BlockState, new Predicate(() => At_2SBlock()));
         At(BlockReact, C_BlockState, new Predicate(() => At_2CBlock()));
 
+        At(AttackState, CounterState, new Predicate(() => At_2Counter()));
+        At(MoveState, CounterState, new Predicate(() => At_2Counter()));
+        At(CrouchState, CounterState, new Predicate(() => At_2Counter()));
+        At(AttackState, CounterState, new Predicate(() => At_2Counter()));
+
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
-        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw()));
-        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw()));
+        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter()));
+        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
@@ -212,6 +218,20 @@ public class Character_StateMachine : MonoBehaviour
         if(_base._cAnimator.lastAttack != null) 
         {
             _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Throw && _base._cAnimator.lastAttack.hitConnected;
+            return _attackIsThrow;
+        }
+        return false;
+    }
+    bool At_2Counter()
+    {
+        bool _attackIsThrow = false;
+        if (_base._subState != Character_SubStates.Controlled)
+        {
+            return false;
+        }
+        if (_base._cAnimator.lastAttack != null)
+        {
+            _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Counter;
             return _attackIsThrow;
         }
         return false;

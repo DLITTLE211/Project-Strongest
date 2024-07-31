@@ -90,30 +90,33 @@ public class Character_Force : MonoBehaviour
     {
         if (!beingPushed)
         {
-            if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
+            if (_base._cAnimator.lastAttack == null)
             {
-                if (_base._cAnimator.activatedInput == null)
+                if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
                 {
-                    if (_base.ReturnMovementInputs() != null)
+                    if (_base._cAnimator.activatedInput == null)
                     {
-                        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                        if (_base.ReturnMovementInputs() != null)
                         {
-                            _myRB.drag = 100000;
-                            return;
+                            if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                            {
+                                _myRB.drag = 100000;
+                                return;
+                            }
                         }
                     }
                 }
-            }
-            if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
-            {
-                if (_base._cAnimator.activatedInput == null)
+                if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
                 {
-                    if (_base.ReturnMovementInputs() != null)
+                    if (_base._cAnimator.activatedInput == null)
                     {
-                        if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
+                        if (_base.ReturnMovementInputs() != null)
                         {
-                            _myRB.drag = 100000;
-                            return;
+                            if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
+                            {
+                                _myRB.drag = 100000;
+                                return;
+                            }
                         }
                     }
                 }
