@@ -134,7 +134,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         HitBox.DestroyHitbox(HitBox, extendedHitBox);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
         _playerCAnimator._base._aManager.SetStartNextAttack(true);
-        if (HitBox != null)
+
+        if (HitBox.hitboxProperties != null)
         {
             if (HitBox.hitboxProperties._moveType == MoveType.Counter)
             {
@@ -303,7 +304,8 @@ public class AttackHandler_Attack : AttackHandler_Base
                 {
                     if (customHitboxCallBacks.Count > 0)
                     {
-                        if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                        float curCustomTimeStamp = waitTime * customHitboxCallBacks[0].timeStamp;
+                        if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
                             character.ReceiveCustomCallBack(customHitboxCallBacks[0]); 
                             customHitboxCallBacks.RemoveAt(0);

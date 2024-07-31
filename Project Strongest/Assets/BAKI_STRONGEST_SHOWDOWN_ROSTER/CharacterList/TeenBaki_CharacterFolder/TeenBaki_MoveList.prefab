@@ -653,12 +653,12 @@ MonoBehaviour:
         init: 0
         startup: 2
         active: 3
-        inactive: 122
+        inactive: 5
         recovery: 0
         lastFrame: 0
         _extraPoints:
-        - hitFramePoints: 22
-          call: 1048576
+        - hitFramePoints: 10
+          call: 524288
           hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
@@ -678,8 +678,8 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 36
-          call: 0
+        - hitFramePoints: 15
+          call: 524288
           hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
@@ -699,8 +699,8 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 60
-          call: 1048576
+        - hitFramePoints: 35
+          call: 524288
           hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
@@ -720,10 +720,10 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 2
-        - hitFramePoints: 87
-          call: 8
+        - hitFramePoints: 50
+          call: 4
           hitFrameBool: 0
-          Force: -7
+          Force: -4
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
           camRotation: {x: 0, y: 0, z: 0}
