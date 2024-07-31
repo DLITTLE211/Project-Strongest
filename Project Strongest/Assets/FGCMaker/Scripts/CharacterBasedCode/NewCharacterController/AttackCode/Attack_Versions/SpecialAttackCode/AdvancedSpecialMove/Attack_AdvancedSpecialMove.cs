@@ -249,6 +249,13 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
             target._cDamageCalculator.TakeChipDamage(property);
         }
     }
+    public void HandleCounterAnimAttackInfo()
+    {
+        _customAnimation[0].SetAttackAnim(curBase._cAnimator);
+        _customAnimation[0].AddRequiredCallbacks(curBase);
+        _customAnimation[0].AddCustomCallbacks(_customAnimation[0]);
+        curBase._cAnimator.StartThrowFrameCount(property, _customAnimation[0]);
+    }
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {
         property.InputTimer = timer;

@@ -29,6 +29,10 @@ public class Character_ComboDetection : MonoBehaviour
 
     void PrimeSpecialMoves()
     {
+        for (int i = 0; i < _base.comboList3_0.CounterAttacks.Count; i++)
+        {
+            _base.counterAttackList.Add(_base.comboList3_0.CounterAttacks[i]);
+        }
         for (int i = 0; i < _base.comboList3_0.stanceSpecials.Count; i++)
         {
             _base.stanceAttackList.Add(_base.comboList3_0.stanceSpecials[i]);
@@ -96,6 +100,7 @@ public class Character_ComboDetection : MonoBehaviour
         _base.specialMoveList.Clear();
         _base.rekkaAttackList.Clear();
         _base.stanceAttackList.Clear();
+        _base.counterAttackList.Clear();
 
         for (int i = 0; i < _base.comboList3_0.special_Simple.Count; i++)
         {
@@ -108,6 +113,10 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.comboList3_0.stanceSpecials.Count; i++)
         {
             _base.stanceAttackList.Add(_base.comboList3_0.stanceSpecials[i]);
+        }
+        for (int i = 0; i < _base.comboList3_0.CounterAttacks.Count; i++)
+        {
+            _base.counterAttackList.Add(_base.comboList3_0.CounterAttacks[i]);
         }
     }
     public void CheckPossibleCombos(Character_ButtonInput newInput)
@@ -198,6 +207,34 @@ public class Character_ComboDetection : MonoBehaviour
     }
     void SpecialInputVerifier(Character_ButtonInput input)
     {
+        #region Counter Special Moves
+        for (int i = 0; i < _base.counterAttackList.Count; i++)
+        {
+            Attack_AdvancedSpecialMove c = _base.counterAttackList[i];
+            if (c.ContinueCombo(input, _base))
+            {
+                //Current input is correct");
+            }
+            else
+            {
+                _base.counterRemoveList.Add(_base.counterAttackList[i]);
+            }
+            if (_base.counterRemoveList.Count >= _base.counterAttackList.Count)
+            {
+                // c.ResetCombo();
+                _base.counterRemoveList.Clear();
+            }
+        }
+        foreach (Attack_AdvancedSpecialMove possibleAttack in _base.counterRemoveList)
+        {
+            _base.counterAttackList.Remove(possibleAttack);
+        }
+        if (_base.counterAttackList.Count <= _base.comboList3_0.CounterAttacks.Count)
+        {
+            ResetComboList();
+            _base.counterRemoveList.Clear();
+        }
+        #endregion
         #region Basic Special Moves
         for (int i = 0; i < _base.specialMoveList.Count; i++)
         {

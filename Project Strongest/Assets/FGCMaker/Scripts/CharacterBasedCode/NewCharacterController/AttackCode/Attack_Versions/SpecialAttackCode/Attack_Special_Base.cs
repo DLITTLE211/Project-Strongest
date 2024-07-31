@@ -9,6 +9,8 @@ public enum MoveType
     Stance,
     Super,
     Throw,
+    Counter,
+    CommandGrab,
 
     /*
      * Basic special move: Completed. Search for input, upon completion 
