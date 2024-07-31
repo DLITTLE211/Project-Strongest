@@ -22,7 +22,7 @@ public class State_Crouch : BaseState
         await Task.Delay(TentimeInMS);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            _cAnim.PlayNextAnimation(crouchHash, 0, true);
+            _cAnim.PlayNextAnimation(crouchHash, 2 * (1 / 60f), false);
         }
     }
     async Task ActivateSuperMobility(float OneFrame) 
@@ -48,11 +48,5 @@ public class State_Crouch : BaseState
     {
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         base.OnExit();
-        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
-
-        if (nextTransition.To == _base._cStateMachine.idleStateRef ^ nextTransition.To == _base._cStateMachine.moveStateRef) 
-        {
-            _cAnim.PlayNextAnimation(C2IHash, 0);
-        }
     }
 }

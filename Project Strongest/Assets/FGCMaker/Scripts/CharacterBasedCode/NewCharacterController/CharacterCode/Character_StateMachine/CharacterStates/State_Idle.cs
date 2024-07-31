@@ -89,15 +89,17 @@ public class State_Idle : BaseState
     {
         try
         {
-            if (_cAnim.CheckAttackAndMobility() && (_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+            if (!isAnimatingIdle)
             {
-                _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
-                isAnimatingIdle = true;
-                _cAnim.ClearLastAttack();
+                if (_cAnim.CheckAttackAndMobility() && (_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                {
+                    isAnimatingIdle = true;
+                    _cAnim.ClearLastAttack();
+                    _cAnim.PlayNextAnimation(groundIdleHash, 2*(1/60f));
+                    _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+                    _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+                }
             }
-
-            _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-            _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         }
         catch (NullReferenceException) 
         {
