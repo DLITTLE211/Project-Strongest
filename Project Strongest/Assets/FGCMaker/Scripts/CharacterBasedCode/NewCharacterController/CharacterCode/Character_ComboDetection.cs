@@ -361,6 +361,11 @@ public class Character_ComboDetection : MonoBehaviour
             _base.comboList3_0.stanceSpecials[i].ResetCombo();
             _base.stanceAttackList[i].ResetCombo();
         }
+        for (int i = 0; i < _base.counterAttackList.Count; i++)
+        {
+            _base.comboList3_0.CounterAttacks[i].ResetCombo();
+            _base.counterAttackList[i].ResetCombo();
+        }
     }
     public void OnSuccessfulSpecialMove(Attack_BaseProperties attack)
     {
@@ -392,6 +397,15 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 _base.comboList3_0.stanceSpecials[i].ResetCombo();
                 _base.stanceAttackList[i].ResetCombo();
+            }
+            else { continue; }
+        }
+        for (int i = 0; i < _base.comboList3_0.CounterAttacks.Count; i++)
+        {
+            if (_base.comboList3_0.CounterAttacks[i].ReturnMoveComplete() && _base.comboList3_0.CounterAttacks[i].property != attack)
+            {
+                _base.comboList3_0.CounterAttacks[i].ResetCombo();
+                _base.counterAttackList[i].ResetCombo();
             }
             else { continue; }
         }

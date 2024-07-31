@@ -249,6 +249,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
             target._cDamageCalculator.TakeChipDamage(property);
         }
     }
+    public bool ReturnMoveComplete()
+    {
+        return moveComplete;
+    }
     public void HandleCounterAnimAttackInfo()
     {
         _customAnimation[0].SetAttackAnim(curBase._cAnimator);
