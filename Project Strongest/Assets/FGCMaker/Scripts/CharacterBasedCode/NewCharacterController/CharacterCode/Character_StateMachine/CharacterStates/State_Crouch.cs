@@ -22,7 +22,7 @@ public class State_Crouch : BaseState
         await Task.Delay(TentimeInMS);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            _cAnim.PlayNextAnimation(crouchHash, 2 * (1 / 60f), false);
+            _cAnim.PlayNextAnimation(crouchHash, 2 * (1 / 60f));
         }
     }
     async Task ActivateSuperMobility(float OneFrame) 

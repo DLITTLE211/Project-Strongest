@@ -617,7 +617,7 @@ MonoBehaviour:
           init: 0
           startup: 1
           active: 5
-          inactive: 16
+          inactive: 17
           recovery: 0
           lastFrame: 0
           _extraPoints: []
@@ -748,7 +748,7 @@ MonoBehaviour:
         _startRefreshRate: 0
     curInput: 0
     movementPortionLength: 0
-    finalAttackButton: 0
+    finalAttackButton: 121
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
@@ -785,18 +785,18 @@ MonoBehaviour:
         animLength: 0
         HitBox: {fileID: 0}
         attackType: 7
-        hb_placement: {x: 0, y: 0, z: 0}
+        hb_placement: {x: 0.5, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0, y: 0}
+        hb_size: {x: 1, y: 2.15}
         extendedHitBox: {fileID: 0}
         hurtType: 9
-        hu_placement: {x: 0, y: 0, z: 0}
+        hu_placement: {x: 0.5, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0, y: 0}
+        hu_size: {x: 1, y: 2.15}
         _frameData:
           init: 0
-          startup: 4
-          active: 5
+          startup: 1
+          active: 3
           inactive: 12
           recovery: 0
           lastFrame: 0
@@ -831,14 +831,14 @@ MonoBehaviour:
       hu_size: {x: 0, y: 0}
       _frameData:
         init: 0
-        startup: 0
-        active: 0
-        inactive: 0
+        startup: 2
+        active: 3
+        inactive: 123
         recovery: 0
         lastFrame: 0
         _extraPoints:
-        - hitFramePoints: 22
-          call: 1048576
+        - hitFramePoints: 10
+          call: 524288
           hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
@@ -858,8 +858,8 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 36
-          call: 1048576
+        - hitFramePoints: 15
+          call: 524288
           hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
@@ -867,7 +867,7 @@ MonoBehaviour:
           camRotation: {x: 0, y: 0, z: 0}
           snapMovement: 0
           customDamage:
-            rawAttackDamage: 8
+            rawAttackDamage: 9
             counterHitDamageMult: 0
             hitstopValue: 0
             hitstunValue: 0
@@ -879,8 +879,8 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 60
-          call: 1048576
+        - hitFramePoints: 25
+          call: 524288
           hitFrameBool: 0
           Force: 0
           projectileSpeed: 0
@@ -888,7 +888,7 @@ MonoBehaviour:
           camRotation: {x: 0, y: 0, z: 0}
           snapMovement: 0
           customDamage:
-            rawAttackDamage: 15
+            rawAttackDamage: 14
             counterHitDamageMult: 0
             hitstopValue: 0
             hitstunValue: 0
@@ -900,8 +900,8 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 2
-        - hitFramePoints: 87
-          call: 16
+        - hitFramePoints: 48
+          call: 4
           hitFrameBool: 0
           Force: -7
           projectileSpeed: 0
@@ -928,7 +928,7 @@ MonoBehaviour:
         _startRefreshRate: 0
     curInput: 0
     movementPortionLength: 0
-    finalAttackButton: 0
+    finalAttackButton: 87
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
@@ -2678,7 +2678,7 @@ MonoBehaviour:
           directionalInput: 0
       - _correctSequence: 6C
         correctAttack: 0
-        correctInput: 0
+        correctInput: 120
         moveInput: 0
         attackInput: 0
         property:
@@ -4103,7 +4103,7 @@ MonoBehaviour:
       _correctInput:
       - _correctSequence: 5H
         correctAttack: 0
-        correctInput: 0
+        correctInput: 121
         moveInput: 0
         attackInput: 0
         property:
