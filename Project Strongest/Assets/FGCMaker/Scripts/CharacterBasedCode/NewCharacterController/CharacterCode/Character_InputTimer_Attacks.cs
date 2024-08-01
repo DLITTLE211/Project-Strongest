@@ -12,11 +12,6 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     // Start is called before the first frame update
     public void ResetTimer()
     {
-        
-        if (throwLanded)
-        {
-            throwLanded = false;
-        }
         FrameCountTimer = StartFrameCountTimer;
         CheckForInput = false;
         _base._cComboDetection.ResetCombos();
@@ -152,9 +147,9 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
         }
     }
-    public bool ReturnTimerIsZero() 
+    public bool ReturnInThrowAnim() 
     {
-        return FrameCountTimer <= 0f;
+        return throwLanded;
     }
 }
 [Serializable]

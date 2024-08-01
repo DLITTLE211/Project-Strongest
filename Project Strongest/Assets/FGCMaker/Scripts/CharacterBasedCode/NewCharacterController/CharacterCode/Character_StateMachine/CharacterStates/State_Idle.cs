@@ -25,21 +25,29 @@ public class State_Idle : BaseState
         {
             if (_base._cStateMachine.opponentComboCounter.CurrentHitCount > 0)
             {
-                ResetComboInformation();
+                if (_cAnim.lastAttack == null)
+                {
+                    ResetComboInformation();
+                }
                 IdleCheck();
             }
             else
             {
-                await CheckOnLanding(); 
-                ResetComboInformation();
+                if (_cAnim.lastAttack == null)
+                {
+                    ResetComboInformation();
+                }
                 IdleCheck();
 
             }
         }
         else
         {
-            await CheckOnLanding();
-            ResetComboInformation();
+            await CheckOnLanding(); 
+            if (_cAnim.lastAttack == null)
+            {
+                ResetComboInformation();
+            }
             IdleCheck();
         }
 
@@ -53,6 +61,13 @@ public class State_Idle : BaseState
         }
         catch (ArgumentOutOfRangeException) { return; }
     }
+    public async Task CheckOutOfThrow()
+    {
+        while (_base.opponentPlayer._cAttackTimer.ReturnInThrowAnim())
+        {
+            await Task.Yield();
+        }
+    }
     public async Task CheckOnLanding() 
     {
         while (!_base._cHurtBox.IsGrounded()) 
@@ -60,10 +75,12 @@ public class State_Idle : BaseState
             await Task.Yield();
         }
     }
-    void ResetComboInformation()
+    async void ResetComboInformation()
     {
         _base._cAnimator.SetShake(false);
+        await CheckOutOfThrow();
         _base._cStateMachine.opponentComboCounter.OnEndCombo();
+
         _base._cDamageCalculator.ResetScaling();
         _base._cDamageCalculator.ClearDamageText();
     }
@@ -71,7 +88,7 @@ public class State_Idle : BaseState
     async Task WaitToEndSuperMobility()
     {
         float OneFrame = 1 / 60f;
-        float waitTime = 10 * OneFrame;
+        float waitTime = 2 * OneFrame;
         int timeInMS = (int)(waitTime * 1000f);
         await Task.Delay(timeInMS);
         _base._cComboDetection.superMobilityOption = false;

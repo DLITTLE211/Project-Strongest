@@ -152,6 +152,5 @@ public class Character_ComboCounter : MonoBehaviour
         }
         #endregion
         canFade = true;
-        CurrentHitCount = 0;
     }
 }

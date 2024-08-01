@@ -63,7 +63,8 @@ public class Character_Base : MonoBehaviour
     public List<Character_Mobility> _extraMoveControls;
     public HitPointCall activationCall;
     [SerializeField] public float xVal, yVal;
-    [SerializeField, Range(0f, 1f)] public float xYield, yYield;
+    //[SerializeField, Range(0f, 1f)] public float xYield, yYield;
+    public ControllerYield controllerYield;
     [SerializeField] public int numpadValue;
     [SerializeField] public Vector2 numpadVector;
     [Space(20)]
@@ -494,4 +495,10 @@ public class ButtonStateMachine
     {
         _state = InputState.released;
     }
+}
+[Serializable]
+public class ControllerYield
+{
+    [SerializeField, Range(0f, 1f)] public float positiveXYield, positiveYYield;
+    [SerializeField, Range(0f, 1f)] public float negativeXYield, negativeYYield;
 }

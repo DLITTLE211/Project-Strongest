@@ -1404,8 +1404,11 @@ MonoBehaviour:
   activationCall: 1536
   xVal: 0
   yVal: 0
-  xYield: 0.25
-  yYield: 0.65
+  controllerYield:
+    positiveXYield: 0.25
+    positiveYYield: 0.85
+    negativeXYield: 0.25
+    negativeYYield: 0.75
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
   comboInstantiatedSpot: {fileID: 1073604928}
@@ -1424,6 +1427,10 @@ MonoBehaviour:
   stanceRemoveList: []
   counterAttackList: []
   counterRemoveList: []
+  CommandThrowAttackList: []
+  CommandThrowRemoveList: []
+  CustomSuperAttackList: []
+  CustomSuperRemoveList: []
   myRb: {fileID: 94923330}
   _jumpForce: 250
   _moveForce: 0.3
@@ -12733,8 +12740,11 @@ MonoBehaviour:
   activationCall: 1536
   xVal: 0
   yVal: 0
-  xYield: 0.25
-  yYield: 0.65
+  controllerYield:
+    positiveXYield: 0.25
+    positiveYYield: 0.85
+    negativeXYield: 0.25
+    negativeYYield: 0.75
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
   comboInstantiatedSpot: {fileID: 398680612}
@@ -12753,6 +12763,10 @@ MonoBehaviour:
   stanceRemoveList: []
   counterAttackList: []
   counterRemoveList: []
+  CommandThrowAttackList: []
+  CommandThrowRemoveList: []
+  CustomSuperAttackList: []
+  CustomSuperRemoveList: []
   myRb: {fileID: 993311522}
   _jumpForce: 250
   _moveForce: 0.3
