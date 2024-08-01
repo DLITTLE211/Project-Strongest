@@ -29,9 +29,10 @@ public enum HitBoxType
     Overhead,
     Anti_Air,
     Unblockable,
-    CommandGrab,
+    CommandGrab_Ground,
     Throw,
     nullified,
+    CommandGrab_Air,
 }
 [Serializable]
 public enum ColliderType

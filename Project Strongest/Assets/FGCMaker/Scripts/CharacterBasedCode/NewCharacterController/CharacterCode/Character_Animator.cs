@@ -332,7 +332,10 @@ public class Character_Animator : MonoBehaviour
     }
     public void StartThrowFrameCount(Attack_BaseProperties throwProperty, AttackHandler_Attack throwCustom)
     {
-        StopCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
+        if (lastAttack != null)
+        {
+            StopCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
+        }
         lastAttack = throwProperty;
         PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
         StartCoroutine(throwCustom.TickAnimThrowCount(throwCustom));

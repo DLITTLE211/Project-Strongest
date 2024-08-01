@@ -372,7 +372,7 @@ MonoBehaviour:
   CommandThrows:
   - specialMoveName: Spinning Lotus
     attackInput:
-      attackString: 63214B
+      attackString: 624B
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
       cancelProperty:
         cancelFrom: 1
         cancelTo: 0
-      _moveType: 1
+      _moveType: 7
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: 6594631023453466586, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -413,16 +413,16 @@ MonoBehaviour:
         hu_size: {x: 1, y: 2.15}
         _frameData:
           init: 0
-          startup: 28
-          active: 29
-          inactive: 36
+          startup: 5
+          active: 19
+          inactive: 28
           recovery: 0
           lastFrame: 0
           _extraPoints:
-          - hitFramePoints: 15
+          - hitFramePoints: 5
             call: 8
             hitFrameBool: 0
-            Force: 3
+            Force: 5
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -440,10 +440,10 @@ MonoBehaviour:
                 verticalKBP: 0
                 Value: 0
               KnockDown: 0
-          - hitFramePoints: 15
+          - hitFramePoints: 5
             call: 4
             hitFrameBool: 0
-            Force: 2
+            Force: 6
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -497,7 +497,7 @@ MonoBehaviour:
         recovery: 0
         lastFrame: 0
         _extraPoints:
-        - hitFramePoints: 22
+        - hitFramePoints: 5
           call: 524288
           hitFrameBool: 0
           Force: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 30
+        - hitFramePoints: 15
           call: 524288
           hitFrameBool: 0
           Force: 0
@@ -539,7 +539,28 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 36
+        - hitFramePoints: 25
+          call: 524288
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 7
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 35
           call: 524288
           hitFrameBool: 0
           Force: 0
@@ -561,30 +582,9 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 45
-          call: 524288
-          hitFrameBool: 0
-          Force: 0
-          projectileSpeed: 0
-          camPos: {x: 0, y: 0, z: 0}
-          camRotation: {x: 0, y: 0, z: 0}
-          snapMovement: 0
-          customDamage:
-            rawAttackDamage: 7
-            counterHitDamageMult: 0
-            hitstopValue: 0
-            hitstunValue: 0
-            hitLevel: 0
-            lateralKBP:
-              lateralKBP: 0
-              Value: 0
-            verticalKBP:
-              verticalKBP: 0
-              Value: 0
-            KnockDown: 0
-        - hitFramePoints: 55
           call: 4
           hitFrameBool: 0
-          Force: -3
+          Force: -5
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
           camRotation: {x: 0, y: 0, z: 0}
@@ -602,10 +602,10 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 55
+        - hitFramePoints: 45
           call: 8
           hitFrameBool: 0
-          Force: 2
+          Force: 5
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
           camRotation: {x: 0, y: 0, z: 0}

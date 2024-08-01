@@ -131,9 +131,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded()) 
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else 
                     {
@@ -152,9 +166,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else
                     {
@@ -173,9 +201,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw With Counter Hit;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw With Counter Hit;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else if (_hitbox.HBType == HitBoxType.High)
                     {
@@ -194,9 +236,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw With Counter Hit;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw With Counter Hit;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else if (_hitbox.HBType == HitBoxType.Low)
                     {
@@ -215,9 +271,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw With Counter Hit;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw With Counter Hit;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                 }
                 break;
@@ -238,9 +308,13 @@ public class HurtBox : CollisionDetection
                 {
                     //Send Throw;
                 }
-                else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                 {
                     //Send Command Throw;
+                }
+                else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                {
+                    //Send Not Connected;
                 }
                 else if (_hitbox.HBType == HitBoxType.Unblockable)
                 {

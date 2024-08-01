@@ -40,7 +40,7 @@ public class HitBox : CollisionDetection
             case HitBoxType.Unblockable:
                 SetRendererColor(new Color32(0, 135, 135, 255)); //IDK
                 break;
-            case HitBoxType.CommandGrab:
+            case HitBoxType.CommandGrab_Ground:
                 SetRendererColor(new Color32(0, 0, 255, 255)); //Blue
                 break;
             case HitBoxType.Throw:
@@ -51,6 +51,9 @@ public class HitBox : CollisionDetection
                 SetHitboxSize(this);
                 SetText();
                 return;
+            case HitBoxType.CommandGrab_Air:
+                SetRendererColor(new Color32(255, 0, 255, 255)); //Blue
+                break;
             default:
                 DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
                 break;
