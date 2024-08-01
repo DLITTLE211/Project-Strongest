@@ -285,6 +285,10 @@ public class AttackHandler_Attack : AttackHandler_Base
     public IEnumerator TickAnimThrowCount(AttackHandler_Attack throwProp)
     {
         frameCount = 0;
+        if (!_playerCAnimator.canTick) 
+        {
+            _playerCAnimator.canTick = true;
+        }
         float waitTime = 1f / 60f;
         character._cAttackTimer.PauseTimerOnThrowSuccess();
         while (frameCount <= throwProp.animLength)

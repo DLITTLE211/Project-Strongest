@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Character_StateMachine : MonoBehaviour
 {
@@ -211,13 +212,16 @@ public class Character_StateMachine : MonoBehaviour
     bool At_2Throw()
     {
         bool _attackIsThrow = false;
+        List<MoveType> acceptableThrowType = new List<MoveType>();
         if (_base._subState != Character_SubStates.Controlled)
         {
             return false;
         }
         if(_base._cAnimator.lastAttack != null) 
         {
-            _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Throw && _base._cAnimator.lastAttack.hitConnected;
+            acceptableThrowType.Add(MoveType.Throw);
+            acceptableThrowType.Add(MoveType.CommandGrab);
+            _attackIsThrow = acceptableThrowType.Contains(_base._cAnimator.lastAttack._moveType) && _base._cAnimator.lastAttack.hitConnected;
             return _attackIsThrow;
         }
         return false;
@@ -337,6 +341,7 @@ public class Character_StateMachine : MonoBehaviour
     }
     bool At_2Jump()
     {
+        bool attackNull = _base._cAnimator.lastAttack == null;
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
         bool _isHit = _base._cAnimator.isHit; 
         bool _currentInput;
@@ -347,20 +352,21 @@ public class Character_StateMachine : MonoBehaviour
             {
                 _currentInput = false;
                 _isBlocking = false;
+                attackNull = true;
             }
             else
             {
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base._cHurtBox.IsGrounded() == true ?_base.ReturnMovementInputs().Button_State.directionalInput >= 7 : true;
             }
-            bool fullCheck = !_isHit && !_isBlocking && _currentInput && notRecovering;
+            bool fullCheck = !_isHit && !_isBlocking && _currentInput && attackNull && notRecovering;
             return fullCheck;
         }
         catch (ArgumentOutOfRangeException)
         {
             _currentInput = false;
             _isBlocking = false;
-            return !_isHit && !_isBlocking && _currentInput  && notRecovering;
+            return !_isHit && !_isBlocking && _currentInput&& true  && notRecovering;
         }
     }
     bool At_Jump2Move()

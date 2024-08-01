@@ -101,7 +101,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public void ClearThrowLanded()
     {
         throwLanded = false;
-        FrameCountTimer = 0;
+        FrameCountTimer = -1 / 60f;
         CountDownTimer();
     }
 
