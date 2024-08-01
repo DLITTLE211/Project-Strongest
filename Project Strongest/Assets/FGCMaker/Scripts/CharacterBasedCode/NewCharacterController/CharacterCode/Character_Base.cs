@@ -94,6 +94,12 @@ public class Character_Base : MonoBehaviour
 
     public List<Attack_AdvancedSpecialMove> counterAttackList;
     public List<Attack_AdvancedSpecialMove> counterRemoveList;
+
+    public List<Attack_AdvancedSpecialMove> CommandThrowAttackList;
+    public List<Attack_AdvancedSpecialMove> CommandThrowRemoveList;
+
+    public List<Attack_AdvancedSpecialMove> CustomSuperAttackList;
+    public List<Attack_AdvancedSpecialMove> CustomSuperRemoveList;
     [Space(20)]
     #endregion
 

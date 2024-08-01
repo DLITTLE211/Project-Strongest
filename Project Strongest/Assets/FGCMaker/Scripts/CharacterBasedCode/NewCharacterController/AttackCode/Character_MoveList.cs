@@ -131,23 +131,24 @@ public class Character_MoveList : MonoBehaviour
             counterProperties.Add(CounterAttacks[i].property);
         }
         #endregion
-        /*
-                      #region Command Throw Property Storage
-                      commandThrowProperties = new List<Attack_BaseProperties>();
-                      for (int i = 0; i < CommandThrows.Count; i++)
-                      {
-                          commandThrowProperties.Add(CommandThrows[i].property);
-                      }
-                      #endregion
 
-                      #region Base Super Property Storage
-                      basicSuperAttackProperties = new List<Attack_BaseProperties>();
-                      for (int i = 0; i < BasicSuperAttacks.Count; i++)
-                      {
-                          basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
-                      }
-              #endregion
-                      */
+        #region Command Throw Property Storage
+        GetCommandThrowSpecials(baseCharacterInfo);
+        commandThrowProperties = new List<Attack_BaseProperties>();
+        for (int i = 0; i < CommandThrows.Count; i++)
+        {
+            commandThrowProperties.Add(CommandThrows[i].property);
+        }
+        #endregion
+        /*
+        #region Base Super Property Storage
+        basicSuperAttackProperties = new List<Attack_BaseProperties>();
+        for (int i = 0; i < BasicSuperAttacks.Count; i++)
+        {
+            basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
+        }
+        #endregion
+        */
     }
 
     public void GetNormalAttacks(Character_Base baseCharacterInfo)
@@ -216,6 +217,19 @@ public class Character_MoveList : MonoBehaviour
             for(int j = 0; j < CounterAttacks[i]._customAnimation.Count; j++) 
             {
                 CounterAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetCommandThrowSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < CommandThrows.Count; i++)
+        {
+            CommandThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            CommandThrows[i].TurnInputsToString();
+            CommandThrows[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
+            for (int j = 0; j < CommandThrows[i]._customAnimation.Count; j++)
+            {
+                CommandThrows[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
             }
         }
     }
@@ -322,18 +336,34 @@ public class Character_MoveList : MonoBehaviour
                         {
                             if (CounterAttacks[i].property.AttackAnims.animName == attack.AttackAnims.animName)
                             {
-                                CounterAttacks[i].SendCounterHitInfo(target);
+                                 CounterAttacks[i].SendCounterHitInfo(target);
                                 CounterAttacks[i].SendSuccessfulDamageInfo(target, false);
                                 CounterAttacks[i].HandleCounterAnimAttackInfo();
                                 return;
                             }
                             else { continue; }
                         }
-                        catch (ArgumentOutOfRangeException)
+                        catch (Exception)
                         { continue; }
                     }
                     break;
                 case MoveType.CommandGrab:
+                    for (int i = 0; i < CommandThrows.Count; i++)
+                    {
+                        try
+                        {
+                            if (CommandThrows[i].property.AttackAnims.animName == attack.AttackAnims.animName)
+                            {
+                                CommandThrows[i].SendCounterHitInfo(target);
+                                CommandThrows[i].SendSuccessfulDamageInfo(target, false);
+                                CommandThrows[i].HandleCounterAnimAttackInfo();
+                                return;
+                            }
+                            else { continue; }
+                        }
+                        catch (Exception)
+                        { continue; }
+                    }
                     break;
             }
         }
