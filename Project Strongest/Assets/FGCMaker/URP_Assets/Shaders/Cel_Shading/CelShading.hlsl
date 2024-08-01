@@ -1,3 +1,4 @@
+
 void CelShading_float(in float3 Normal, in float Smoothness, in float3 ClipSpacePos, in float3 WorldPos, in float4 tinting, in float rampOffset, out float3 rampOutput, out float3 direction)
 {
 #ifdef SHADERGRAPH_PREVIEW
@@ -27,3 +28,4 @@ void CelShading_float(in float3 Normal, in float Smoothness, in float3 ClipSpace
 	direction = light.direction;
 #endif
 }
+

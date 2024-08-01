@@ -122,7 +122,7 @@ public interface IAttack_StanceFuctionality
     /// </summary>
     /// <returns></returns>
     #endregion
-    void PreformAttack(Character_Base curBase,StanceAttack action = null);
+    void PreformAttack(Character_Base curBase,StanceAttack action = null, int stanceAttackActionint = -1);
 
     #region Function Summary
     /// <summary>

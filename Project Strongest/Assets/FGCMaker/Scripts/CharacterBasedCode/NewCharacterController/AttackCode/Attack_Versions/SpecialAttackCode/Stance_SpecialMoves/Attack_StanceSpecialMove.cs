@@ -10,6 +10,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     [SerializeField] private char finalAttackButton;
     [SerializeField] private bool moveComplete;
     [SerializeField] internal bool inStanceState;
+    [SerializeField] internal int stanceHeldTime;
     (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
 
 
@@ -24,6 +25,10 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
         {
             return CheckCombo(input, curBase, attackInput);
         }
+    }
+    public bool ReturnMoveComplete()
+    {
+        return moveComplete;
     }
     int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
     {
@@ -56,29 +61,36 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     }
     public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
     {
-        if (moveComplete == false)
+        try
         {
-            bool moveInput = false;
-            if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+            if (moveComplete == false)
             {
-                moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                bool moveInput = false;
+                if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                {
+                    moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                }
+                else
+                {
+                    moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                }
+
+                // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
+                bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
+                bool thisMove = moveInput && moveState;
+                return thisMove;
             }
             else
             {
-                moveInput = stanceInput._stanceInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                bool buttonInput = finalAttackButton.ToString() == attackInput.Button_Name.ToString();
+                bool CorrectState = attackInput.Button_State._state == stanceInput._stanceInputState._state;
+                bool thisAttack = buttonInput && CorrectState;
+                return thisAttack;
             }
-
-            // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
-            bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
-            bool thisMove = moveInput && moveState;
-            return thisMove;
         }
-        else
+        catch (NullReferenceException) 
         {
-            bool buttonInput = finalAttackButton.ToString() == attackInput.Button_Name.ToString();
-            bool CorrectState = attackInput.Button_State._state == stanceInput._stanceInputState._state;
-            bool thisAttack = buttonInput && CorrectState;
-            return thisAttack;
+            return false;
         }
     }
 
@@ -130,19 +142,22 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
             }
             else
             {
-                if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceAttack, attackInput))
+                if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceAttack, attackInput).Item1)
                 {
                     inStanceState = false;
-                    PreformAttack(curBase, stanceInput.stanceAttack);
+                    int stanceAttackSubInput = IsStanceInputCorrect(Input, curBase, stanceInput.stanceAttack, attackInput).Item2;
+                    PreformAttack(curBase, stanceInput.stanceAttack, stanceAttackSubInput);
                     return true;
                 }
-                if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceKill, attackInput))
+                if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
                 {
-                    
-                    stanceStartProperty.InputTimer._base._cAttackTimer.SetTimerType(TimerType.Normal,0.1f);
-                    PreformAttack(curBase, stanceInput.stanceKill);
-                    ResetCombo();
-                    return true;
+                    if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceKill, attackInput).Item1)
+                    {
+                        stanceStartProperty.InputTimer._base._cAttackTimer.SetTimerType(TimerType.Normal);
+                        PreformAttack(curBase, stanceInput.stanceKill);
+                        ResetCombo();
+                        return true;
+                    }
                 }
             }
         }
@@ -153,32 +168,44 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     {
         return attack.Button_State._state == stanceAttack._stanceButtonInput._correctInput[0].attackInputState._state;
     }
-    bool itemCheck(StanceAttack stanceAttack)
+    (bool,int) itemCheck(StanceAttack stanceAttack)
     {
-        bool DirectionInputCheck = false;
-        if (stanceAttack._stanceButtonInput._correctInput[0].verifyAttackInput.Item1 == (Attack_BaseInput.MoveInput)0)
+        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
         {
-            DirectionInputCheck = true;
+            bool DirectionInputCheck = false;
+            if (stanceAttack._stanceButtonInput._correctInput[i].verifyAttackInput.Item1 == (Attack_BaseInput.MoveInput)0)
+            {
+                DirectionInputCheck = true;
+            }
+            else
+            {
+                DirectionInputCheck = _newinput.Item1 == stanceAttack._stanceButtonInput._correctInput[i].verifyAttackInput.Item1;
+            }
+            char attackInput = stanceAttack._stanceButtonInput._correctInput[i].verifyAttackInput.Item2.ToString().ToCharArray()[0];
+            bool AttackInputCheck = (char)_newinput.Item2 == attackInput;
+            bool fullCheck = DirectionInputCheck && AttackInputCheck;
+            if (!fullCheck)
+            {
+                continue;
+            }
+            else
+            {
+                return (fullCheck, i);
+            }
         }
-        else 
-        {
-            DirectionInputCheck = _newinput.Item1 == stanceAttack._stanceButtonInput._correctInput[0].verifyAttackInput.Item1;
-        }
-        char attackInput = stanceAttack._stanceButtonInput._correctInput[0].verifyAttackInput.Item2.ToString().ToCharArray()[0];
-        bool AttackInputCheck = (char)_newinput.Item2 == attackInput;
-        return DirectionInputCheck && AttackInputCheck;
+        return (false,-1);
     }
-    public bool IsStanceInputCorrect(Character_ButtonInput testInput, Character_Base _curBase, StanceAttack stanceAttack, Character_ButtonInput attackInput = null) 
+    public (bool, int) IsStanceInputCorrect(Character_ButtonInput testInput, Character_Base _curBase, StanceAttack stanceAttack, Character_ButtonInput attackInput = null) 
     {
         int lastDirection = testInput.Button_State.directionalInput;
         _newinput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
         _newinput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
-        if (ButtonStateCheck(attackInput, stanceAttack) && itemCheck(stanceAttack))
+        if (ButtonStateCheck(attackInput, stanceAttack) && itemCheck(stanceAttack).Item1)
         {
-            return true;
+            return (true, itemCheck(stanceAttack).Item2);
         }
-        return false;
+        return (false,-1);
     }
 
     public override void TurnInputsToString()
@@ -200,13 +227,22 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     public void SetAttackAnims(Character_Animator animator)
     {
         stanceStartProperty.SetAttackAnims(animator);
-        stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo();
-        stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo();
+        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(animator);
+            stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceAttack._stanceButtonInput._correctInput[i].property._attackName);
+        }
+        for (int i = 0; i < stanceInput.stanceKill._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(animator);
+            stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceKill._stanceButtonInput._correctInput[i].property._attackName);
+        }
     }
     public override void ResetCombo()
     {
         stanceStartProperty.InputTimer._base._cAnimator._lastAttackState = Character_Animator.lastAttackState.nullified;
-       curInput = 0;
+        stanceStartProperty.InputTimer._base._cAnimator.myAnim.SetBool("Stance_Release", false);
+        curInput = 0;
         inStanceState = false;
         moveComplete = false;
     }
@@ -215,11 +251,11 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     {
         stanceStartProperty.InputTimer.ResetTimerSuccess();
     }
-    public void PreformAttack(Character_Base curBase, StanceAttack action = null)
+    public void PreformAttack(Character_Base curBase, StanceAttack action = null, int stanceAttackActionint = -1)
     {
         if (action != null)
         {
-            curBase._aManager.ReceiveAttack(action._stanceButtonInput._correctInput[0].property);
+            curBase._aManager.ReceiveAttack(action._stanceButtonInput._correctInput[stanceAttackActionint].property);
         }
         else
         {
@@ -278,8 +314,14 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {
         stanceStartProperty.InputTimer = timer;
-        stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = timer;
-        stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = timer;
+        if (stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = timer;
+        }
+        if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0) 
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = timer;
+        }
     }
     #endregion
 }

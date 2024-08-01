@@ -185,7 +185,7 @@ public class Editor_CharacterMaker : EditorWindow
         #region Movement Info
         GUILayout.Label("Character Movement Info");
         EditorGUILayout.BeginHorizontal();
-        _newProfile.MoveVelocity = (float)EditorGUILayout.FloatField("Move Speed:", _newProfile.MoveVelocity);
+        _newProfile.MoveVelocity = (float)EditorGUILayout.Slider("Move Speed:", _newProfile.MoveVelocity,1f,5f);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
@@ -293,7 +293,7 @@ public class Editor_CharacterMaker : EditorWindow
             filledMass = _newProfile.Mass >= 50 ? true : false;
             filledHeight = _newProfile.Height > 45f ? true : false;
             filledWeight = _newProfile.Weight >= 100f ? true : false;
-            filledMoveVelocity = _newProfile.MoveVelocity >= 100f ? true : false;
+            filledMoveVelocity = _newProfile.MoveVelocity >= 1f ? true : false;
             filledJumpForce = _newProfile.JumpForce >= 30f ? true : false;
             filledInAirMoveForce = _newProfile.InAirMoveForce >= 3f ? true : false;
             filledMaxHealth = _newProfile.MaxHealth >= 100f ? true : false;

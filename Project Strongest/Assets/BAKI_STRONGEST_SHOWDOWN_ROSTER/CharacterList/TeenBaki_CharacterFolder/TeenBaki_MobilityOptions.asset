@@ -13,13 +13,92 @@ MonoBehaviour:
   m_Name: TeenBaki_MobilityOptions
   m_EditorClassIdentifier: 
   mobilityOptions:
-  - movementName: 
-    type: 0
+  - movementName: NeutralSuperJump
+    type: 3
     curInput: 0
-    _movementInputs: []
+    _movementInputs:
+    - movementString: 8
+      stringCharArray: 3800
+      canCheckInput: 0
+      completedString: 0
     mobilityAnim:
       playerAnim: {fileID: 0}
-      animClip: []
+      animClip:
+      - {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      - {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName:
+      - Jumping_Neutral
+      - Jumping_Falling
+      totalWaitTime: 0
+      animLength: []
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 20
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
+    cTimer: {fileID: 0}
+    movementPriority: 3
+    isSuperVariant: 1
+    activeMove: 0
+  - movementName: BackSuperJump
+    type: 4
+    curInput: 0
+    _movementInputs:
+    - movementString: 7
+      stringCharArray: 3700
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      - {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       animName: []
       totalWaitTime: 0
       animLength: []
@@ -28,20 +107,211 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 20
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
     cTimer: {fileID: 0}
-    movementPriority: 0
+    movementPriority: 3
+    isSuperVariant: 1
+    activeMove: 0
+  - movementName: ForwardSuperJump
+    type: 5
+    curInput: 0
+    _movementInputs:
+    - movementString: 9
+      stringCharArray: 3900
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      - {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: []
+      totalWaitTime: 0
+      animLength: []
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 20
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
+    cTimer: {fileID: 0}
+    movementPriority: 3
+    isSuperVariant: 1
+    activeMove: 0
+  - movementName: ForwardJump
+    type: 2
+    curInput: 0
+    _movementInputs:
+    - movementString: 9
+      stringCharArray: 3900
+      canCheckInput: 0
+      completedString: 0
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip:
+      - {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      - {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: []
+      totalWaitTime: 0
+      animLength: []
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 20
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
+    cTimer: {fileID: 0}
+    movementPriority: 1
     isSuperVariant: 0
     activeMove: 0
-  - movementName: 
-    type: 0
+  - movementName: BackJump
+    type: 1
     curInput: 0
-    _movementInputs: []
+    _movementInputs:
+    - movementString: 7
+      stringCharArray: 3700
+      canCheckInput: 0
+      completedString: 0
     mobilityAnim:
       playerAnim: {fileID: 0}
-      animClip: []
+      animClip:
+      - {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      - {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       animName: []
       totalWaitTime: 0
       animLength: []
@@ -50,20 +320,69 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 20
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
     cTimer: {fileID: 0}
-    movementPriority: 0
+    movementPriority: 1
     isSuperVariant: 0
     activeMove: 0
-  - movementName: 
+  - movementName: Jump
     type: 0
     curInput: 0
-    _movementInputs: []
+    _movementInputs:
+    - movementString: 8
+      stringCharArray: 3800
+      canCheckInput: 0
+      completedString: 0
     mobilityAnim:
       playerAnim: {fileID: 0}
-      animClip: []
+      animClip:
+      - {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      - {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       animName: []
       totalWaitTime: 0
       animLength: []
@@ -72,20 +391,68 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 4
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 20
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
     cTimer: {fileID: 0}
-    movementPriority: 0
+    movementPriority: 1
     isSuperVariant: 0
     activeMove: 0
-  - movementName: 
-    type: 0
+  - movementName: ForwardDash
+    type: 6
     curInput: 0
-    _movementInputs: []
+    _movementInputs:
+    - movementString: 656
+      stringCharArray: 360035003600
+      canCheckInput: 0
+      completedString: 0
     mobilityAnim:
       playerAnim: {fileID: 0}
-      animClip: []
+      animClip:
+      - {fileID: -478295745125350043, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       animName: []
       totalWaitTime: 0
       animLength: []
@@ -94,20 +461,68 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 2
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 15
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
     cTimer: {fileID: 0}
-    movementPriority: 0
+    movementPriority: 2
     isSuperVariant: 0
     activeMove: 0
-  - movementName: 
-    type: 0
+  - movementName: BackDash
+    type: 7
     curInput: 0
-    _movementInputs: []
+    _movementInputs:
+    - movementString: 454
+      stringCharArray: 340035003400
+      canCheckInput: 0
+      completedString: 0
     mobilityAnim:
       playerAnim: {fileID: 0}
-      animClip: []
+      animClip:
+      - {fileID: 5713790909594089297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       animName: []
       totalWaitTime: 0
       animLength: []
@@ -116,76 +531,53 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
+        recovery: 25
+        lastFrame: 25
+        _extraPoints:
+        - hitFramePoints: 2
+          call: 512
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+        - hitFramePoints: 13
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
+            lateralKBP:
+              lateralKBP: 0
+              Value: 0
+            verticalKBP:
+              verticalKBP: 0
+              Value: 0
+            KnockDown: 0
+      _customMobilityCallBacks: []
     cTimer: {fileID: 0}
-    movementPriority: 0
-    isSuperVariant: 0
-    activeMove: 0
-  - movementName: 
-    type: 0
-    curInput: 0
-    _movementInputs: []
-    mobilityAnim:
-      playerAnim: {fileID: 0}
-      animClip: []
-      animName: []
-      totalWaitTime: 0
-      animLength: []
-      frameData:
-        init: 0
-        startup: 0
-        active: 0
-        inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
-    cTimer: {fileID: 0}
-    movementPriority: 0
-    isSuperVariant: 0
-    activeMove: 0
-  - movementName: 
-    type: 0
-    curInput: 0
-    _movementInputs: []
-    mobilityAnim:
-      playerAnim: {fileID: 0}
-      animClip: []
-      animName: []
-      totalWaitTime: 0
-      animLength: []
-      frameData:
-        init: 0
-        startup: 0
-        active: 0
-        inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
-    cTimer: {fileID: 0}
-    movementPriority: 0
-    isSuperVariant: 0
-    activeMove: 0
-  - movementName: 
-    type: 0
-    curInput: 0
-    _movementInputs: []
-    mobilityAnim:
-      playerAnim: {fileID: 0}
-      animClip: []
-      animName: []
-      totalWaitTime: 0
-      animLength: []
-      frameData:
-        init: 0
-        startup: 0
-        active: 0
-        inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
-    cTimer: {fileID: 0}
-    movementPriority: 0
+    movementPriority: 2
     isSuperVariant: 0
     activeMove: 0

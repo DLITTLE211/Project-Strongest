@@ -206,7 +206,7 @@ VFXRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1766900919
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!2083052967 &2697127886887135864
 VisualEffect:
@@ -416,60 +416,57 @@ MonoBehaviour:
   hitboxProperties:
     _attackName: 
     _cTimer: {fileID: 0}
-    rawAttackDamage: 12
-    counterHitDamageMult: 1.25
-    hitstopValue: 20
-    hitstunValue: 25
-    _attackScaling: 30
-    hitLevel: 2
-    attackHashes: 3bf9d5d0
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
     _meterRequirement: 0
-    _meterAwardedOnHit: 5
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
     dashCancelable: 0
     JumpCancelable: 0
     _airInfo: 0
     cancelProperty:
-      cancelFrom: 3
-      cancelTo: 3
-    _moveType: 1
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
     AttackAnims:
       playerAnim: {fileID: 0}
-      animClip: {fileID: 7400000, guid: 88491b584d66c154da47ab194904ec8d, type: 2}
-      animName: Hadoken
-      animLength: 0.5
-      HitBox: {fileID: 3267700318180617927}
-      attackType: 1
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
       hb_placement: {x: 0, y: 0, z: 0}
       hb_orientation: {x: 0, y: 0, z: 0}
-      hb_size: {x: 0.45, y: 0.45}
+      hb_size: {x: 0, y: 0}
       extendedHitBox: {fileID: 0}
       hurtType: 0
-      hu_placement: {x: 0.55, y: 0.5, z: 0}
+      hu_placement: {x: 0, y: 0, z: 0}
       hu_orientation: {x: 0, y: 0, z: 0}
-      hu_size: {x: 0.5, y: 0.75}
+      hu_size: {x: 0, y: 0}
       _frameData:
         init: 0
-        startup: 8
-        active: 18
-        inactive: 20
-        recovery: 10
-        lastFrame: 30
-        _extraPoints:
-        - hitFramePoints: 20
-          call: 1
-          hitFrameBools: 1
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
       _hitCount:
-        _count: 2
-        _startCount: 2
-        _refreshRate: 0.15
-        _startRefreshRate: 0.15
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
     lateralKBP:
-      lateralKBP: 3
-      Value: 5
+      lateralKBP: 0
+      Value: 0
     verticalKBP:
       verticalKBP: 0
-      Value: 4
-    KnockDown: 1
+      Value: 0
+    KnockDown: 0
 --- !u!114 &4861535848318824580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,11 +490,11 @@ MonoBehaviour:
     counterHitDamageMult: 0
     hitstopValue: 0
     hitstunValue: 0
-    _attackScaling: 0
     hitLevel: 0
     attackHashes: 
     _meterRequirement: 0
     _meterAwardedOnHit: 0
+    attackScalingPercent: 0
     dashCancelable: 0
     JumpCancelable: 0
     _airInfo: 0

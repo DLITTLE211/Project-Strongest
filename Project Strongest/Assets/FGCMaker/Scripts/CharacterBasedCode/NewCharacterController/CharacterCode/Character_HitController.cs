@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class Character_HitController : MonoBehaviour
 {
     [SerializeField] private HitReactions _characterHitAnimations;
-    public Character_Animator _cAnimator;
+    [SerializeField] private Character_Animator _cAnimator;
     public Character_Base _base;
     bool recoverTrigger;
     public bool smallHitRecovering,bigHitRecovering, airRecoverPossible;
@@ -17,9 +17,14 @@ public class Character_HitController : MonoBehaviour
     public Attack_KnockDown last_KD;
     private float recoveryTime;
 
+  
     public void Start()
     {
         recoveryTime = 0;
+    }
+    public void SetAnimator(Character_Animator myAnim)
+    {
+        _cAnimator = myAnim;
         SetUpHitAnimations();
     }
     void SetUpHitAnimations()
@@ -336,7 +341,7 @@ public class Character_HitController : MonoBehaviour
             bigHitRecovering = false;
         }
         _base._cAnimator.SetCanRecover(false);
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._cHurtBox.SetHurboxState();
     }
     public void SetHurtboxOnHit(Attack_KnockDown knockDown)
     {

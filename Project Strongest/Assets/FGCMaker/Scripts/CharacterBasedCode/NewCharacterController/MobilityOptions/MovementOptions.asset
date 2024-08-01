@@ -42,8 +42,19 @@ MonoBehaviour:
         lastFrame: 12
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 3
     isSuperVariant: 1
@@ -77,8 +88,19 @@ MonoBehaviour:
         lastFrame: 12
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 3
     isSuperVariant: 1
@@ -112,8 +134,19 @@ MonoBehaviour:
         lastFrame: 24
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 3
     isSuperVariant: 1
@@ -147,8 +180,19 @@ MonoBehaviour:
         lastFrame: 24
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 1
     isSuperVariant: 0
@@ -182,8 +226,19 @@ MonoBehaviour:
         lastFrame: 12
         _extraPoints:
         - hitFramePoints: 5
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 1
     isSuperVariant: 0
@@ -217,8 +272,19 @@ MonoBehaviour:
         lastFrame: 12
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 1
     isSuperVariant: 0
@@ -249,11 +315,33 @@ MonoBehaviour:
         lastFrame: 35
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
         - hitFramePoints: 34
-          call: 11
-          hitFrameBools: 0
+          call: 2048
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 2
     isSuperVariant: 0
@@ -284,11 +372,33 @@ MonoBehaviour:
         lastFrame: 25
         _extraPoints:
         - hitFramePoints: 4
-          call: 10
-          hitFrameBools: 0
+          call: 1024
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
         - hitFramePoints: 24
-          call: 11
-          hitFrameBools: 0
+          call: 2048
+          hitFrameBool: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            hitstopValue: 0
+            hitstunValue: 0
+            hitLevel: 0
     cTimer: {fileID: 0}
     movementPriority: 2
     isSuperVariant: 0

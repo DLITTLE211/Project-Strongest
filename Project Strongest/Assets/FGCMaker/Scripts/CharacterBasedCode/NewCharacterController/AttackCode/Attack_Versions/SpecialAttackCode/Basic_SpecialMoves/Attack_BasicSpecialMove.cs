@@ -20,6 +20,10 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
         curInput = 0;
         moveComplete = false;
     }
+    public bool ReturnMoveComplete() 
+    {
+        return moveComplete;
+    }
     public override void ResetMoveCombo()
     {
         property.InputTimer.ResetTimerSuccess();

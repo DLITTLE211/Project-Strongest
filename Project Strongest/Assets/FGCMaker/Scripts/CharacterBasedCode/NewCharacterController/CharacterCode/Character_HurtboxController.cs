@@ -23,11 +23,15 @@ public class Character_HurtboxController : MonoBehaviour
     public HurtBox triggerBox;
     public float check;
 
-    private void Start()
+    public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing) 
     {
-        SetupVectorInfo();
+        collisionBox.SetBaseCollider(0.5f, _base.characterProfile.Height / 100f, HurtBoxSizing, ColliderType.Collision);
     }
-
+    public void SetTriggerHurtboxStartSize(Character_HurtBoxSizing HurtBoxSizing)
+    {
+        triggerBox.SetHurtboxSizing(HurtBoxSizing);
+        SetupVectorInfo(HurtBoxSizing);
+    }
     private void FixedUpdate()
     {
         IsGrounded();
@@ -117,12 +121,12 @@ public class Character_HurtboxController : MonoBehaviour
         collisionBox.transform.DOLocalMoveY(0.35f, time);
     }
 
-    public void SetupVectorInfo() 
+    public void SetupVectorInfo(Character_HurtBoxSizing HurtBoxSizing) 
     {
-        hurtBoxesSizes.Add(triggerBox.transform.localScale);
-        hurtBoxesSizes.Add(new Vector3(triggerBox.transform.localScale.x, triggerBox.transform.localScale.y - (triggerBox.transform.localScale.y / 2), triggerBox.transform.localScale.z));
-        hurtBoxesSizes.Add(new Vector3(triggerBox.transform.localScale.y, triggerBox.transform.localScale.x, triggerBox.transform.localScale.z));
-        hurtBoxesPositions.Add(0);
+        hurtBoxesSizes.Add(HurtBoxSizing.hurtboxSizing);
+        hurtBoxesSizes.Add(new Vector3(HurtBoxSizing.hurtboxSizing.x, HurtBoxSizing.hurtboxSizing.y - (HurtBoxSizing.hurtboxSizing.y / 2), HurtBoxSizing.hurtboxSizing.z));
+        hurtBoxesSizes.Add(new Vector3(HurtBoxSizing.hurtboxSizing.y, HurtBoxSizing.hurtboxSizing.x, HurtBoxSizing.hurtboxSizing.z));
+        hurtBoxesPositions.Add(triggerBox.transform.localPosition.y);
         hurtBoxesPositions.Add(-0.35f);
         float layFlatValue = _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight ? 90 : -90f;
         hurtBoxRotations.Add(new Vector3(0, 0, 0f));
@@ -131,7 +135,7 @@ public class Character_HurtboxController : MonoBehaviour
     #endregion
 
     #region Hurtbox State Manipulation
-    public void SetHurboxState(HurtBoxType newType)
+    public void SetHurboxState(HurtBoxType newType = HurtBoxType.NoBlock)
     {
         newHurtboxType = newType;
         UpdateHurtboxStateText(newHurtboxType);

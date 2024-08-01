@@ -4,13 +4,17 @@ using System.Threading.Tasks;
 
 public class Character_HitStun : MonoBehaviour
 {
-    [SerializeField] Character_Animator _cAnimator;
+    [SerializeField] private Character_Animator _cAnimator;
     [Range(0f,1f)]public float animSpeed;
     [SerializeField] bool isFrozen;
     void Start()
     {
         isFrozen = false;
         SetStartCharacterAnimSpeed();
+    }
+    public void SetAnimator(Character_Animator myAnim)
+    {
+        _cAnimator = myAnim;
     }
     public void HandleAnimatorFreeze(bool state)
     {
@@ -55,7 +59,10 @@ public class Character_HitStun : MonoBehaviour
     {
         if (!isFrozen)
         {
-            _cAnimator.myAnim.speed = animSpeed;
+            if (_cAnimator != null)
+            {
+                _cAnimator.myAnim.speed = animSpeed;
+            }
         }
     }
 }

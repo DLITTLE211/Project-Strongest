@@ -62,6 +62,12 @@ public enum Events
     Update_PathData,
     SendReturnTime,
     ClearLastTime,
+    CustomCallback,
+    AddNegativeFrames,
+    DisplayCharacterInfo,
+    ClearCharacterInfo,
+    TryApplyCharacter,
+    LockinCharacterChoice,
 }
 
 static internal class Messenger

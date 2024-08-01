@@ -7,11 +7,9 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 {
     public Character_Base _base;
     public TimerType _type;
+    private bool throwLanded;
+    private bool permanentStance;
     // Start is called before the first frame update
-    void Start()
-    {
-        ResetTimer();
-    }
     public void ResetTimer()
     {
         FrameCountTimer = StartFrameCountTimer;
@@ -19,7 +17,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         _base._cComboDetection.ResetCombos();
         _base._aManager.ClearAttacks();
     }
-    public void SetStartingValues(float newTime = 0.3f)
+    public void SetStartingValues(float newTime = 0.4f)
     {
         _base._cComboDetection.inStance = false;
         _base._cComboDetection.inRekka = false;
@@ -36,31 +34,43 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         FrameCountTimer = StartFrameCountTimer;
     }
 
-    public void ResetTimeOnRekka(float time)
+    public void ResetTimeOnSpecialMove(float time)
     {
-        FrameCountTimer = time;
+        _frameCountTimer = time;
     }
-
     public void ResumeTimer()
     {
         CheckForInput = true;
     }
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         TimerTickDown();
+      
     }
     public void TimerTickDown()
     {
-        if (!_base._cComboDetection.inStance)
+        if (_base._cComboDetection.inStance)
         {
-            if (CheckForInput && _base._cAnimator.inputWindowOpen)
+            if (!permanentStance)
+            {
+                if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
+                {
+                    CountDownTimer();
+                    return;
+                }
+            }
+            return;
+        }
+        else
+        {
+            if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
             {
                 CountDownTimer();
             }
         }
     }
-    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.3f) 
+    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.4f) 
     {
         if (newType != TimerType.Normal)
         {
@@ -70,7 +80,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
             if (newType == TimerType.InStance)
             {
-                SetStartStanceTimerValues();
+                SetStartStanceTimerValues(newTime);
             }
         }
         else
@@ -79,35 +89,67 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         }
         _type = newType;
     }
+    public void PauseTimerOnThrowSuccess()
+    {
+        throwLanded = true;
+    }
+    public void ClearThrowLanded()
+    {
+        throwLanded = false;
+        FrameCountTimer = -1 / 60f;
+        CountDownTimer();
+    }
 
-    void SetStartStanceTimerValues() 
+    void SetStartStanceTimerValues(float time) 
     {
         _base._cComboDetection.inStance = true;
+        if (time > 0)
+        {
+            ResetTimeOnSpecialMove((time));
+            permanentStance = false;
+        }
+        else 
+        {
+            permanentStance = true;
+        }
     }
     void SetStartRekkaTimerValues(float time)
     {
-        ResetTimeOnRekka((time * (1/60f)));
+        ResetTimeOnSpecialMove((time * (1/60f)));
     }
 
     public void CountDownTimer()
     {
         if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
         {
-            if (_frameCountTimer <= 0f)
+            if (FrameCountTimer <= -1 / 60f)
             {
                 if (_type == TimerType.InRekka)
                 {
-                    _base._cAnimator.ClearLastAttack();
                     SetTimerType();
                 }
                 ResetTimer();
             }
             else
             {
-                _frameCountTimer -= 1 / 60f;
-                FrameCountTimer = _frameCountTimer;
+                FrameCountTimer -= 1 / 60f;
             }
         }
+        else
+        {
+            if (FrameCountTimer <= -1 / 60f)
+            {
+                ResetTimer();
+            }
+            else
+            {
+                FrameCountTimer -= 1 / 60f;
+            }
+        }
+    }
+    public bool ReturnInThrowAnim() 
+    {
+        return throwLanded;
     }
 }
 [Serializable]

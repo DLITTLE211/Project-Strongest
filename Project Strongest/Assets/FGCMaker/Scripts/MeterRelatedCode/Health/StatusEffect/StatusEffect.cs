@@ -7,7 +7,7 @@ public class StatusEffect : ScriptableObject
     public float effectNumber;
     public Image effectImage,effectImageFrame;
     public Sprite effectImageSprite, effectFrameSprite;
-    public enum PositiveStatusEffect {Fury, Might, WillPower, Focus};
+    public enum PositiveStatusEffect {Fury, Might, WillPower, Focus, FleetFoot,Iron};
     /*
      * Fury: Outright increase to Raw Damage
      * Might: Increase to blockstun on attacks

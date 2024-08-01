@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public class State_Idle : BaseState
 {
+    private bool isAnimatingIdle;
     public State_Idle(Character_Base playerBase) : base(playerBase){ }
     public override async void OnEnter()
     {
@@ -24,21 +25,29 @@ public class State_Idle : BaseState
         {
             if (_base._cStateMachine.opponentComboCounter.CurrentHitCount > 0)
             {
-                ResetComboInformation();
+                if (_cAnim.lastAttack == null)
+                {
+                    ResetComboInformation();
+                }
                 IdleCheck();
             }
             else
             {
-                await CheckOnLanding(); 
-                ResetComboInformation();
+                if (_cAnim.lastAttack == null)
+                {
+                    ResetComboInformation();
+                }
                 IdleCheck();
 
             }
         }
         else
         {
-            await CheckOnLanding();
-            ResetComboInformation();
+            await CheckOnLanding(); 
+            if (_cAnim.lastAttack == null)
+            {
+                ResetComboInformation();
+            }
             IdleCheck();
         }
 
@@ -52,6 +61,13 @@ public class State_Idle : BaseState
         }
         catch (ArgumentOutOfRangeException) { return; }
     }
+    public async Task CheckOutOfThrow()
+    {
+        while (_base.opponentPlayer._cAttackTimer.ReturnInThrowAnim())
+        {
+            await Task.Yield();
+        }
+    }
     public async Task CheckOnLanding() 
     {
         while (!_base._cHurtBox.IsGrounded()) 
@@ -59,10 +75,12 @@ public class State_Idle : BaseState
             await Task.Yield();
         }
     }
-    void ResetComboInformation()
+    async void ResetComboInformation()
     {
         _base._cAnimator.SetShake(false);
+        await CheckOutOfThrow();
         _base._cStateMachine.opponentComboCounter.OnEndCombo();
+
         _base._cDamageCalculator.ResetScaling();
         _base._cDamageCalculator.ClearDamageText();
     }
@@ -70,25 +88,59 @@ public class State_Idle : BaseState
     async Task WaitToEndSuperMobility()
     {
         float OneFrame = 1 / 60f;
-        float waitTime = 10 * OneFrame;
+        float waitTime = 2 * OneFrame;
         int timeInMS = (int)(waitTime * 1000f);
         await Task.Delay(timeInMS);
         _base._cComboDetection.superMobilityOption = false;
     }
+
+    public override void OnUpdate()
+    {
+        if (!isAnimatingIdle) 
+        {
+            IdleCheck();
+        }
+        base.OnUpdate();
+    }
     void IdleCheck()
     {
-        if (_cAnim.CheckAttackAndMobility())
+        try
         {
-            _cAnim.PlayNextAnimation(groundIdleHash, _crossFade);
+            if (!isAnimatingIdle)
+            {
+                if (_cAnim.CheckAttackAndMobility() && (_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                {
+                    isAnimatingIdle = true;
+                    _cAnim.ClearLastAttack();
+                    _cAnim.PlayNextAnimation(groundIdleHash, 2*(1/60f));
+                    _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+                    _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+                }
+            }
         }
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+        catch (NullReferenceException) 
+        {
+            return;
+        }
     }
 
     public override void OnExit()
     {
         Messenger.Broadcast(Events.ClearLastTime);
-
         base.OnExit();
+        isAnimatingIdle = false;
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+
+        if (nextTransition.To == _base._cStateMachine.moveStateRef)
+        {
+            if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+            {
+                _cAnim.PlayNextAnimation(moveBHash, _crossFade);
+            }
+            if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
+            {
+                _cAnim.PlayNextAnimation(moveFHash, _crossFade);
+            }
+        }
     }
 }

@@ -7,6 +7,10 @@ public enum MoveType
     BasicSpeical,
     Rekka,
     Stance,
+    Super,
+    Throw,
+    Counter,
+    CommandGrab,
 
     /*
      * Basic special move: Completed. Search for input, upon completion 
@@ -126,6 +130,14 @@ public class RekkaInput
     public Attack_BaseProperties mainAttackProperty;
     public ButtonStateMachine mainAttackInputState;
     public List<RekkaAttack> _rekkaPortion;
+    public List<Attack_BaseProperties> _rekkaProperties;
+    public void SetRekkaProperties() 
+    {
+        for (int i = 0; i < _rekkaPortion.Count; i++) 
+        {
+            _rekkaProperties.Add(_rekkaPortion[i].individualRekkaAttack._correctInput[0].property);
+        }
+    }
 }
 [Serializable]
 public class RekkaAttack

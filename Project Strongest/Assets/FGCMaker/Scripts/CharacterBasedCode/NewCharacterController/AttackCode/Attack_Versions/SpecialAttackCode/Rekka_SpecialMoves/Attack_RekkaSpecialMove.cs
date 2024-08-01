@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [Serializable]
 public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuctionality
@@ -35,12 +36,16 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
             DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step...");
         }
     }
+    public bool ReturnMoveComplete()
+    {
+        return moveComplete;
+    }
     public void SetAttackAnims(Character_Animator animator) 
     {
         rekkaInput.mainAttackProperty.SetAttackAnims(animator);
         for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
         {
-            rekkaInput._rekkaPortion[i].individualRekkaAttack.ActivateAttackInfo();
+            rekkaInput._rekkaPortion[i].individualRekkaAttack.ActivateAttackInfo(RekkaSpecialAttack_Name);
         }
     }
 
@@ -134,14 +139,18 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
             }
         }
         #endregion
-
         #region In Rekka Input Check
         else
         {
+            if (curRekkaInput == 0)
+            {
+                Start4FrameDelay();
+            }
             if (attackInput != null)
             {
                 if (IsRekkaCorrectInput(Input, curBase, curInput, attackInput) != null)
                 {
+                    rekkaInput.mainAttackProperty.InputTimer.ResetTimeOnSpecialMove(leewayTime * (1/60f));
                     RekkaAttack confirmedRekkaAttack = IsRekkaCorrectInput(Input, curBase, curInput, attackInput);
                     if (curRekkaInput > rekkaInputCount)
                     {
@@ -150,9 +159,8 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
                         return false;
                     }
                     curRekkaInput++;
-                    rekkaInput.mainAttackProperty.InputTimer.ResetTimeOnRekka((leewayTime * (1 / 60f)));
                     PreformAttack(curBase, confirmedRekkaAttack);
-                     return true;
+                    return true;
                 }
                 else { return false; }
             }
@@ -161,7 +169,16 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         #endregion
     }
     #endregion
-
+    public async void Start4FrameDelay()
+    {
+        await Delay4Frames();
+    }
+    public async Task Delay4Frames() 
+    {
+        float fourFrames = 4 * (1f/60f);
+        int FourFramesInMS = (int)(fourFrames * 1000f);
+        await Task.Delay(FourFramesInMS);
+    }
 
     #region Interface Functions
 
@@ -200,9 +217,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         bool checkButtonState = attack.Button_State._state != ButtonStateMachine.InputState.released;
         if (checkButtonState) 
         {
-            return true;
+            return attack.Button_State._state == curRekkaAttack.individualRekkaAttack._correctInput[0].attackInputState._state;
         }
-        return attack.Button_State._state == curRekkaAttack.individualRekkaAttack._correctInput[0].attackInputState._state;
+        return false;
     }
     bool itemCheck(RekkaAttack curRekkaAttack)
     {
@@ -225,29 +242,36 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
     }
     public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
     {
-        if (moveComplete == false)
+        try
         {
-            bool moveInput = false;
-            if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+            if (moveComplete == false)
             {
-                moveInput = rekkaInput.mainAttackInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                bool moveInput = false;
+                if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                {
+                    moveInput = rekkaInput.mainAttackInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                }
+                else
+                {
+                    moveInput = rekkaInput.mainAttackInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                }
+
+                // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
+                bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
+                bool thisMove = moveInput && moveState;
+                return thisMove;
             }
             else
             {
-                moveInput = rekkaInput.mainAttackInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                bool buttonInput = finalAttackButton.ToString() == attackInput.Button_Name.ToString();
+                bool CorrectState = attackInput.Button_State._state == rekkaInput.mainAttackInputState._state;
+                bool thisAttack = buttonInput && CorrectState;
+                return thisAttack;
             }
-
-            // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
-            bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
-            bool thisMove = moveInput && moveState;
-            return thisMove;
         }
-        else
+        catch (NullReferenceException)
         {
-            bool buttonInput = finalAttackButton.ToString() == attackInput.Button_Name.ToString();
-            bool CorrectState = attackInput.Button_State._state == rekkaInput.mainAttackInputState._state;
-            bool thisAttack = buttonInput && CorrectState;
-            return thisAttack;
+            return false;
         }
     }
 
@@ -255,6 +279,8 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
     {
         for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
         {
+            RekkaAttack curRekkaAttack = rekkaInput._rekkaPortion[i];
+            Attack_BaseProperties attackProperty = curRekkaAttack.individualRekkaAttack._correctInput[0].property;
             int _lastDirection = testInput.Button_State.directionalInput;
             _newinput.Item1 = (Attack_BaseInput.MoveInput)_lastDirection;
             char buttonInput = attackInput.Button_Name.ToCharArray()[0];

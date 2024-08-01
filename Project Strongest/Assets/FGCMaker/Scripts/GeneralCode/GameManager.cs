@@ -1,11 +1,15 @@
 using Rewired;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private MainGame_Arena_LoadStage stageLoader;
+
+    private List<ChosenCharacter> playerProfiles;
+    private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
-    //public List<Character_Base> players;
     void Start()
     {
         /*
@@ -21,6 +25,15 @@ public class GameManager : MonoBehaviour
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
+        if (SceneManager.GetActiveScene().name == "MainGame_CharacterSelect") 
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainGame_Arena"));
+        } 
+        if (SceneManager.GetActiveScene().name == "MainGame_Arena") 
+        {
+            LoadStageAsset();
+            LoadPlayerAssets();
+        }
         SetupPlayers();
     }
 
@@ -28,6 +41,18 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = frameRate;
     }
+    public void LoadStageAsset()
+    {
+        _chosenStage = CharacterSelect_LoadArena.chosenStage;
+        stageLoader.LoadStage(_chosenStage);
+    }
+    public void LoadPlayerAssets() 
+    {
+        playerProfiles = new List<ChosenCharacter>();
+        playerProfiles.Add(CharacterSelect_LoadArena.leftPlayerChosenProfile);
+        playerProfiles.Add(CharacterSelect_LoadArena.rightPlayerChosenProfile);
+    }
+
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)
     {
         if (args == null)
@@ -47,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < players.totalPlayers.Count; i++)
             {
-                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,-1);
+                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,null,-1);
             }
         }
         else
@@ -55,12 +80,12 @@ public class GameManager : MonoBehaviour
             players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
             if (ReInput.controllers.GetJoystickNames().Length == 1)
             {
-                players.totalPlayers[0].Initialize(Character_SubStates.Controlled, players.availableIds[0]);
+                players.totalPlayers[0].characterProfile = playerProfiles[0].chosenCharacter;
+                players.totalPlayers[0].Initialize(Character_SubStates.Controlled, playerProfiles[0].chosenAmplifier, players.availableIds[0]);
                 players.AddUsedID(players.joystickNames[0]);
-                if (players.totalPlayers[1]._subState != Character_SubStates.Dummy)
-                {
-                    players.totalPlayers[1].Initialize(Character_SubStates.Dummy, -1);
-                }
+
+                players.totalPlayers[1].characterProfile = playerProfiles[1].chosenCharacter;
+                players.totalPlayers[1].Initialize(Character_SubStates.Dummy, null, -1);
             }
             else
             {
@@ -68,7 +93,8 @@ public class GameManager : MonoBehaviour
                 {
                     if (players.totalPlayers[i].playerID == -1)
                     {
-                        players.totalPlayers[i].Initialize(Character_SubStates.Controlled, players.availableIds[0]);
+                        players.totalPlayers[i].characterProfile = playerProfiles[i].chosenCharacter;
+                        players.totalPlayers[i].Initialize(Character_SubStates.Controlled, playerProfiles[i].chosenAmplifier, players.availableIds[0]);
                         players.AddUsedID(players.joystickNames[i]);
                     }
                     else { continue; }
@@ -83,7 +109,7 @@ public class GameManager : MonoBehaviour
         {
             if (!players.UsedID.Item1.Contains(players.totalPlayers[i].playerID)) 
             {
-                players.totalPlayers[i].Initialize(Character_SubStates.Dummy, -1);
+                players.totalPlayers[i].Initialize(Character_SubStates.Dummy, null, -1);
             }
         }
     }

@@ -1,12 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Rewired;
+using System.Threading.Tasks;
 
 public class Character_Base : MonoBehaviour
 {
+    #region Character Profile Data
+    [Header("__________Character Profile Data__________")]
+    public Character_Profile characterProfile;
+    [Space(20)]
+    #endregion
     #region Script References
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
+    public Character_Hitstop _cHitstop;
     public Character_AttackDetection _cADetection;
     public Character_ComboDetection _cComboDetection;
     public Character_Animator _cAnimator;
@@ -53,9 +61,10 @@ public class Character_Base : MonoBehaviour
     [Header("______DIRECTIONAL INPUT DETECTION________")]
     public Character_MobilityAsset _extraMoveAsset;
     public List<Character_Mobility> _extraMoveControls;
-    [SerializeField] public List<Character_Mobility> _removeList;
+    public HitPointCall activationCall;
     [SerializeField] public float xVal, yVal;
-    [SerializeField, Range(0f, 1f)] public float xYield, yYield;
+    //[SerializeField, Range(0f, 1f)] public float xYield, yYield;
+    public ControllerYield controllerYield;
     [SerializeField] public int numpadValue;
     [SerializeField] public Vector2 numpadVector;
     [Space(20)]
@@ -66,12 +75,16 @@ public class Character_Base : MonoBehaviour
     //public NewComboList comboList3_0;
     public GameObject comboInstantiatedSpot;
     [SerializeField] private Character_MoveList sourceComboList3_0;
+    [SerializeField] private Amplifiers amplifier;
     public Character_MoveList comboList3_0;
+
+    public List<Attack_ThrowBase> BasicThrows;
+    public List<Attack_ThrowBase> removeThrowList;
 
     public List<Attack_NonSpecialAttack> simpleAttackList;
     public List<Attack_NonSpecialAttack> removeSimpleList;
 
-    public List<Attack_BasicSpecialMove> specialMoveAttackTest;
+    public List<Attack_BasicSpecialMove> specialMoveList;
     public List<Attack_BasicSpecialMove> removeSMList;
 
     public List<Attack_RekkaSpecialMove> rekkaAttackList;
@@ -79,6 +92,15 @@ public class Character_Base : MonoBehaviour
 
     public List<Attack_StanceSpecialMove> stanceAttackList;
     public List<Attack_StanceSpecialMove> stanceRemoveList;
+
+    public List<Attack_AdvancedSpecialMove> counterAttackList;
+    public List<Attack_AdvancedSpecialMove> counterRemoveList;
+
+    public List<Attack_AdvancedSpecialMove> CommandThrowAttackList;
+    public List<Attack_AdvancedSpecialMove> CommandThrowRemoveList;
+
+    public List<Attack_AdvancedSpecialMove> CustomSuperAttackList;
+    public List<Attack_AdvancedSpecialMove> CustomSuperRemoveList;
     [Space(20)]
     #endregion
 
@@ -86,13 +108,15 @@ public class Character_Base : MonoBehaviour
     [Header("________FORCE VARIABLES_________")]
     public Rigidbody myRb;
     [SerializeField] private float _jumpForce;
-    public float JumpForce { get { return _jumpForce; } set { _jumpForce = value; } }
+    public float JumpForce { get { return _jumpForce; }}
 
     [SerializeField] private float _moveForce;
-    public float MoveForce { get { return _moveForce; } set { _moveForce = value; } }
+    public float MoveForce { get { return _moveForce; } }
+    [SerializeField] private float _dashForce;
+    public float DashForce { get { return _dashForce; } }
 
     [SerializeField] private float _jumpDirForce;
-    public float JumpDirForce { get { return _jumpDirForce; } set { _jumpDirForce = value; } }
+    public float JumpDirForce { get { return _jumpDirForce; }}
 
     public int movementPC; //movement priority check
     [Space(20)]
@@ -106,7 +130,7 @@ public class Character_Base : MonoBehaviour
 
     #region Side Recognition
     [Header("______SIDE RECOGNITION________")]
-    public Player_SideRecognition pSide; 
+    public Player_SideRecognition pSide;
     [Space(20)]
     #endregion
 
@@ -121,31 +145,80 @@ public class Character_Base : MonoBehaviour
     public int newField;
 
     #region Initialization Code
-    public void Initialize(Character_SubStates setSubState, int NewID = -1)
+    public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
+        AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
+        _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         ResetRemoveList();
         InitCombos();
         _cComboCounter.SetStartComboCounter();
+        _cAnimator.canTransitionIdle = true;
+    }
+    void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
+    {
+        characterProfile.SetCharacterAnimator(chosenAnimator);
+        chosenAnimator._base = this;
+        _aManager.C_Animator = chosenAnimator;
+        if (_chosenAmplifier != null) 
+        {
+            amplifier = _chosenAmplifier;
+        }
+        _cHealth.SetHealthInformation(characterProfile);
+        _dashForce = characterProfile.dashSpeed;
+        _moveForce = characterProfile.MoveVelocity;
+        _jumpForce = characterProfile.JumpForce;
+        _jumpDirForce = characterProfile.InAirMoveForce;
+
+
+        _cAnimator = chosenAnimator;
+        _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
+        _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing);
+        _cComboDetection.SetAnimator(chosenAnimator);
+        _cHitstun.SetAnimator(chosenAnimator);
+        _cHitController.SetAnimator(chosenAnimator);
+        _cAnimator.enabled = true;
+        _cAnimator.myAnim.enabled = true;
+        _cStateMachine.DefineState();
+        _cAttackTimer.ResetTimer();
+        _cMobiltyTimer.ResetTimer();
+        _cAnimator.ClearLastAttack();
+        _cAnimator.NullifyMobilityOption();
+        _extraMoveAsset = characterProfile._CharacterMobility;
+    }
+    void AddCharacterModel(Amplifiers _chosenAmplifier)
+    {
+        GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
+        _chosenCharacter.transform.localPosition = new Vector3(0f, -1f, 0f);
+        _chosenCharacter.transform.localRotation = Quaternion.identity;
+        _chosenCharacter.transform.localScale = Vector3.one;
+        _chosenCharacter.SetActive(true);
+        Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
+        pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
+        SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
     }
     void ResetRemoveList() 
     {
         removeSimpleList.Clear();
         removeSMList.Clear();
     }
+
     void ResetInputLog()
     {
         _timer.inputLogger.ResetAllText();
     }
+
     void InitCombos()
     {
-        _extraMoveControls = _extraMoveAsset.MobilityOptions;
+        _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
+        comboList3_0.ExtractBaseProperties(this);
         _cComboDetection.PrimeCombos();
     }
-    void GetCharacterMoveList() 
+    void GetCharacterMoveList()
     {
+        sourceComboList3_0 = characterProfile._characterMoveList;
         Character_MoveList newComboList = Instantiate(sourceComboList3_0, comboInstantiatedSpot.transform);
         comboList3_0 = newComboList;
     }
@@ -155,6 +228,7 @@ public class Character_Base : MonoBehaviour
         {
             case Character_SubStates.Controlled:
                 playerID = NewID;
+                DesyncVariables();
                 HandleButtonInitialization();
                 _subState = setSubState;
                 break;
@@ -254,6 +328,48 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
+    public void ReceiveCustomCallBack(CustomCallback callback) 
+    {
+        if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.DealCustomDamage:
+                    opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                    break;
+            }
+        }
+        if (_cForce.ForceCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.Force_Right:
+                    _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                    break;
+                case HitPointCall.Force_Up:
+                    _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                    break;
+            }
+        }
+    }
+    public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob = null)
+    {
+        if (activationCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.ActivateMobilityAction:
+                    _extraMoveAsset.CallMobilityAction(_mob);
+                    break;
+            }
+            switch (callback.customCall)
+            {
+                case HitPointCall.ClearMobility:
+                    _cAnimator.ClearLastActivatedInput();
+                    break;
+            }
+        }
+    }
     private void Update()
     {
         _cADetection.CheckButtonPressed();
@@ -300,6 +416,49 @@ public class Character_Base : MonoBehaviour
         }
         return attackButtons[0];
     }
+
+    public void AwaitCanTransitionIdle(Callback func) 
+    {
+        StartCoroutine(WaitUntilCanTransitionIdle(func));
+    }
+    IEnumerator WaitUntilCanTransitionIdle(Callback func)
+    {
+        while (!_cAnimator.canTransitionIdle) 
+        {
+            yield return new WaitForSeconds(1f / 60f);
+        }
+        if (_cAnimator._lastAttackState == Character_Animator.lastAttackState.populated)
+        {
+            _cAnimator.canTransitionIdle = false;
+        }
+        else
+        {
+            func();
+        }
+    }
+    public void AwaitCanTransition_OutAttack(Callback func)
+    {
+        StartCoroutine(WaitUntilCanTransition(func));
+    }
+    IEnumerator WaitUntilCanTransition(Callback func)
+    {
+        while (!_cHurtBox.IsGrounded())
+        {
+            yield return new WaitForSeconds(1f / 60f);
+        }
+        IState nextTransition = _cStateMachine._playerState.current.State;
+
+        if (nextTransition == _cStateMachine.idleStateRef)
+        {
+            _cAnimator.PlayNextAnimation(Animator.StringToHash("Idle"), 0, true);
+            func();
+        }
+        if (nextTransition == _cStateMachine.crouchStateRef)
+        {
+            _cAnimator.PlayNextAnimation(Animator.StringToHash("Crouch"), 0, true);
+            func();
+        }
+    }
 }
 [Serializable]
 public class ButtonInput
@@ -336,4 +495,10 @@ public class ButtonStateMachine
     {
         _state = InputState.released;
     }
+}
+[Serializable]
+public class ControllerYield
+{
+    [SerializeField, Range(0f, 1f)] public float positiveXYield, positiveYYield;
+    [SerializeField, Range(0f, 1f)] public float negativeXYield, negativeYYield;
 }

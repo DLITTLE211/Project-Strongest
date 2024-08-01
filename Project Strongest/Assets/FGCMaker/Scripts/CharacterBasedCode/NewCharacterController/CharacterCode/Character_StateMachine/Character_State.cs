@@ -6,7 +6,7 @@ using System;
 public class Character_State 
 {
     #region StateNode
-    class StateNode 
+    public class StateNode 
     {
         public IState State { get; }
         public HashSet<ITransition> Transitions { get; }
@@ -25,7 +25,8 @@ public class Character_State
     [SerializeField] private Character_Base _base;
     [SerializeField] Dictionary<Type, StateNode> nodes = new Dictionary<Type, StateNode>(); 
     HashSet<ITransition> anyTransition = new HashSet<ITransition>();
-    StateNode current;
+    public StateNode current;
+    public IState nextState;
     public string CurrentStateString;
     public Character_State(Character_Base newbase) 
     {
@@ -39,6 +40,7 @@ public class Character_State
             ChangeState(transition.To);
         }
         current.State?.OnUpdate();
+        nextState = current.State;
     }
 
     public void SetState(IState state) 
@@ -47,7 +49,7 @@ public class Character_State
         current.State?.OnEnter();
         CurrentStateString = current.State.ToString();
     }
-    void ChangeState(IState state) 
+    public void ChangeState(IState state) 
     {
         if (state == current.State) 
         {
@@ -63,7 +65,7 @@ public class Character_State
             CurrentStateString = newState.ToString();
         }
     }
-    ITransition GetTransition() 
+    public ITransition GetTransition() 
     {
         foreach (var transition in anyTransition) 
         {

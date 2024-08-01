@@ -17,9 +17,14 @@ public class Character_Health : MonoBehaviour
 
     void Start()
     {
-        health_Main.SetStartMeterValues(100);
-        health_Recov.SetStartMeterValues(100);
         Messenger.AddListener<Affliction>(Events.SendAfflictionToTarget, ApplyAffliction);
+    }
+
+    public void SetHealthInformation(Character_Profile profile) 
+    {
+        health_Main.SetStartMeterValues(profile.MaxHealth);
+        health_Recov.SetStartMeterValues(profile.MaxHealth);
+        recoverHealthRate = profile.HealthRegenRate;
     }
     public void ApplyAffliction(Affliction curAffliction)
     {

@@ -10,9 +10,14 @@ public class HurtBox : CollisionDetection
     public HurtBoxType huBType;
     public ColliderType colliderType;
     private Attack_BaseProperties currentHitProperties;
-    private void Start()
+    public Attack_BaseProperties CounterMoveProperty;
+    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
     {
-        SetHurtBoxSize(this.transform.localScale.x, this.transform.localScale.y,colliderType);
+        SetHurtBoxSize(0,0,ColliderType.Trigger,hu_Sizing);
+    }
+    public void SetCounterMoveProperty(Attack_BaseProperties counterProperty) 
+    {
+        CounterMoveProperty = counterProperty;
     }
     void FixedUpdate()
     {
@@ -66,12 +71,12 @@ public class HurtBox : CollisionDetection
         for (int i = 0; i < hitCount._count; i++)
         {
             yield return new WaitForSeconds(hitCount._refreshRate);
-            Base_Target.comboList3_0.CheckAndApply(_hitbox.hitboxProperties, Base_Target, Base_Attacker,false);
+            Base_Attacker.comboList3_0.CheckAndApply(_hitbox.hitboxProperties, Base_Target, Base_Attacker,false);
         }
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
         hitCount.ResetHitCount();
-        Base_Attacker._cAnimator.ClearLastAttack();
+        //Base_Attacker._cAnimator.ClearLastAttack();
     }
     async void HandleMultiHitProperties(HitBox _hitbox,HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
     {
@@ -96,7 +101,7 @@ public class HurtBox : CollisionDetection
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
         hitCount.ResetHitCount();
-        Base_Attacker._cAnimator.ClearLastAttack();
+        //Base_Attacker._cAnimator.ClearLastAttack();
     }
     async void HandleMultiHitProperties_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
     {
@@ -126,9 +131,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded()) 
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else 
                     {
@@ -147,9 +166,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else
                     {
@@ -160,7 +193,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.ParryLow:
                 if (_hitbox.HBType == HitBoxType.Low ^ _hitbox.HBType == HitBoxType.Unblockable)
                 {
-                    //Send Parry Low;
+                    //Send ParrierForceIdle();
                 }
                 else
                 {
@@ -168,9 +201,23 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw With Counter Hit;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw With Counter Hit;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else if (_hitbox.HBType == HitBoxType.High)
                     {
@@ -181,7 +228,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.ParryHigh:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable)
                 {
-                    //Send Parry High;
+                    //Send ParrierForceIdle();
                 }
                 else
                 {
@@ -189,13 +236,58 @@ public class HurtBox : CollisionDetection
                     {
                         //Send Throw With Counter Hit;
                     }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                     {
-                        //Send Command Throw With Counter Hit;
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                     else if (_hitbox.HBType == HitBoxType.Low)
                     {
                         //Send Low With Counter Hit;
+                    }
+                }
+                break;
+            case HurtBoxType.FullParry:
+                if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable ^ _hitbox.HBType == HitBoxType.Low)
+                {
+                    OnSuccessfulCounter(_hitbox, hitCount, target);
+                }
+                else
+                {
+                    if (_hitbox.HBType == HitBoxType.Throw)
+                    {
+                        //Send Throw With Counter Hit;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
+                    {
+                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
+                    }
+                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
+                        {
+                            //Send Command Throw;
+                            return;
+                        }
+                        //Send Not Connected;
                     }
                 }
                 break;
@@ -216,9 +308,13 @@ public class HurtBox : CollisionDetection
                 {
                     //Send Throw;
                 }
-                else if (_hitbox.HBType == HitBoxType.CommandGrab)
+                else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
                 {
                     //Send Command Throw;
+                }
+                else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
+                {
+                    //Send Not Connected;
                 }
                 else if (_hitbox.HBType == HitBoxType.Unblockable)
                 {
@@ -243,6 +339,7 @@ public class HurtBox : CollisionDetection
         {
             if (_hitbox.HBType != HitBoxType.nullified)
             {
+                currentHitProperties.hitConnected = true;
                 StartCoroutine(DoMultiHit_OnBlock(_hitbox, hitCount, Base_Target, Base_Attacker));
             }
         }
@@ -252,6 +349,7 @@ public class HurtBox : CollisionDetection
             {
                 Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
 
+                currentAttack.hitConnected = true;
                 Base_Target.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,true);
                 await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue/5f, Base_Target);
                 Base_Target._cHitController.HandleBlockState(currentAttack);
@@ -269,6 +367,7 @@ public class HurtBox : CollisionDetection
         {
             if (_hitbox.HBType != HitBoxType.nullified)
             {
+                currentHitProperties.hitConnected = true;
                 StartCoroutine(DoMultiHit(_hitbox, hitCount, Base_Target, Base_Attacker));
             }
         }
@@ -277,8 +376,8 @@ public class HurtBox : CollisionDetection
             if (_hitbox.HBType != HitBoxType.nullified)
             {
                 Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
-
-                Base_Target.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,false);
+                currentAttack.hitConnected = true;
+                Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,false);
                 await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
                 Base_Target._cHitController.HandleHitState(currentAttack);
                 Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
@@ -287,6 +386,29 @@ public class HurtBox : CollisionDetection
             }
         }
     }
+    
+    public async void OnSuccessfulCounter(HitBox _hitbox, HitCount hitCount, Transform target)
+    {
+        Character_Base Base_Target = _hitbox.GetComponentInParent<Character_Base>();
+        Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
+        if (Base_Attacker._cAnimator.lastAttack != null) 
+        {
+            CounterMoveProperty = Base_Attacker._cAnimator.lastAttack;
+        }
+        
+        if (_hitbox.HBType != HitBoxType.nullified)
+        {
+            Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
+            currentAttack.hitConnected = true;
+            Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker, false);
+            await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
+            Base_Target._cHitController.HandleHitState(currentAttack);
+            Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
+            await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
+            _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
+        }
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Wall")
@@ -307,7 +429,7 @@ public class HurtBox : CollisionDetection
             {
                 Character_Base thisBase = this.gameObject.transform.root.GetComponent<Character_Base>();
                 Player_SideRecognition thisPSide = this.gameObject.transform.root.GetComponent<Character_Base>().pSide;
-                thisBase._cForce.AddForceOnCommand(0.75f);
+                thisBase._cForce.AddLateralForceOnCommand(0.75f);
                 Debug.Log("Hit Wall Frame 1");
             }
         }

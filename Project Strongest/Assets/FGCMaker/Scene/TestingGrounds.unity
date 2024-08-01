@@ -2359,11 +2359,11 @@ MonoBehaviour:
     counterHitDamageMult: 0
     hitstopValue: 0
     hitstunValue: 0
-    _attackScaling: 0
     hitLevel: 0
     attackHashes: 
     _meterRequirement: 0
     _meterAwardedOnHit: 0
+    attackScalingPercent: 0
     dashCancelable: 0
     JumpCancelable: 0
     _airInfo: 0
@@ -2412,6 +2412,9 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 0
   _canRecover: 0
+  FreezeCall: 122880
+  mobilityCall: 2048
+  attackCall: 66
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2590,7 @@ MonoBehaviour:
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
   comboInstantiatedSpot: {fileID: 1073604928}
-  sourceComboList3_0: {fileID: -9053754971972435157, guid: aa08daca22384a54d8e722eeb49da763, type: 3}
+  sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   comboList3_0: {fileID: 0}
   simpleAttackList: []
   removeSimpleList: []
@@ -3023,6 +3026,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
   _damageText: {fileID: 752586224}
+  customDamageCall: 1048576
 --- !u!1 &132508870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7772,6 +7776,8 @@ MonoBehaviour:
   _base: {fileID: 993311525}
   xVal: 0
   yVal: 0
+  forceHitCall: 56
+  teleportCall: 64
   isFrozen: 0
 --- !u!1 &498465947
 GameObject:
@@ -8291,6 +8297,7 @@ MonoBehaviour:
   RightWall: {fileID: 971839218}
   _p1Position: {fileID: 434338341}
   _p2Position: {fileID: 1211425607}
+  sideCall: 2097152
 --- !u!114 &529132895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8487,6 +8494,8 @@ MonoBehaviour:
   - {fileID: 993311515}
   - {fileID: 94923331}
   offset: {x: -0.53, y: -0.008, z: -0.3}
+  cameraControlCalls: 917504
+  isTracking: 1
 --- !u!1 &566836024
 GameObject:
   m_ObjectHideFlags: 0
@@ -10865,11 +10874,11 @@ MonoBehaviour:
     counterHitDamageMult: 0
     hitstopValue: 0
     hitstunValue: 0
-    _attackScaling: 0
     hitLevel: 0
     attackHashes: 
     _meterRequirement: 0
     _meterAwardedOnHit: 0
+    attackScalingPercent: 0
     dashCancelable: 0
     JumpCancelable: 0
     _airInfo: 0
@@ -10918,6 +10927,9 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 0
   _canRecover: 0
+  FreezeCall: 122880
+  mobilityCall: 6144
+  attackCall: 128
 --- !u!95 &705305729
 Animator:
   serializedVersion: 5
@@ -11533,6 +11545,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
   _damageText: {fileID: 1216137438}
+  customDamageCall: 1048576
 --- !u!1 &761506510
 GameObject:
   m_ObjectHideFlags: 0
@@ -14732,7 +14745,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &882403984
@@ -15632,6 +15645,7 @@ GameObject:
   - component: {fileID: 927057667}
   - component: {fileID: 927057666}
   - component: {fileID: 927057665}
+  - component: {fileID: 927057668}
   m_Layer: 6
   m_Name: InvisWall(Left)
   m_TagString: Wall
@@ -15725,6 +15739,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927057663}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &927057668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927057663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ebe9bbea2300440b992711c218fee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &927690851
 GameObject:
   m_ObjectHideFlags: 0
@@ -16418,7 +16444,7 @@ GameObject:
   - component: {fileID: 971839222}
   m_Layer: 0
   m_Name: CameraWallGate_Right
-  m_TagString: Wall
+  m_TagString: CameraWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16875,7 +16901,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &982141381
@@ -17160,7 +17186,7 @@ MonoBehaviour:
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
   comboInstantiatedSpot: {fileID: 398680612}
-  sourceComboList3_0: {fileID: -9053754971972435157, guid: aa08daca22384a54d8e722eeb49da763, type: 3}
+  sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   comboList3_0: {fileID: 0}
   simpleAttackList: []
   removeSimpleList: []
@@ -17998,6 +18024,8 @@ MonoBehaviour:
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
+  forceHitCall: 56
+  teleportCall: 64
   isFrozen: 0
 --- !u!1 &1064684077
 GameObject:
@@ -18123,7 +18151,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1064684080
@@ -24143,7 +24171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 08e507a8eb0d5e44f9275e75d3846fe8, type: 2}
+  - {fileID: 2100000, guid: 14d7d6b2d208838498f09e4ff7614a41, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25253,6 +25281,7 @@ GameObject:
   - component: {fileID: 1813479481}
   - component: {fileID: 1813479480}
   - component: {fileID: 1813479479}
+  - component: {fileID: 1813479482}
   m_Layer: 6
   m_Name: InvisWall(Right)
   m_TagString: Wall
@@ -25346,6 +25375,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813479477}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1813479482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813479477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ebe9bbea2300440b992711c218fee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1823320413
 GameObject:
   m_ObjectHideFlags: 0
@@ -26607,7 +26648,7 @@ GameObject:
   - component: {fileID: 1971111052}
   m_Layer: 0
   m_Name: CameraWallGate_Left
-  m_TagString: Wall
+  m_TagString: CameraWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

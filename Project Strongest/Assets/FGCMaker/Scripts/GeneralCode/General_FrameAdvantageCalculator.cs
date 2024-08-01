@@ -9,8 +9,11 @@ public class General_FrameAdvantageCalculator : MonoBehaviour
     public CharacterFrameData player1, player2;
     private void Start()
     {
-        player1.characterName = player1.character.gameObject.name;
-        player2.characterName = player2.character.gameObject.name;
+        if (player1.character != null && player2.character != null)
+        {
+            player1.characterName = player1.character.gameObject.name;
+            player2.characterName = player2.character.gameObject.name;
+        }
         Messenger.AddListener<int,string>(Events.SendReturnTime, ReceiveIdleReturnTimes);
         Messenger.AddListener(Events.ClearLastTime, ClearLastReturnTime);
     }

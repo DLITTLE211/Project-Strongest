@@ -50,11 +50,11 @@ public class State_Block : BaseState
     {
         if (!_base._cHitController.ReturnCrouchBlock() && !_base._cHitController.ReturnStandBlock())
         {
-            _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+            _base._cHurtBox.SetHurboxState();
         }
         if (_base._cHitController.bigHitRecovering) 
         {
-            _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+            _base._cHurtBox.SetHurboxState();
         }
         base.OnExit();
     }

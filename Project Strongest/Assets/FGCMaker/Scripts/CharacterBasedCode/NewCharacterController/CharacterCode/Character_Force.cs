@@ -26,20 +26,103 @@ public class Character_Force : MonoBehaviour
     [SerializeField] private float xVal, yVal;
     [SerializeField] private Rigidbody _myRB => _base.myRb;
     [SerializeField] private Player_SideRecognition _side => _base.pSide;
+    [SerializeField] private HitPointCall forceHitCall;
+    [SerializeField] private HitPointCall teleportCall;
+    public HitPointCall ForceCall {get { return forceHitCall; }}
+    public HitPointCall TeleportCall { get { return teleportCall; }}
     private float jumpSpeed;
     private float forwardSpeed;
     [SerializeField] bool isFrozen;
     private bool canToggleKinematic;
+    public float xSpeed;
+    bool sendingForce;
+    public bool beingPushed;
     public void Start()
     {
-        isFrozen = false;
-        canToggleKinematic = true;
+        isFrozen = false; 
+        sendingForce = false;
+         canToggleKinematic = true;
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
+
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+    }
+    public bool CanSendForce()
+    {
+        return !sendingForce;
+    }
+    void ApplyForceOnCustomCallback(CustomCallback callback) 
+    {
+        if (forceHitCall.HasFlag(callback.customCall)) 
+        {
+            switch (callback.customCall) 
+            {
+                case HitPointCall.Force_Up:
+                    AddVerticalForceOnCommand(callback.forceFloat);
+                    break;
+                case HitPointCall.Force_Right:
+                    AddLateralForceOnCommand(callback.forceFloat);
+                    break;
+            }
+        }
+        if (teleportCall.HasFlag(callback.customCall))
+        {
+            if (callback.customCall == HitPointCall.TeleportForward) 
+            {
+                TeleportOnCommand(callback.forceFloat);
+            }
+            if (callback.customCall == HitPointCall.TeleportBackward)
+            {
+                TeleportOnCommand(-callback.forceFloat);
+            }
+        }
     }
     private void Update()
     {
-        _base._cAnimator.myAnim.SetFloat("y", _myRB.velocity.y);
+        if (_base._cAnimator != null)
+        {
+            _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
+        }
+        xSpeed = _myRB.velocity.x;
+        ForceStillPlayer();
+    }
+    void ForceStillPlayer() 
+    {
+        if (!beingPushed)
+        {
+            if (_base._cAnimator.lastAttack == null)
+            {
+                if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
+                {
+                    if (_base._cAnimator.activatedInput == null)
+                    {
+                        if (_base.ReturnMovementInputs() != null)
+                        {
+                            if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                            {
+                                _myRB.drag = 100000;
+                                return;
+                            }
+                        }
+                    }
+                }
+                if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
+                {
+                    if (_base._cAnimator.activatedInput == null)
+                    {
+                        if (_base.ReturnMovementInputs() != null)
+                        {
+                            if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
+                            {
+                                _myRB.drag = 100000;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        _myRB.drag = 1;
     }
     public void HandleForceFreeze(bool state)
     {
@@ -90,23 +173,70 @@ public class Character_Force : MonoBehaviour
     #endregion
     public void SetWalkForce(Character_ButtonInput dInput)
     {
-        switch (dInput.Button_State.directionalInput)
+        if (_base._cAnimator._lastAttackState == Character_Animator.lastAttackState.nullified)
         {
-            case 4:
-                _myRB.AddForce(transform.right * (-_base.MoveForce), ForceMode.VelocityChange);
-                break;
-            case 6:
-                _myRB.AddForce(transform.right * (_base.MoveForce), ForceMode.VelocityChange);
-                break;
+            switch (dInput.Button_State.directionalInput)
+            {
+                case 4:
+                    _myRB.drag = 1;
+                    _myRB.velocity = new Vector3(-Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
+                    break;
+                case 6:
+                    _myRB.drag = 1;
+                    _myRB.velocity = new Vector3(Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
+                    break;
+            }
         }
     }
-    public void AddForceOnCommand(float value)
+    public void AddVerticalForceOnCommand(float value)
     {
+        _myRB.AddForce(transform.up * value, ForceMode.VelocityChange);
+    }
+    public void AddLateralForceOnCommand(float value, bool forceDirection = false)
+    {
+        if (!forceDirection)
+        {
+            if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+            {
+                value *= -1;
+            }
+        }
+        _myRB.AddForce(transform.right * value, ForceMode.VelocityChange);
+        if (beingPushed)
+        {
+            beingPushed = false;
+        }
+    }
+    public void InstantForceAway(float value, bool forceDirection = false)
+    {
+        if (!forceDirection)
+        {
+            if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+            {
+                value *= -1;
+            }
+        }
+        Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos = new Vector3(_myRB.transform.position.x + value, _myRB.transform.position.y, _myRB.transform.position.z);
+        _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
+        if (beingPushed)
+        {
+            beingPushed = false;
+        }
+    }
+    void TeleportOnCommand(float value)
+    {
+        Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos;
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             value *= -1;
+            newPos = new Vector3(-(_myRB.transform.position.x + 2), _myRB.transform.position.y, _myRB.transform.position.z);
+            _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
+            return;
         }
-        _myRB.AddForce(transform.right * value, ForceMode.VelocityChange);
+        newPos = new Vector3(_myRB.transform.position.x + 2, _myRB.transform.position.y, _myRB.transform.position.z);
+        _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
     }
 
     #region Function Summary
@@ -115,57 +245,106 @@ public class Character_Force : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     #endregion
+    IEnumerator DoForceOnDelay(Character_Mobility _mInput)
+    {
+        int forwardMult = 0;
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+        {
+            forwardMult = 1;
+        }
+        else
+        {
+            forwardMult = -1;
+        }
+        sendingForce = true;
+        yield return new WaitForSeconds(2 / 60f);
+
+        switch (_mInput.type)
+        {
+            case MovementType.BackJump:
+                // Back Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
+                xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+                break;
+            case MovementType.Jump:
+                // Neutral Jump;
+                _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
+                break;
+            case MovementType.ForwardJump:
+                // Forward Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
+                xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+                break;
+            case MovementType.NeutralSuperJump:
+                // Neutral Super Jump;
+                _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
+                break;
+            case MovementType.ForwardSuperJump:
+                // Forward Super Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
+                xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+
+                break;
+            case MovementType.BackSuperJump:
+                // Back Super Jump;
+                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
+                xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
+                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+                break;
+            case MovementType.ForwardDash:
+                // Forward Dash;
+                StartCoroutine(OnDelayDash(forwardMult * _base.DashForce * 2f));
+                break;
+            case MovementType.BackDash:
+                // Back Dash;
+                StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
+                break;
+        }
+        yield return new WaitForSeconds(2 / 60f);
+        sendingForce = false;
+    }
     public void HandleExtraMovement(Character_Mobility _mInput)
     {
-        if (_base.movementPC < _mInput.movementPriority)
+        List<IState> acceptableStates = new List<IState>();
+        if (_base._cHurtBox.IsGrounded())
         {
-            _base.movementPC = _mInput.movementPriority;
-            switch (_mInput.type)
+            if (_mInput.movementPriority == 2)
             {
-                case MovementType.BackJump:
-                    // Back Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                    xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
-                    _myRB.velocity = new Vector3(xVal, yVal);
-                    break;
-                case MovementType.Jump:
-                    // Neutral Jump;
-                    _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
-                    break;
-                case MovementType.ForwardJump:
-                    // Forward Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                    xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
-                    _myRB.velocity = new Vector3(xVal, yVal);
-                    break;
-                case MovementType.NeutralSuperJump:
-                    // Neutral Super Jump;
-                    _myRB.velocity = new Vector3(_myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
-                    break;
-                case MovementType.ForwardSuperJump:
-                    // Forward Super Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                    xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
-                    _myRB.velocity = new Vector3(xVal, yVal);
-
-                    break;
-                case MovementType.BackSuperJump:
-                    // Back Super Jump;
-                    yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                    xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
-                    _myRB.velocity = new Vector3(xVal, yVal);
-                    break;
-                case MovementType.ForwardDash:
-                    // Forward Dash;
-                    _myRB.AddForce(transform.right * (_base.MoveForce * 20f), ForceMode.VelocityChange);
-                    break;
-                case MovementType.BackDash:
-                    // Back Dash;
-                    _myRB.AddForce(transform.right * -(_base.MoveForce * 20f), ForceMode.VelocityChange);
-                    break;
+                acceptableStates.Add(_base._cStateMachine.dashStateRef);
+                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
+                {
+                    acceptableStates.Clear();
+                    sendingForce = false;
+                    return;
+                }
             }
-            DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
+            else
+            {
+                acceptableStates.Add(_base._cStateMachine.jumpRef);
+                acceptableStates.Add(_base._cStateMachine.crouchStateRef);
+                acceptableStates.Add(_base._cStateMachine.idleStateRef);
+                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
+                {
+                    acceptableStates.Clear();
+                    sendingForce = false;
+                    return;
+                }
+            }
+            _base.movementPC = _mInput.movementPriority;
+            if (sendingForce == false)
+            {
+                StartCoroutine(DoForceOnDelay(_mInput));
+                DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
+            }
         }
+    }
+    IEnumerator OnDelayDash(float speed)
+    {
+        yield return new WaitForSeconds(2 / 60f);
+        _myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);
     }
     #region Function Summary
     /// <summary>
@@ -185,12 +364,32 @@ public class Character_Force : MonoBehaviour
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             _myRB.AddForce(transform.right * H_KnockBack, ForceMode.VelocityChange);
-            _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            if (property._airInfo == AirAttackInfo.GroundOnly)
+            {
+                _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            }
+            else if(property._airInfo == AirAttackInfo.AirOnly)
+            {
+                if (_base._cHurtBox.IsGrounded() == false) 
+                {
+                    _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+                }
+            }
         }
         else
         {
-            _myRB.AddForce(transform.right * (-H_KnockBack), ForceMode.VelocityChange);
-            _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            _myRB.AddForce(transform.right * (-H_KnockBack), ForceMode.VelocityChange); 
+            if (property._airInfo == AirAttackInfo.GroundOnly)
+            {
+                _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            }
+            else if (property._airInfo == AirAttackInfo.AirOnly)
+            {
+                if (_base._cHurtBox.IsGrounded() == false)
+                {
+                    _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+                }
+            }
         }
     }
 
@@ -247,7 +446,7 @@ public class Character_Force : MonoBehaviour
         if (_base.ReturnMovementInputs().Button_State.directionalInput == 4 
             ^_base.ReturnMovementInputs().Button_State.directionalInput == 4)
         {
-            AddForceOnCommand(4);
+            AddLateralForceOnCommand(4);
         }
     }
 }

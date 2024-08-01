@@ -7,19 +7,26 @@ using System;
 public class Attack_Manager : MonoBehaviour
 {
     public Character_Base _base;
-    public Character_Animator _cAnimator => _base._cAnimator;
+    [SerializeField] private Character_Animator _cAnimator;
+    public Character_Animator C_Animator { set { _cAnimator = value; } }
     public List<HitBox> hitBoxes;
     public List<Attack_BaseProperties> Combo;
     //public Attack_BaseProperties newAttack, lastAttack;
     public int currentCount;
+    private bool CanTransitionAnimation;
+
+    Queue<Attack_BaseProperties> _AttackAnimQueue;
     // Start is called before the first frame update
     void Start()
     {
         SetHitBoxStartState();
         Combo = new List<Attack_BaseProperties>();
+        _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
+        CanTransitionAnimation = true;
     }
-    public void ClearAttacks() 
-    {
+    public void ClearAttacks()
+    { 
+        _AttackAnimQueue.Clear();
         _cAnimator.inputWindowOpen = true;
         _cAnimator.EndAnim();
         Combo.Clear();
@@ -28,23 +35,28 @@ public class Attack_Manager : MonoBehaviour
     }
     public void ReceiveAttack(Attack_BaseProperties attack)
     {
-        GetAttackCriteriaifNotNull(attack);
+        GetAttackCriteriaifNotNull(attack); 
     }
     public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack)
     {
-        if (Combo.Count == 0)
+        if (Combo.Count == 0 && currentCount == 0)
         {
             Combo.Add(newAttack);
-            ChecFirstAttackCriteria(newAttack);
+            ChecFirstAttackCriteria(newAttack,true);
         }
         else
         {
-            CheckNextAttackCriteria(newAttack, Combo.Count -1);
+            if (Combo[Combo.Count - 1] == newAttack)
+            {
+                return;
+            }
+            Combo.Add(newAttack);
+            CheckNextAttackCriteria(newAttack, false, Combo.Count -1);
         }
     }
-    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, int index = 0)
+    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
     {
-        if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack))
+        if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
         {
             Combo.RemoveAt(index);
             return;
@@ -61,50 +73,109 @@ public class Attack_Manager : MonoBehaviour
         }
         DoAttack(newAttack);
     }
-    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, int index = 0)
+    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
     {
-        if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+        Attack_BaseProperties lastBase = Combo[index - 1];
+        if (lastBase.cancelProperty.cancelTo == Cancel_State.Heavy_String_Normal_Start ^ lastBase.cancelProperty.cancelTo == Cancel_State.Light_String_Normal_Start)
         {
-            Combo.RemoveAt(index);
-            return;
+            if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
+            {
+                if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+                {
+                    Combo.RemoveAt(index);
+                    return;
+                }
+            }
+            if (!CheckMeterCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
+            if (!CheckGroundCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
         }
-        if (!CheckMeterCriteria(newAttack))
+
+        else
         {
-            Combo.RemoveAt(index);
-            return;
+            if (!(CheckCancelCriteria(lastBase.cancelProperty.cancelTo, newAttack)))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
+            if (!CheckMeterCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
+            if (!CheckGroundCriteria(newAttack))
+            {
+                Combo.RemoveAt(index);
+                return;
+            }
         }
-        if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack))
+        if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState)
         {
-            Combo.RemoveAt(index);
-            return;
+            _cAnimator.SetRekkaBool(false);
         }
-        if (!CheckGroundCriteria(newAttack))
+        if (newAttack._moveType != MoveType.Stance && _cAnimator.inStanceState)
         {
-            Combo.RemoveAt(index);
-            return;
+            _cAnimator.SetStanceBool(false);
         }
         Combo.Add(newAttack);
         DoAttack(newAttack);
     }
-    public bool CheckStringPriority(Cancel_State lastState, Attack_BaseProperties newAttack)
+    public bool CheckStringPriority(Cancel_State lastState, Attack_BaseProperties newAttack, bool firstAttack)
     {
-        if (lastState == Cancel_State.String_Normal_Attack && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Attack)
+        if (firstAttack)
         {
             return true;
         }
-        else 
+        else
         {
-            if (lastState == Cancel_State.Rekka_Input_FollowUp)
+            //(lastState == Cancel_State.String_Normal_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Start) || (lastState == Cancel_State.Stance_Input_Start && newAttack.cancelProperty.cancelFrom == Cancel_State.Normal_Attack))
+            if (StateComparison(lastState, newAttack, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
             {
-                if (_base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count-1]).inRekkaState)
-                {
-                    return false;
-                }
-                _base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count - 1]).usedRekkas.Add(newAttack);
+                return true;
             }
+            if (StateComparison(lastState, newAttack, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
+            {
+                return true;
+            }
+            else
+            {
+                if (lastState == Cancel_State.Light_Normal_Attack)
+                {
+                    if (newAttack.cancelProperty.cancelFrom == Cancel_State.Heavy_Normal_Attack || newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
+                    {
+                        return true;
+                    }
+                }
+                if (lastState == Cancel_State.Heavy_Normal_Attack)
+                {
+                    if (newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
+                    {
+                        return true;
+                    }
+                }
+                if (lastState == Cancel_State.Rekka_Input_FollowUp)
+                {
+                    if (_base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count - 1]).inRekkaState)
+                    {
+                        return false;
+                    }
+                    _base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count - 1]).usedRekkas.Add(newAttack);
+                }
 
-            return true;
+                return false;
+            }
         }
+    }
+    bool StateComparison(Cancel_State lastState, Attack_BaseProperties newAttack, Cancel_State desiredLastState, Cancel_State desiredNextState) 
+    {
+        return lastState == desiredNextState && newAttack.cancelProperty.cancelFrom == desiredLastState;
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {
@@ -215,20 +286,38 @@ public class Attack_Manager : MonoBehaviour
             }
         }
     }
+    public void SetStartNextAttack(bool state) 
+    {
+        CanTransitionAnimation = state;
+    }
     void DoAttack(Attack_BaseProperties _newAttack)
     {
         currentCount = Combo.Count;
-        PlayAttack(_newAttack);
+        if (CanTransitionAnimation)
+        {
+            PlayAttack(_newAttack);
+        }
+        else 
+        {
+           StartCoroutine(AwaitClear(_newAttack));
+        }
+    }
+    IEnumerator AwaitClear(Attack_BaseProperties _newAttack)
+    {
+        _AttackAnimQueue.Enqueue(_newAttack);
+        while (_AttackAnimQueue.Count > 0)
+        {
+            yield return new WaitForSeconds(5 * (1f / 60f));
+            PlayAttack(_AttackAnimQueue.Dequeue());
+        }
     }
     void PlayAttack(Attack_BaseProperties attack)
     {
         if (attack.attackHashes.Count != 0)
         {
-            _cAnimator.PlayNextAnimation(attack.attackHashes[0], 2 * (1f / attack.AttackAnims.animClip.frameRate), true);
             _cAnimator.SetNextAttackStartVariables(attack);
         }
     }
-
     #region HitBox Management Code
     public void SetHitBoxStartState() 
     {

@@ -11,7 +11,7 @@ public class Character_GravityScaler : MonoBehaviour
     [SerializeField] bool isFrozen;
     private void Start()
     {
-        gravity = 5f;
+        gravity = 10f;
         isFrozen = false;
     }
 
@@ -30,7 +30,7 @@ public class Character_GravityScaler : MonoBehaviour
             if (isFrozen)
             {
                 isFrozen = false;
-                gravity = 5f;
+                gravity = 10f;
             }
         }
     }

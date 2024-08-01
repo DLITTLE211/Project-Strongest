@@ -7,6 +7,9 @@ using UnityEngine;
 public class Character_MobilityAsset : ScriptableObject
 {
     [SerializeField]private List<Character_Mobility> mobilityOptions;
+    float frameCount;
+    List<CustomCallback> customMobilityCallBacks;
+    bool animRunning = false;
     public List<Character_Mobility> MobilityOptions 
     {
         get 
@@ -40,6 +43,42 @@ public class Character_MobilityAsset : ScriptableObject
         for (int i = 0; i < mobilityOptions.Count; i++)
         {
            mobilityOptions[i].ClearAnimatorAndBase();
+        }
+    }
+    public IEnumerator TickMobilityAnimation(Character_Mobility inputToActivate)
+    {
+        if (!animRunning)
+        {
+            float waitTime = 1f / 60f;
+            frameCount = 0;
+            animRunning = true;
+            inputToActivate.baseCharacter._cAnimator.PlayNextAnimation(Animator.StringToHash(inputToActivate.mobilityAnim.animName[0]), 0.25f, true);
+            while (frameCount <= inputToActivate.mobilityAnim.animLength[0])
+            {
+                #region Mobility Anim Checks
+                if (inputToActivate.mobilityAnim._customMobilityCallBacks.Count > 0)
+                {
+                    CustomCallback callback = inputToActivate.mobilityAnim._customMobilityCallBacks[0];
+                    ExtraFrameHitPoints newHitPoint = inputToActivate.mobilityAnim.frameData._extraPoints[0];
+                    float hitPoint = waitTime * callback.timeStamp;
+                    if (frameCount >= hitPoint && !callback.funcBool)
+                    {
+                        newHitPoint.hitFrameBool = true;
+                        callback.funcBool = true;
+                        inputToActivate.baseCharacter.ApplyForceOnCustomCallback(inputToActivate.mobilityAnim._customMobilityCallBacks[0], inputToActivate);
+                        inputToActivate.mobilityAnim._customMobilityCallBacks.RemoveAt(0);
+                    }
+                }
+                frameCount += waitTime;
+                yield return new WaitForSeconds(waitTime);
+                #endregion
+            }
+            animRunning = false;
+        }
+        else
+        {
+            animRunning = false;
+            inputToActivate.baseCharacter._cAnimator.NullifyMobilityOption();
         }
     }
 }

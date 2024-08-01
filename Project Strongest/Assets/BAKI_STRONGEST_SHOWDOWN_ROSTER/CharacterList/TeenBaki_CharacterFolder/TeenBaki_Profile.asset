@@ -18,14 +18,28 @@ MonoBehaviour:
   Mass: 100
   Height: 168
   Weight: 168
-  MoveVelocity: 100
-  JumpForce: 150
+  hurtboxSizing:
+    radius: 0.25
+    hurtboxPosition: {x: 0, y: 0.08, z: -0.5}
+    hurtboxSizing: {x: 1, y: 2.25, z: 1.7}
+  collisionSizing:
+    headRadius: 0.35
+    headHeight: 0.27
+    headHurtboxPositioning: {x: 0, y: 0.45, z: 0}
+    bodyRadius: 0.75
+    bodyHeight: 1.15
+    bodyHurtboxPositioning: {x: 0, y: 0, z: 0}
+  MoveVelocity: 1.75
+  JumpForce: 325
   InAirMoveForce: 100
+  dashSpeed: 2.5
   MaxHealth: 100
   MaxStunValue: 80
   DefenseValue: 30
   HealthRegenRate: 3
-  characterAnimator: {fileID: 9100000, guid: be9a7067718126e45aa7cf8813a6abd2, type: 2}
+  characterModel: {fileID: 2619550513160664684, guid: 578bb02657ccb83479060e3c4b62ec43, type: 3}
+  characterAnimator: {fileID: 0}
+  cAnimatorScript: {fileID: 0}
   AllCharacterAnimations:
   - {fileID: -3977307983880513915, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   - {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -116,10 +130,11 @@ MonoBehaviour:
   - {fileID: 5464064686492668912, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   - {fileID: -1532270695588769162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   - {fileID: -7488435070052245135, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-  LayerInfo: []
   CharacterModel: {fileID: 919132149155446097, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  _characterMoveList: {fileID: -3225154758481460539, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}
   moveListCount: 1
   CharacterMoveListPrefab:
   - {fileID: 3315631830582736349, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}
+  _CharacterMobility: {fileID: 11400000, guid: 6f2110f2d7c0c27478d5e3589d7ceaba, type: 2}
   BasicCharacterInteractions: []
   SpecialCharacterInteractions: []

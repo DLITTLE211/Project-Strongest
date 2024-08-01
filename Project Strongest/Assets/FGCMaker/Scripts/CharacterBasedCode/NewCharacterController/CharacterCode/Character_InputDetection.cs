@@ -20,8 +20,8 @@ public class Character_InputDetection : MonoBehaviour
         }
         catch (ArgumentOutOfRangeException) { return; }
         //Will need to be revised
-        _base.xVal = (_base.xVal >= _base.xYield) ? 1 : ((_base.xVal <= -_base.xYield) ? -1 : 0);
-        _base.yVal = (_base.yVal >= _base.yYield) ? 1 : ((_base.yVal <= -_base.yYield) ? -1 : 0);
+        _base.xVal = (_base.xVal >= _base.controllerYield.positiveXYield) ? 1 : ((_base.xVal <= -_base.controllerYield.negativeXYield) ? -1 : 0);
+        _base.yVal = (_base.yVal >= _base.controllerYield.positiveYYield) ? 1 : ((_base.yVal <= -_base.controllerYield.negativeXYield) ? -1 : 0);
         _base.numpadVector.x = _base.xVal;
         _base.numpadVector.y = _base.yVal;
         ConvertVector(_base.numpadVector);

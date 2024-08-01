@@ -17,7 +17,6 @@ public class Character_Mobility : IMobility
     public int movementPriority;
     public bool isSuperVariant;
     public bool activeMove;
-
     public Character_Mobility Clone() 
     {
         return new Character_Mobility(baseCharacter,movementName,type,curInput,
@@ -41,9 +40,6 @@ public class Character_Mobility : IMobility
     }
     public void TurnInputsToString(Character_Base _base)
     {
-        baseCharacter = _base;
-        cTimer = _base._cMobiltyTimer;
-        mobilityAnim.playerAnim = _base._cAnimator.myAnim;
         Messenger.AddListener(Events.ResetMoveOnTimer, ResetCurrentInput);
         for (int i = 0; i < _movementInputs.Count; i++) 
         {
@@ -135,14 +131,22 @@ public class Character_Mobility : IMobility
         }
         return switchValue;
     }
-    public bool IsCorrectInput(Character_ButtonInput newInput, int curInput) 
+    public bool IsCorrectInput(Character_ButtonInput newInput, int curInput)
     {
-        for (int i = 0; i < _movementInputs.Count; i++) 
+        for (int i = 0; i < _movementInputs.Count; i++)
         {
             try
             {
-                bool moveInput =  _movementInputs[i].stringCharArray[curInput].ToString() == newInput.Button_State.directionalInput.ToString();
-                if (moveInput == true) 
+                bool moveInput = false;
+                if (baseCharacter.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                {
+                    moveInput = _movementInputs[0].stringCharArray[curInput].ToString() == newInput.Button_State.directionalInput.ToString();
+                }
+                else
+                {
+                    moveInput = _movementInputs[0].stringCharArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(newInput).ToString();
+                }
+                if (moveInput == true)
                 {
                     return true;
                 }
@@ -162,12 +166,24 @@ public class Character_Mobility : IMobility
 
     public void PlayAnimation(Character_Mobility _mobilityAnim, Character_Base curBase)
     {
-        if (curBase._cHurtBox.IsGrounded() == true)
+        if (curBase._cHurtBox.IsGrounded() == true && curBase._cForce.CanSendForce())
         {
             if (curBase._cAnimator._lastMovementState == Character_Animator.lastMovementState.nullified)
             {
-                curBase._cAnimator.SetActivatedInput(_mobilityAnim, mobilityAnim, mobilityAnim.totalWaitTime);
+                if (mobilityAnim._customMobilityCallBacks.Count <= 0)
+                {
+                    mobilityAnim.ReAddCustomCallbacks();
+                }
+                curBase._cAnimator.SetActivatedInput(_mobilityAnim);
             }
+            else
+            {
+                Debug.LogError("Still Populated");
+            }
+        }
+        else
+        {
+            Debug.LogError("Still AirBorn");
         }
     }
     public void ResetCurrentInput()
@@ -179,6 +195,11 @@ public class Character_Mobility : IMobility
     public void ResetOnSuccess()
     {
         cTimer.ResetTimerSuccess();
+
+        if (mobilityAnim._customMobilityCallBacks.Count <= 0)
+        {
+            mobilityAnim.ReAddCustomCallbacks();
+        }
     }
 
     public void SetAnims(Character_Animator animator)
@@ -228,6 +249,7 @@ public class MobilityAnimation
 
     public List<float> animLength;
     public FrameData frameData;
+    public List<CustomCallback> _customMobilityCallBacks;
 
     public MobilityAnimation(Animator _anim, List<AnimationClip> _animClip, List<string> _animName, float _totalWaitTime, List<float> _animLength, FrameData _frameData) 
     {
@@ -239,6 +261,19 @@ public class MobilityAnimation
         frameData = _frameData;
     }
 
+    public void AddCustomCallbacks()
+    {
+        _customMobilityCallBacks = new List<CustomCallback>();
+        for (int i = 0; i < frameData._extraPoints.Count; i++)
+        {
+            frameData._extraPoints[i].hitFrameBool = false;
+            CustomCallback customCallback = new CustomCallback(frameData._extraPoints[i].call, frameData._extraPoints[i].hitFramePoints,
+                frameData._extraPoints[i].hitFrameBool, frameData._extraPoints[i].camPos,
+                frameData._extraPoints[i].camRotation, frameData._extraPoints[i].Force,
+                frameData._extraPoints[i].projectileSpeed);
+            _customMobilityCallBacks.Add(customCallback);
+        }
+    }
     public void SetMobilityAnim(Character_Animator _playerAnim)
     {
         //playerAnim = _playerAnim.myAnim;
@@ -274,5 +309,10 @@ public class MobilityAnimation
                 }
             }
         }
+        AddCustomCallbacks();
+    }
+    public void ReAddCustomCallbacks() 
+    {
+        AddCustomCallbacks();
     }
 }

@@ -11,16 +11,23 @@ public class State_Crouch : BaseState
 
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
-        {
-            _cAnim.PlayNextAnimation(crouchHash, _crossFade);
-        }
         await WaitToChargeSuperMobility();
     }
-    async Task WaitToChargeSuperMobility() 
+    async Task WaitToChargeSuperMobility()
     {
         float OneFrame = 1 / 60f;
-        float waitTime = 10 * OneFrame;
+        await ActivateSuperMobility(OneFrame);
+        float TenwaitTime = 2 * OneFrame;
+        int TentimeInMS = (int)(TenwaitTime * 1000f);
+        await Task.Delay(TentimeInMS);
+        if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+        {
+            _cAnim.PlayNextAnimation(crouchHash, 2 * (1 / 60f));
+        }
+    }
+    async Task ActivateSuperMobility(float OneFrame) 
+    {
+        float waitTime = 2 * OneFrame;
         int timeInMS = (int)(waitTime * 1000f);
         await Task.Delay(timeInMS);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
@@ -30,10 +37,6 @@ public class State_Crouch : BaseState
     }
     public override void OnUpdate()
     {
-        if (_base._cAnimator._lastMovementState != Character_Animator.lastMovementState.nullified)
-        {
-           // _base._cAnimator.NullifyMobilityOption();
-        }
         base.OnUpdate();
     }
     public override void OnRecov()

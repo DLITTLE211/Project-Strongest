@@ -17,11 +17,30 @@ public class InGameCameraController : MonoBehaviour
     [SerializeField] Camera orthoCamera, perspectiveBGCamera;
     [SerializeField] Transform[] playerCharacters;
     [SerializeField] Vector3 offset;
-
-
+    [SerializeField] private HitPointCall cameraControlCalls;
+    [SerializeField] private bool isTracking;
     private void Start()
     {
         InitCameraInformation();
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+    }
+    void ApplyForceOnCustomCallback(CustomCallback callback)
+    {
+        if (cameraControlCalls.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.PanPosOnTarget:
+                    PositionChangeOnTarget(callback);
+                    break;
+                case HitPointCall.PanRotateOnTarget:
+                    RotateOnTarget(callback);
+                    break;
+                case HitPointCall.PanZoomOnTarget:
+                    ZoomOnTarget(callback);
+                    break;
+            }
+        }
     }
     #region Function Summary
     /// <summary>
@@ -32,17 +51,20 @@ public class InGameCameraController : MonoBehaviour
     public void InitCameraInformation()
     {
         size = GreatestDistance();
-        minWidth = 1.35f;
-        maxWidth = 1.65f;
+        minWidth = 1.65f;
+        maxWidth = 1.95f;
         smoothTime = 0.215f;
     }
     private void LateUpdate()
     {
-        if (!checkCenterPoint())
+        if (isTracking)
         {
-            ZoomCamera();
-            CameraToPlayerCenter(orthoCamera);
-            CameraToPlayerCenter(perspectiveBGCamera);
+            if (!checkCenterPoint())
+            {
+                ZoomCamera();
+                CameraToPlayerCenter(orthoCamera);
+                CameraToPlayerCenter(perspectiveBGCamera);
+            }
         }
     }
     #region Function Summary
@@ -168,4 +190,40 @@ public class InGameCameraController : MonoBehaviour
     }
 
 
+    void RotateOnTarget(CustomCallback callback)
+    {
+        isTracking = false;
+        if (callback.snapMovement)
+        {
+
+        }
+        else 
+        {
+
+        }
+    }
+    void PositionChangeOnTarget(CustomCallback callback)
+    {
+        isTracking = false;
+        if (callback.snapMovement)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+    void ZoomOnTarget(CustomCallback callback)
+    {
+        isTracking = false;
+        if (callback.snapMovement)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 }

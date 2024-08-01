@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 public class Player_SideRecognition : MonoBehaviour
 {
@@ -10,15 +11,67 @@ public class Player_SideRecognition : MonoBehaviour
 [System.Serializable]
 public class Character_Position
 {
+    [SerializeField] private Transform CollisionDetectionTransform;
+    [SerializeField] private Transform modelTransform;
+    public Transform ModelTransform { get { return modelTransform; } }
     public HitBox[] hitBoxes;
     public HitBox projectile_HitBox;
     public HurtBox extendedHurbox;
     public Transform _targetCharacter;
     public float LW_Distance, RW_Distance;
     public Character_Face_Direction _directionFacing;
+    private Vector3 leftFace = new Vector3(0f, 180f, 0f), rightFace = new Vector3(0f, 0f, 0f);
+    Tween switchFaceDirection;
     public void SetFacingState(Character_Face_Direction face) 
     {
-        _directionFacing = face;
+        if (_directionFacing != face) 
+        {
+            switch (face) 
+            {
+                case Character_Face_Direction.FacingLeft:
+                    TurnModel(leftFace, -1f, face);
+                    break;
+                case Character_Face_Direction.FacingRight:
+                    TurnModel(rightFace, 1f, face);
+                    break;
+            }
+        }
+    }
+
+    void TurnModel(Vector3 direction, float flipSide, Character_Face_Direction _face)
+    {
+        if (modelTransform == null)
+        {
+            return;
+        }
+        if (DOTween.IsTweening(modelTransform))
+        {
+            return;
+        }
+        if (modelTransform.localEulerAngles == direction)
+        {
+            _directionFacing = _face;
+            return;
+        }
+        modelTransform.localScale = new Vector3(1f, 1f, flipSide);
+        modelTransform.DORotate(direction, 0.15f).OnStart(() =>
+        {
+            if (_face == Character_Face_Direction.FacingRight)
+            {
+                CollisionDetectionTransform.DOLocalMoveX(-0.25f, 0.15f);
+            }
+            else if (_face == Character_Face_Direction.FacingLeft)
+            {
+                CollisionDetectionTransform.DOLocalMoveX(0.25f, 0.15f);
+            }
+        }).OnComplete(() =>
+        {
+            _directionFacing = _face; 
+        });
+    }
+    public void SetModelTransform(Transform _modelTransform) 
+    {
+        modelTransform = _modelTransform;
     }
     public void UpdatePlayerFacingDirection(Transform LW, Transform RW) 
     {
@@ -61,4 +114,5 @@ public enum Character_Face_Direction
 {
     FacingLeft,
     FacingRight,
+    Neither,
 }

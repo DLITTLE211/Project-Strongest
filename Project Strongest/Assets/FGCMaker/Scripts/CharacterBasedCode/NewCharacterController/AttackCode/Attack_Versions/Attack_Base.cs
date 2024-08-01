@@ -21,7 +21,6 @@ public class Attack_BaseProperties
     public float counterHitDamageMult;
     [Range(1, 100)] public int hitstopValue;
     [Range(1, 200)] public int hitstunValue;
-    [Range(15, 75)] public int _attackScaling;
     public HitLevel hitLevel;
     [SerializeField] public List<int> attackHashes;
     [Space(20)]
@@ -30,6 +29,7 @@ public class Attack_BaseProperties
     [Header("_____REQUIREMENTS/RESTRICTIONS______")]
     [Range(0, 3)] public int _meterRequirement;
     [Range(0, 30)] public int _meterAwardedOnHit;
+    [Range(-10, 40)] public int attackScalingPercent;
     public bool dashCancelable, JumpCancelable;
 
     #region MoveType Properties
@@ -39,6 +39,7 @@ public class Attack_BaseProperties
     public Attack_CancelInfo cancelProperty;
     public MoveType _moveType;
     public AttackHandler_Attack AttackAnims;
+    public bool hitConnected;
     #endregion
 
     #region KnockBack/KnockDown Variables
@@ -50,11 +51,23 @@ public class Attack_BaseProperties
     #endregion
     public void SetAttackAnims(Character_Animator animator)
     {
+        hitConnected = false;
         attackHashes = new List<int>();
         AttackAnims.SetAttackAnim(animator);
         attackHashes.Add(Animator.StringToHash(AttackAnims.animName));
-
     }
+}
+[Serializable]
+public class CustomDamageField 
+{
+    public float rawAttackDamage;
+    public float counterHitDamageMult;
+    [Range(1, 100)] public int hitstopValue;
+    [Range(1, 200)] public int hitstunValue;
+    public HitLevel hitLevel;
+    public Horizontal_KnockBack lateralKBP; // Lateral KnockBack Properties
+    public Vertical_KnockBack verticalKBP; // Vertical KnockBack Properties
+    public Attack_KnockDown KnockDown; // Vertical KnockBack Properties
 }
 [Serializable]
 public class Attack_Input 

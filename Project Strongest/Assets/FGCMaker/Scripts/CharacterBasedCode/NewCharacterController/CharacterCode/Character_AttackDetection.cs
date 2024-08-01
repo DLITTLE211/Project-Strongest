@@ -17,7 +17,7 @@ public class Character_AttackDetection : MonoBehaviour
                 _base._timer.AddPressedButton(action);
                 _base.widget.ValidateButtonReleaseInput(action);
 
-                if (action.Button_Name == "A" || action.Button_Name == "B")
+               /* if (action.Button_Name == "A" || action.Button_Name == "B")
                 {
                     if (CheckSingleButtons(_base.attackButtons[0], ButtonStateMachine.InputState.held))//_base.attackButtons[0].Button_State._state != ButtonStateMachine.InputState.held)
                     {
@@ -53,7 +53,7 @@ public class Character_AttackDetection : MonoBehaviour
                         _base._timer.AddPressedButton(_base.attackButtons[9]);
                     }
                     continue;
-                }
+                }*/
                 continue;
             }
             if (_base.player.GetButton(action.Button_Element.actionId))
@@ -65,7 +65,7 @@ public class Character_AttackDetection : MonoBehaviour
                         returnButtonPressName(action);
                         break;
                     case ButtonStateMachine.InputState.pressed:
-                        if (CheckTwoButtonsPressed(_base.attackButtons[0], _base.attackButtons[1], ButtonStateMachine.InputState.pressed))
+                        /*if (CheckTwoButtonsPressed(_base.attackButtons[0], _base.attackButtons[1], ButtonStateMachine.InputState.pressed))
                         {
                             _base.attackButtons[4].Button_State.OnHeld();
                             _base._timer.AddPressedButton(_base.attackButtons[4]);
@@ -79,16 +79,16 @@ public class Character_AttackDetection : MonoBehaviour
                             _base._timer.AddPressedButton(_base.attackButtons[9]);
                             _base.widget.ValidateButtonHoldInput(_base.attackButtons[9]);
                             break;
-                        }
-                        else
-                        {
+                        }*/
+                        //else
+                      //  {
                             action.Button_State.OnHeld();
                             _base.widget.ValidateButtonHoldInput(action);
                             _base._timer.AddPressedButton(action);
                             break;
-                        }
+                      //  }
                     case ButtonStateMachine.InputState.held:
-                        if (CheckTwoButtonsPressed(_base.attackButtons[0], _base.attackButtons[1], ButtonStateMachine.InputState.held))
+                      /*  if (CheckTwoButtonsPressed(_base.attackButtons[0], _base.attackButtons[1], ButtonStateMachine.InputState.held))
                         {
                             _base.attackButtons[4].Button_State.OnHeld();
                             _base.widget.ValidateButtonHoldInput(_base.attackButtons[4]);
@@ -102,12 +102,12 @@ public class Character_AttackDetection : MonoBehaviour
                             _base.widget.ValidateButtonHoldInput(_base.attackButtons[9]);
                             _base._timer.AddPressedButton(_base.attackButtons[9]);
                             break;
-                        }
-                        else
-                        {
+                        }*/
+                       // else
+                        //{
                             _base._timer.AddPressedButton(action);
                             break;
-                        }
+                       // }
                     default:
                         DebugMessageHandler.instance.DisplayErrorMessage(2, $"Invalid Input State Detected { action.Button_State}");
                         break;
