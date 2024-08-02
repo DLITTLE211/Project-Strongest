@@ -49,7 +49,11 @@ public class CollisionDetection : MonoBehaviour
     public TMP_Text testText;
     private HitBox lastHitbox;
     public CollisionType collisionType;
-
+    private bool allowHitCheck;
+    private void Start()
+    {
+        allowHitCheck = false;
+    }
     public void SetHurtBoxSize(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger, Character_HurtBoxSizing sizing = null)
     {
         if (currentCollider == null)
@@ -84,8 +88,8 @@ public class CollisionDetection : MonoBehaviour
     {
         if (hitboxInfo.currentCollider == null)
         {
-            hitboxInfo.boxColliderSpawnPoint.AddComponent<SphereCollider>();
-            hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<SphereCollider>();
+            hitboxInfo.boxColliderSpawnPoint.AddComponent<BoxCollider>();
+            hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<BoxCollider>();
             hitboxInfo.currentCollider.isTrigger = true;
         }
         xSize = sizeX;
@@ -141,14 +145,25 @@ public class CollisionDetection : MonoBehaviour
     {
         hurtbox.gameObject.SetActive(true);
         lastHitbox.gameObject.SetActive(true);
+        lastHitbox = _hitbox; 
         CheckForCollision(_hitbox);
+        allowHitCheck = true;
     }
     public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox)
     {
-        //CheckForCollision(_hitbox);
-        lastHitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
+        allowHitCheck = false;
+        _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
         hurtbox.gameObject.SetActive(false);
-        _hitbox = lastHitbox;
+        lastHitbox = _hitbox;
+        lastHitbox.gameObject.SetActive(false);
+
+    }
+    private void Update()
+    {
+        if (allowHitCheck) 
+        {
+            CheckForCollision(lastHitbox);
+        }
     }
     void CheckForCollision(HitBox _hitbox) 
     {
@@ -171,6 +186,7 @@ public class CollisionDetection : MonoBehaviour
                 {
                     _hitbox.SendHitStateAndHurtBox(_hitbox, _hitbox.hitboxProperties.AttackAnims._hitCount, target);
                     _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
+                    allowHitCheck = false;
                 }
 
                 DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);

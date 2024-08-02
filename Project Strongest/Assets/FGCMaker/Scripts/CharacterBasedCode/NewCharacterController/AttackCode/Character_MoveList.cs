@@ -102,8 +102,6 @@ public class Character_MoveList : MonoBehaviour
         #endregion
         #endregion
 
-
-        //Under Development
         #region Stance Special Storage
         GetStanceAttacks(baseCharacterInfo);
         stanceMainProperties = new List<Attack_BaseProperties>();
@@ -140,15 +138,16 @@ public class Character_MoveList : MonoBehaviour
             commandThrowProperties.Add(CommandThrows[i].property);
         }
         #endregion
-        /*
+
         #region Base Super Property Storage
+        GetCustomSuperSpecials(baseCharacterInfo);
         basicSuperAttackProperties = new List<Attack_BaseProperties>();
         for (int i = 0; i < BasicSuperAttacks.Count; i++)
         {
             basicSuperAttackProperties.Add(BasicSuperAttacks[i].property);
         }
         #endregion
-        */
+        
     }
 
     public void GetNormalAttacks(Character_Base baseCharacterInfo)
@@ -230,6 +229,19 @@ public class Character_MoveList : MonoBehaviour
             for (int j = 0; j < CommandThrows[i]._customAnimation.Count; j++)
             {
                 CommandThrows[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetCustomSuperSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < BasicSuperAttacks.Count; i++)
+        {
+            BasicSuperAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            BasicSuperAttacks[i].TurnInputsToString();
+            BasicSuperAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
+            for (int j = 0; j < BasicSuperAttacks[i]._customAnimation.Count; j++)
+            {
+                BasicSuperAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
             }
         }
     }
@@ -357,6 +369,24 @@ public class Character_MoveList : MonoBehaviour
                                 CommandThrows[i].SendCounterHitInfo(target);
                                 CommandThrows[i].SendSuccessfulDamageInfo(target, false);
                                 CommandThrows[i].HandleCounterAnimAttackInfo();
+                                return;
+                            }
+                            else { continue; }
+                        }
+                        catch (Exception)
+                        { continue; }
+                    }
+                    break;
+                case MoveType.Super:
+                    for (int i = 0; i < BasicSuperAttacks.Count; i++)
+                    {
+                        try
+                        {
+                            if (BasicSuperAttacks[i].property.AttackAnims.animName == attack.AttackAnims.animName)
+                            {
+                                BasicSuperAttacks[i].SendCounterHitInfo(target);
+                                BasicSuperAttacks[i].SendSuccessfulDamageInfo(target, false);
+                                BasicSuperAttacks[i].HandleSuperMultipleAnimAttackInfo();
                                 return;
                             }
                             else { continue; }

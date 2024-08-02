@@ -25,6 +25,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     [SerializeField] internal Vector3 hu_orientation = new Vector3(0, 0, 0);
     [SerializeField] internal Vector2 hu_size;
     #endregion
+
     private Character_Base character;
     private Character_Animator _playerCAnimator;
     public FrameData _frameData;
@@ -274,15 +275,15 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             if (!lastAttack.hitConnected)
             {
-                Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+                _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
             }
         }
         else
         {
-            Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+            _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
         }
     }
-    public IEnumerator TickAnimThrowCount(AttackHandler_Attack throwProp)
+    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp)
     {
         frameCount = 0;
         if (!_playerCAnimator.canTick) 

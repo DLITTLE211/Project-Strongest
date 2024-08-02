@@ -47,7 +47,7 @@ MonoBehaviour:
   BasicSuperAttacks:
   - specialMoveName: Triceratops Fist
     attackInput:
-      attackString: 214214A
+      attackString: 214214B
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -78,26 +78,47 @@ MonoBehaviour:
         animLength: 0
         HitBox: {fileID: 0}
         attackType: 1
-        hb_placement: {x: 0, y: 0, z: 0}
+        hb_placement: {x: 1, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0, y: 0}
+        hb_size: {x: 0.85, y: 2.15}
         extendedHitBox: {fileID: 0}
         hurtType: 0
-        hu_placement: {x: 0, y: 0, z: 0}
+        hu_placement: {x: 1, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0, y: 0}
+        hu_size: {x: 0.8, y: 2.15}
         _frameData:
           init: 0
-          startup: 23
-          active: 24
-          inactive: 50
+          startup: 7
+          active: 8
+          inactive: 65
           recovery: 0
           lastFrame: 0
           _extraPoints:
           - hitFramePoints: 25
+            call: 4
+            hitFrameBool: 0
+            Force: 15
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
+              lateralKBP:
+                lateralKBP: 0
+                Value: 0
+              verticalKBP:
+                verticalKBP: 0
+                Value: 0
+              KnockDown: 0
+          - hitFramePoints: 25
             call: 8
             hitFrameBool: 0
-            Force: 7
+            Force: 3
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}

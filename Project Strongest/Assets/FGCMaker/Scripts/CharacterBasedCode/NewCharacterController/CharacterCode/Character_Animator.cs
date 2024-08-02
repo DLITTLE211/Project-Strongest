@@ -50,6 +50,8 @@ public class Character_Animator : MonoBehaviour
     public HitPointCall MobilityCall { get { return _mobilityCall; } }
     public HitPointCall AttackCall { get { return _attackCall; } }
     bool hitNewAnim;
+
+    IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
     private void Start()
     {
         inputWindowOpen = true;
@@ -328,17 +330,32 @@ public class Character_Animator : MonoBehaviour
     public void StartFrameCount()
     {
         PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate), true);
-        StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
+        BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
+        StartCoroutine(BasicAttackRoutine);
     }
     public void StartThrowFrameCount(Attack_BaseProperties throwProperty, AttackHandler_Attack throwCustom)
     {
-        if (lastAttack != null)
+        if (BasicAttackRoutine != null)
         {
-            StopCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
         }
         lastAttack = throwProperty;
         PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
-        StartCoroutine(throwCustom.TickAnimThrowCount(throwCustom));
+        ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
+        StartCoroutine(ThrowAttackRoutine);
+    }
+    public void StartSuperFrameCount(Attack_BaseProperties superProperty, AttackHandler_Attack superCustom)
+    {
+        if (BasicAttackRoutine != null)
+        {
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
+        }
+        lastAttack = superProperty;
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate), true);
+        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom);
+        StartCoroutine(SuperAttackRoutine);
     }
     public void AddForceOnAttack(float forceValue)
     {
@@ -388,16 +405,23 @@ public class Character_Animator : MonoBehaviour
 
 
     #region End Of Animation Clean-Up
-    void CountUpNegativeFrames(int lastNegativeFrames)
+    public void CountUpNegativeFrames(int lastNegativeFrames)
     {
         negativeFrameCount += lastNegativeFrames;
-        if (lastAttack == null)
+        if (BasicAttackRoutine != null) 
         {
-            return;
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
         }
-        else
+        if (ThrowAttackRoutine != null)
         {
-            //ClearLastAttack();
+            StopCoroutine(ThrowAttackRoutine);
+            ThrowAttackRoutine = null;
+        }
+        if (SuperAttackRoutine != null)
+        {
+            StopCoroutine(SuperAttackRoutine);
+            SuperAttackRoutine = null;
         }
     }
     public void NullifyMobilityOption()
@@ -428,6 +452,10 @@ public class Character_Animator : MonoBehaviour
                 ClearLastAttack();
             }
         }
+    }
+    void ClearRoutine(IEnumerator routine) 
+    {
+        routine = null;
     }
     #endregion
 }
