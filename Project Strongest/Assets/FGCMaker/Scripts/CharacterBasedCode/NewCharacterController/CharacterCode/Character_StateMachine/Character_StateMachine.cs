@@ -38,6 +38,7 @@ public class Character_StateMachine : MonoBehaviour
         var C_BlockState = new State_CrouchBlock(_base); // C = Crouch 
         var BlockReact = new State_BlockReact(_base); // C = Crouch 
         var CounterState = new State_Counter(_base); // C = Crouch 
+        var CustomSuperState = new State_CustomSuper(_base); // C = Crouch 
         #endregion
 
         #region Define Transitions
@@ -50,7 +51,6 @@ public class Character_StateMachine : MonoBehaviour
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
-        //At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(AttackState, MoveState, new Predicate(() => At_2Move()));
 
         At(AttackState, ThrowState, new Predicate(() => At_2Throw()));
@@ -93,8 +93,9 @@ public class Character_StateMachine : MonoBehaviour
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
-        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter()));
-        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter()));
+        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
+        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
+        Any(CustomSuperState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && At_2CustomSuper()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
@@ -236,6 +237,20 @@ public class Character_StateMachine : MonoBehaviour
         if (_base._cAnimator.lastAttack != null)
         {
             _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Counter;
+            return _attackIsThrow;
+        }
+        return false;
+    }
+    bool At_2CustomSuper()
+    {
+        bool _attackIsThrow = false;
+        if (_base._subState != Character_SubStates.Controlled)
+        {
+            return false;
+        }
+        if (_base._cAnimator.lastAttack != null)
+        {
+            _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Super;
             return _attackIsThrow;
         }
         return false;
