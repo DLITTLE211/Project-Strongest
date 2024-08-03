@@ -260,12 +260,12 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
         _customAnimation[0].AddCustomCallbacks(_customAnimation[0]);
         curBase._cAnimator.StartThrowFrameCount(property, _customAnimation[0]);
     }
-    public void HandleSuperMultipleAnimAttackInfo()
+    public void HandleSuperMultipleAnimAttackInfo(int curCustomAnim)
     {
-        _customAnimation[0].SetAttackAnim(curBase._cAnimator);
-        _customAnimation[0].AddRequiredCallbacks(curBase);
-        _customAnimation[0].AddCustomCallbacks(_customAnimation[0]);
-        curBase._cAnimator.StartSuperFrameCount(property, _customAnimation[0]);
+        _customAnimation[curCustomAnim].SetAttackAnim(curBase._cAnimator);
+        _customAnimation[curCustomAnim].AddRequiredCallbacks(curBase);
+        _customAnimation[curCustomAnim].AddCustomCallbacks(_customAnimation[curCustomAnim]);
+        curBase._cAnimator.StartSuperFrameCount(property, _customAnimation[curCustomAnim]);
     }
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {

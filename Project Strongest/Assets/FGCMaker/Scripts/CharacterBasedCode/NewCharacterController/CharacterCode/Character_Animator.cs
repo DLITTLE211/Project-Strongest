@@ -367,6 +367,7 @@ public class Character_Animator : MonoBehaviour
         canTransitionIdle = state;
     }
 
+
     #region Projectile Code
     public void ShootProjectile()
     {

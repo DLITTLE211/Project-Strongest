@@ -4,7 +4,12 @@ using System.Collections;
 using UnityEngine;
 using Rewired;
 using System.Threading.Tasks;
-
+[Serializable]
+public enum AwaitEnum 
+{
+    NA,
+    HitEndWall,
+}
 public class Character_Base : MonoBehaviour
 {
     #region Character Profile Data
@@ -134,12 +139,13 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
-
     #region Opponent Reference
     [Header("______OPPONENT CHARACTER________")]
     public Character_Base opponentPlayer;
     [Space(20)]
     #endregion
+
+    private Dictionary<AwaitEnum, bool> awaitEnums;
 
     [SerializeField]
     public int newField;
@@ -153,8 +159,14 @@ public class Character_Base : MonoBehaviour
         ResetInputLog();
         ResetRemoveList();
         InitCombos();
+        SetAwaitEnums();
         _cComboCounter.SetStartComboCounter();
         _cAnimator.canTransitionIdle = true;
+    }
+    void SetAwaitEnums()
+    {
+        awaitEnums = new Dictionary<AwaitEnum, bool>();
+        awaitEnums.Add(AwaitEnum.HitEndWall, false);
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -328,8 +340,13 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
-    public void ReceiveCustomCallBack(CustomCallback callback) 
+    public async void ReceiveCustomCallBack(CustomCallback callback) 
     {
+        if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
+        {
+            await AwaitCustomCall(callback.awaitEnum);
+            return;
+        }
         if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
@@ -340,6 +357,18 @@ public class Character_Base : MonoBehaviour
             }
         }
         if (_cForce.ForceCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.Force_Right:
+                    _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                    break;
+                case HitPointCall.Force_Up:
+                    _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                    break;
+            }
+        }
+        if (_cAnimator.AttackCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
             {
@@ -457,6 +486,19 @@ public class Character_Base : MonoBehaviour
         {
             _cAnimator.PlayNextAnimation(Animator.StringToHash("Crouch"), 0, true);
             func();
+        }
+    }
+
+    public async Task AwaitCustomCall(AwaitEnum customBoolAwait)
+    {
+        if (awaitEnums.ContainsKey(customBoolAwait))
+        {
+            bool stateCheck = awaitEnums[customBoolAwait];
+            while (!stateCheck) 
+            {
+                await Task.Yield();
+            }
+            return;
         }
     }
 }

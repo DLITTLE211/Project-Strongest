@@ -41,6 +41,8 @@ public class AttackHandler_Attack : AttackHandler_Base
     bool inactive;
     bool lastFrame;
 
+
+
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
         _playerCAnimator = _playerAnim;
@@ -213,7 +215,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints,
                     _frameData._extraPoints[i].hitFrameBool, _frameData._extraPoints[i].camPos,
                     _frameData._extraPoints[i].camRotation, _frameData._extraPoints[i].Force,
-                    _frameData._extraPoints[i].projectileSpeed);
+                    _frameData._extraPoints[i].projectileSpeed, _frameData._extraPoints[i].snapMovement, _frameData._extraPoints[i].customDamage, _frameData._extraPoints[i].awaitEnum);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -338,7 +340,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        Messenger.Broadcast<int>(Events.AddNegativeFrames, throwProp._frameData.recovery);
+        _playerCAnimator.CountUpNegativeFrames(throwProp._frameData.recovery);
     }
 }
 
@@ -408,12 +410,12 @@ public class CustomCallback
     public HitPointCall customCall;
     public float timeStamp;
     public bool funcBool;
-
+    public AwaitEnum awaitEnum;
     public float forceFloat,projectileSpeedFloat;
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
     public CustomDamageField customDamage;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null)
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null, AwaitEnum _awaitEnum = AwaitEnum.NA)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -424,6 +426,7 @@ public class CustomCallback
         customDamage = _customDamage;
         forceFloat = _forceFloat;
         projectileSpeedFloat = _projectileFloat;
+        awaitEnum = _awaitEnum;
     }
 }
 [Serializable]
@@ -432,6 +435,7 @@ public class ExtraFrameHitPoints
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
+    public AwaitEnum awaitEnum;
     public float Force, projectileSpeed;
     public Vector3 camPos, camRotation;
     public bool snapMovement;
@@ -463,4 +467,5 @@ public enum HitPointCall
 
     DealCustomDamage = 524288,
     ForceSideSwitch = 1048576,
+    AwaitSequenceSignifier = 2097152,
 }
