@@ -1366,6 +1366,7 @@ MonoBehaviour:
   _cHitController: {fileID: 607290437}
   _cSuperMeter: {fileID: 2060023739}
   _aManager: {fileID: 1309202297}
+  _sideManager: {fileID: 1359521219}
   _timer:
     inputLogger:
       textObject:
@@ -12702,6 +12703,7 @@ MonoBehaviour:
   _cHitController: {fileID: 1014556006}
   _cSuperMeter: {fileID: 1465636459}
   _aManager: {fileID: 132508872}
+  _sideManager: {fileID: 1359521219}
   _timer:
     inputLogger:
       textObject:
@@ -16265,7 +16267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.097166695, y: 0.91300005}
   m_AnchorMax: {x: 0.097166695, y: 0.91300005}
-  m_AnchoredPosition: {x: -3.7592163, y: 13.0000305}
+  m_AnchoredPosition: {x: -3.7592163, y: 13}
   m_SizeDelta: {x: 182.9044, y: 188.4228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1309202295
@@ -17291,8 +17293,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0231cfda7deb83d4fab60c6cc63a6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftWall: {fileID: 0}
-  RightWall: {fileID: 0}
+  LeftWall:
+    WallTransform: {fileID: 0}
+    wallIgnore: {fileID: 0}
+  RightWall:
+    WallTransform: {fileID: 0}
+    wallIgnore: {fileID: 0}
   _p1Position: {fileID: 434338341}
   _p2Position: {fileID: 1211425607}
   sideCall: 1048576

@@ -386,10 +386,8 @@ public class Character_MoveList : MonoBehaviour
                             {
                                 BasicSuperAttacks[i].SendCounterHitInfo(target);
                                 BasicSuperAttacks[i].SendSuccessfulDamageInfo(target, false);
-                                for (int j = 0; j < BasicSuperAttacks[i]._customAnimation.Count; j++)
-                                {
-                                    BasicSuperAttacks[i].HandleSuperMultipleAnimAttackInfo(i);
-                                }
+                                BasicSuperAttacks[i].HandleSuperMultipleAnimAttackInfo();
+
                                 return;
                             }
                             else { continue; }

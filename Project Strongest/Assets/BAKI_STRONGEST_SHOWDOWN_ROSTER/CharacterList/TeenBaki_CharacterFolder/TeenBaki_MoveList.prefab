@@ -97,7 +97,9 @@ MonoBehaviour:
           - hitFramePoints: 25
             call: 4
             hitFrameBool: 0
-            awaitEnum: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
             Force: 15
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
@@ -119,7 +121,9 @@ MonoBehaviour:
           - hitFramePoints: 25
             call: 8
             hitFrameBool: 0
-            awaitEnum: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
             Force: 3
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
@@ -177,8 +181,10 @@ MonoBehaviour:
         - hitFramePoints: 2
           call: 2097152
           hitFrameBool: 0
-          awaitEnum: 1
-          Force: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 4
+          Force: 4
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
           camRotation: {x: 0, y: 0, z: 0}
@@ -226,7 +232,9 @@ MonoBehaviour:
         - hitFramePoints: 30
           call: 1048576
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -248,7 +256,9 @@ MonoBehaviour:
         - hitFramePoints: 50
           call: 1048576
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -270,7 +280,9 @@ MonoBehaviour:
         - hitFramePoints: 85
           call: 1048576
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -292,7 +304,9 @@ MonoBehaviour:
         - hitFramePoints: 115
           call: 1048576
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -471,7 +485,9 @@ MonoBehaviour:
           - hitFramePoints: 5
             call: 8
             hitFrameBool: 0
-            awaitEnum: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
             Force: 5
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
@@ -493,7 +509,9 @@ MonoBehaviour:
           - hitFramePoints: 5
             call: 4
             hitFrameBool: 0
-            awaitEnum: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
             Force: 6
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
@@ -551,7 +569,9 @@ MonoBehaviour:
         - hitFramePoints: 5
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -573,7 +593,9 @@ MonoBehaviour:
         - hitFramePoints: 15
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -595,7 +617,9 @@ MonoBehaviour:
         - hitFramePoints: 25
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -617,7 +641,9 @@ MonoBehaviour:
         - hitFramePoints: 35
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -639,7 +665,9 @@ MonoBehaviour:
         - hitFramePoints: 37
           call: 4
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: -5
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -661,7 +689,9 @@ MonoBehaviour:
         - hitFramePoints: 37
           call: 8
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 3
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -780,7 +810,9 @@ MonoBehaviour:
         - hitFramePoints: 10
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -802,7 +834,9 @@ MonoBehaviour:
         - hitFramePoints: 15
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -824,7 +858,9 @@ MonoBehaviour:
         - hitFramePoints: 25
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -846,7 +882,9 @@ MonoBehaviour:
         - hitFramePoints: 48
           call: 4
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: -5
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -964,7 +1002,9 @@ MonoBehaviour:
         - hitFramePoints: 10
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -986,7 +1026,9 @@ MonoBehaviour:
         - hitFramePoints: 15
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -1008,7 +1050,9 @@ MonoBehaviour:
         - hitFramePoints: 25
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -1030,7 +1074,9 @@ MonoBehaviour:
         - hitFramePoints: 48
           call: 4
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: -7
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -3988,7 +4034,9 @@ MonoBehaviour:
               - hitFramePoints: 7
                 call: 8
                 hitFrameBool: 0
-                awaitEnum: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
                 Force: -5
                 projectileSpeed: 0
                 camPos: {x: 0, y: 0, z: 0}
@@ -4464,7 +4512,9 @@ MonoBehaviour:
         - hitFramePoints: 5
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -4486,7 +4536,9 @@ MonoBehaviour:
         - hitFramePoints: 20
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -4508,7 +4560,9 @@ MonoBehaviour:
         - hitFramePoints: 45
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -4628,7 +4682,9 @@ MonoBehaviour:
         - hitFramePoints: 5
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -4650,7 +4706,9 @@ MonoBehaviour:
         - hitFramePoints: 20
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -4672,7 +4730,9 @@ MonoBehaviour:
         - hitFramePoints: 45
           call: 524288
           hitFrameBool: 0
-          awaitEnum: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}

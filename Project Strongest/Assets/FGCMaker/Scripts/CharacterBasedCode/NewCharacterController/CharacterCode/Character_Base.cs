@@ -4,12 +4,6 @@ using System.Collections;
 using UnityEngine;
 using Rewired;
 using System.Threading.Tasks;
-[Serializable]
-public enum AwaitEnum 
-{
-    NA,
-    HitEndWall,
-}
 public class Character_Base : MonoBehaviour
 {
     #region Character Profile Data
@@ -146,7 +140,7 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
-    private Dictionary<AwaitEnum, bool> awaitEnums;
+    private Dictionary<WaitingEnumKey, bool> awaitEnums;
 
     [SerializeField]
     public int newField;
@@ -166,8 +160,8 @@ public class Character_Base : MonoBehaviour
     }
     void SetAwaitEnums()
     {
-        awaitEnums = new Dictionary<AwaitEnum, bool>();
-        awaitEnums.Add(AwaitEnum.HitEndWall, _sideManager.LeftWall.wallIgnore.playerHitEndWall ^ _sideManager.RightWall.wallIgnore.playerHitEndWall);
+        awaitEnums = new Dictionary<WaitingEnumKey, bool>();
+        awaitEnums.Add(WaitingEnumKey.HitEndWall, _sideManager.LeftWall.wallIgnore.playerHitEndWall ^ _sideManager.RightWall.wallIgnore.playerHitEndWall);
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -345,40 +339,83 @@ public class Character_Base : MonoBehaviour
     {
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
-            await AwaitCustomCall(callback.awaitEnum);
+            await AwaitCustomCall(callback);
             return;
         }
-        if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
+        CheckCallback(callback);
+    }
+    void CheckCallback(CustomCallback callback, AwaitClass waitingCheck = null) 
+    {
+        if (waitingCheck == null)
         {
-            switch (callback.customCall)
+            if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
             {
-                case HitPointCall.DealCustomDamage:
-                    opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
-                    break;
+                switch (callback.customCall)
+                {
+                    case HitPointCall.DealCustomDamage:
+                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                        break;
+                }
+            }
+            if (_cForce.ForceCall.HasFlag(callback.customCall))
+            {
+                switch (callback.customCall)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
+            }
+            if (_cAnimator.AttackCall.HasFlag(callback.customCall))
+            {
+                switch (callback.customCall)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
             }
         }
-        if (_cForce.ForceCall.HasFlag(callback.customCall))
+        else 
         {
-            switch (callback.customCall)
+            if (_cDamageCalculator.customDamageCall.HasFlag(waitingCheck.awaitingCheck))
             {
-                case HitPointCall.Force_Right:
-                    _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                    break;
-                case HitPointCall.Force_Up:
-                    _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                    break;
+                switch (waitingCheck.awaitingCheck)
+                {
+                    case HitPointCall.DealCustomDamage:
+                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                        break;
+                }
             }
-        }
-        if (_cAnimator.AttackCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
+            if (_cForce.ForceCall.HasFlag(waitingCheck.awaitingCheck))
             {
-                case HitPointCall.Force_Right:
-                    _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                    break;
-                case HitPointCall.Force_Up:
-                    _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                    break;
+                switch (waitingCheck.awaitingCheck)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
+            }
+            if (_cAnimator.AttackCall.HasFlag(waitingCheck.awaitingCheck))
+            {
+                switch (waitingCheck.awaitingCheck)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
             }
         }
     }
@@ -490,13 +527,14 @@ public class Character_Base : MonoBehaviour
         }
     }
 
-    public async Task AwaitCustomCall(AwaitEnum customBoolAwait)
+    public async Task AwaitCustomCall(CustomCallback customBoolAwait)
     {
-        if (awaitEnums.ContainsKey(customBoolAwait))
+        if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
         {
-            bool stateCheck = awaitEnums[customBoolAwait];
+            bool stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
             while (!stateCheck) 
             {
+                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
                 await Task.Yield();
             }
             return;
@@ -544,4 +582,16 @@ public class ControllerYield
 {
     [SerializeField, Range(0f, 1f)] public float positiveXYield, positiveYYield;
     [SerializeField, Range(0f, 1f)] public float negativeXYield, negativeYYield;
+}
+[Serializable]
+public enum WaitingEnumKey
+{
+    NA,
+    HitEndWall,
+}
+[Serializable]
+public class AwaitClass
+{
+    public WaitingEnumKey keyRef;
+    public HitPointCall awaitingCheck;
 }

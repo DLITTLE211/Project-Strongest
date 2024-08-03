@@ -202,7 +202,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 CustomCallback customCallback = new CustomCallback(throwAttackCallbacks._frameData._extraPoints[i].call, throwAttackCallbacks._frameData._extraPoints[i].hitFramePoints,
                     throwAttackCallbacks._frameData._extraPoints[i].hitFrameBool, throwAttackCallbacks._frameData._extraPoints[i].camPos,
                     throwAttackCallbacks._frameData._extraPoints[i].camRotation, throwAttackCallbacks._frameData._extraPoints[i].Force,
-                    throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, throwAttackCallbacks._frameData._extraPoints[i].snapMovement, throwAttackCallbacks._frameData._extraPoints[i].customDamage);
+                    throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, throwAttackCallbacks._frameData._extraPoints[i].snapMovement, throwAttackCallbacks._frameData._extraPoints[i].customDamage, throwAttackCallbacks._frameData._extraPoints[i].awaitEnum);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -410,12 +410,12 @@ public class CustomCallback
     public HitPointCall customCall;
     public float timeStamp;
     public bool funcBool;
-    public AwaitEnum awaitEnum;
+    public AwaitClass awaitEnum;
     public float forceFloat,projectileSpeedFloat;
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
     public CustomDamageField customDamage;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null, AwaitEnum _awaitEnum = AwaitEnum.NA)
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null, AwaitClass _awaitEnum = null)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -435,7 +435,7 @@ public class ExtraFrameHitPoints
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
-    public AwaitEnum awaitEnum;
+    public AwaitClass awaitEnum;
     public float Force, projectileSpeed;
     public Vector3 camPos, camRotation;
     public bool snapMovement;
