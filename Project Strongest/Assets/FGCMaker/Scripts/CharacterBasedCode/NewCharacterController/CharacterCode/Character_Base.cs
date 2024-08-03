@@ -38,6 +38,7 @@ public class Character_Base : MonoBehaviour
     public Character_HitController _cHitController;
     public Character_SuperMeter _cSuperMeter;
     public Attack_Manager _aManager;
+    [SerializeField] private Player_SideManager _sideManager;
     [Space(10)]
     public Character_Timer _timer;
     [Space(20)]
@@ -166,7 +167,7 @@ public class Character_Base : MonoBehaviour
     void SetAwaitEnums()
     {
         awaitEnums = new Dictionary<AwaitEnum, bool>();
-        awaitEnums.Add(AwaitEnum.HitEndWall, false);
+        awaitEnums.Add(AwaitEnum.HitEndWall, _sideManager.LeftWall.wallIgnore.playerHitEndWall ^ _sideManager.RightWall.wallIgnore.playerHitEndWall);
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
