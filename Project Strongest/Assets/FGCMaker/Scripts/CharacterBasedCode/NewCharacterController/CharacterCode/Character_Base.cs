@@ -540,7 +540,7 @@ public class Character_Base : MonoBehaviour
 
     public async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
-        (WaitingEnumKey, AwaitCheck) stateCheck = false;
+        (WaitingEnumKey, AwaitCheck) stateCheck = new (WaitingEnumKey.NA, new AwaitCheck(false,null));
         for (int i = 0; i < awaitEnums.Count; i++)
         {
             if (awaitEnums[i].Item1 == customBoolAwait.awaitEnum.keyRef)
