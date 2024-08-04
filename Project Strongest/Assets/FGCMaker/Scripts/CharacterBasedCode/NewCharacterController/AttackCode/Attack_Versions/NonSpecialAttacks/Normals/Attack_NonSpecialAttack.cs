@@ -64,7 +64,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
             {
                 // return false;
             }
-            if (_base._cComboDetection.inRekka == true || _base._cComboDetection.inStance == true)
+            if (_base._cComboDetection.inSuper == true && _base._cComboDetection.inRekka == true || _base._cComboDetection.inStance == true)
             {
                  return false;
             }

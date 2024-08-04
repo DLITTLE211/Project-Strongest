@@ -50,13 +50,14 @@ public class Character_Animator : MonoBehaviour
     public HitPointCall MobilityCall { get { return _mobilityCall; } }
     public HitPointCall AttackCall { get { return _attackCall; } }
     bool hitNewAnim;
-
+    public bool customSuperHit;
     IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
     private void Start()
     {
+        customSuperHit = false;
         inputWindowOpen = true;
         startPos = _model.localPosition;
-        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames); 
+        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames);
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
         inRekkaState = false;
         inStanceState = false;
@@ -352,6 +353,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(BasicAttackRoutine);
             BasicAttackRoutine = null;
         }
+        customSuperHit = true;
         lastAttack = superProperty;
         PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate), true);
         SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, nextAnimIterator);
@@ -435,6 +437,10 @@ public class Character_Animator : MonoBehaviour
     }
     public void ClearLastAttack()
     {
+        if (customSuperHit) 
+        {
+            customSuperHit= false;
+        }
         lastAttack = null; 
         _base._cForce.CallUnlockKinematic();
         _lastAttackState = lastAttackState.nullified;

@@ -55,6 +55,9 @@ public class Character_StateMachine : MonoBehaviour
 
         At(AttackState, ThrowState, new Predicate(() => At_2Throw()));
 
+        At(AttackState, CustomSuperState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && At_2CustomSuper()));
+        At(JumpState, CustomSuperState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && At_2CustomSuper()));
+
         At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
         At(MoveState, JumpState, new Predicate(() => At_2Jump()));
@@ -95,7 +98,7 @@ public class Character_StateMachine : MonoBehaviour
         #region Any States (Can Move to this state upon Bool Check Being Met)
         Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
-        Any(CustomSuperState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && At_2CustomSuper()));
+        Any(CustomSuperState, new Predicate(() => At_2CustomSuper()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
@@ -243,15 +246,19 @@ public class Character_StateMachine : MonoBehaviour
     }
     bool At_2CustomSuper()
     {
-        bool _attackIsThrow = false;
+        bool _attackIsSuper = false;
         if (_base._subState != Character_SubStates.Controlled)
         {
             return false;
         }
         if (_base._cAnimator.lastAttack != null)
         {
-            _attackIsThrow = _base._cAnimator.lastAttack._moveType == MoveType.Super;
-            return _attackIsThrow;
+            _attackIsSuper = _base._cAnimator.lastAttack._moveType == MoveType.Super;
+            bool notCounter = !At_2Counter();
+            bool notThrow = !At_2Throw();
+            bool anAttack = ToAttackState();
+            bool fullCheck = _attackIsSuper && notCounter && notThrow && anAttack;
+            return fullCheck;
         }
         return false;
     }

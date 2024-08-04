@@ -10,7 +10,10 @@ public class State_CustomSuper : BaseState
     }
     public override void OnEnter()
     {
-        DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter ThrowState");
+        if (_base._cAnimator.lastAttack._moveType == MoveType.Super && _cAnim.customSuperHit)
+        {
+            _base._cComboDetection.inSuper = true;
+        }
     }
     public override void OnUpdate()
     {
@@ -23,6 +26,7 @@ public class State_CustomSuper : BaseState
 
     public override void OnExit()
     {
+        _base._cComboDetection.inSuper = false;
         base.OnExit();
     }
 }

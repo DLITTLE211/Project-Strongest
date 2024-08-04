@@ -165,7 +165,7 @@ public class Character_Base : MonoBehaviour
     void SetAwaitEnums()
     {
         awaitEnums = new List<(WaitingEnumKey, AwaitCheck)>();
-        awaitEnums.Add(new(WaitingEnumKey.HitEndWall, new AwaitCheck(hitWallCheck, () => SetBoolStates()))); 
+        awaitEnums.Add(new(WaitingEnumKey.HitEndWall, new AwaitCheck(() => SetBoolStates()))); 
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -447,12 +447,14 @@ public class Character_Base : MonoBehaviour
         _timer.TimerCountDown();
 
     }
-    void SetBoolStates() 
+    bool SetBoolStates() 
     {
         if (!awaitCondition) 
         {
             hitWallCheck = _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall;
+            return hitWallCheck;
         }
+        return false;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -540,7 +542,7 @@ public class Character_Base : MonoBehaviour
 
     public async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
-        (WaitingEnumKey, AwaitCheck) stateCheck = new (WaitingEnumKey.NA, new AwaitCheck(false,null));
+        (WaitingEnumKey, AwaitCheck) stateCheck = new (WaitingEnumKey.NA, new AwaitCheck(null));
         for (int i = 0; i < awaitEnums.Count; i++)
         {
             if (awaitEnums[i].Item1 == customBoolAwait.awaitEnum.keyRef)
@@ -621,9 +623,8 @@ public class AwaitCheck
 {
     public bool check;
     public Callback CallbackUpdate;
-    public AwaitCheck(bool _check, Callback _CallbackUpdate) 
+    public AwaitCheck(Callback _CallbackUpdate) 
     {
-        check = _check;
         CallbackUpdate = _CallbackUpdate;
     }
 }

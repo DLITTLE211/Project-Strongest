@@ -7,7 +7,7 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] private Character_Animator _animator;
     [SerializeField] private string lastInput;
-    public bool inStance, inRekka, superMobilityOption;
+    public bool inStance, inRekka,inSuper ,superMobilityOption;
     private bool canCheckMovement;
 
     private void Start()
