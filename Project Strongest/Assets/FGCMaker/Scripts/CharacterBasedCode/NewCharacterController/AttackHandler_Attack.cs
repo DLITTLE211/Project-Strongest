@@ -321,7 +321,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                         float curCustomTimeStamp = waitTime * customHitboxCallBacks[0].timeStamp;
                         if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
-                            character.ReceiveCustomCallBack(customHitboxCallBacks[0]); 
+                            character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback); 
                             customHitboxCallBacks.RemoveAt(0);
                         }
                     }

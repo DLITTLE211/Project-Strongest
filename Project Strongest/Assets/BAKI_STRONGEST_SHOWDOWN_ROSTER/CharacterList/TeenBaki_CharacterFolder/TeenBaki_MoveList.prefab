@@ -336,6 +336,7 @@ MonoBehaviour:
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    currentCustomAnim: 0
   - specialMoveName: Ultimate Guillotine Choke
     attackInput:
       attackString: 236236C
@@ -432,6 +433,7 @@ MonoBehaviour:
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    currentCustomAnim: 0
   CommandThrows:
   - specialMoveName: Spinning Lotus
     attackInput:
@@ -721,6 +723,7 @@ MonoBehaviour:
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    currentCustomAnim: 0
   CounterAttacks:
   - specialMoveName: Tiger King (Light)
     attackInput:
@@ -914,6 +917,7 @@ MonoBehaviour:
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    currentCustomAnim: 0
   - specialMoveName: Tiger King (Heavy)
     attackInput:
       attackString: 623D
@@ -1106,6 +1110,7 @@ MonoBehaviour:
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    currentCustomAnim: 0
   stanceSpecials:
   - StanceSpecialAttack_Name: Blink Strike (Heavy)
     stanceStartProperty:
@@ -2006,8 +2011,8 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        cancelFrom: 3
-        cancelTo: 8
+        cancelFrom: 7
+        cancelTo: 14
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}

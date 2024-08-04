@@ -260,7 +260,6 @@ public class Character_ComboDetection : MonoBehaviour
     }
     void SpecialInputVerifier(Character_ButtonInput input)
     {
-
         #region Custom Super Special Moves
         for (int i = 0; i < _base.CustomSuperAttackList.Count; i++)
         {
@@ -349,6 +348,7 @@ public class Character_ComboDetection : MonoBehaviour
             else
             {
                 _base.stanceRemoveList.Add(_base.stanceAttackList[i]);
+                //_base.stanceRemoveList[i].ResetCombo();
             }
             if (_base.stanceRemoveList.Count >= _base.stanceAttackList.Count)
             {
@@ -378,6 +378,7 @@ public class Character_ComboDetection : MonoBehaviour
             else
             {
                 _base.rekkaRemoveList.Add(_base.rekkaAttackList[i]);
+                //_base.rekkaAttackList[i].ResetCombo();
             }
             if (_base.rekkaRemoveList.Count >= _base.rekkaAttackList.Count)
             {

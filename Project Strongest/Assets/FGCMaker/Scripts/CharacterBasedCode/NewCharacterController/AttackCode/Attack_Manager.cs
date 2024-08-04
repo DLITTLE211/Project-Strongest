@@ -250,7 +250,7 @@ public class Attack_Manager : MonoBehaviour
             }
             else 
             {
-                if (newAttack.cancelProperty.cancelFrom >= lastState)
+                if (newAttack.cancelProperty.cancelTo >= lastState)
                 {
                     Debug.Log(" new Attack is of higher or equal value. Doing action");
                     return true;
