@@ -343,11 +343,11 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
-    public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
+    public void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
     {
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
-            await AwaitCustomCall(callback, superIteratorCallback);
+            StartCoroutine(AwaitCustomCall(callback, superIteratorCallback));
             return;
         }
         CheckCallback(callback);
@@ -545,7 +545,7 @@ public class Character_Base : MonoBehaviour
         }
     }
 
-    public async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
+    IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
         (WaitingEnumKey, AwaitCheck) stateCheck = new(WaitingEnumKey.NA, new AwaitCheck(null));
         for (int i = 0; i < awaitEnums.Count; i++)
@@ -560,7 +560,7 @@ public class Character_Base : MonoBehaviour
         while (!stateCheck.Item2.testCall(stateCheck.Item2.check) && _cAnimator.lastAttack != null)
         {
             CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-            await Task.Yield();
+            yield return new WaitForSeconds(1/60f);
         }
         awaitCondition = true;
 
@@ -568,7 +568,6 @@ public class Character_Base : MonoBehaviour
         {
             superIteratorCallback();
         }
-        return;
     }
 }
 [Serializable]
@@ -629,7 +628,6 @@ public class AwaitClass
 public class AwaitCheck
 {
     public bool check;
-    public Callback<bool> CallbackUpdate;
     public CallbackTest testCall;
 
     public AwaitCheck(CallbackTest _testCall) 
