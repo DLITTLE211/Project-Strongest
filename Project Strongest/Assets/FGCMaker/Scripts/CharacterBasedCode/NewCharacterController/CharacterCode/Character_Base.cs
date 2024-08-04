@@ -165,7 +165,11 @@ public class Character_Base : MonoBehaviour
     void SetAwaitEnums()
     {
         awaitEnums = new List<(WaitingEnumKey, AwaitCheck)>();
-        AwaitCheck awaitCheckSet = new AwaitCheck(() => SetBoolStates());
+        CallbackTest test = delegate (bool i) 
+        {
+            return SetBoolStates(i); 
+        };
+        AwaitCheck awaitCheckSet = new AwaitCheck(test);
         awaitEnums.Add(new(WaitingEnumKey.HitEndWall, awaitCheckSet)); 
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
@@ -448,12 +452,12 @@ public class Character_Base : MonoBehaviour
         _timer.TimerCountDown();
 
     }
-    bool SetBoolStates() 
+    bool SetBoolStates(bool check = false) 
     {
         if (!awaitCondition) 
         {
-            hitWallCheck = _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall;
-            return hitWallCheck;
+            check = _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall;
+            return check;
         }
         return false;
     }
@@ -553,12 +557,10 @@ public class Character_Base : MonoBehaviour
             }
         }
         awaitCondition = false;
-        while (!stateCheck.Item2.check && _cAnimator.lastAttack != null)
+        while (!stateCheck.Item2.testCall(stateCheck.Item2.check) && _cAnimator.lastAttack != null)
         {
             CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-            stateCheck.Item2.CallbackUpdate();
             await Task.Yield();
-
         }
         awaitCondition = true;
 
@@ -627,9 +629,13 @@ public class AwaitClass
 public class AwaitCheck
 {
     public bool check;
-    public Callback CallbackUpdate;
-    public AwaitCheck(Callback _CallbackUpdate) 
+    public Callback<bool> CallbackUpdate;
+    public CallbackTest testCall;
+
+    public AwaitCheck(CallbackTest _testCall) 
     {
-        CallbackUpdate = _CallbackUpdate;
+        testCall = _testCall;
     }
 }
+[Serializable]
+public delegate bool CallbackTest(bool i = false);
