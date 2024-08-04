@@ -141,7 +141,7 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
-    private List<(WaitingEnumKey, AwaitCheck)> awaitEnums;
+    private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
     private bool hitWallCheck;
     public bool awaitCondition;
 
@@ -164,13 +164,13 @@ public class Character_Base : MonoBehaviour
     }
     void SetAwaitEnums()
     {
-        awaitEnums = new List<(WaitingEnumKey, AwaitCheck)>();
+        awaitEnums = new Dictionary<WaitingEnumKey, AwaitCheck>();
         CallbackTest test = delegate (bool i) 
         {
             return SetBoolStates(i); 
         };
         AwaitCheck awaitCheckSet = new AwaitCheck(test);
-        awaitEnums.Add(new(WaitingEnumKey.HitEndWall, awaitCheckSet)); 
+        awaitEnums.Add(WaitingEnumKey.HitEndWall, awaitCheckSet); 
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -547,26 +547,21 @@ public class Character_Base : MonoBehaviour
 
     IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
-        (WaitingEnumKey, AwaitCheck) stateCheck = new(WaitingEnumKey.NA, new AwaitCheck(null));
-        for (int i = 0; i < awaitEnums.Count; i++)
+        if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
         {
-            if (awaitEnums[i].Item1 == customBoolAwait.awaitEnum.keyRef)
+            AwaitCheck stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
+            awaitCondition = false;
+            while (!stateCheck.testCall(stateCheck.check) && _cAnimator.lastAttack != null)
             {
-                stateCheck = awaitEnums[i];
-                break;
+                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
+                yield return new WaitForSeconds(1 / 60f);
             }
-        }
-        awaitCondition = false;
-        while (!stateCheck.Item2.testCall(stateCheck.Item2.check) && _cAnimator.lastAttack != null)
-        {
-            CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-            yield return new WaitForSeconds(1/60f);
-        }
-        awaitCondition = true;
+            awaitCondition = true;
 
-        if (_cAnimator.lastAttack != null)
-        {
-            superIteratorCallback();
+            if (_cAnimator.lastAttack != null)
+            {
+                superIteratorCallback();
+            }
         }
     }
 }
