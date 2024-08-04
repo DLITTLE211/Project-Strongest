@@ -36,7 +36,7 @@ public class Character_Force : MonoBehaviour
     private bool canToggleKinematic;
     public float xSpeed;
     bool sendingForce;
-    public bool beingPushed;
+    public bool beingPushed, stillnessCheck;
     public void Start()
     {
         isFrozen = false; 
@@ -90,39 +90,31 @@ public class Character_Force : MonoBehaviour
     {
         if (!beingPushed)
         {
-            if (_base._cAnimator.lastAttack == null)
+            if (checkAllowPush(_base._cStateMachine._playerState.current.State))
             {
-                if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.idleStateRef)
-                {
-                    if (_base._cAnimator.activatedInput == null)
-                    {
-                        if (_base.ReturnMovementInputs() != null)
-                        {
-                            if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
-                            {
-                                _myRB.drag = 100000;
-                                return;
-                            }
-                        }
-                    }
-                }
-                if (_base._cHurtBox.IsGrounded() && _base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
-                {
-                    if (_base._cAnimator.activatedInput == null)
-                    {
-                        if (_base.ReturnMovementInputs() != null)
-                        {
-                            if (_base.ReturnMovementInputs().Button_State.directionalInput < 4)
-                            {
-                                _myRB.drag = 100000;
-                                return;
-                            }
-                        }
-                    }
-                }
+                _myRB.drag = 100000;
+                return;
             }
         }
         _myRB.drag = 1;
+    }
+    bool checkAllowPush(IState curState) 
+    {
+        List<IState> acceptableHoldStates = new List<IState>();
+        acceptableHoldStates.Add(_base._cStateMachine.dashStateRef);
+        acceptableHoldStates.Add(_base._cStateMachine.idleStateRef);
+        bool attackAwaitCondition = true;
+        if (_base.opponentPlayer._cAnimator.lastAttack != null)
+        {
+            if (_base.opponentPlayer._cAnimator.lastAttack._moveType == MoveType.Super) 
+            {
+                attackAwaitCondition = _base.opponentPlayer.awaitCondition;
+            }
+        }
+        stillnessCheck = _base._cAnimator.lastAttack == null && acceptableHoldStates.Contains(curState) 
+            && _base._cHurtBox.IsGrounded() && _base._cAnimator.activatedInput == null && _base.ReturnMovementInputs() != null 
+            && (_base.ReturnMovementInputs().Button_State.directionalInput < 4 || _base.ReturnMovementInputs().Button_State.directionalInput == 5) && attackAwaitCondition;
+        return stillnessCheck;
     }
     public void HandleForceFreeze(bool state)
     {

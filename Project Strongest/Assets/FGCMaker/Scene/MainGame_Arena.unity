@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 50180543}
   m_Layer: 7
   m_Name: HurtBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 60956039}
   m_Layer: 7
   m_Name: Hitboxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 94923329}
   m_Layer: 7
   m_Name: Character_Player2
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1406,9 +1406,9 @@ MonoBehaviour:
   xVal: 0
   yVal: 0
   controllerYield:
-    positiveXYield: 0.25
-    positiveYYield: 0.85
-    negativeXYield: 0.25
+    positiveXYield: 0.45
+    positiveYYield: 0.75
+    negativeXYield: 0.45
     negativeYYield: 0.75
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
@@ -1441,6 +1441,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 1211425607}
   opponentPlayer: {fileID: 993311525}
+  awaitCondition: 0
   newField: 0
 --- !u!54 &94923330
 Rigidbody:
@@ -1498,7 +1499,7 @@ GameObject:
   - component: {fileID: 105695702}
   m_Layer: 7
   m_Name: HurtBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4265,7 +4266,7 @@ GameObject:
   - component: {fileID: 340028145}
   m_Layer: 7
   m_Name: Hitboxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4850,7 +4851,7 @@ GameObject:
   - component: {fileID: 405498831}
   m_Layer: 7
   m_Name: CollisionDetection
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5991,7 +5992,7 @@ GameObject:
   - component: {fileID: 454955342}
   m_Layer: 7
   m_Name: HB_Side_L
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6297,7 +6298,7 @@ GameObject:
   - component: {fileID: 475772376}
   m_Layer: 7
   m_Name: CollisionDetection
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6448,6 +6449,7 @@ MonoBehaviour:
   isFrozen: 0
   xSpeed: 0
   beingPushed: 0
+  stillnessCheck: 0
 --- !u!1 &498465947
 GameObject:
   m_ObjectHideFlags: 0
@@ -9041,7 +9043,7 @@ GameObject:
   - component: {fileID: 794000089}
   m_Layer: 7
   m_Name: HB_Side_R
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11550,7 +11552,7 @@ GameObject:
   - component: {fileID: 933904496}
   m_Layer: 7
   m_Name: TriggerBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12621,7 +12623,7 @@ GameObject:
   - component: {fileID: 993311525}
   m_Layer: 7
   m_Name: Character_Player1
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12743,9 +12745,9 @@ MonoBehaviour:
   xVal: 0
   yVal: 0
   controllerYield:
-    positiveXYield: 0.25
-    positiveYYield: 0.85
-    negativeXYield: 0.25
+    positiveXYield: 0.45
+    positiveYYield: 0.75
+    negativeXYield: 0.45
     negativeYYield: 0.75
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
@@ -12778,6 +12780,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 434338341}
   opponentPlayer: {fileID: 94923329}
+  awaitCondition: 0
   newField: 0
 --- !u!1 &996888123
 GameObject:
@@ -13603,6 +13606,7 @@ MonoBehaviour:
   isFrozen: 0
   xSpeed: 0
   beingPushed: 0
+  stillnessCheck: 0
 --- !u!1 &1064684077
 GameObject:
   m_ObjectHideFlags: 0
@@ -14163,7 +14167,7 @@ GameObject:
   - component: {fileID: 1097998283}
   m_Layer: 7
   m_Name: HB_Side_L
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15760,7 +15764,7 @@ GameObject:
   - component: {fileID: 1267981851}
   m_Layer: 7
   m_Name: TriggerBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23158,7 +23162,7 @@ GameObject:
   - component: {fileID: 2077968776}
   m_Layer: 7
   m_Name: HB_Side_R
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

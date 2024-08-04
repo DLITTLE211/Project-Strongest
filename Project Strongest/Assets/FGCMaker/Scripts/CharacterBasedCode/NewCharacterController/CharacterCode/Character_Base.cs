@@ -38,6 +38,7 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
+
     #region Rewired Controls
     [Header("__________REWIRED CONTROLS__________")]
     public int playerID;
@@ -141,6 +142,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     private Dictionary<WaitingEnumKey, bool> awaitEnums;
+    public bool awaitCondition;
 
     [SerializeField]
     public int newField;
@@ -157,11 +159,12 @@ public class Character_Base : MonoBehaviour
         SetAwaitEnums();
         _cComboCounter.SetStartComboCounter();
         _cAnimator.canTransitionIdle = true;
+        awaitCondition = true;
     }
     void SetAwaitEnums()
     {
         awaitEnums = new Dictionary<WaitingEnumKey, bool>();
-        awaitEnums.Add(WaitingEnumKey.HitEndWall, _sideManager.LeftWall.wallIgnore.playerHitEndWall ^ _sideManager.RightWall.wallIgnore.playerHitEndWall);
+        awaitEnums.Add(WaitingEnumKey.HitEndWall, _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall);
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -330,7 +333,6 @@ public class Character_Base : MonoBehaviour
                     moveAxes.Add(newButton);
                 }
             }
-
         }
     }
     #endregion
@@ -532,11 +534,13 @@ public class Character_Base : MonoBehaviour
         if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
         {
             bool stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
-            while (!stateCheck) 
+            awaitCondition = false;
+            while (!stateCheck)
             {
                 CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
                 await Task.Yield();
             }
+            awaitCondition = true;
             superIteratorCallback();
             return;
         }

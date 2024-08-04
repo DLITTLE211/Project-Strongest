@@ -11,7 +11,7 @@ public class StageWallColliderIgnore : MonoBehaviour
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(),this.GetComponent<Collider>());
         }
-        if (collision.gameObject.tag == "CameraWall")
+        if (collision.gameObject.tag == "CollisionBox" || collision.gameObject.tag == "PCharacter")
         {
             playerHitEndWall = true;
         }
@@ -25,7 +25,7 @@ public class StageWallColliderIgnore : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "CameraWall")
+        if (collision.gameObject.tag == "CollisionBox" || collision.gameObject.tag == "PCharacter")
         {
             playerHitEndWall = false;
         }
