@@ -345,7 +345,7 @@ public class Character_Animator : MonoBehaviour
         ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
         StartCoroutine(ThrowAttackRoutine);
     }
-    public void StartSuperFrameCount(Attack_BaseProperties superProperty, AttackHandler_Attack superCustom)
+    public void StartSuperFrameCount(Attack_BaseProperties superProperty, AttackHandler_Attack superCustom, Callback nextAnimIterator = null)
     {
         if (BasicAttackRoutine != null)
         {
@@ -354,7 +354,7 @@ public class Character_Animator : MonoBehaviour
         }
         lastAttack = superProperty;
         PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate), true);
-        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom);
+        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, nextAnimIterator);
         StartCoroutine(SuperAttackRoutine);
     }
     public void AddForceOnAttack(float forceValue)

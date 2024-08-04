@@ -335,11 +335,11 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
-    public async void ReceiveCustomCallBack(CustomCallback callback) 
+    public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
     {
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
-            await AwaitCustomCall(callback);
+            await AwaitCustomCall(callback, superIteratorCallback);
             return;
         }
         CheckCallback(callback);
@@ -527,7 +527,7 @@ public class Character_Base : MonoBehaviour
         }
     }
 
-    public async Task AwaitCustomCall(CustomCallback customBoolAwait)
+    public async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
         if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
         {
@@ -537,6 +537,7 @@ public class Character_Base : MonoBehaviour
                 CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
                 await Task.Yield();
             }
+            superIteratorCallback();
             return;
         }
     }

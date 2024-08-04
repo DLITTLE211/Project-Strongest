@@ -212,10 +212,17 @@ public class AttackHandler_Attack : AttackHandler_Base
             for (int i = 0; i < _frameData._extraPoints.Count; i++)
             {
                 _frameData._extraPoints[i].hitFrameBool = false;
-                CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints,
-                    _frameData._extraPoints[i].hitFrameBool, _frameData._extraPoints[i].camPos,
-                    _frameData._extraPoints[i].camRotation, _frameData._extraPoints[i].Force,
-                    _frameData._extraPoints[i].projectileSpeed, _frameData._extraPoints[i].snapMovement, _frameData._extraPoints[i].customDamage, _frameData._extraPoints[i].awaitEnum);
+                CustomCallback customCallback = 
+                    new CustomCallback(_frameData._extraPoints[i].call, 
+                    _frameData._extraPoints[i].hitFramePoints,
+                    _frameData._extraPoints[i].hitFrameBool,
+                    _frameData._extraPoints[i].camPos,
+                    _frameData._extraPoints[i].camRotation, 
+                    _frameData._extraPoints[i].Force,
+                    _frameData._extraPoints[i].projectileSpeed,
+                    _frameData._extraPoints[i].snapMovement,
+                    _frameData._extraPoints[i].customDamage,
+                    _frameData._extraPoints[i].awaitEnum);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -285,7 +292,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
         }
     }
-    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp)
+    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp,Callback superIteratorCallback = null)
     {
         frameCount = 0;
         if (!_playerCAnimator.canTick) 
