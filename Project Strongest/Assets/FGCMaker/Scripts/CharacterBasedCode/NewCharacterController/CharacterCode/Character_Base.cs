@@ -165,7 +165,8 @@ public class Character_Base : MonoBehaviour
     void SetAwaitEnums()
     {
         awaitEnums = new List<(WaitingEnumKey, AwaitCheck)>();
-        awaitEnums.Add(new(WaitingEnumKey.HitEndWall, new AwaitCheck(() => SetBoolStates()))); 
+        AwaitCheck awaitCheckSet = new AwaitCheck(() => SetBoolStates());
+        awaitEnums.Add(new(WaitingEnumKey.HitEndWall, awaitCheckSet)); 
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
