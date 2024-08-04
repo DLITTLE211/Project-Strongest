@@ -13,6 +13,7 @@ public class State_CustomSuper : BaseState
         if (_base._cAnimator.lastAttack._moveType == MoveType.Super && _cAnim.customSuperHit)
         {
             _base._cComboDetection.inSuper = true;
+            _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
     }
     public override void OnUpdate()

@@ -551,15 +551,18 @@ public class Character_Base : MonoBehaviour
             }
         }
         awaitCondition = false;
-        while (!stateCheck.Item2.check)
+        if (_cAnimator.lastAttack != null)
         {
-            CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-            await Task.Yield();
-            stateCheck.Item2.CallbackUpdate();
+            while (!stateCheck.Item2.check)
+            {
+                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
+                await Task.Yield();
+                stateCheck.Item2.CallbackUpdate();
 
+            }
+            awaitCondition = true;
+            superIteratorCallback();
         }
-        awaitCondition = true;
-        superIteratorCallback();
         return;
 
     }

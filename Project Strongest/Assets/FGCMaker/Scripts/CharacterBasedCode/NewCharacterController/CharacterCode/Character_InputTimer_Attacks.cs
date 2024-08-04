@@ -7,7 +7,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 {
     public Character_Base _base;
     public TimerType _type;
-    private bool throwLanded;
+    private bool throwLanded, superLanded;
     private bool permanentStance;
     // Start is called before the first frame update
     public void ResetTimer()
@@ -54,7 +54,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         {
             if (!permanentStance)
             {
-                if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
+                if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded && !superLanded)
                 {
                     CountDownTimer();
                     return;
@@ -64,7 +64,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         }
         else
         {
-            if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded)
+            if (CheckForInput && _base._cAnimator.inputWindowOpen && !throwLanded && !superLanded)
             {
                 CountDownTimer();
             }
@@ -92,6 +92,16 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public void PauseTimerOnThrowSuccess()
     {
         throwLanded = true;
+    }
+    public void PauseTimerOnSuperSuccess()
+    {
+        superLanded = true;
+    }
+    public void ClearSuperLanded()
+    {
+        superLanded = false;
+        FrameCountTimer = -1 / 60f;
+        CountDownTimer();
     }
     public void ClearThrowLanded()
     {

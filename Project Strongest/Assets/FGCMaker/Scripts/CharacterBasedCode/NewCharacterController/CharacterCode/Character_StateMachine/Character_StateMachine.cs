@@ -254,10 +254,7 @@ public class Character_StateMachine : MonoBehaviour
         if (_base._cAnimator.lastAttack != null)
         {
             _attackIsSuper = _base._cAnimator.lastAttack._moveType == MoveType.Super;
-            bool notCounter = !At_2Counter();
-            bool notThrow = !At_2Throw();
-            bool anAttack = ToAttackState();
-            bool fullCheck = _attackIsSuper && notCounter && notThrow && anAttack;
+            bool fullCheck = _attackIsSuper ;
             return fullCheck;
         }
         return false;

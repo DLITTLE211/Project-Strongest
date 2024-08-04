@@ -300,7 +300,14 @@ public class AttackHandler_Attack : AttackHandler_Base
             _playerCAnimator.canTick = true;
         }
         float waitTime = 1f / 60f;
-        character._cAttackTimer.PauseTimerOnThrowSuccess();
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
+        {
+            character._cAttackTimer.PauseTimerOnThrowSuccess();
+        }
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            character._cAttackTimer.PauseTimerOnSuperSuccess();
+        }
         while (frameCount <= throwProp.animLength)
         {
             try
