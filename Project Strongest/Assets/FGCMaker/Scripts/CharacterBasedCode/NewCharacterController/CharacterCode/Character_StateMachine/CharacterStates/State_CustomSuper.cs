@@ -10,10 +10,13 @@ public class State_CustomSuper : BaseState
     }
     public override void OnEnter()
     {
-        if (_base._cAnimator.lastAttack._moveType == MoveType.Super && _cAnim.customSuperHit)
+        Attack_BaseProperties hitboxProperty = _base.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
+        if (hitboxProperty._moveType == MoveType.Super)
         {
             _base._cComboDetection.inSuper = true;
-            _base._cAttackTimer.PauseTimerOnSuperSuccess();
+            _base._cAttackTimer.SetTimerType(TimerType.Super);
+            _cAnim._lastAttackState = Character_Animator.lastAttackState.populated;
+            _cAnim.lastAttack = hitboxProperty;
         }
     }
     public override void OnUpdate()
@@ -28,6 +31,7 @@ public class State_CustomSuper : BaseState
     public override void OnExit()
     {
         _base._cComboDetection.inSuper = false;
+        _base._cAttackTimer.SetTimerType(TimerType.Normal);
         base.OnExit();
     }
 }

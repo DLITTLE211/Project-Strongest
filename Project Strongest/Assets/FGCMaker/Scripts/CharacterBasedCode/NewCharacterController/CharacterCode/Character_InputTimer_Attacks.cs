@@ -82,6 +82,11 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             {
                 SetStartStanceTimerValues(newTime);
             }
+            if (newType == TimerType.Super)
+            {
+                superLanded = true;
+                SetStartingValues(newTime);
+            }
         }
         else
         {
@@ -168,4 +173,5 @@ public enum TimerType
     Normal,
     InRekka,
     InStance,
+    Super,
 }

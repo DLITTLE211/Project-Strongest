@@ -346,17 +346,18 @@ public class Character_Animator : MonoBehaviour
         ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
         StartCoroutine(ThrowAttackRoutine);
     }
-    public void StartSuperFrameCount(Attack_BaseProperties superProperty, AttackHandler_Attack superCustom, Callback nextAnimIterator = null)
+    public void StartSuperFrameCount(Attack_BaseProperties superProperty, int curAnim,int animCount,AttackHandler_Attack superCustom, Callback nextAnimIterator = null)
     {
         if (BasicAttackRoutine != null)
         {
             StopCoroutine(BasicAttackRoutine);
             BasicAttackRoutine = null;
         }
-        customSuperHit = true;
         lastAttack = superProperty;
+        customSuperHit = true;
+        _base._cAttackTimer.PauseTimerOnSuperSuccess();
         PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate), true);
-        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, nextAnimIterator);
+        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, curAnim, animCount, nextAnimIterator);
         StartCoroutine(SuperAttackRoutine);
     }
     public void AddForceOnAttack(float forceValue)
@@ -459,10 +460,6 @@ public class Character_Animator : MonoBehaviour
                 ClearLastAttack();
             }
         }
-    }
-    void ClearRoutine(IEnumerator routine) 
-    {
-        routine = null;
     }
     #endregion
 }

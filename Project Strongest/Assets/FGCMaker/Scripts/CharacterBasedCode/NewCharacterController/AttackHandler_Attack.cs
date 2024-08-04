@@ -292,10 +292,10 @@ public class AttackHandler_Attack : AttackHandler_Base
             _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
         }
     }
-    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp,Callback superIteratorCallback = null)
+    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
         frameCount = 0;
-        if (!_playerCAnimator.canTick) 
+        if (!_playerCAnimator.canTick)
         {
             _playerCAnimator.canTick = true;
         }
@@ -328,7 +328,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                         float curCustomTimeStamp = waitTime * customHitboxCallBacks[0].timeStamp;
                         if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
-                            character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback); 
+                            character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
                             customHitboxCallBacks.RemoveAt(0);
                         }
                     }
@@ -347,8 +347,18 @@ public class AttackHandler_Attack : AttackHandler_Base
             frameCount += 1f * waitTime;
             yield return new WaitForSeconds(waitTime);
         }
-        character._cAttackTimer.ClearThrowLanded();
-        _playerCAnimator.SetCanTransitionIdle(true);
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            if (curAnim >= animCount)
+            {
+                character._cAttackTimer.ClearSuperLanded();
+                _playerCAnimator.SetCanTransitionIdle(true);
+            }
+        }
+        else
+        {
+            _playerCAnimator.SetCanTransitionIdle(true);
+        }
         if (requiredHitboxCallBacks.Count == 1)
         {
             requiredHitboxCallBacks[0].func();

@@ -542,29 +542,30 @@ public class Character_Base : MonoBehaviour
 
     public async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
-        (WaitingEnumKey, AwaitCheck) stateCheck = new (WaitingEnumKey.NA, new AwaitCheck(null));
+        (WaitingEnumKey, AwaitCheck) stateCheck = new(WaitingEnumKey.NA, new AwaitCheck(null));
         for (int i = 0; i < awaitEnums.Count; i++)
         {
             if (awaitEnums[i].Item1 == customBoolAwait.awaitEnum.keyRef)
             {
                 stateCheck = awaitEnums[i];
+                break;
             }
         }
         awaitCondition = false;
+        while (!stateCheck.Item2.check && _cAnimator.lastAttack != null)
+        {
+            CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
+            stateCheck.Item2.CallbackUpdate();
+            await Task.Yield();
+
+        }
+        awaitCondition = true;
+
         if (_cAnimator.lastAttack != null)
         {
-            while (!stateCheck.Item2.check)
-            {
-                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-                await Task.Yield();
-                stateCheck.Item2.CallbackUpdate();
-
-            }
-            awaitCondition = true;
             superIteratorCallback();
         }
         return;
-
     }
 }
 [Serializable]

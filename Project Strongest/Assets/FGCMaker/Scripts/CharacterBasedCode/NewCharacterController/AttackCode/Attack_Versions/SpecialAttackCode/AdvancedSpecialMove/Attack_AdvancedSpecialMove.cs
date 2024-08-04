@@ -267,7 +267,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
         _customAnimation[currentCustomAnim].SetAttackAnim(curBase._cAnimator);
         _customAnimation[currentCustomAnim].AddRequiredCallbacks(curBase);
         _customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimation[currentCustomAnim]);
-        curBase._cAnimator.StartSuperFrameCount(property, _customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
+        curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimation.Count-1, _customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
     }
     public void PlayNextCustomAnim() 
     {
