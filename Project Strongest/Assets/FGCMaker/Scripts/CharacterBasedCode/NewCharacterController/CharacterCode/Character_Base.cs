@@ -141,7 +141,8 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
-    private Dictionary<WaitingEnumKey, bool> awaitEnums;
+    private List<(WaitingEnumKey, AwaitCheck)> awaitEnums;
+    private bool hitWallCheck;
     public bool awaitCondition;
 
     [SerializeField]
@@ -163,8 +164,8 @@ public class Character_Base : MonoBehaviour
     }
     void SetAwaitEnums()
     {
-        awaitEnums = new Dictionary<WaitingEnumKey, bool>();
-        awaitEnums.Add(WaitingEnumKey.HitEndWall, _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall);
+        awaitEnums = new List<(WaitingEnumKey, AwaitCheck)>();
+        awaitEnums.Add(new(WaitingEnumKey.HitEndWall, new AwaitCheck(hitWallCheck, () => SetBoolStates()))); 
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -444,6 +445,14 @@ public class Character_Base : MonoBehaviour
         _cADetection.CheckButtonPressed();
         _cADetection.CallReturnButton();
         _timer.TimerCountDown();
+
+    }
+    void SetBoolStates() 
+    {
+        if (!awaitCondition) 
+        {
+            hitWallCheck = _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -531,19 +540,26 @@ public class Character_Base : MonoBehaviour
 
     public async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
-        if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
+        (WaitingEnumKey, AwaitCheck) stateCheck = false;
+        for (int i = 0; i < awaitEnums.Count; i++)
         {
-            bool stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
-            awaitCondition = false;
-            while (!stateCheck)
+            if (awaitEnums[i].Item1 == customBoolAwait.awaitEnum.keyRef)
             {
-                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-                await Task.Yield();
+                stateCheck = awaitEnums[i];
             }
-            awaitCondition = true;
-            superIteratorCallback();
-            return;
         }
+        awaitCondition = false;
+        while (!stateCheck.Item2.check)
+        {
+            CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
+            await Task.Yield();
+            stateCheck.Item2.CallbackUpdate();
+
+        }
+        awaitCondition = true;
+        superIteratorCallback();
+        return;
+
     }
 }
 [Serializable]
@@ -599,4 +615,15 @@ public class AwaitClass
 {
     public WaitingEnumKey keyRef;
     public HitPointCall awaitingCheck;
+}
+[Serializable]
+public class AwaitCheck
+{
+    public bool check;
+    public Callback CallbackUpdate;
+    public AwaitCheck(bool _check, Callback _CallbackUpdate) 
+    {
+        check = _check;
+        CallbackUpdate = _CallbackUpdate;
+    }
 }
