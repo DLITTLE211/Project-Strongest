@@ -280,6 +280,14 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            if (character._cAttackTimer._type == TimerType.Super)
+            {
+                character._cAttackTimer.ClearSuperLanded();
+            }
+        }
+        _playerCAnimator.SetCanTransitionIdle(true);
         if (lastAttack._moveType == MoveType.Throw)
         {
             if (!lastAttack.hitConnected)
@@ -357,6 +365,10 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         else
         {
+            if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
+            {
+                character._cAttackTimer.ClearThrowLanded();
+            }
             _playerCAnimator.SetCanTransitionIdle(true);
         }
         if (requiredHitboxCallBacks.Count == 1)
