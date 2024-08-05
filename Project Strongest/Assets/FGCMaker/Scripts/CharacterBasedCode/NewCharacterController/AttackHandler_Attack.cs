@@ -229,7 +229,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
-        if (lastAttack._moveType == MoveType.Counter) 
+        if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
@@ -280,7 +280,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        if (lastAttack._moveType == MoveType.Super)
         {
             if (character._cAttackTimer._type == TimerType.Super)
             {

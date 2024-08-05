@@ -50,17 +50,18 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             counterHitMult = 1;
         }
-        currentComboHitCount = getCurrentComboHitCount();
-
         float counterHitCalculation = (curRawDamage * counterHitMult) - curRawDamage;
-        float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
+        float counterHitValue = counterHitCalculation <= 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
+        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
-
-        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         UpdateDamageText(calculatedDamage);
+        if (calculatedRecovDamage == Mathf.Infinity)
+        {
+            calculatedRecovDamage = calculatedDamage;
+        }
+        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
     }
     public void TakeDamage(Attack_BaseProperties currentAttack)
@@ -81,7 +82,7 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
+        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
 
         if (currentAttack._meterRequirement <= 0)
@@ -93,7 +94,7 @@ public class Character_DamageCalculator : MonoBehaviour
         UpdateDamageText(calculatedDamage);
         if (calculatedRecovDamage == Mathf.Infinity)
         {
-            calculatedRecovDamage = 0;
+            calculatedRecovDamage = calculatedDamage;
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));

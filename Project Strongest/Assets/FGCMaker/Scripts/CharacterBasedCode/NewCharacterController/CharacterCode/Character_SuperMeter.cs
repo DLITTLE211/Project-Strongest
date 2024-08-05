@@ -99,7 +99,7 @@ public class Character_SuperMeter : MonoBehaviour
         {
             if (checkLowerPossibleTier(calcValue))
             {
-                meterTier -= 1;
+                meterTier -= calcValue;
                 SetMeterTierText();
                 superMeter.currentValue -= (calcValue * meterMaxThreshold);
                 superMeter.currentValue += meterMaxThreshold;
