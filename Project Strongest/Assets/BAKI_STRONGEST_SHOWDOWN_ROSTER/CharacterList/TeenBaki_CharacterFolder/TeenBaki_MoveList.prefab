@@ -88,9 +88,9 @@ MonoBehaviour:
         hu_size: {x: 1.35, y: 1.35}
         _frameData:
           init: 0
-          startup: 26
-          active: 27
-          inactive: 40
+          startup: 22
+          active: 23
+          inactive: 35
           recovery: 0
           lastFrame: 0
           _extraPoints:
@@ -100,7 +100,7 @@ MonoBehaviour:
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 9
+            Force: 15
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 2
+            Force: 3
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
