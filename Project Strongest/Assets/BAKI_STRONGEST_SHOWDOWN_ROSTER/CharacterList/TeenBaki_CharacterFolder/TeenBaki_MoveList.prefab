@@ -531,7 +531,7 @@ MonoBehaviour:
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
-  - specialMoveName: Demon Blood Activation (Ultr)
+  - specialMoveName: Demon Blood Activation (Ultra)
     attackInput:
       attackString: 236236D
       attackStringArray: 
@@ -559,7 +559,7 @@ MonoBehaviour:
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
-        animClip: {fileID: 0}
+        animClip: {fileID: -4431683996302900706, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
         animName: 
         animLength: 0
         HitBox: {fileID: 0}
@@ -575,7 +575,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 0
-          active: 0
+          active: 1
           inactive: 145
           recovery: 0
           lastFrame: 0
@@ -2219,73 +2219,6 @@ MonoBehaviour:
       KnockDown: 1
     attackInput:
       attackString: 236236A
-      attackStringArray: 
-    attackInputState:
-      _state: 0
-      directionalInput: 0
-    curInput: 0
-    movementPortionLength: 0
-    finalAttackButton: 0
-    moveComplete: 0
-    framesBetweenAttacks: 0
-  - BasicSpecialAttack_Name: Demon Blood Activation (Ultra)
-    property:
-      _attackName: 
-      _cTimer: {fileID: 0}
-      rawAttackDamage: 0
-      counterHitDamageMult: 0
-      hitstopValue: 1
-      hitstunValue: 1
-      hitLevel: 0
-      attackHashes: 
-      _meterRequirement: 3
-      _meterAwardedOnHit: 0
-      attackScalingPercent: 0
-      dashCancelable: 0
-      JumpCancelable: 0
-      _airInfo: 0
-      cancelProperty:
-        cancelFrom: 1
-        cancelTo: 0
-      _moveType: 4
-      AttackAnims:
-        playerAnim: {fileID: 0}
-        animClip: {fileID: -4431683996302900706, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-        animName: 
-        animLength: 0
-        HitBox: {fileID: 0}
-        attackType: 7
-        hb_placement: {x: 0, y: 0, z: 0}
-        hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0, y: 0}
-        extendedHitBox: {fileID: 0}
-        hurtType: 7
-        hu_placement: {x: 0, y: 0, z: 0}
-        hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0, y: 0}
-        _frameData:
-          init: 0
-          startup: 0
-          active: 0
-          inactive: 145
-          recovery: 0
-          lastFrame: 0
-          _extraPoints: []
-        _hitCount:
-          _count: 0
-          _startCount: 0
-          _refreshRate: 0
-          _startRefreshRate: 0
-      hitConnected: 0
-      lateralKBP:
-        lateralKBP: 0
-        Value: 0
-      verticalKBP:
-        verticalKBP: 0
-        Value: 0
-      KnockDown: 0
-    attackInput:
-      attackString: 236236D
       attackStringArray: 
     attackInputState:
       _state: 0
