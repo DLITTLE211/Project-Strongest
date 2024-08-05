@@ -2610,14 +2610,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0.55, y: 0.55, z: 0}
+            hb_placement: {x: 0.75, y: 0.75, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0.35, y: 0.35}
+            hb_size: {x: 0.55, y: 0.35}
             extendedHitBox: {fileID: 0}
             hurtType: 0
             hu_placement: {x: 0.55, y: 0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0.4, y: 0.4}
+            hu_size: {x: 0.65, y: 0.6}
             _frameData:
               init: 0
               startup: 5
@@ -2673,17 +2673,17 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1, y: 0.25, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 1.15, y: 0.8}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 1, y: 0.25, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1.35, y: 0.9}
             _frameData:
               init: 0
-              startup: 11
+              startup: 3
               active: 12
               inactive: 18
               recovery: 0
@@ -2736,14 +2736,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1, y: 0.45, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.75, y: 0.95}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 1, y: 0.45, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.85, y: 1.45}
             _frameData:
               init: 0
               startup: 11

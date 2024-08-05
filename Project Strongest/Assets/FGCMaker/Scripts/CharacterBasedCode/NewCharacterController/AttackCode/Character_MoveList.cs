@@ -252,11 +252,11 @@ public class Character_MoveList : MonoBehaviour
             switch (attack._moveType)
             {
                 case MoveType.Normal:
-                    for (int i = 0; i < simpleAttacks.Count; i++)
+                    for (int i = 0; i < simpleAttackProperties.Count; i++)
                     {
                         try
                         {
-                            if (simpleAttacks[i]._attackInput._correctInput[currentPathData._curInputPath].property.AttackAnims.animName == attack.AttackAnims.animName)
+                            if (simpleAttackProperties[i].AttackAnims.animName == attack.AttackAnims.animName)
                             {
                                 attacker._cComboCounter.OnHit_CountUp();
                                 simpleAttacks[i].SendCounterHitInfo(currentPathData, target);

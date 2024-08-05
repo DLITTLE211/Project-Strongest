@@ -162,6 +162,10 @@ public class CollisionDetection : MonoBehaviour
     {
         if (allowHitCheck) 
         {
+            if (!lastHitbox.gameObject.activeInHierarchy) 
+            {
+                lastHitbox.gameObject.SetActive(true);
+            }
             CheckForCollision(lastHitbox);
         }
     }
