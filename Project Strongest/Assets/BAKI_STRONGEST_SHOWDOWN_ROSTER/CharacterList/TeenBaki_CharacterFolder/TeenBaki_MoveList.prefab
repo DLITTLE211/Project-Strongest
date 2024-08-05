@@ -45,6 +45,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicSuperAttacks:
+  - specialMoveName: Ultimate Guillotine Choke
+    attackInput:
+      attackString: 236236C
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 20
+      counterHitDamageMult: 0
+      hitstopValue: 25
+      hitstunValue: 15
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 3
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 0
+      _moveType: 4
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 5464064686492668912, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 1
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      hitConnected: 0
+      lateralKBP:
+        lateralKBP: 1
+        Value: 2
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 2
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: 3120397125411222643, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 7
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+    currentCustomAnim: 0
   - specialMoveName: Triceratops Fist
     attackInput:
       attackString: 214214B
@@ -427,6 +524,76 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+    currentCustomAnim: 0
+  - specialMoveName: Demon Blood Activation (Ultr)
+    attackInput:
+      attackString: 236236D
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: Blood Activation (Super)
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 1
+      hitstunValue: 1
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 3
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 0
+      _moveType: 4
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 0}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 7
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 7
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 145
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      hitConnected: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    _customAnimation: []
     curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0

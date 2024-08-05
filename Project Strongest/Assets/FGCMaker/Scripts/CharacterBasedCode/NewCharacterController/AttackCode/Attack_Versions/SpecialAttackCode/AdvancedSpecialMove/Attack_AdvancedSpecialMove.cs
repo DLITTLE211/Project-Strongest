@@ -264,10 +264,15 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {
-        _customAnimation[currentCustomAnim].SetAttackAnim(curBase._cAnimator);
-        _customAnimation[currentCustomAnim].AddRequiredCallbacks(curBase);
-        _customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimation[currentCustomAnim]);
-        curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimation.Count-1, _customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
+        if (_customAnimation.Count > 0)
+        {
+            _customAnimation[currentCustomAnim].SetAttackAnim(curBase._cAnimator);
+            _customAnimation[currentCustomAnim].AddRequiredCallbacks(curBase);
+            _customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimation[currentCustomAnim]);
+            curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimation.Count - 1, _customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
+            return;
+        }
+        return;
     }
     public void PlayNextCustomAnim() 
     {
