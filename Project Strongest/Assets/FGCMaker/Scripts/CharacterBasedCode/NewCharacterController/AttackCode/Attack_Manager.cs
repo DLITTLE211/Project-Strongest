@@ -80,7 +80,7 @@ public class Attack_Manager : MonoBehaviour
         {
             if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
             {
-                if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+                if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelFrom, newAttack)))
                 {
                     Combo.RemoveAt(index);
                     return;

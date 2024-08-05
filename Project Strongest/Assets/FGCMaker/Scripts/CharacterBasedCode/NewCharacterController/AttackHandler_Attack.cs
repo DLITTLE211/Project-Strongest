@@ -235,6 +235,10 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         frameCount = 0;
         float waitTime = 1f / 60f;
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            character._cAttackTimer.PauseTimerOnSuperSuccess();
+        }
         character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
