@@ -45,55 +45,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicSuperAttacks:
-  - specialMoveName: Ultimate Guillotine Choke
+  - specialMoveName: Cockroach Dash (Super)
     attackInput:
-      attackString: 236236C
+      attackString: 236236A
       attackStringArray: 
     attackInputState:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: 
+      _attackName: Dash Attack
       _cTimer: {fileID: 0}
-      rawAttackDamage: 20
+      rawAttackDamage: 18
       counterHitDamageMult: 0
-      hitstopValue: 25
-      hitstunValue: 15
-      hitLevel: 0
+      hitstopValue: 30
+      hitstunValue: 25
+      hitLevel: 4
       attackHashes: 
-      _meterRequirement: 3
+      _meterRequirement: 1
       _meterAwardedOnHit: 0
-      attackScalingPercent: 0
+      attackScalingPercent: 10
       dashCancelable: 0
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
         cancelFrom: 1
-        cancelTo: 0
+        cancelTo: 14
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
-        animClip: {fileID: 5464064686492668912, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animClip: {fileID: -354913261071876262, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
         animName: 
         animLength: 0
         HitBox: {fileID: 0}
         attackType: 1
-        hb_placement: {x: 0, y: 0, z: 0}
+        hb_placement: {x: 0.5, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0, y: 0}
+        hb_size: {x: 1, y: 1}
         extendedHitBox: {fileID: 0}
         hurtType: 0
-        hu_placement: {x: 0, y: 0, z: 0}
+        hu_placement: {x: 0.5, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0, y: 0}
+        hu_size: {x: 1.35, y: 1.35}
         _frameData:
           init: 0
-          startup: 0
-          active: 0
-          inactive: 0
+          startup: 26
+          active: 27
+          inactive: 40
           recovery: 0
           lastFrame: 0
-          _extraPoints: []
+          _extraPoints:
+          - hitFramePoints: 15
+            call: 4
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 7
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
+              lateralKBP:
+                lateralKBP: 0
+                Value: 0
+              verticalKBP:
+                verticalKBP: 0
+                Value: 0
+              KnockDown: 0
+          - hitFramePoints: 15
+            call: 8
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 4
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
+              lateralKBP:
+                lateralKBP: 0
+                Value: 0
+              verticalKBP:
+                verticalKBP: 0
+                Value: 0
+              KnockDown: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -101,40 +149,13 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitConnected: 0
       lateralKBP:
-        lateralKBP: 1
-        Value: 2
+        lateralKBP: 4
+        Value: 9
       verticalKBP:
-        verticalKBP: 0
-        Value: 0
-      KnockDown: 2
-    _customAnimation:
-    - playerAnim: {fileID: 0}
-      animClip: {fileID: 3120397125411222643, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-      animName: 
-      animLength: 0
-      HitBox: {fileID: 0}
-      attackType: 7
-      hb_placement: {x: 0, y: 0, z: 0}
-      hb_orientation: {x: 0, y: 0, z: 0}
-      hb_size: {x: 0, y: 0}
-      extendedHitBox: {fileID: 0}
-      hurtType: 7
-      hu_placement: {x: 0, y: 0, z: 0}
-      hu_orientation: {x: 0, y: 0, z: 0}
-      hu_size: {x: 0, y: 0}
-      _frameData:
-        init: 0
-        startup: 0
-        active: 0
-        inactive: 0
-        recovery: 0
-        lastFrame: 0
-        _extraPoints: []
-      _hitCount:
-        _count: 0
-        _startCount: 0
-        _refreshRate: 0
-        _startRefreshRate: 0
+        verticalKBP: 1
+        Value: 3
+      KnockDown: 1
+    _customAnimation: []
     curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
@@ -2161,73 +2182,6 @@ MonoBehaviour:
     inRekkaState: 0
     usedRekkas: []
   special_Simple:
-  - BasicSpecialAttack_Name: Cockroach Dash (Super)
-    property:
-      _attackName: Cockroach Dash
-      _cTimer: {fileID: 0}
-      rawAttackDamage: 30
-      counterHitDamageMult: 1
-      hitstopValue: 30
-      hitstunValue: 25
-      hitLevel: 4
-      attackHashes: 
-      _meterRequirement: 1
-      _meterAwardedOnHit: 0
-      attackScalingPercent: 10
-      dashCancelable: 0
-      JumpCancelable: 0
-      _airInfo: 0
-      cancelProperty:
-        cancelFrom: 7
-        cancelTo: 14
-      _moveType: 4
-      AttackAnims:
-        playerAnim: {fileID: 0}
-        animClip: {fileID: -354913261071876262, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-        animName: 
-        animLength: 0
-        HitBox: {fileID: 0}
-        attackType: 0
-        hb_placement: {x: 0, y: 0, z: 0}
-        hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0, y: 0}
-        extendedHitBox: {fileID: 0}
-        hurtType: 0
-        hu_placement: {x: 0, y: 0, z: 0}
-        hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0, y: 0}
-        _frameData:
-          init: 0
-          startup: 26
-          active: 27
-          inactive: 40
-          recovery: 0
-          lastFrame: 0
-          _extraPoints: []
-        _hitCount:
-          _count: 0
-          _startCount: 0
-          _refreshRate: 0
-          _startRefreshRate: 0
-      hitConnected: 0
-      lateralKBP:
-        lateralKBP: 4
-        Value: 9
-      verticalKBP:
-        verticalKBP: 1
-        Value: 3
-      KnockDown: 1
-    attackInput:
-      attackString: 236236A
-      attackStringArray: 
-    attackInputState:
-      _state: 0
-      directionalInput: 0
-    curInput: 0
-    movementPortionLength: 0
-    finalAttackButton: 0
-    moveComplete: 0
-    framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Blink Strike
     property:
       _attackName: 
