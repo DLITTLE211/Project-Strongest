@@ -3006,14 +3006,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1, y: 0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.65, y: 0.75}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.8, y: 0.25, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.8, y: 1.65}
             _frameData:
               init: 0
               startup: 8
@@ -3069,14 +3069,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 0
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1, y: -0.45, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.65, y: 0.4}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.8, y: -0.45, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.8, y: 0.45}
             _frameData:
               init: 0
               startup: 16
@@ -3101,7 +3101,7 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 6C
+      - _correctSequence: 6D
         correctAttack: 0
         correctInput: 120
         moveInput: 0
@@ -3109,7 +3109,7 @@ MonoBehaviour:
         property:
           _attackName: 
           _cTimer: {fileID: 0}
-          rawAttackDamage: 13
+          rawAttackDamage: 10
           counterHitDamageMult: 1.09
           hitstopValue: 12
           hitstunValue: 9
@@ -3120,7 +3120,7 @@ MonoBehaviour:
           attackScalingPercent: 11
           dashCancelable: 0
           JumpCancelable: 0
-          _airInfo: 1
+          _airInfo: 0
           cancelProperty:
             cancelFrom: 5
             cancelTo: 0
@@ -3132,14 +3132,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.8, y: 0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.75, y: 1.75}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.75, y: 0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.8, y: 1.5}
             _frameData:
               init: 0
               startup: 23
@@ -3155,12 +3155,12 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitConnected: 0
           lateralKBP:
-            lateralKBP: 4
+            lateralKBP: 2
             Value: 9
           verticalKBP:
-            verticalKBP: 1
+            verticalKBP: 0
             Value: 3
-          KnockDown: 2
+          KnockDown: 0
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -3181,7 +3181,7 @@ MonoBehaviour:
         property:
           _attackName: Standing Heavy Kick
           _cTimer: {fileID: 0}
-          rawAttackDamage: 12
+          rawAttackDamage: 9
           counterHitDamageMult: 1.035
           hitstopValue: 20
           hitstunValue: 14
@@ -3204,14 +3204,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1, y: 0.65, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.9, y: 0.85}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 1, y: 0.6, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1, y: 0.9}
             _frameData:
               init: 0
               startup: 11
@@ -3236,7 +3236,7 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 4B
+      - _correctSequence: 6B
         correctAttack: 0
         correctInput: 0
         moveInput: 0
@@ -3267,14 +3267,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.9, y: 0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.8, y: 0.8}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.9, y: 0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1, y: 0.85}
             _frameData:
               init: 0
               startup: 13
@@ -3299,7 +3299,7 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 4D
+      - _correctSequence: 6D
         correctAttack: 0
         correctInput: 588
         moveInput: 0
@@ -3330,14 +3330,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.65, y: 1.45, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.5, y: 1.5}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.65, y: 1.45, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.55, y: 1.5}
             _frameData:
               init: 0
               startup: 12
@@ -3353,10 +3353,10 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitConnected: 0
           lateralKBP:
-            lateralKBP: 2
+            lateralKBP: 3
             Value: 2
           verticalKBP:
-            verticalKBP: 2
+            verticalKBP: 0
             Value: 6
           KnockDown: 0
         attackInputState:

@@ -149,13 +149,16 @@ public class CollisionDetection : MonoBehaviour
         CheckForCollision(_hitbox);
         allowHitCheck = true;
     }
-    public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox)
+    public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox = null)
     {
         allowHitCheck = false;
         _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
-        hurtbox.gameObject.SetActive(false);
         lastHitbox = _hitbox;
         lastHitbox.gameObject.SetActive(false);
+        if (hurtbox != null)
+        {
+            hurtbox.gameObject.SetActive(false);
+        }
 
     }
     private void Update()
@@ -190,7 +193,7 @@ public class CollisionDetection : MonoBehaviour
                 {
                     _hitbox.SendHitStateAndHurtBox(_hitbox, _hitbox.hitboxProperties.AttackAnims._hitCount, target);
                     _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
-                    allowHitCheck = false;
+                    DestroyHitbox(_hitbox);
                 }
 
                 DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);
