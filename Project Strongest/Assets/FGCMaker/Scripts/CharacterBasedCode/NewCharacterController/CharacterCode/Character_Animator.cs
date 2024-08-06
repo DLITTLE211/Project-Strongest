@@ -40,7 +40,7 @@ public class Character_Animator : MonoBehaviour
 
     internal int negativeFrameCount;
     Vector3 startPos;
-    [SerializeField] private Cancel_State currentAttackLevel;
+    public Cancel_State currentAttackLevel;
 
 
     [SerializeField] private HitPointCall _freezeCall;

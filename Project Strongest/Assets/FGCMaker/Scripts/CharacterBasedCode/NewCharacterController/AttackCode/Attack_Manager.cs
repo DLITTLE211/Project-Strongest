@@ -16,6 +16,8 @@ public class Attack_Manager : MonoBehaviour
     private bool CanTransitionAnimation;
 
     Queue<Attack_BaseProperties> _AttackAnimQueue;
+    private List<Cancel_State> stringCancelStates;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,17 @@ public class Attack_Manager : MonoBehaviour
         Combo = new List<Attack_BaseProperties>();
         _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
         CanTransitionAnimation = true;
+        SetStringCancelCheck();
+    }
+    void SetStringCancelCheck() 
+    {
+        stringCancelStates = new List<Cancel_State>();
+        stringCancelStates.Add(Cancel_State.Light_Normal_Attack);
+        stringCancelStates.Add(Cancel_State.Light_String_Normal_Start);
+        stringCancelStates.Add(Cancel_State.Light_String_Normal_FollowUp);
+        stringCancelStates.Add(Cancel_State.Heavy_Normal_Attack);
+        stringCancelStates.Add(Cancel_State.Heavy_String_Normal_Start);
+        stringCancelStates.Add(Cancel_State.Heavy_String_Normal_FollowUp);
     }
     public void ClearAttacks()
     { 
@@ -56,7 +69,7 @@ public class Attack_Manager : MonoBehaviour
     }
     void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
     {
-        if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
+        if (!CheckStringPriority(Combo[index].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
         {
             Combo.RemoveAt(index);
             return;
@@ -76,45 +89,34 @@ public class Attack_Manager : MonoBehaviour
     void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
     {
         Attack_BaseProperties lastBase = Combo[index - 1];
-        if (lastBase.cancelProperty.cancelTo == Cancel_State.Heavy_String_Normal_Start ^ lastBase.cancelProperty.cancelTo == Cancel_State.Light_String_Normal_Start)
+        if (stringCancelStates.Contains(newAttack.cancelProperty.cancelFrom))
         {
-            if (!CheckStringPriority(Combo[index].cancelProperty.cancelTo, newAttack, isFirstAttack))
+            if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
             {
-                if (!(CheckCancelCriteria(Combo[index].cancelProperty.cancelTo, newAttack)))
+                if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                 {
                     Combo.RemoveAt(index);
                     return;
                 }
             }
-            if (!CheckMeterCriteria(newAttack))
-            {
-                Combo.RemoveAt(index);
-                return;
-            }
-            if (!CheckGroundCriteria(newAttack))
+        }
+        else 
+        {
+            if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
             {
                 Combo.RemoveAt(index);
                 return;
             }
         }
-
-        else
+        if (!CheckMeterCriteria(newAttack))
         {
-            if (!(CheckCancelCriteria(lastBase.cancelProperty.cancelTo, newAttack)))
-            {
-                Combo.RemoveAt(index);
-                return;
-            }
-            if (!CheckMeterCriteria(newAttack))
-            {
-                Combo.RemoveAt(index);
-                return;
-            }
-            if (!CheckGroundCriteria(newAttack))
-            {
-                Combo.RemoveAt(index);
-                return;
-            }
+            Combo.RemoveAt(index);
+            return;
+        }
+        if (!CheckGroundCriteria(newAttack))
+        {
+            Combo.RemoveAt(index);
+            return;
         }
         if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState)
         {
@@ -127,7 +129,7 @@ public class Attack_Manager : MonoBehaviour
         Combo.Add(newAttack);
         DoAttack(newAttack);
     }
-    public bool CheckStringPriority(Cancel_State lastState, Attack_BaseProperties newAttack, bool firstAttack)
+    public bool CheckStringPriority(Attack_CancelInfo lastState, Attack_BaseProperties newAttack, Attack_CancelInfo newAttackCancelInfo, bool firstAttack)
     {
         if (firstAttack)
         {
@@ -135,47 +137,48 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
-            //(lastState == Cancel_State.String_Normal_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.String_Normal_Start) || (lastState == Cancel_State.Stance_Input_Start && newAttack.cancelProperty.cancelFrom == Cancel_State.Normal_Attack))
-            if (StateComparison(lastState, newAttack, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
+            if (StateComparison(lastState.cancelTo, newAttackCancelInfo.cancelFrom, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
             {
                 return true;
             }
-            if (StateComparison(lastState, newAttack, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
+            if (StateComparison(lastState.cancelTo, newAttackCancelInfo.cancelFrom, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
             {
                 return true;
             }
             else
             {
-                if (lastState == Cancel_State.Light_Normal_Attack)
+                if (newAttackCancelInfo.cancelFrom < _cAnimator.currentAttackLevel)
                 {
-                    if (newAttack.cancelProperty.cancelFrom == Cancel_State.Heavy_Normal_Attack || newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
+                    return false;
+                }
+                else
+                {
+                    if (lastState.cancelTo == Cancel_State.Light_Normal_Attack)
                     {
-                        return true;
+                        List<Cancel_State> availableCancelStates = new List<Cancel_State>();
+                        availableCancelStates.Add(Cancel_State.Light_Normal_Attack);
+                        availableCancelStates.Add(Cancel_State.Heavy_Normal_Attack);
+                        availableCancelStates.Add(Cancel_State.Command_Normal_Attack);
+                        if (availableCancelStates.Contains(newAttack.cancelProperty.cancelFrom))
+                        {
+                            return true;
+                        }
+                    }
+                    if (lastState.cancelTo == Cancel_State.Heavy_Normal_Attack)
+                    {
+                        if (newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
+                        {
+                            return true;
+                        }
                     }
                 }
-                if (lastState == Cancel_State.Heavy_Normal_Attack)
-                {
-                    if (newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
-                    {
-                        return true;
-                    }
-                }
-                if (lastState == Cancel_State.Rekka_Input_FollowUp)
-                {
-                    if (_base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count - 1]).inRekkaState)
-                    {
-                        return false;
-                    }
-                    _base.comboList3_0.GetRekkaRouteAttack(Combo[Combo.Count - 1]).usedRekkas.Add(newAttack);
-                }
-
                 return false;
             }
         }
     }
-    bool StateComparison(Cancel_State lastState, Attack_BaseProperties newAttack, Cancel_State desiredLastState, Cancel_State desiredNextState) 
+    bool StateComparison(Cancel_State lastState, Cancel_State newState, Cancel_State desiredLastState, Cancel_State desiredNextState) 
     {
-        return lastState == desiredNextState && newAttack.cancelProperty.cancelFrom == desiredLastState;
+        return lastState == desiredNextState && (newState == desiredLastState || newState == desiredNextState);
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {
@@ -223,34 +226,42 @@ public class Attack_Manager : MonoBehaviour
             }
         }
     }
-    public bool CheckCancelCriteria(Cancel_State lastState, Attack_BaseProperties newAttack)
+    public bool CheckCancelCriteria(Attack_CancelInfo lastState, Attack_BaseProperties newAttack, Attack_CancelInfo newAttackCancelInfo)
     {
-        if (lastState == Cancel_State.NotCancellable ^ lastState == Cancel_State.Maximum_Attack)
+        if (lastState.cancelTo == Cancel_State.NotCancellable ^ lastState.cancelTo == Cancel_State.Maximum_Attack)
         {
-            string message = lastState == Cancel_State.NotCancellable ? "Last attack was noncacncelablle. ending..." :
-                "You've reached the maximum Attack Level. ending...";
+            string message = lastState.cancelTo == Cancel_State.NotCancellable ? "Last attack was noncacncelablle. ending..." : "You've reached the maximum Attack Level. ending...";
             Debug.Log(message);
             return false;
         }
-        else if (lastState == Cancel_State.Rekka_Input_FollowUp) 
+        else
         {
-            if (newAttack.cancelProperty.cancelFrom == Cancel_State.Rekka_Input_Start)
+            if (lastState.cancelTo == Cancel_State.Rekka_Input_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.Rekka_Input_Start)
             {
-                if (_base.comboList3_0.GetRekkaRouteAttack(newAttack).inRekkaState)
+                Attack_RekkaSpecialMove curRekka = _base.comboList3_0.GetRekkaRouteAttack(newAttack);
+                if (curRekka.inRekkaState)
                 {
-                    if (!_base.comboList3_0.GetRekkaRouteAttack(newAttack).usedRekkas.Contains(newAttack))
+                    if (!curRekka.usedRekkas.Contains(newAttack))
                     {
-
                         Debug.Log("New Attack is within current activate Rekka. Doing action");
                         return true;
                     }
-                    
                 }
                 return false;
             }
-            else 
+            if (lastState.cancelTo == Cancel_State.Super_Attack)
             {
-                if (newAttack.cancelProperty.cancelTo >= lastState)
+                if (newAttack == Combo[Combo.Count - 1])
+                {
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                int newAttackHierarchy = (int)newAttack.cancelProperty.cancelFrom;
+                int lastAttackHierachy = (int)lastState.cancelTo;
+                if (newAttackHierarchy >= lastAttackHierachy)
                 {
                     Debug.Log(" new Attack is of higher or equal value. Doing action");
                     return true;
@@ -260,29 +271,6 @@ public class Attack_Manager : MonoBehaviour
                     Debug.Log(" new Attack is of lower value. Ending action");
                     return false;
                 }
-            }
-        }
-        else if (lastState == Cancel_State.Super_Attack)
-        {
-            if (newAttack == Combo[Combo.Count-1])
-            {
-                return false;
-            }
-            return true;
-        }
-        else
-        {
-            int newAttackHierarchy = (int)newAttack.cancelProperty.cancelFrom;
-            int lastAttackHierachy = (int)lastState;
-            if (newAttackHierarchy >= lastAttackHierachy)
-            {
-                Debug.Log(" new Attack is of higher or equal value. Doing action");
-                return true;
-            }
-            else
-            {
-                Debug.Log(" new Attack is of lower value. Ending action");
-                return false;
             }
         }
     }
