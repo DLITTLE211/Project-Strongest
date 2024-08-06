@@ -112,7 +112,18 @@ public class State_Idle : BaseState
                 {
                     isAnimatingIdle = true;
                     _cAnim.ClearLastAttack();
-                    _cAnim.PlayNextAnimation(groundIdleHash, 2*(1/60f));
+                    ResetComboInformation();
+                    _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+                    _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+                    _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+                }
+            }
+            else
+            {
+                if (_cAnim.lastAttack != null)
+                {
+                    _cAnim.ClearLastAttack();
+                    ResetComboInformation();
                     _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
                     _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
                 }
