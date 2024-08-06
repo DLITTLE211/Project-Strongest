@@ -27,7 +27,7 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] protected internal List<Attack_ThrowBase> BasicThrows;
     [Header("Complete Movelist Properties")]
     [Space(15)]
-    [SerializeField] private List<Attack_BaseProperties> simpleAttackProperties;
+    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> simpleAttackProperties;
     [SerializeField] private List<Attack_BaseProperties> basicSpecialProperties;
     [SerializeField] private List<Attack_BaseProperties> rekkaBaseProperties;
     [SerializeField] private List<Attack_BaseProperties> rekkaSubAttackProperties;
@@ -48,13 +48,15 @@ public class Character_MoveList : MonoBehaviour
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {
         #region Simple Attacks Storage
-        simpleAttackProperties = new List<Attack_BaseProperties>();
+        simpleAttackProperties = new Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack>();
         GetNormalAttacks(baseCharacterInfo);
         for (int i = 0; i < simpleAttacks.Count; i++)
         {
             for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
             {
-                simpleAttackProperties.Add(simpleAttacks[i]._attackInput._correctInput[j].property);
+                Attack_BaseProperties property = simpleAttacks[i]._attackInput._correctInput[j].property;
+                string attackName = property._attackName;
+                simpleAttackProperties.Add(property, simpleAttacks[i]);
             }
         }
         #endregion
@@ -252,22 +254,13 @@ public class Character_MoveList : MonoBehaviour
             switch (attack._moveType)
             {
                 case MoveType.Normal:
-                    for (int i = 0; i < simpleAttackProperties.Count; i++)
+                    if (simpleAttackProperties.ContainsKey(attack))
                     {
-                        try
-                        {
-                            if (simpleAttackProperties[i].AttackAnims.animName == attack.AttackAnims.animName)
-                            {
-                                attacker._cComboCounter.OnHit_CountUp();
-                                simpleAttacks[i].SendCounterHitInfo(currentPathData, target);
-                                simpleAttacks[i].SendSuccessfulDamageInfo(currentPathData, target);
-                                //lastProperty = SimpleAttacks[i]._attackInput._correctInput[currentPathData._curInputPath].property;
-                                return;
-                            }
-                            else { continue; }
-                        }
-                        catch (ArgumentOutOfRangeException) 
-                        { continue; }
+                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        attacker._cComboCounter.OnHit_CountUp();
+                        currentNormal.SendCounterHitInfo(attack, target);
+                        currentNormal.SendSuccessfulDamageInfo(attack, target);
+                        return;
                     }
                     break;
                 case MoveType.Throw:
@@ -403,21 +396,12 @@ public class Character_MoveList : MonoBehaviour
             switch (attack._moveType)
             {
                 case MoveType.Normal:
-                    for (int i = 0; i < simpleAttacks.Count; i++)
+
+                    if (simpleAttackProperties.ContainsKey(attack))
                     {
-                        try
-                        {
-                            if (simpleAttacks[i]._attackInput._correctInput[currentPathData._curInputPath].property.AttackAnims.animName == attack.AttackAnims.animName)
-                            {
-                                //Switch to new function of  SendChipDamageInfo();
-                                simpleAttacks[i].SendSuccessfulDamageInfo(currentPathData, target, blockedAttack);
-                                return;
-                            }
-                            else
-                            {continue;}
-                        }
-                        catch (ArgumentOutOfRangeException) 
-                        { continue; }
+                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        currentNormal.SendSuccessfulDamageInfo(attack, target, blockedAttack);
+                        return;
                     }
                     break;
                 case MoveType.BasicSpeical:

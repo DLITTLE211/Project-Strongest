@@ -192,20 +192,20 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
         catch(ArgumentNullException e) { DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step..."); }
     }
 
-    public void SendCounterHitInfo(Path_Data _data, Character_Base target)
+    public void SendCounterHitInfo(Attack_BaseProperties attack, Character_Base target)
     {
-        target._cDamageCalculator.ReceiveCounterHitMultiplier(_attackInput._correctInput[_data._curInputPath].property.counterHitDamageMult);
+        target._cDamageCalculator.ReceiveCounterHitMultiplier(attack.counterHitDamageMult);
     }
 
-    public void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack = false)
+    public void SendSuccessfulDamageInfo(Attack_BaseProperties attack, Character_Base target, bool blockedAttack = false)
     {
         if (!blockedAttack)
         {
-            target._cDamageCalculator.TakeDamage(_attackInput._correctInput[_data._curInputPath].property);
+            target._cDamageCalculator.TakeDamage(attack);
         }
         else 
         {
-            target._cDamageCalculator.TakeChipDamage(_attackInput._correctInput[_data._curInputPath].property);
+            target._cDamageCalculator.TakeChipDamage(attack);
         }
     }
 
