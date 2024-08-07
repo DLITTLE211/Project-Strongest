@@ -3329,7 +3329,7 @@ MonoBehaviour:
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
-            attackType: 1
+            attackType: 3
             hb_placement: {x: 0.65, y: 1.45, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
             hb_size: {x: 0.5, y: 1.5}
@@ -3690,12 +3690,12 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0.75, y: -0.55, z: 0}
+            hb_placement: {x: 0.85, y: -0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
             hb_size: {x: 0.55, y: 1.25}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0.75, y: -0.55, z: 0}
+            hu_placement: {x: 0.85, y: -0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
             hu_size: {x: 0.65, y: 1.35}
             _frameData:
@@ -3762,12 +3762,12 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0.9, y: -0.55, z: 0}
+            hb_placement: {x: 0.95, y: -0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
             hb_size: {x: 0.8, y: 1.25}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0.9, y: -0.55, z: 0}
+            hu_placement: {x: 0.95, y: -0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
             hu_size: {x: 0.9, y: 1.45}
             _frameData:
@@ -3834,12 +3834,12 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0.8, y: -0.55, z: 0}
+            hb_placement: {x: 1.15, y: -0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
             hb_size: {x: 0.8, y: 1.15}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0.8, y: -0.55, z: 0}
+            hu_placement: {x: 1.15, y: -0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
             hu_size: {x: 0.9, y: 1.25}
             _frameData:
@@ -3906,14 +3906,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1.15, y: -0.15, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 1.25, y: 1}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 1.15, y: -0.15, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1.35, y: 1.15}
             _frameData:
               init: 0
               startup: 14
@@ -3978,14 +3978,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.85, y: 0.6, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.55, y: 0.55}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.65, y: 0.6, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.65, y: 0.65}
             _frameData:
               init: 0
               startup: 11
@@ -4050,14 +4050,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1.05, y: 0.6, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.9, y: 0.65}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.9, y: 0.6, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1.06, y: 0.75}
             _frameData:
               init: 0
               startup: 13
@@ -4121,15 +4121,15 @@ MonoBehaviour:
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
-            attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            attackType: 3
+            hb_placement: {x: 0.65, y: 1.45, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.65, y: 1.5}
             extendedHitBox: {fileID: 0}
-            hurtType: 3
-            hu_placement: {x: 0, y: 0, z: 0}
+            hurtType: 0
+            hu_placement: {x: 0.65, y: 1.45, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.75, y: 1.65}
             _frameData:
               init: 0
               startup: 12
@@ -4194,14 +4194,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.85, y: -0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.8, y: 1.55}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.7, y: -0.55, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.95, y: 1.5}
             _frameData:
               init: 0
               startup: 5
@@ -4266,14 +4266,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 2
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.45, y: -0.5, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.8, y: 0.75}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.45, y: -0.5, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.85, y: 0.7}
             _frameData:
               init: 0
               startup: 14
@@ -4362,14 +4362,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.8, y: 0.6, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.45, y: 0.5}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.75, y: 0.6, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.65, y: 0.55}
             _frameData:
               init: 0
               startup: 14
@@ -4425,14 +4425,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 1
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.8, y: 0.9, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.75, y: 0.55}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.8, y: 0.9, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.8, y: 0.5}
             _frameData:
               init: 0
               startup: 13
@@ -4514,7 +4514,7 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 3
+            verticalKBP: 0
             Value: 8
           KnockDown: 0
         attackInputState:
@@ -4772,7 +4772,7 @@ MonoBehaviour:
           camRotation: {x: 0, y: 0, z: 0}
           snapMovement: 0
           customDamage:
-            rawAttackDamage: 5
+            rawAttackDamage: 4
             counterHitDamageMult: 0
             hitstopValue: 15
             hitstunValue: 0
@@ -4796,7 +4796,7 @@ MonoBehaviour:
           camRotation: {x: 0, y: 0, z: 0}
           snapMovement: 0
           customDamage:
-            rawAttackDamage: 8
+            rawAttackDamage: 6
             counterHitDamageMult: 0
             hitstopValue: 15
             hitstunValue: 0
@@ -4820,8 +4820,8 @@ MonoBehaviour:
           camRotation: {x: 0, y: 0, z: 0}
           snapMovement: 0
           customDamage:
-            rawAttackDamage: 12
-            counterHitDamageMult: 0
+            rawAttackDamage: 8
+            counterHitDamageMult: 1
             hitstopValue: 25
             hitstunValue: 0
             hitLevel: 2
