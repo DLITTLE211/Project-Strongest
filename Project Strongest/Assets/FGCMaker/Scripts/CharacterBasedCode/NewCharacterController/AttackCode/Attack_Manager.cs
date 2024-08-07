@@ -134,7 +134,7 @@ public class Attack_Manager : MonoBehaviour
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
-                        Combo.RemoveAt(index);
+                      //  Combo.RemoveAt(index);
                         return false;
                     }
                 }
@@ -144,7 +144,7 @@ public class Attack_Manager : MonoBehaviour
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
-                        Combo.RemoveAt(index);
+                      //  Combo.RemoveAt(index);
                         return false;
                     }
                 }
@@ -154,7 +154,7 @@ public class Attack_Manager : MonoBehaviour
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
-                        Combo.RemoveAt(index);
+                      //  Combo.RemoveAt(index);
                         return false;
                     }
                 }
@@ -162,7 +162,7 @@ public class Attack_Manager : MonoBehaviour
             default:
                 if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                 {
-                    Combo.RemoveAt(index);
+                  //  Combo.RemoveAt(index);
                     return false;
                 }
                 break;
