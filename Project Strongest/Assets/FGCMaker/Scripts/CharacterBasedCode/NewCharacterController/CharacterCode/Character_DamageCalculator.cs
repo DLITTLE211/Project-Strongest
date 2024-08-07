@@ -20,23 +20,6 @@ public class Character_DamageCalculator : MonoBehaviour
     [SerializeField] private TMP_Text _damageText;
     float damageTextAmount;
     public HitPointCall customDamageCall;
-    private void Start()
-    {
-        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyCustomDamage);
-    }
-    void ApplyCustomDamage(CustomCallback callback)
-    {
-       /* if (customDamageCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
-            {
-                case HitPointCall.DealCustomDamage:
-                    TakeDamage(callback.customDamage);
-                    break;
-            }
-        }*/
-    }
-
     #region Damage Functions
     public void TakeDamage(CustomDamageField currentAttack)
     {
@@ -55,11 +38,11 @@ public class Character_DamageCalculator : MonoBehaviour
         float defenseValue = _healtController.defenseValue / 100;
 
         calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
-        calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
+        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
-        if (calculatedRecovDamage == Mathf.Infinity)
+        if (calculatedRecovDamage <= 0)
         {
-            calculatedRecovDamage = calculatedDamage;
+            calculatedRecovDamage = 0;
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
@@ -83,7 +66,7 @@ public class Character_DamageCalculator : MonoBehaviour
         float defenseValue = _healtController.defenseValue / 100;
 
         calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
-        calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
+        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
 
         if (currentAttack._meterRequirement <= 0)
         {
@@ -92,9 +75,9 @@ public class Character_DamageCalculator : MonoBehaviour
             _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
         }
         UpdateDamageText(calculatedDamage);
-        if (calculatedRecovDamage == Mathf.Infinity)
+        if (calculatedRecovDamage <= 0)
         {
-            calculatedRecovDamage = calculatedDamage;
+            calculatedRecovDamage = 0;
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
