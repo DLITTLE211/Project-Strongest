@@ -263,6 +263,26 @@ public class Character_MoveList : MonoBehaviour
                         return;
                     }
                     break;
+                case MoveType.String_Normal:
+                    if (simpleAttackProperties.ContainsKey(attack))
+                    {
+                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        attacker._cComboCounter.OnHit_CountUp();
+                        currentNormal.SendCounterHitInfo(attack, target);
+                        currentNormal.SendSuccessfulDamageInfo(attack, target);
+                        return;
+                    }
+                    break;
+                case MoveType.Command_Normal:
+                    if (simpleAttackProperties.ContainsKey(attack))
+                    {
+                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        attacker._cComboCounter.OnHit_CountUp();
+                        currentNormal.SendCounterHitInfo(attack, target);
+                        currentNormal.SendSuccessfulDamageInfo(attack, target);
+                        return;
+                    }
+                    break;
                 case MoveType.Throw:
                     for (int i = 0; i < BasicThrows.Count; i++)
                     {

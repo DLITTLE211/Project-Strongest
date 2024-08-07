@@ -59,54 +59,41 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
-           // if (Combo[Combo.Count - 1] == newAttack)
-            //{
-            //    return;
-            //}
             Combo.Add(newAttack);
-            CheckNextAttackCriteria(newAttack, false, Combo.Count -1);
+            CheckNextAttackCriteria(newAttack, false, Combo.Count-1);
         }
+        /*
+         * if (Combo[Combo.Count - 1] == newAttack)
+         * {
+         * return;
+         * }
+         */
     }
-    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
+    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack)
     {
-        if (!CheckStringPriority(Combo[index].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
+        if (!CheckStringPriority(Combo[0].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
         {
-            Combo.RemoveAt(index);
+            Combo.RemoveAt(0);
             return;
         }
         if (!CheckMeterCriteria(newAttack))
         {
-            Combo.RemoveAt(index);
+            Combo.RemoveAt(0);
             return;
         }
         if (!CheckGroundCriteria(newAttack))
         {
-            Combo.RemoveAt(index);
+            Combo.RemoveAt(0);
             return;
         }
         DoAttack(newAttack);
     }
-    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
+    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index)
     {
-        Attack_BaseProperties lastBase = Combo[index - 1];
-        if (stringCancelStates.Contains(newAttack.cancelProperty.cancelFrom))
+        if (!CheckMoveType(newAttack, false, index)) 
         {
-            if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
-            {
-                if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
-                {
-                    Combo.RemoveAt(index);
-                    return;
-                }
-            }
-        }
-        else 
-        {
-            if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
-            {
-                Combo.RemoveAt(index);
-                return;
-            }
+            Combo.RemoveAt(index);
+            return;
         }
         if (!CheckMeterCriteria(newAttack))
         {
@@ -128,6 +115,51 @@ public class Attack_Manager : MonoBehaviour
         }
         Combo.Add(newAttack);
         DoAttack(newAttack);
+    }
+    bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
+    {
+        Attack_BaseProperties lastBase = Combo[index - 1];
+        switch (newAttack._moveType) 
+        {
+            case MoveType.Normal:
+                if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
+                {
+                    if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
+                    {
+                        Combo.RemoveAt(index);
+                        return false;
+                    }
+                }
+                break;
+            case MoveType.String_Normal:
+                if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
+                {
+                    if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
+                    {
+                        Combo.RemoveAt(index);
+                        return false;
+                    }
+                }
+                break;
+            case MoveType.Command_Normal:
+                if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
+                {
+                    if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
+                    {
+                        Combo.RemoveAt(index);
+                        return false;
+                    }
+                }
+                break;
+            default:
+                if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
+                {
+                    Combo.RemoveAt(index);
+                    return false;
+                }
+                break;
+        }
+        return true;
     }
     public bool CheckStringPriority(Attack_CancelInfo lastState, Attack_BaseProperties newAttack, Attack_CancelInfo newAttackCancelInfo, bool firstAttack)
     {
