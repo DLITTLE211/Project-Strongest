@@ -4,6 +4,8 @@ using System;
 public enum MoveType
 {
     Normal,
+    String_Normal,
+    Command_Normal,
     BasicSpeical,
     Rekka,
     Stance,
