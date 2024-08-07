@@ -17,7 +17,7 @@ public class Attack_Manager : MonoBehaviour
 
     Queue<Attack_BaseProperties> _AttackAnimQueue;
     private List<Cancel_State> stringCancelStates;
-
+    [SerializeField] private MoveType curTypeHierarchy;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +40,7 @@ public class Attack_Manager : MonoBehaviour
     public void ClearAttacks()
     { 
         _AttackAnimQueue.Clear();
+        curTypeHierarchy = MoveType.Normal;
         _cAnimator.inputWindowOpen = true;
         _cAnimator.EndAnim();
         Combo.Clear();
@@ -90,6 +91,13 @@ public class Attack_Manager : MonoBehaviour
     }
     void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index)
     {
+        int newAttackHierarchy = (int)newAttack._moveType;
+        int lastAttackHierachy = (int)curTypeHierarchy;
+        if (newAttackHierarchy < lastAttackHierachy) 
+        {
+            Combo.RemoveAt(index);
+            return;
+        }
         if (!CheckMoveType(newAttack, false, index)) 
         {
             Combo.RemoveAt(index);
@@ -313,6 +321,7 @@ public class Attack_Manager : MonoBehaviour
     void DoAttack(Attack_BaseProperties _newAttack)
     {
         currentCount = Combo.Count;
+        curTypeHierarchy = _newAttack._moveType;
         if (CanTransitionAnimation)
         {
             PlayAttack(_newAttack);

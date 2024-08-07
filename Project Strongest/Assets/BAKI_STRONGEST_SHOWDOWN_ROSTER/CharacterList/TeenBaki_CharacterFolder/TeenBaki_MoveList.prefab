@@ -2393,7 +2393,7 @@ MonoBehaviour:
       cancelProperty:
         cancelFrom: 2
         cancelTo: 8
-      _moveType: 1
+      _moveType: 3
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: -5822560235860408203, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -2460,7 +2460,7 @@ MonoBehaviour:
       cancelProperty:
         cancelFrom: 1
         cancelTo: 8
-      _moveType: 1
+      _moveType: 3
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: -1304916342993743281, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -2527,7 +2527,7 @@ MonoBehaviour:
       cancelProperty:
         cancelFrom: 1
         cancelTo: 8
-      _moveType: 1
+      _moveType: 3
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: -6444692493166209453, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -4114,9 +4114,9 @@ MonoBehaviour:
             hu_size: {x: 1.35, y: 1.15}
             _frameData:
               init: 0
-              startup: 14
-              active: 15
-              inactive: 22
+              startup: 10
+              active: 11
+              inactive: 18
               recovery: 0
               lastFrame: 0
               _extraPoints: []
