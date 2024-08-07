@@ -2576,6 +2576,204 @@ MonoBehaviour:
     moveComplete: 0
     framesBetweenAttacks: 0
   simpleAttacks:
+  - SpecialAttackName: Mantis Combo
+    _attackInput:
+      _correctInput:
+      - _correctSequence: 4A
+        correctAttack: 0
+        correctInput: 366
+        moveInput: 0
+        attackInput: 0
+        property:
+          _attackName: 4LP
+          _cTimer: {fileID: 0}
+          rawAttackDamage: 8
+          counterHitDamageMult: 1.015
+          hitstopValue: 18
+          hitstunValue: 16
+          hitLevel: 1
+          attackHashes: 
+          _meterRequirement: 0
+          _meterAwardedOnHit: 4
+          attackScalingPercent: 19
+          dashCancelable: 0
+          JumpCancelable: 0
+          _airInfo: 0
+          cancelProperty:
+            cancelFrom: 1
+            cancelTo: 4
+          _moveType: 0
+          AttackAnims:
+            playerAnim: {fileID: 0}
+            animClip: {fileID: 6631655470011103691, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+            animName: 
+            animLength: 0
+            HitBox: {fileID: 0}
+            attackType: 1
+            hb_placement: {x: 0.8, y: 0.6, z: 0}
+            hb_orientation: {x: 0, y: 0, z: 0}
+            hb_size: {x: 0.45, y: 0.5}
+            extendedHitBox: {fileID: 0}
+            hurtType: 0
+            hu_placement: {x: 0.75, y: 0.6, z: 0}
+            hu_orientation: {x: 0, y: 0, z: 0}
+            hu_size: {x: 0.65, y: 0.55}
+            _frameData:
+              init: 0
+              startup: 14
+              active: 15
+              inactive: 22
+              recovery: 0
+              lastFrame: 0
+              _extraPoints: []
+            _hitCount:
+              _count: 0
+              _startCount: 0
+              _refreshRate: 0
+              _startRefreshRate: 0
+          hitConnected: 0
+          lateralKBP:
+            lateralKBP: 2
+            Value: 4
+          verticalKBP:
+            verticalKBP: 0
+            Value: 0
+          KnockDown: 0
+        attackInputState:
+          _state: 0
+          directionalInput: 0
+      - _correctSequence: 5B
+        correctAttack: 0
+        correctInput: 0
+        moveInput: 0
+        attackInput: 0
+        property:
+          _attackName: 5HP
+          _cTimer: {fileID: 0}
+          rawAttackDamage: 10
+          counterHitDamageMult: 1.035
+          hitstopValue: 20
+          hitstunValue: 19
+          hitLevel: 1
+          attackHashes: 
+          _meterRequirement: 0
+          _meterAwardedOnHit: 6
+          attackScalingPercent: 12
+          dashCancelable: 0
+          JumpCancelable: 0
+          _airInfo: 0
+          cancelProperty:
+            cancelFrom: 4
+            cancelTo: 5
+          _moveType: 0
+          AttackAnims:
+            playerAnim: {fileID: 0}
+            animClip: {fileID: -5950384472953660948, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+            animName: 
+            animLength: 0
+            HitBox: {fileID: 0}
+            attackType: 1
+            hb_placement: {x: 0.8, y: 0.9, z: 0}
+            hb_orientation: {x: 0, y: 0, z: 0}
+            hb_size: {x: 0.75, y: 0.55}
+            extendedHitBox: {fileID: 0}
+            hurtType: 0
+            hu_placement: {x: 0.8, y: 0.9, z: 0}
+            hu_orientation: {x: 0, y: 0, z: 0}
+            hu_size: {x: 0.8, y: 0.5}
+            _frameData:
+              init: 0
+              startup: 13
+              active: 15
+              inactive: 20
+              recovery: 0
+              lastFrame: 0
+              _extraPoints: []
+            _hitCount:
+              _count: 0
+              _startCount: 0
+              _refreshRate: 0
+              _startRefreshRate: 0
+          hitConnected: 0
+          lateralKBP:
+            lateralKBP: 2
+            Value: 2
+          verticalKBP:
+            verticalKBP: 1
+            Value: 2
+          KnockDown: 0
+        attackInputState:
+          _state: 0
+          directionalInput: 0
+      - _correctSequence: 5C
+        correctAttack: 0
+        correctInput: 32
+        moveInput: 0
+        attackInput: 0
+        property:
+          _attackName: 3HK
+          _cTimer: {fileID: 0}
+          rawAttackDamage: 10
+          counterHitDamageMult: 1.025
+          hitstopValue: 17
+          hitstunValue: 15
+          hitLevel: 2
+          attackHashes: 
+          _meterRequirement: 0
+          _meterAwardedOnHit: 6
+          attackScalingPercent: 13
+          dashCancelable: 0
+          JumpCancelable: 1
+          _airInfo: 0
+          cancelProperty:
+            cancelFrom: 5
+            cancelTo: 8
+          _moveType: 0
+          AttackAnims:
+            playerAnim: {fileID: 0}
+            animClip: {fileID: 3642804766188552297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+            animName: 
+            animLength: 0
+            HitBox: {fileID: 0}
+            attackType: 2
+            hb_placement: {x: 1, y: 0.65, z: 0}
+            hb_orientation: {x: 0, y: 0, z: 0}
+            hb_size: {x: 0.55, y: 0.9}
+            extendedHitBox: {fileID: 0}
+            hurtType: 0
+            hu_placement: {x: 0.8, y: 0.65, z: 0}
+            hu_orientation: {x: 0, y: 0, z: 0}
+            hu_size: {x: 0.75, y: 0.95}
+            _frameData:
+              init: 0
+              startup: 16
+              active: 17
+              inactive: 24
+              recovery: 0
+              lastFrame: 0
+              _extraPoints: []
+            _hitCount:
+              _count: 0
+              _startCount: 0
+              _refreshRate: 0
+              _startRefreshRate: 0
+          hitConnected: 0
+          lateralKBP:
+            lateralKBP: 2
+            Value: 3
+          verticalKBP:
+            verticalKBP: 0
+            Value: 8
+          KnockDown: 0
+        attackInputState:
+          _state: 0
+          directionalInput: 0
+    _pathdata:
+      _curInputPath: 0
+      _curAttackPath: 0
+    curInput: 0
+    curAttack: 0
+    lastDirection: 0
   - SpecialAttackName: Standing Light Punch
     _attackInput:
       _correctInput:
@@ -4319,204 +4517,6 @@ MonoBehaviour:
             verticalKBP: 5
             Value: 5
           KnockDown: 1
-        attackInputState:
-          _state: 0
-          directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
-    curInput: 0
-    curAttack: 0
-    lastDirection: 0
-  - SpecialAttackName: Mantis Combo
-    _attackInput:
-      _correctInput:
-      - _correctSequence: 4A
-        correctAttack: 0
-        correctInput: 0
-        moveInput: 0
-        attackInput: 0
-        property:
-          _attackName: 4LP
-          _cTimer: {fileID: 0}
-          rawAttackDamage: 8
-          counterHitDamageMult: 1.015
-          hitstopValue: 18
-          hitstunValue: 16
-          hitLevel: 1
-          attackHashes: 
-          _meterRequirement: 0
-          _meterAwardedOnHit: 4
-          attackScalingPercent: 19
-          dashCancelable: 0
-          JumpCancelable: 0
-          _airInfo: 0
-          cancelProperty:
-            cancelFrom: 1
-            cancelTo: 4
-          _moveType: 0
-          AttackAnims:
-            playerAnim: {fileID: 0}
-            animClip: {fileID: 6631655470011103691, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-            animName: 
-            animLength: 0
-            HitBox: {fileID: 0}
-            attackType: 1
-            hb_placement: {x: 0.8, y: 0.6, z: 0}
-            hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0.45, y: 0.5}
-            extendedHitBox: {fileID: 0}
-            hurtType: 0
-            hu_placement: {x: 0.75, y: 0.6, z: 0}
-            hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0.65, y: 0.55}
-            _frameData:
-              init: 0
-              startup: 14
-              active: 15
-              inactive: 22
-              recovery: 0
-              lastFrame: 0
-              _extraPoints: []
-            _hitCount:
-              _count: 0
-              _startCount: 0
-              _refreshRate: 0
-              _startRefreshRate: 0
-          hitConnected: 0
-          lateralKBP:
-            lateralKBP: 2
-            Value: 4
-          verticalKBP:
-            verticalKBP: 0
-            Value: 0
-          KnockDown: 0
-        attackInputState:
-          _state: 0
-          directionalInput: 0
-      - _correctSequence: 5B
-        correctAttack: 0
-        correctInput: 0
-        moveInput: 0
-        attackInput: 0
-        property:
-          _attackName: 5HP
-          _cTimer: {fileID: 0}
-          rawAttackDamage: 10
-          counterHitDamageMult: 1.035
-          hitstopValue: 20
-          hitstunValue: 19
-          hitLevel: 1
-          attackHashes: 
-          _meterRequirement: 0
-          _meterAwardedOnHit: 6
-          attackScalingPercent: 12
-          dashCancelable: 0
-          JumpCancelable: 0
-          _airInfo: 0
-          cancelProperty:
-            cancelFrom: 4
-            cancelTo: 5
-          _moveType: 0
-          AttackAnims:
-            playerAnim: {fileID: 0}
-            animClip: {fileID: -5950384472953660948, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-            animName: 
-            animLength: 0
-            HitBox: {fileID: 0}
-            attackType: 1
-            hb_placement: {x: 0.8, y: 0.9, z: 0}
-            hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0.75, y: 0.55}
-            extendedHitBox: {fileID: 0}
-            hurtType: 0
-            hu_placement: {x: 0.8, y: 0.9, z: 0}
-            hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0.8, y: 0.5}
-            _frameData:
-              init: 0
-              startup: 13
-              active: 15
-              inactive: 20
-              recovery: 0
-              lastFrame: 0
-              _extraPoints: []
-            _hitCount:
-              _count: 0
-              _startCount: 0
-              _refreshRate: 0
-              _startRefreshRate: 0
-          hitConnected: 0
-          lateralKBP:
-            lateralKBP: 2
-            Value: 2
-          verticalKBP:
-            verticalKBP: 1
-            Value: 2
-          KnockDown: 0
-        attackInputState:
-          _state: 0
-          directionalInput: 0
-      - _correctSequence: 3D
-        correctAttack: 0
-        correctInput: 32
-        moveInput: 0
-        attackInput: 0
-        property:
-          _attackName: 3HK
-          _cTimer: {fileID: 0}
-          rawAttackDamage: 10
-          counterHitDamageMult: 1.025
-          hitstopValue: 17
-          hitstunValue: 15
-          hitLevel: 2
-          attackHashes: 
-          _meterRequirement: 0
-          _meterAwardedOnHit: 6
-          attackScalingPercent: 13
-          dashCancelable: 0
-          JumpCancelable: 1
-          _airInfo: 0
-          cancelProperty:
-            cancelFrom: 5
-            cancelTo: 8
-          _moveType: 0
-          AttackAnims:
-            playerAnim: {fileID: 0}
-            animClip: {fileID: 3642804766188552297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-            animName: 
-            animLength: 0
-            HitBox: {fileID: 0}
-            attackType: 2
-            hb_placement: {x: 0, y: 0, z: 0}
-            hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
-            extendedHitBox: {fileID: 0}
-            hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
-            hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
-            _frameData:
-              init: 0
-              startup: 16
-              active: 17
-              inactive: 24
-              recovery: 0
-              lastFrame: 0
-              _extraPoints: []
-            _hitCount:
-              _count: 0
-              _startCount: 0
-              _refreshRate: 0
-              _startRefreshRate: 0
-          hitConnected: 0
-          lateralKBP:
-            lateralKBP: 2
-            Value: 3
-          verticalKBP:
-            verticalKBP: 0
-            Value: 8
-          KnockDown: 0
         attackInputState:
           _state: 0
           directionalInput: 0

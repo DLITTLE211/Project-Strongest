@@ -291,7 +291,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                 character._cAttackTimer.ClearSuperLanded();
             }
         }
-        _playerCAnimator.SetCanTransitionIdle(true);
         if (lastAttack._moveType == MoveType.Throw)
         {
             if (!lastAttack.hitConnected)

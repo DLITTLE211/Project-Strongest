@@ -108,14 +108,17 @@ public class State_Idle : BaseState
         {
             if (!isAnimatingIdle)
             {
-                if (_cAnim.CheckAttackAndMobility() && (_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                if (_cAnim.CheckAttackAndMobility())
                 {
-                    isAnimatingIdle = true;
+                    if ((_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                    {
+                        isAnimatingIdle = true;
+                        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+                    }
+                }
+                else 
+                {
                     _cAnim.ClearLastAttack();
-                    ResetComboInformation();
-                    _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
-                    _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-                    _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
                 }
             }
             else
@@ -123,11 +126,11 @@ public class State_Idle : BaseState
                 if (_cAnim.lastAttack != null)
                 {
                     _cAnim.ClearLastAttack();
-                    ResetComboInformation();
-                    _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-                    _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
                 }
             }
+            _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+            _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
+            ResetComboInformation();
         }
         catch (NullReferenceException) 
         {
