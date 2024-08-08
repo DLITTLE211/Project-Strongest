@@ -20,6 +20,7 @@ public class Attack_Manager : MonoBehaviour
     [SerializeField] private MoveType curTypeHierarchy;
     // Start is called before the first frame update
     private int normalGatlingCount;
+    public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } } 
     void Start()
     {
         SetHitBoxStartState();

@@ -7,27 +7,47 @@ public class Character_MoveList : MonoBehaviour
 {
     [Header("_____Basic Supers_____")]
     [SerializeField] protected internal List<Attack_AdvancedSpecialMove> BasicSuperAttacks;
+    [Space(15)]
     [Header("_____Command Grabs_____")]
     [SerializeField] protected internal List<Attack_AdvancedSpecialMove> CommandThrows;
+    [Space(15)]
     [Header("_____Counters_____")]
     [SerializeField] protected internal List<Attack_AdvancedSpecialMove> CounterAttacks;
+    [Space(15)]
     [Header("_____Stance Special Moves_____")]
     [SerializeField] protected internal List<Attack_StanceSpecialMove> stanceSpecials;
+    [Space(15)]
     [Space(15)]
     [Header("_____Rekka Special Moves_____")]
     [SerializeField] protected internal List<Attack_RekkaSpecialMove> rekkaSpecials;
     [Space(15)]
+    [Space(15)]
     [Header("_____Basic Special Moves_____")]
     [SerializeField] protected internal List<Attack_BasicSpecialMove> special_Simple;
+    [Space(15)]
+    [Space(15)]
+    [Header("_____Simple Attacks_____")]
+    [SerializeField] protected internal List<Attack_NonSpecialAttack> stringNormalAttacks;
+    [Space(15)]
+    [Space(15)]
+    [Header("_____Simple Attacks_____")]
+    [SerializeField] protected internal List<Attack_NonSpecialAttack> commandNormalAttacks;
+    [Space(15)]
     [Space(15)]
     [Header("_____Simple Attacks_____")]
     [SerializeField] protected internal List<Attack_NonSpecialAttack> simpleAttacks;
     [Space(15)]
+    [Space(15)]
     [Header("_____Basic Throws_____")]
     [SerializeField] protected internal List<Attack_ThrowBase> BasicThrows;
-    [Header("Complete Movelist Properties")]
     [Space(15)]
-    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> simpleAttackProperties;
+
+    [Header("Normal Attack Properties Properties")]
+    [Space(15)]
+    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> basicNormalsProperties;
+    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> commandNormalsProperties;
+    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> StringNormalsProperties;
+    [Space(15)]
     [SerializeField] private List<Attack_BaseProperties> basicSpecialProperties;
     [SerializeField] private List<Attack_BaseProperties> rekkaBaseProperties;
     [SerializeField] private List<Attack_BaseProperties> rekkaSubAttackProperties;
@@ -48,7 +68,7 @@ public class Character_MoveList : MonoBehaviour
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {
         #region Simple Attacks Storage
-        simpleAttackProperties = new Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack>();
+        basicNormalsProperties = new Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack>();
         GetNormalAttacks(baseCharacterInfo);
         for (int i = 0; i < simpleAttacks.Count; i++)
         {
@@ -56,7 +76,33 @@ public class Character_MoveList : MonoBehaviour
             {
                 Attack_BaseProperties property = simpleAttacks[i]._attackInput._correctInput[j].property;
                 string attackName = property._attackName;
-                simpleAttackProperties.Add(property, simpleAttacks[i]);
+                basicNormalsProperties.Add(property, simpleAttacks[i]);
+            }
+        }
+        #endregion
+        #region Command Attacks Storage
+        commandNormalsProperties = new Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack>();
+        GetCommandAttacks(baseCharacterInfo);
+        for (int i = 0; i < commandNormalAttacks.Count; i++)
+        {
+            for (int j = 0; j < commandNormalAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                Attack_BaseProperties property = commandNormalAttacks[i]._attackInput._correctInput[j].property;
+                string attackName = property._attackName;
+                commandNormalsProperties.Add(property, commandNormalAttacks[i]);
+            }
+        }
+        #endregion
+        #region String Attacks Storage
+        StringNormalsProperties = new Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack>();
+        GetStringAttacks(baseCharacterInfo);
+        for (int i = 0; i < stringNormalAttacks.Count; i++)
+        {
+            for (int j = 0; j < stringNormalAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                Attack_BaseProperties property = stringNormalAttacks[i]._attackInput._correctInput[j].property;
+                string attackName = property._attackName;
+                StringNormalsProperties.Add(property, stringNormalAttacks[i]);
             }
         }
         #endregion
@@ -164,6 +210,30 @@ public class Character_MoveList : MonoBehaviour
             }
         }
     }
+    public void GetCommandAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            simpleAttacks[i].SetStarterInformation();
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetStringAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            simpleAttacks[i].SetStarterInformation();
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
     public void GetThrows(Character_Base baseCharacterInfo)
     {
         for (int i = 0; i < BasicThrows.Count; i++)
@@ -254,9 +324,9 @@ public class Character_MoveList : MonoBehaviour
             switch (attack._moveType)
             {
                 case MoveType.Normal:
-                    if (simpleAttackProperties.ContainsKey(attack))
+                    if (basicNormalsProperties.ContainsKey(attack))
                     {
-                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        Attack_NonSpecialAttack currentNormal = basicNormalsProperties[attack];
                         attacker._cComboCounter.OnHit_CountUp();
                         currentNormal.SendCounterHitInfo(attack, target);
                         currentNormal.SendSuccessfulDamageInfo(attack, target);
@@ -264,9 +334,9 @@ public class Character_MoveList : MonoBehaviour
                     }
                     break;
                 case MoveType.String_Normal:
-                    if (simpleAttackProperties.ContainsKey(attack))
+                    if (commandNormalsProperties.ContainsKey(attack))
                     {
-                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        Attack_NonSpecialAttack currentNormal = commandNormalsProperties[attack];
                         attacker._cComboCounter.OnHit_CountUp();
                         currentNormal.SendCounterHitInfo(attack, target);
                         currentNormal.SendSuccessfulDamageInfo(attack, target);
@@ -274,9 +344,9 @@ public class Character_MoveList : MonoBehaviour
                     }
                     break;
                 case MoveType.Command_Normal:
-                    if (simpleAttackProperties.ContainsKey(attack))
+                    if (StringNormalsProperties.ContainsKey(attack))
                     {
-                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        Attack_NonSpecialAttack currentNormal = StringNormalsProperties[attack];
                         attacker._cComboCounter.OnHit_CountUp();
                         currentNormal.SendCounterHitInfo(attack, target);
                         currentNormal.SendSuccessfulDamageInfo(attack, target);
@@ -416,16 +486,30 @@ public class Character_MoveList : MonoBehaviour
             switch (attack._moveType)
             {
                 case MoveType.Normal:
-
-                    if (simpleAttackProperties.ContainsKey(attack))
+                    if (basicNormalsProperties.ContainsKey(attack))
                     {
-                        Attack_NonSpecialAttack currentNormal = simpleAttackProperties[attack];
+                        Attack_NonSpecialAttack currentNormal = basicNormalsProperties[attack];
+                        currentNormal.SendSuccessfulDamageInfo(attack, target, blockedAttack);
+                        return;
+                    }
+                    break;
+                case MoveType.String_Normal:
+                    if (commandNormalsProperties.ContainsKey(attack))
+                    {
+                        Attack_NonSpecialAttack currentNormal = commandNormalsProperties[attack];
+                        currentNormal.SendSuccessfulDamageInfo(attack, target, blockedAttack);
+                        return;
+                    }
+                    break;
+                case MoveType.Command_Normal:
+                    if (StringNormalsProperties.ContainsKey(attack))
+                    {
+                        Attack_NonSpecialAttack currentNormal = StringNormalsProperties[attack];
                         currentNormal.SendSuccessfulDamageInfo(attack, target, blockedAttack);
                         return;
                     }
                     break;
                 case MoveType.BasicSpeical:
-
                     for (int i = 0; i < special_Simple.Count; i++)
                     {
                         if (special_Simple[i].property.AttackAnims.animName == attack.AttackAnims.animName)
@@ -434,7 +518,7 @@ public class Character_MoveList : MonoBehaviour
                             special_Simple[i].SendSuccessfulDamageInfo(target, blockedAttack);
                             return;
                         }
-                        else 
+                        else
                         { continue; }
                     }
                     break;
