@@ -40,7 +40,7 @@ public class Character_Animator : MonoBehaviour
 
     internal int negativeFrameCount;
     Vector3 startPos;
-    [SerializeField] private Cancel_State currentAttackLevel;
+    public Cancel_State currentAttackLevel;
 
 
     [SerializeField] private HitPointCall _freezeCall;
@@ -50,11 +50,14 @@ public class Character_Animator : MonoBehaviour
     public HitPointCall MobilityCall { get { return _mobilityCall; } }
     public HitPointCall AttackCall { get { return _attackCall; } }
     bool hitNewAnim;
+    public bool customSuperHit;
+    IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
     private void Start()
     {
+        customSuperHit = false;
         inputWindowOpen = true;
         startPos = _model.localPosition;
-        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames); 
+        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames);
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
         inRekkaState = false;
         inStanceState = false;
@@ -327,18 +330,40 @@ public class Character_Animator : MonoBehaviour
     }
     public void StartFrameCount()
     {
+        if (BasicAttackRoutine != null)
+        {
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
+        }
         PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate), true);
-        StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
+        BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
+        StartCoroutine(BasicAttackRoutine);
     }
     public void StartThrowFrameCount(Attack_BaseProperties throwProperty, AttackHandler_Attack throwCustom)
     {
-        if (lastAttack != null)
+        if (BasicAttackRoutine != null)
         {
-            StopCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
         }
         lastAttack = throwProperty;
         PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
-        StartCoroutine(throwCustom.TickAnimThrowCount(throwCustom));
+        ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
+        StartCoroutine(ThrowAttackRoutine);
+    }
+    public void StartSuperFrameCount(Attack_BaseProperties superProperty, int curAnim,int animCount,AttackHandler_Attack superCustom, Callback nextAnimIterator = null)
+    {
+        if (BasicAttackRoutine != null)
+        {
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
+        }
+        lastAttack = superProperty;
+        customSuperHit = true;
+        _base._cAttackTimer.PauseTimerOnSuperSuccess();
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate), true);
+        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, curAnim, animCount, nextAnimIterator);
+        StartCoroutine(SuperAttackRoutine);
     }
     public void AddForceOnAttack(float forceValue)
     {
@@ -349,6 +374,7 @@ public class Character_Animator : MonoBehaviour
     {
         canTransitionIdle = state;
     }
+
 
     #region Projectile Code
     public void ShootProjectile()
@@ -388,16 +414,23 @@ public class Character_Animator : MonoBehaviour
 
 
     #region End Of Animation Clean-Up
-    void CountUpNegativeFrames(int lastNegativeFrames)
+    public void CountUpNegativeFrames(int lastNegativeFrames)
     {
         negativeFrameCount += lastNegativeFrames;
-        if (lastAttack == null)
+        if (BasicAttackRoutine != null) 
         {
-            return;
+            StopCoroutine(BasicAttackRoutine);
+            BasicAttackRoutine = null;
         }
-        else
+        if (ThrowAttackRoutine != null)
         {
-            //ClearLastAttack();
+            StopCoroutine(ThrowAttackRoutine);
+            ThrowAttackRoutine = null;
+        }
+        if (SuperAttackRoutine != null)
+        {
+            StopCoroutine(SuperAttackRoutine);
+            SuperAttackRoutine = null;
         }
     }
     public void NullifyMobilityOption()
@@ -410,6 +443,10 @@ public class Character_Animator : MonoBehaviour
     }
     public void ClearLastAttack()
     {
+        if (customSuperHit) 
+        {
+            customSuperHit= false;
+        }
         lastAttack = null; 
         _base._cForce.CallUnlockKinematic();
         _lastAttackState = lastAttackState.nullified;

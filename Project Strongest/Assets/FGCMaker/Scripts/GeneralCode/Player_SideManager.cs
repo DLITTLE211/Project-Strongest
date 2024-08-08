@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class Player_SideManager : MonoBehaviour
 {
-    public Transform LeftWall, RightWall;
+    public WallIdentification LeftWall, RightWall;
     public Player_SideRecognition _p1Position;
     public Player_SideRecognition _p2Position;
     public HitPointCall sideCall;
@@ -45,11 +45,11 @@ public class Player_SideManager : MonoBehaviour
         {
             if (_p1Position.gameObject.activeSelf)
             {
-                _p1Position.thisPosition.UpdatePlayerFacingDirection(LeftWall, RightWall);
+                _p1Position.thisPosition.UpdatePlayerFacingDirection(LeftWall.WallTransform, RightWall.WallTransform);
             }
             if (_p2Position.gameObject.activeSelf)
             {
-                _p2Position.thisPosition.UpdatePlayerFacingDirection(LeftWall, RightWall);
+                _p2Position.thisPosition.UpdatePlayerFacingDirection(LeftWall.WallTransform, RightWall.WallTransform);
             }
             if (_p1Position.gameObject.activeSelf && _p2Position.gameObject.activeSelf)
             {
@@ -102,4 +102,10 @@ public class Player_SideManager : MonoBehaviour
         return _p1Position.thisPosition.RW_Distance > _p2Position.thisPosition.RW_Distance;
     }
     #endregion
+}
+[Serializable]
+public class WallIdentification 
+{
+    public Transform WallTransform;
+    public StageWallColliderIgnore wallIgnore;
 }

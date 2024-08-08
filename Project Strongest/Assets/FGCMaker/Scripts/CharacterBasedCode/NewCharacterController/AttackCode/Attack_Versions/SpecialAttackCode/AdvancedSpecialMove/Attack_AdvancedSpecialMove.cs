@@ -106,6 +106,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
     [SerializeField] private bool moveComplete;
     [SerializeField] private Character_Base curBase;
     [SerializeField] private int framesBetweenAttacks;
+    public int currentCustomAnim;
 
     #region Attack Base Code
     public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase)
@@ -115,6 +116,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
     public override void ResetCombo()
     {
         curInput = 0;
+        currentCustomAnim = 0;
         moveComplete = false;
     }
     public override void ResetMoveCombo()
@@ -259,6 +261,23 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
         _customAnimation[0].AddRequiredCallbacks(curBase);
         _customAnimation[0].AddCustomCallbacks(_customAnimation[0]);
         curBase._cAnimator.StartThrowFrameCount(property, _customAnimation[0]);
+    }
+    public void HandleSuperMultipleAnimAttackInfo()
+    {
+        if (_customAnimation.Count > 0)
+        {
+            _customAnimation[currentCustomAnim].SetAttackAnim(curBase._cAnimator);
+            _customAnimation[currentCustomAnim].AddRequiredCallbacks(curBase);
+            _customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimation[currentCustomAnim]);
+            curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimation.Count - 1, _customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
+            return;
+        }
+        return;
+    }
+    public void PlayNextCustomAnim() 
+    {
+        currentCustomAnim++;
+        HandleSuperMultipleAnimAttackInfo();
     }
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {

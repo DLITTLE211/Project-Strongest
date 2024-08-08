@@ -20,23 +20,6 @@ public class Character_DamageCalculator : MonoBehaviour
     [SerializeField] private TMP_Text _damageText;
     float damageTextAmount;
     public HitPointCall customDamageCall;
-    private void Start()
-    {
-        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyCustomDamage);
-    }
-    void ApplyCustomDamage(CustomCallback callback)
-    {
-       /* if (customDamageCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
-            {
-                case HitPointCall.DealCustomDamage:
-                    TakeDamage(callback.customDamage);
-                    break;
-            }
-        }*/
-    }
-
     #region Damage Functions
     public void TakeDamage(CustomDamageField currentAttack)
     {
@@ -50,17 +33,18 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             counterHitMult = 1;
         }
-        currentComboHitCount = getCurrentComboHitCount();
-
         float counterHitCalculation = (curRawDamage * counterHitMult) - curRawDamage;
-        float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
+        float counterHitValue = counterHitCalculation <= 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
-        calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
-
-        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
+        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
+        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
+        if (calculatedRecovDamage <= 0)
+        {
+            calculatedRecovDamage = 0;
+        }
+        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
     }
     public void TakeDamage(Attack_BaseProperties currentAttack)
@@ -81,8 +65,8 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
-        calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
+        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
+        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
 
         if (currentAttack._meterRequirement <= 0)
         {
@@ -91,7 +75,7 @@ public class Character_DamageCalculator : MonoBehaviour
             _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
         }
         UpdateDamageText(calculatedDamage);
-        if (calculatedRecovDamage == Mathf.Infinity)
+        if (calculatedRecovDamage <= 0)
         {
             calculatedRecovDamage = 0;
         }

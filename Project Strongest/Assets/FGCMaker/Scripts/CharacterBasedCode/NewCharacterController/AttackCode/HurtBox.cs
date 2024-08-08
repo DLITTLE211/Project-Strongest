@@ -13,7 +13,7 @@ public class HurtBox : CollisionDetection
     public Attack_BaseProperties CounterMoveProperty;
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
     {
-        SetHurtBoxSize(0,0,ColliderType.Trigger,hu_Sizing);
+        SetHurtBoxSize(0,0,false,ColliderType.Trigger,hu_Sizing);
     }
     public void SetCounterMoveProperty(Attack_BaseProperties counterProperty) 
     {

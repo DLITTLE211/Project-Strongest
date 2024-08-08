@@ -38,6 +38,7 @@ public class Character_StateMachine : MonoBehaviour
         var C_BlockState = new State_CrouchBlock(_base); // C = Crouch 
         var BlockReact = new State_BlockReact(_base); // C = Crouch 
         var CounterState = new State_Counter(_base); // C = Crouch 
+        var CustomSuperState = new State_CustomSuper(_base); // C = Crouch 
         #endregion
 
         #region Define Transitions
@@ -50,10 +51,12 @@ public class Character_StateMachine : MonoBehaviour
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
-        //At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
-        At(AttackState, MoveState, new Predicate(() => At_2Move()));
+        //At(AttackState, MoveState, new Predicate(() => At_2Move()));
 
         At(AttackState, ThrowState, new Predicate(() => At_2Throw()));
+
+        At(AttackState, CustomSuperState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && At_2CustomSuper()));
+        At(JumpState, CustomSuperState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && At_2CustomSuper()));
 
         At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
@@ -93,8 +96,9 @@ public class Character_StateMachine : MonoBehaviour
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
-        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter()));
-        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter()));
+        Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
+        Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
+        Any(CustomSuperState, new Predicate(() => At_2CustomSuper()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
@@ -140,6 +144,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking = false;
         bool _currentInput = false;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
 
         if (_base._subState != Character_SubStates.Controlled)
         {
@@ -152,14 +157,15 @@ public class Character_StateMachine : MonoBehaviour
             _isBlocking = _CheckBlockButton();
         }
 
-        return !_isHit && _currentInput && _isBlocking && _isGrounded && !_canRecover && notRecovering;
+        return !_isHit && _currentInput && _isBlocking && _isGrounded && !_canRecover && notRecovering && _notAttacking;
     }
     bool At_2BlockReact()
     {
         bool notRecovering = _base._cHitController.ReturnCrouchBlock() || _base._cHitController.ReturnStandBlock();
         bool _currentInput = true;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
+
         if (_base._subState != Character_SubStates.Controlled)
         {
             _currentInput = true;
@@ -174,7 +180,7 @@ public class Character_StateMachine : MonoBehaviour
             if (_base._cHitController.ReturnStandBlock())
             {
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput > 3 && _base.ReturnMovementInputs().Button_State.directionalInput < 7;
-                return _currentInput && _isGrounded && notRecovering;
+                return _currentInput && _isGrounded && notRecovering && _notAttacking;
             }
         }
         return _currentInput && _isGrounded && notRecovering;
@@ -187,6 +193,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking;
         bool _currentInput;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -199,7 +206,7 @@ public class Character_StateMachine : MonoBehaviour
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
                 _isBlocking = _CheckBlockButton();
             }
-            return !_isHit && _isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
+            return !_isHit && _isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && _notAttacking;
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -240,6 +247,21 @@ public class Character_StateMachine : MonoBehaviour
         }
         return false;
     }
+    bool At_2CustomSuper()
+    {
+        bool _attackIsSuper = false;
+        if (_base._subState != Character_SubStates.Controlled)
+        {
+            return false;
+        }
+        if (_base._cAnimator.lastAttack != null)
+        {
+            _attackIsSuper = _base._cAnimator.lastAttack._moveType == MoveType.Super;
+            bool fullCheck = _attackIsSuper ;
+            return fullCheck;
+        }
+        return false;
+    }
     bool At_2Crouch()
     {
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
@@ -249,6 +271,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _inRekkaOrStance = _base._cAnimator.inStanceState || _base._cAnimator.inRekkaState;
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -261,7 +284,7 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
             }
-            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance;
+            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && _notAttacking;
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -315,6 +338,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput;
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -328,7 +352,7 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput == 4 || _base.ReturnMovementInputs().Button_State.directionalInput == 6;
             }
-            bool canMove = !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
+            bool canMove = !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && _notAttacking;
             return canMove;
         }
         catch (ArgumentOutOfRangeException)

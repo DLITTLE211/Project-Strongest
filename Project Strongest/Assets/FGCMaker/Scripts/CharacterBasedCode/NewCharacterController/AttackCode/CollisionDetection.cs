@@ -49,16 +49,29 @@ public class CollisionDetection : MonoBehaviour
     public TMP_Text testText;
     private HitBox lastHitbox;
     public CollisionType collisionType;
-
-    public void SetHurtBoxSize(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger, Character_HurtBoxSizing sizing = null)
+    private bool allowHitCheck;
+    private void Start()
+    {
+        allowHitCheck = false;
+    }
+    public void SetHurtBoxSize( float sizeX, float sizeY, bool isHurtboxTypeBox, ColliderType collisionType = ColliderType.Trigger, Character_HurtBoxSizing sizing = null)
     {
         if (currentCollider == null)
         {
             if (collisionType == ColliderType.Trigger)
             {
-                boxColliderSpawnPoint.AddComponent<CapsuleCollider>();
-                currentCollider = boxColliderSpawnPoint.GetComponent<CapsuleCollider>();
-                currentCollider.GetComponent<CapsuleCollider>().radius = 0.25f;
+                if (!isHurtboxTypeBox)
+                {
+                    boxColliderSpawnPoint.AddComponent<CapsuleCollider>();
+                    currentCollider = boxColliderSpawnPoint.GetComponent<CapsuleCollider>();
+                    currentCollider.GetComponent<CapsuleCollider>().radius = 0.25f;
+                }
+                else
+                {
+                    boxColliderSpawnPoint.AddComponent<BoxCollider>();
+                    currentCollider = new Collider();
+                    currentCollider = boxColliderSpawnPoint.GetComponent<BoxCollider>();
+                }
                 currentCollider.isTrigger = true;
             }
             else if (collisionType == ColliderType.Collision)
@@ -68,10 +81,19 @@ public class CollisionDetection : MonoBehaviour
         }
         if (sizing != null)
         {
-            currentCollider.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0.5f);
-            currentCollider.transform.localPosition = sizing.hurtboxPosition;
-            currentCollider.transform.localScale = sizing.hurtboxSizing;
-            currentCollider.GetComponent<CapsuleCollider>().radius = sizing.radius;
+            if (!isHurtboxTypeBox)
+            {
+                currentCollider.GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0.5f);
+                currentCollider.transform.localPosition = sizing.hurtboxPosition;
+                currentCollider.transform.localScale = sizing.hurtboxSizing;
+                currentCollider.GetComponent<CapsuleCollider>().radius = sizing.radius;
+            }
+            else
+            {
+                currentCollider.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
+                currentCollider.transform.localPosition = sizing.hurtboxPosition;
+                currentCollider.transform.localScale = sizing.hurtboxSizing;
+            }
         }
         else
         {
@@ -84,8 +106,8 @@ public class CollisionDetection : MonoBehaviour
     {
         if (hitboxInfo.currentCollider == null)
         {
-            hitboxInfo.boxColliderSpawnPoint.AddComponent<SphereCollider>();
-            hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<SphereCollider>();
+            hitboxInfo.boxColliderSpawnPoint.AddComponent<BoxCollider>();
+            hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<BoxCollider>();
             hitboxInfo.currentCollider.isTrigger = true;
         }
         xSize = sizeX;
@@ -127,7 +149,7 @@ public class CollisionDetection : MonoBehaviour
     public void PlaceHurtBox(HurtBox hurtBox, Vector3 _position, Vector3 _rotation, float _sizeX, float _sizeY, HurtBoxType _hurtType = HurtBoxType.NoBlock)
     {
         Quaternion _rotate = new Quaternion(_rotation.x, _rotation.y, 0, 0);
-        hurtBox.SetHurtBoxSize(_sizeX, _sizeY);
+        hurtBox.SetHurtBoxSize(_sizeX, _sizeY,true);
         hurtBox.transform.localPosition = _position;
         hurtBox.transform.localRotation = _rotate;
 
@@ -141,14 +163,32 @@ public class CollisionDetection : MonoBehaviour
     {
         hurtbox.gameObject.SetActive(true);
         lastHitbox.gameObject.SetActive(true);
+        lastHitbox = _hitbox; 
         CheckForCollision(_hitbox);
+        allowHitCheck = true;
     }
-    public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox)
+    public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox = null)
     {
-        //CheckForCollision(_hitbox);
-        lastHitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
-        hurtbox.gameObject.SetActive(false);
-        _hitbox = lastHitbox;
+        allowHitCheck = false;
+        _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
+        lastHitbox = _hitbox;
+        lastHitbox.gameObject.SetActive(false);
+        if (hurtbox != null)
+        {
+            hurtbox.gameObject.SetActive(false);
+        }
+
+    }
+    private void Update()
+    {
+        if (allowHitCheck) 
+        {
+            if (!lastHitbox.gameObject.activeInHierarchy) 
+            {
+                lastHitbox.gameObject.SetActive(true);
+            }
+            CheckForCollision(lastHitbox);
+        }
     }
     void CheckForCollision(HitBox _hitbox) 
     {
@@ -171,6 +211,7 @@ public class CollisionDetection : MonoBehaviour
                 {
                     _hitbox.SendHitStateAndHurtBox(_hitbox, _hitbox.hitboxProperties.AttackAnims._hitCount, target);
                     _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
+                    DestroyHitbox(_hitbox);
                 }
 
                 DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);

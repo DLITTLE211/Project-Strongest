@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 50180543}
   m_Layer: 7
   m_Name: HurtBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 60956039}
   m_Layer: 7
   m_Name: Hitboxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1216,6 +1216,7 @@ MonoBehaviour:
   lastInput: 
   inStance: 0
   inRekka: 0
+  inSuper: 0
   superMobilityOption: 0
 --- !u!1 &94634922
 GameObject:
@@ -1329,7 +1330,7 @@ GameObject:
   - component: {fileID: 94923329}
   m_Layer: 7
   m_Name: Character_Player2
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1366,6 +1367,7 @@ MonoBehaviour:
   _cHitController: {fileID: 607290437}
   _cSuperMeter: {fileID: 2060023739}
   _aManager: {fileID: 1309202297}
+  _sideManager: {fileID: 1359521219}
   _timer:
     inputLogger:
       textObject:
@@ -1405,9 +1407,9 @@ MonoBehaviour:
   xVal: 0
   yVal: 0
   controllerYield:
-    positiveXYield: 0.25
-    positiveYYield: 0.85
-    negativeXYield: 0.25
+    positiveXYield: 0.45
+    positiveYYield: 0.75
+    negativeXYield: 0.45
     negativeYYield: 0.75
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
@@ -1440,6 +1442,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 1211425607}
   opponentPlayer: {fileID: 993311525}
+  awaitCondition: 0
   newField: 0
 --- !u!54 &94923330
 Rigidbody:
@@ -1497,7 +1500,7 @@ GameObject:
   - component: {fileID: 105695702}
   m_Layer: 7
   m_Name: HurtBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1877,6 +1880,7 @@ MonoBehaviour:
   - {fileID: 967627800}
   Combo: []
   currentCount: 0
+  curTypeHierarchy: 0
 --- !u!1 &152502580
 GameObject:
   m_ObjectHideFlags: 0
@@ -4264,7 +4268,7 @@ GameObject:
   - component: {fileID: 340028145}
   m_Layer: 7
   m_Name: Hitboxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4849,7 +4853,7 @@ GameObject:
   - component: {fileID: 405498831}
   m_Layer: 7
   m_Name: CollisionDetection
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5990,7 +5994,7 @@ GameObject:
   - component: {fileID: 454955342}
   m_Layer: 7
   m_Name: HB_Side_L
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6296,7 +6300,7 @@ GameObject:
   - component: {fileID: 475772376}
   m_Layer: 7
   m_Name: CollisionDetection
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6447,6 +6451,7 @@ MonoBehaviour:
   isFrozen: 0
   xSpeed: 0
   beingPushed: 0
+  stillnessCheck: 0
 --- !u!1 &498465947
 GameObject:
   m_ObjectHideFlags: 0
@@ -6573,7 +6578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.063, y: 0.527}
   m_AnchorMax: {x: 0.063, y: 0.527}
-  m_AnchoredPosition: {x: 4.4473877, y: 0}
+  m_AnchoredPosition: {x: 4.4473877, y: -30}
   m_SizeDelta: {x: 99.0593, y: 688.1809}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!1 &520829059
@@ -7084,6 +7089,7 @@ MonoBehaviour:
   lastInput: 
   inStance: 0
   inRekka: 0
+  inSuper: 0
   superMobilityOption: 0
 --- !u!1 &580190454
 GameObject:
@@ -9040,7 +9046,7 @@ GameObject:
   - component: {fileID: 794000089}
   m_Layer: 7
   m_Name: HB_Side_R
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11549,7 +11555,7 @@ GameObject:
   - component: {fileID: 933904496}
   m_Layer: 7
   m_Name: TriggerBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12620,7 +12626,7 @@ GameObject:
   - component: {fileID: 993311525}
   m_Layer: 7
   m_Name: Character_Player1
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12702,6 +12708,7 @@ MonoBehaviour:
   _cHitController: {fileID: 1014556006}
   _cSuperMeter: {fileID: 1465636459}
   _aManager: {fileID: 132508872}
+  _sideManager: {fileID: 1359521219}
   _timer:
     inputLogger:
       textObject:
@@ -12741,9 +12748,9 @@ MonoBehaviour:
   xVal: 0
   yVal: 0
   controllerYield:
-    positiveXYield: 0.25
-    positiveYYield: 0.85
-    negativeXYield: 0.25
+    positiveXYield: 0.45
+    positiveYYield: 0.75
+    negativeXYield: 0.45
     negativeYYield: 0.75
   numpadValue: 0
   numpadVector: {x: 0, y: 0}
@@ -12776,6 +12783,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 434338341}
   opponentPlayer: {fileID: 94923329}
+  awaitCondition: 0
   newField: 0
 --- !u!1 &996888123
 GameObject:
@@ -13601,6 +13609,7 @@ MonoBehaviour:
   isFrozen: 0
   xSpeed: 0
   beingPushed: 0
+  stillnessCheck: 0
 --- !u!1 &1064684077
 GameObject:
   m_ObjectHideFlags: 0
@@ -14161,7 +14170,7 @@ GameObject:
   - component: {fileID: 1097998283}
   m_Layer: 7
   m_Name: HB_Side_L
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15758,7 +15767,7 @@ GameObject:
   - component: {fileID: 1267981851}
   m_Layer: 7
   m_Name: TriggerBoxes
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16265,7 +16274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.097166695, y: 0.91300005}
   m_AnchorMax: {x: 0.097166695, y: 0.91300005}
-  m_AnchoredPosition: {x: -3.7592163, y: 0}
+  m_AnchoredPosition: {x: -3.7592163, y: 13}
   m_SizeDelta: {x: 182.9044, y: 188.4228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1309202295
@@ -16319,6 +16328,7 @@ MonoBehaviour:
   - {fileID: 816935829}
   Combo: []
   currentCount: 0
+  curTypeHierarchy: 0
 --- !u!1 &1311287728
 GameObject:
   m_ObjectHideFlags: 0
@@ -16491,7 +16501,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.000061035, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1322037307
 GameObject:
@@ -17291,11 +17301,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0231cfda7deb83d4fab60c6cc63a6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftWall: {fileID: 0}
-  RightWall: {fileID: 0}
+  LeftWall:
+    WallTransform: {fileID: 0}
+    wallIgnore: {fileID: 0}
+  RightWall:
+    WallTransform: {fileID: 0}
+    wallIgnore: {fileID: 0}
   _p1Position: {fileID: 434338341}
   _p2Position: {fileID: 1211425607}
-  sideCall: 2097152
+  sideCall: 1048576
 --- !u!114 &1359521220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20001,7 +20015,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.90300006, y: 0.91300005}
   m_AnchorMax: {x: 0.90300006, y: 0.91300005}
-  m_AnchoredPosition: {x: -0.6711426, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 187.77, y: 188.4228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1684261298
@@ -20735,7 +20749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.54, y: 0.91300005}
   m_AnchorMax: {x: 0.54, y: 0.91300005}
-  m_AnchoredPosition: {x: -4.520401, y: 0}
+  m_AnchoredPosition: {x: -4.520401, y: 13}
   m_SizeDelta: {x: 665.81, y: 161.2016}
   m_Pivot: {x: 0.5, y: 0.49999985}
 --- !u!1 &1823320413
@@ -23152,7 +23166,7 @@ GameObject:
   - component: {fileID: 2077968776}
   m_Layer: 7
   m_Name: HB_Side_R
-  m_TagString: Untagged
+  m_TagString: PCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

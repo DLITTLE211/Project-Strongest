@@ -25,6 +25,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     [SerializeField] internal Vector3 hu_orientation = new Vector3(0, 0, 0);
     [SerializeField] internal Vector2 hu_size;
     #endregion
+
     private Character_Base character;
     private Character_Animator _playerCAnimator;
     public FrameData _frameData;
@@ -39,6 +40,8 @@ public class AttackHandler_Attack : AttackHandler_Base
     bool active;
     bool inactive;
     bool lastFrame;
+
+
 
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
@@ -199,7 +202,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 CustomCallback customCallback = new CustomCallback(throwAttackCallbacks._frameData._extraPoints[i].call, throwAttackCallbacks._frameData._extraPoints[i].hitFramePoints,
                     throwAttackCallbacks._frameData._extraPoints[i].hitFrameBool, throwAttackCallbacks._frameData._extraPoints[i].camPos,
                     throwAttackCallbacks._frameData._extraPoints[i].camRotation, throwAttackCallbacks._frameData._extraPoints[i].Force,
-                    throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, throwAttackCallbacks._frameData._extraPoints[i].snapMovement, throwAttackCallbacks._frameData._extraPoints[i].customDamage);
+                    throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, throwAttackCallbacks._frameData._extraPoints[i].snapMovement, throwAttackCallbacks._frameData._extraPoints[i].customDamage, throwAttackCallbacks._frameData._extraPoints[i].awaitEnum);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -209,22 +212,33 @@ public class AttackHandler_Attack : AttackHandler_Base
             for (int i = 0; i < _frameData._extraPoints.Count; i++)
             {
                 _frameData._extraPoints[i].hitFrameBool = false;
-                CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints,
-                    _frameData._extraPoints[i].hitFrameBool, _frameData._extraPoints[i].camPos,
-                    _frameData._extraPoints[i].camRotation, _frameData._extraPoints[i].Force,
-                    _frameData._extraPoints[i].projectileSpeed);
+                CustomCallback customCallback = 
+                    new CustomCallback(_frameData._extraPoints[i].call, 
+                    _frameData._extraPoints[i].hitFramePoints,
+                    _frameData._extraPoints[i].hitFrameBool,
+                    _frameData._extraPoints[i].camPos,
+                    _frameData._extraPoints[i].camRotation, 
+                    _frameData._extraPoints[i].Force,
+                    _frameData._extraPoints[i].projectileSpeed,
+                    _frameData._extraPoints[i].snapMovement,
+                    _frameData._extraPoints[i].customDamage,
+                    _frameData._extraPoints[i].awaitEnum);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
-        if (lastAttack._moveType == MoveType.Counter) 
+        if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
         frameCount = 0;
         float waitTime = 1f / 60f;
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            character._cAttackTimer.PauseTimerOnSuperSuccess();
+        }
         character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
@@ -270,27 +284,41 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
+        if (lastAttack._moveType == MoveType.Super)
+        {
+            if (character._cAttackTimer._type == TimerType.Super)
+            {
+                character._cAttackTimer.ClearSuperLanded();
+            }
+        }
         if (lastAttack._moveType == MoveType.Throw)
         {
             if (!lastAttack.hitConnected)
             {
-                Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+                _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
             }
         }
         else
         {
-            Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+            _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
         }
     }
-    public IEnumerator TickAnimThrowCount(AttackHandler_Attack throwProp)
+    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
         frameCount = 0;
-        if (!_playerCAnimator.canTick) 
+        if (!_playerCAnimator.canTick)
         {
             _playerCAnimator.canTick = true;
         }
         float waitTime = 1f / 60f;
-        character._cAttackTimer.PauseTimerOnThrowSuccess();
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
+        {
+            character._cAttackTimer.PauseTimerOnThrowSuccess();
+        }
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            character._cAttackTimer.PauseTimerOnSuperSuccess();
+        }
         while (frameCount <= throwProp.animLength)
         {
             try
@@ -311,7 +339,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                         float curCustomTimeStamp = waitTime * customHitboxCallBacks[0].timeStamp;
                         if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
-                            character.ReceiveCustomCallBack(customHitboxCallBacks[0]); 
+                            character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
                             customHitboxCallBacks.RemoveAt(0);
                         }
                     }
@@ -330,14 +358,28 @@ public class AttackHandler_Attack : AttackHandler_Base
             frameCount += 1f * waitTime;
             yield return new WaitForSeconds(waitTime);
         }
-        character._cAttackTimer.ClearThrowLanded();
-        _playerCAnimator.SetCanTransitionIdle(true);
+        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        {
+            if (curAnim >= animCount)
+            {
+                character._cAttackTimer.ClearSuperLanded();
+                _playerCAnimator.SetCanTransitionIdle(true);
+            }
+        }
+        else
+        {
+            if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
+            {
+                character._cAttackTimer.ClearThrowLanded();
+            }
+            _playerCAnimator.SetCanTransitionIdle(true);
+        }
         if (requiredHitboxCallBacks.Count == 1)
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        Messenger.Broadcast<int>(Events.AddNegativeFrames, throwProp._frameData.recovery);
+        _playerCAnimator.CountUpNegativeFrames(throwProp._frameData.recovery);
     }
 }
 
@@ -407,12 +449,12 @@ public class CustomCallback
     public HitPointCall customCall;
     public float timeStamp;
     public bool funcBool;
-
+    public AwaitClass awaitEnum;
     public float forceFloat,projectileSpeedFloat;
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
     public CustomDamageField customDamage;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null)
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null, AwaitClass _awaitEnum = null)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -423,6 +465,7 @@ public class CustomCallback
         customDamage = _customDamage;
         forceFloat = _forceFloat;
         projectileSpeedFloat = _projectileFloat;
+        awaitEnum = _awaitEnum;
     }
 }
 [Serializable]
@@ -431,6 +474,7 @@ public class ExtraFrameHitPoints
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
+    public AwaitClass awaitEnum;
     public float Force, projectileSpeed;
     public Vector3 camPos, camRotation;
     public bool snapMovement;
@@ -462,4 +506,5 @@ public enum HitPointCall
 
     DealCustomDamage = 524288,
     ForceSideSwitch = 1048576,
+    AwaitSequenceSignifier = 2097152,
 }

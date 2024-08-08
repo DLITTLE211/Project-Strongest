@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine;
 using Rewired;
 using System.Threading.Tasks;
-
 public class Character_Base : MonoBehaviour
 {
     #region Character Profile Data
@@ -33,10 +32,12 @@ public class Character_Base : MonoBehaviour
     public Character_HitController _cHitController;
     public Character_SuperMeter _cSuperMeter;
     public Attack_Manager _aManager;
+    [SerializeField] private Player_SideManager _sideManager;
     [Space(10)]
     public Character_Timer _timer;
     [Space(20)]
     #endregion
+
 
     #region Rewired Controls
     [Header("__________REWIRED CONTROLS__________")]
@@ -134,12 +135,15 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
-
     #region Opponent Reference
     [Header("______OPPONENT CHARACTER________")]
     public Character_Base opponentPlayer;
     [Space(20)]
     #endregion
+
+    private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
+    private bool hitWallCheck;
+    public bool awaitCondition;
 
     [SerializeField]
     public int newField;
@@ -153,8 +157,20 @@ public class Character_Base : MonoBehaviour
         ResetInputLog();
         ResetRemoveList();
         InitCombos();
+        SetAwaitEnums();
         _cComboCounter.SetStartComboCounter();
         _cAnimator.canTransitionIdle = true;
+        awaitCondition = true;
+    }
+    void SetAwaitEnums()
+    {
+        awaitEnums = new Dictionary<WaitingEnumKey, AwaitCheck>();
+        CallbackTest test = delegate (bool i) 
+        {
+            return SetBoolStates(i); 
+        };
+        AwaitCheck awaitCheckSet = new AwaitCheck(test);
+        awaitEnums.Add(WaitingEnumKey.HitEndWall, awaitCheckSet); 
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -323,32 +339,91 @@ public class Character_Base : MonoBehaviour
                     moveAxes.Add(newButton);
                 }
             }
-
         }
     }
     #endregion
 
-    public void ReceiveCustomCallBack(CustomCallback callback) 
+    public void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
     {
-        if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
+        if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
-            switch (callback.customCall)
+            StartCoroutine(AwaitCustomCall(callback, superIteratorCallback));
+            return;
+        }
+        CheckCallback(callback);
+    }
+    void CheckCallback(CustomCallback callback, AwaitClass waitingCheck = null) 
+    {
+        if (waitingCheck == null)
+        {
+            if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
             {
-                case HitPointCall.DealCustomDamage:
-                    opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
-                    break;
+                switch (callback.customCall)
+                {
+                    case HitPointCall.DealCustomDamage:
+                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                        break;
+                }
+            }
+            if (_cForce.ForceCall.HasFlag(callback.customCall))
+            {
+                switch (callback.customCall)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
+            }
+            if (_cAnimator.AttackCall.HasFlag(callback.customCall))
+            {
+                switch (callback.customCall)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
             }
         }
-        if (_cForce.ForceCall.HasFlag(callback.customCall))
+        else 
         {
-            switch (callback.customCall)
+            if (_cDamageCalculator.customDamageCall.HasFlag(waitingCheck.awaitingCheck))
             {
-                case HitPointCall.Force_Right:
-                    _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                    break;
-                case HitPointCall.Force_Up:
-                    _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                    break;
+                switch (waitingCheck.awaitingCheck)
+                {
+                    case HitPointCall.DealCustomDamage:
+                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                        break;
+                }
+            }
+            if (_cForce.ForceCall.HasFlag(waitingCheck.awaitingCheck))
+            {
+                switch (waitingCheck.awaitingCheck)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
+            }
+            if (_cAnimator.AttackCall.HasFlag(waitingCheck.awaitingCheck))
+            {
+                switch (waitingCheck.awaitingCheck)
+                {
+                    case HitPointCall.Force_Right:
+                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.Force_Up:
+                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
+                        break;
+                }
             }
         }
     }
@@ -375,6 +450,16 @@ public class Character_Base : MonoBehaviour
         _cADetection.CheckButtonPressed();
         _cADetection.CallReturnButton();
         _timer.TimerCountDown();
+
+    }
+    bool SetBoolStates(bool check = false) 
+    {
+        if (!awaitCondition) 
+        {
+            check = _sideManager.LeftWall.wallIgnore.playerHitEndWall || _sideManager.RightWall.wallIgnore.playerHitEndWall;
+            return check;
+        }
+        return false;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -459,6 +544,26 @@ public class Character_Base : MonoBehaviour
             func();
         }
     }
+
+    IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
+    {
+        if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
+        {
+            AwaitCheck stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
+            awaitCondition = false;
+            while (!stateCheck.testCall(stateCheck.check) && _cAnimator.lastAttack != null)
+            {
+                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            awaitCondition = true;
+
+            if (_cAnimator.lastAttack != null)
+            {
+                superIteratorCallback();
+            }
+        }
+    }
 }
 [Serializable]
 public class ButtonInput
@@ -502,3 +607,28 @@ public class ControllerYield
     [SerializeField, Range(0f, 1f)] public float positiveXYield, positiveYYield;
     [SerializeField, Range(0f, 1f)] public float negativeXYield, negativeYYield;
 }
+[Serializable]
+public enum WaitingEnumKey
+{
+    NA,
+    HitEndWall,
+}
+[Serializable]
+public class AwaitClass
+{
+    public WaitingEnumKey keyRef;
+    public HitPointCall awaitingCheck;
+}
+[Serializable]
+public class AwaitCheck
+{
+    public bool check;
+    public CallbackTest testCall;
+
+    public AwaitCheck(CallbackTest _testCall) 
+    {
+        testCall = _testCall;
+    }
+}
+[Serializable]
+public delegate bool CallbackTest(bool i = false);
