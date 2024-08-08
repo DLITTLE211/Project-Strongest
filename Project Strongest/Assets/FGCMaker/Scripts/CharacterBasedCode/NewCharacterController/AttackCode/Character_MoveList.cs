@@ -29,14 +29,11 @@ public class Character_MoveList : MonoBehaviour
     [Header("_____Simple Attacks_____")]
     [SerializeField] protected internal List<Attack_NonSpecialAttack> stringNormalAttacks;
     [Space(15)]
-    [Space(15)]
     [Header("_____Simple Attacks_____")]
     [SerializeField] protected internal List<Attack_NonSpecialAttack> commandNormalAttacks;
     [Space(15)]
-    [Space(15)]
     [Header("_____Simple Attacks_____")]
     [SerializeField] protected internal List<Attack_NonSpecialAttack> simpleAttacks;
-    [Space(15)]
     [Space(15)]
     [Header("_____Basic Throws_____")]
     [SerializeField] protected internal List<Attack_ThrowBase> BasicThrows;

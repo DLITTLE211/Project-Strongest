@@ -9,7 +9,6 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private string lastInput;
     public bool inStance, inRekka,inSuper ,superMobilityOption;
     private bool canCheckMovement;
-
     private void Start()
     {
         canCheckMovement = false;
@@ -199,6 +198,7 @@ public class Character_ComboDetection : MonoBehaviour
     void SimpleInputVerifier(Character_ButtonInput input)
     {
         #region Simple Attacks
+        
         for (int i = 0; i < _base.simpleAttackList.Count; i++)
         {
             Attack_NonSpecialAttack c = _base.simpleAttackList[i];
@@ -212,7 +212,6 @@ public class Character_ComboDetection : MonoBehaviour
             }
             if (_base.removeSimpleList.Count >= _base.simpleAttackList.Count)
             {
-                // c.ResetCombo();
                 _base.removeSimpleList.Clear();
             }
         }
