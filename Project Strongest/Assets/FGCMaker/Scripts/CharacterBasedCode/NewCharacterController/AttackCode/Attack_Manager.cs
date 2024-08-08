@@ -19,6 +19,7 @@ public class Attack_Manager : MonoBehaviour
     private List<Cancel_State> stringCancelStates;
     [SerializeField] private MoveType curTypeHierarchy;
     // Start is called before the first frame update
+    private int normalGatlingCount;
     void Start()
     {
         SetHitBoxStartState();
@@ -26,6 +27,7 @@ public class Attack_Manager : MonoBehaviour
         _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
         CanTransitionAnimation = true;
         SetStringCancelCheck();
+        normalGatlingCount = 3;
     }
     void SetStringCancelCheck() 
     {
@@ -40,6 +42,7 @@ public class Attack_Manager : MonoBehaviour
     public void ClearAttacks()
     { 
         _AttackAnimQueue.Clear();
+        normalGatlingCount = 3;
         curTypeHierarchy = MoveType.Normal;
         _cAnimator.inputWindowOpen = true;
         _cAnimator.EndAnim();
@@ -130,11 +133,14 @@ public class Attack_Manager : MonoBehaviour
         switch (newAttack._moveType) 
         {
             case MoveType.Normal:
+                if (normalGatlingCount <= 0) 
+                {
+                    return false;
+                }
                 if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
-                      //  Combo.RemoveAt(index);
                         return false;
                     }
                 }
@@ -144,7 +150,6 @@ public class Attack_Manager : MonoBehaviour
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
-                      //  Combo.RemoveAt(index);
                         return false;
                     }
                 }
@@ -154,7 +159,6 @@ public class Attack_Manager : MonoBehaviour
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
-                      //  Combo.RemoveAt(index);
                         return false;
                     }
                 }
@@ -162,7 +166,6 @@ public class Attack_Manager : MonoBehaviour
             default:
                 if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                 {
-                  //  Combo.RemoveAt(index);
                     return false;
                 }
                 break;
@@ -344,6 +347,10 @@ public class Attack_Manager : MonoBehaviour
     {
         if (attack.attackHashes.Count != 0)
         {
+            if (attack._moveType == MoveType.Normal) 
+            {
+                normalGatlingCount--;
+            }
             _cAnimator.SetNextAttackStartVariables(attack);
         }
     }
