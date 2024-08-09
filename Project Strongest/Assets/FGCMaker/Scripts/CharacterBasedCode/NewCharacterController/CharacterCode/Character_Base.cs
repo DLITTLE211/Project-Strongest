@@ -152,6 +152,7 @@ public class Character_Base : MonoBehaviour
 
     [SerializeField]
     public int newField;
+    public List<AttackInputTypes> inputVisualiser;
 
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
@@ -236,8 +237,10 @@ public class Character_Base : MonoBehaviour
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         comboList3_0.ExtractBaseProperties(this);
-        comboList3_0.SetupCharacterTotalMoveList(characterMoveListAttacks);
+        inputVisualiser = new List<AttackInputTypes>();
+        comboList3_0.SetupCharacterTotalMoveList(characterMoveListAttacks,characterProfile.CharacterName, inputVisualiser);
         _cComboDetection.PrimeCombos();
+
     }
     void GetCharacterMoveList()
     {

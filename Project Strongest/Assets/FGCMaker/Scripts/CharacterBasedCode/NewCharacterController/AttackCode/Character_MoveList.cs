@@ -195,12 +195,38 @@ public class Character_MoveList : MonoBehaviour
         
     }
 
-    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary) 
+    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary, string characterName, List<AttackInputTypes> _types) 
     {
         string errorMessage = "";
         try
         {
+            errorMessage = "Start Super Addition";
+            for (int i = 0; i < BasicSuperAttacks.Count; i++) 
+            {
+                AttackInputTypes superInputType = new AttackInputTypes(BasicSuperAttacks[i].attackInput,null, BasicSuperAttacks[i].property._moveType);
+                totalAttackDictionary.Add(superInputType, BasicSuperAttacks[i]);
+                _types.Add(superInputType);
+            }
+            errorMessage = "Start Command Throw Addition";
+            for (int i = 0; i < CommandThrows.Count; i++)
+            {
+                AttackInputTypes commandThrowInputType = new AttackInputTypes(CommandThrows[i].attackInput, null, CommandThrows[i].property._moveType);
+                totalAttackDictionary.Add(commandThrowInputType, CommandThrows[i]);
+                _types.Add(commandThrowInputType);
+            }
+            errorMessage = "Start Counter Addition";
+            for (int i = 0; i < CounterAttacks.Count; i++)
+            {
+                AttackInputTypes counterInputType = new AttackInputTypes(CounterAttacks[i].attackInput, null, CounterAttacks[i].property._moveType);
+                totalAttackDictionary.Add(counterInputType, CounterAttacks[i]);
+                _types.Add(counterInputType);
+            }
+            errorMessage = "Start Stance Attack Addition";
 
+
+            ////////////////////////////////////////////////////////////
+            Debug.Log($"All Attacks Added to Dictionary. Have a \"Fight\"-Tastic Day, {characterName}!! ");
+            Debug.Log($"Dictionary TotalCount is... {totalAttackDictionary.Count}.");
         }
         catch (Exception) 
         {

@@ -98,7 +98,7 @@ public abstract class AdvancedSpecialBase
 
 }
 [Serializable]
-public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecialAction
+public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctionality //IAdvancedSpecialAction
 {
     [SerializeField] private int curInput;
     [SerializeField] private int movementPortionLength;
@@ -141,6 +141,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
     #endregion
 
     #region Attack Functionality Code
+    public void SetStarterInformation()
+    {
+        throw new NotImplementedException();
+    }
     public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackButton = null)
     {
         property.InputTimer.CheckForInput = true;
@@ -230,6 +234,11 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAdvancedSpecial
     public void PreformAttack(Character_Base curBase)
     {
         curBase._aManager.ReceiveAttack(property);
+    }
+    public void PreformAttack()
+    {
+        AttackData newAttackData = new AttackData(curBase);
+        newAttackData.curBase._aManager.ReceiveAttack(property);
     }
     public void SendCounterHitInfo(Character_Base target)
     {
