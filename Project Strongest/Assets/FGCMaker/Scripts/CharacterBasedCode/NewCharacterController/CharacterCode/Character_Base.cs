@@ -79,6 +79,8 @@ public class Character_Base : MonoBehaviour
     [SerializeField] private Amplifiers amplifier;
     public Character_MoveList comboList3_0;
 
+    [SerializeField] private Dictionary<AttackInputTypes, IAttackFunctionality> characterMoveListAttacks;
+    #region Combo Structures (Old)
     public List<Attack_ThrowBase> BasicThrows;
     public List<Attack_ThrowBase> removeThrowList;
 
@@ -102,6 +104,9 @@ public class Character_Base : MonoBehaviour
 
     public List<Attack_AdvancedSpecialMove> CustomSuperAttackList;
     public List<Attack_AdvancedSpecialMove> CustomSuperRemoveList;
+    #endregion
+
+
     [Space(20)]
     #endregion
 
@@ -156,6 +161,7 @@ public class Character_Base : MonoBehaviour
         _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         ResetRemoveList();
+        characterMoveListAttacks =
         InitCombos();
         SetAwaitEnums();
         _cComboCounter.SetStartComboCounter();

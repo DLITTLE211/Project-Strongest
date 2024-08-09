@@ -13,7 +13,6 @@ public interface IThrowAction
     void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack);
     void SendCounterHitInfo(Path_Data _data, Character_Base target);
     void SetStarterInformation();
-    void UpdateLastDirectional(Character_ButtonInput newDirection);
     void SetComboTimer(Character_InputTimer_Attacks timer);
 }
 [Serializable]
@@ -204,10 +203,6 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
         _throwAnimation[0].AddRequiredCallbacks(curBase);
         _throwAnimation[0].AddCustomCallbacks(_throwAnimation[0]);
         curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
-    }
-    public void UpdateLastDirectional(Character_ButtonInput newDirection)
-    {
-        throw new System.NotImplementedException();
     }
     #endregion
 }
