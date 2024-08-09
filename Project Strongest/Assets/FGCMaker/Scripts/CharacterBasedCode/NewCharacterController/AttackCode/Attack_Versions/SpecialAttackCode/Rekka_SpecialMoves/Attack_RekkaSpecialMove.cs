@@ -194,6 +194,15 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         await Task.Delay(FourFramesInMS);
     }
 
+    public void DisableCheckable()
+    {
+        throw new NotImplementedException();
+    }
+
+    public MoveType GetAttackMoveType()
+    {
+        throw new NotImplementedException();
+    }
     #region Interface Functions
 
     #region Input Verification Code

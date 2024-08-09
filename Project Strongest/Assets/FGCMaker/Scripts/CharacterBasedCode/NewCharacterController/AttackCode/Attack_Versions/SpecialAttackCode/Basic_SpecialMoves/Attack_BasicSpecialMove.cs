@@ -8,19 +8,19 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
     [SerializeField] private int movementPortionLength;
     [SerializeField] private char finalAttackButton;
     [SerializeField] private bool moveComplete;
-    [SerializeField] private int framesBetweenAttacks; 
+    [SerializeField] private int framesBetweenAttacks;
 
     #region Attack Base Code
     public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase)
     {
-        return CheckCombo(input,curBase);
+        return CheckCombo(input, curBase);
     }
     public override void ResetCombo()
     {
         curInput = 0;
         moveComplete = false;
     }
-    public bool ReturnMoveComplete() 
+    public bool ReturnMoveComplete()
     {
         return moveComplete;
     }
@@ -46,7 +46,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
     #endregion
 
     #region Attack Functionality Code
-    public bool CheckCombo(Character_ButtonInput Input,Character_Base curBase, Character_ButtonInput attackButton = null)
+    public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackButton = null)
     {
         property.InputTimer.CheckForInput = true;
         if (IsCorrectInput(Input, curBase, curInput))
@@ -58,7 +58,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
                 moveComplete = true;
                 ResetMoveCombo();
             }
-            if (curInput >= movementPortionLength +1 && moveComplete == true)
+            if (curInput >= movementPortionLength + 1 && moveComplete == true)
             {
                 PreformAttack(curBase);
                 ResetCombo();
@@ -106,12 +106,12 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
                 {
                     moveInput = attackInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
                 }
-                else 
+                else
                 {
                     moveInput = attackInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
                 }
 
-               // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
+                // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
                 bool moveState = testInput.Button_State._state == ButtonStateMachine.InputState.directional;
                 bool thisMove = moveInput && moveState;
                 if (thisMove)
@@ -147,7 +147,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
         {
             target._cDamageCalculator.TakeDamage(property);
         }
-        else 
+        else
         {
             target._cDamageCalculator.TakeChipDamage(property);
         }
@@ -157,4 +157,15 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
         property.InputTimer = timer;
     }
     #endregion
+
+
+    public void DisableCheckable()
+    {
+        throw new NotImplementedException();
+    }
+
+    public MoveType GetAttackMoveType()
+    {
+        throw new NotImplementedException();
+    }
 }

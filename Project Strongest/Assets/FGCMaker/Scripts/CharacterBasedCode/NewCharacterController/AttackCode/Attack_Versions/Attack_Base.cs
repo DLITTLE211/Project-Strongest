@@ -78,6 +78,11 @@ public class Attack_Input
     {
         attackStringArray = attackString.ToCharArray();
     }
+    public Attack_Input(string _attackString, char[] _stringArray) 
+    {
+        attackString = _attackString;
+        attackStringArray = _stringArray;
+    }
 }
 [Serializable]
 public class Vertical_KnockBack

@@ -358,4 +358,13 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
 
     #endregion
+    public void DisableCheckable()
+    {
+        throw new NotImplementedException();
+    }
+
+    public MoveType GetAttackMoveType()
+    {
+        throw new NotImplementedException();
+    }
 }

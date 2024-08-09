@@ -36,6 +36,15 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality //IThrowA
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     AttackData attackData;
 
+    public void DisableCheckable()
+    {
+        throw new NotImplementedException();
+    }
+
+    public MoveType GetAttackMoveType()
+    {
+        throw new NotImplementedException();
+    }
     #region Attack Base Code
     public override void CheckButtonInfo(InputAction buttonInfo)
     {

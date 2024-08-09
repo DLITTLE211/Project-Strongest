@@ -98,7 +98,7 @@ public abstract class AdvancedSpecialBase
 
 }
 [Serializable]
-public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctionality //IAdvancedSpecialAction
+public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctionality //IAdvancedSpecialAction
 {
     [SerializeField] private int curInput;
     [SerializeField] private int movementPortionLength;
@@ -283,7 +283,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctiona
         }
         return;
     }
-    public void PlayNextCustomAnim() 
+    public void PlayNextCustomAnim()
     {
         currentCustomAnim++;
         HandleSuperMultipleAnimAttackInfo();
@@ -294,4 +294,15 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctiona
         curBase = timer._base;
     }
     #endregion
+
+
+    public void DisableCheckable()
+    {
+        throw new NotImplementedException();
+    }
+
+    public MoveType GetAttackMoveType()
+    {
+        throw new NotImplementedException();
+    }
 }

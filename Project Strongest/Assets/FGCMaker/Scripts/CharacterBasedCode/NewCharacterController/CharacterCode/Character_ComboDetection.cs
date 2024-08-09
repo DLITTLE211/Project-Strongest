@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Character_ComboDetection : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
     [SerializeField] private Character_Animator _animator;
-    [SerializeField] private string lastInput;
+    [SerializeField] private int lastInput;
     public bool inStance, inRekka,inSuper ,superMobilityOption;
     private bool canCheckMovement;
+    [SerializeField] private AttackInputTypes currentInput;
+    [SerializeField] private IAttackFunctionality ActiveFollowUpAttackCheck;
+    private string curString;
+    private char[] curStringArray;
+
+    List<MoveType> followUpInputMoveTypes;
     private void Start()
     {
         canCheckMovement = false;
-        lastInput = "";
+        lastInput = -1; 
+        curString = "";
+        currentInput = new AttackInputTypes(new Attack_Input(curString,curStringArray));
+        
+    }
+    void SetFollowUpAttackTypes() 
+    {
+        followUpInputMoveTypes = new List<MoveType>();
+        followUpInputMoveTypes.Add(MoveType.String_Normal);
+        followUpInputMoveTypes.Add(MoveType.Stance);
+        followUpInputMoveTypes.Add(MoveType.Rekka);
     }
     public void SetAnimator(Character_Animator myAnim) 
     {
@@ -28,87 +45,115 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (_base._cAnimator.inputWindowOpen)
             {
-                SpecialInputVerifier(input);
-                SimpleInputVerifier(input);
-                CompleteMoveListVerifier(input);
+               // SpecialInputVerifier(input);
+                //SimpleInputVerifier(input);
+                AddToCurrentInput(lastInput,input);
             }
         }
         else
         {
-            if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
+            if (lastInput != input.Button_State.directionalInput && canCheckMovement)
             {
-                lastInput = input.Button_State.directionalInput.ToString();
-                SpecialInputVerifier(input);
-                CompleteMoveListVerifier(input);
+                lastInput = input.Button_State.directionalInput;
+               // SpecialInputVerifier(input);
+                AddToCurrentInput(lastInput);
             }
-            ExtraMovementVerifier(input);
+           // ExtraMovementVerifier(input);
         }
     }
-    void CompleteMoveListVerifier(Character_ButtonInput input) 
+    void AddToCurrentInput(int direction, Character_ButtonInput attack = null) 
     {
-        /*
-        for(int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
+        if (attack != null)
         {
-            if(_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[i].Key.moveType)
-            {
-                _base.CharacterMoveListAttacks[i].DisableCheckable();
-                continue;
-            }
-            else 
-            {
-                if (!_base.CharacterMoveListAttacks[i].CheckMove(input))
-                {
-                    _base.CharacterMoveListAttacks[i].ResetCombo();
-                    _base.CharacterMoveListAttacks[i].DisableCheckable();
-                }
-                else 
-                {
-                    _base.CharacterMoveListAttacks[i].Iterate();
-                    if (_base.CharacterMoveListAttacks[i].Key.moveType > (int)MoveType.String_Normal)
-                    {
-                        if (!_base.CharacterMoveListAttacks[i].GetMoveInputComplete())
-                        {
-                            if (_base.CharacterMoveListAttacks[i].CheckCurInput >= _base.CharacterMoveListAttacks[i].ReturnMoveInputCount())
-                            {
-                                _base.CharacterMoveListAttacks[i].SetMoveInputComplete();
-                            }
-                        }
-                        else
-                        {
-                            _base.CharacterMoveListAttacks[i].PreformAttack();
-                        }
+            currentInput.AddAttackInput(direction, attack);
+            CompleteMoveListVerifier();
+            
+            return;
+        }
+        currentInput.AddDirectionalInput(direction);
+    }
+    void CompleteMoveListVerifier()
+    {
+        if (ActiveFollowUpAttackCheck != null)
+        {
 
-                    }
-                    else
-                    {
-                        if (_base.CharacterMoveListAttacks[i].Key.moveType == (int)MoveType.String_Normal)
-                        {
-                            if (_base.CharacterMoveListAttacks[i].GetCurAttackInput > 0)
-                            {
-                                if (!_base.CharacterMoveListAttacks[i].CheckPreviousAttackConnected())
-                                {
-                                    _base.CharacterMoveListAttacks[i].DisableCheckable();
-                                    continue;
-                                }
-                                else
-                                {
-                                    _base.CharacterMoveListAttacks[i].PreformAttack();
-                                }
-                            }
-                            else
-                            {
-                                _base.CharacterMoveListAttacks[i].PreformAttack();
-                            }
-                        }
-                        else 
-                        {
-                            _base.CharacterMoveListAttacks[i].PreformAttack();
-                        }
-                    }
+        }
+        else
+        {
+            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
+            {
+                if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
+                {
+                    _base.CharacterMoveListAttacks[currentInput].DisableCheckable();
                 }
+                else
+                {
+                    if (followUpInputMoveTypes.Contains(_base.CharacterMoveListAttacks[currentInput].GetAttackMoveType()))
+                    {
+                        ActiveFollowUpAttackCheck = _base.CharacterMoveListAttacks[currentInput];
+                    }
+                    _base.CharacterMoveListAttacks[currentInput].PreformAttack();
+                }
+            }
+            else
+            {
+                _base.CharacterMoveListAttacks[currentInput].DisableCheckable();
             }
         }
-        */
+        //else 
+        //{
+        /* if (!_base.CharacterMoveListAttacks[i].CheckMove(input))
+         {
+             _base.CharacterMoveListAttacks[i].ResetCombo();
+             _base.CharacterMoveListAttacks[i].DisableCheckable();
+         }
+         else 
+         {
+             _base.CharacterMoveListAttacks[i].Iterate();
+             if (_base.CharacterMoveListAttacks[i].Key.moveType > (int)MoveType.String_Normal)
+             {
+                 if (!_base.CharacterMoveListAttacks[i].GetMoveInputComplete())
+                 {
+                     if (_base.CharacterMoveListAttacks[i].CheckCurInput >= _base.CharacterMoveListAttacks[i].ReturnMoveInputCount())
+                     {
+                         _base.CharacterMoveListAttacks[i].SetMoveInputComplete();
+                     }
+                 }
+                 else
+                 {
+                     _base.CharacterMoveListAttacks[i].PreformAttack();
+                 }
+
+             }
+             else
+             {
+                 if (_base.CharacterMoveListAttacks[i].Key.moveType == (int)MoveType.String_Normal)
+                 {
+                     if (_base.CharacterMoveListAttacks[i].GetCurAttackInput > 0)
+                     {
+                         if (!_base.CharacterMoveListAttacks[i].CheckPreviousAttackConnected())
+                         {
+                             _base.CharacterMoveListAttacks[i].DisableCheckable();
+                             continue;
+                         }
+                         else
+                         {
+                             _base.CharacterMoveListAttacks[i].PreformAttack();
+                         }
+                     }
+                     else
+                     {
+                         _base.CharacterMoveListAttacks[i].PreformAttack();
+                     }
+                 }
+                 else 
+                 {
+                     _base.CharacterMoveListAttacks[i].PreformAttack();
+                 }
+             }
+         }*/
+        //  }
+        //}
     }
     public void PrimeCombos()
     {

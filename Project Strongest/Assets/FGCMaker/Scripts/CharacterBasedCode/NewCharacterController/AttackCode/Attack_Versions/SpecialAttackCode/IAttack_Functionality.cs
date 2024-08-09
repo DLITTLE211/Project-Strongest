@@ -10,6 +10,9 @@ public interface IAttackFunctionality
     void SetComboTimer(Character_InputTimer_Attacks timer);
     void SetStarterInformation();
 
+    void DisableCheckable();
+    MoveType GetAttackMoveType();
+
 }
 
 [Serializable]
@@ -38,12 +41,25 @@ public class AttackInputTypes
 {
     public Attack_Input specialMoveTypeInput;
     public List<Attack_BasicInput> normalTypeInput;
+    private (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
     public MoveType moveType;
-    
     public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<Attack_BasicInput> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
         moveType = _moveType;
+    }
+    public void AddDirectionalInput(int directionalInput) 
+    {
+        specialMoveTypeInput.attackString += directionalInput.ToString();
+    }
+    public void AddAttackInput(int lastDirection, Character_ButtonInput attackInput)
+    {
+        specialMoveTypeInput.attackString += attackInput.Button_Name.ToString();
+        specialMoveTypeInput.turnStringToArray();
+
+        currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
+        char buttonInput = attackInput.Button_Name.ToCharArray()[0];
+        currentAttackInput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
     }
 }
