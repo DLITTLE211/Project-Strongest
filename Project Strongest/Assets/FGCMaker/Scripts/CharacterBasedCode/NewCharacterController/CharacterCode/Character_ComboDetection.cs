@@ -18,6 +18,98 @@ public class Character_ComboDetection : MonoBehaviour
     {
         _animator = myAnim;
     }
+    public void CheckPossibleCombos(Character_ButtonInput newInput)
+    {
+        StoreNewInput(newInput);
+    }
+    public void StoreNewInput(Character_ButtonInput input)
+    {
+        if (input.Button_State._state != ButtonStateMachine.InputState.directional)
+        {
+            if (_base._cAnimator.inputWindowOpen)
+            {
+                SpecialInputVerifier(input);
+                SimpleInputVerifier(input);
+                CompleteMoveListVerifier(input);
+            }
+        }
+        else
+        {
+            if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
+            {
+                lastInput = input.Button_State.directionalInput.ToString();
+                SpecialInputVerifier(input);
+                CompleteMoveListVerifier(input);
+            }
+            ExtraMovementVerifier(input);
+        }
+    }
+    void CompleteMoveListVerifier(Character_ButtonInput input) 
+    {
+        /*
+        for(int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
+        {
+            if(_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[i].Key.moveType)
+            {
+                _base.CharacterMoveListAttacks[i].DisableCheckable();
+                continue;
+            }
+            else 
+            {
+                if (!_base.CharacterMoveListAttacks[i].CheckMove(input))
+                {
+                    _base.CharacterMoveListAttacks[i].ResetCombo();
+                    _base.CharacterMoveListAttacks[i].DisableCheckable();
+                }
+                else 
+                {
+                    _base.CharacterMoveListAttacks[i].Iterate();
+                    if (_base.CharacterMoveListAttacks[i].Key.moveType > (int)MoveType.String_Normal)
+                    {
+                        if (!_base.CharacterMoveListAttacks[i].GetMoveInputComplete())
+                        {
+                            if (_base.CharacterMoveListAttacks[i].CheckCurInput >= _base.CharacterMoveListAttacks[i].ReturnMoveInputCount())
+                            {
+                                _base.CharacterMoveListAttacks[i].SetMoveInputComplete();
+                            }
+                        }
+                        else
+                        {
+                            _base.CharacterMoveListAttacks[i].PreformAttack();
+                        }
+
+                    }
+                    else
+                    {
+                        if (_base.CharacterMoveListAttacks[i].Key.moveType == (int)MoveType.String_Normal)
+                        {
+                            if (_base.CharacterMoveListAttacks[i].GetCurAttackInput > 0)
+                            {
+                                if (!_base.CharacterMoveListAttacks[i].CheckPreviousAttackConnected())
+                                {
+                                    _base.CharacterMoveListAttacks[i].DisableCheckable();
+                                    continue;
+                                }
+                                else
+                                {
+                                    _base.CharacterMoveListAttacks[i].PreformAttack();
+                                }
+                            }
+                            else
+                            {
+                                _base.CharacterMoveListAttacks[i].PreformAttack();
+                            }
+                        }
+                        else 
+                        {
+                            _base.CharacterMoveListAttacks[i].PreformAttack();
+                        }
+                    }
+                }
+            }
+        }
+        */
+    }
     public void PrimeCombos()
     {
         PrimeNormal();
@@ -169,31 +261,6 @@ public class Character_ComboDetection : MonoBehaviour
             _base.specialMoveList.Add(_base.comboList3_0.special_Simple[i]);
         }
         #endregion
-    }
-
-    public void CheckPossibleCombos(Character_ButtonInput newInput)
-    {
-        StoreNewInput(newInput);
-    }
-    public void StoreNewInput(Character_ButtonInput input)
-    {
-        if (input.Button_State._state != ButtonStateMachine.InputState.directional)
-        {
-            if (_base._cAnimator.inputWindowOpen)
-            {
-                SpecialInputVerifier(input);
-                SimpleInputVerifier(input);
-            }
-        }
-        else
-        {
-            if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
-            {
-                lastInput = input.Button_State.directionalInput.ToString();
-                SpecialInputVerifier(input);
-            }
-            ExtraMovementVerifier(input);
-        }
     }
     void SimpleInputVerifier(Character_ButtonInput input)
     {

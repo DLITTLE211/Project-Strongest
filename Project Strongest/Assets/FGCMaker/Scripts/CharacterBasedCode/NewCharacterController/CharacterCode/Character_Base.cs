@@ -79,7 +79,8 @@ public class Character_Base : MonoBehaviour
     [SerializeField] private Amplifiers amplifier;
     public Character_MoveList comboList3_0;
 
-    [SerializeField] private Dictionary<AttackInputTypes, IAttackFunctionality> characterMoveListAttacks;
+    [SerializeField] private Dictionary<AttackInputTypes, IAttackFunctionality> _characterMoveListAttacks;
+    public Dictionary<AttackInputTypes, IAttackFunctionality> CharacterMoveListAttacks { get { return _characterMoveListAttacks; } }
     #region Combo Structures (Old)
     public List<Attack_ThrowBase> BasicThrows;
     public List<Attack_ThrowBase> removeThrowList;
@@ -233,12 +234,12 @@ public class Character_Base : MonoBehaviour
 
     void InitCombos()
     {
-        characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>();
+        _characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>();
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         comboList3_0.ExtractBaseProperties(this);
         inputVisualiser = new List<AttackInputTypes>();
-        comboList3_0.SetupCharacterTotalMoveList(characterMoveListAttacks,characterProfile.CharacterName, inputVisualiser);
+        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser);
         _cComboDetection.PrimeCombos();
 
     }
