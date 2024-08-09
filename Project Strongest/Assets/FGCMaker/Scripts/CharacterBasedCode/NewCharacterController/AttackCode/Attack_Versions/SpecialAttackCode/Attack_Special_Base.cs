@@ -4,15 +4,15 @@ using System;
 public enum MoveType
 {
     Normal,
-    String_Normal,
+    Throw,
     Command_Normal,
+    String_Normal,
     BasicSpeical,
     Rekka,
     Stance,
-    Super,
-    Throw,
     Counter,
     CommandGrab,
+    Super,
 
     /*
      * Basic special move: Completed. Search for input, upon completion 
