@@ -259,6 +259,40 @@ public class Character_MoveList : MonoBehaviour
             }
             #endregion
 
+            #region String Normals Registration
+            errorMessage = "Start String Normal Attack Addition";
+            for (int i = 0; i < stringNormalAttacks.Count; i++)
+            {
+                List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
+                totalSubInputs.Add(stringNormalAttacks[i]._attackInput);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, stringNormalAttacks[i]._attackInput._correctInput[0].property._moveType);
+                totalAttackDictionary.Add(superInputType, stringNormalAttacks[i]);
+                _types.Add(superInputType);
+            }
+            #endregion
+            #region Command Normals Registration
+            errorMessage = "Start String Normal Attack Addition";
+            for (int i = 0; i < commandNormalAttacks.Count; i++)
+            {
+                List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
+                totalSubInputs.Add(commandNormalAttacks[i]._attackInput);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, commandNormalAttacks[i]._attackInput._correctInput[0].property._moveType);
+                totalAttackDictionary.Add(superInputType, commandNormalAttacks[i]);
+                _types.Add(superInputType);
+            }
+            #endregion
+            #region Normals Registration
+            errorMessage = "Start String Normal Attack Addition";
+            for (int i = 0; i < simpleAttacks.Count; i++)
+            {
+                List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
+                totalSubInputs.Add(simpleAttacks[i]._attackInput);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, simpleAttacks[i]._attackInput._correctInput[0].property._moveType);
+                totalAttackDictionary.Add(superInputType, simpleAttacks[i]);
+                _types.Add(superInputType);
+            }
+            #endregion
+
             ////////////////////////////////////////////////////////////
             Debug.Log($"All Attacks Added to Dictionary. Have a \"Fight\"-Tastic Day, {characterName}!! ");
             Debug.Log($"Dictionary TotalCount is... {totalAttackDictionary.Count}.");

@@ -20,8 +20,9 @@ public class AttackData
     public Attack_BaseProperties mainStance;
     public RekkaAttack rekkaAttack;
     public StanceAttack stanceAttack;
+    public Attack_BaseInput normalAttack;
     public int stanceCurInput;
-    public AttackData(Character_Base _curBase, RekkaAttack _rekkaAttack = null, StanceAttack _stanceAttack = null, int _stanceCurInput = -1, Attack_BaseProperties _mainRekka = null, Attack_BaseProperties _mainStance = null) 
+    public AttackData(Character_Base _curBase, RekkaAttack _rekkaAttack = null, StanceAttack _stanceAttack = null, int _stanceCurInput = -1, Attack_BaseProperties _mainRekka = null, Attack_BaseProperties _mainStance = null, Attack_BaseInput _normalAttack = null) 
     {
         curBase = _curBase;
         rekkaAttack = _rekkaAttack;
@@ -29,6 +30,7 @@ public class AttackData
         stanceCurInput = _stanceCurInput;
         mainRekka = _mainRekka;
         mainStance = _mainStance;
+        normalAttack = _normalAttack;
     }
 }
 [Serializable]

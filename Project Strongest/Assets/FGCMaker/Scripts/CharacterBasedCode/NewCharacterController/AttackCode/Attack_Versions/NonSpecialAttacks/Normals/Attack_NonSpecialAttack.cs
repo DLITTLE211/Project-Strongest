@@ -1,7 +1,7 @@
 using Rewired;
 using System;
 using UnityEngine;
-[System.Serializable]
+[Serializable]
 public class Path_Data 
 {
     public int _curInputPath;
@@ -12,14 +12,16 @@ public class Path_Data
         _curAttackPath = j;
     }
 }
-[System.Serializable]
-public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFunctionality
+[Serializable]
+public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctionality //IAttack_BasicFunctionality
 {
     public Path_Data _pathdata;
     [SerializeField] private int curInput,curAttack;
     [SerializeField] private int lastDirection;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     private Character_Base _base;
+
+    AttackData attackData;
     #region Attack Base Code
     public override void CheckButtonInfo(InputAction buttonInfo)
     {
@@ -70,8 +72,9 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
             }
             if (curAttack > 0)
             {
-                if (this._attackInput._correctInput[curAttack - 1].property.hitConnected == true)
+                if (_attackInput._correctInput[curAttack - 1].property.hitConnected == true)
                 {
+                    attackData = new AttackData(curBase, null, null, -1, null, null, _attackInput._correctInput[curAttack - 1]);
                     RewardAttack(curBase);
                 }
                 else
@@ -90,6 +93,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
     public void RewardAttack(Character_Base curBase) 
     {
         this._attackInput._correctInput[0].property.InputTimer.ResetTimerSuccess();
+        
         PreformAttack(curInput, curAttack, curBase);
         if (curInput > _attackInput._correctInput.Count)
         {
@@ -171,6 +175,12 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
         }
     }
 
+
+    public void PreformAttack()
+    {
+        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
+        //throw new NotImplementedException();
+    }
     public void PreformAttack(int currentInput, int currentAttack,Character_Base curBase)
     {
         _pathdata.SetPathData(currentInput, currentAttack);
@@ -192,11 +202,19 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
         catch(ArgumentNullException e) { DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step..."); }
     }
 
+    public void SendCounterHitInfo(Character_Base curBase)
+    {
+        throw new NotImplementedException();
+    }
     public void SendCounterHitInfo(Attack_BaseProperties attack, Character_Base target)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(attack.counterHitDamageMult);
     }
 
+    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    {
+        throw new NotImplementedException();
+    }
     public void SendSuccessfulDamageInfo(Attack_BaseProperties attack, Character_Base target, bool blockedAttack = false)
     {
         if (!blockedAttack)
@@ -218,9 +236,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
         }
     }
 
-    public void UpdateLastDirectional(Character_ButtonInput newDirection)
-    {
-        throw new System.NotImplementedException();
-    }
+
     #endregion
 }
