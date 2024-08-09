@@ -200,6 +200,7 @@ public class Character_MoveList : MonoBehaviour
         string errorMessage = "";
         try
         {
+            #region Super Registration
             errorMessage = "Start Super Addition";
             for (int i = 0; i < BasicSuperAttacks.Count; i++) 
             {
@@ -207,6 +208,9 @@ public class Character_MoveList : MonoBehaviour
                 totalAttackDictionary.Add(superInputType, BasicSuperAttacks[i]);
                 _types.Add(superInputType);
             }
+            #endregion
+
+            #region CommandThrow Registration
             errorMessage = "Start Command Throw Addition";
             for (int i = 0; i < CommandThrows.Count; i++)
             {
@@ -214,6 +218,9 @@ public class Character_MoveList : MonoBehaviour
                 totalAttackDictionary.Add(commandThrowInputType, CommandThrows[i]);
                 _types.Add(commandThrowInputType);
             }
+            #endregion
+
+            #region Counter Registration
             errorMessage = "Start Counter Addition";
             for (int i = 0; i < CounterAttacks.Count; i++)
             {
@@ -221,8 +228,36 @@ public class Character_MoveList : MonoBehaviour
                 totalAttackDictionary.Add(counterInputType, CounterAttacks[i]);
                 _types.Add(counterInputType);
             }
-            errorMessage = "Start Stance Attack Addition";
 
+            #endregion
+
+            #region Stance Registration
+            errorMessage = "Start Stance Attack Addition";
+            for (int i = 0; i < stanceSpecials.Count; i++)
+            {
+                List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
+                totalSubInputs.Add(stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput);
+                totalSubInputs.Add(stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput);
+                AttackInputTypes superInputType = new AttackInputTypes(stanceSpecials[i].stanceInput._stanceInput, totalSubInputs, stanceSpecials[i].stanceStartProperty._moveType);
+                totalAttackDictionary.Add(superInputType, stanceSpecials[i]);
+                _types.Add(superInputType);
+            }
+            #endregion
+
+            #region Rekka Registration
+            errorMessage = "Start Rekka Attack Addition";
+            for (int i = 0; i < rekkaSpecials.Count; i++)
+            {
+                List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
+                for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++) 
+                {
+                    totalSubInputs.Add(rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack);
+                }
+                AttackInputTypes superInputType = new AttackInputTypes(rekkaSpecials[i].rekkaInput.mainAttackInput, totalSubInputs, rekkaSpecials[i].rekkaInput.mainAttackProperty._moveType);
+                totalAttackDictionary.Add(superInputType, rekkaSpecials[i]);
+                _types.Add(superInputType);
+            }
+            #endregion
 
             ////////////////////////////////////////////////////////////
             Debug.Log($"All Attacks Added to Dictionary. Have a \"Fight\"-Tastic Day, {characterName}!! ");

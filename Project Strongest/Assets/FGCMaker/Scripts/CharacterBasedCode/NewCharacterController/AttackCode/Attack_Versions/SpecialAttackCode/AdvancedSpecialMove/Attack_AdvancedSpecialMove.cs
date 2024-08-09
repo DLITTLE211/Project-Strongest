@@ -107,7 +107,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctiona
     [SerializeField] private Character_Base curBase;
     [SerializeField] private int framesBetweenAttacks;
     public int currentCustomAnim;
-
+    private AttackData newAttackData;
     #region Attack Base Code
     public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase)
     {
@@ -159,6 +159,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctiona
             }
             if (curInput >= movementPortionLength + 1 && moveComplete == true)
             {
+                newAttackData = new AttackData(curBase);
                 PreformAttack(curBase);
                 ResetCombo();
             }
@@ -237,7 +238,6 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase , IAttackFunctiona
     }
     public void PreformAttack()
     {
-        AttackData newAttackData = new AttackData(curBase);
         newAttackData.curBase._aManager.ReceiveAttack(property);
     }
     public void SendCounterHitInfo(Character_Base target)

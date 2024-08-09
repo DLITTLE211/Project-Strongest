@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [Serializable]
-public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuctionality
+public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctionality //,IAttack_StanceFuctionality
 {
     [SerializeField] private int curInput;
     [SerializeField] private int movementPortionLength;
@@ -12,7 +12,8 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     [SerializeField] internal bool inStanceState;
     [SerializeField] internal int stanceHeldTime;
     (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
-
+    [SerializeField] private Character_Base _curBase;
+    AttackData newAttackData;
 
     #region Stance Class Code
     public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase, Character_ButtonInput attackInput)
@@ -146,7 +147,11 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
                 {
                     inStanceState = false;
                     int stanceAttackSubInput = IsStanceInputCorrect(Input, curBase, stanceInput.stanceAttack, attackInput).Item2;
+                    newAttackData = new AttackData(_curBase, null, stanceInput.stanceAttack, stanceAttackSubInput);
+
+
                     PreformAttack(curBase, stanceInput.stanceAttack, stanceAttackSubInput);
+
                     return true;
                 }
                 if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
@@ -271,6 +276,33 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
         inStanceState = true;
     }
 
+    public void PreformAttack()
+    {
+        if (newAttackData.stanceAttack != null)
+        {
+            newAttackData.curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property);
+        }
+        else
+        {
+            SetStanceStateTrue();
+            newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty);
+        }
+    }
+
+    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SendCounterHitInfo(Character_Base curBase)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetStarterInformation()
+    {
+        throw new NotImplementedException();
+    }
     public void SendCounterHitInfo(Character_Base curBase, StanceAttack _stanceMove = null)
     {
         if (inStanceState || _stanceMove != null)
@@ -314,6 +346,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {
         stanceStartProperty.InputTimer = timer;
+        _curBase = timer._base;
         if (stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
         {
             stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = timer;
@@ -323,5 +356,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
             stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = timer;
         }
     }
+
     #endregion
 }

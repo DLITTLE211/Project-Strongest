@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 [Serializable]
-public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuctionality
+public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctionality//IAttack_RekkaFuctionality
 {
     [SerializeField] private int curInput;
     [SerializeField] private int curRekkaInput, rekkaInputCount;
@@ -15,7 +15,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
     [SerializeField] internal bool inRekkaState;
     [SerializeField] internal List<Attack_BaseProperties> usedRekkas;
     (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
-
+    private AttackData attackData;
     #region Special_Rekka Functions
     public override void TurnInputsToString()
     {
@@ -81,6 +81,18 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         rekkaInput.mainAttackProperty.InputTimer.ResetTimerSuccess();
     }
 
+    public void PreformAttack()
+    {
+        if (attackData.rekkaAttack != null)
+        {
+            attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+        }
+        else
+        {
+            attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty);
+        }
+        throw new NotImplementedException();
+    }
     public void PreformAttack(Character_Base curBase, RekkaAttack _rekka = null)
     {
         if (_rekka != null)
@@ -131,6 +143,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
                     }
                     if (curInput >= movementPortionLength + 1 && moveComplete == true)
                     {
+                        attackData = new AttackData(curBase, null, null, -1, rekkaInput.mainAttackProperty);
                         PreformAttack(curBase);
                     }
                     return true;
@@ -159,6 +172,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
                         return false;
                     }
                     curRekkaInput++;
+                    attackData = new AttackData(curBase, confirmedRekkaAttack);
                     PreformAttack(curBase, confirmedRekkaAttack);
                     return true;
                 }
@@ -298,9 +312,18 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
     }
     #endregion
 
+
+    public void SetStarterInformation()
+    {
+        throw new NotImplementedException();
+    }
     public void SetRekkaStateTrue() 
     {
-        inRekkaState = true; 
+        inRekkaState = true;
+    }
+    public void SendCounterHitInfo(Character_Base curBase)
+    {
+        throw new NotImplementedException();
     }
     public void SendCounterHitInfo(Character_Base curBase, RekkaAttack _rekkaAttack = null)
     {
@@ -314,6 +337,35 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         }
     }
 
+    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    {
+        throw new NotImplementedException();
+
+        if (attackData.rekkaAttack != null)
+        {
+            SendCounterHitInfo(curBase, attackData.rekkaAttack);
+            if (!blockedAttack)
+            {
+                curBase._cDamageCalculator.TakeDamage(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+            }
+            else
+            {
+                curBase._cDamageCalculator.TakeChipDamage(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+            }
+        }
+        else
+        {
+            SendCounterHitInfo(curBase);
+            if (!blockedAttack)
+            {
+                curBase._cDamageCalculator.TakeDamage(attackData.mainRekka);
+            }
+            else
+            {
+                curBase._cDamageCalculator.TakeChipDamage(attackData.mainRekka);
+            }
+        }
+    }
     public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, RekkaAttack _rekkaAttack = null)
     {
         if (_rekkaAttack != null)
@@ -350,6 +402,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
             rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput[0].property.InputTimer = timer;
         }
     }
+
+
+
     #endregion
 
 }
