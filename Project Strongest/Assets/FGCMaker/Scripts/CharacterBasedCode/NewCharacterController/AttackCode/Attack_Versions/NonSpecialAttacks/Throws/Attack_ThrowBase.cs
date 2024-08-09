@@ -28,12 +28,13 @@ public abstract class ThrowActionBase
 
 }
 [Serializable]
-public class Attack_ThrowBase : ThrowActionBase , IThrowAction
+public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality //IThrowAction
 {
     [SerializeField] private int curInput, curAttack;
     [SerializeField] private int lastDirection;
     [SerializeField] private Character_Base curBase;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
+    AttackData attackData;
 
     #region Attack Base Code
     public override void CheckButtonInfo(InputAction buttonInfo)
@@ -70,6 +71,7 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
         {
             this._attackInput._correctInput[0].property.InputTimer.ResetTimerSuccess();
             //_cTimer.ResetTimerSuccess();
+            attackData = new AttackData(curBase, null, null, -1, null, null, _attackInput._correctInput[curAttack - 1]);
             PreformAttack(curInput, curAttack, curBase);
             if (curInput > _attackInput._correctInput.Count)
             {
@@ -155,6 +157,11 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
         }
     }
 
+    public void PreformAttack()
+    {
+        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
+        //throw new NotImplementedException();
+    }
     public void PreformAttack(int currentInput, int currentAttack, Character_Base curBase)
     {
         curBase._aManager.ReceiveAttack(_attackInput._correctInput[currentInput].property);
@@ -173,11 +180,20 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
         catch (ArgumentNullException e) { DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step..."); }
     }
 
+
+    public void SendCounterHitInfo(Character_Base curBase)
+    {
+        throw new NotImplementedException();
+    }
     public void SendCounterHitInfo(Path_Data _data, Character_Base target)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(_attackInput._correctInput[_data._curInputPath].property.counterHitDamageMult);
     }
 
+    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    {
+        throw new NotImplementedException();
+    }
     public void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack = false)
     {
         target._cDamageCalculator.TakeDamage(_attackInput._correctInput[_data._curInputPath].property);
@@ -204,5 +220,7 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
         _throwAnimation[0].AddCustomCallbacks(_throwAnimation[0]);
         curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
     }
+
+
     #endregion
 }

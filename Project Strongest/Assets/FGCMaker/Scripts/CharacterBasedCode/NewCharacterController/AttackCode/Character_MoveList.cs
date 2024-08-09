@@ -195,6 +195,128 @@ public class Character_MoveList : MonoBehaviour
         
     }
 
+    #region Extract AttackType Functions
+    public void GetNormalAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            simpleAttacks[i].SetStarterInformation();
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetCommandAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            simpleAttacks[i].SetStarterInformation();
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetStringAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            simpleAttacks[i].SetStarterInformation();
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetThrows(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < BasicThrows.Count; i++)
+        {
+            BasicThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            BasicThrows[i].SetStarterInformation();
+            for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
+            {
+                BasicThrows[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetSimpleSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < special_Simple.Count; i++)
+        {
+            special_Simple[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            special_Simple[i].TurnInputsToString();
+            special_Simple[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
+        }
+    }
+    public void GetRekkaSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < rekkaSpecials.Count; i++)
+        {
+            rekkaSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            rekkaSpecials[i].TurnInputsToString();
+            rekkaSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator);
+            for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++)
+            {
+                rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+            }
+            rekkaSpecials[i].rekkaInput.SetRekkaProperties();
+        }
+    }
+    public void GetStanceAttacks(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < stanceSpecials.Count; i++)
+        {
+            stanceSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            stanceSpecials[i].TurnInputsToString();
+            stanceSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator);
+        }
+    }
+    public void GetCounterSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < CounterAttacks.Count; i++)
+        {
+            CounterAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            CounterAttacks[i].TurnInputsToString();
+            CounterAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
+            for (int j = 0; j < CounterAttacks[i]._customAnimation.Count; j++)
+            {
+                CounterAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetCommandThrowSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < CommandThrows.Count; i++)
+        {
+            CommandThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            CommandThrows[i].TurnInputsToString();
+            CommandThrows[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
+            for (int j = 0; j < CommandThrows[i]._customAnimation.Count; j++)
+            {
+                CommandThrows[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    public void GetCustomSuperSpecials(Character_Base baseCharacterInfo)
+    {
+        for (int i = 0; i < BasicSuperAttacks.Count; i++)
+        {
+            BasicSuperAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            BasicSuperAttacks[i].TurnInputsToString();
+            BasicSuperAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
+            for (int j = 0; j < BasicSuperAttacks[i]._customAnimation.Count; j++)
+            {
+                BasicSuperAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+            }
+        }
+    }
+    #endregion
+
     public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary, string characterName, List<AttackInputTypes> _types) 
     {
         string errorMessage = "";
@@ -270,8 +392,9 @@ public class Character_MoveList : MonoBehaviour
                 _types.Add(superInputType);
             }
             #endregion
+
             #region Command Normals Registration
-            errorMessage = "Start String Normal Attack Addition";
+            errorMessage = "Start Command Normal Attack Addition";
             for (int i = 0; i < commandNormalAttacks.Count; i++)
             {
                 List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
@@ -281,14 +404,27 @@ public class Character_MoveList : MonoBehaviour
                 _types.Add(superInputType);
             }
             #endregion
+
             #region Normals Registration
-            errorMessage = "Start String Normal Attack Addition";
+            errorMessage = "Start Normal Attack Addition";
             for (int i = 0; i < simpleAttacks.Count; i++)
             {
                 List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
                 totalSubInputs.Add(simpleAttacks[i]._attackInput);
                 AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, simpleAttacks[i]._attackInput._correctInput[0].property._moveType);
                 totalAttackDictionary.Add(superInputType, simpleAttacks[i]);
+                _types.Add(superInputType);
+            }
+            #endregion
+
+            #region Throw Registration
+            errorMessage = "Start Throws Addition";
+            for (int i = 0; i < BasicThrows.Count; i++)
+            {
+                List<Attack_BasicInput> totalSubInputs = new List<Attack_BasicInput>();
+                totalSubInputs.Add(BasicThrows[i]._attackInput);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, BasicThrows[i]._attackInput._correctInput[0].property._moveType);
+                totalAttackDictionary.Add(superInputType, BasicThrows[i]);
                 _types.Add(superInputType);
             }
             #endregion
@@ -305,125 +441,6 @@ public class Character_MoveList : MonoBehaviour
         }
     }
 
-    public void GetNormalAttacks(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < simpleAttacks.Count; i++)
-        {
-            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            simpleAttacks[i].SetStarterInformation();
-            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
-            {
-                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
-    public void GetCommandAttacks(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < simpleAttacks.Count; i++)
-        {
-            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            simpleAttacks[i].SetStarterInformation();
-            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
-            {
-                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
-    public void GetStringAttacks(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < simpleAttacks.Count; i++)
-        {
-            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            simpleAttacks[i].SetStarterInformation();
-            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
-            {
-                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
-    public void GetThrows(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < BasicThrows.Count; i++)
-        {
-            BasicThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            BasicThrows[i].SetStarterInformation();
-            for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
-            {
-                BasicThrows[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
-    public void GetSimpleSpecials(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < special_Simple.Count; i++)
-        {
-            special_Simple[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            special_Simple[i].TurnInputsToString();
-            special_Simple[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-        }
-    }
-    public void GetRekkaSpecials(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < rekkaSpecials.Count; i++)
-        {
-            rekkaSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            rekkaSpecials[i].TurnInputsToString();
-            rekkaSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator); 
-            for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++)
-            {
-                rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
-            }
-            rekkaSpecials[i].rekkaInput.SetRekkaProperties();
-        }
-    }
-    public void GetStanceAttacks(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < stanceSpecials.Count; i++)
-        {
-            stanceSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            stanceSpecials[i].TurnInputsToString();
-            stanceSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator);
-        }
-    }
-    public void GetCounterSpecials(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < CounterAttacks.Count; i++)
-        {
-            CounterAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            CounterAttacks[i].TurnInputsToString();
-            CounterAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-            for(int j = 0; j < CounterAttacks[i]._customAnimation.Count; j++) 
-            {
-                CounterAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
-    public void GetCommandThrowSpecials(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < CommandThrows.Count; i++)
-        {
-            CommandThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            CommandThrows[i].TurnInputsToString();
-            CommandThrows[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-            for (int j = 0; j < CommandThrows[i]._customAnimation.Count; j++)
-            {
-                CommandThrows[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
-    public void GetCustomSuperSpecials(Character_Base baseCharacterInfo)
-    {
-        for (int i = 0; i < BasicSuperAttacks.Count; i++)
-        {
-            BasicSuperAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            BasicSuperAttacks[i].TurnInputsToString();
-            BasicSuperAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-            for (int j = 0; j < BasicSuperAttacks[i]._customAnimation.Count; j++)
-            {
-                BasicSuperAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
-            }
-        }
-    }
 
 
 
