@@ -161,7 +161,6 @@ public class Character_Base : MonoBehaviour
         _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         ResetRemoveList();
-        characterMoveListAttacks =
         InitCombos();
         SetAwaitEnums();
         _cComboCounter.SetStartComboCounter();
@@ -233,9 +232,11 @@ public class Character_Base : MonoBehaviour
 
     void InitCombos()
     {
+        characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>();
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         comboList3_0.ExtractBaseProperties(this);
+        comboList3_0.SetupCharacterTotalMoveList(characterMoveListAttacks);
         _cComboDetection.PrimeCombos();
     }
     void GetCharacterMoveList()

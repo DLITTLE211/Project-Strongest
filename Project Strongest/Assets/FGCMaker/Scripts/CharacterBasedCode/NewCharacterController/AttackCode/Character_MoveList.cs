@@ -195,6 +195,21 @@ public class Character_MoveList : MonoBehaviour
         
     }
 
+    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary) 
+    {
+        string errorMessage = "";
+        try
+        {
+
+        }
+        catch (Exception) 
+        {
+            Debug.LogError($"Failed to Add All Attacks to Dictionary. Stopping at \"{errorMessage}\". ");
+            Debug.LogError($"Dictionary TotalCount is... {totalAttackDictionary.Count}.");
+            Debug.Break();
+        }
+    }
+
     public void GetNormalAttacks(Character_Base baseCharacterInfo)
     {
         for (int i = 0; i < simpleAttacks.Count; i++)
@@ -314,6 +329,9 @@ public class Character_MoveList : MonoBehaviour
             }
         }
     }
+
+
+
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)
     {
         if (!blockedAttack)
