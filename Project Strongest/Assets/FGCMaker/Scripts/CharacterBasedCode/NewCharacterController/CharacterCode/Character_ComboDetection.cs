@@ -19,10 +19,10 @@ public class Character_ComboDetection : MonoBehaviour
     private void Start()
     {
         canCheckMovement = false;
-        lastInput = -1; 
+        lastInput = 5; 
         curString = "";
         currentInput = new AttackInputTypes(new Attack_Input(curString,curStringArray));
-        
+        SetFollowUpAttackTypes();
     }
     void SetFollowUpAttackTypes() 
     {
@@ -55,7 +55,11 @@ public class Character_ComboDetection : MonoBehaviour
             if (lastInput != input.Button_State.directionalInput && canCheckMovement)
             {
                 lastInput = input.Button_State.directionalInput;
-               // SpecialInputVerifier(input);
+                // SpecialInputVerifier(input);
+                if (lastInput % 2 != 0) 
+                {
+                    return;
+                }
                 AddToCurrentInput(lastInput);
             }
            // ExtraMovementVerifier(input);
@@ -94,10 +98,6 @@ public class Character_ComboDetection : MonoBehaviour
                     }
                     _base.CharacterMoveListAttacks[currentInput].PreformAttack();
                 }
-            }
-            else
-            {
-                _base.CharacterMoveListAttacks[currentInput].DisableCheckable();
             }
         }
         //else 
@@ -547,7 +547,9 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void ResetCombos()
     {
-        for (int i = 0; i < _base.simpleAttackList.Count; i++)
+        currentInput.ResetComboInfo();
+
+       /* for (int i = 0; i < _base.simpleAttackList.Count; i++)
         {
             _base.comboList3_0.simpleAttacks[i].ResetCombo();
             _base.simpleAttackList[i].ResetCombo();
@@ -588,7 +590,7 @@ public class Character_ComboDetection : MonoBehaviour
         {
             _base.comboList3_0.BasicSuperAttacks[i].ResetCombo();
             _base.CustomSuperAttackList[i].ResetCombo();
-        }
+        }*/
     }
     public void OnSuccessfulSpecialMove(Attack_BaseProperties attack)
     {
@@ -651,5 +653,21 @@ public class Character_ComboDetection : MonoBehaviour
             }
             else { continue; }
         }
+    }
+}
+public class UserQualityComparer : IEqualityComparer<AttackInputTypes>
+{
+
+    public bool Equals(AttackInputTypes x, AttackInputTypes y)
+    {
+        bool specialInputMatch = x?.specialMoveTypeInput == y?.specialMoveTypeInput;
+        bool normalInputMatch = y.CheckMatchingInput(x);
+        //ToDo function in attacktype that verifies if normalattackinput at given index match normal input that was recently inputted
+
+        return specialInputMatch || normalInputMatch;
+    }
+    public int GetHashCode(AttackInputTypes obj)
+    {
+        return obj?.GetHashCode() ?? 0;
     }
 }

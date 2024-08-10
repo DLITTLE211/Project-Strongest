@@ -40,13 +40,17 @@ public class AttackData
 public class AttackInputTypes 
 {
     public Attack_Input specialMoveTypeInput;
-    public List<Attack_BasicInput> normalTypeInput;
+    public List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> normalTypeInput;
+
+
+
     private (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
     public MoveType moveType;
-    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<Attack_BasicInput> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
+    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
+
         moveType = _moveType;
     }
     public void AddDirectionalInput(int directionalInput) 
@@ -61,5 +65,22 @@ public class AttackInputTypes
         currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
         currentAttackInput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
+    }
+
+    public bool CheckMatchingInput(AttackInputTypes obj) 
+    {
+        if (obj != null) 
+        {
+            normalTypeInput.Contains(obj.currentAttackInput);
+        }
+        return false;
+    }
+
+    public void ResetComboInfo() 
+    {
+        specialMoveTypeInput.attackString = "";
+        specialMoveTypeInput.attackStringArray = new char[0];
+        currentAttackInput.Item1 = 0;
+        currentAttackInput.Item2 = Attack_BaseInput.AttackInput.A;
     }
 }

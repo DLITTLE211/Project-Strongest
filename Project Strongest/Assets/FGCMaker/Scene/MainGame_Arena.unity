@@ -1213,11 +1213,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 993311525}
   _animator: {fileID: 0}
-  lastInput: 
+  lastInput: 0
   inStance: 0
   inRekka: 0
   inSuper: 0
   superMobilityOption: 0
+  currentInput:
+    specialMoveTypeInput:
+      attackString: 
+      attackStringArray: 
+    moveType: 0
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1449,7 @@ MonoBehaviour:
   opponentPlayer: {fileID: 993311525}
   awaitCondition: 0
   newField: 0
+  inputVisualiser: []
 --- !u!54 &94923330
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7086,11 +7092,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 94923329}
   _animator: {fileID: 0}
-  lastInput: 
+  lastInput: 0
   inStance: 0
   inRekka: 0
   inSuper: 0
   superMobilityOption: 0
+  currentInput:
+    specialMoveTypeInput:
+      attackString: 
+      attackStringArray: 
+    moveType: 0
 --- !u!1 &580190454
 GameObject:
   m_ObjectHideFlags: 0
@@ -12785,6 +12796,7 @@ MonoBehaviour:
   opponentPlayer: {fileID: 94923329}
   awaitCondition: 0
   newField: 0
+  inputVisualiser: []
 --- !u!1 &996888123
 GameObject:
   m_ObjectHideFlags: 0
