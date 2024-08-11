@@ -67,7 +67,7 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (attack != null)
         {
-            currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing,attack);
+            currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing,attack,_base._cHurtBox.IsGrounded());
             CompleteMoveListVerifier();
             
             return;
@@ -82,7 +82,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
-            if (/*ValidInputDetection(_base.CharacterMoveListAttacks, currentInput))*/_base.CharacterMoveListAttacks.ContainsKey(currentInput))
+            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
             {
                 if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
                 {
@@ -673,7 +673,35 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
 {
     public bool Equals(AttackInputTypes x, AttackInputTypes y)
     {
-        return x.specialMoveTypeInput.attackString == y.specialMoveTypeInput.attackString;
+        if (y.moveType == MoveType.Key)
+        {
+            bool startingInputCheck = x.normalTypeInput[0] == y.currentAttackInput;
+            bool groundClearanceCheck = false;
+            if (x.normalAirAttackInfo == AirAttackInfo.AirOk)
+            {
+                groundClearanceCheck = true;
+            }
+            else 
+            {
+                groundClearanceCheck = x.normalAirAttackInfo == y.keyGroundCheck;
+            }
+            bool fullcheck = startingInputCheck && groundClearanceCheck;
+            return fullcheck;
+        }
+        else
+        {
+            if ((int)x.moveType <= (int)MoveType.String_Normal)
+            {
+                bool startingInputCheck = x.normalTypeInput[0] == y.normalTypeInput[0];
+                bool groundClearanceCheck = x.normalAirAttackInfo == y.normalAirAttackInfo;
+                bool fullcheck = startingInputCheck && groundClearanceCheck;
+                return fullcheck;
+            }
+            else
+            {
+                return x.specialMoveTypeInput.attackString == y.specialMoveTypeInput.attackString;
+            }
+        }
     }
     public int GetHashCode(AttackInputTypes obj)
     {
@@ -697,7 +725,7 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
         {
             if ((int)obj.moveType <= (int)MoveType.String_Normal)
             {
-                inputHash = obj.normalTypeInput.GetHashCode();
+                inputHash = obj.normalTypeInput[0].GetHashCode();
             }
             else
             {

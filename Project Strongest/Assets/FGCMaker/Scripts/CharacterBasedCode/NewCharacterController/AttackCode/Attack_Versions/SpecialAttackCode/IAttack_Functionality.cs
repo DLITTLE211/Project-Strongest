@@ -41,16 +41,18 @@ public class AttackData
 public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
 {
     public Attack_Input specialMoveTypeInput;
-    public List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> normalTypeInput;
-    public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
+    public List<string> normalTypeInput;
+    public string currentAttackInput;
     public MoveType moveType;
+    public AirAttackInfo normalAirAttackInfo;
+    public AirAttackInfo keyGroundCheck;
     public int hash;
-    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
+    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<string> _normalTypeInput = null, MoveType _moveType = MoveType.Normal, AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
         moveType = _moveType;
-
+        normalAirAttackInfo = _normalAirAttackInfo;
     }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide) 
     {
@@ -62,24 +64,32 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
         }
         specialMoveTypeInput.attackString += directionalInput.ToString();
     }
-    public void AddAttackInput(int lastDirection, Character_Face_Direction faceSide, Character_ButtonInput attackInput)
+    public void AddAttackInput(int lastDirection, Character_Face_Direction faceSide, Character_ButtonInput attackInput, bool groundState)
     {
-        normalTypeInput = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
+        normalTypeInput = new List<string>();
         specialMoveTypeInput.attackString += attackInput.Button_Name.ToString();
         specialMoveTypeInput.turnStringToArray();
         if (faceSide == Character_Face_Direction.FacingLeft)
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(lastDirection);
-            currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)alteredInput;
+            currentAttackInput += alteredInput;
         }
         else
         {
-            currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
+            currentAttackInput += lastDirection;
         }
         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
-        currentAttackInput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
+        currentAttackInput += buttonInput;
         normalTypeInput.Add(currentAttackInput);
         moveType = MoveType.Key;
+        if (groundState)
+        {
+            keyGroundCheck = AirAttackInfo.GroundOnly;
+        }
+        else 
+        {
+            keyGroundCheck = AirAttackInfo.AirOnly;
+        }
     }
 
     public bool CheckMatchingInput(AttackInputTypes obj) 
@@ -95,8 +105,7 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
     {
         specialMoveTypeInput.attackString = "";
         specialMoveTypeInput.attackStringArray = new char[0];
-        currentAttackInput.Item1 = 0;
-        currentAttackInput.Item2 = Attack_BaseInput.AttackInput.A;
+        currentAttackInput = "";
     }
     int TransfigureDirectionOnSideSwitch(int move)
     {

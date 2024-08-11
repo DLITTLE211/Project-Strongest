@@ -359,16 +359,16 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Stance Attack Addition";
             for (int i = 0; i < stanceSpecials.Count; i++)
             {
-                List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> totalSubInputs = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
+                List<string> totalSubInputs = new List<string>();
                 List<Attack_BaseInput> stanceAttacks = stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput;
                 List<Attack_BaseInput> stanceKills = stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput;
                 for (int j = 0; j < stanceAttacks.Count; j++)
                 {
-                    totalSubInputs.Add(stanceAttacks[j].verifyAttackInput);
+                    totalSubInputs.Add(stanceAttacks[j]._correctSequence);
                 }
                 for (int j = 0; j < stanceKills.Count; j++)
                 {
-                    totalSubInputs.Add(stanceKills[j].verifyAttackInput);
+                    totalSubInputs.Add(stanceKills[j]._correctSequence);
                 }
                 AttackInputTypes superInputType = new AttackInputTypes(stanceSpecials[i].stanceInput._stanceInput, totalSubInputs, stanceSpecials[i].stanceStartProperty._moveType);
                 totalAttackDictionary.Add(superInputType, stanceSpecials[i]);
@@ -380,12 +380,12 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Rekka Attack Addition";
             for (int i = 0; i < rekkaSpecials.Count; i++)
             {
-                List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> totalSubInputs = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
+                List<string> totalSubInputs = new List<string>();
                 for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++) 
                 {
                     for (int k = 0; k < rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput.Count; k++)
                     {
-                        totalSubInputs.Add(rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[k].verifyAttackInput);
+                        totalSubInputs.Add(rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[k]._correctSequence);
                     }
                 }
                 AttackInputTypes superInputType = new AttackInputTypes(rekkaSpecials[i].rekkaInput.mainAttackInput, totalSubInputs, rekkaSpecials[i].rekkaInput.mainAttackProperty._moveType);
@@ -407,12 +407,12 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start String Normal Attack Addition";
             for (int i = 0; i < stringNormalAttacks.Count; i++)
             {
-                List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> totalSubInputs = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
+                List<string> totalSubInputs = new List<string>();
                 for (int j = 0; j < stringNormalAttacks[i]._attackInput._correctInput.Count; j++)
                 {
-                    totalSubInputs.Add(stringNormalAttacks[i]._attackInput._correctInput[j].verifyAttackInput);
+                    totalSubInputs.Add(stringNormalAttacks[i]._attackInput._correctInput[j]._correctSequence);
                 }
-                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, stringNormalAttacks[i]._attackInput._correctInput[0].property._moveType);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, stringNormalAttacks[i]._attackInput._correctInput[0].property._moveType, stringNormalAttacks[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, stringNormalAttacks[i]);
                 _types.Add(superInputType);
             }
@@ -422,12 +422,12 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Command Normal Attack Addition";
             for (int i = 0; i < commandNormalAttacks.Count; i++)
             {
-                List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> totalSubInputs = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
+                List<string> totalSubInputs = new List<string>();
                 for (int j = 0; j < commandNormalAttacks[i]._attackInput._correctInput.Count; j++)
                 {
-                    totalSubInputs.Add(commandNormalAttacks[i]._attackInput._correctInput[j].verifyAttackInput);
+                    totalSubInputs.Add(commandNormalAttacks[i]._attackInput._correctInput[j]._correctSequence);
                 }
-                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, commandNormalAttacks[i]._attackInput._correctInput[0].property._moveType);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, commandNormalAttacks[i]._attackInput._correctInput[0].property._moveType, commandNormalAttacks[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, commandNormalAttacks[i]);
                 _types.Add(superInputType);
             }
@@ -437,12 +437,12 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Normal Attack Addition";
             for (int i = 0; i < simpleAttacks.Count; i++)
             {
-                List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> totalSubInputs = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>(); 
+                List<string> totalSubInputs = new List<string>(); 
                 for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
                 {
-                    totalSubInputs.Add(simpleAttacks[i]._attackInput._correctInput[j].verifyAttackInput);
+                    totalSubInputs.Add(simpleAttacks[i]._attackInput._correctInput[j]._correctSequence);
                 }
-                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, simpleAttacks[i]._attackInput._correctInput[0].property._moveType);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, simpleAttacks[i]._attackInput._correctInput[0].property._moveType, simpleAttacks[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, simpleAttacks[i]);
                 _types.Add(superInputType);
             }
@@ -452,12 +452,12 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Throws Addition";
             for (int i = 0; i < BasicThrows.Count; i++)
             {
-                List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> totalSubInputs = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
+                List<string> totalSubInputs = new List<string>();
                 for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
                 {
-                    totalSubInputs.Add(BasicThrows[i]._attackInput._correctInput[j].verifyAttackInput);
+                    totalSubInputs.Add(BasicThrows[i]._attackInput._correctInput[j]._correctSequence);
                 }
-                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, BasicThrows[i]._attackInput._correctInput[0].property._moveType);
+                AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, BasicThrows[i]._attackInput._correctInput[0].property._moveType, BasicThrows[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, BasicThrows[i]);
                 _types.Add(superInputType);
             }
