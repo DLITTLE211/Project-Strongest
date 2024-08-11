@@ -77,6 +77,7 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
         currentAttackInput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
         normalTypeInput.Add(currentAttackInput);
+        moveType = MoveType.Key;
     }
 
     public bool CheckMatchingInput(AttackInputTypes obj) 

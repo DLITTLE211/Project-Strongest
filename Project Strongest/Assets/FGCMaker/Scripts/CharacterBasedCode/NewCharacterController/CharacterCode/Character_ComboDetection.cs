@@ -81,7 +81,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
-            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
+            if (_base.CharacterMoveListAttacks.Keys.Equals(currentInput))
             {
                 if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
                 {
@@ -158,6 +158,11 @@ public class Character_ComboDetection : MonoBehaviour
         PrimeMobility();
         PrimeSpecialMoves();
         ResetComboList();
+        StartCoroutine(AwaitCharacterActive());
+    }
+    IEnumerator AwaitCharacterActive() 
+    {
+        yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
         _base.CollectCharacterMovelist();
     }
 
@@ -166,48 +171,42 @@ public class Character_ComboDetection : MonoBehaviour
         #region Super Storage
         for (int i = 0; i < _base.comboList3_0.BasicSuperAttacks.Count; i++)
         {
-            //_base.CustomSuperAttackList.Add(_base.comboList3_0.BasicSuperAttacks[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.BasicSuperAttacks[i]);
+            _base.CustomSuperAttackList.Add(_base.comboList3_0.BasicSuperAttacks[i]);
         }
         #endregion
 
         #region Command Throw Storage
         for (int i = 0; i < _base.comboList3_0.CommandThrows.Count; i++)
         {
-            //_base.CommandThrowAttackList.Add(_base.comboList3_0.CommandThrows[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.CommandThrows[i]);
+            _base.CommandThrowAttackList.Add(_base.comboList3_0.CommandThrows[i]);
         }
         #endregion
 
         #region Counter Storage
         for (int i = 0; i < _base.comboList3_0.CounterAttacks.Count; i++)
         {
-            //_base.counterAttackList.Add(_base.comboList3_0.CounterAttacks[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.CounterAttacks[i]);
+            _base.counterAttackList.Add(_base.comboList3_0.CounterAttacks[i]);
         }
         #endregion
 
         #region Stance Specials Storage
         for (int i = 0; i < _base.comboList3_0.stanceSpecials.Count; i++)
         {
-            //_base.stanceAttackList.Add(_base.comboList3_0.stanceSpecials[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.stanceSpecials[i]);
+            _base.stanceAttackList.Add(_base.comboList3_0.stanceSpecials[i]);
         }
         #endregion
 
         #region Rekka Specials Storage
         for (int i = 0; i < _base.comboList3_0.rekkaSpecials.Count; i++)
         {
-            //_base.rekkaAttackList.Add(_base.comboList3_0.rekkaSpecials[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.rekkaSpecials[i]);
+            _base.rekkaAttackList.Add(_base.comboList3_0.rekkaSpecials[i]);
         }
         #endregion
 
         #region Basic Special Storage
         for (int i = 0; i < _base.comboList3_0.special_Simple.Count; i++)
         {
-            //_base.specialMoveList.Add(_base.comboList3_0.special_Simple[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.special_Simple[i]);
+            _base.specialMoveList.Add(_base.comboList3_0.special_Simple[i]);
         }
         #endregion
     }
@@ -215,13 +214,11 @@ public class Character_ComboDetection : MonoBehaviour
     {
         for (int i = 0; i < _base.comboList3_0.simpleAttacks.Count; i++)
         {
-            //_base.simpleAttackList.Add(_base.comboList3_0.simpleAttacks[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.simpleAttacks[i]);
+            _base.simpleAttackList.Add(_base.comboList3_0.simpleAttacks[i]);
         }
         for (int i = 0; i < _base.comboList3_0.BasicThrows.Count; i++)
         {
-            //_base.BasicThrows.Add(_base.comboList3_0.BasicThrows[i]);
-            _base.CharacterMoveListAttacks.Add(new AttackInputTypes(), _base.comboList3_0.BasicThrows[i]);
+            _base.BasicThrows.Add(_base.comboList3_0.BasicThrows[i]);
         }
     }
     void PrimeMobility() 
@@ -313,6 +310,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         #endregion
     }
+    /*
     void SimpleInputVerifier(Character_ButtonInput input)
     {
         #region Simple Attacks
@@ -540,7 +538,7 @@ public class Character_ComboDetection : MonoBehaviour
             _base.removeSMList.Clear();
         }
         #endregion
-    }
+    }*/
 
     void ExtraMovementVerifier(Character_ButtonInput input)
     {
@@ -666,49 +664,32 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
 {
     public bool Equals(AttackInputTypes x, AttackInputTypes y)
     {
+        Debug.Log("hit");
        throw new NotImplementedException();
     }
     public int GetHashCode(AttackInputTypes obj)
     {
-        if (obj == null) 
+        return obj.GetHashCode();
+        /*if (obj == null) 
         { 
             return 0; 
         }
         int inputHash = 0;
-        switch (obj.moveType)
+        if (obj.moveType == MoveType.Key)
         {
-            case MoveType.Normal:
-                inputHash = obj.normalTypeInput.GetHashCode();
-                break;
-            case MoveType.Throw:
-                inputHash = obj.normalTypeInput.GetHashCode();
-                break;
-            case MoveType.String_Normal:
-                inputHash = obj.normalTypeInput.GetHashCode();
-                break;
-            case MoveType.BasicSpeical:
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
-                break;
-            case MoveType.Rekka:
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
-                break;
-            case MoveType.Stance:
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
-                break;
-            case MoveType.Counter:
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
-                break;
-            case MoveType.CommandGrab:
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
-                break;
-            case MoveType.Super:
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
-                break;
-            case MoveType.Key:
-                inputHash = (int)obj.specialMoveTypeInput.GetHashCode() | obj.currentAttackInput.GetHashCode();
-                break;
+            inputHash = (int)obj.specialMoveTypeInput.GetHashCode() | obj.currentAttackInput.GetHashCode();
         }
-        
-        return inputHash;
+        else
+        {
+            if ((int)obj.moveType <= (int)MoveType.String_Normal)
+            {
+                inputHash = obj.normalTypeInput[0].GetHashCode();
+            }
+            else
+            {
+                inputHash = obj.specialMoveTypeInput.GetHashCode();
+            }
+        }
+        return inputHash;*/
     }
 }

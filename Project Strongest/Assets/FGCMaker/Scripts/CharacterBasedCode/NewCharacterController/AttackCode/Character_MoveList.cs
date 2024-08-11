@@ -212,25 +212,25 @@ public class Character_MoveList : MonoBehaviour
     }
     public void GetCommandAttacks(Character_Base baseCharacterInfo)
     {
-        for (int i = 0; i < simpleAttacks.Count; i++)
+        for (int i = 0; i < commandNormalAttacks.Count; i++)
         {
-            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            simpleAttacks[i].SetStarterInformation();
+            commandNormalAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            commandNormalAttacks[i].SetStarterInformation();
             for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
             {
-                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+                commandNormalAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
             }
         }
     }
     public void GetStringAttacks(Character_Base baseCharacterInfo)
     {
-        for (int i = 0; i < simpleAttacks.Count; i++)
+        for (int i = 0; i < stringNormalAttacks.Count; i++)
         {
-            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            simpleAttacks[i].SetStarterInformation();
-            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            stringNormalAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
+            stringNormalAttacks[i].SetStarterInformation();
+            for (int j = 0; j < stringNormalAttacks[i]._attackInput._correctInput.Count; j++)
             {
-                simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
+                stringNormalAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
             }
         }
     }
@@ -474,7 +474,6 @@ public class Character_MoveList : MonoBehaviour
             Debug.Break();
         }
     }
-
 
 
 

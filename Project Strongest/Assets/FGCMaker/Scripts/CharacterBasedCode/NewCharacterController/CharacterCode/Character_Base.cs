@@ -578,6 +578,7 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
+
 }
 [Serializable]
 public class ButtonInput
