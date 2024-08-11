@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 public interface IAttackFunctionality 
 {
@@ -37,19 +38,15 @@ public class AttackData
     }
 }
 [Serializable]
-public class AttackInputTypes 
+public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
 {
     public Attack_Input specialMoveTypeInput;
     public List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> normalTypeInput;
-
-    private (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
-    public MoveType moveType;
-    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
+    public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
+    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
-
-        moveType = _moveType;
     }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide) 
     {
@@ -63,9 +60,9 @@ public class AttackInputTypes
     }
     public void AddAttackInput(int lastDirection, Character_Face_Direction faceSide, Character_ButtonInput attackInput)
     {
+        normalTypeInput = new List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)>();
         specialMoveTypeInput.attackString += attackInput.Button_Name.ToString();
         specialMoveTypeInput.turnStringToArray();
-
         if (faceSide == Character_Face_Direction.FacingLeft)
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(lastDirection);
@@ -77,6 +74,7 @@ public class AttackInputTypes
         }
         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
         currentAttackInput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
+        normalTypeInput.Add(currentAttackInput);
     }
 
     public bool CheckMatchingInput(AttackInputTypes obj) 
@@ -115,4 +113,20 @@ public class AttackInputTypes
         }
         return switchValue;
     }
+
+    /*
+    public bool Equals(AttackInputTypes x, AttackInputTypes y)
+    {
+        bool specialInputMatch = x?.specialMoveTypeInput == y?.specialMoveTypeInput;
+        bool normalInputMatch = y.CheckMatchingInput(x);
+        //ToDo function in attacktype that verifies if normalattackinput at given index match normal input that was recently inputted
+
+        return specialInputMatch || normalInputMatch;
+    }
+    public int GetHashCode(AttackInputTypes obj)
+    {
+        int returningValue = obj?.GetHashCode() ?? 0;
+        return returningValue;
+    }
+    */
 }

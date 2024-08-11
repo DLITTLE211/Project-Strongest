@@ -45,7 +45,7 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (_base._cAnimator.inputWindowOpen)
             {
-               // SpecialInputVerifier(input);
+                // SpecialInputVerifier(input);
                 //SimpleInputVerifier(input);
                 AddToCurrentInput(lastInput,input);
             }
@@ -54,6 +54,7 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (lastInput != input.Button_State.directionalInput && canCheckMovement)
             {
+                _base._cAttackTimer.CheckForInput = true;
                 lastInput = input.Button_State.directionalInput;
                 // SpecialInputVerifier(input);
                 AddToCurrentInput(lastInput);
@@ -80,7 +81,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
-            if (_base.CharacterMoveListAttacks.Keys.Equals(currentInput))
+            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
             {
                 if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
                 {
@@ -651,19 +652,20 @@ public class Character_ComboDetection : MonoBehaviour
         }
     }
 }
+[Serializable]
 public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
 {
     public bool Equals(AttackInputTypes x, AttackInputTypes y)
     {
         bool specialInputMatch = x?.specialMoveTypeInput == y?.specialMoveTypeInput;
         bool normalInputMatch = y.CheckMatchingInput(x);
-        //ToDo function in attacktype that verifies if normalattackinput at given index match normal input that was recently inputted
 
         return specialInputMatch || normalInputMatch;
     }
     public int GetHashCode(AttackInputTypes obj)
     {
-        int returningValue = obj?.GetHashCode() ?? 0;
-        return returningValue;
+        if (obj == null) return 0;
+        int inputHash = HashCode.Combine(obj.specialMoveTypeInput, obj.normalTypeInput);
+        return inputHash;
     }
 }
