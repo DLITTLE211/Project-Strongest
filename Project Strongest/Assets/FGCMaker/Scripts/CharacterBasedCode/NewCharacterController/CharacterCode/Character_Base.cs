@@ -237,9 +237,7 @@ public class Character_Base : MonoBehaviour
         _characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>(new AttackInputCustomComparer());
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
-        comboList3_0.ExtractBaseProperties(this);
         inputVisualiser = new List<AttackInputTypes>();
-        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser);
         _cComboDetection.PrimeCombos();
 
     }
@@ -248,6 +246,11 @@ public class Character_Base : MonoBehaviour
         sourceComboList3_0 = characterProfile._characterMoveList;
         Character_MoveList newComboList = Instantiate(sourceComboList3_0, comboInstantiatedSpot.transform);
         comboList3_0 = newComboList;
+        comboList3_0.ExtractBaseProperties(this);
+    }
+    public void CollectCharacterMovelist() 
+    {
+        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser);
     }
     void InitButtons(Character_SubStates setSubState, int NewID)
     {

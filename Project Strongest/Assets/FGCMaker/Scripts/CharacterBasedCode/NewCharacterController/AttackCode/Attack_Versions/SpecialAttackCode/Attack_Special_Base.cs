@@ -13,6 +13,7 @@ public enum MoveType
     Counter,
     CommandGrab,
     Super,
+    Key,
 
     /*
      * Basic special move: Completed. Search for input, upon completion 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [System.Serializable]
-public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFuctionality
+public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality//IAttack_SpecialFuctionality
 {
     [SerializeField] private int curInput;
     [SerializeField] private int movementPortionLength;
@@ -165,6 +165,16 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttack_SpecialFucti
     }
 
     public MoveType GetAttackMoveType()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void PreformAttack()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetStarterInformation()
     {
         throw new NotImplementedException();
     }

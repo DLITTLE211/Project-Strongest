@@ -190,16 +190,12 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     }
     public void SetStarterInformation()
     {
-        ResetCombo(); 
+        ResetCombo();
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
         {
             _attackInput._correctInput[i].property.InputTimer.SetTimerType();
+            _attackInput._correctInput[i].SetAttackInfo(_attackInput._correctInput[i]._correctSequence, _attackInput._correctInput[i].property._attackName);
         }
-        try 
-        {
-            _attackInput.ActivateAttackInfo(SpecialAttackName);
-        }
-        catch(ArgumentNullException e) { DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step..."); }
     }
 
     public void SendCounterHitInfo(Character_Base curBase)

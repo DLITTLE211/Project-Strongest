@@ -43,10 +43,12 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
     public Attack_Input specialMoveTypeInput;
     public List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> normalTypeInput;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
-    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null) 
+    public MoveType moveType;
+    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
+        moveType = _moveType;
     }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide) 
     {
