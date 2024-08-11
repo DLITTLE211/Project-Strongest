@@ -82,7 +82,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
-            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
+            if (/*ValidInputDetection(_base.CharacterMoveListAttacks, currentInput))*/_base.CharacterMoveListAttacks.ContainsKey(currentInput))
             {
                 if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
                 {
@@ -655,13 +655,25 @@ public class Character_ComboDetection : MonoBehaviour
             else { continue; }
         }
     }
+    bool ValidInputDetection(Dictionary<AttackInputTypes,IAttackFunctionality> keySet,AttackInputTypes comparer) 
+    {
+        foreach (AttackInputTypes i in keySet.Keys) 
+        {
+            if (i.specialMoveTypeInput.attackString == comparer.specialMoveTypeInput.attackString) 
+            {
+                return true;
+            }
+            continue;
+        }
+        return false;
+    }
 }
 [Serializable]
 public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
 {
     public bool Equals(AttackInputTypes x, AttackInputTypes y)
     {
-        throw new NotImplementedException();
+        return x.specialMoveTypeInput.attackString == y.specialMoveTypeInput.attackString;
     }
     public int GetHashCode(AttackInputTypes obj)
     {
@@ -672,7 +684,14 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
         int inputHash = 0;
         if (obj.moveType == MoveType.Key)
         {
-            inputHash = (int)obj.specialMoveTypeInput.GetHashCode();
+            if (obj.specialMoveTypeInput.attackStringArray.Length > 3) 
+            {
+                inputHash = (int)obj.specialMoveTypeInput.attackString.GetHashCode();
+            }
+            else 
+            {
+                inputHash = (int)obj.currentAttackInput.GetHashCode();
+            }
         }
         else
         {
@@ -683,7 +702,7 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
             else
             {
 
-                inputHash = obj.specialMoveTypeInput.GetHashCode();
+                inputHash = obj.specialMoveTypeInput.attackString.GetHashCode();
             }
         }
         obj.hash = inputHash;
