@@ -44,11 +44,13 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
     public List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> normalTypeInput;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
     public MoveType moveType;
+    public int hash;
     public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
         moveType = _moveType;
+
     }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide) 
     {
@@ -116,20 +118,4 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
         }
         return switchValue;
     }
-
-    /*
-    public bool Equals(AttackInputTypes x, AttackInputTypes y)
-    {
-        bool specialInputMatch = x?.specialMoveTypeInput == y?.specialMoveTypeInput;
-        bool normalInputMatch = y.CheckMatchingInput(x);
-        //ToDo function in attacktype that verifies if normalattackinput at given index match normal input that was recently inputted
-
-        return specialInputMatch || normalInputMatch;
-    }
-    public int GetHashCode(AttackInputTypes obj)
-    {
-        int returningValue = obj?.GetHashCode() ?? 0;
-        return returningValue;
-    }
-    */
 }
