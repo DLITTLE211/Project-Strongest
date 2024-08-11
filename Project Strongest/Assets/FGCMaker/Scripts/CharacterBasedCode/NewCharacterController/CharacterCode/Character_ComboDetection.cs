@@ -56,10 +56,6 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 lastInput = input.Button_State.directionalInput;
                 // SpecialInputVerifier(input);
-                if (lastInput % 2 != 0) 
-                {
-                    return;
-                }
                 AddToCurrentInput(lastInput);
             }
            // ExtraMovementVerifier(input);
@@ -69,12 +65,12 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (attack != null)
         {
-            currentInput.AddAttackInput(direction, attack);
+            currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing,attack);
             CompleteMoveListVerifier();
             
             return;
         }
-        currentInput.AddDirectionalInput(direction);
+        currentInput.AddDirectionalInput(direction,_base.pSide.thisPosition._directionFacing);
     }
     void CompleteMoveListVerifier()
     {
@@ -84,7 +80,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
-            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
+            if (_base.CharacterMoveListAttacks.Keys.Equals(currentInput))
             {
                 if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
                 {
@@ -655,9 +651,8 @@ public class Character_ComboDetection : MonoBehaviour
         }
     }
 }
-public class UserQualityComparer : IEqualityComparer<AttackInputTypes>
+public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
 {
-
     public bool Equals(AttackInputTypes x, AttackInputTypes y)
     {
         bool specialInputMatch = x?.specialMoveTypeInput == y?.specialMoveTypeInput;
@@ -668,6 +663,7 @@ public class UserQualityComparer : IEqualityComparer<AttackInputTypes>
     }
     public int GetHashCode(AttackInputTypes obj)
     {
-        return obj?.GetHashCode() ?? 0;
+        int returningValue = obj?.GetHashCode() ?? 0;
+        return returningValue;
     }
 }

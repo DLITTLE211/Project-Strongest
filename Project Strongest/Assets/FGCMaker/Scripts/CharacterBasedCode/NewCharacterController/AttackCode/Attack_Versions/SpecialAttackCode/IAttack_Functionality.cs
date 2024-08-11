@@ -42,8 +42,6 @@ public class AttackInputTypes
     public Attack_Input specialMoveTypeInput;
     public List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> normalTypeInput;
 
-
-
     private (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) currentAttackInput;
     public MoveType moveType;
     public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<(Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput)> _normalTypeInput = null, MoveType _moveType = MoveType.Normal) 
@@ -53,16 +51,30 @@ public class AttackInputTypes
 
         moveType = _moveType;
     }
-    public void AddDirectionalInput(int directionalInput) 
+    public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide) 
     {
+        if(faceSide == Character_Face_Direction.FacingLeft) 
+        {
+            int alteredInput = TransfigureDirectionOnSideSwitch(directionalInput);
+            specialMoveTypeInput.attackString += alteredInput.ToString();
+            return;
+        }
         specialMoveTypeInput.attackString += directionalInput.ToString();
     }
-    public void AddAttackInput(int lastDirection, Character_ButtonInput attackInput)
+    public void AddAttackInput(int lastDirection, Character_Face_Direction faceSide, Character_ButtonInput attackInput)
     {
         specialMoveTypeInput.attackString += attackInput.Button_Name.ToString();
         specialMoveTypeInput.turnStringToArray();
 
-        currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
+        if (faceSide == Character_Face_Direction.FacingLeft)
+        {
+            int alteredInput = TransfigureDirectionOnSideSwitch(lastDirection);
+            currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)alteredInput;
+        }
+        else
+        {
+            currentAttackInput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
+        }
         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
         currentAttackInput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
     }
@@ -71,7 +83,7 @@ public class AttackInputTypes
     {
         if (obj != null) 
         {
-            normalTypeInput.Contains(obj.currentAttackInput);
+            return normalTypeInput.Contains(obj.currentAttackInput);
         }
         return false;
     }
@@ -82,5 +94,25 @@ public class AttackInputTypes
         specialMoveTypeInput.attackStringArray = new char[0];
         currentAttackInput.Item1 = 0;
         currentAttackInput.Item2 = Attack_BaseInput.AttackInput.A;
+    }
+    int TransfigureDirectionOnSideSwitch(int move)
+    {
+        int switchValue = 5;
+        switch (move)
+        {
+            case 6:
+                switchValue = 4;
+                break;
+            case 3:
+                switchValue = 1;
+                break;
+            case 4:
+                switchValue = 6;
+                break;
+            case 1:
+                switchValue = 3;
+                break;
+        }
+        return switchValue;
     }
 }

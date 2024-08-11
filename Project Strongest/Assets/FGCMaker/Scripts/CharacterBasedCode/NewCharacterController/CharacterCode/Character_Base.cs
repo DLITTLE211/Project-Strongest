@@ -234,7 +234,7 @@ public class Character_Base : MonoBehaviour
 
     void InitCombos()
     {
-        _characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>();
+        _characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>(new AttackInputCustomComparer());
         _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         comboList3_0.ExtractBaseProperties(this);
