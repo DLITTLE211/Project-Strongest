@@ -201,7 +201,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
 
     public MoveType GetAttackMoveType()
     {
-        throw new NotImplementedException();
+        return MoveType.Rekka;
     }
     #region Interface Functions
 

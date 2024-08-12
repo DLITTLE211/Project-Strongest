@@ -5,8 +5,8 @@ using UnityEngine;
 public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality//IAttack_SpecialFuctionality
 {
     [SerializeField] private int curInput;
-    [SerializeField] private int movementPortionLength;
-    [SerializeField] private char finalAttackButton;
+   // [SerializeField] private int movementPortionLength;
+   // [SerializeField] private char finalAttackButton;
     [SerializeField] private bool moveComplete;
     [SerializeField] private int framesBetweenAttacks;
 
@@ -34,9 +34,12 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
         property.InputTimer.SetTimerType();
         try
         {
-            attackInput.turnStringToArray();
-            movementPortionLength = attackInput.attackStringArray.Length - 1;
-            finalAttackButton = attackInput.attackStringArray[attackInput.attackStringArray.Length - 1];
+            for(int i = 0; i < attackInput.Count; i++) 
+            {
+                attackInput[i].turnStringToArray();
+                //movementPortionLength = attackInput.attackStringArray.Length - 1;
+                //finalAttackButton = attackInput.attackStringArray[attackInput.attackStringArray.Length - 1];
+            }
         }
         catch (ArgumentNullException e)
         {
@@ -53,7 +56,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
         {
             curInput++;
             property.InputTimer.ResetTimerSuccess();
-            if (curInput >= movementPortionLength && moveComplete == false)
+          /*  if (curInput >= movementPortionLength && moveComplete == false)
             {
                 moveComplete = true;
                 ResetMoveCombo();
@@ -62,7 +65,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
             {
                 PreformAttack(curBase);
                 ResetCombo();
-            }
+            }*/
             return true;
         }
         else { return false; }
@@ -104,11 +107,11 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
                 bool moveInput = false;
                 if (_curBase.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
                 {
-                    moveInput = attackInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
+                  //  moveInput = attackInput.attackStringArray[curInput].ToString() == testInput.Button_State.directionalInput.ToString();
                 }
                 else
                 {
-                    moveInput = attackInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
+                  //  moveInput = attackInput.attackStringArray[curInput].ToString() == TransfigureDirectionOnSideSwitch(testInput).ToString();
                 }
 
                 // DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {TransfigureDirectionOnSideSwitch(testInput)}");
@@ -121,9 +124,9 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
 
                 { return false; }
             case true:
-                bool buttonInput = finalAttackButton.ToString() == testInput.Button_Name.ToString();
+               // bool buttonInput = finalAttackButton.ToString() == testInput.Button_Name.ToString();
                 bool CorrectState = testInput.Button_State._state == attackInputState._state;
-                bool thisAttack = buttonInput && CorrectState;
+                bool thisAttack = true && CorrectState;
                 if (thisAttack)
 
                 { return thisAttack; }

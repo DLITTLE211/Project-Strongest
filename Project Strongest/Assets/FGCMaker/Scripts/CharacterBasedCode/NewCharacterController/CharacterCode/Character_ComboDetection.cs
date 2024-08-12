@@ -83,87 +83,32 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
-            if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.released) 
+            if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
             {
-                return;
-            }
-            if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
-            {
-                if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
+                if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
                 {
-                    _base.CharacterMoveListAttacks[currentInput].DisableCheckable();
-                }
-                else
-                {
-                    if (followUpInputMoveTypes.Contains(_base.CharacterMoveListAttacks[currentInput].GetAttackMoveType()))
+                    if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
                     {
-                        ActiveFollowUpAttackCheck = _base.CharacterMoveListAttacks[currentInput];
+                        return;
                     }
-                    _base.CharacterMoveListAttacks[currentInput].PreformAttack();
+                    else
+                    {
+                        if (followUpInputMoveTypes.Contains(_base.CharacterMoveListAttacks[currentInput].GetAttackMoveType()))
+                        {
+                            ActiveFollowUpAttackCheck = _base.CharacterMoveListAttacks[currentInput];
+                        }
+                        _base.CharacterMoveListAttacks[currentInput].PreformAttack();
+                    }
                 }
             }
         }
-        //else 
-        //{
-        /* if (!_base.CharacterMoveListAttacks[i].CheckMove(input))
-         {
-             _base.CharacterMoveListAttacks[i].ResetCombo();
-             _base.CharacterMoveListAttacks[i].DisableCheckable();
-         }
-         else 
-         {
-             _base.CharacterMoveListAttacks[i].Iterate();
-             if (_base.CharacterMoveListAttacks[i].Key.moveType > (int)MoveType.String_Normal)
-             {
-                 if (!_base.CharacterMoveListAttacks[i].GetMoveInputComplete())
-                 {
-                     if (_base.CharacterMoveListAttacks[i].CheckCurInput >= _base.CharacterMoveListAttacks[i].ReturnMoveInputCount())
-                     {
-                         _base.CharacterMoveListAttacks[i].SetMoveInputComplete();
-                     }
-                 }
-                 else
-                 {
-                     _base.CharacterMoveListAttacks[i].PreformAttack();
-                 }
-
-             }
-             else
-             {
-                 if (_base.CharacterMoveListAttacks[i].Key.moveType == (int)MoveType.String_Normal)
-                 {
-                     if (_base.CharacterMoveListAttacks[i].GetCurAttackInput > 0)
-                     {
-                         if (!_base.CharacterMoveListAttacks[i].CheckPreviousAttackConnected())
-                         {
-                             _base.CharacterMoveListAttacks[i].DisableCheckable();
-                             continue;
-                         }
-                         else
-                         {
-                             _base.CharacterMoveListAttacks[i].PreformAttack();
-                         }
-                     }
-                     else
-                     {
-                         _base.CharacterMoveListAttacks[i].PreformAttack();
-                     }
-                 }
-                 else 
-                 {
-                     _base.CharacterMoveListAttacks[i].PreformAttack();
-                 }
-             }
-         }*/
-        //  }
-        //}
     }
     public void PrimeCombos()
     {
-        PrimeNormal();
+       // PrimeNormal();
         PrimeMobility();
-        PrimeSpecialMoves();
-        ResetComboList();
+       // PrimeSpecialMoves();
+       // ResetComboList();
         _base.CollectCharacterMovelist();
     }
     void PrimeSpecialMoves()
@@ -456,7 +401,8 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
             }
             else
             {
-                return x.specialMoveTypeInput.attackString == y.specialMoveTypeInput.attackString;
+                bool fullCheck = x.specialMoveTypeInput.attackString == y.specialMoveTypeInput.attackString;
+                return fullCheck;
             }
         }
         else
@@ -483,7 +429,7 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
         int inputHash = 0;
         if (obj.moveType == MoveType.Key)
         {
-            if (obj.specialMoveTypeInput.attackStringArray.Length > 3) 
+            if (obj.specialMoveTypeInput.attackStringArray.Length >= 3) 
             {
                 inputHash = (int)obj.specialMoveTypeInput.attackString.GetHashCode();
             }
@@ -500,6 +446,7 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
             }
             else
             {
+                //inputHash = (int)(obj.specialMoveTypeInput.attackString[0].GetHashCode() | obj.specialMoveTypeInput.attackString[1].GetHashCode())
                 inputHash = obj.specialMoveTypeInput.attackString.GetHashCode();
             }
         }

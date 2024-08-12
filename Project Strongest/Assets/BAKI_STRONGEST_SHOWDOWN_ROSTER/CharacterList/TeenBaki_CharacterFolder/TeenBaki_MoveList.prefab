@@ -2432,14 +2432,12 @@ MonoBehaviour:
         Value: 4
       KnockDown: 0
     attackInput:
-      attackString: 6323A
+    - attackString: 623A
       attackStringArray: 
     attackInputState:
       _state: 0
       directionalInput: 0
     curInput: 0
-    movementPortionLength: 0
-    finalAttackButton: 48
     moveComplete: 0
     framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Benda Slap (High)
@@ -2499,14 +2497,14 @@ MonoBehaviour:
         Value: 6
       KnockDown: 0
     attackInput:
-      attackString: 214A
+    - attackString: 214A
+      attackStringArray: 
+    - attackString: 24A
       attackStringArray: 
     attackInputState:
       _state: 0
       directionalInput: 0
     curInput: 0
-    movementPortionLength: 0
-    finalAttackButton: 46
     moveComplete: 0
     framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Benda Slap (Low)
@@ -2566,14 +2564,14 @@ MonoBehaviour:
         Value: 3
       KnockDown: 0
     attackInput:
-      attackString: 214B
+    - attackString: 214B
+      attackStringArray: 
+    - attackString: 24B
       attackStringArray: 
     attackInputState:
       _state: 0
       directionalInput: 0
     curInput: 0
-    movementPortionLength: 0
-    finalAttackButton: 0
     moveComplete: 0
     framesBetweenAttacks: 0
   stringNormalAttacks:

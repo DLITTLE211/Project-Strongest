@@ -76,7 +76,7 @@ public abstract class Attack_Special_Base
 
     
     public Attack_BaseProperties property;
-    public Attack_Input attackInput;
+    public List<Attack_Input> attackInput;
     public ButtonStateMachine attackInputState;
 
 }

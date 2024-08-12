@@ -397,9 +397,12 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Rekka Attack Addition";
             for (int i = 0; i < special_Simple.Count; i++)
             {
-                AttackInputTypes superInputType = new AttackInputTypes(special_Simple[i].attackInput, null, special_Simple[i].property._moveType);
-                totalAttackDictionary.Add(superInputType, rekkaSpecials[i]);
-                _types.Add(superInputType);
+                for (int j = 0; j < special_Simple[i].attackInput.Count; j++) 
+                {
+                    AttackInputTypes superInputType = new AttackInputTypes(special_Simple[i].attackInput[j], null, special_Simple[i].property._moveType);
+                    totalAttackDictionary.Add(superInputType, rekkaSpecials[i]);
+                    _types.Add(superInputType);
+                }
             }
             #endregion
 
