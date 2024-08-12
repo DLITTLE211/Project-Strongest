@@ -296,13 +296,9 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     #endregion
 
 
-    public void DisableCheckable()
-    {
-        throw new NotImplementedException();
-    }
 
     public MoveType GetAttackMoveType()
     {
-        throw new NotImplementedException();
+        return property._moveType;
     }
 }

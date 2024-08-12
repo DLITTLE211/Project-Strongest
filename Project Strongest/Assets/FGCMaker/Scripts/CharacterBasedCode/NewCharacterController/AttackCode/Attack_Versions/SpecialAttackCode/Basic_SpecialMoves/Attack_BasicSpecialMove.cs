@@ -162,14 +162,9 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     #endregion
 
 
-    public void DisableCheckable()
-    {
-        throw new NotImplementedException();
-    }
-
     public MoveType GetAttackMoveType()
     {
-        throw new NotImplementedException();
+        return property._moveType;
     }
 
     public void PreformAttack()

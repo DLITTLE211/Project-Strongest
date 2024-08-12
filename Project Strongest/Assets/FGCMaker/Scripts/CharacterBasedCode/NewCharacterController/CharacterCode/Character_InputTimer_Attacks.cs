@@ -17,7 +17,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         _base._cComboDetection.ResetCombos();
         _base._aManager.ClearAttacks();
     }
-    public void SetStartingValues(float newTime = 0.4f)
+    public void SetStartingValues(float newTime)
     {
         _base._cComboDetection.inStance = false;
         _base._cComboDetection.inRekka = false;
@@ -70,7 +70,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
         }
     }
-    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.4f) 
+    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.3f) 
     {
         if (newType != TimerType.Normal)
         {

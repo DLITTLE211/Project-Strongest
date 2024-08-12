@@ -232,14 +232,10 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
     }
 
-    public void DisableCheckable()
-    {
-        throw new NotImplementedException();
-    }
 
     public MoveType GetAttackMoveType()
     {
-        throw new NotImplementedException();
+        return _attackInput._correctInput[0].property._moveType;
     }
 
 

@@ -91,7 +91,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         {
             attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty);
         }
-        throw new NotImplementedException();
     }
     public void PreformAttack(Character_Base curBase, RekkaAttack _rekka = null)
     {
@@ -194,14 +193,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         await Task.Delay(FourFramesInMS);
     }
 
-    public void DisableCheckable()
-    {
-        throw new NotImplementedException();
-    }
-
     public MoveType GetAttackMoveType()
     {
-        return MoveType.Rekka;
+        return rekkaInput.mainAttackProperty._moveType;
     }
     #region Interface Functions
 

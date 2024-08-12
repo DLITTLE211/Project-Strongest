@@ -85,19 +85,21 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
             {
-                if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
+                IAttackFunctionality refAttackType = null;
+                if (_base.CharacterMoveListAttacks.TryGetValue(currentInput, out refAttackType))
                 {
-                    if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
+                    MoveType indexMoveType = refAttackType.GetAttackMoveType();
+                    if (_base._aManager.MoveTypeHierarchy > indexMoveType)
                     {
                         return;
                     }
                     else
                     {
-                        if (followUpInputMoveTypes.Contains(_base.CharacterMoveListAttacks[currentInput].GetAttackMoveType()))
+                        if (followUpInputMoveTypes.Contains(indexMoveType))
                         {
-                            ActiveFollowUpAttackCheck = _base.CharacterMoveListAttacks[currentInput];
+                            ActiveFollowUpAttackCheck = refAttackType;
                         }
-                        _base.CharacterMoveListAttacks[currentInput].PreformAttack();
+                        refAttackType.PreformAttack();
                     }
                 }
             }
@@ -446,8 +448,7 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
             }
             else
             {
-                //inputHash = (int)(obj.specialMoveTypeInput.attackString[0].GetHashCode() | obj.specialMoveTypeInput.attackString[1].GetHashCode())
-                inputHash = obj.specialMoveTypeInput.attackString.GetHashCode();
+                 inputHash = obj.specialMoveTypeInput.attackString.GetHashCode();
             }
         }
         obj.hash = inputHash;

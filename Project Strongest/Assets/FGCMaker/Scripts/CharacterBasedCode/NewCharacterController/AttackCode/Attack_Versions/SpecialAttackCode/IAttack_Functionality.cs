@@ -10,8 +10,6 @@ public interface IAttackFunctionality
     void SendCounterHitInfo(Character_Base curBase);
     void SetComboTimer(Character_InputTimer_Attacks timer);
     void SetStarterInformation();
-
-    void DisableCheckable();
     MoveType GetAttackMoveType();
 
 }
