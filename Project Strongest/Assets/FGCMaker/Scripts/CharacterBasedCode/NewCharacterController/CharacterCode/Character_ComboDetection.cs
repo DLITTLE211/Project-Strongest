@@ -15,7 +15,7 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private IAttackFunctionality ActiveFollowUpAttackCheck;
     private string curString;
     private char[] curStringArray;
-
+    private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
     private void Start()
     {
@@ -48,6 +48,7 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 // SpecialInputVerifier(input);
                 //SimpleInputVerifier(input);
+                lastAddedinput = input;
                 AddToCurrentInput(lastInput,input);
             }
         }
@@ -82,6 +83,10 @@ public class Character_ComboDetection : MonoBehaviour
         }
         else
         {
+            if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.released) 
+            {
+                return;
+            }
             if (_base.CharacterMoveListAttacks.ContainsKey(currentInput))
             {
                 if (_base._aManager.MoveTypeHierarchy > _base.CharacterMoveListAttacks[currentInput].GetAttackMoveType())
@@ -434,18 +439,25 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
     {
         if (y.moveType == MoveType.Key)
         {
-            bool startingInputCheck = x.normalTypeInput[0] == y.currentAttackInput;
-            bool groundClearanceCheck = false;
-            if (x.normalAirAttackInfo == AirAttackInfo.AirOk)
+            if ((int)x.moveType <= (int)MoveType.String_Normal)
             {
-                groundClearanceCheck = true;
+                bool startingInputCheck = x.normalTypeInput[0] == y.currentAttackInput;
+                bool groundClearanceCheck = false;
+                if (x.normalAirAttackInfo == AirAttackInfo.AirOk)
+                {
+                    groundClearanceCheck = true;
+                }
+                else
+                {
+                    groundClearanceCheck = x.normalAirAttackInfo == y.keyGroundCheck;
+                }
+                bool fullcheck = startingInputCheck && groundClearanceCheck;
+                return fullcheck;
             }
-            else 
+            else
             {
-                groundClearanceCheck = x.normalAirAttackInfo == y.keyGroundCheck;
+                return x.specialMoveTypeInput.attackString == y.specialMoveTypeInput.attackString;
             }
-            bool fullcheck = startingInputCheck && groundClearanceCheck;
-            return fullcheck;
         }
         else
         {
