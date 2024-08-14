@@ -76,7 +76,6 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality //IThrowA
         {
             this._attackInput._correctInput[0].property.InputTimer.ResetTimerSuccess();
             //_cTimer.ResetTimerSuccess();
-            attackData = new AttackData(curBase, null, null, -1, null, null, _attackInput._correctInput[curAttack - 1]);
             PreformAttack(curInput, curAttack, curBase);
             if (curInput > _attackInput._correctInput.Count)
             {
@@ -164,6 +163,7 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality //IThrowA
 
     public void PreformAttack()
     {
+        attackData = new AttackData(curBase, null, null, -1, null, null, _attackInput._correctInput[0]);
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
         //throw new NotImplementedException();
     }

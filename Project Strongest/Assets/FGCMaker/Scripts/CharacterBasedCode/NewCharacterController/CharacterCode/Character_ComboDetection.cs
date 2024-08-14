@@ -78,9 +78,25 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (ActiveFollowUpAttackCheck.Value != null)
         {
-            if (FindFollowUpEntry(currentInput)) 
+            if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Stance)
             {
-                //ActiveFollowUpAttackCheck.Value.DoFollowUpAttack();
+                if (lastAddedinput.Button_State._state != ButtonStateMachine.InputState.pressed)
+                {
+                    if (FindFollowUpEntry(ActiveFollowUpAttackCheck.Key))
+                    {
+                        //ActiveFollowUpAttackCheck.Value.DoFollowUpAttack();
+                    }
+                }
+            }
+            else 
+            {
+                if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
+                {
+                    if (FindFollowUpEntry(ActiveFollowUpAttackCheck.Key))
+                    {
+                        //ActiveFollowUpAttackCheck.Value.DoFollowUpAttack();
+                    }
+                }
             }
         }
         else
@@ -97,11 +113,15 @@ public class Character_ComboDetection : MonoBehaviour
                     }
                     else
                     {
+                        refAttackType.PreformAttack(); 
                         if (followUpInputMoveTypes.Contains(indexMoveType))
                         {
                             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, refAttackType);
                         }
-                        refAttackType.PreformAttack();
+                        else
+                        {
+                            ResetCombos();
+                        }
                     }
                     Debug.Log("attack found");
                 }
@@ -267,7 +287,10 @@ public class Character_ComboDetection : MonoBehaviour
     public void ResetCombos()
     {
         currentInput.ResetComboInfo();
-        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput,null);
+        if (ActiveFollowUpAttackCheck.Value != null)
+        {
+            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
+        }
        /* 
         for (int i = 0; i < _base.simpleAttackList.Count; i++)
         {
@@ -389,16 +412,35 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 string moveInDict = entry.Key.specialMoveTypeInput.attackString;
                 string keyRef = key.specialMoveTypeInput.attackString;
-                if (moveInDict.Contains(keyRef))
+                if (entry.Key.specialMoveTypeInput.attackString.Length > 0)
+                {
+                    string attackButton = moveInDict.Substring(moveInDict.Length - 1);
+                    string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
+                    if (keyRef.Contains(movementOnlyString) && keyRef.Contains(attackButton))
+                    {
+                        keyRef = keyRef.Remove(movementOnlyString.IndexOf(movementOnlyString),movementOnlyString.Length);
+                        keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                        return entry;
+                    }
+                }
+                /*    if (moveInDict.Contains(keyRef))
                 {
                     moveInDict = moveInDict.Remove(moveInDict.IndexOf(keyRef));
                     keyRef = keyRef.Remove(keyRef.IndexOf(keyRef));
-                    if (moveInDict == keyRef)
+                    if (moveInDict == "")
                     {
                         Debug.Log(entry.Value);
                         return entry;
                     }
-                }
+                    else
+                    {
+                        if (moveInDict == keyRef)
+                        {
+                            Debug.Log(entry.Value);
+                            return entry;
+                        }
+                    }
+                }*/
             }
             if (entry.Key.normalTypeInput != null)
             {
@@ -410,7 +452,7 @@ public class Character_ComboDetection : MonoBehaviour
             }
             continue;
         }
-
+        entry = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(key,null);
         return entry;
     }
     private bool FindFollowUpEntry(AttackInputTypes key)

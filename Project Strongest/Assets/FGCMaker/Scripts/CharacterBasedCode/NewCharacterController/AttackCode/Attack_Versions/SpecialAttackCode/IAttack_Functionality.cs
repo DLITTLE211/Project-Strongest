@@ -112,7 +112,7 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
     }
     int TransfigureDirectionOnSideSwitch(int move)
     {
-        int switchValue = 5;
+        int switchValue = move;
         switch (move)
         {
             case 6:

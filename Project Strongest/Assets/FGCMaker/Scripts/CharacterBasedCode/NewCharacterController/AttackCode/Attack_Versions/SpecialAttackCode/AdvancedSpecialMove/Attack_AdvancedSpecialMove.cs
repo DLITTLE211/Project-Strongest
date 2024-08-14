@@ -238,6 +238,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     }
     public void PreformAttack()
     {
+        newAttackData = new AttackData(curBase);
         newAttackData.curBase._aManager.ReceiveAttack(property);
     }
     public void SendCounterHitInfo(Character_Base target)

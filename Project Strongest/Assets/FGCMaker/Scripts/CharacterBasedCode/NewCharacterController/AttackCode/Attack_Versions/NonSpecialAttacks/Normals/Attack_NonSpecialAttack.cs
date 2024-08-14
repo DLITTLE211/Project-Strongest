@@ -74,7 +74,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             {
                 if (_attackInput._correctInput[curAttack - 1].property.hitConnected == true)
                 {
-                    attackData = new AttackData(curBase, null, null, -1, null, null, _attackInput._correctInput[curAttack - 1]);
                     RewardAttack(curBase);
                 }
                 else
@@ -178,6 +177,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
 
     public void PreformAttack()
     {
+        attackData = new AttackData(_base, null, null, -1, null, null, _attackInput._correctInput[0]);
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
         //throw new NotImplementedException();
     }
