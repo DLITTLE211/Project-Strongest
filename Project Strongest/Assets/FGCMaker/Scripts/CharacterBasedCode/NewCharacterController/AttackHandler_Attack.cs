@@ -239,7 +239,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
+        //character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
             try

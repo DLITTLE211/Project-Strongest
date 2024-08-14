@@ -36,7 +36,7 @@ public class AttackData
     }
 }
 [Serializable]
-public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
+public class AttackInputTypes 
 {
     public Attack_Input specialMoveTypeInput;
     public List<string> normalTypeInput;
