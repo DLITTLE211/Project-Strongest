@@ -52,9 +52,14 @@ public class AttackInputTypes //: IEqualityComparer<AttackInputTypes>
         moveType = _moveType;
         normalAirAttackInfo = _normalAirAttackInfo;
     }
-    public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide) 
+    public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide)
     {
-        if(faceSide == Character_Face_Direction.FacingLeft) 
+        if (specialMoveTypeInput.attackString.Length > 8)
+        {
+            string attackSubString = specialMoveTypeInput.attackString.Substring(1);
+            specialMoveTypeInput.attackString = attackSubString;
+        }
+        if (faceSide == Character_Face_Direction.FacingLeft) 
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(directionalInput);
             specialMoveTypeInput.attackString += alteredInput.ToString();

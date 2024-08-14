@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -12,7 +11,7 @@ public class Character_ComboDetection : MonoBehaviour
     public bool inStance, inRekka,inSuper ,superMobilityOption;
     private bool canCheckMovement;
     [SerializeField] private AttackInputTypes currentInput;
-    [SerializeField] private IAttackFunctionality ActiveFollowUpAttackCheck;
+    [SerializeField] private KeyValuePair<AttackInputTypes,IAttackFunctionality> ActiveFollowUpAttackCheck;
     private string curString;
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;
@@ -57,6 +56,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (lastInput != input.Button_State.directionalInput && canCheckMovement)
             {
                 _base._cAttackTimer.CheckForInput = true;
+                _base._cAttackTimer.ResetTimerSuccess();
                 lastInput = input.Button_State.directionalInput;
                 // SpecialInputVerifier(input);
                 AddToCurrentInput(lastInput);
@@ -70,14 +70,13 @@ public class Character_ComboDetection : MonoBehaviour
         {
             currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing,attack,_base._cHurtBox.IsGrounded());
             CompleteMoveListVerifier();
-            
             return;
         }
         currentInput.AddDirectionalInput(direction,_base.pSide.thisPosition._directionFacing);
     }
     void CompleteMoveListVerifier()
     {
-        if (ActiveFollowUpAttackCheck != null)
+        if (ActiveFollowUpAttackCheck.Value != null)
         {
 
         }
@@ -85,9 +84,9 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
             {
-                IAttackFunctionality refAttackType = null;
-                if (_base.CharacterMoveListAttacks.TryGetValue(currentInput, out refAttackType))
+                if (FindStringEntry(currentInput).Value != null)
                 {
+                    IAttackFunctionality refAttackType = FindStringEntry(currentInput).Value;
                     MoveType indexMoveType = refAttackType.GetAttackMoveType();
                     if (_base._aManager.MoveTypeHierarchy > indexMoveType)
                     {
@@ -97,20 +96,37 @@ public class Character_ComboDetection : MonoBehaviour
                     {
                         if (followUpInputMoveTypes.Contains(indexMoveType))
                         {
-                            ActiveFollowUpAttackCheck = refAttackType;
+                            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, refAttackType);
                         }
                         refAttackType.PreformAttack();
                     }
+                    Debug.Log("attack found");
                 }
+                Debug.Log("attack not found");
+                /* 
+                 IAttackFunctionality refAttackType = null;
+                 if (_base.CharacterMoveListAttacks.TryGetValue(currentInput, out refAttackType))
+                 {
+                     MoveType indexMoveType = refAttackType.GetAttackMoveType();
+                     if (_base._aManager.MoveTypeHierarchy > indexMoveType)
+                     {
+                         return;
+                     }
+                     else
+                     {
+                         if (followUpInputMoveTypes.Contains(indexMoveType))
+                         {
+                             ActiveFollowUpAttackCheck = refAttackType;
+                         }
+                         refAttackType.PreformAttack();
+                     }
+                 }*/
             }
         }
     }
     public void PrimeCombos()
     {
-       // PrimeNormal();
         PrimeMobility();
-       // PrimeSpecialMoves();
-       // ResetComboList();
         _base.CollectCharacterMovelist();
     }
     void PrimeSpecialMoves()
@@ -157,17 +173,6 @@ public class Character_ComboDetection : MonoBehaviour
         }
         #endregion
     }
-    void PrimeNormal() 
-    {
-        for (int i = 0; i < _base.comboList3_0.simpleAttacks.Count; i++)
-        {
-            _base.simpleAttackList.Add(_base.comboList3_0.simpleAttacks[i]);
-        }
-        for (int i = 0; i < _base.comboList3_0.BasicThrows.Count; i++)
-        {
-            _base.BasicThrows.Add(_base.comboList3_0.BasicThrows[i]);
-        }
-    }
     void PrimeMobility() 
     {
         for (int i = 0; i < _base._extraMoveAsset.MobilityOptions.Count; i++)
@@ -183,16 +188,6 @@ public class Character_ComboDetection : MonoBehaviour
         }
         canCheckMovement = true;
     }
-    void ResetComboList() 
-    {
-        SetSimpleButtons();
-        SetSpecialButtons();
-    }
-    void ResetMovementList()
-    {
-        _base._extraMoveControls.Clear();
-        PrimeMobility();
-    }
     void SetSimpleButtons()
     {
         _base.simpleAttackList.Clear();
@@ -206,7 +201,7 @@ public class Character_ComboDetection : MonoBehaviour
             _base.BasicThrows.Add(_base.comboList3_0.BasicThrows[i]);
         }
     }
-    void SetSpecialButtons()
+    /*void SetSpecialButtons()
     {
         _base.specialMoveList.Clear();
         _base.rekkaAttackList.Clear();
@@ -256,15 +251,14 @@ public class Character_ComboDetection : MonoBehaviour
             _base.specialMoveList.Add(_base.comboList3_0.special_Simple[i]);
         }
         #endregion
-    }
+    }*/
 
     void ExtraMovementVerifier(Character_ButtonInput input)
     {
         for (int i = 0; i < _base._extraMoveControls.Count; i++)
         {
             Character_Mobility c = _base._extraMoveControls[i];
-            if (c.ContinueCombo(input,_base, superMobilityOption))
-                {/*Current Input Is Correct Per (i) MovementOption*/}
+            c.ContinueCombo(input, _base, superMobilityOption);
         }
     }
     public void ResetCombos()
@@ -377,6 +371,64 @@ public class Character_ComboDetection : MonoBehaviour
             }
             else { continue; }
         }
+    }
+    private KeyValuePair<AttackInputTypes, IAttackFunctionality> FindStringEntry(AttackInputTypes key)
+    {
+        if (key.specialMoveTypeInput.attackString == null || key.specialMoveTypeInput.attackString == "")
+        {
+            throw new KeyNotFoundException();
+        }
+        KeyValuePair<AttackInputTypes, IAttackFunctionality> entry = new KeyValuePair<AttackInputTypes, IAttackFunctionality>();
+        for (int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
+        {
+            entry = _base.CharacterMoveListAttacks.ElementAt(i);
+            if (entry.Key.specialMoveTypeInput != null)
+            {
+                string moveInDict = entry.Key.specialMoveTypeInput.attackString;
+                string keyRef = key.specialMoveTypeInput.attackString;
+                if (moveInDict.Contains(keyRef))
+                {
+                    moveInDict = moveInDict.Remove(moveInDict.IndexOf(keyRef));
+                    keyRef = keyRef.Remove(keyRef.IndexOf(keyRef));
+                    if (moveInDict == keyRef)
+                    {
+                        Debug.Log(entry.Value);
+                        return entry;
+                    }
+                }
+            }
+            if (entry.Key.normalTypeInput != null)
+            {
+                if (entry.Key.normalTypeInput[0] == key.currentAttackInput)
+                {
+                    Debug.Log(entry.Value);
+                    return entry;
+                }
+            }
+            continue;
+        }
+
+        return entry;
+    }
+    private bool FindFollowUpEntry(AttackInputTypes key)
+    {
+        if (key.specialMoveTypeInput.attackString == null || key.specialMoveTypeInput.attackString == "")
+        {
+            throw new KeyNotFoundException();
+        }
+        AttackInputTypes entry = ActiveFollowUpAttackCheck.Key;
+        if (entry != null)
+        {
+            for (int i = 0; i < entry.normalTypeInput.Count; i++) 
+            {
+                if (entry.normalTypeInput[i] == key.currentAttackInput)
+                {
+                    return true;
+                }
+                continue;
+            }
+        }
+        return false;
     }
 }
 [Serializable]
