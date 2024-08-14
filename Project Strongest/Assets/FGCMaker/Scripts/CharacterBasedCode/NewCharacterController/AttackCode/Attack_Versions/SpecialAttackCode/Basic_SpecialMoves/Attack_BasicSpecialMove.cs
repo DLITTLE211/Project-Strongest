@@ -9,11 +9,13 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
    // [SerializeField] private char finalAttackButton;
     [SerializeField] private bool moveComplete;
     [SerializeField] private int framesBetweenAttacks;
-
+    private AttackData attackData;
+    private Character_Base _curBase;
     #region Attack Base Code
     public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase)
     {
-        return CheckCombo(input, curBase);
+        return false;
+       // return CheckCombo(input, curBase);
     }
     public override void ResetCombo()
     {
@@ -49,13 +51,13 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     #endregion
 
     #region Attack Functionality Code
-    public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackButton = null)
+    public void CheckCombo()//Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackButton = null)
     {
-        property.InputTimer.CheckForInput = true;
-        if (IsCorrectInput(Input, curBase, curInput))
-        {
-            curInput++;
-            property.InputTimer.ResetTimerSuccess();
+        //property.InputTimer.CheckForInput = true;
+        //if (IsCorrectInput(Input, curBase, curInput))
+        //{
+            //curInput++;
+            //property.InputTimer.ResetTimerSuccess();
           /*  if (curInput >= movementPortionLength && moveComplete == false)
             {
                 moveComplete = true;
@@ -66,11 +68,13 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
                 PreformAttack(curBase);
                 ResetCombo();
             }*/
-            return true;
-        }
-        else { return false; }
+           // return true;
+        //}
+        //else { 
+         //   return false; 
+        //}
     }
-    int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
+    /*int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
     {
         int switchValue = 5;
         switch (move.Button_State.directionalInput)
@@ -98,8 +102,8 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
                 break;
         }
         return switchValue;
-    }
-    public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackButton = null)
+    }*/
+    /*public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackButton = null)
     {
         switch (moveComplete)
         {
@@ -134,10 +138,15 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
 
                 { return false; }
         }
-    }
+    }*//*
     public void PreformAttack(Character_Base curBase)
     {
         curBase._aManager.ReceiveAttack(property);
+    }*/
+    public void PreformAttack()
+    {
+        attackData = new AttackData(_curBase);
+        attackData.curBase._aManager.ReceiveAttack(property);
     }
     public void SendCounterHitInfo(Character_Base target)
     {
@@ -158,6 +167,10 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {
         property.InputTimer = timer;
+        if (_curBase == null)
+        {
+            _curBase = property.InputTimer._base;
+        }
     }
     #endregion
 
@@ -167,10 +180,6 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
         return property._moveType;
     }
 
-    public void PreformAttack()
-    {
-        throw new NotImplementedException();
-    }
 
     public void SetStarterInformation()
     {

@@ -78,7 +78,10 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (ActiveFollowUpAttackCheck.Value != null)
         {
-
+            if (FindFollowUpEntry(currentInput)) 
+            {
+                //ActiveFollowUpAttackCheck.Value.DoFollowUpAttack();
+            }
         }
         else
         {
@@ -264,7 +267,7 @@ public class Character_ComboDetection : MonoBehaviour
     public void ResetCombos()
     {
         currentInput.ResetComboInfo();
-
+        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput,null);
        /* 
         for (int i = 0; i < _base.simpleAttackList.Count; i++)
         {
@@ -431,7 +434,7 @@ public class Character_ComboDetection : MonoBehaviour
         return false;
     }
 }
-[Serializable]
+/*[Serializable]
 public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
 {
     public bool Equals(AttackInputTypes x, AttackInputTypes y)
@@ -506,4 +509,4 @@ public class AttackInputCustomComparer : IEqualityComparer<AttackInputTypes>
         obj.hash = inputHash;
         return inputHash;
     }
-}
+}*/
