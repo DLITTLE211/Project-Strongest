@@ -12,6 +12,10 @@ public interface IAttackFunctionality
     void SetStarterInformation();
     MoveType GetAttackMoveType();
 
+    virtual void DoFollowUpAttack(int attack) { }
+    virtual int GetFollowUpAttackInt() {return -1;}
+    virtual void SetFollowUpAttackInt() {}
+
 }
 
 [Serializable]
@@ -69,6 +73,7 @@ public class AttackInputTypes
     }
     public void AddAttackInput(int lastDirection, Character_Face_Direction faceSide, Character_ButtonInput attackInput, bool groundState)
     {
+        currentAttackInput = "";
         normalTypeInput = new List<string>();
         specialMoveTypeInput.attackString += attackInput.Button_Name.ToString();
         specialMoveTypeInput.turnStringToArray();
@@ -89,7 +94,7 @@ public class AttackInputTypes
         {
             keyGroundCheck = AirAttackInfo.GroundOnly;
         }
-        else 
+        else
         {
             keyGroundCheck = AirAttackInfo.AirOnly;
         }

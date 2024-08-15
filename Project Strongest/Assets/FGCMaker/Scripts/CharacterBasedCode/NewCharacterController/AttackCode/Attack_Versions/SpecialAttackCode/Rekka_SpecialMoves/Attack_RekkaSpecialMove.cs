@@ -15,6 +15,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     [SerializeField] internal bool inRekkaState;
     [SerializeField] internal List<Attack_BaseProperties> usedRekkas;
     (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
+    public Character_Base _curBase;
     private AttackData attackData;
     #region Special_Rekka Functions
     public override void TurnInputsToString()
@@ -42,6 +43,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     }
     public void SetAttackAnims(Character_Animator animator) 
     {
+        _curBase = animator._base;
         rekkaInput.mainAttackProperty.SetAttackAnims(animator);
         for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
         {
@@ -80,17 +82,17 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         rekkaInput.mainAttackProperty.InputTimer.ResetTimerSuccess();
     }
-
+    public void DoFollowUpAttack(int attack)
+    {
+        attackData = new AttackData(_curBase, rekkaInput._rekkaPortion[attack], null, -1, null);
+        usedRekkas.Add(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+        attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+    }
     public void PreformAttack()
     {
-        if (attackData.rekkaAttack != null)
-        {
-            attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
-        }
-        else
-        {
-            attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty);
-        }
+        attackData = new AttackData(_curBase, null, null, -1, rekkaInput.mainAttackProperty);
+        attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty);
+
     }
     public void PreformAttack(Character_Base curBase, RekkaAttack _rekka = null)
     {
@@ -405,8 +407,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput[0].property.InputTimer = timer;
         }
     }
-
-
 
     #endregion
 
