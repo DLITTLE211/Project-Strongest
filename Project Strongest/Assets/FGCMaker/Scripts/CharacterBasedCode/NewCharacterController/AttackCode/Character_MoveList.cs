@@ -259,9 +259,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < rekkaSpecials.Count; i++)
         {
-            rekkaSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            rekkaSpecials[i].TurnInputsToString();
-            rekkaSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator);
+            rekkaSpecials[i].SetStarterInformation(baseCharacterInfo);
             for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++)
             {
                 rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);

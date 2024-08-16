@@ -88,24 +88,6 @@ public abstract class Attack_Special_Rekka
     public string RekkaSpecialAttack_Name;
     #region Function Summary
     /// <summary>
-    /// Continues searching for the next input for potential combo inputs if true
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract bool ContinueCombo(Character_ButtonInput moveInput, Character_Base curBase, Character_ButtonInput attackButton = null);
-    #region Function Summary
-    /// <summary>
-    /// Turns inputs into readable strings for combo detection
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract void TurnInputsToString();
-    #region Function Summary
-    /// <summary>
     /// Reset combo upon timer ending
     /// </summary>
     /// <param name="input"></param>

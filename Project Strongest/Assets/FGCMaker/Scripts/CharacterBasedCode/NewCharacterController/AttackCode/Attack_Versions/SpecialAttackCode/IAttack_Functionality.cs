@@ -7,8 +7,8 @@ public interface IAttackFunctionality
     void PreformAttack();
     void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack);
     void SendCounterHitInfo(Character_Base curBase);
-    void SetComboTimer(Character_InputTimer_Attacks timer);
-    void SetStarterInformation();
+    void SetComboTimer();
+    void SetStarterInformation(Character_Base _base);
     MoveType GetAttackMoveType();
 
     virtual void DoFollowUpAttack(int attack) { }
