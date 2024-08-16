@@ -71,12 +71,6 @@ public class Attack_Manager : MonoBehaviour
             Combo.Add(newAttack);
             CheckNextAttackCriteria(newAttack, false, Combo.Count-1);
         }
-        /*
-         * if (Combo[Combo.Count - 1] == newAttack)
-         * {
-         * return;
-         * }
-         */
     }
     void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack)
     {
@@ -344,7 +338,10 @@ public class Attack_Manager : MonoBehaviour
         while (_AttackAnimQueue.Count > 0)
         {
             yield return new WaitForSeconds(5 * (1f / 60f));
-            PlayAttack(_AttackAnimQueue.Dequeue());
+            if (_AttackAnimQueue.Count > 0)
+            {
+                PlayAttack(_AttackAnimQueue.Dequeue());
+            }
         }
     }
     void PlayAttack(Attack_BaseProperties attack)

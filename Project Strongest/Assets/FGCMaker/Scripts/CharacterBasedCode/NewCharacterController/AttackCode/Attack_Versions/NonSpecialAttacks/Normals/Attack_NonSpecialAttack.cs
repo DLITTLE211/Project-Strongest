@@ -8,11 +8,16 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     [SerializeField] private int lastDirection;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     private Character_Base _curbase;
+    public int leewayTime;
 
     AttackData attackData;
 
     public void SetStarterInformation(Character_Base _base)
     {
+        if (_attackInput._correctInput.Count > 1)
+        {
+            leewayTime = 40;
+        }
         _curbase = _base;
         ResetCombo();
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
@@ -80,6 +85,11 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
             return;
         }
+        if (!_attackInput._correctInput[curAttack-1].property.hitConnected)
+        {
+            Debug.LogError($"Previous Attack in string did not connect. Returning...");
+            return;
+        }
         attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[curAttack]);
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
         curAttack++;
@@ -93,17 +103,21 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
         attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[0]);
         ResetCombo();
+        if (_attackInput._correctInput.Count > 1)
+        {
+            attackData.normalAttack.property.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1/60f)));
+        }
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
         curAttack++;
     }
 
     bool CheckStateMatchAttackState(int curAttack) 
     {
-        if (this._attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.AirOnly && _curbase._cHurtBox.IsGrounded())
+        if (_attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.AirOnly && _curbase._cHurtBox.IsGrounded())
         {
              return false;
         }
-        if (this._attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.GroundOnly && !_curbase._cHurtBox.IsGrounded())
+        if (_attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.GroundOnly && !_curbase._cHurtBox.IsGrounded())
         {
              return false;
         }

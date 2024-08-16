@@ -478,7 +478,7 @@ public class Character_MoveList : MonoBehaviour
                         return;
                     }
                     break;
-                case MoveType.String_Normal:
+                case MoveType.Command_Normal:
                     if (commandNormalsProperties.ContainsKey(attack))
                     {
                         Attack_NonSpecialAttack currentNormal = commandNormalsProperties[attack];
@@ -488,7 +488,7 @@ public class Character_MoveList : MonoBehaviour
                         return;
                     }
                     break;
-                case MoveType.Command_Normal:
+                case MoveType.String_Normal:
                     if (StringNormalsProperties.ContainsKey(attack))
                     {
                         Attack_NonSpecialAttack currentNormal = StringNormalsProperties[attack];

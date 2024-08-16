@@ -19,9 +19,9 @@ public class Character_ComboDetection : MonoBehaviour
     private void Start()
     {
         canCheckMovement = false;
-        lastInput = 5; 
+        lastInput = 5;
         curString = "";
-        currentInput = new AttackInputTypes(new Attack_Input(curString,curStringArray));
+        currentInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         SetFollowUpAttackTypes();
     }
     void SetFollowUpAttackTypes() 
@@ -45,6 +45,7 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (_base._cAnimator.inputWindowOpen)
             {
+                _base._cAttackTimer.CheckForInput = true;
                 // SpecialInputVerifier(input);
                 //SimpleInputVerifier(input);
                 lastAddedinput = input;
@@ -176,7 +177,9 @@ public class Character_ComboDetection : MonoBehaviour
             ActiveFollowUpAttackCheck.Value.ResetAttackData();
             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
         }
+
     }
+
     /*public void OnSuccessfulSpecialMove(Attack_BaseProperties attack)
     {
         for (int i = 0; i < _base.specialMoveList.Count; i++)
@@ -289,7 +292,7 @@ public class Character_ComboDetection : MonoBehaviour
         bool OrderedSequence =  ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal ? true : false;
         if (OrderedSequence)
         {
-            int stringComparison = ActiveFollowUpAttackCheck.Value.GetFollowUpAttackInt();
+             int stringComparison = ActiveFollowUpAttackCheck.Value.GetFollowUpAttackInt();
             if (stringComparison <= -1) 
             {
                 return -1;

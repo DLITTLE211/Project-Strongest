@@ -251,6 +251,7 @@ public class Character_Base : MonoBehaviour
     public void CollectCharacterMovelist() 
     {
         comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser);
+        _cAttackTimer.SetTimerType();
     }
     void InitButtons(Character_SubStates setSubState, int NewID)
     {
