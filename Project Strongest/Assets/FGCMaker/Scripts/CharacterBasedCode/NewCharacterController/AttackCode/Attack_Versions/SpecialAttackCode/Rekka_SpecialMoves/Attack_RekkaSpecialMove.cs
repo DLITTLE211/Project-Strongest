@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [Serializable]
-public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctionality//IAttack_RekkaFuctionality
+public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctionality
 {
     [SerializeField] private int curRekkaInput, rekkaInputCount;
     [SerializeField] internal int leewayTime;

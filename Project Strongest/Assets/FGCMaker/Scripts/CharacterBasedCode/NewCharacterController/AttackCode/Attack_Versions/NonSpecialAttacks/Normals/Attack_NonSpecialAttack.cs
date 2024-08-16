@@ -123,13 +123,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
         return true;
     }
-    public void PreformAttack(int currentInput, int currentAttack,Character_Base curBase)
-    {
-        //_pathdata.SetPathData(currentInput, currentAttack);
-        
-        //curBase.comboList3_0.UpdatePathData(_pathdata);
-        curBase._aManager.ReceiveAttack(_attackInput._correctInput[currentInput].property);
-    }
 
     public void SendCounterHitInfo(Character_Base curBase)
     {

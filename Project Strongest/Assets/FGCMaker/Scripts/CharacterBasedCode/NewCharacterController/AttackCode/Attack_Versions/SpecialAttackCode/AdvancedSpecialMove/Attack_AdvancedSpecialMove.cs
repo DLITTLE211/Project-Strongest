@@ -52,12 +52,6 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         currentCustomAnim = 0;
     }
     #region Attack Functionality Code
-    
-    /*public void PreformAttack(Character_Base _curBase)
-    {
-        _curBase._aManager.ReceiveAttack(property);
-    }*/
-
     public void PreformAttack()
     {
         newAttackData = new AttackData(_curBase);
@@ -68,11 +62,6 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
     }
-    /*
-    public void PlayNextAttackAnimation(int currentAnimation)
-    {
-        _curBase._cAnimator.PlayNextAnimation(Animator.StringToHash(_customAnimation[currentAnimation].animName), 0, true);
-    }*/
     public void SendSuccessfulDamageInfo(Character_Base target, bool blockedAttack)
     {
         SendCounterHitInfo(target);
