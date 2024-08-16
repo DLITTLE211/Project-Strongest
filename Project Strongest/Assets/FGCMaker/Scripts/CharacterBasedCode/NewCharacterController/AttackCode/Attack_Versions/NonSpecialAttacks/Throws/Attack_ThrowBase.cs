@@ -4,17 +4,6 @@ using UnityEngine;
 using Rewired;
 using System;
 
-public interface IThrowAction 
-{
-    bool IsCorrectInput(Character_ButtonInput move, Character_ButtonInput attack, Character_Base curBase);
-    bool CheckCombo(Character_ButtonInput move, Character_ButtonInput attack, Character_Base curBase);
-
-    void PreformAttack(int curInput, int CurrentAttack, Character_Base curBase);
-    void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack);
-    void SendCounterHitInfo(Path_Data _data, Character_Base target);
-    void SetStarterInformation();
-    void SetComboTimer(Character_InputTimer_Attacks timer);
-}
 [Serializable]
 public abstract class ThrowActionBase 
 {
@@ -28,7 +17,7 @@ public abstract class ThrowActionBase
 
 }
 [Serializable]
-public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality //IThrowAction
+public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality 
 {
     [SerializeField] private int curInput, curAttack;
     [SerializeField] private int lastDirection;
@@ -190,19 +179,19 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality //IThrowA
     {
         throw new NotImplementedException();
     }
-    public void SendCounterHitInfo(Path_Data _data, Character_Base target)
+    /*public void SendCounterHitInfo(Path_Data _data, Character_Base target)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(_attackInput._correctInput[_data._curInputPath].property.counterHitDamageMult);
-    }
+    }*/
 
     public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
     {
         throw new NotImplementedException();
     }
-    public void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack = false)
+    /*public void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack = false)
     {
         target._cDamageCalculator.TakeDamage(_attackInput._correctInput[_data._curInputPath].property);
-    }
+    }*/
 
     public void PlayNextAttackAnimation(int currentAnimation) 
     {

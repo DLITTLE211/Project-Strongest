@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 [Serializable]
 public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctionality//IAttack_RekkaFuctionality

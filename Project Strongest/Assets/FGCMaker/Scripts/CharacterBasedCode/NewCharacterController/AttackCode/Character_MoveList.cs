@@ -54,14 +54,7 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] private List<Attack_BaseProperties> counterProperties;
     [SerializeField] private List<Attack_BaseProperties> commandThrowProperties;
     [SerializeField] private List<Attack_BaseProperties> basicSuperAttackProperties;
-    [Header("PathData")]
-    [Space(15)]
-    [SerializeField] protected internal Path_Data currentPathData;
 
-    public void UpdatePathData(Path_Data _pathData) 
-    {
-        currentPathData = _pathData;
-    }
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {
         #region Simple Attacks Storage
@@ -202,8 +195,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < simpleAttacks.Count; i++)
         {
-            simpleAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            simpleAttacks[i].SetStarterInformation();
+            simpleAttacks[i].SetStarterInformation(baseCharacterInfo);
             for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
             {
                 simpleAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
@@ -214,8 +206,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < commandNormalAttacks.Count; i++)
         {
-            commandNormalAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            commandNormalAttacks[i].SetStarterInformation();
+            commandNormalAttacks[i].SetStarterInformation(baseCharacterInfo);
             for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
             {
                 commandNormalAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
@@ -226,8 +217,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < stringNormalAttacks.Count; i++)
         {
-            stringNormalAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            stringNormalAttacks[i].SetStarterInformation();
+            stringNormalAttacks[i].SetStarterInformation(baseCharacterInfo);
             for (int j = 0; j < stringNormalAttacks[i]._attackInput._correctInput.Count; j++)
             {
                 stringNormalAttacks[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
@@ -279,8 +269,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < CounterAttacks.Count; i++)
         {
-            CounterAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            CounterAttacks[i].TurnInputsToString();
+            CounterAttacks[i].SetStarterInformation(baseCharacterInfo);
             CounterAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
             for (int j = 0; j < CounterAttacks[i]._customAnimation.Count; j++)
             {
@@ -292,8 +281,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < CommandThrows.Count; i++)
         {
-            CommandThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            CommandThrows[i].TurnInputsToString();
+            CommandThrows[i].SetStarterInformation(baseCharacterInfo);
             CommandThrows[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
             for (int j = 0; j < CommandThrows[i]._customAnimation.Count; j++)
             {
@@ -305,8 +293,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < BasicSuperAttacks.Count; i++)
         {
-            BasicSuperAttacks[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            BasicSuperAttacks[i].TurnInputsToString();
+            BasicSuperAttacks[i].SetStarterInformation(baseCharacterInfo);
             BasicSuperAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
             for (int j = 0; j < BasicSuperAttacks[i]._customAnimation.Count; j++)
             {
@@ -521,8 +508,8 @@ public class Character_MoveList : MonoBehaviour
                         {
                             if (BasicThrows[i]._attackInput._correctInput[0].property.AttackAnims.animName == attack.AttackAnims.animName)
                             {
-                                BasicThrows[i].SendCounterHitInfo(currentPathData, target);
-                                BasicThrows[i].SendSuccessfulDamageInfo(currentPathData, target);
+                                //BasicThrows[i].SendCounterHitInfo(currentPathData, target);
+                                //BasicThrows[i].SendSuccessfulDamageInfo(currentPathData, target);
                                 BasicThrows[i].HandleThrowAnimAttackInfo();
                                 return;
                             }

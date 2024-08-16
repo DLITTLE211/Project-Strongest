@@ -1,95 +1,47 @@
-using Rewired;
 using System;
 using UnityEngine;
+
 [Serializable]
-public class Path_Data 
+public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctionality 
 {
-    public int _curInputPath;
-    public int _curAttackPath;
-    public void SetPathData(int i, int j) 
-    {
-        _curInputPath = i;
-        _curAttackPath = j;
-    }
-}
-[Serializable]
-public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctionality //IAttack_BasicFunctionality
-{
-    public Path_Data _pathdata;
     [SerializeField] private int curInput,curAttack;
     [SerializeField] private int lastDirection;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
-    private Character_Base _base;
+    private Character_Base _curbase;
 
     AttackData attackData;
-    #region Attack Base Code
-    public override void CheckButtonInfo(InputAction buttonInfo)
+
+    public void SetStarterInformation(Character_Base _base)
     {
-        throw new System.NotImplementedException();
+        _curbase = _base;
+        ResetCombo();
+        for (int i = 0; i < _attackInput._correctInput.Count; i++)
+        {
+            _attackInput._correctInput[i].SetAttackInfo(_attackInput._correctInput[i]._correctSequence, _attackInput._correctInput[i].property._attackName);
+        }
+        SetComboTimer();
     }
+    public void SetComboTimer()
+    {
+        for (int i = 0; i < _attackInput._correctInput.Count; i++)
+        {
+            _attackInput._correctInput[i].property.InputTimer = _curbase._cAttackTimer;
+        }
+    }
+    #region Attack Base Code
 
     public override void ResetCombo()
     {
-        curInput = 0;
         curAttack = 0;
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
         {
             _attackInput._correctInput[i].property.hitConnected = false;
         }
     }
-
-    public override void ResetMoveCombo()
-    {
-       // _cTimer.ResetTimerSuccess();
-    }
-
-    public override bool ContinueCombo(Character_ButtonInput move, Character_ButtonInput attackInput,Character_Base curBase)
-    {
-        return CheckCombo(move,attackInput,curBase);
-    }
+    
     #endregion
 
-    #region Attack Functionality
-    public bool CheckCombo(Character_ButtonInput moveInput, Character_ButtonInput attackButton, Character_Base curBase)
-    {
-        for (int i = 0; i < _attackInput._correctInput.Count; i++)
-        {
-            _attackInput._correctInput[i].property.InputTimer.CheckForInput = true;
-        }
-        if (IsCorrectInput(moveInput, attackButton, curBase)) 
-        {
-            if (this._attackInput._correctInput[0].property._airInfo == AirAttackInfo.AirOnly && _base._cHurtBox.IsGrounded()) 
-            {
-               // return false;
-            }
-            if (this._attackInput._correctInput[0].property._airInfo == AirAttackInfo.GroundOnly && !_base._cHurtBox.IsGrounded()) 
-            {
-                // return false;
-            }
-            if (_base._cComboDetection.inSuper == true && _base._cComboDetection.inRekka == true || _base._cComboDetection.inStance == true)
-            {
-                 return false;
-            }
-            if (curAttack > 0)
-            {
-                if (_attackInput._correctInput[curAttack - 1].property.hitConnected == true)
-                {
-                    RewardAttack(curBase);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else 
-            {
-                RewardAttack(curBase);
-            }
-            return true;
-        }
-        return false;
-    }
-    public void RewardAttack(Character_Base curBase) 
+    /*public void RewardAttack(Character_Base curBase) 
     {
         this._attackInput._correctInput[0].property.InputTimer.ResetTimerSuccess();
         
@@ -104,98 +56,65 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             curInput++;
             curAttack++;
         }
+    }*/
+   
+    public int GetFollowUpAttackInt() 
+    { 
+        return curAttack; 
     }
-    bool ButtonStateCheck(Character_ButtonInput attack)
+    public void ResetAttackData()
     {
-        return attack.Button_State._state == _attackInput._correctInput[curInput].attackInputState._state;
-    }
-    bool itemCheck()
-    {
-        if (curInput >= _attackInput._correctInput.Count)
-        {
-            ResetCombo();
-        }
-        bool DirectionInputCheck = _newinput.Item1 == _attackInput._correctInput[curInput].verifyAttackInput.Item1;
-        char attackInput = _attackInput._correctInput[curInput].verifyAttackInput.Item2.ToString().ToCharArray()[0];
-        bool AttackInputCheck = (char)_newinput.Item2 == attackInput;
-        return DirectionInputCheck && AttackInputCheck;
-    }
-    int TransfigureDirectionOnSideSwitch(Character_ButtonInput move) 
-    {
-        int switchValue = 5;
-        switch (move.Button_State.directionalInput)
-        {
-            case 9:
-                switchValue = 7;
-                break;
-            case 6:
-                switchValue = 4;
-                break;
-            case 3:
-                switchValue = 1;
-                break;
-            case 7:
-                switchValue = 9;
-                break;
-            case 4:
-                switchValue = 6;
-                break;
-            case 1:
-                switchValue = 3;
-                break;
-        }
-        return switchValue;
-    }
-    public bool IsCorrectInput(Character_ButtonInput move, Character_ButtonInput attack,Character_Base curBase)
-    {
-        if(move.Button_State.directionalInput != lastDirection) 
-        {
-            switch (curBase.pSide.thisPosition._directionFacing)
-            {
-                case Character_Face_Direction.FacingLeft:
-                    lastDirection = TransfigureDirectionOnSideSwitch(move);
-                    break;
-                case Character_Face_Direction.FacingRight:
-                    lastDirection = move.Button_State.directionalInput;
-                    break;
-            }
-        }
-        //DebugMessageHandler.instance.DisplayErrorMessage(3, $"Current Direction Inputted: {lastDirection}");
-        _newinput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
-        char buttonInput = attack.Button_Name.ToCharArray()[0];
-        _newinput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
-        if(itemCheck() && ButtonStateCheck(attack)) 
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        ResetCombo();
     }
 
-
+    public void DoFollowUpAttack(int attack)
+    {
+        if (curAttack > _attackInput._correctInput.Count)
+        {
+            curAttack = _attackInput._correctInput.Count;
+            Debug.LogError($"Current Attack input exceeds string count. Returning...");
+            return;
+        }
+        if (CheckStateMatchAttackState(curAttack))
+        {
+            Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
+            return;
+        }
+        attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[curAttack]);
+        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
+        curAttack++;
+    }
     public void PreformAttack()
     {
-        attackData = new AttackData(_base, null, null, -1, null, null, _attackInput._correctInput[0]);
+        if (CheckStateMatchAttackState(0))
+        {
+            Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
+            return;
+        }
+        attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[0]);
+        ResetCombo();
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
-        //throw new NotImplementedException();
+        curAttack++;
+    }
+
+    bool CheckStateMatchAttackState(int curAttack) 
+    {
+        if (this._attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.AirOnly && _curbase._cHurtBox.IsGrounded())
+        {
+             return false;
+        }
+        if (this._attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.GroundOnly && !_curbase._cHurtBox.IsGrounded())
+        {
+             return false;
+        }
+        return true;
     }
     public void PreformAttack(int currentInput, int currentAttack,Character_Base curBase)
     {
-        _pathdata.SetPathData(currentInput, currentAttack);
+        //_pathdata.SetPathData(currentInput, currentAttack);
         
-        curBase.comboList3_0.UpdatePathData(_pathdata);
+        //curBase.comboList3_0.UpdatePathData(_pathdata);
         curBase._aManager.ReceiveAttack(_attackInput._correctInput[currentInput].property);
-    }
-    public void SetStarterInformation()
-    {
-        ResetCombo();
-        for (int i = 0; i < _attackInput._correctInput.Count; i++)
-        {
-            _attackInput._correctInput[i].property.InputTimer.SetTimerType();
-            _attackInput._correctInput[i].SetAttackInfo(_attackInput._correctInput[i]._correctSequence, _attackInput._correctInput[i].property._attackName);
-        }
     }
 
     public void SendCounterHitInfo(Character_Base curBase)
@@ -223,21 +142,9 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
     }
 
-    public void SetComboTimer(Character_InputTimer_Attacks timer)
-    {
-        _base = timer._base;
-        for (int i = 0; i < _attackInput._correctInput.Count; i++)
-        {
-            _attackInput._correctInput[i].property.InputTimer = timer;
-        }
-    }
-
 
     public MoveType GetAttackMoveType()
     {
         return _attackInput._correctInput[0].property._moveType;
     }
-
-
-    #endregion
 }

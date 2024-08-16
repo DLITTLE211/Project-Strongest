@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [Serializable]
-public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctionality //,IAttack_StanceFuctionality
+public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctionality
 {
     [SerializeField] private int curInput;
     [SerializeField] private int movementPortionLength;

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
 {
     [SerializeField] private int framesBetweenAttacks;

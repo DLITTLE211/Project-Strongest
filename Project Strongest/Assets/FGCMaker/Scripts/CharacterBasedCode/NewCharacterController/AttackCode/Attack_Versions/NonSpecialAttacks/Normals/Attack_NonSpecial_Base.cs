@@ -7,10 +7,10 @@ public abstract class Attack_NonSpecial_Base
 {
     public string SpecialAttackName;
     public Attack_BasicInput _attackInput;
-    public abstract bool ContinueCombo(Character_ButtonInput i, Character_ButtonInput j,Character_Base curBase);
-    public abstract void CheckButtonInfo(InputAction buttonInfo);
+    //public abstract bool ContinueCombo(Character_ButtonInput i, Character_ButtonInput j,Character_Base curBase);
+    //public abstract void CheckButtonInfo(InputAction buttonInfo);
     public abstract void ResetCombo();
-    public abstract void ResetMoveCombo();
+    //public abstract void ResetMoveCombo();
 
 }
 [System.Serializable]
