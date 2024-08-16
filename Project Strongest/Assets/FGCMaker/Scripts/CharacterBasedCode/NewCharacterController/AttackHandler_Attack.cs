@@ -128,7 +128,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnActive(Character_Base curBase)
     {
         active = true;
-        HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount);
+        HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount,_playerCAnimator.lastAttack);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered active");
     }
     public override void OnRecov(Character_Base curBase)
@@ -199,10 +199,17 @@ public class AttackHandler_Attack : AttackHandler_Base
             for (int i = 0; i < throwAttackCallbacks._frameData._extraPoints.Count; i++)
             {
                 throwAttackCallbacks._frameData._extraPoints[i].hitFrameBool = false;
-                CustomCallback customCallback = new CustomCallback(throwAttackCallbacks._frameData._extraPoints[i].call, throwAttackCallbacks._frameData._extraPoints[i].hitFramePoints,
-                    throwAttackCallbacks._frameData._extraPoints[i].hitFrameBool, throwAttackCallbacks._frameData._extraPoints[i].camPos,
-                    throwAttackCallbacks._frameData._extraPoints[i].camRotation, throwAttackCallbacks._frameData._extraPoints[i].Force,
-                    throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, throwAttackCallbacks._frameData._extraPoints[i].snapMovement, throwAttackCallbacks._frameData._extraPoints[i].customDamage, throwAttackCallbacks._frameData._extraPoints[i].awaitEnum);
+                CustomCallback customCallback = new CustomCallback(
+                    throwAttackCallbacks._frameData._extraPoints[i].call, 
+                    throwAttackCallbacks._frameData._extraPoints[i].hitFramePoints,
+                    throwAttackCallbacks._frameData._extraPoints[i].hitFrameBool, 
+                    throwAttackCallbacks._frameData._extraPoints[i].camPos,
+                    throwAttackCallbacks._frameData._extraPoints[i].camRotation, 
+                    throwAttackCallbacks._frameData._extraPoints[i].Force,
+                    throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, 
+                    throwAttackCallbacks._frameData._extraPoints[i].snapMovement,
+                    throwAttackCallbacks._frameData._extraPoints[i].customDamage, 
+                    throwAttackCallbacks._frameData._extraPoints[i].awaitEnum);
                 customHitboxCallBacks.Add(customCallback);
             }
         }

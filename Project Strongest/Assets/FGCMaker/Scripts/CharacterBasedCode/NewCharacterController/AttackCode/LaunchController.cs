@@ -42,7 +42,7 @@ public class LaunchController : MonoBehaviour
     {
         if (projectileHitbox.HBType != HitBoxType.nullified)
         {
-            projectileHitbox.SendHitStateAndHurtBox(projectileHitbox, projectileProperty.AttackAnims._hitCount, target);
+            projectileHitbox.SendHitStateAndHurtBox(projectileHitbox, target);
             projectileHitbox.currentCollider.enabled = false;
             KillProjectile();
         }

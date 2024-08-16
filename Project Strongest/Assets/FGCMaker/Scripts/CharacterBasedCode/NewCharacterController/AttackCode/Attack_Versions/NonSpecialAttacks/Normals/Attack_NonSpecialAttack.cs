@@ -80,27 +80,18 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             Debug.LogError($"Current Attack input exceeds string count. Returning...");
             return;
         }
-        if (!CheckStateMatchAttackState(curAttack))
-        {
-            Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
-            return;
-        }
         if (!_attackInput._correctInput[curAttack-1].property.hitConnected)
         {
             Debug.LogError($"Previous Attack in string did not connect. Returning...");
             return;
         }
+        attackData.normalAttack.property.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
         attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[curAttack]);
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
         curAttack++;
     }
     public void PreformAttack()
     {
-        if (!CheckStateMatchAttackState(0))
-        {
-            Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
-            return;
-        }
         attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[0]);
         ResetCombo();
         if (_attackInput._correctInput.Count > 1)
@@ -109,19 +100,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
         attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
         curAttack++;
-    }
-
-    bool CheckStateMatchAttackState(int curAttack) 
-    {
-        if (_attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.AirOnly && _curbase._cHurtBox.IsGrounded())
-        {
-             return false;
-        }
-        if (_attackInput._correctInput[curAttack].property._airInfo == AirAttackInfo.GroundOnly && !_curbase._cHurtBox.IsGrounded())
-        {
-             return false;
-        }
-        return true;
     }
 
     public void SendCounterHitInfo(Character_Base curBase)

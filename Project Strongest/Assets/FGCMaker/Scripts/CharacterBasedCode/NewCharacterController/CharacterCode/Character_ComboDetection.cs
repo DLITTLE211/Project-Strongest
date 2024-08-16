@@ -252,29 +252,35 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
         {
             entry = _base.CharacterMoveListAttacks.ElementAt(i);
-            if (entry.Key.specialMoveTypeInput != null)
+            if ((int)entry.Value.GetAttackMoveType() > 3)
             {
-                string moveInDict = entry.Key.specialMoveTypeInput.attackString;
-                string keyRef = key.specialMoveTypeInput.attackString;
-                if (entry.Key.specialMoveTypeInput.attackString.Length > 0)
+                if (entry.Key.specialMoveTypeInput != null)
                 {
-                    string attackButton = moveInDict.Substring(moveInDict.Length - 1);
-                    string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
-                    if (keyRef.Contains(movementOnlyString) && keyRef.Contains(attackButton))
+                    string moveInDict = entry.Key.specialMoveTypeInput.attackString;
+                    string keyRef = key.specialMoveTypeInput.attackString;
+                    if (entry.Key.specialMoveTypeInput.attackString.Length > 0)
                     {
-                        keyRef = keyRef.Remove(movementOnlyString.IndexOf(movementOnlyString),movementOnlyString.Length);
-                        keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
-                        return entry;
+                        string attackButton = moveInDict.Substring(moveInDict.Length - 1);
+                        string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
+                        if (keyRef.Contains(movementOnlyString) && keyRef.Contains(attackButton))
+                        {
+                            keyRef = keyRef.Remove(movementOnlyString.IndexOf(movementOnlyString), movementOnlyString.Length);
+                            keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                            return entry;
+                        }
                     }
                 }
             }
-            if (entry.Key.normalTypeInput != null)
+            else
             {
-                if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
+                if (entry.Key.normalAirAttackInfo == key.keyGroundCheck)
                 {
-                    key.currentAttackInput = key.currentAttackInput.Remove(key.currentAttackInput.IndexOf(entry.Key.normalTypeInput[0]), entry.Key.normalTypeInput[0].Length);
-                    Debug.Log(entry.Value);
-                    return entry;
+                    if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
+                    {
+                        key.currentAttackInput = key.currentAttackInput.Remove(key.currentAttackInput.IndexOf(entry.Key.normalTypeInput[0]), entry.Key.normalTypeInput[0].Length);
+                        Debug.Log(entry.Value);
+                        return entry;
+                    }
                 }
             }
             continue;

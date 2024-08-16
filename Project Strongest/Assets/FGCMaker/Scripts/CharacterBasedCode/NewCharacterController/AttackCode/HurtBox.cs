@@ -112,18 +112,18 @@ public class HurtBox : CollisionDetection
     }
     #endregion
     #endregion
-    public void ReceieveHitBox(HitBox _hitbox, HitCount hitCount, Transform target)
+    public void ReceieveHitBox(HitBox _hitbox, Transform target)
     {
         switch (huBType)
         {
             case HurtBoxType.NoBlock:
                 //Send Do Damage;
-                OnSuccessfulHit(_hitbox, hitCount, target);
+                OnSuccessfulHit(_hitbox, target);
                 break;
             case HurtBoxType.BlockLow:
                 if (_hitbox.HBType == HitBoxType.Low)
                 {
-                    OnSuccessfulBlock(_hitbox, hitCount, target);
+                    OnSuccessfulBlock(_hitbox, target);
                 }
                 else 
                 {
@@ -158,7 +158,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.BlockHigh:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead)
                 {
-                    OnSuccessfulBlock(_hitbox, hitCount, target);
+                    OnSuccessfulBlock(_hitbox, target);
                 }
                 else
                 {
@@ -263,7 +263,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.FullParry:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable ^ _hitbox.HBType == HitBoxType.Low)
                 {
-                    OnSuccessfulCounter(_hitbox, hitCount, target);
+                    OnSuccessfulCounter(_hitbox, target);
                 }
                 else
                 {
@@ -330,11 +330,15 @@ public class HurtBox : CollisionDetection
                 break;
         }
     }
-    public async void OnSuccessfulBlock(HitBox _hitbox, HitCount hitCount, Transform target)
+    public async void OnSuccessfulBlock(HitBox _hitbox, Transform target)
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
         Character_Base Base_Attacker = _hitbox.GetComponentInParent<Character_Base>();
-        currentHitProperties = _hitbox.hitboxProperties;
+        if (_hitbox.hitboxProperties != null)
+        {
+            currentHitProperties = _hitbox.hitboxProperties;
+        }
+        HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
         if (hitCount._count > 1)
         {
             if (_hitbox.HBType != HitBoxType.nullified)
@@ -358,11 +362,15 @@ public class HurtBox : CollisionDetection
             }
         }
     }
-    public async void OnSuccessfulHit(HitBox _hitbox, HitCount hitCount, Transform target) 
+    public async void OnSuccessfulHit(HitBox _hitbox, Transform target) 
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
         Character_Base Base_Attacker = _hitbox.GetComponentInParent<Character_Base>();
-        currentHitProperties = _hitbox.hitboxProperties;
+        if (_hitbox.hitboxProperties != null)
+        {
+            currentHitProperties = _hitbox.hitboxProperties;
+        }
+        HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
         if (hitCount._count > 1)
         {
             if (_hitbox.HBType != HitBoxType.nullified)
@@ -375,19 +383,18 @@ public class HurtBox : CollisionDetection
         {
             if (_hitbox.HBType != HitBoxType.nullified)
             {
-                Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
-                currentAttack.hitConnected = true;
-                Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,false);
-                await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
-                Base_Target._cHitController.HandleHitState(currentAttack);
-                Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
-                await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
+                currentHitProperties.hitConnected = true;
+                Base_Attacker.comboList3_0.CheckAndApply(currentHitProperties, Base_Target, Base_Attacker,false);
+                await Character_Hitstop.Instance.CallHitStop(currentHitProperties, currentHitProperties.hitstopValue, Base_Target);
+                Base_Target._cHitController.HandleHitState(currentHitProperties);
+                Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
+                await Base_Target._cHitstun.ApplyHitStun(currentHitProperties.hitstunValue);
                 _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
             }
         }
     }
     
-    public async void OnSuccessfulCounter(HitBox _hitbox, HitCount hitCount, Transform target)
+    public async void OnSuccessfulCounter(HitBox _hitbox, Transform target)
     {
         Character_Base Base_Target = _hitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();

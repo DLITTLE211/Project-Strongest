@@ -67,9 +67,9 @@ public class HitBox : CollisionDetection
             Messenger.Broadcast<Affliction>(Events.SendAfflictionToTarget,attackAffliction[i]);
         }
     }
-    public void SendHitStateAndHurtBox(HitBox thisHitbox,HitCount _hitCount, Transform target)
+    public void SendHitStateAndHurtBox(HitBox thisHitbox, Transform target)
     {
-        target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, _hitCount, target);
+        target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target);
         //Messenger.Broadcast<HitBox, string, HitCount>(Events.SendHitToHurtBox, thisHitbox, attackName, _hitCount);
         CheckEffects();
     }
