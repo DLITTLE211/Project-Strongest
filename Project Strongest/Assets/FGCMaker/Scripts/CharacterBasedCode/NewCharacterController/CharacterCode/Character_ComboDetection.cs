@@ -117,6 +117,7 @@ public class Character_ComboDetection : MonoBehaviour
                     MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
                     if (_base._aManager.MoveTypeHierarchy > indexMoveType)
                     {
+                        Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
                         return;
                     }
                     else
@@ -172,6 +173,7 @@ public class Character_ComboDetection : MonoBehaviour
         currentInput.ResetComboInfo();
         if (ActiveFollowUpAttackCheck.Value != null)
         {
+            ActiveFollowUpAttackCheck.Value.ResetAttackData();
             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
         }
     }
@@ -288,6 +290,10 @@ public class Character_ComboDetection : MonoBehaviour
         if (OrderedSequence)
         {
             int stringComparison = ActiveFollowUpAttackCheck.Value.GetFollowUpAttackInt();
+            if (stringComparison <= -1) 
+            {
+                return -1;
+            }
             string stringCheck = keyComparison.normalTypeInput[stringComparison];
             if (keyInput.currentAttackInput.Contains(stringCheck))
             {

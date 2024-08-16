@@ -113,16 +113,6 @@ public abstract class Attack_Special_Rekka
     /// <returns></returns>
     #endregion
     public abstract void ResetCombo();
-    #region Function Summary
-    /// <summary>
-    /// Resets combo only on successful complete movement portion of attack
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract void ResetMoveCombo();
-
 
     public RekkaInput rekkaInput;
 }

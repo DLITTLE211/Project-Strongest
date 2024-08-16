@@ -1829,13 +1829,14 @@ MonoBehaviour:
       _rekkaProperties: []
     curInput: 0
     curRekkaInput: 0
-    rekkaInputCount: 2
+    rekkaInputCount: 1
     movementPortionLength: 0
     finalAttackButton: 0
     moveComplete: 0
     leewayTime: 35
     inRekkaState: 0
     usedRekkas: []
+    _curBase: {fileID: 0}
   - RekkaSpecialAttack_Name: Flash Step (Light Series)
     rekkaInput:
       mainAttackInput:
@@ -2105,6 +2106,7 @@ MonoBehaviour:
     leewayTime: 55
     inRekkaState: 0
     usedRekkas: []
+    _curBase: {fileID: 0}
   - RekkaSpecialAttack_Name: Flash Step (Heavy Series)
     rekkaInput:
       mainAttackInput:
@@ -2374,6 +2376,7 @@ MonoBehaviour:
     leewayTime: 55
     inRekkaState: 0
     usedRekkas: []
+    _curBase: {fileID: 0}
   special_Simple:
   - BasicSpecialAttack_Name: Blink Strike
     property:
@@ -4080,7 +4083,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 
+          _attackName: Heavy Sweep
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
           counterHitDamageMult: 1.03

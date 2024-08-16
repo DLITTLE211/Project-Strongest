@@ -15,6 +15,7 @@ public interface IAttackFunctionality
     virtual void DoFollowUpAttack(int attack) { }
     virtual int GetFollowUpAttackInt() {return -1;}
     virtual void SetFollowUpAttackInt() {}
+    virtual void ResetAttackData() { }
 
 }
 

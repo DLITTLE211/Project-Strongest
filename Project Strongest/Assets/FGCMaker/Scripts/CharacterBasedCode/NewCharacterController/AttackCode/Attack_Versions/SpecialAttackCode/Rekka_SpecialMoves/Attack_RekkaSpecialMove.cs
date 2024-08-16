@@ -29,7 +29,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             movementPortionLength = rekkaInput.mainAttackInput.attackStringArray.Length - 1;
             finalAttackButton = rekkaInput.mainAttackInput.attackStringArray[rekkaInput.mainAttackInput.attackStringArray.Length - 1];
             inRekkaState = false;
-            rekkaInputCount = rekkaInput._rekkaPortion.Count;
             usedRekkas = new List<Attack_BaseProperties>();
         }
         catch (ArgumentNullException e)
@@ -60,31 +59,30 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         usedRekkas = new List<Attack_BaseProperties>();
     }
 
-    public void ResetRekkaInputs()
-    {
-        inRekkaState = false;
-        curRekkaInput = 0;
-        usedRekkas = new List<Attack_BaseProperties>();
-    }
-
     public override bool ContinueCombo(Character_ButtonInput moveInput, Character_Base curBase, Character_ButtonInput attackInput)
     {
-        if (attackInput == moveInput) 
-        {
-            return CheckCombo(moveInput, curBase);
-        }
-        else 
-        {
-            return CheckCombo(moveInput, curBase, attackInput);
-        }
+        return false;
     }
-    public override void ResetMoveCombo()
+    /*public void ResetMoveCombo()
     {
         rekkaInput.mainAttackProperty.InputTimer.ResetTimerSuccess();
-    }
+    }*/
     public void DoFollowUpAttack(int attack)
     {
         attackData = new AttackData(_curBase, rekkaInput._rekkaPortion[attack], null, -1, null);
+        if (usedRekkas.Contains(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property))
+        {
+            Debug.LogError($"Attack: \"{attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property._attackName}\" has already been used. Returning...");
+            attackData = null;
+            return;
+        }
+        if (curRekkaInput >= rekkaInputCount)
+        {
+            Debug.LogError($"Rekka Input Allowance exceeded. Returning");
+            attackData = null;
+            return;
+        }
+        curRekkaInput++;
         usedRekkas.Add(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
         attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
     }
@@ -92,8 +90,24 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         attackData = new AttackData(_curBase, null, null, -1, rekkaInput.mainAttackProperty);
         attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty);
+        SetRekkaStateTrue();
+        ResetRekkaInputs();
+        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,leewayTime);
+        inRekkaState = true;
 
     }
+    public void ResetAttackData()
+    {
+        ResetRekkaInputs();
+    }
+
+    public void ResetRekkaInputs()
+    {
+        inRekkaState = false;
+        curRekkaInput = 0;
+        usedRekkas = new List<Attack_BaseProperties>();
+    }
+
     public void PreformAttack(Character_Base curBase, RekkaAttack _rekka = null)
     {
         if (_rekka != null)
@@ -106,7 +120,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         }
     }
 
-    public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackInput = null)
+    /*public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackInput = null)
     {
         rekkaInput.mainAttackProperty.InputTimer.CheckForInput = true;
         #region Non-Rekka Input Check
@@ -125,7 +139,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
                     }
                     if (curInput >= movementPortionLength + 1 && moveComplete == true)
                     {
-                        PreformAttack(curBase);
+                       // PreformAttack(curBase);
                     }
                     return true;
                 }
@@ -145,7 +159,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
                     if (curInput >= movementPortionLength + 1 && moveComplete == true)
                     {
                         attackData = new AttackData(curBase, null, null, -1, rekkaInput.mainAttackProperty);
-                        PreformAttack(curBase);
+                        //PreformAttack(curBase);
                     }
                     return true;
                 }
@@ -182,12 +196,8 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             return false;
         }
         #endregion
-    }
+    }*/
     #endregion
-    public async void Start4FrameDelay()
-    {
-        await Delay4Frames();
-    }
     public async Task Delay4Frames() 
     {
         float fourFrames = 4 * (1f/60f);
@@ -202,7 +212,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     #region Interface Functions
 
     #region Input Verification Code
-    int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
+    /*int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
     {
         int switchValue = 5;
         switch (move.Button_State.directionalInput)
@@ -230,7 +240,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
                 break;
         }
         return switchValue;
-    }
+    }*/
     bool ButtonStateCheck(Character_ButtonInput attack,RekkaAttack curRekkaAttack)
     {
         bool checkButtonState = attack.Button_State._state != ButtonStateMachine.InputState.released;
@@ -259,7 +269,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         bool AttackInputCheck = (char)_newinput.Item2 == attackInput;
         return DirectionInputCheck && AttackInputCheck;
     }
-    public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
+    /*public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
     {
         try
         {
@@ -292,9 +302,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         {
             return false;
         }
-    }
+    }*/
 
-    public RekkaAttack IsRekkaCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
+    /*public RekkaAttack IsRekkaCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
     {
         for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
         {
@@ -314,7 +324,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             }
         }
         return null;
-    }
+    }*/
     #endregion
 
 
@@ -342,10 +352,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         }
     }
 
+
     public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
     {
-        throw new NotImplementedException();
-
         if (attackData.rekkaAttack != null)
         {
             SendCounterHitInfo(curBase, attackData.rekkaAttack);

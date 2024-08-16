@@ -77,22 +77,30 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             if (newType == TimerType.InRekka)
             {
                 SetStartRekkaTimerValues(newTime);
+                _type = newType;
+                return;
+
             }
             if (newType == TimerType.InStance)
             {
                 SetStartStanceTimerValues(newTime);
+                _type = newType;
+                return;
             }
             if (newType == TimerType.Super)
             {
                 superLanded = true;
                 SetStartingValues(newTime);
+                _type = newType;
+                return;
             }
         }
         else
         {
             SetStartingValues(newTime);
+            _type = newType;
+            return;
         }
-        _type = newType;
     }
     public void PauseTimerOnThrowSuccess()
     {
@@ -130,7 +138,8 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     }
     void SetStartRekkaTimerValues(float time)
     {
-        ResetTimeOnSpecialMove((time * (1/60f)));
+        float newSetTime = (time * (1 / 60f));
+        ResetTimeOnSpecialMove(newSetTime);
     }
 
     public void CountDownTimer()
