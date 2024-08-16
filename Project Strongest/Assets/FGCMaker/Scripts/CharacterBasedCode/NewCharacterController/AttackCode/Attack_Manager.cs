@@ -44,12 +44,16 @@ public class Attack_Manager : MonoBehaviour
     { 
         _AttackAnimQueue.Clear();
         normalGatlingCount = 3;
-        curTypeHierarchy = MoveType.Normal;
         _cAnimator.inputWindowOpen = true;
         _cAnimator.EndAnim();
         Combo.Clear();
         currentCount = Combo.Count;
         _cAnimator.negativeFrameCount = 0;
+    }
+
+    public void ResetMoveHierarchy()
+    {
+        curTypeHierarchy = MoveType.Normal;
     }
     public void ReceiveAttack(Attack_BaseProperties attack)
     {
@@ -125,7 +129,6 @@ public class Attack_Manager : MonoBehaviour
         {
             _cAnimator.SetStanceBool(false);
         }
-        Combo.Add(newAttack);
         DoAttack(newAttack);
     }
     bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)

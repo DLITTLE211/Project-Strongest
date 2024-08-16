@@ -114,6 +114,7 @@ public class State_Idle : BaseState
                     {
                         isAnimatingIdle = true;
                         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+                        _base._aManager.ResetMoveHierarchy();
                     }
                 }
                 else 

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public interface IAttackFunctionality 
 {
     //bool IsCorrectInput(Character_ButtonInput movementInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null);
-    //bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackInput = null);
     void PreformAttack();
     void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack);
     void SendCounterHitInfo(Character_Base curBase);
