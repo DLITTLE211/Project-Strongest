@@ -250,8 +250,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < special_Simple.Count; i++)
         {
-            special_Simple[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            special_Simple[i].TurnInputsToString();
+            special_Simple[i].SetStarterInformation(baseCharacterInfo);
             special_Simple[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
         }
     }

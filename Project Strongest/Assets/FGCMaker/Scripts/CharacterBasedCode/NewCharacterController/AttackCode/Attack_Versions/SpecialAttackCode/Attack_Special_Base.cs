@@ -37,48 +37,10 @@ public enum MoveType
 public abstract class Attack_Special_Base 
 {
     public string BasicSpecialAttack_Name;
-    #region Function Summary
-    /// <summary>
-    /// Continues searching for the next input for potential combo inputs if true
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract bool ContinueCombo(Character_ButtonInput input,Character_Base curBase);
-    #region Function Summary
-    /// <summary>
-    /// Turns inputs into readable strings for combo detection
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract void TurnInputsToString();
-    #region Function Summary
-    /// <summary>
-    /// Reset combo upon timer ending
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract void ResetCombo();
-    #region Function Summary
-    /// <summary>
-    /// Resets combo only on successful complete movement portion of attack
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="curBase"></param>
-    /// <returns></returns>
-    #endregion
-    public abstract void ResetMoveCombo();
 
-    
     public Attack_BaseProperties property;
     public List<Attack_Input> attackInput;
     public ButtonStateMachine attackInputState;
-
 }
 #endregion
 
