@@ -16,7 +16,6 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     }
     public void TurnInputsToString()
     {
-        property.InputTimer.SetTimerType();
         try
         {
             for (int i = 0; i < attackInput.Count; i++)

@@ -96,7 +96,7 @@ public abstract class Attack_Special_Stance
     /// <param name="curBase"></param>
     /// <returns></returns>
     #endregion
-    public abstract bool ContinueCombo(Character_ButtonInput input, Character_Base curBase, Character_ButtonInput attackInput);
+    //public abstract bool ContinueCombo(Character_ButtonInput input, Character_Base curBase, Character_ButtonInput attackInput);
     #region Function Summary
     /// <summary>
     /// Turns inputs into readable strings for combo detection
@@ -105,7 +105,7 @@ public abstract class Attack_Special_Stance
     /// <param name="curBase"></param>
     /// <returns></returns>
     #endregion
-    public abstract void TurnInputsToString();
+    //public abstract void TurnInputsToString();
     #region Function Summary
     /// <summary>
     /// Reset combo upon timer ending
@@ -123,7 +123,7 @@ public abstract class Attack_Special_Stance
     /// <param name="curBase"></param>
     /// <returns></returns>
     #endregion
-    public abstract void ResetMoveCombo();
+    //public abstract void ResetMoveCombo();
 
     public Attack_BaseProperties stanceStartProperty;
     public StanceInput stanceInput;

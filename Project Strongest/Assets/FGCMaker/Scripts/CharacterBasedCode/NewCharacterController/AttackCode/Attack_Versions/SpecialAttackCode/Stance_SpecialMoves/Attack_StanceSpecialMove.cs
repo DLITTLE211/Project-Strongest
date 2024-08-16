@@ -6,17 +6,60 @@ using System.Collections.Generic;
 public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctionality
 {
     [SerializeField] private int curInput;
-    [SerializeField] private int movementPortionLength;
-    [SerializeField] private char finalAttackButton;
-    [SerializeField] private bool moveComplete;
     [SerializeField] internal bool inStanceState;
     [SerializeField] internal int stanceHeldTime;
-    (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     [SerializeField] private Character_Base _curBase;
     AttackData newAttackData;
 
+    public void SetStarterInformation(Character_Base _base)
+    {
+        _curBase = _base;
+        TurnInputsToString();
+        SetComboTimer();
+        SetAttackAnims();
+    }
+
+    public void TurnInputsToString()
+    {
+        curInput = 0;
+        try
+        {
+            stanceInput._stanceInput.turnStringToArray();
+        }
+        catch (ArgumentNullException e)
+        {
+            DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step...");
+        }
+    }
+    public void SetComboTimer()
+    {
+        stanceStartProperty.InputTimer = _curBase._cAttackTimer;
+        if (stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = _curBase._cAttackTimer;
+        }
+        if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = _curBase._cAttackTimer;
+        }
+    }
+
+    public void SetAttackAnims()
+    {
+        stanceStartProperty.SetAttackAnims(_curBase._cAnimator);
+        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(_curBase._cAnimator);
+            stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceAttack._stanceButtonInput._correctInput[i].property._attackName);
+        }
+        for (int i = 0; i < stanceInput.stanceKill._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(_curBase._cAnimator);
+            stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceKill._stanceButtonInput._correctInput[i].property._attackName);
+        }
+    }
     #region Stance Class Code
-    public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase, Character_ButtonInput attackInput)
+    /*public override bool ContinueCombo(Character_ButtonInput input, Character_Base curBase, Character_ButtonInput attackInput)
     {
         if (attackInput == input)
         {
@@ -26,12 +69,12 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         {
             return CheckCombo(input, curBase, attackInput);
         }
-    }
-    public bool ReturnMoveComplete()
+    }*/
+    /*public bool ReturnMoveComplete()
     {
         return moveComplete;
-    }
-    int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
+    }*/
+    /*int TransfigureDirectionOnSideSwitch(Character_ButtonInput move)
     {
         int switchValue = 5;
         switch (move.Button_State.directionalInput)
@@ -59,8 +102,8 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
                 break;
         }
         return switchValue;
-    }
-    public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
+    }*/
+    /*public bool IsCorrectInput(Character_ButtonInput testInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null)
     {
         try
         {
@@ -94,9 +137,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             return false;
         }
     }
+*/
 
-
-    public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackInput = null)
+    /*public bool CheckCombo(Character_ButtonInput Input, Character_Base curBase, Character_ButtonInput attackInput = null)
     {
         stanceStartProperty.InputTimer.CheckForInput = true;
         #region Non-StanceInput Check
@@ -168,8 +211,8 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
         #endregion
         return false;
-    }
-    bool ButtonStateCheck(Character_ButtonInput attack, StanceAttack stanceAttack)
+    }*/
+    /*bool ButtonStateCheck(Character_ButtonInput attack, StanceAttack stanceAttack)
     {
         return attack.Button_State._state == stanceAttack._stanceButtonInput._correctInput[0].attackInputState._state;
     }
@@ -199,63 +242,24 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             }
         }
         return (false,-1);
-    }
-    public (bool, int) IsStanceInputCorrect(Character_ButtonInput testInput, Character_Base _curBase, StanceAttack stanceAttack, Character_ButtonInput attackInput = null) 
-    {
-        int lastDirection = testInput.Button_State.directionalInput;
-        _newinput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
-        char buttonInput = attackInput.Button_Name.ToCharArray()[0];
-        _newinput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
-        if (ButtonStateCheck(attackInput, stanceAttack) && itemCheck(stanceAttack).Item1)
-        {
-            return (true, itemCheck(stanceAttack).Item2);
-        }
-        return (false,-1);
-    }
+    }*/
+    /* public (bool, int) IsStanceInputCorrect(Character_ButtonInput testInput, Character_Base _curBase, StanceAttack stanceAttack, Character_ButtonInput attackInput = null) 
+     {
+         int lastDirection = testInput.Button_State.directionalInput;
+         _newinput.Item1 = (Attack_BaseInput.MoveInput)lastDirection;
+         char buttonInput = attackInput.Button_Name.ToCharArray()[0];
+         _newinput.Item2 = (Attack_BaseInput.AttackInput)buttonInput;
+         if (ButtonStateCheck(attackInput, stanceAttack) && itemCheck(stanceAttack).Item1)
+         {
+             return (true, itemCheck(stanceAttack).Item2);
+         }
+         return (false,-1);
+     }*/
 
-    public override void TurnInputsToString()
-    {
-        curInput = 0;
-        moveComplete = false;
-        try
-        {
-            stanceInput._stanceInput.turnStringToArray();
-            movementPortionLength = stanceInput._stanceInput.attackStringArray.Length - 1;
-            finalAttackButton = stanceInput._stanceInput.attackStringArray[stanceInput._stanceInput.attackStringArray.Length - 1];
-            inStanceState = false;
-        }
-        catch (ArgumentNullException e)
-        {
-            DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step...");
-        }
-    }
-    public void SetAttackAnims(Character_Animator animator)
-    {
-        stanceStartProperty.SetAttackAnims(animator);
-        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
-        {
-            stanceInput.stanceAttack._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(animator);
-            stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceAttack._stanceButtonInput._correctInput[i].property._attackName);
-        }
-        for (int i = 0; i < stanceInput.stanceKill._stanceButtonInput._correctInput.Count; i++)
-        {
-            stanceInput.stanceKill._stanceButtonInput._correctInput[i].SetInnerAttackAnimations(animator);
-            stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceKill._stanceButtonInput._correctInput[i].property._attackName);
-        }
-    }
-    public override void ResetCombo()
-    {
-        stanceStartProperty.InputTimer._base._cAnimator._lastAttackState = Character_Animator.lastAttackState.nullified;
-        stanceStartProperty.InputTimer._base._cAnimator.myAnim.SetBool("Stance_Release", false);
-        curInput = 0;
-        inStanceState = false;
-        moveComplete = false;
-    }
-
-    public override void ResetMoveCombo()
+    /*public void ResetMoveCombo()
     {
         stanceStartProperty.InputTimer.ResetTimerSuccess();
-    }
+    }*/
     public void PreformAttack(Character_Base curBase, StanceAttack action = null, int stanceAttackActionint = -1)
     {
         if (action != null)
@@ -275,19 +279,27 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         inStanceState = true;
     }
-
+    public void DoFollowUpAttack(int attack) 
+    {
+        newAttackData.curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property);
+        newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty);
+    }
     public void PreformAttack()
     {
-        if (newAttackData.stanceAttack != null)
-        {
-            newAttackData.curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property);
-        }
-        else
-        {
-            SetStanceStateTrue();
-            newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty);
-        }
+        newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty);
+        SetStanceStateTrue();
     }
+    public void ResetAttackData()
+    {
+        ResetCombo();
+    }
+    public override void ResetCombo()
+    {
+        _curBase._cAnimator._lastAttackState = Character_Animator.lastAttackState.nullified;
+        _curBase._cAnimator.myAnim.SetBool("Stance_Release", false);
+        inStanceState = false;
+    }
+
 
     public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
     {
@@ -299,10 +311,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         throw new NotImplementedException();
     }
 
-    public void SetStarterInformation()
-    {
-        throw new NotImplementedException();
-    }
     public void SendCounterHitInfo(Character_Base curBase, StanceAttack _stanceMove = null)
     {
         if (inStanceState || _stanceMove != null)
@@ -342,21 +350,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             }
         }
     }
-
-    public void SetComboTimer(Character_InputTimer_Attacks timer)
-    {
-        stanceStartProperty.InputTimer = timer;
-        _curBase = timer._base;
-        if (stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
-        {
-            stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = timer;
-        }
-        if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0) 
-        {
-            stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = timer;
-        }
-    }
-
     #endregion
 
     public MoveType GetAttackMoveType()

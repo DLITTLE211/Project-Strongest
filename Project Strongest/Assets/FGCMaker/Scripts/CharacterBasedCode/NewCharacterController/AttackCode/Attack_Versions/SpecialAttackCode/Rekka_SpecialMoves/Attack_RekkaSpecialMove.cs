@@ -24,7 +24,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     private void TurnInputsToString()
     {
         curRekkaInput = 0;
-        rekkaInput.mainAttackProperty.InputTimer.SetTimerType();
         try
         {
             rekkaInput.mainAttackInput.turnStringToArray();

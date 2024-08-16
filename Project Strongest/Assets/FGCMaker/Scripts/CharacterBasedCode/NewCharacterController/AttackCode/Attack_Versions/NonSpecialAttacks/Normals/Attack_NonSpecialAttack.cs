@@ -75,7 +75,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             Debug.LogError($"Current Attack input exceeds string count. Returning...");
             return;
         }
-        if (CheckStateMatchAttackState(curAttack))
+        if (!CheckStateMatchAttackState(curAttack))
         {
             Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
             return;
@@ -86,7 +86,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     }
     public void PreformAttack()
     {
-        if (CheckStateMatchAttackState(0))
+        if (!CheckStateMatchAttackState(0))
         {
             Debug.LogError($"Current Attack airState information does not match playerstate. Returning...");
             return;

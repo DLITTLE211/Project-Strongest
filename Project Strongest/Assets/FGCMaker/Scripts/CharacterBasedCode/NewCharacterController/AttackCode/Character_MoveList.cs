@@ -228,8 +228,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < BasicThrows.Count; i++)
         {
-            BasicThrows[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            BasicThrows[i].SetStarterInformation();
+            BasicThrows[i].SetStarterInformation(baseCharacterInfo);
             for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
             {
                 BasicThrows[i]._attackInput._correctInput[j].SetInnerAttackAnimations(baseCharacterInfo._cAnimator);
@@ -260,9 +259,7 @@ public class Character_MoveList : MonoBehaviour
     {
         for (int i = 0; i < stanceSpecials.Count; i++)
         {
-            stanceSpecials[i].SetComboTimer(baseCharacterInfo._cAttackTimer);
-            stanceSpecials[i].TurnInputsToString();
-            stanceSpecials[i].SetAttackAnims(baseCharacterInfo._cAnimator);
+            stanceSpecials[i].SetStarterInformation(baseCharacterInfo);
         }
     }
     public void GetCounterSpecials(Character_Base baseCharacterInfo)
