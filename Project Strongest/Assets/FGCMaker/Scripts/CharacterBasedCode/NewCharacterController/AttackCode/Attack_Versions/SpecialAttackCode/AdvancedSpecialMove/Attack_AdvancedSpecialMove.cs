@@ -52,11 +52,11 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         currentCustomAnim = 0;
     }
     #region Attack Functionality Code
-    public void PreformAttack()
+    public void PreformAttack(Callback SendAttackOnSucess)
     {
         newAttackData = new AttackData(_curBase);
         ResetCombo();
-        newAttackData.curBase._aManager.ReceiveAttack(property);
+        newAttackData.curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);
     }
     public void SendCounterHitInfo(Character_Base target)
     {

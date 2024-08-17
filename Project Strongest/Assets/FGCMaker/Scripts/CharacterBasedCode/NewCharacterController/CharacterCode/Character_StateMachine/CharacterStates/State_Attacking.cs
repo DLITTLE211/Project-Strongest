@@ -17,12 +17,12 @@ public class State_Attacking : BaseState
             case MoveType.Rekka:
                 SetRekka();
                 _base._cComboDetection.inRekka = true;
-                _base._cAttackTimer.SetTimerType(TimerType.InRekka, newRekkaAttack.leewayTime);
+               // _base._cAttackTimer.SetTimerType(TimerType.InRekka, newRekkaAttack.leewayTime);
                 break;
             case MoveType.Stance:
                 SetStance();
                 _base._cComboDetection.inStance = true;
-                _base._cAttackTimer.SetTimerType(TimerType.InStance,newStanceAttack.stanceHeldTime * (1 / 60f));
+               // _base._cAttackTimer.SetTimerType(TimerType.InStance,newStanceAttack.stanceHeldTime * (1 / 60f));
                 break;
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter IdleState");

@@ -72,7 +72,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         ResetCombo();
     }
 
-    public void DoFollowUpAttack(int attack)
+    public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
         if (curAttack > _attackInput._correctInput.Count)
         {
@@ -87,10 +87,10 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
         attackData.normalAttack.property.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
         attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[curAttack]);
-        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
+        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property, SendAttackOnSucess);
         curAttack++;
     }
-    public void PreformAttack()
+    public void PreformAttack(Callback SendAttackOnSucess)
     {
         attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[0]);
         ResetCombo();
@@ -98,7 +98,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         {
             attackData.normalAttack.property.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1/60f)));
         }
-        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
+        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property, SendAttackOnSucess);
         curAttack++;
     }
 

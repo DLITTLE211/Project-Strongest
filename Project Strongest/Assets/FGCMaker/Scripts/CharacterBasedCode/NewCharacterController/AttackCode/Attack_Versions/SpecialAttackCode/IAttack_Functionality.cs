@@ -4,14 +4,14 @@ using System.Collections.Generic;
 public interface IAttackFunctionality 
 {
     //bool IsCorrectInput(Character_ButtonInput movementInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null);
-    void PreformAttack();
+    void PreformAttack(Callback SendAttackOnSucess);
     void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack);
     void SendCounterHitInfo(Character_Base curBase);
     void SetComboTimer();
     void SetStarterInformation(Character_Base _base);
     MoveType GetAttackMoveType();
 
-    virtual void DoFollowUpAttack(int attack) { }
+    virtual void DoFollowUpAttack(int attack, Callback SendAttackOnSucess) { }
     virtual int GetFollowUpAttackInt() {return -1;}
     virtual void SetFollowUpAttackInt() {}
     virtual void ResetAttackData() { }

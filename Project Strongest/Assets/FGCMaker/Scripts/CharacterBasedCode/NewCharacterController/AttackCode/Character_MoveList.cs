@@ -55,6 +55,12 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] private List<Attack_BaseProperties> commandThrowProperties;
     [SerializeField] private List<Attack_BaseProperties> basicSuperAttackProperties;
 
+    [Header("KeyValue Property")]
+    [Space(15)]
+    [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> currentAttack;
+
+
+
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {
         #region Simple Attacks Storage
@@ -460,6 +466,22 @@ public class Character_MoveList : MonoBehaviour
         }
     }
 
+    public void SetCurrentAttack(KeyValuePair<AttackInputTypes, IAttackFunctionality> newAttack) 
+    {
+        currentAttack = newAttack;
+    }
+
+    public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack) 
+    {
+        if (blockedAttack) 
+        {
+            //Call interface function for dealing damage w/out block;
+        }
+        else
+        {
+            //Call interface function for dealing damage w/ block;
+        }
+    }
 
 
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)

@@ -55,24 +55,24 @@ public class Attack_Manager : MonoBehaviour
     {
         curTypeHierarchy = MoveType.Normal;
     }
-    public void ReceiveAttack(Attack_BaseProperties attack)
+    public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess)
     {
-        GetAttackCriteriaifNotNull(attack); 
+        GetAttackCriteriaifNotNull(attack, SetAttackOnSuccess); 
     }
-    public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack)
+    public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack, Callback SetAttackOnSuccess)
     {
         if (Combo.Count == 0 && currentCount == 0)
         {
             Combo.Add(newAttack);
-            ChecFirstAttackCriteria(newAttack,true);
+            ChecFirstAttackCriteria(newAttack,true, SetAttackOnSuccess);
         }
         else
         {
             Combo.Add(newAttack);
-            CheckNextAttackCriteria(newAttack, false, Combo.Count-1);
+            CheckNextAttackCriteria(newAttack, false, Combo.Count-1, SetAttackOnSuccess);
         }
     }
-    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack)
+    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, Callback SetAttackOnSuccess)
     {
         if (!CheckStringPriority(Combo[0].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
         {
@@ -89,9 +89,10 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(0);
             return;
         }
+        SetAttackOnSuccess();
         DoAttack(newAttack);
     }
-    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index)
+    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index, Callback SetAttackOnSuccess)
     {
         int newAttackHierarchy = (int)newAttack._moveType;
         int lastAttackHierachy = (int)curTypeHierarchy;
@@ -123,6 +124,7 @@ public class Attack_Manager : MonoBehaviour
         {
             _cAnimator.SetStanceBool(false);
         }
+        SetAttackOnSuccess();
         DoAttack(newAttack);
     }
     bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)

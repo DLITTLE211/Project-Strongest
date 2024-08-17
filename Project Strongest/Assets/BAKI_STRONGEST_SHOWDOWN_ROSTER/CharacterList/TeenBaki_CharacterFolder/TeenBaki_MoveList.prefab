@@ -156,11 +156,9 @@ MonoBehaviour:
         Value: 5
       KnockDown: 1
     _customAnimation: []
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   - specialMoveName: Triceratops Fist
@@ -496,11 +494,9 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   - specialMoveName: Ultimate Guillotine Choke
@@ -737,11 +733,9 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 110
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   - specialMoveName: Demon Blood Activation (Ultra)
@@ -807,11 +801,9 @@ MonoBehaviour:
         Value: 0
       KnockDown: 0
     _customAnimation: []
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 95
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   CommandThrows:
@@ -1097,11 +1089,9 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   CounterAttacks:
@@ -1291,11 +1281,9 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 121
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   - specialMoveName: Tiger King (Heavy)
@@ -1484,11 +1472,9 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
-    curInput: 0
     movementPortionLength: 0
     finalAttackButton: 87
-    moveComplete: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
   stanceSpecials:
@@ -1625,9 +1611,6 @@ MonoBehaviour:
         _stanceButtonInput:
           _correctInput: []
     curInput: 0
-    movementPortionLength: 0
-    finalAttackButton: 0
-    moveComplete: 0
     inStanceState: 0
     stanceHeldTime: 55
     _curBase: {fileID: 0}
@@ -1827,12 +1810,8 @@ MonoBehaviour:
               _state: 0
               directionalInput: 0
       _rekkaProperties: []
-    curInput: 0
     curRekkaInput: 0
     rekkaInputCount: 1
-    movementPortionLength: 0
-    finalAttackButton: 0
-    moveComplete: 0
     leewayTime: 35
     inRekkaState: 0
     usedRekkas: []
@@ -2097,12 +2076,8 @@ MonoBehaviour:
               _state: 0
               directionalInput: 0
       _rekkaProperties: []
-    curInput: 0
     curRekkaInput: 0
     rekkaInputCount: 2
-    movementPortionLength: 0
-    finalAttackButton: 0
-    moveComplete: 0
     leewayTime: 55
     inRekkaState: 0
     usedRekkas: []
@@ -2367,12 +2342,8 @@ MonoBehaviour:
               _state: 0
               directionalInput: 0
       _rekkaProperties: []
-    curInput: 0
     curRekkaInput: 0
     rekkaInputCount: 2
-    movementPortionLength: 0
-    finalAttackButton: 0
-    moveComplete: 0
     leewayTime: 55
     inRekkaState: 0
     usedRekkas: []
@@ -2440,8 +2411,6 @@ MonoBehaviour:
     attackInputState:
       _state: 0
       directionalInput: 0
-    curInput: 0
-    moveComplete: 0
     framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Benda Slap (High)
     property:
@@ -2507,8 +2476,6 @@ MonoBehaviour:
     attackInputState:
       _state: 0
       directionalInput: 0
-    curInput: 0
-    moveComplete: 0
     framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Benda Slap (Low)
     property:
@@ -2574,8 +2541,6 @@ MonoBehaviour:
     attackInputState:
       _state: 0
       directionalInput: 0
-    curInput: 0
-    moveComplete: 0
     framesBetweenAttacks: 0
   stringNormalAttacks:
   - SpecialAttackName: Mantis Combo
@@ -2646,7 +2611,7 @@ MonoBehaviour:
           directionalInput: 0
       - _correctSequence: 5B
         correctAttack: 0
-        correctInput: 0
+        correctInput: 105
         moveInput: 0
         attackInput: 0
         property:
@@ -2770,12 +2735,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Standing Light Punch
     _attackInput:
       _correctInput:
@@ -2968,12 +2931,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Standing Heavy Punch
     _attackInput:
       _correctInput:
@@ -3166,12 +3127,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Standing Light Kick
     _attackInput:
       _correctInput:
@@ -3364,12 +3323,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Standing Heavy Kick
     _attackInput:
       _correctInput:
@@ -3562,12 +3519,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   commandNormalAttacks:
   - SpecialAttackName: Jumping Jaw Strike
     _attackInput:
@@ -3635,12 +3590,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Oi Zuki
     _attackInput:
       _correctInput:
@@ -3707,12 +3660,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: High Kick
     _attackInput:
       _correctInput:
@@ -3779,12 +3730,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Flying Knee
     _attackInput:
       _correctInput:
@@ -3851,12 +3800,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   simpleAttacks:
   - SpecialAttackName: Crouching Light Punch
     _attackInput:
@@ -3924,12 +3871,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Crouching Heavy Punch
     _attackInput:
       _correctInput:
@@ -3996,12 +3941,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Crouching Light Kick
     _attackInput:
       _correctInput:
@@ -4068,12 +4011,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Crouching Heavy Kick
     _attackInput:
       _correctInput:
@@ -4140,12 +4081,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Air Light Punch
     _attackInput:
       _correctInput:
@@ -4212,12 +4151,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Air Heavy Punch
     _attackInput:
       _correctInput:
@@ -4284,12 +4221,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Air Light Kick
     _attackInput:
       _correctInput:
@@ -4356,12 +4291,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Air Heavy Kick
     _attackInput:
       _correctInput:
@@ -4428,12 +4361,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: High Parry
     _attackInput:
       _correctInput:
@@ -4500,12 +4431,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   - SpecialAttackName: Low Parry
     _attackInput:
       _correctInput:
@@ -4572,12 +4501,10 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-    _pathdata:
-      _curInputPath: 0
-      _curAttackPath: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
+    leewayTime: 0
   BasicThrows:
   - ThrowName: Forward Throw
     _attackInput:
@@ -4748,7 +4675,7 @@ MonoBehaviour:
     curInput: 0
     curAttack: 0
     lastDirection: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
   - ThrowName: Back Throw
     _attackInput:
       _correctInput:
@@ -4918,7 +4845,7 @@ MonoBehaviour:
     curInput: 0
     curAttack: 0
     lastDirection: 0
-    curBase: {fileID: 0}
+    _curBase: {fileID: 0}
   basicSpecialProperties: []
   rekkaBaseProperties: []
   rekkaSubAttackProperties: []
@@ -4928,6 +4855,3 @@ MonoBehaviour:
   counterProperties: []
   commandThrowProperties: []
   basicSuperAttackProperties: []
-  currentPathData:
-    _curInputPath: 0
-    _curAttackPath: 0

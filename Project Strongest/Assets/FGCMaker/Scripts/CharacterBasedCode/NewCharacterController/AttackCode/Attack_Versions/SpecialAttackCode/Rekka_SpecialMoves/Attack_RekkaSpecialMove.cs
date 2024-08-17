@@ -61,7 +61,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         curRekkaInput = 0;
         usedRekkas = new List<Attack_BaseProperties>();
     }
-    public void DoFollowUpAttack(int attack)
+    public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
         attackData = new AttackData(_curBase, rekkaInput._rekkaPortion[attack], null, -1, null);
         if (usedRekkas.Contains(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property))
@@ -78,12 +78,12 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         }
         curRekkaInput++;
         usedRekkas.Add(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
-        attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+        attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property,SendAttackOnSucess);
     }
-    public void PreformAttack()
+    public void PreformAttack(Callback SendAttackOnSucess)
     {
         attackData = new AttackData(_curBase, null, null, -1, rekkaInput.mainAttackProperty);
-        attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty);
+        attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess);
         SetRekkaStateTrue();
         ResetCombo();
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,leewayTime);

@@ -59,7 +59,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
     }
     #region Stance Class Code
-    public void PreformAttack(Character_Base curBase, StanceAttack action = null, int stanceAttackActionint = -1)
+   /* public void PreformAttack(Character_Base curBase, StanceAttack action = null, int stanceAttackActionint = -1)
     {
         if (action != null)
         {
@@ -70,7 +70,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             SetStanceStateTrue();
             curBase._aManager.ReceiveAttack(stanceStartProperty);
         }
-    }
+    }*/
     #endregion
 
     #region Interface Code
@@ -78,14 +78,17 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         inStanceState = true;
     }
-    public void DoFollowUpAttack(int attack)
+    public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
-        newAttackData.curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property);
-        newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty);
+        newAttackData.curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property, SendAttackOnSucess);
+       
+        
+        //newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
     }
-    public void PreformAttack()
+    public void PreformAttack(Callback SendAttackOnSucess)
     {
-        newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty);
+        newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
+        stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance,(stanceHeldTime * (1/60f)));
         SetStanceStateTrue();
     }
     public void ResetAttackData()

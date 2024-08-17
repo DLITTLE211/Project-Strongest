@@ -57,10 +57,10 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
 
     #region Attack Functionality
 
-    public void PreformAttack()
+    public void PreformAttack(Callback SendAttackOnSucess)
     {
         attackData = new AttackData(_curBase, null, null, -1, null, null, _attackInput._correctInput[0]);
-        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property);
+        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property,SendAttackOnSucess);
     }
 
     public void SendSuccessfulDamageInfo(Character_Base target, bool blockedAttack)

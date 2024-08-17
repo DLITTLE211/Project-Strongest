@@ -79,32 +79,16 @@ public class Character_Base : MonoBehaviour
     [SerializeField] private Amplifiers amplifier;
     public Character_MoveList comboList3_0;
 
+    #region Combo Structures (New)
     [SerializeField] private Dictionary<AttackInputTypes, IAttackFunctionality> _characterMoveListAttacks;
-    public Dictionary<AttackInputTypes, IAttackFunctionality> CharacterMoveListAttacks { get { return _characterMoveListAttacks; } }
-    #region Combo Structures (Old)
-    public List<Attack_ThrowBase> BasicThrows;
-    public List<Attack_ThrowBase> removeThrowList;
-
-    public List<Attack_NonSpecialAttack> simpleAttackList;
-    public List<Attack_NonSpecialAttack> removeSimpleList;
-
-    public List<Attack_BasicSpecialMove> specialMoveList;
-    public List<Attack_BasicSpecialMove> removeSMList;
-
-    public List<Attack_RekkaSpecialMove> rekkaAttackList;
-    public List<Attack_RekkaSpecialMove> rekkaRemoveList;
-
-    public List<Attack_StanceSpecialMove> stanceAttackList;
-    public List<Attack_StanceSpecialMove> stanceRemoveList;
-
-    public List<Attack_AdvancedSpecialMove> counterAttackList;
-    public List<Attack_AdvancedSpecialMove> counterRemoveList;
-
-    public List<Attack_AdvancedSpecialMove> CommandThrowAttackList;
-    public List<Attack_AdvancedSpecialMove> CommandThrowRemoveList;
-
-    public List<Attack_AdvancedSpecialMove> CustomSuperAttackList;
-    public List<Attack_AdvancedSpecialMove> CustomSuperRemoveList;
+    public List<AttackInputTypes> inputVisualiser;
+    public Dictionary<AttackInputTypes, IAttackFunctionality> CharacterMoveListAttacks 
+    { 
+        get 
+        { 
+            return _characterMoveListAttacks; 
+        }
+    }
     #endregion
 
 
@@ -153,7 +137,6 @@ public class Character_Base : MonoBehaviour
 
     [SerializeField]
     public int newField;
-    public List<AttackInputTypes> inputVisualiser;
 
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
@@ -162,7 +145,6 @@ public class Character_Base : MonoBehaviour
         InitButtons(setSubState, NewID);
         _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
-        ResetRemoveList();
         InitCombos();
         SetAwaitEnums();
         _cComboCounter.SetStartComboCounter();
@@ -220,11 +202,6 @@ public class Character_Base : MonoBehaviour
         Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
         SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
-    }
-    void ResetRemoveList() 
-    {
-        removeSimpleList.Clear();
-        removeSMList.Clear();
     }
 
     void ResetInputLog()

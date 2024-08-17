@@ -91,7 +91,7 @@ public class Character_ComboDetection : MonoBehaviour
                     int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
                     if (followUpAttackIndex > 0)
                     {
-                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex);
+                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex,() => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
                     }
                 }
             }
@@ -102,7 +102,7 @@ public class Character_ComboDetection : MonoBehaviour
                     int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
                     if (followUpAttackIndex > -1)
                     {
-                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex);
+                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
                     }
                 }
             }
@@ -123,7 +123,7 @@ public class Character_ComboDetection : MonoBehaviour
                     }
                     else
                     {
-                        refAttackType.Value.PreformAttack();
+                        refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
                         if (followUpInputMoveTypes.Contains(indexMoveType))
                         {
                             currentFollowUpInput = lastAddedinput;

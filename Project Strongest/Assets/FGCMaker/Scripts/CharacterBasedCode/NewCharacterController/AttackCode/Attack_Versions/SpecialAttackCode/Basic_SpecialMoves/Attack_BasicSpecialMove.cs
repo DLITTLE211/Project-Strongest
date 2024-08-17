@@ -32,14 +32,14 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         property.InputTimer = _curBase._cAttackTimer;
     }
-    public void PreformAttack(Character_Base curBase)
+    /*public void PreformAttack(Character_Base curBase, Callback SendAttackOnSucess)
     {
         curBase._aManager.ReceiveAttack(property);
-    }
-    public void PreformAttack()
+    }*/
+    public void PreformAttack(Callback SendAttackOnSucess)
     {
         attackData = new AttackData(_curBase);
-        attackData.curBase._aManager.ReceiveAttack(property);
+        attackData.curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
     }
     public void SendCounterHitInfo(Character_Base target)
     {
