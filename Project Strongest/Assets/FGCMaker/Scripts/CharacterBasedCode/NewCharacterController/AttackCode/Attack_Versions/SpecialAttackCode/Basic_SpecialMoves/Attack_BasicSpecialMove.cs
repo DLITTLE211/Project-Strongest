@@ -5,7 +5,6 @@ using UnityEngine;
 public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
 {
     [SerializeField] private int framesBetweenAttacks;
-    private AttackData attackData;
     private Character_Base _curBase;
     #region Attack Base Code
     public void SetStarterInformation(Character_Base _base)
@@ -38,23 +37,22 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     }*/
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-        attackData = new AttackData(_curBase);
-        attackData.curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
     }
-    public void SendCounterHitInfo(Character_Base target)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties property)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
     }
-    public void SendSuccessfulDamageInfo(Character_Base target, bool blockedAttack)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
         if (!blockedAttack)
         {
-            SendCounterHitInfo(target);
-            target._cDamageCalculator.TakeDamage(property);
+            SendCounterHitInfo(target,main);
+            target._cDamageCalculator.TakeDamage(main);
         }
         else
         {
-            target._cDamageCalculator.TakeChipDamage(property);
+            target._cDamageCalculator.TakeChipDamage(main);
         }
     }
     #endregion

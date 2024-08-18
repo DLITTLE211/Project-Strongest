@@ -7,10 +7,8 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     [SerializeField] private int curInput,curAttack;
     [SerializeField] private int lastDirection;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
-    private Character_Base _curbase;
+    private Character_Base _curBase;
     public int leewayTime;
-
-    AttackData attackData;
 
     public void SetStarterInformation(Character_Base _base)
     {
@@ -18,7 +16,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         {
             leewayTime = 40;
         }
-        _curbase = _base;
+        _curBase = _base;
         ResetCombo();
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
         {
@@ -30,7 +28,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     {
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
         {
-            _attackInput._correctInput[i].property.InputTimer = _curbase._cAttackTimer;
+            _attackInput._correctInput[i].property.InputTimer = _curBase._cAttackTimer;
         }
     }
     #region Attack Base Code
@@ -85,20 +83,21 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             Debug.LogError($"Previous Attack in string did not connect. Returning...");
             return;
         }
-        attackData.normalAttack.property.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
-        attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[curAttack]);
-        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property, SendAttackOnSucess);
+        Attack_BaseProperties newNormalAttack = _attackInput._correctInput[curAttack].property;
+        newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
+        _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
         curAttack++;
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-        attackData = new AttackData(_curbase, null, null, -1, null, null, _attackInput._correctInput[0]);
+
+        Attack_BaseProperties newNormalAttack = _attackInput._correctInput[0].property;
         ResetCombo();
         if (_attackInput._correctInput.Count > 1)
         {
-            attackData.normalAttack.property.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1/60f)));
+            newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1/60f)));
         }
-        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
         curAttack++;
     }
 
@@ -106,16 +105,24 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     {
         throw new NotImplementedException();
     }
-    public void SendCounterHitInfo(Attack_BaseProperties attack, Character_Base target)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties main)
     {
-        target._cDamageCalculator.ReceiveCounterHitMultiplier(attack.counterHitDamageMult);
+        target._cDamageCalculator.ReceiveCounterHitMultiplier(main.counterHitDamageMult);
     }
 
-    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        throw new NotImplementedException();
+        if (!blockedAttack)
+        {
+            SendCounterHitInfo(attacker, main);
+            target._cDamageCalculator.TakeDamage(main);
+        }
+        else
+        {
+            target._cDamageCalculator.TakeChipDamage(main);
+        }
     }
-    public void SendSuccessfulDamageInfo(Attack_BaseProperties attack, Character_Base target, bool blockedAttack = false)
+  /*  public void SendSuccessfulDamageInfo(Attack_BaseProperties attack, Character_Base target, bool blockedAttack = false)
     {
         if (!blockedAttack)
         {
@@ -125,7 +132,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         {
             target._cDamageCalculator.TakeChipDamage(attack);
         }
-    }
+    }*/
 
 
     public MoveType GetAttackMoveType()

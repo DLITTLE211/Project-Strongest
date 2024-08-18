@@ -21,7 +21,6 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     [SerializeField] private Character_Base _curBase;
     [SerializeField] private int framesBetweenAttacks;
     public int currentCustomAnim;
-    private AttackData newAttackData;
     #region Attack Base Code
 
     public void SetStarterInformation(Character_Base _base)
@@ -54,19 +53,18 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     #region Attack Functionality Code
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-        newAttackData = new AttackData(_curBase);
         ResetCombo();
-        newAttackData.curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);
     }
-    public void SendCounterHitInfo(Character_Base target)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUP = null)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
     }
-    public void SendSuccessfulDamageInfo(Character_Base target, bool blockedAttack)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        SendCounterHitInfo(target);
         if (!blockedAttack)
         {
+            SendCounterHitInfo(target);
             target._cDamageCalculator.TakeDamage(property);
         }
         else

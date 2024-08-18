@@ -488,7 +488,7 @@ public class Character_MoveList : MonoBehaviour
     {
         if (!blockedAttack)
         {
-            switch (attack._moveType)
+           /* switch (attack._moveType)
             {
                 case MoveType.Normal:
                     if (basicNormalsProperties.ContainsKey(attack))
@@ -646,11 +646,11 @@ public class Character_MoveList : MonoBehaviour
                         { continue; }
                     }
                     break;
-            }
+            }*/
         }
         else
         {
-            switch (attack._moveType)
+            /*switch (attack._moveType)
             {
                 case MoveType.Normal:
                     if (basicNormalsProperties.ContainsKey(attack))
@@ -726,7 +726,7 @@ public class Character_MoveList : MonoBehaviour
 
                     }
                     break;
-            }
+            }*/
         }
     }
 

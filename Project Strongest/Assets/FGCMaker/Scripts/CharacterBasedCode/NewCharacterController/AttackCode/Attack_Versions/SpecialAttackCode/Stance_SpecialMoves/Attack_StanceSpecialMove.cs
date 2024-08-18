@@ -9,7 +9,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     [SerializeField] internal bool inStanceState;
     [SerializeField] internal int stanceHeldTime;
     [SerializeField] private Character_Base _curBase;
-    AttackData newAttackData;
+    //AttackData newAttackData;
 
     public void SetStarterInformation(Character_Base _base)
     {
@@ -80,15 +80,14 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
-        newAttackData.curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property, SendAttackOnSucess);
+        //_curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property, SendAttackOnSucess);
        
         
         //newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-        newAttackData = new AttackData();
-        newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
         stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance,(stanceHeldTime * (1/60f)));
         SetStanceStateTrue();
     }
@@ -104,17 +103,47 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
 
 
-    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        throw new NotImplementedException();
+        if (followUp != null)
+        {
+            SendCounterHitInfo(target, followUp);
+            if (!blockedAttack)
+            {
+                target._cDamageCalculator.TakeDamage(followUp);
+            }
+            else
+            {
+                target._cDamageCalculator.TakeChipDamage(followUp);
+            }
+        }
+        else
+        {
+            SendCounterHitInfo(target);
+            if (!blockedAttack)
+            {
+                target._cDamageCalculator.TakeDamage(stanceStartProperty);
+            }
+            else
+            {
+                target._cDamageCalculator.TakeChipDamage(stanceStartProperty);
+            }
+        }
     }
 
-    public void SendCounterHitInfo(Character_Base curBase)
+    public void SendCounterHitInfo(Character_Base target,Attack_BaseProperties followUp = null)
     {
-        throw new NotImplementedException();
+        if (followUp != null)
+        {
+            target._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
+        }
+        else
+        {
+            target._cDamageCalculator.ReceiveCounterHitMultiplier(stanceStartProperty.counterHitDamageMult);
+        }
     }
 
-    public void SendCounterHitInfo(Character_Base curBase, StanceAttack _stanceMove = null)
+   /* public void SendCounterHitInfo(Character_Base curBase, StanceAttack _stanceMove = null)
     {
         if (inStanceState || _stanceMove != null)
         {
@@ -124,9 +153,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         {
             curBase._cDamageCalculator.ReceiveCounterHitMultiplier(stanceStartProperty.counterHitDamageMult);
         }
-    }
+    }*/
 
-    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, StanceAttack _stanceMove = null)
+    /*public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, StanceAttack _stanceMove = null)
     {
         if (inStanceState || _stanceMove != null)
         {
@@ -152,7 +181,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
                 curBase._cDamageCalculator.TakeChipDamage(stanceStartProperty);
             }
         }
-    }
+    }*/
     #endregion
 
     public MoveType GetAttackMoveType()

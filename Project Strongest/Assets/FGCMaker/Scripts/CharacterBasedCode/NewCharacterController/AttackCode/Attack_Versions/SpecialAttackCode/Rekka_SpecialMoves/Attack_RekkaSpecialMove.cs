@@ -11,7 +11,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     [SerializeField] internal List<Attack_BaseProperties> usedRekkas;
     (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     public Character_Base _curBase;
-    private AttackData attackData;
 
     #region Starting Information Code
     public void SetStarterInformation(Character_Base _base)
@@ -63,27 +62,24 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
-        attackData = new AttackData(_curBase, rekkaInput._rekkaPortion[attack], null, -1, null);
-        if (usedRekkas.Contains(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property))
+        Attack_BaseProperties newProperty = rekkaInput._rekkaPortion[attack].individualRekkaAttack._correctInput[0].property;
+        if (usedRekkas.Contains(newProperty))
         {
-            Debug.LogError($"Attack: \"{attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property._attackName}\" has already been used. Returning...");
-            attackData = null;
+            Debug.LogError($"Attack: \"{newProperty._attackName}\" has already been used. Returning...");
             return;
         }
         if (curRekkaInput >= rekkaInputCount)
         {
             Debug.LogError($"Rekka Input Allowance exceeded. Returning");
-            attackData = null;
             return;
         }
         curRekkaInput++;
-        usedRekkas.Add(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
-        attackData.curBase._aManager.ReceiveAttack(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property,SendAttackOnSucess);
+        usedRekkas.Add(newProperty);
+        _curBase._aManager.ReceiveAttack(newProperty, SendAttackOnSucess);
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-        attackData = new AttackData(_curBase, null, null, -1, rekkaInput.mainAttackProperty);
-        attackData.curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess);
         SetRekkaStateTrue();
         ResetCombo();
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,leewayTime);
@@ -105,49 +101,45 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         inRekkaState = true;
     }
-    public void SendCounterHitInfo(Character_Base curBase)
+    public void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null)
     {
-        throw new NotImplementedException();
-    }
-    public void SendCounterHitInfo(Character_Base curBase, RekkaAttack _rekkaAttack = null)
-    {
-        if (_rekkaAttack != null)
+        if (followUp != null)
         {
-            curBase._cDamageCalculator.ReceiveCounterHitMultiplier(_rekkaAttack.individualRekkaAttack._correctInput[0].property.counterHitDamageMult);
+            curBase._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
         }
         else
         {
             curBase._cDamageCalculator.ReceiveCounterHitMultiplier(rekkaInput.mainAttackProperty.counterHitDamageMult);
         }
     }
-    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (attackData.rekkaAttack != null)
+        if (followUp != null)
         {
-            SendCounterHitInfo(curBase, attackData.rekkaAttack);
             if (!blockedAttack)
             {
-                curBase._cDamageCalculator.TakeDamage(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+                SendCounterHitInfo(_curBase, followUp);
+                _curBase._cDamageCalculator.TakeDamage(followUp);
             }
             else
             {
-                curBase._cDamageCalculator.TakeChipDamage(attackData.rekkaAttack.individualRekkaAttack._correctInput[0].property);
+                _curBase._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
             }
         }
         else
         {
-            SendCounterHitInfo(curBase);
             if (!blockedAttack)
             {
-                curBase._cDamageCalculator.TakeDamage(attackData.mainRekka);
+                SendCounterHitInfo(_curBase);
+                _curBase._cDamageCalculator.TakeDamage(followUp);
             }
             else
             {
-                curBase._cDamageCalculator.TakeChipDamage(attackData.mainRekka);
+                _curBase._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
             }
         }
     }
-    public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, RekkaAttack _rekkaAttack = null)
+    /*public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, RekkaAttack _rekkaAttack = null)
     {
         if (_rekkaAttack != null)
         {
@@ -173,5 +165,5 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
                 curBase._cDamageCalculator.TakeChipDamage(_rekkaAttack.individualRekkaAttack._correctInput[0].property);
             }
         }
-    }
+    }*/
 }

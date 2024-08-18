@@ -20,7 +20,6 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
     [SerializeField] private int lastDirection;
     [SerializeField] private Character_Base _curBase;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
-    AttackData attackData;
     public void SetStarterInformation(Character_Base _base)
     {
         _curBase = _base; 
@@ -59,23 +58,22 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
 
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-        attackData = new AttackData(_curBase, null, null, -1, null, null, _attackInput._correctInput[0]);
-        attackData.curBase._aManager.ReceiveAttack(attackData.normalAttack.property,SendAttackOnSucess);
+        Attack_BaseProperties newAttack = _attackInput._correctInput[0].property;
+        _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
     }
 
-    public void SendSuccessfulDamageInfo(Character_Base target, bool blockedAttack)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        SendCounterHitInfo(target);
         if (_attackInput._correctInput[0].property.rawAttackDamage > 0)
         {
+            SendCounterHitInfo(target, null);
             target._cDamageCalculator.TakeDamage(_attackInput._correctInput[0].property);
         }
     }
 
-    public void SendCounterHitInfo(Character_Base target)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUp)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(_attackInput._correctInput[0].property.counterHitDamageMult);
-        throw new NotImplementedException();
     }
     /*public void SendCounterHitInfo(Path_Data _data, Character_Base target)
     {

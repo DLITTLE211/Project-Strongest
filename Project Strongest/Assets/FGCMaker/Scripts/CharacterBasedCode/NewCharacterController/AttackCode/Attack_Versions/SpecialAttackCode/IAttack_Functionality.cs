@@ -5,8 +5,8 @@ public interface IAttackFunctionality
 {
     //bool IsCorrectInput(Character_ButtonInput movementInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null);
     void PreformAttack(Callback SendAttackOnSucess);
-    void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack);
-    void SendCounterHitInfo(Character_Base curBase);
+    void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null);
+    void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null);
     void SetComboTimer();
     void SetStarterInformation(Character_Base _base);
     MoveType GetAttackMoveType();
@@ -18,27 +18,6 @@ public interface IAttackFunctionality
 
 }
 
-[Serializable]
-public class AttackData 
-{
-    public Character_Base curBase;
-    public Attack_BaseProperties mainRekka;
-    public Attack_BaseProperties mainStance;
-    public RekkaAttack rekkaAttack;
-    public StanceAttack stanceAttack;
-    public Attack_BaseInput normalAttack;
-    public int stanceCurInput;
-    public AttackData(Character_Base _curBase, RekkaAttack _rekkaAttack = null, StanceAttack _stanceAttack = null, int _stanceCurInput = -1, Attack_BaseProperties _mainRekka = null, Attack_BaseProperties _mainStance = null, Attack_BaseInput _normalAttack = null) 
-    {
-        curBase = _curBase;
-        rekkaAttack = _rekkaAttack;
-        stanceAttack = _stanceAttack;
-        stanceCurInput = _stanceCurInput;
-        mainRekka = _mainRekka;
-        mainStance = _mainStance;
-        normalAttack = _normalAttack;
-    }
-}
 [Serializable]
 public class AttackInputTypes 
 {
