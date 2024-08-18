@@ -6,7 +6,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
 {
     [SerializeField] private int curInput,curAttack;
     [SerializeField] private int lastDirection;
-    public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
+    public (MoveInput, AttackInput) _newinput;
     private Character_Base _curBase;
     public int leewayTime;
 
@@ -44,23 +44,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     
     #endregion
 
-    /*public void RewardAttack(Character_Base curBase) 
-    {
-        this._attackInput._correctInput[0].property.InputTimer.ResetTimerSuccess();
-        
-        PreformAttack(curInput, curAttack, curBase);
-        if (curInput > _attackInput._correctInput.Count)
-        {
-            curInput = _attackInput._correctInput.Count;
-
-        }
-        else
-        {
-            curInput++;
-            curAttack++;
-        }
-    }*/
-   
     public int GetFollowUpAttackInt() 
     { 
         return curAttack; 
@@ -122,19 +105,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             target._cDamageCalculator.TakeChipDamage(main);
         }
     }
-  /*  public void SendSuccessfulDamageInfo(Attack_BaseProperties attack, Character_Base target, bool blockedAttack = false)
-    {
-        if (!blockedAttack)
-        {
-            target._cDamageCalculator.TakeDamage(attack);
-        }
-        else 
-        {
-            target._cDamageCalculator.TakeChipDamage(attack);
-        }
-    }*/
-
-
     public MoveType GetAttackMoveType()
     {
         return _attackInput._correctInput[0].property._moveType;

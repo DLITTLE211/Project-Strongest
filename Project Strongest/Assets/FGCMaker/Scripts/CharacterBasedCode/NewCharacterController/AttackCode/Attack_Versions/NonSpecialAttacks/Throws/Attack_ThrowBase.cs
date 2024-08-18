@@ -19,7 +19,6 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
     [SerializeField] private int curInput, curAttack;
     [SerializeField] private int lastDirection;
     [SerializeField] private Character_Base _curBase;
-    public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     public void SetStarterInformation(Character_Base _base)
     {
         _curBase = _base; 

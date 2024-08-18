@@ -28,30 +28,6 @@ public class Attack_BasicInput
 [System.Serializable]
 public class Attack_BaseInput
 {
-    public enum MoveInput
-    {
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5,
-        Six = 6,
-        Seven = 7,
-        Eight = 8,
-        Nine = 9,
-        Zero = 0,
-    }
-    public enum AttackInput
-    {
-        A = 'A',
-        B = 'B',
-        C = 'C',
-        D = 'D',
-        E = 'E',
-        F = 'F',
-        G = 'G',
-        H = 'H',
-    }
     public string _correctSequence;
     public int correctAttack;
     public char correctInput;
@@ -72,7 +48,7 @@ public class Attack_BaseInput
     {
         correctInput = (NewAttackString.ToCharArray()[1]);
         correctAttack = Int32.Parse(NewAttackString.Split(correctInput)[0]);
-        verifyAttackInput = ((Attack_BaseInput.MoveInput)correctAttack, (Attack_BaseInput.AttackInput)correctInput);
+        verifyAttackInput = ((MoveInput)correctAttack, (AttackInput)correctInput);
         moveInput = verifyAttackInput.Item1;
         attackInput = verifyAttackInput.Item2;
         if (property._attackName == "") 
@@ -80,15 +56,30 @@ public class Attack_BaseInput
             property._attackName = $"{specialAttackName}_property";
         }
     }
-    public Attack_BaseInput(string NewAttackString) 
-    {
-        _correctSequence = NewAttackString;
-        correctInput = (NewAttackString.ToCharArray()[1]);
-        correctAttack = Int32.Parse(NewAttackString.Split(correctInput)[0]);
-        verifyAttackInput = ((Attack_BaseInput.MoveInput)correctAttack, (Attack_BaseInput.AttackInput)correctInput);
-        attackInputState._state = ButtonStateMachine.InputState.pressed;
-        moveInput = verifyAttackInput.Item1;
-        attackInput = verifyAttackInput.Item2;
-    }
 }
-
+[Serializable]
+public enum MoveInput
+{
+    One = 1,
+    Two = 2,
+    Three = 3,
+    Four = 4,
+    Five = 5,
+    Six = 6,
+    Seven = 7,
+    Eight = 8,
+    Nine = 9,
+    Zero = 0,
+}
+[Serializable]
+public enum AttackInput
+{
+    A = 'A',
+    B = 'B',
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    F = 'F',
+    G = 'G',
+    H = 'H',
+}

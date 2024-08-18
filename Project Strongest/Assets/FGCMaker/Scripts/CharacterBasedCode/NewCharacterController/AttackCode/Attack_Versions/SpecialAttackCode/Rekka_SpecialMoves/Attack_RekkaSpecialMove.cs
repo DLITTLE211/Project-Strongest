@@ -9,7 +9,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     [SerializeField] internal int leewayTime;
     [SerializeField] internal bool inRekkaState;
     [SerializeField] internal List<Attack_BaseProperties> usedRekkas;
-    (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
     public Character_Base _curBase;
 
     #region Starting Information Code

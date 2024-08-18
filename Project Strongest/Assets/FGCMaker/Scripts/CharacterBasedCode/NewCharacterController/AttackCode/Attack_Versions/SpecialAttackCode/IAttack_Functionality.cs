@@ -3,21 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 public interface IAttackFunctionality 
 {
-    //bool IsCorrectInput(Character_ButtonInput movementInput, Character_Base _curBase, int curInput, Character_ButtonInput attackInput = null);
+    #region Universal Functions
     void PreformAttack(Callback SendAttackOnSucess);
     void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null);
     void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null);
     void SetComboTimer();
     void SetStarterInformation(Character_Base _base);
     MoveType GetAttackMoveType();
+    #endregion
 
+    #region Virtual Functions
     virtual void DoFollowUpKill(int kill) { }
     virtual void DoFollowUpAttack(Character_ButtonInput buttonInput,int attack, Callback SendAttackOnSucess) { }
     virtual void DoFollowUpAttack(int attack, Callback SendAttackOnSucess) { }
     virtual int GetFollowUpAttackInt() {return -1;}
     virtual void SetFollowUpAttackInt() {}
     virtual void ResetAttackData() { }
-
+    #endregion
 }
 
 [Serializable]
@@ -29,7 +31,11 @@ public class AttackInputTypes
     public MoveType moveType;
     public AirAttackInfo normalAirAttackInfo;
     public AirAttackInfo keyGroundCheck;
-    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<string> _normalTypeInput = null, MoveType _moveType = MoveType.Normal, AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
+    public AttackInputTypes(
+        Attack_Input _specialMoveTypeInput = null, 
+        List<string> _normalTypeInput = null,
+        MoveType _moveType = MoveType.Normal,
+        AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
