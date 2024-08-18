@@ -80,5 +80,15 @@ public class Attack_BaseInput
             property._attackName = $"{specialAttackName}_property";
         }
     }
+    public Attack_BaseInput(string NewAttackString) 
+    {
+        _correctSequence = NewAttackString;
+        correctInput = (NewAttackString.ToCharArray()[1]);
+        correctAttack = Int32.Parse(NewAttackString.Split(correctInput)[0]);
+        verifyAttackInput = ((Attack_BaseInput.MoveInput)correctAttack, (Attack_BaseInput.AttackInput)correctInput);
+        attackInputState._state = ButtonStateMachine.InputState.pressed;
+        moveInput = verifyAttackInput.Item1;
+        attackInput = verifyAttackInput.Item2;
+    }
 }
 

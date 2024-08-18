@@ -11,6 +11,8 @@ public interface IAttackFunctionality
     void SetStarterInformation(Character_Base _base);
     MoveType GetAttackMoveType();
 
+    virtual void DoFollowUpKill(int kill) { }
+    virtual void DoFollowUpAttack(Character_ButtonInput buttonInput,int attack, Callback SendAttackOnSucess) { }
     virtual void DoFollowUpAttack(int attack, Callback SendAttackOnSucess) { }
     virtual int GetFollowUpAttackInt() {return -1;}
     virtual void SetFollowUpAttackInt() {}
@@ -27,7 +29,6 @@ public class AttackInputTypes
     public MoveType moveType;
     public AirAttackInfo normalAirAttackInfo;
     public AirAttackInfo keyGroundCheck;
-    public int hash;
     public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<string> _normalTypeInput = null, MoveType _moveType = MoveType.Normal, AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 

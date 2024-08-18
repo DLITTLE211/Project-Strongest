@@ -14,7 +14,7 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
     private string curString;
     private char[] curStringArray;
-    private Character_ButtonInput lastAddedinput, currentFollowUpInput;
+    private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
     private void Start()
     {
@@ -86,24 +86,19 @@ public class Character_ComboDetection : MonoBehaviour
             FullMovelistCheck();
         }
     }
+
+    #region Attack Verification Code
     void ActiveContinuedMoveCheck() 
     {
-
         if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Stance)
         {
-            if (lastAddedinput.Button_State._state != ButtonStateMachine.InputState.pressed)
+            int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
+            if (followUpAttackIndex >= 0)
             {
-                if (currentFollowUpInput.Button_Name == lastAddedinput.Button_Name
-                 && currentFollowUpInput.Button_State._state == lastAddedinput.Button_State._state)
-                {
-                    return;
-                }
-                int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
-                if (followUpAttackIndex > 0)
-                {
-                    ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
-                }
+                ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(lastAddedinput,followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+
             }
+
         }
         else
         {
@@ -150,7 +145,6 @@ public class Character_ComboDetection : MonoBehaviour
                     refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
                     if (followUpInputMoveTypes.Contains(indexMoveType))
                     {
-                        currentFollowUpInput = lastAddedinput;
                         ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
                     }
                     else
@@ -163,45 +157,7 @@ public class Character_ComboDetection : MonoBehaviour
             Debug.Log("attack not found");
         }
     }
-    public void PrimeCombos()
-    {
-        PrimeMobility();
-        _base.CollectCharacterMovelist();
-    }
-    void PrimeMobility() 
-    {
-        for (int i = 0; i < _base._extraMoveAsset.MobilityOptions.Count; i++)
-        {
-            _base._extraMoveControls[i].cTimer = _base._cMobiltyTimer;
-            _base._extraMoveControls[i].baseCharacter = _base;
-            MobilityAnimation mobilityAnim = _base._extraMoveControls[i].mobilityAnim;
-            _base._extraMoveControls[i].mobilityAnim = new MobilityAnimation(_animator.myAnim, mobilityAnim.animClip, mobilityAnim.animName, mobilityAnim.totalWaitTime, mobilityAnim.animLength, mobilityAnim.frameData);
 
-            _base._extraMoveControls[i].TurnInputsToString(_base);
-            _base._extraMoveControls[i].ResetCurrentInput();
-            _base._extraMoveControls[i].SetAnims(_base._cAnimator);
-        }
-        canCheckMovement = true;
-    }
-
-    void ExtraMovementVerifier(Character_ButtonInput input)
-    {
-        for (int i = 0; i < _base._extraMoveControls.Count; i++)
-        {
-            Character_Mobility c = _base._extraMoveControls[i];
-            c.ContinueCombo(input, _base, superMobilityOption);
-        }
-    }
-    public void ResetCombos()
-    {
-        currentInput.ResetComboInfo();
-        if (ActiveFollowUpAttackCheck.Value != null)
-        {
-            ActiveFollowUpAttackCheck.Value.ResetAttackData();
-            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
-        }
-
-    }
 
     private KeyValuePair<AttackInputTypes, IAttackFunctionality> FindStringEntry(AttackInputTypes key)
     {
@@ -246,7 +202,7 @@ public class Character_ComboDetection : MonoBehaviour
             }
             continue;
         }
-        entry = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(key,null);
+        entry = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(key, null);
         return entry;
     }
     private int FindFollowUpEntry(AttackInputTypes keyComparison, AttackInputTypes keyInput)
@@ -256,11 +212,11 @@ public class Character_ComboDetection : MonoBehaviour
             throw new KeyNotFoundException();
         }
         AttackInputTypes entry = keyComparison;
-        bool OrderedSequence =  ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal ? true : false;
+        bool OrderedSequence = ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal ? true : false;
         if (OrderedSequence)
         {
-             int stringComparison = ActiveFollowUpAttackCheck.Value.GetFollowUpAttackInt();
-            if (stringComparison <= -1) 
+            int stringComparison = ActiveFollowUpAttackCheck.Value.GetFollowUpAttackInt();
+            if (stringComparison <= -1)
             {
                 return -1;
             }
@@ -278,7 +234,7 @@ public class Character_ComboDetection : MonoBehaviour
                 string Comparison = entry.normalTypeInput[i];
                 if (Comparison.Contains("0"))
                 {
-                    KeyString = KeyString.Remove(0,1);
+                    KeyString = KeyString.Remove(0, 1);
                     Comparison = Comparison.Remove(0, 1);
                     if (KeyString.Contains(Comparison))
                     {
@@ -297,4 +253,47 @@ public class Character_ComboDetection : MonoBehaviour
         }
         return -1;
     }
+
+    #endregion
+
+    public void PrimeCombos()
+    {
+        PrimeMobility();
+        _base.CollectCharacterMovelist();
+    }
+    void PrimeMobility() 
+    {
+        for (int i = 0; i < _base._extraMoveAsset.MobilityOptions.Count; i++)
+        {
+            _base._extraMoveControls[i].cTimer = _base._cMobiltyTimer;
+            _base._extraMoveControls[i].baseCharacter = _base;
+            MobilityAnimation mobilityAnim = _base._extraMoveControls[i].mobilityAnim;
+            _base._extraMoveControls[i].mobilityAnim = new MobilityAnimation(_animator.myAnim, mobilityAnim.animClip, mobilityAnim.animName, mobilityAnim.totalWaitTime, mobilityAnim.animLength, mobilityAnim.frameData);
+
+            _base._extraMoveControls[i].TurnInputsToString(_base);
+            _base._extraMoveControls[i].ResetCurrentInput();
+            _base._extraMoveControls[i].SetAnims(_base._cAnimator);
+        }
+        canCheckMovement = true;
+    }
+
+    void ExtraMovementVerifier(Character_ButtonInput input)
+    {
+        for (int i = 0; i < _base._extraMoveControls.Count; i++)
+        {
+            Character_Mobility c = _base._extraMoveControls[i];
+            c.ContinueCombo(input, _base, superMobilityOption);
+        }
+    }
+    public void ResetCombos()
+    {
+        currentInput.ResetComboInfo();
+        if (ActiveFollowUpAttackCheck.Value != null)
+        {
+            ActiveFollowUpAttackCheck.Value.ResetAttackData();
+            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
+        }
+
+    }
+
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctionality
@@ -78,12 +79,34 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         inStanceState = true;
     }
-    public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
+    public void DoFollowUpKill(int kill)
     {
-        //_curBase._aManager.ReceiveAttack(newAttackData.stanceAttack._stanceButtonInput._correctInput[newAttackData.stanceCurInput].property, SendAttackOnSucess);
-       
+        Attack_BaseProperties newAttack = stanceInput.stanceKill._stanceButtonInput._correctInput[kill-1].property;
+        newAttack.InputTimer.SetTimerType(TimerType.Normal, 1 / 60f);
+        _curBase._aManager.ClearAttacks();
+        _curBase._cComboDetection.ResetCombos();
+        newAttack.InputTimer.CheckForInput = true;
+    }
+    public void DoFollowUpAttack(Character_ButtonInput buttonInput, int attack, Callback SendAttackOnSucess) 
+    {
+        if (buttonInput.Button_State._state == ButtonStateMachine.InputState.held) 
+        {
+            Debug.LogError("Current Button Input is Still held. Returning...");
+            return;
+        }
+        if (!(attack > stanceInput.stanceAttack._stanceButtonInput._correctInput.Count-1))
+        {
+            Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
+            _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
+            ResetCombo();
+            newAttack.InputTimer.SetTimerType(TimerType.Normal, 1/60f);
+            newAttack.InputTimer.CheckForInput = true;
+        }
+        else 
+        {
+            DoFollowUpKill(attack);
+        }
         
-        //newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {

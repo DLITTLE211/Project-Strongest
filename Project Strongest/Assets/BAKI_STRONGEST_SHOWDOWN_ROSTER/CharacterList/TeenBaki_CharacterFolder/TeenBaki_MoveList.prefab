@@ -1544,7 +1544,7 @@ MonoBehaviour:
       stanceAttack:
         _stanceButtonInput:
           _correctInput:
-          - _correctSequence: 5B
+          - _correctSequence: 0B
             correctAttack: 0
             correctInput: 0
             moveInput: 0
@@ -1612,7 +1612,7 @@ MonoBehaviour:
           _correctInput: []
     curInput: 0
     inStanceState: 0
-    stanceHeldTime: 55
+    stanceHeldTime: 95
     _curBase: {fileID: 0}
   rekkaSpecials:
   - RekkaSpecialAttack_Name: Hanma Assault
@@ -4855,3 +4855,58 @@ MonoBehaviour:
   counterProperties: []
   commandThrowProperties: []
   basicSuperAttackProperties: []
+  followUp:
+    _attackName: 
+    _cTimer: {fileID: 0}
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
+    _meterRequirement: 0
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
+    dashCancelable: 0
+    JumpCancelable: 0
+    _airInfo: 0
+    cancelProperty:
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
+    AttackAnims:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    hitConnected: 0
+    lateralKBP:
+      lateralKBP: 0
+      Value: 0
+    verticalKBP:
+      verticalKBP: 0
+      Value: 0
+    KnockDown: 0
