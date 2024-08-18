@@ -72,6 +72,7 @@ public class HurtBox : CollisionDetection
         {
             yield return new WaitForSeconds(hitCount._refreshRate);
             Base_Attacker.comboList3_0.CheckAndApply(_hitbox.hitboxProperties, Base_Target, Base_Attacker,false);
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target,Base_Attacker,false,currentHitProperties);
         }
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
@@ -97,6 +98,7 @@ public class HurtBox : CollisionDetection
         {
             yield return new WaitForSeconds(hitCount._refreshRate);
             Base_Target.comboList3_0.CheckAndApply(_hitbox.hitboxProperties, Base_Target, Base_Attacker, true);
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
         }
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
@@ -355,6 +357,7 @@ public class HurtBox : CollisionDetection
 
                 currentAttack.hitConnected = true;
                 Base_Target.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,true);
+                Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
                 await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue/5f, Base_Target);
                 Base_Target._cHitController.HandleBlockState(currentAttack);
                 await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue/5f);
@@ -385,6 +388,8 @@ public class HurtBox : CollisionDetection
             {
                 currentHitProperties.hitConnected = true;
                 Base_Attacker.comboList3_0.CheckAndApply(currentHitProperties, Base_Target, Base_Attacker,false);
+
+                Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
                 await Character_Hitstop.Instance.CallHitStop(currentHitProperties, currentHitProperties.hitstopValue, Base_Target);
                 Base_Target._cHitController.HandleHitState(currentHitProperties);
                 Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
@@ -408,6 +413,7 @@ public class HurtBox : CollisionDetection
             Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
             currentAttack.hitConnected = true;
             Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker, false);
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
             await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
             Base_Target._cHitController.HandleHitState(currentAttack);
             Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);

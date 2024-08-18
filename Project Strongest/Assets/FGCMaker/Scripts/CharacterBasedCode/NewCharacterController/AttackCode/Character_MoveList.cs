@@ -58,7 +58,7 @@ public class Character_MoveList : MonoBehaviour
     [Header("KeyValue Property")]
     [Space(15)]
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> currentAttack;
-
+    [SerializeField] private Attack_BaseProperties followUp;
 
 
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
@@ -473,13 +473,30 @@ public class Character_MoveList : MonoBehaviour
 
     public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack) 
     {
-        if (blockedAttack) 
+        if (currentAttack.Value != null) 
         {
-            //Call interface function for dealing damage w/out block;
-        }
-        else
-        {
-            //Call interface function for dealing damage w/ block;
+            if (followUp != null)
+            {
+                if (blockedAttack)
+                {
+                    //Call interface function for dealing damage w/out block;
+                }
+                else
+                {
+                    //Call interface function for dealing damage w/ block;
+                }
+            }
+            else
+            {
+                if (blockedAttack)
+                {
+                    //Call interface function for dealing damage w/out block;
+                }
+                else
+                {
+                    //Call interface function for dealing damage w/ block;
+                }
+            }
         }
     }
 
