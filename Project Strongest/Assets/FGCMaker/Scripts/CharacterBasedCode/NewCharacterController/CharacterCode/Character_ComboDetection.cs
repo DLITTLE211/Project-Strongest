@@ -8,10 +8,10 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] private Character_Animator _animator;
     [SerializeField] private int lastInput;
-    public bool inStance, inRekka,inSuper ,superMobilityOption;
+    public bool inStance, inRekka, inSuper, superMobilityOption;
     private bool canCheckMovement;
     [SerializeField] private AttackInputTypes currentInput;
-    [SerializeField] private KeyValuePair<AttackInputTypes,IAttackFunctionality> ActiveFollowUpAttackCheck;
+    [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
     private string curString;
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput, currentFollowUpInput;
@@ -24,14 +24,14 @@ public class Character_ComboDetection : MonoBehaviour
         currentInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         SetFollowUpAttackTypes();
     }
-    void SetFollowUpAttackTypes() 
+    void SetFollowUpAttackTypes()
     {
         followUpInputMoveTypes = new List<MoveType>();
         followUpInputMoveTypes.Add(MoveType.String_Normal);
         followUpInputMoveTypes.Add(MoveType.Stance);
         followUpInputMoveTypes.Add(MoveType.Rekka);
     }
-    public void SetAnimator(Character_Animator myAnim) 
+    public void SetAnimator(Character_Animator myAnim)
     {
         _animator = myAnim;
     }
@@ -49,7 +49,7 @@ public class Character_ComboDetection : MonoBehaviour
                 // SpecialInputVerifier(input);
                 //SimpleInputVerifier(input);
                 lastAddedinput = input;
-                AddToCurrentInput(lastInput,input);
+                AddToCurrentInput(lastInput, input);
             }
         }
         else
@@ -65,59 +65,43 @@ public class Character_ComboDetection : MonoBehaviour
             ExtraMovementVerifier(input);
         }
     }
-    void AddToCurrentInput(int direction, Character_ButtonInput attack = null) 
+    void AddToCurrentInput(int direction, Character_ButtonInput attack = null)
     {
         if (attack != null)
         {
-            currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing,attack,_base._cHurtBox.IsGrounded());
+            currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing, attack, _base._cHurtBox.IsGrounded());
             CompleteMoveListVerifier();
             return;
         }
-        currentInput.AddDirectionalInput(direction,_base.pSide.thisPosition._directionFacing);
+        currentInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
     }
     void CompleteMoveListVerifier()
     {
         if (ActiveFollowUpAttackCheck.Value != null)
         {
-            if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Stance)
+            ActiveContinuedMoveCheck();
+        }
+        else
+        {
+            FullMovelistCheck();
+        }
+    }
+    void ActiveContinuedMoveCheck() 
+    {
+
+        if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Stance)
+        {
+            if (lastAddedinput.Button_State._state != ButtonStateMachine.InputState.pressed)
             {
-                if (lastAddedinput.Button_State._state != ButtonStateMachine.InputState.pressed)
+                if (currentFollowUpInput.Button_Name == lastAddedinput.Button_Name
+                 && currentFollowUpInput.Button_State._state == lastAddedinput.Button_State._state)
                 {
-                    if (currentFollowUpInput.Button_Name == lastAddedinput.Button_Name 
-                     && currentFollowUpInput.Button_State._state == lastAddedinput.Button_State._state) 
-                    {
-                        return;
-                    }
-                    int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
-                    if (followUpAttackIndex > 0)
-                    {
-                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex,() => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
-                    }
+                    return;
                 }
-            }
-            else 
-            {
-                if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
+                int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
+                if (followUpAttackIndex > 0)
                 {
-                    int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
-                    if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal)
-                    {
-                        if (followUpAttackIndex > -1)
-                        {
-                            ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
-                        }
-                        else 
-                        {
-                            CompleteMoveListVerifier();
-                        }
-                    }
-                    else
-                    {
-                        if (followUpAttackIndex > -1)
-                        {
-                            ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
-                        }
-                    }
+                    ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
                 }
             }
         }
@@ -125,33 +109,58 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
             {
-                KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
-                refAttackType = FindStringEntry(currentInput);
-                if (refAttackType.Value != null)
+                int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
+                if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal)
                 {
-                    MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
-                    if (_base._aManager.MoveTypeHierarchy > indexMoveType)
+                    if (followUpAttackIndex > -1)
                     {
-                        Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
-                        return;
+                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
                     }
                     else
                     {
-                        refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
-                        if (followUpInputMoveTypes.Contains(indexMoveType))
-                        {
-                            currentFollowUpInput = lastAddedinput;
-                            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
-                        }
-                        else
-                        {
-                            ResetCombos();
-                        }
+                        FullMovelistCheck();
                     }
-                    Debug.Log("attack found");
                 }
-                Debug.Log("attack not found");
+                else
+                {
+                    if (followUpAttackIndex > -1)
+                    {
+                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                    }
+                }
             }
+        }
+    }
+    void FullMovelistCheck() 
+    {
+        if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
+        {
+            KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
+            refAttackType = FindStringEntry(currentInput);
+            if (refAttackType.Value != null)
+            {
+                MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
+                if (_base._aManager.MoveTypeHierarchy > indexMoveType)
+                {
+                    Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
+                    return;
+                }
+                else
+                {
+                    refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                    if (followUpInputMoveTypes.Contains(indexMoveType))
+                    {
+                        currentFollowUpInput = lastAddedinput;
+                        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
+                    }
+                    else
+                    {
+                        ResetCombos();
+                    }
+                }
+                Debug.Log("attack found");
+            }
+            Debug.Log("attack not found");
         }
     }
     public void PrimeCombos()
