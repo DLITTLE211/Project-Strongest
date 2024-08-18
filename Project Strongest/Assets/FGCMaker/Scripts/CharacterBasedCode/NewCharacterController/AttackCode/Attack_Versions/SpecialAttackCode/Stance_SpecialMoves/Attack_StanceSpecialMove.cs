@@ -87,6 +87,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
+        newAttackData = new AttackData();
         newAttackData.curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
         stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance,(stanceHeldTime * (1/60f)));
         SetStanceStateTrue();

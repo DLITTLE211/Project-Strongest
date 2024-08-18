@@ -100,9 +100,23 @@ public class Character_ComboDetection : MonoBehaviour
                 if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
                 {
                     int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
-                    if (followUpAttackIndex > -1)
+                    if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal)
                     {
-                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                        if (followUpAttackIndex > -1)
+                        {
+                            ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                        }
+                        else 
+                        {
+                            CompleteMoveListVerifier();
+                        }
+                    }
+                    else
+                    {
+                        if (followUpAttackIndex > -1)
+                        {
+                            ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                        }
                     }
                 }
             }
@@ -180,68 +194,6 @@ public class Character_ComboDetection : MonoBehaviour
 
     }
 
-    /*public void OnSuccessfulSpecialMove(Attack_BaseProperties attack)
-    {
-        for (int i = 0; i < _base.specialMoveList.Count; i++)
-        {
-            if (_base.comboList3_0.special_Simple[i].ReturnMoveComplete() && _base.comboList3_0.special_Simple[i].property != attack)
-            {
-                _base.comboList3_0.special_Simple[i].ResetCombo();
-                _base.specialMoveList[i].ResetCombo();
-            }
-            else { continue; }
-        }
-        for (int i = 0; i < _base.comboList3_0.rekkaSpecials.Count; i++)
-        {
-            if (_base.comboList3_0.rekkaSpecials[i].ReturnMoveComplete() && _base.comboList3_0.rekkaSpecials[i].rekkaInput.mainAttackProperty != attack)
-            {
-                if (_base.comboList3_0.rekkaSpecials[i].rekkaInput._rekkaProperties.Contains(attack)) 
-                {
-                    continue;
-                }
-                _base.comboList3_0.rekkaSpecials[i].ResetCombo();
-                _base.rekkaAttackList[i].ResetCombo();
-            }
-            else { continue; }
-        }
-        for (int i = 0; i < _base.comboList3_0.stanceSpecials.Count; i++)
-        {
-            if (_base.comboList3_0.stanceSpecials[i].ReturnMoveComplete() && _base.comboList3_0.stanceSpecials[i].stanceStartProperty != attack)
-            {
-                _base.comboList3_0.stanceSpecials[i].ResetCombo();
-                _base.stanceAttackList[i].ResetCombo();
-            }
-            else { continue; }
-        }
-        for (int i = 0; i < _base.comboList3_0.CounterAttacks.Count; i++)
-        {
-            if (_base.comboList3_0.CounterAttacks[i].ReturnMoveComplete() && _base.comboList3_0.CounterAttacks[i].property != attack)
-            {
-                _base.comboList3_0.CounterAttacks[i].ResetCombo();
-                _base.counterAttackList[i].ResetCombo();
-            }
-            else { continue; }
-        }
-        for (int i = 0; i < _base.CommandThrowAttackList.Count; i++)
-        {
-            if (_base.comboList3_0.CommandThrows[i].ReturnMoveComplete() && _base.comboList3_0.CommandThrows[i].property != attack)
-            {
-                _base.comboList3_0.CommandThrows[i].ResetCombo();
-                _base.CommandThrowAttackList[i].ResetCombo();
-            }
-            else { continue; }
-        }
-        
-        for (int i = 0; i < _base.CustomSuperAttackList.Count; i++)
-        {
-            if (_base.comboList3_0.BasicSuperAttacks[i].ReturnMoveComplete() && _base.comboList3_0.BasicSuperAttacks[i].property != attack)
-            {
-                _base.comboList3_0.BasicSuperAttacks[i].ResetCombo();
-                _base.CustomSuperAttackList[i].ResetCombo();
-            }
-            else { continue; }
-        }
-    }*/
     private KeyValuePair<AttackInputTypes, IAttackFunctionality> FindStringEntry(AttackInputTypes key)
     {
         if (key.specialMoveTypeInput.attackString == null || key.specialMoveTypeInput.attackString == "")

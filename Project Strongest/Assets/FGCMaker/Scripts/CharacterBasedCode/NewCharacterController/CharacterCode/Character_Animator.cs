@@ -309,14 +309,6 @@ public class Character_Animator : MonoBehaviour
             NullifyMobilityOption();
         }
     }
-    public void HaltTimer()
-    {
-        _timer.HaltTimer();
-    }
-    public void ResumeTimer()
-    {
-        _timer.ResumeTimer();
-    }
     public void SetNextAttackStartVariables(Attack_BaseProperties nextattack)
     {
         canTick = true;

@@ -154,12 +154,19 @@ public class Character_Base : MonoBehaviour
     void SetAwaitEnums()
     {
         awaitEnums = new Dictionary<WaitingEnumKey, AwaitCheck>();
-        CallbackTest test = delegate (bool i) 
+        CallbackTest HitWallDelegate = delegate (bool i) 
         {
             return SetBoolStates(i); 
         };
-        AwaitCheck awaitCheckSet = new AwaitCheck(test);
-        awaitEnums.Add(WaitingEnumKey.HitEndWall, awaitCheckSet); 
+        AwaitCheck wallCheck = new AwaitCheck(HitWallDelegate);
+        awaitEnums.Add(WaitingEnumKey.HitEndWall, wallCheck);
+
+        CallbackTest TimerEndDelegate = delegate (bool i)
+        {
+            return _cAttackTimer.ReturnTimerLessThan(0);
+        };
+        AwaitCheck timerCheck = new AwaitCheck(HitWallDelegate);
+        awaitEnums.Add(WaitingEnumKey.TimerEnd, timerCheck);
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
@@ -605,6 +612,7 @@ public enum WaitingEnumKey
 {
     NA,
     HitEndWall,
+    TimerEnd,
 }
 [Serializable]
 public class AwaitClass

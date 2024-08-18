@@ -25,10 +25,6 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         FrameCountTimer = StartFrameCountTimer;
         CheckForInput = false;
     }
-    public void HaltTimer()
-    {
-        CheckForInput = false;
-    }
     public void ResetTimerSuccess()
     {
         FrameCountTimer = StartFrameCountTimer;
@@ -37,10 +33,6 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public void ResetTimeOnSpecialMove(float time)
     {
         _frameCountTimer = time;
-    }
-    public void ResumeTimer()
-    {
-        CheckForInput = true;
     }
     // Update is called once per frame
     private void Update()
@@ -170,6 +162,10 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 FrameCountTimer -= 1 / 60f;
             }
         }
+    }
+    public bool ReturnTimerLessThan(float timeComparison) 
+    {
+        return FrameCountTimer <= timeComparison;
     }
     public bool ReturnInThrowAnim() 
     {
