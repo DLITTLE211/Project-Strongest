@@ -72,7 +72,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
             target._cDamageCalculator.TakeChipDamage(property);
         }
     }
-    public void HandleCounterAnimAttackInfo()
+    public void HandleSubAnimAttackInfo()
     {
         _customAnimation[0].SetAttackAnim(_curBase._cAnimator);
         _customAnimation[0].AddRequiredCallbacks(_curBase);
@@ -99,6 +99,22 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     public MoveType GetAttackMoveType()
     {
         return property._moveType;
+    }
+
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    {
+        SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
+        if (property._moveType == MoveType.Super)
+        {
+            HandleSuperMultipleAnimAttackInfo();
+        }
+        else
+        {
+            if (property._moveType == MoveType.Counter ^ property._moveType == MoveType.CommandGrab)
+            {
+                HandleSubAnimAttackInfo();
+            }
+        }
     }
     #endregion
 }

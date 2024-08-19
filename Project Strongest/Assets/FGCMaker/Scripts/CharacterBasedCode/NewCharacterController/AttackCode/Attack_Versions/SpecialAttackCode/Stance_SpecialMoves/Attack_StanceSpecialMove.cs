@@ -137,9 +137,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         if (followUp != null)
         {
-            SendCounterHitInfo(target, followUp);
             if (!blockedAttack)
             {
+                SendCounterHitInfo(target, followUp);
                 target._cDamageCalculator.TakeDamage(followUp);
             }
             else
@@ -149,9 +149,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
         else
         {
-            SendCounterHitInfo(target);
             if (!blockedAttack)
             {
+                SendCounterHitInfo(target);
                 target._cDamageCalculator.TakeDamage(stanceStartProperty);
             }
             else
@@ -172,50 +172,15 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             target._cDamageCalculator.ReceiveCounterHitMultiplier(stanceStartProperty.counterHitDamageMult);
         }
     }
-
-   /* public void SendCounterHitInfo(Character_Base curBase, StanceAttack _stanceMove = null)
-    {
-        if (inStanceState || _stanceMove != null)
-        {
-            curBase._cDamageCalculator.ReceiveCounterHitMultiplier(_stanceMove._stanceButtonInput._correctInput[0].property.counterHitDamageMult);
-        }
-        else
-        {
-            curBase._cDamageCalculator.ReceiveCounterHitMultiplier(stanceStartProperty.counterHitDamageMult);
-        }
-    }*/
-
-    /*public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, StanceAttack _stanceMove = null)
-    {
-        if (inStanceState || _stanceMove != null)
-        {
-            SendCounterHitInfo(curBase, _stanceMove);
-            if (!blockedAttack)
-            {
-                curBase._cDamageCalculator.TakeDamage(_stanceMove._stanceButtonInput._correctInput[0].property);
-            }
-            else
-            {
-                curBase._cDamageCalculator.TakeChipDamage(_stanceMove._stanceButtonInput._correctInput[0].property);
-            }
-        }
-        else
-        {
-            SendCounterHitInfo(curBase);
-            if (!blockedAttack)
-            {
-                curBase._cDamageCalculator.TakeDamage(stanceStartProperty);
-            }
-            else
-            {
-                curBase._cDamageCalculator.TakeChipDamage(stanceStartProperty);
-            }
-        }
-    }*/
     #endregion
 
     public MoveType GetAttackMoveType()
     {
         return stanceStartProperty._moveType;
+    }
+
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    {
+        SendSuccessfulDamageInfo(attacker, target, blockedAttack, main,followUp);
     }
 }

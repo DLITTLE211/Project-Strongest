@@ -39,6 +39,10 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         _curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
     }
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    {
+        SendSuccessfulDamageInfo(attacker, target,blockedAttack,main);
+    }
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties property)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
@@ -60,4 +64,5 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         return property._moveType;
     }
+
 }

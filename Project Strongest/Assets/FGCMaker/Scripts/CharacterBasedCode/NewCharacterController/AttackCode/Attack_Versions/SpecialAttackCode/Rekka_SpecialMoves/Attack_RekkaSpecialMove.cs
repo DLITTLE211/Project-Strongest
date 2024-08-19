@@ -143,31 +143,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             }
         }
     }
-    /*public void SendSuccessfulDamageInfo(Character_Base curBase, bool blockedAttack, RekkaAttack _rekkaAttack = null)
+
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (_rekkaAttack != null)
-        {
-            SendCounterHitInfo(curBase,_rekkaAttack);
-            if (!blockedAttack)
-            {
-                curBase._cDamageCalculator.TakeDamage(_rekkaAttack.individualRekkaAttack._correctInput[0].property);
-            }
-            else 
-            {
-                curBase._cDamageCalculator.TakeChipDamage(_rekkaAttack.individualRekkaAttack._correctInput[0].property);
-            }
-        }
-        else
-        {
-            SendCounterHitInfo(curBase); 
-            if (!blockedAttack)
-            {
-                curBase._cDamageCalculator.TakeDamage(_rekkaAttack.individualRekkaAttack._correctInput[0].property);
-            }
-            else
-            {
-                curBase._cDamageCalculator.TakeChipDamage(_rekkaAttack.individualRekkaAttack._correctInput[0].property);
-            }
-        }
-    }*/
+        SendSuccessfulDamageInfo(attacker, target, blockedAttack, main, followUp);
+    }
 }

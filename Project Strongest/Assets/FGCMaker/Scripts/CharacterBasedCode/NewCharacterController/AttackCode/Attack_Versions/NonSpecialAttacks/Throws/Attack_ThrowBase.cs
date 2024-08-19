@@ -65,24 +65,15 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
     {
         if (_attackInput._correctInput[0].property.rawAttackDamage > 0)
         {
-            SendCounterHitInfo(target, null);
             target._cDamageCalculator.TakeDamage(_attackInput._correctInput[0].property);
         }
+        SendCounterHitInfo(target, null);
     }
 
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUp)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(_attackInput._correctInput[0].property.counterHitDamageMult);
     }
-    /*public void SendCounterHitInfo(Path_Data _data, Character_Base target)
-    {
-        target._cDamageCalculator.ReceiveCounterHitMultiplier(_attackInput._correctInput[_data._curInputPath].property.counterHitDamageMult);
-    }*/
-
-    /*public void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack = false)
-    {
-        target._cDamageCalculator.TakeDamage(_attackInput._correctInput[_data._curInputPath].property);
-    }*/
 
     public void HandleThrowAnimAttackInfo()
     {
@@ -90,6 +81,11 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
         _throwAnimation[0].AddRequiredCallbacks(_curBase);
         _throwAnimation[0].AddCustomCallbacks(_throwAnimation[0]);
         _curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
+    }
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    {
+        SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
+        HandleThrowAnimAttackInfo();
     }
     #endregion
 }

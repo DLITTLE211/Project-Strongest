@@ -100,18 +100,38 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
 
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (!blockedAttack)
+        if (followUp != null)
         {
-            SendCounterHitInfo(attacker, main);
-            target._cDamageCalculator.TakeDamage(main);
+            if (!blockedAttack)
+            {
+                SendCounterHitInfo(target, followUp);
+                target._cDamageCalculator.TakeDamage(followUp);
+            }
+            else
+            {
+                target._cDamageCalculator.TakeChipDamage(followUp);
+            }
         }
         else
         {
-            target._cDamageCalculator.TakeChipDamage(main);
+            if (!blockedAttack)
+            {
+                SendCounterHitInfo(target);
+                target._cDamageCalculator.TakeDamage(main);
+            }
+            else
+            {
+                target._cDamageCalculator.TakeChipDamage(main);
+            }
         }
     }
     public MoveType GetAttackMoveType()
     {
         return _attackInput._correctInput[0].property._moveType;
+    }
+
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    {
+        SendSuccessfulDamageInfo(attacker, target, blockedAttack, main, followUp);
     }
 }

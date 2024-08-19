@@ -483,10 +483,13 @@ public class Character_MoveList : MonoBehaviour
             {
                 if (blockedAttack)
                 {
+                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack, followUp);
                     //Call interface function for dealing damage w/out block;
                 }
                 else
                 {
+                    attacker._cComboCounter.OnHit_CountUp();
+                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack,followUp);
                     //Call interface function for dealing damage w/ block;
                 }
             }
@@ -494,10 +497,13 @@ public class Character_MoveList : MonoBehaviour
             {
                 if (blockedAttack)
                 {
+                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack);
                     //Call interface function for dealing damage w/out block;
                 }
                 else
                 {
+                    attacker._cComboCounter.OnHit_CountUp();
+                    currentAttack.Value.HandleDamageDealing(attacker, target,blockedAttack, attack);
                     //Call interface function for dealing damage w/ block;
                 }
             }

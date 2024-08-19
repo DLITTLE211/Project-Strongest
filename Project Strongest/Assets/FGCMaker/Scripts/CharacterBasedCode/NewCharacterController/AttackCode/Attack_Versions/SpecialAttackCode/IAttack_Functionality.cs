@@ -9,6 +9,8 @@ public interface IAttackFunctionality
     void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null);
     void SetComboTimer();
     void SetStarterInformation(Character_Base _base);
+
+    void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null);
     MoveType GetAttackMoveType();
     #endregion
 
