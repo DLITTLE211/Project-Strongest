@@ -1222,7 +1222,11 @@ MonoBehaviour:
     specialMoveTypeInput:
       attackString: 
       attackStringArray: 
+    normalTypeInput: []
+    currentAttackInput: 
     moveType: 0
+    normalAirAttackInfo: 0
+    keyGroundCheck: 0
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,22 +1426,7 @@ MonoBehaviour:
   sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   amplifier: {fileID: 0}
   comboList3_0: {fileID: 0}
-  BasicThrows: []
-  removeThrowList: []
-  simpleAttackList: []
-  removeSimpleList: []
-  specialMoveList: []
-  removeSMList: []
-  rekkaAttackList: []
-  rekkaRemoveList: []
-  stanceAttackList: []
-  stanceRemoveList: []
-  counterAttackList: []
-  counterRemoveList: []
-  CommandThrowAttackList: []
-  CommandThrowRemoveList: []
-  CustomSuperAttackList: []
-  CustomSuperRemoveList: []
+  inputVisualiser: []
   myRb: {fileID: 94923330}
   _jumpForce: 250
   _moveForce: 0.3
@@ -1449,7 +1438,6 @@ MonoBehaviour:
   opponentPlayer: {fileID: 993311525}
   awaitCondition: 0
   newField: 0
-  inputVisualiser: []
 --- !u!54 &94923330
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6452,7 +6440,7 @@ MonoBehaviour:
   _base: {fileID: 993311525}
   xVal: 0
   yVal: 0
-  forceHitCall: 28
+  forceHitCall: 32796
   teleportCall: 64
   isFrozen: 0
   xSpeed: 0
@@ -7101,7 +7089,11 @@ MonoBehaviour:
     specialMoveTypeInput:
       attackString: 
       attackStringArray: 
+    normalTypeInput: []
+    currentAttackInput: 
     moveType: 0
+    normalAirAttackInfo: 0
+    keyGroundCheck: 0
 --- !u!1 &580190454
 GameObject:
   m_ObjectHideFlags: 0
@@ -12769,22 +12761,7 @@ MonoBehaviour:
   sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   amplifier: {fileID: 0}
   comboList3_0: {fileID: 0}
-  BasicThrows: []
-  removeThrowList: []
-  simpleAttackList: []
-  removeSimpleList: []
-  specialMoveList: []
-  removeSMList: []
-  rekkaAttackList: []
-  rekkaRemoveList: []
-  stanceAttackList: []
-  stanceRemoveList: []
-  counterAttackList: []
-  counterRemoveList: []
-  CommandThrowAttackList: []
-  CommandThrowRemoveList: []
-  CustomSuperAttackList: []
-  CustomSuperRemoveList: []
+  inputVisualiser: []
   myRb: {fileID: 993311522}
   _jumpForce: 250
   _moveForce: 0.3
@@ -12796,7 +12773,6 @@ MonoBehaviour:
   opponentPlayer: {fileID: 94923329}
   awaitCondition: 0
   newField: 0
-  inputVisualiser: []
 --- !u!1 &996888123
 GameObject:
   m_ObjectHideFlags: 0
@@ -13616,7 +13592,7 @@ MonoBehaviour:
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
-  forceHitCall: 28
+  forceHitCall: 32796
   teleportCall: 64
   isFrozen: 0
   xSpeed: 0

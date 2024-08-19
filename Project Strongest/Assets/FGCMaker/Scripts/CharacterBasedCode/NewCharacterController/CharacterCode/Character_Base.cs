@@ -377,6 +377,12 @@ public class Character_Base : MonoBehaviour
                     case HitPointCall.Force_Up:
                         _cForce.AddVerticalForceOnCommand(callback.forceFloat);
                         break;
+                    case HitPointCall.TeleportForward:
+                        _cForce.TeleportOnCommand(callback.forceFloat);
+                        break;
+                    case HitPointCall.TeleportBackward:
+                        _cForce.TeleportOnCommand(-callback.forceFloat);
+                        break;
                 }
             }
             if (_cAnimator.AttackCall.HasFlag(callback.customCall))

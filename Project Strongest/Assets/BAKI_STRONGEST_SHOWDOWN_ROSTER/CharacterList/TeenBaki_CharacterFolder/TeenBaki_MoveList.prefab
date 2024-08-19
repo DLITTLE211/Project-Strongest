@@ -2152,7 +2152,31 @@ MonoBehaviour:
             inactive: 30
             recovery: 0
             lastFrame: 0
-            _extraPoints: []
+            _extraPoints:
+            - hitFramePoints: 5
+              call: 16
+              hitFrameBool: 0
+              awaitEnum:
+                keyRef: 0
+                awaitingCheck: 0
+              Force: 1.5
+              projectileSpeed: 0
+              camPos: {x: 0, y: 0, z: 0}
+              camRotation: {x: 0, y: 0, z: 0}
+              snapMovement: 0
+              customDamage:
+                rawAttackDamage: 0
+                counterHitDamageMult: 0
+                hitstopValue: 0
+                hitstunValue: 0
+                hitLevel: 0
+                lateralKBP:
+                  lateralKBP: 0
+                  Value: 0
+                verticalKBP:
+                  verticalKBP: 0
+                  Value: 0
+                KnockDown: 0
           _hitCount:
             _count: 0
             _startCount: 0
@@ -2203,14 +2227,14 @@ MonoBehaviour:
                 animLength: 0
                 HitBox: {fileID: 0}
                 attackType: 1
-                hb_placement: {x: 0, y: 0, z: 0}
+                hb_placement: {x: 1.05, y: 0.8, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0, y: 0}
+                hb_size: {x: 0.8, y: 0.85}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 0, y: 0, z: 0}
+                hu_placement: {x: 1.05, y: 0.65, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 0, y: 0}
+                hu_size: {x: 0.95, y: 1.15}
                 _frameData:
                   init: 0
                   startup: 28
@@ -2267,15 +2291,15 @@ MonoBehaviour:
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
-                attackType: 0
-                hb_placement: {x: 0, y: 0, z: 0}
+                attackType: 1
+                hb_placement: {x: 1.05, y: 1, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0, y: 0}
+                hb_size: {x: 0.8, y: 0.75}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 0, y: 0, z: 0}
+                hu_placement: {x: 1.05, y: 0.85, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 0, y: 0}
+                hu_size: {x: 0.95, y: 1.15}
                 _frameData:
                   init: 0
                   startup: 10
@@ -2333,14 +2357,14 @@ MonoBehaviour:
                 animLength: 0
                 HitBox: {fileID: 0}
                 attackType: 0
-                hb_placement: {x: 0, y: 0, z: 0}
+                hb_placement: {x: 1.15, y: -0.15, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0, y: 0}
+                hb_size: {x: 0.8, y: 0.75}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 0, y: 0, z: 0}
+                hu_placement: {x: 1.15, y: 0, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 0, y: 0}
+                hu_size: {x: 0.85, y: 1.05}
                 _frameData:
                   init: 0
                   startup: 8

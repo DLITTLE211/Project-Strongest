@@ -216,18 +216,18 @@ public class Character_Force : MonoBehaviour
             beingPushed = false;
         }
     }
-    void TeleportOnCommand(float value)
+    public void TeleportOnCommand(float value)
     {
         Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
         Vector3 newPos;
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             value *= -1;
-            newPos = new Vector3(-(_myRB.transform.position.x + 2), _myRB.transform.position.y, _myRB.transform.position.z);
+            newPos = new Vector3(-(_myRB.transform.position.x + value), _myRB.transform.position.y, _myRB.transform.position.z);
             _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
             return;
         }
-        newPos = new Vector3(_myRB.transform.position.x + 2, _myRB.transform.position.y, _myRB.transform.position.z);
+        newPos = new Vector3(_myRB.transform.position.x + value, _myRB.transform.position.y, _myRB.transform.position.z);
         _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
     }
 
