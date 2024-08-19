@@ -68,8 +68,13 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
         Attack_BaseProperties newNormalAttack = _attackInput._correctInput[curAttack].property;
         newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
-        _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(newNormalAttack, () => StringNormalFollowUpFunctions(newNormalAttack, SendAttackOnSucess));
         curAttack++;
+    }
+    public void StringNormalFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess)
+    {
+        SendAttackOnSucess();
+        _curBase.comboList3_0.SetFollowAttack(newProperty);
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {

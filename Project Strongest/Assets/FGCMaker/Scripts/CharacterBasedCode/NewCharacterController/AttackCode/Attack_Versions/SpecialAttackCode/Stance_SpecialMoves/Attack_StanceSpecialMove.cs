@@ -99,13 +99,18 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         {
             Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
            
-            _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
+            _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess));
             ResetCombo();
         }
         else 
         {
             DoFollowUpKill(attack);
         }
+    }
+    public void StanceFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess)
+    {
+        SendAttackOnSucess();
+        _curBase.comboList3_0.SetFollowAttack(newProperty);
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {

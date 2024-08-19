@@ -74,7 +74,12 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         }
         curRekkaInput++;
         usedRekkas.Add(newProperty);
-        _curBase._aManager.ReceiveAttack(newProperty, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess));
+    }
+    public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 
+    {
+        SendAttackOnSucess();
+        _curBase.comboList3_0.SetFollowAttack(newProperty);
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {

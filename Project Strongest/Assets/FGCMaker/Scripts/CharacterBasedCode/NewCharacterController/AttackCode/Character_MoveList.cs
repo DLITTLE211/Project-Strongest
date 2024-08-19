@@ -470,6 +470,10 @@ public class Character_MoveList : MonoBehaviour
     {
         currentAttack = newAttack;
     }
+    public void SetFollowAttack(Attack_BaseProperties _followUp)
+    {
+        followUp = _followUp;
+    }
 
     public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack) 
     {
