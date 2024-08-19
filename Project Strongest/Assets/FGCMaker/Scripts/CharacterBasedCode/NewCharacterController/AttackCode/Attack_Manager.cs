@@ -51,6 +51,8 @@ public class Attack_Manager : MonoBehaviour
             Combo.Clear();
             currentCount = Combo.Count;
             _cAnimator.negativeFrameCount = 0;
+            _cAnimator.inStanceState = false;
+            _cAnimator.inRekkaState = false;
         }
     }
 
