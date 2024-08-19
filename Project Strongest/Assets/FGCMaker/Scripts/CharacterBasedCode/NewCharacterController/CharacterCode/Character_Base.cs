@@ -154,6 +154,11 @@ public class Character_Base : MonoBehaviour
     void SetAwaitEnums()
     {
         awaitEnums = new Dictionary<WaitingEnumKey, AwaitCheck>();
+        CallbackTest TimerEndDelegate = delegate (bool i)
+        {
+            return _cAttackTimer.ReturnTimerLessThan(-1 / 60f);
+        };
+
         CallbackTest HitWallDelegate = delegate (bool i) 
         {
             return SetBoolStates(i); 
@@ -161,11 +166,8 @@ public class Character_Base : MonoBehaviour
         AwaitCheck wallCheck = new AwaitCheck(HitWallDelegate);
         awaitEnums.Add(WaitingEnumKey.HitEndWall, wallCheck);
 
-        CallbackTest TimerEndDelegate = delegate (bool i)
-        {
-            return _cAttackTimer.ReturnTimerLessThan(0);
-        };
-        AwaitCheck timerCheck = new AwaitCheck(HitWallDelegate);
+       
+        AwaitCheck timerCheck = new AwaitCheck(TimerEndDelegate);
         awaitEnums.Add(WaitingEnumKey.TimerEnd, timerCheck);
     }
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
@@ -342,11 +344,12 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
-    public void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
+    public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
     {
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
-            StartCoroutine(AwaitCustomCall(callback, superIteratorCallback));
+            await AwaitCustomCall2(callback, superIteratorCallback);
+            //StartCoroutine(AwaitCustomCall(callback, superIteratorCallback));
             return;
         }
         CheckCallback(callback);
@@ -543,7 +546,26 @@ public class Character_Base : MonoBehaviour
             func();
         }
     }
+    async Task AwaitCustomCall2(CustomCallback customBoolAwait, Callback superIteratorCallback) 
+    {
+        if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
+        {
+            AwaitCheck stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
+            awaitCondition = false;
+            while ((!awaitCondition) && (!stateCheck.testCall(stateCheck.check) && _cAnimator.lastAttack != null))
+            {
+                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
+                int singleFrameInInt = (int)(1000 * (1 / 60f));
+                await Task.Delay(singleFrameInInt);
+            }
+            awaitCondition = true;
 
+            if (_cAnimator.lastAttack != null && superIteratorCallback != null)
+            {
+                superIteratorCallback();
+            }
+        }
+    }
     IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
         if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
@@ -557,7 +579,7 @@ public class Character_Base : MonoBehaviour
             }
             awaitCondition = true;
 
-            if (_cAnimator.lastAttack != null)
+            if (_cAnimator.lastAttack != null && superIteratorCallback != null)
             {
                 superIteratorCallback();
             }

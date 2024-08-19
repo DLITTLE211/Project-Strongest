@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 
 [Serializable]
@@ -97,16 +98,14 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         if (!(attack > stanceInput.stanceAttack._stanceButtonInput._correctInput.Count-1))
         {
             Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
+           
             _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
             ResetCombo();
-            newAttack.InputTimer.SetTimerType(TimerType.Normal, 1/60f);
-            newAttack.InputTimer.CheckForInput = true;
         }
         else 
         {
             DoFollowUpKill(attack);
         }
-        
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
@@ -120,9 +119,12 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
     public override void ResetCombo()
     {
+        if (!_curBase.awaitCondition)
+        {
+            _curBase.awaitCondition = true;
+        }
         _curBase._cAnimator._lastAttackState = Character_Animator.lastAttackState.nullified;
-        _curBase._cAnimator.myAnim.SetBool("Stance_Release", false);
-        inStanceState = false;
+         inStanceState = false;
     }
 
 

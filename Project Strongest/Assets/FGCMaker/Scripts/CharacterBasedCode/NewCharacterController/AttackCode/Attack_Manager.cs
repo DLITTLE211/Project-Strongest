@@ -41,14 +41,17 @@ public class Attack_Manager : MonoBehaviour
         stringCancelStates.Add(Cancel_State.Heavy_String_Normal_FollowUp);
     }
     public void ClearAttacks()
-    { 
-        _AttackAnimQueue.Clear();
-        normalGatlingCount = 3;
-        _cAnimator.inputWindowOpen = true;
-        _cAnimator.EndAnim();
-        Combo.Clear();
-        currentCount = Combo.Count;
-        _cAnimator.negativeFrameCount = 0;
+    {
+        if (_base._cAttackTimer._type == TimerType.Normal)
+        {
+            _AttackAnimQueue.Clear();
+            normalGatlingCount = 3;
+            _cAnimator.inputWindowOpen = true;
+            _cAnimator.EndAnim();
+            Combo.Clear();
+            currentCount = Combo.Count;
+            _cAnimator.negativeFrameCount = 0;
+        }
     }
 
     public void ResetMoveHierarchy()
@@ -339,9 +342,10 @@ public class Attack_Manager : MonoBehaviour
         _AttackAnimQueue.Enqueue(_newAttack);
         while (_AttackAnimQueue.Count > 0)
         {
-            yield return new WaitForSeconds(5 * (1f / 60f));
+            yield return new WaitForSeconds(2 * (1f / 60f));
             if (_AttackAnimQueue.Count > 0)
             {
+                Debug.LogError("Queued Attack successfully Released");
                 PlayAttack(_AttackAnimQueue.Dequeue());
             }
         }

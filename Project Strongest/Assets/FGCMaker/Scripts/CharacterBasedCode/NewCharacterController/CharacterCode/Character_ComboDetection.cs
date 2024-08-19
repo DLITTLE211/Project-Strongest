@@ -57,7 +57,10 @@ public class Character_ComboDetection : MonoBehaviour
             if (lastInput != input.Button_State.directionalInput && canCheckMovement)
             {
                 _base._cAttackTimer.CheckForInput = true;
-                _base._cAttackTimer.ResetTimerSuccess();
+                if (ActiveFollowUpAttackCheck.Value == null)
+                {
+                    _base._cAttackTimer.ResetTimerSuccess();
+                }
                 lastInput = input.Button_State.directionalInput;
                 // SpecialInputVerifier(input);
                 AddToCurrentInput(lastInput);

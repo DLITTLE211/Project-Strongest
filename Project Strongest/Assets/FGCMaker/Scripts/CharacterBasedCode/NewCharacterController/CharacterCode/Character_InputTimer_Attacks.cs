@@ -62,7 +62,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
         }
     }
-    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.3f) 
+    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.35f) 
     {
         if (newType != TimerType.Normal)
         {
@@ -111,6 +111,12 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public void ClearThrowLanded()
     {
         throwLanded = false;
+        FrameCountTimer = -1 / 60f;
+        CountDownTimer();
+    }
+    public void ClearAttackLanded()
+    {
+        SetTimerType(TimerType.Normal);
         FrameCountTimer = -1 / 60f;
         CountDownTimer();
     }
