@@ -19,7 +19,7 @@ public class Attack_Manager : MonoBehaviour
     private List<Cancel_State> stringCancelStates;
     [SerializeField] private MoveType curTypeHierarchy;
     // Start is called before the first frame update
-    private int normalGatlingCount;
+    internal int normalGatlingCount;
     public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } } 
     void Start()
     {
@@ -45,7 +45,6 @@ public class Attack_Manager : MonoBehaviour
         if (_base._cAttackTimer._type == TimerType.Normal)
         {
             _AttackAnimQueue.Clear();
-            normalGatlingCount = 3;
             _cAnimator.inputWindowOpen = true;
             _cAnimator.EndAnim();
             Combo.Clear();
@@ -59,6 +58,7 @@ public class Attack_Manager : MonoBehaviour
     public void ResetMoveHierarchy()
     {
         curTypeHierarchy = MoveType.Normal;
+        normalGatlingCount = 3;
     }
     public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess)
     {
@@ -138,10 +138,6 @@ public class Attack_Manager : MonoBehaviour
         switch (newAttack._moveType) 
         {
             case MoveType.Normal:
-                if (normalGatlingCount <= 0) 
-                {
-                    return false;
-                }
                 if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
                 {
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))

@@ -83,7 +83,15 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         ResetCombo();
         if (_attackInput._correctInput.Count > 1)
         {
-            newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1/60f)));
+            newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
+        }
+        if (_attackInput._correctInput[0].property._moveType == MoveType.Normal)
+        {
+            if (_curBase._aManager.normalGatlingCount <= 0)
+            {
+                Debug.LogError("Gatling Limit Reached. Returning...");
+                return;
+            }
         }
         _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
         curAttack++;
