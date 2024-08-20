@@ -104,12 +104,14 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     }
     public void ClearSuperLanded()
     {
+        SetTimerType(TimerType.Normal);
         superLanded = false;
         FrameCountTimer = -1 / 60f;
         CountDownTimer();
     }
     public void ClearThrowLanded()
     {
+        SetTimerType(TimerType.Normal);
         throwLanded = false;
         FrameCountTimer = -1 / 60f;
         CountDownTimer();

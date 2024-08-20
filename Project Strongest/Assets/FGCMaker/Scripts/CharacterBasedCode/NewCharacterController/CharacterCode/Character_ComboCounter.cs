@@ -14,17 +14,13 @@ public class Character_ComboCounter : MonoBehaviour
     [SerializeField] private Color32 _counterColor, _QualityColor;
     [Range(0,255f)] public float alphaLevel;
     [SerializeField] Transform comboHolder;
+    Tween fadeTextTween;
     bool canFade;
     public void SetStartComboCounter()
     {
-        SetStartColors();
         CurrentHitCount = 0;
         UpdateQualityText();
         UpdateText();
-    }
-    void SetStartColors()
-    {
-        alphaLevel = 255f;
     }
     public void ResetComboCounter() 
     {
@@ -32,9 +28,10 @@ public class Character_ComboCounter : MonoBehaviour
     }
     public void OnHit_CountUp() 
     {
+        fadeTextTween.Kill();
+        fadeTextTween = null;
         CurrentHitCount++;
         canFade = false;
-        SetStartColors();
         UpdateText();
 
         DOTween.Complete(comboHolder);
@@ -58,18 +55,26 @@ public class Character_ComboCounter : MonoBehaviour
         {
             if (_counterText.color.a != 255)
 
-            { _counterText.DOFade(1, 0.05f).OnStart(() => { _counterText.text = $"{CurrentHitCount} {hitCount}"; });}
-           
-            else 
-            {_counterText.text = $"{CurrentHitCount} {hitCount}"; }
+            {
+                _counterText.DOFade(1, 0.05f).OnStart(() =>
+                {
+                    _counterText.text = $"{CurrentHitCount} {hitCount}";
+                });
+            }
+            else
+            {
+                _counterText.text = $"{CurrentHitCount} {hitCount}";
+            }
+        
         }
         
     }
     void UpdateQualityText(string qualityType = "")
     {
-        if (CurrentHitCount == 0)
+        if (qualityType == "")
         {
-            _QualityText.text = "";
+            _QualityText.text = qualityType;
+            return;
         }
         else
         {
@@ -79,19 +84,35 @@ public class Character_ComboCounter : MonoBehaviour
             }
 
             else 
-            { _QualityText.text = $"{qualityType} Combo!!"; }
+            { 
+                _QualityText.text = $"{qualityType} Combo!!"; 
+            }
         }
     }
     #endregion
 
     private void Update()
     {
-        SetColorNumbers();
+        //SetColorNumbers();
         if (canFade)
         {
-            FadeToClear();
+            //FadeToClear();
         }
 
+    }
+    void FadeOutText()
+    {
+        canFade = true;
+        fadeTextTween = _counterText.DOFade(0,1.15f);
+        fadeTextTween.OnStart(() => 
+        {
+            _QualityText.DOFade(0, 1.15f);
+        }).OnComplete(() =>
+        {
+            canFade = false;
+            ResetComboCounter();
+            UpdateQualityText();
+        });
     }
     void SetColorNumbers() 
     {
@@ -151,6 +172,7 @@ public class Character_ComboCounter : MonoBehaviour
             UpdateQualityText("Basic");
         }
         #endregion
+        FadeOutText();
         canFade = true;
     }
 }
