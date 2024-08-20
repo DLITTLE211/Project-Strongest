@@ -186,14 +186,6 @@ public class Character_Animator : MonoBehaviour
         _base._cHitstun.HandleAnimatorFreeze(false);
         _base._cGravity.HandleGravityFreeze(false);
     }
-    public void SetHurtBoxToNoBlock() //Called in AnimEvent
-    {
-        _base._cHurtBox.SetHurboxState();
-    }
-    public void SetHurtBoxToBlockHigh() //Called in AnimEvent
-    {
-        StartCoroutine(SetCanBlock());
-    }
     public bool CheckAttackAndMobility()
     {
         bool activatedInputCheck = (activatedInput == null || (activatedInput.movementPriority == 0 && (activatedInput.movementName == null || activatedInput.movementName == "")));
@@ -231,11 +223,6 @@ public class Character_Animator : MonoBehaviour
             }
         }
         return true;
-    }
-
-    public void SetHurtBoxToBlockLow() //Called in AnimEvent
-    {
-        StartCoroutine(SetCanBlock());
     }
     IEnumerator SetCanBlock()
     {
@@ -275,10 +262,6 @@ public class Character_Animator : MonoBehaviour
                 StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
             }
         }
-    }
-    public Character_Mobility returnActivatedInput()
-    {
-        return activatedInput;
     }
 
     public void SetLastAttack(Attack_BaseProperties _attack)
@@ -321,7 +304,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(BasicAttackRoutine);
             BasicAttackRoutine = null;
         }
-        PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate), true);
+        PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate));
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
     }
@@ -347,13 +330,9 @@ public class Character_Animator : MonoBehaviour
         lastAttack = superProperty;
         customSuperHit = true;
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
-        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate), true);
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate));
         SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, curAnim, animCount, nextAnimIterator);
         StartCoroutine(SuperAttackRoutine);
-    }
-    public void AddForceOnAttack(float forceValue)
-    {
-        _base._cForce.AddLateralForceOnCommand(forceValue);
     }
 
     public void SetCanTransitionIdle(bool state) 

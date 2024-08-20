@@ -176,14 +176,6 @@ public class Character_Mobility : IMobility
                 }
                 curBase._cAnimator.SetActivatedInput(_mobilityAnim);
             }
-            else
-            {
-                Debug.LogError("Still Populated");
-            }
-        }
-        else
-        {
-            Debug.LogError("Still AirBorn");
         }
     }
     public void ResetCurrentInput()
