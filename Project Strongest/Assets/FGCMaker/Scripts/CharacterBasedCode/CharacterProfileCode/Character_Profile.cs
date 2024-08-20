@@ -50,6 +50,7 @@ public class Character_Profile : ScriptableObject
     public Character_Animator cAnimatorScript;
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public GameObject CharacterModel;
+    public HitReactions _hitReactions;
     #endregion
 
     #region Character MoveList Info

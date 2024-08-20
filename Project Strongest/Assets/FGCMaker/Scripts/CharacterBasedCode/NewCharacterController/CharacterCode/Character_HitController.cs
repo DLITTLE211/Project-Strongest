@@ -11,16 +11,21 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private Character_Animator _cAnimator;
     public Character_Base _base;
     bool recoverTrigger;
-    public bool smallHitRecovering,bigHitRecovering, airRecoverPossible;
+    public bool smallHitRecovering, bigHitRecovering, airRecoverPossible;
     public bool crouchBlocking, standingBlocking;
     private bool hasRecovered;
     public Attack_KnockDown last_KD;
     private float recoveryTime;
 
-  
+
     public void Start()
     {
         recoveryTime = 0;
+    }
+    public void SetHitReactions(Character_Animator myAnim,HitReactions newHitReactions) 
+    {
+        _characterHitAnimations = newHitReactions;
+        SetAnimator(myAnim);
     }
     public void SetAnimator(Character_Animator myAnim)
     {

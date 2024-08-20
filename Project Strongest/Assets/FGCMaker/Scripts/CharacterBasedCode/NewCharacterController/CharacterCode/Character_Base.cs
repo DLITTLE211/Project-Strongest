@@ -191,8 +191,8 @@ public class Character_Base : MonoBehaviour
         _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing);
         _cComboDetection.SetAnimator(chosenAnimator);
         _cHitstun.SetAnimator(chosenAnimator);
-        _cHitController.SetAnimator(chosenAnimator);
         _cAnimator.enabled = true;
+        _cHitController.SetHitReactions(chosenAnimator, characterProfile._hitReactions);
         _cAnimator.myAnim.enabled = true;
         _cStateMachine.DefineState();
         _cAttackTimer.ResetTimer();

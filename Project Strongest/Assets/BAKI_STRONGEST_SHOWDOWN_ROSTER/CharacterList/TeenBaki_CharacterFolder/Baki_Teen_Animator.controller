@@ -262,7 +262,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AirHit_Medium
+  m_Name: Medium_AirHit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -375,10 +375,10 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4094913747400573319}
-    m_Position: {x: -170, y: 950, z: 0}
+    m_Position: {x: 1010, y: 960, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9000382207612458877}
-    m_Position: {x: 460, y: 940, z: 0}
+    m_Position: {x: 710, y: 1000, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8578886611270922510}
     m_Position: {x: 130, y: 870, z: 0}
@@ -698,7 +698,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit_Light_High
+  m_Name: Light_Hit_High
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1585,19 +1585,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SKD
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Y_Float
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: IDLE
@@ -1776,7 +1776,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit_Medium
+  m_Name: Medium_Hit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2010,7 +2010,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit_Heavy
+  m_Name: Heavy_Hit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2088,7 +2088,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AirHit_Recovery
+  m_Name: Recovery_AirHit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2168,7 +2168,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit_Light_Low
+  m_Name: Light_Hit_Low
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2632,7 +2632,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AirHit_Light
+  m_Name: Light_AirHit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
