@@ -89,18 +89,14 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         curAttack++;
     }
 
-    public void SendCounterHitInfo(Character_Base curBase)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties attack)
     {
-        throw new NotImplementedException();
-    }
-    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties main)
-    {
-        target._cDamageCalculator.ReceiveCounterHitMultiplier(main.counterHitDamageMult);
+        target._cDamageCalculator.ReceiveCounterHitMultiplier(attack.counterHitDamageMult);
     }
 
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (followUp != null)
+        if (followUp.InputTimer != null)
         {
             if (!blockedAttack)
             {
@@ -116,7 +112,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         {
             if (!blockedAttack)
             {
-                SendCounterHitInfo(target);
+                SendCounterHitInfo(target, main);
                 target._cDamageCalculator.TakeDamage(main);
             }
             else

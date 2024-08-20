@@ -107,7 +107,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
         if (newAttackProperties != null)
         {
-            HitBox.hitboxProperties = newAttackProperties;
+            HitBox.SetHitBoxProperties(newAttackProperties);
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
         _playerCAnimator.SetCanTransitionIdle(false);

@@ -114,18 +114,18 @@ public class HurtBox : CollisionDetection
     }
     #endregion
     #endregion
-    public void ReceieveHitBox(HitBox _hitbox, Transform target)
+    public void ReceieveHitBox(HitBox _hitbox, Transform target,Callback endFunc)
     {
         switch (huBType)
         {
             case HurtBoxType.NoBlock:
                 //Send Do Damage;
-                OnSuccessfulHit(_hitbox, target);
+                OnSuccessfulHit(_hitbox, target, endFunc);
                 break;
             case HurtBoxType.BlockLow:
                 if (_hitbox.HBType == HitBoxType.Low)
                 {
-                    OnSuccessfulBlock(_hitbox, target);
+                    OnSuccessfulBlock(_hitbox, target, endFunc);
                 }
                 else 
                 {
@@ -160,7 +160,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.BlockHigh:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead)
                 {
-                    OnSuccessfulBlock(_hitbox, target);
+                    OnSuccessfulBlock(_hitbox, target, endFunc);
                 }
                 else
                 {
@@ -265,7 +265,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.FullParry:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable ^ _hitbox.HBType == HitBoxType.Low)
                 {
-                    OnSuccessfulCounter(_hitbox, target);
+                    OnSuccessfulCounter(_hitbox, target, endFunc);
                 }
                 else
                 {
@@ -332,7 +332,7 @@ public class HurtBox : CollisionDetection
                 break;
         }
     }
-    public async void OnSuccessfulBlock(HitBox _hitbox, Transform target)
+    public async void OnSuccessfulBlock(HitBox _hitbox, Transform target, Callback endFunc)
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
         Character_Base Base_Attacker = _hitbox.GetComponentInParent<Character_Base>();
@@ -364,8 +364,9 @@ public class HurtBox : CollisionDetection
                 _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
             }
         }
+        endFunc();
     }
-    public async void OnSuccessfulHit(HitBox _hitbox, Transform target) 
+    public async void OnSuccessfulHit(HitBox _hitbox, Transform target, Callback endFunc) 
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
         Character_Base Base_Attacker = _hitbox.GetComponentInParent<Character_Base>();
@@ -397,9 +398,10 @@ public class HurtBox : CollisionDetection
                 _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
             }
         }
+        endFunc();
     }
     
-    public async void OnSuccessfulCounter(HitBox _hitbox, Transform target)
+    public async void OnSuccessfulCounter(HitBox _hitbox, Transform target, Callback endFunc)
     {
         Character_Base Base_Target = _hitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
@@ -420,6 +422,7 @@ public class HurtBox : CollisionDetection
             await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
             _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         }
+        endFunc();
     }
     
     private void OnTriggerEnter(Collider other)

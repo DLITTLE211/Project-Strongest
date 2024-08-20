@@ -15,6 +15,11 @@ public class HitBox : CollisionDetection
         SetHitboxSize(this, xSize, ySize);
     }
 
+    public void SetHitBoxProperties(Attack_BaseProperties newProperty) 
+    {
+        hitboxProperties = newProperty;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -67,10 +72,9 @@ public class HitBox : CollisionDetection
             Messenger.Broadcast<Affliction>(Events.SendAfflictionToTarget,attackAffliction[i]);
         }
     }
-    public void SendHitStateAndHurtBox(HitBox thisHitbox, Transform target)
+    public void SendHitStateAndHurtBox(HitBox thisHitbox, Transform target,Callback endFunc)
     {
-        target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target);
-        //Messenger.Broadcast<HitBox, string, HitCount>(Events.SendHitToHurtBox, thisHitbox, attackName, _hitCount);
+        target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target, endFunc);
         CheckEffects();
     }
     private void OnTriggerEnter(Collider other)

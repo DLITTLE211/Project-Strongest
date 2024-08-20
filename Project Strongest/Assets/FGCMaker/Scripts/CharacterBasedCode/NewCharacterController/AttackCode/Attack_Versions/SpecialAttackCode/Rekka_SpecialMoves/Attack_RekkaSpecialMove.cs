@@ -107,7 +107,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     }
     public void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null)
     {
-        if (followUp != null)
+        if (followUp.InputTimer != null)
         {
             curBase._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
         }
@@ -118,7 +118,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     }
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (followUp != null)
+        if (followUp.InputTimer != null)
         {
             if (!blockedAttack)
             {

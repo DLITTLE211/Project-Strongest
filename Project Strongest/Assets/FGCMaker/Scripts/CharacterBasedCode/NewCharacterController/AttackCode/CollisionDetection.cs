@@ -49,7 +49,7 @@ public class CollisionDetection : MonoBehaviour
     public TMP_Text testText;
     private HitBox lastHitbox;
     public CollisionType collisionType;
-    private bool allowHitCheck;
+    internal bool allowHitCheck;
     private void Start()
     {
         allowHitCheck = false;
@@ -172,7 +172,6 @@ public class CollisionDetection : MonoBehaviour
     public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox = null)
     {
         allowHitCheck = false;
-        lastHitbox = _hitbox;
         lastHitbox.SetHitColliderType(lastHitbox, HitBoxType.nullified);
         if (hurtbox != null)
         {
@@ -209,9 +208,7 @@ public class CollisionDetection : MonoBehaviour
                 Transform target = c.transform.root;
                 if (_hitbox.HBType != HitBoxType.nullified)
                 {
-                    _hitbox.SendHitStateAndHurtBox(_hitbox, target);
-                    _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
-                    DestroyHitbox(_hitbox);
+                    _hitbox.SendHitStateAndHurtBox(_hitbox, target,() => ClearAdditionalHit(_hitbox));
                     allowHitCheck = false;
                 }
 
@@ -220,5 +217,10 @@ public class CollisionDetection : MonoBehaviour
             }
             else { continue; }
         }
+    }
+
+    void ClearAdditionalHit(HitBox _hitbox) 
+    {
+        DestroyHitbox(_hitbox);
     }
 }
