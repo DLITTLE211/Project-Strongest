@@ -223,10 +223,19 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 return -1;
             }
-            string stringCheck = keyComparison.normalTypeInput[stringComparison];
-            if (keyInput.currentAttackInput.Contains(stringCheck))
+            try
             {
-                return 1;
+                string stringCheck = keyComparison.normalTypeInput[stringComparison];
+
+                if (keyInput.currentAttackInput.Contains(stringCheck))
+                {
+                    return 1;
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ActiveFollowUpAttackCheck.Value.ResetAttackData();
+                return -1;
             }
         }
         else
