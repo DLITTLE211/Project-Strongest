@@ -105,15 +105,15 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         inRekkaState = true;
     }
-    public void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUp = null)
     {
         if (followUp.InputTimer != null)
         {
-            curBase._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
+            target._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
         }
         else
         {
-            curBase._cDamageCalculator.ReceiveCounterHitMultiplier(rekkaInput.mainAttackProperty.counterHitDamageMult);
+            target._cDamageCalculator.ReceiveCounterHitMultiplier(rekkaInput.mainAttackProperty.counterHitDamageMult);
         }
     }
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
@@ -122,24 +122,24 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         {
             if (!blockedAttack)
             {
-                SendCounterHitInfo(_curBase, followUp);
-                _curBase._cDamageCalculator.TakeDamage(followUp);
+                SendCounterHitInfo(target, followUp);
+                target._cDamageCalculator.TakeDamage(followUp);
             }
             else
             {
-                _curBase._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
+                target._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
             }
         }
         else
         {
             if (!blockedAttack)
             {
-                SendCounterHitInfo(_curBase);
-                _curBase._cDamageCalculator.TakeDamage(followUp);
+                SendCounterHitInfo(target);
+                target._cDamageCalculator.TakeDamage(followUp);
             }
             else
             {
-                _curBase._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
+                target._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
             }
         }
     }
