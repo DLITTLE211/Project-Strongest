@@ -49,7 +49,7 @@ public class CollisionDetection : MonoBehaviour
     public TMP_Text testText;
     private HitBox lastHitbox;
     public CollisionType collisionType;
-    internal bool allowHitCheck;
+    public bool allowHitCheck;
     private void Start()
     {
         allowHitCheck = false;
@@ -131,7 +131,7 @@ public class CollisionDetection : MonoBehaviour
     }
     public void SetHitColliderType(HitBox collision, HitBoxType _newType) 
     {
-        collision.HBType = _newType;
+        //collision.HBType = _newType;
         collision.SetHitboxSize(collision);
     }
 
@@ -182,10 +182,6 @@ public class CollisionDetection : MonoBehaviour
     {
         if (allowHitCheck) 
         {
-            if (!lastHitbox.gameObject.activeInHierarchy) 
-            {
-                lastHitbox.gameObject.SetActive(true);
-            }
             CheckForCollision(lastHitbox);
         }
     }
