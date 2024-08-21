@@ -9,11 +9,16 @@ public class HitBox : CollisionDetection
     public HitBoxType HBType;
     public List<Affliction> attackAffliction;
     public Attack_BaseProperties hitboxProperties;
+    string layerCheck;
     // Start is called before the first frame update
 
     void Start()
     {
         SetHitboxSize(this, xSize, ySize);
+    }
+    public void SetLayerCheck(int ID) 
+    {
+        layerCheck = $"Player{ID}";
     }
     public void SetHitBoxProperties(Attack_BaseProperties newProperty)
     {
@@ -21,7 +26,7 @@ public class HitBox : CollisionDetection
     }
     private void Update()
     {
-        if (HBType != HitBoxType.nullified)// || allowHitCheck)
+        if (HBType != HitBoxType.nullified)
         {
             CheckForCollision();
         }
@@ -32,7 +37,7 @@ public class HitBox : CollisionDetection
             currentCollider.bounds.center,
             currentCollider.bounds.extents,
             currentCollider.transform.rotation,
-            LayerMask.GetMask("Players"));
+            LayerMask.GetMask(layerCheck));
 
         foreach (Collider c in cols)
         {

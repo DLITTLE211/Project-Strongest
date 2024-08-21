@@ -527,7 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 50180543}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HurtBoxes
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 73610120}
   - component: {fileID: 73610119}
   - component: {fileID: 73610118}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HuB_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 94923331}
   - component: {fileID: 94923330}
   - component: {fileID: 94923329}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Character_Player2
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -1776,7 +1776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131915388}
   - component: {fileID: 131915389}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______DamageCalulator_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2602,7 +2602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192485229}
   - component: {fileID: 192485230}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4261,7 +4261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 340028145}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Hitboxes
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -4846,7 +4846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405498831}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: CollisionDetection
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -6228,7 +6228,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 191
+    m_Bits: 703
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6457,7 +6457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498465948}
   - component: {fileID: 498465949}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______AttackButtonDetection_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7045,7 +7045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 566836025}
   - component: {fileID: 566836026}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______ComboDetection_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7446,7 +7446,7 @@ GameObject:
   m_Component:
   - component: {fileID: 599738359}
   - component: {fileID: 599738360}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Hurtbox_Extended
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7556,7 +7556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 607290436}
   - component: {fileID: 607290437}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______HitContrtoller________
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7935,7 +7935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 658162218}
   - component: {fileID: 658162219}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______Health_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8391,7 +8391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 695894838}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: CollisionBoxes
   m_TagString: CollisionBox
   m_Icon: {fileID: 0}
@@ -9598,11 +9598,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089463144201759098, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7587222759460721569, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Name
@@ -9610,7 +9610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_IsActive
@@ -9618,7 +9618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8459305293412710870, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9786,7 +9786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830645724}
   - component: {fileID: 830645725}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______InputDetection_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9968,7 +9968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855942982}
   - component: {fileID: 855942983}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______GravityController_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10398,7 +10398,7 @@ GameObject:
   - component: {fileID: 882403982}
   - component: {fileID: 882403984}
   - component: {fileID: 882403983}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ShowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11271,7 +11271,7 @@ GameObject:
   - component: {fileID: 921692427}
   - component: {fileID: 921692426}
   - component: {fileID: 921692425}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HuB_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11678,7 +11678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953094820}
   - component: {fileID: 953094821}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HurtBox_
   m_TagString: CollisionBox
   m_Icon: {fileID: 0}
@@ -11735,7 +11735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953835060}
   - component: {fileID: 953835061}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______HurtboxController_________
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11789,7 +11789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 960065524}
   - component: {fileID: 960065525}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______StateMachine_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12406,7 +12406,7 @@ GameObject:
   - component: {fileID: 982141379}
   - component: {fileID: 982141381}
   - component: {fileID: 982141380}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ShowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13606,7 +13606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062369592}
   - component: {fileID: 1062369593}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______ForceController_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13661,7 +13661,7 @@ GameObject:
   - component: {fileID: 1064684078}
   - component: {fileID: 1064684080}
   - component: {fileID: 1064684079}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ShowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13831,7 +13831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1073604929}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: MoveListHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14208,7 +14208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1097998283}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HB_Side_L
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -14890,7 +14890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1183931822}
   - component: {fileID: 1183931823}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______ComboCounter________
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15037,7 +15037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1211425606}
   - component: {fileID: 1211425607}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______SideRecognition_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15805,7 +15805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267981851}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: TriggerBoxes
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -15841,7 +15841,7 @@ GameObject:
   - component: {fileID: 1273188029}
   - component: {fileID: 1273188028}
   - component: {fileID: 1273188027}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HuB_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16327,7 +16327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1309202296}
   - component: {fileID: 1309202297}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______AttackManager_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17427,7 +17427,7 @@ GameObject:
   - component: {fileID: 1371640600}
   - component: {fileID: 1371640602}
   - component: {fileID: 1371640601}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______Timers_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19385,7 +19385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1578916746}
   - component: {fileID: 1578916747}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______WidgetController_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19847,7 +19847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661697128}
   - component: {fileID: 1661697129}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______HitBoxManager_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19894,7 +19894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1663233169}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: P2_ScriptReferences
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21838,7 +21838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1950211642}
   - component: {fileID: 1950211643}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22223,7 +22223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992500319}
   - component: {fileID: 1992500320}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______HitStunController_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22270,7 +22270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994870302}
   - component: {fileID: 1994870303}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Hurtbox_Main
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -22908,11 +22908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089463144201759098, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7587222759460721569, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Name
@@ -22920,7 +22920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_IsActive
@@ -22928,7 +22928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8459305293412710870, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22961,7 +22961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2060023738}
   - component: {fileID: 2060023739}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: ______SuperMeterController_______
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23290,7 +23290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2077968776}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HB_Side_R
   m_TagString: PCharacter
   m_Icon: {fileID: 0}
@@ -23634,7 +23634,7 @@ GameObject:
   - component: {fileID: 2121281154}
   - component: {fileID: 2121281155}
   - component: {fileID: 2121281156}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Square
   m_TagString: CollisionBox
   m_Icon: {fileID: 0}

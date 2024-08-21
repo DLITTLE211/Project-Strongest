@@ -21,6 +21,14 @@ public class Character_HitboxManager : MonoBehaviour
             _hitBoxData.HBType = HitBoxType.nullified;
             _hitBoxData.SetHitboxSize(null,0f, 0f);
             _hitBoxData.SetupHitboxDictionary();
+            if (playerID == 1)
+            {
+                _hitBoxData.SetLayerCheck(2);
+            }
+            else 
+            {
+                _hitBoxData.SetLayerCheck(1);
+            }
             totalHitBoxes.Add(_hitBoxData);
         }
         hitBoxIndex = 0;
