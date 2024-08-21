@@ -47,12 +47,34 @@ public class CollisionDetection : MonoBehaviour
     public Collider currentCollider;
     public SpriteRenderer cRenderer;
     public TMP_Text testText;
-    private HitBox lastHitbox;
     public CollisionType collisionType;
     public bool allowHitCheck;
+    private Dictionary<HitBoxType, Color> hitboxColor = new Dictionary<HitBoxType, Color>();
     private void Start()
     {
         allowHitCheck = false;
+    }
+    public void SetupHitboxDictionary()
+    {
+        hitboxColor = new Dictionary<HitBoxType, Color>();
+        hitboxColor.Add(HitBoxType.Low, Color.green);
+        hitboxColor.Add(HitBoxType.High, Color.red);
+        hitboxColor.Add(HitBoxType.Overhead, Color.blue);
+        hitboxColor.Add(HitBoxType.Anti_Air, Color.white);
+        hitboxColor.Add(HitBoxType.Unblockable, Color.grey);
+        hitboxColor.Add(HitBoxType.CommandGrab_Ground, Color.cyan);
+        hitboxColor.Add(HitBoxType.Throw, Color.yellow);
+        hitboxColor.Add(HitBoxType.nullified, Color.black);
+        hitboxColor.Add(HitBoxType.CommandGrab_Air, Color.magenta);
+    }
+    void SetHitboxState(HitBoxType _hitProperty)
+    {
+        if (hitboxColor.ContainsKey(_hitProperty))
+        {
+            SetRendererColor(hitboxColor[_hitProperty]);
+            SetText($"Current HitboxType: {_hitProperty}");
+        }
+        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
     }
     public void SetHurtBoxSize( float sizeX, float sizeY, bool isHurtboxTypeBox, ColliderType collisionType = ColliderType.Trigger, Character_HurtBoxSizing sizing = null)
     {
@@ -104,11 +126,14 @@ public class CollisionDetection : MonoBehaviour
     }
     public void SetHitboxSize(HitBox hitboxInfo, float sizeX = 0, float sizeY = 0)
     {
-        if (hitboxInfo.currentCollider == null)
+        if (hitboxInfo != null)
         {
-            hitboxInfo.boxColliderSpawnPoint.AddComponent<BoxCollider>();
-            hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<BoxCollider>();
-            hitboxInfo.currentCollider.isTrigger = true;
+            if (hitboxInfo.currentCollider == null)
+            {
+                hitboxInfo.boxColliderSpawnPoint.AddComponent<BoxCollider>();
+                hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<BoxCollider>();
+                hitboxInfo.currentCollider.isTrigger = true;
+            }
         }
         xSize = sizeX;
         ySize = sizeY;
@@ -131,7 +156,7 @@ public class CollisionDetection : MonoBehaviour
     }
     public void SetHitColliderType(HitBox collision, HitBoxType _newType) 
     {
-        //collision.HBType = _newType;
+        collision.HBType = _newType;
         collision.SetHitboxSize(collision);
     }
 
@@ -143,10 +168,10 @@ public class CollisionDetection : MonoBehaviour
         _hitbox.transform.localPosition = _position;
         _hitbox.transform.localRotation = _rotate;
         _hitbox.HBType = _hitType;
-        lastHitbox = _hitbox;
-        if (!lastHitbox.gameObject.activeInHierarchy) 
+        SetHitboxState(_hitbox.hitboxProperties.AttackAnims.attackType);
+        if (!_hitbox.gameObject.activeInHierarchy) 
         {
-            lastHitbox.gameObject.SetActive(true);
+            _hitbox.gameObject.SetActive(true);
         }
     }
     public void PlaceHurtBox(HurtBox hurtBox, Vector3 _position, Vector3 _rotation, float _sizeX, float _sizeY, HurtBoxType _hurtType = HurtBoxType.NoBlock)
@@ -165,57 +190,21 @@ public class CollisionDetection : MonoBehaviour
     public void ActivateHitbox(HitBox _hitbox, HurtBox hurtbox,string attackName, HitCount _hitCount, Attack_BaseProperties property)
     {
         hurtbox.gameObject.SetActive(true);
-        lastHitbox.hitboxProperties = property;
+        _hitbox.hitboxProperties = property;
         allowHitCheck = true;
-        CheckForCollision(_hitbox);
+       // CheckForCollision();
     }
     public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox = null)
     {
         allowHitCheck = false;
-        lastHitbox.SetHitColliderType(lastHitbox, HitBoxType.nullified);
+        _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
         if (hurtbox != null)
         {
             hurtbox.SetHurtBoxSize(0, 0, true);
         }
     }
-    private void Update()
-    {
-        if (allowHitCheck) 
-        {
-            CheckForCollision(lastHitbox);
-        }
-    }
-    void CheckForCollision(HitBox _hitbox) 
-    {
-        Collider[] cols =  Physics.OverlapBox(
-            _hitbox.currentCollider.bounds.center,
-            _hitbox.currentCollider.bounds.extents,
-            _hitbox.currentCollider.transform.rotation,
-            LayerMask.GetMask("Players"));
 
-        foreach (Collider c in cols)
-        {
-            if (c.isTrigger == false)
-            {
-                continue;
-            }
-            if (c.transform.root != transform.root)
-            {
-                Transform target = c.transform.root;
-                if (_hitbox.HBType != HitBoxType.nullified)
-                {
-                    _hitbox.SendHitStateAndHurtBox(_hitbox, target,() => ClearAdditionalHit(_hitbox));
-                    allowHitCheck = false;
-                }
-
-                DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);
-                break;
-            }
-            else { continue; }
-        }
-    }
-
-    void ClearAdditionalHit(HitBox _hitbox) 
+    public void ClearAdditionalHit(HitBox _hitbox) 
     {
         DestroyHitbox(_hitbox);
     }

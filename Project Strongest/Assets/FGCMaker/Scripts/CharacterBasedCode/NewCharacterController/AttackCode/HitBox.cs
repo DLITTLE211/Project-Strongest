@@ -10,72 +10,59 @@ public class HitBox : CollisionDetection
     public List<Affliction> attackAffliction;
     public Attack_BaseProperties hitboxProperties;
     // Start is called before the first frame update
+
     void Start()
     {
         SetHitboxSize(this, xSize, ySize);
     }
-
-    public void SetHitBoxProperties(Attack_BaseProperties newProperty) 
+    public void SetHitBoxProperties(Attack_BaseProperties newProperty)
     {
         hitboxProperties = newProperty;
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        CheckAttackState();
-    }
-
-    public void CheckAttackState() 
-    {
-        switch (HBType)
+        if (HBType != HitBoxType.nullified)// || allowHitCheck)
         {
-            case HitBoxType.Low:
-                SetRendererColor(new Color32(0,255,0,255)); //Green
-                break;
-            case HitBoxType.High:
-                SetRendererColor(new Color32(255, 0, 0, 255)); //Red
-                break;
-            case HitBoxType.Overhead:
-                SetRendererColor(new Color32(255, 0, 255, 255)); //Purple
-                break;
-            case HitBoxType.Anti_Air:
-                SetRendererColor(new Color32(149,255, 8, 255)); //Purple
-                break;
-            case HitBoxType.Unblockable:
-                SetRendererColor(new Color32(0, 135, 135, 255)); //IDK
-                break;
-            case HitBoxType.CommandGrab_Ground:
-                SetRendererColor(new Color32(0, 0, 255, 255)); //Blue
-                break;
-            case HitBoxType.Throw:
-                SetRendererColor(new Color32(255, 255, 0, 255)); //Yellow
-                break;
-            case HitBoxType.nullified:
-                SetRendererColor(new Color32(0, 0, 0, 15)); //Black
-                SetHitboxSize(this);
-                SetText();
-                return;
-            case HitBoxType.CommandGrab_Air:
-                SetRendererColor(new Color32(255, 0, 255, 255)); //Blue
-                break;
-            default:
-                DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
-                break;
+            CheckForCollision();
         }
-        SetText($"Current HitboxType: {HBType}");
     }
-    void CheckEffects()
+    void CheckForCollision()
     {
-        for(int i = 0; i < attackAffliction.Count; i++)
+        Collider[] cols = Physics.OverlapBox(
+            currentCollider.bounds.center,
+            currentCollider.bounds.extents,
+            currentCollider.transform.rotation,
+            LayerMask.GetMask("Players"));
+
+        foreach (Collider c in cols)
         {
-            Messenger.Broadcast<Affliction>(Events.SendAfflictionToTarget,attackAffliction[i]);
+            if (c.isTrigger == false)
+            {
+                continue;
+            }
+            if (c.transform.root != transform.root)
+            {
+                Transform target = c.transform.root;
+                if (HBType != HitBoxType.nullified)
+                {
+                    SendHitStateAndHurtBox(this, target, () => ClearAdditionalHit(this));
+                    allowHitCheck = false;
+                    DestroySelf();
+                }
+
+                DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);
+                break;
+            }
+            else { continue; }
         }
+    }
+    void DestroySelf() 
+    {
+        SetHitColliderType(this, HitBoxType.nullified);
     }
     public void SendHitStateAndHurtBox(HitBox thisHitbox, Transform target,Callback endFunc)
     {
         target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target, endFunc);
-        CheckEffects();
     }
     private void OnTriggerEnter(Collider other)
     {

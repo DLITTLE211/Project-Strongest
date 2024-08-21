@@ -33,6 +33,7 @@ public class Character_Base : MonoBehaviour
     public Character_SuperMeter _cSuperMeter;
     public Attack_Manager _aManager;
     [SerializeField] private Player_SideManager _sideManager;
+    public Character_HitboxManager _cHitboxManager;
     [Space(10)]
     public Character_Timer _timer;
     [Space(20)]
@@ -143,6 +144,7 @@ public class Character_Base : MonoBehaviour
     {
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
+        _cHitboxManager.SetupHitboxes(playerID + 1);
         _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         InitCombos();

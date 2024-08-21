@@ -70,19 +70,10 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public void GetPlacementLocation(Character_Base curBase)
     {
-        HitBox newHitBox = curBase.pSide.thisPosition.ReturnSideHitBox(this);
-        if (HitBox == null)
-        {
-            HitBox = newHitBox;
-        }
-        else
-        {
-            if (HitBox != newHitBox)
-            {
-                HitBox = newHitBox;
-            }
-        }
-        if (HitBox.name.Contains(("r").ToString().ToUpper()))
+        HitBox newHitBox = curBase._cHitboxManager.GetCurrentHitbox();
+        HitBox = newHitBox;
+
+        if (character.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {
             bias = 0;
         }
@@ -134,7 +125,14 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnRecov(Character_Base curBase)
     {
         inactive = true;
-        HitBox.DestroyHitbox(HitBox, extendedHitBox);
+        if (HitBox != null)
+        {
+            HitBox.DestroyHitbox(HitBox, extendedHitBox);
+        }
+        else 
+        {
+            character._cHitboxManager.DisableCurrentHitbox();
+        }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
         _playerCAnimator._base._aManager.SetStartNextAttack(true);
 
