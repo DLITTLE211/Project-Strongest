@@ -7,11 +7,10 @@ using Unity.VisualScripting;
 
 public class Character_HitController : MonoBehaviour
 {
-    [SerializeField] private HitReactions _characterHitAnimations;
+    //[SerializeField] private HitReactions _characterHitAnimations;
     [SerializeField] private Character_Animator _cAnimator;
     [SerializeField] private Character_Base _base;
     [SerializeField] private HitAnimationHolder _characterTotalHitReactions;
-    //[SerializeField] private List<HitAnimationField> characterTotalHitReactions;
     Dictionary<HitLevel, Callback> reactionFunctionDictionary;
 
     bool recoverTrigger;
@@ -21,14 +20,14 @@ public class Character_HitController : MonoBehaviour
     public Attack_KnockDown last_KD;
     private float recoveryTime;
     Attack_BaseProperties currentProperty;
-    IEnumerator activeHitResponseRoutine;
+    IEnumerator activeHitResponseRoutine, recoverRoutine;
     public void Start()
     {
         recoveryTime = 0;
     }
     public void SetHitReactions(Character_Animator myAnim,HitReactions newHitReactions) 
     {
-        _characterHitAnimations = newHitReactions;
+        //_characterHitAnimations = newHitReactions;
         SetAnimator(myAnim);
     }
     public void SetAnimator(Character_Animator myAnim)
@@ -39,103 +38,35 @@ public class Character_HitController : MonoBehaviour
     void SetUpHitAnimations()
     {
         _characterTotalHitReactions.Setup();
-        //characterTotalHitReactions = new List<HitAnimationField>();
         for (int i = 0; i < _base.characterProfile.hitResponseAnimations.Count; i++)
         {
             CharacterAnimResponse responseAnim = _base.characterProfile.hitResponseAnimations[i];
             AnimationClip curClip = _base.characterProfile.hitResponseAnimations[i]._clip;
-            HitAnimationField newHitAnimField = new HitAnimationField(curClip, curClip.length, curClip.name, responseAnim._hitReactionType, responseAnim.groundedReaction);
-            if (newHitAnimField != null) 
+            HitAnimationField newHitAnimField = new HitAnimationField(curClip, curClip.length, curClip.name, responseAnim._hitReactionType, responseAnim._hitResponseLevel, responseAnim.groundedReaction);
+            if (newHitAnimField.hitReactionType == HitReactionType.StandardBlock ^ newHitAnimField.hitReactionType == HitReactionType.GuardBreakBlock)
             {
-                _characterTotalHitReactions.GroundAnims.Add(newHitAnimField);
+                _characterTotalHitReactions.block_Anims.Add(newHitAnimField);
+                continue;
             }
-            if (newHitAnimField != null)
-            {
-                _characterTotalHitReactions.air_HitAnims.Add(newHitAnimField);
-            }
-            if (newHitAnimField != null)
-            {
-                _characterTotalHitReactions.air_RecoveryAnims.Add(newHitAnimField);
-            }
-            if (newHitAnimField != null)
+            if (newHitAnimField.hitReactionType == HitReactionType.Getup)
             {
                 _characterTotalHitReactions.getUp_Anims.Add(newHitAnimField);
+                continue;
             }
-            if (newHitAnimField != null)
+            else
             {
-                _characterTotalHitReactions.standingblock_Anims.Add(newHitAnimField);
+                if (newHitAnimField.isGroundedReaction)
+                {
+                    _characterTotalHitReactions.GroundAnims.Add(newHitAnimField);
+                    continue;
+                }
+                else
+                {
+                    _characterTotalHitReactions.air_HitAnims.Add(newHitAnimField);
+                    continue;
+                }
             }
-            if (newHitAnimField != null)
-            {
-                _characterTotalHitReactions.crouchingblock_Anims.Add(newHitAnimField);
-            }
         }
-        /*for (int i = 0; i < _characterHitAnimations.air_RecoverAnims.Count; i++)
-        {
-            _characterHitAnimations.air_RecoverAnims[i].SetCurrentAnim();
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.air_RecoverAnims[i].animClip,
-                _characterHitAnimations.air_RecoverAnims[i].animLength,
-                _characterHitAnimations.air_RecoverAnims[i].animName,
-                _characterHitAnimations.air_RecoverAnims[i].actionableHitPointInFrames[0] * (1 / 60f),
-                _characterHitAnimations.air_RecoverAnims[i].reaction,false);
-           // characterTotalHitReactions.Add(newHitAnimField);
-        }
-        for (int i = 0; i < _characterHitAnimations.ground_hitAnims.Count; i++)
-        {
-            _characterHitAnimations.ground_hitAnims[i].SetCurrentAnim();
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.ground_hitAnims[i].animClip,
-                _characterHitAnimations.ground_hitAnims[i].animLength,
-                _characterHitAnimations.ground_hitAnims[i].animName,
-                _characterHitAnimations.ground_hitAnims[i].actionableHitPointInFrames[0] * (1 / 60f),
-                _characterHitAnimations.ground_hitAnims[i].reaction);
-            //characterTotalHitReactions.Add(newHitAnimField);
-        }
-        for (int i = 0; i < _characterHitAnimations.getUp_Anims.Count; i++)
-        {
-            _characterHitAnimations.getUp_Anims[i].SetCurrentAnim();
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.getUp_Anims[i].animClip,
-                _characterHitAnimations.getUp_Anims[i].animLength,
-                _characterHitAnimations.getUp_Anims[i].animName,
-                _characterHitAnimations.getUp_Anims[i].actionableHitPointInFrames[0] * (1 / 60f),
-                _characterHitAnimations.getUp_Anims[i].reaction);
-            //characterTotalHitReactions.Add(newHitAnimField);
-        }
-        for (int i = 0; i < _characterHitAnimations.air_HitAnims.Count; i++)
-        {
-            _characterHitAnimations.air_HitAnims[i].SetCurrentAnim();
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.air_HitAnims[i].animClip,
-                _characterHitAnimations.air_HitAnims[i].animLength,
-                _characterHitAnimations.air_HitAnims[i].animName,
-                _characterHitAnimations.air_HitAnims[i].actionableHitPointInFrames[0] * (1 / 60f),
-                _characterHitAnimations.air_HitAnims[i].reaction, false);
-            //characterTotalHitReactions.Add(newHitAnimField);
-        }
-        for (int i = 0; i < _characterHitAnimations.standingblock_Anims.Count; i++)
-        {
-            _characterHitAnimations.standingblock_Anims[i].SetCurrentAnim();
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.standingblock_Anims[i].animClip,
-                _characterHitAnimations.standingblock_Anims[i].animLength,
-                _characterHitAnimations.standingblock_Anims[i].animName,
-                _characterHitAnimations.standingblock_Anims[i].actionableHitPointInFrames[0] * (1 / 60f),
-                _characterHitAnimations.standingblock_Anims[i].reaction);
-            //characterTotalHitReactions.Add(newHitAnimField);
-        }
-        for (int i = 0; i < _characterHitAnimations.crouchingblock_Anims.Count; i++)
-        {
-            _characterHitAnimations.crouchingblock_Anims[i].SetCurrentAnim();
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.crouchingblock_Anims[i].animClip,
-                _characterHitAnimations.crouchingblock_Anims[i].animLength,
-                _characterHitAnimations.crouchingblock_Anims[i].animName,
-                _characterHitAnimations.crouchingblock_Anims[i].actionableHitPointInFrames[0] * (1 / 60f),
-                _characterHitAnimations.crouchingblock_Anims[i].reaction);
-            //characterTotalHitReactions.Add(newHitAnimField);
-        }*/
 
         reactionFunctionDictionary = new Dictionary<HitLevel, Callback>();
         for (int i = 0; i < Enum.GetNames(typeof(HitLevel)).Length; i++) 
@@ -160,6 +91,8 @@ public class Character_HitController : MonoBehaviour
                     break;
             }
         }
+        recoverRoutine = null;
+        activeHitResponseRoutine = null;
     }
 
     void StandardHitReaction()
@@ -171,24 +104,44 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
-
+            airRecoverPossible = true;
         }
        // CheckAndStartHitResponse();
     }
     void KnockdownHitReaction()
     {
         bigHitRecovering = true;
+
+
       //  CheckAndStartHitResponse();
     }
     void StandardBlockReaction()
     {
         smallHitRecovering = true;
-     //   CheckAndStartHitResponse();
+        IState currentState = _base._cStateMachine._playerState.current.State;
+        if (currentState == _base._cStateMachine.crouchStateRef)
+        {
+            standingBlocking = true;
+        }
+        else if(currentState == _base._cStateMachine.idleStateRef)
+        {
+            crouchBlocking = true;
+        }
+        //   CheckAndStartHitResponse();
     }
     void GuardBreakBlockReaction()
     {
-        bigHitRecovering = true; 
-     //   CheckAndStartHitResponse();
+        bigHitRecovering = true;
+        IState currentState = _base._cStateMachine._playerState.current.State;
+        if (currentState == _base._cStateMachine.crouchStateRef)
+        {
+            standingBlocking = true;
+        }
+        else if (currentState == _base._cStateMachine.idleStateRef)
+        {
+            crouchBlocking = true;
+        }
+        //   CheckAndStartHitResponse();
     }
     void CheckAndStartHitResponse(HitAnimationField curField)
     {
@@ -209,13 +162,35 @@ public class Character_HitController : MonoBehaviour
             waitTime -= oneFrame;
             yield return new WaitForSeconds(waitTime);
         }
-        if (curField.hitReactionType == HitReactionType.KnockdownHit) 
+        if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
-
+            if (recoverRoutine != null)
+            {
+                StopCoroutine(recoverRoutine);
+            }
+            recoverRoutine = DoRecovery(currentProperty.KnockDown);
+            StartCoroutine(recoverRoutine);
         }
-        else 
+        else
         {
-
+            if (smallHitRecovering)
+            {
+                smallHitRecovering = false;
+            }
+            if (crouchBlocking)
+            {
+                crouchBlocking = false;
+            }
+            if (standingBlocking)
+            {
+                standingBlocking = false;
+            }
+            if (airRecoverPossible)
+            {
+                airRecoverPossible = false;
+            }
+            _base._cAnimator.SetCanRecover(true);
+            _base._cHurtBox.SetHurboxState();
         }
     }
     #region Successful Hit Code
@@ -225,18 +200,6 @@ public class Character_HitController : MonoBehaviour
         _cAnimator.isHit = false; 
         _base._cAnimator.SetCanRecover(true);
         recoverTrigger = true;
-    }
-    private async void Update()
-    {
-        if (recoveryTime > 0) 
-        {
-           // await EraseFrame();
-        }
-    }
-    async Task EraseFrame() 
-    {
-        await Task.Delay((int)(1000f * (1 / 60f)));
-        recoveryTime -= (1 / 60f);
     }
     public async Task ReactToHit(ResponseAnim_Base hitanim, Attack_BaseProperties attackProperty)
     {
@@ -284,17 +247,6 @@ public class Character_HitController : MonoBehaviour
         {
             funcCall();
         }
-
-
-
-        /*if (_base._cHurtBox.IsGrounded())
-        {
-            SetGroundedHitReaction(attackProperty);
-        }
-        else
-        {
-            SetAirHitReaction(attackProperty);
-        }*/
     }
     async void SetGroundedHitReaction(Attack_BaseProperties attackProperty)
     {
@@ -302,33 +254,33 @@ public class Character_HitController : MonoBehaviour
         {
             case HitLevel.SlightKnockback:
                 smallHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 0);
-                await ReactToHit(_characterHitAnimations.ground_hitAnims[0], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 0);
+                //await ReactToHit(_characterHitAnimations.ground_hitAnims[0], attackProperty);
                 break;
             case HitLevel.MediumKnockback:
                 smallHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 1);
-                await ReactToHit(_characterHitAnimations.ground_hitAnims[1], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 1);
+                //await ReactToHit(_characterHitAnimations.ground_hitAnims[1], attackProperty);
                 break;
             case HitLevel.SoaringHit:
                 bigHitRecovering = true;
                 _base._cHurtBox.ChangeHeightOnDowned();
                 _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 2);
-                await ReactToHit(_characterHitAnimations.ground_hitAnims[2], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 2);
+                //await ReactToHit(_characterHitAnimations.ground_hitAnims[2], attackProperty);
                 break;
             case HitLevel.Crumple:
                 bigHitRecovering = true;
                 _base._cHurtBox.ChangeHeightOnDowned();
-                ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 3);
-                await ReactToHit(_characterHitAnimations.ground_hitAnims[3], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 3);
+               // await ReactToHit(_characterHitAnimations.ground_hitAnims[3], attackProperty);
                 break;
             case HitLevel.Spiral:
                 bigHitRecovering = true;
                 _base._cHurtBox.ChangeHeightOnDowned();
                 _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 4);
-                await ReactToHit(_characterHitAnimations.ground_hitAnims[4], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 4);
+                //await ReactToHit(_characterHitAnimations.ground_hitAnims[4], attackProperty);
                 break;
             default:
                 Debug.LogError($"{attackProperty.hitLevel} type hit provided not accounted for in switch case");
@@ -343,37 +295,37 @@ public class Character_HitController : MonoBehaviour
         {
             case HitLevel.SlightKnockback:
                 smallHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 0);
-                await ReactToHit(_characterHitAnimations.air_HitAnims[0], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 0);
+                //await ReactToHit(_characterHitAnimations.air_HitAnims[0], attackProperty);
                 break;
             case HitLevel.MediumKnockback:
                 smallHitRecovering = true;
                 _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1);
-                await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
+               // ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1);
+                //await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
                 break;
             case HitLevel.SoaringHit:
                 bigHitRecovering = true;
                 _base._cHurtBox.ChangeHeightOnDowned();
                 _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1);
-                await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1);
+                //await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
                 break;
             case HitLevel.Crumple:
                 bigHitRecovering = true;
                 airRecoverPossible = false;
                 _base._cHurtBox.ChangeHeightOnDowned();
                 _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1, Attack_KnockDown.SKD);
-                await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1, Attack_KnockDown.SKD);
+                //await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
                 break;
             case HitLevel.Spiral:
                 bigHitRecovering = true;
                 airRecoverPossible = false;
                 _base._cHurtBox.ChangeHeightOnDowned();
                 _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 4, Attack_KnockDown.SKD);
-                await ReactToHit(_characterHitAnimations.ground_hitAnims[4], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 4, Attack_KnockDown.SKD);
+                //await ReactToHit(_characterHitAnimations.ground_hitAnims[4], attackProperty);
                 break;
             default:
                 Debug.LogError($"{attackProperty.hitLevel} type hit provided not accounted for in switch case");
@@ -417,19 +369,20 @@ public class Character_HitController : MonoBehaviour
 
     IEnumerator RegularHitRecover()
     {
+        yield return null;
         if (airRecoverPossible)
         {
             if (!hasRecovered)
             {
                 hasRecovered = true;
                 _cAnimator.SetShake(false);
-                _characterHitAnimations.air_RecoverAnims[0].PlayAnimation(_cAnimator, _characterHitAnimations.air_RecoverAnims[0].animName);
-                _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.air_RecoverAnims[0].actionableHitPointInFrames[0]);
-                yield return new WaitForSeconds(_characterHitAnimations.air_RecoverAnims[0].actionableHitPointInFrames[0]);
+                //_characterHitAnimations.air_RecoverAnims[0].PlayAnimation(_cAnimator, _characterHitAnimations.air_RecoverAnims[0].animName);
+               // _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.air_RecoverAnims[0].actionableHitPointInFrames[0]);
+                //yield return new WaitForSeconds(_characterHitAnimations.air_RecoverAnims[0].actionableHitPointInFrames[0]);
                 _cAnimator.EndShake();
                 _cAnimator.isHit = false;
                 airRecoverPossible = false;
-                yield return new WaitForSeconds(_characterHitAnimations.air_RecoverAnims[0].timeDifference[0]);
+               // yield return new WaitForSeconds(_characterHitAnimations.air_RecoverAnims[0].timeDifference[0]);
                 _cAnimator.isHit = false;
                 SetHitStateFalse();
             }
@@ -448,8 +401,26 @@ public class Character_HitController : MonoBehaviour
             }
         }
     }
+
+    IEnumerator DoRecovery(Attack_KnockDown knockDownType) 
+    {
+        if (knockDownType == Attack_KnockDown.HKD) 
+        {
+        }
+        if (knockDownType == Attack_KnockDown.SKD)
+        {
+
+        }
+        yield return null;
+        if (bigHitRecovering)
+        {
+            bigHitRecovering = false;
+        }
+        recoverRoutine = null;
+    }
     IEnumerator DoGetUp()
     {
+        yield return null; 
         if (_base._cHurtBox.IsGrounded())
         {
             _cAnimator.SetShake(false);
@@ -460,26 +431,26 @@ public class Character_HitController : MonoBehaviour
                 if (last_KD == Attack_KnockDown.SKD)
                 {
                     hasRecovered = true;
-                    _characterHitAnimations.getUp_Anims[0].PlayAnimation(_cAnimator, _characterHitAnimations.getUp_Anims[0].animName);
-                    yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[1].actionableHitPointInFrames[0]);
+                    //_characterHitAnimations.getUp_Anims[0].PlayAnimation(_cAnimator, _characterHitAnimations.getUp_Anims[0].animName);
+                    //yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[1].actionableHitPointInFrames[0]);
                     _base._cAnimator.myAnim.SetTrigger("SKD");
-                    _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.getUp_Anims[1].actionableHitPointInFrames[0]);
+                   // _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.getUp_Anims[1].actionableHitPointInFrames[0]);
                     _cAnimator.EndShake();
                     _cAnimator.isHit = false;
-                    yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[1].timeDifference[0]);
+                   // yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[1].timeDifference[0]);
                     _cAnimator.isHit = false;
                     SetHitStateFalse();
                 }
                 else if (last_KD == Attack_KnockDown.HKD)
                 {
                     hasRecovered = true;
-                    _characterHitAnimations.getUp_Anims[0].PlayAnimation(_cAnimator);
-                    yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[2].actionableHitPointInFrames[0]);
-                    _base._cAnimator.myAnim.SetTrigger("HKD");
-                    _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.getUp_Anims[0].actionableHitPointInFrames[0]);
+                    //_characterHitAnimations.getUp_Anims[0].PlayAnimation(_cAnimator);
+                    //yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[2].actionableHitPointInFrames[0]);
+                    //_base._cAnimator.myAnim.SetTrigger("HKD");
+                   // _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.getUp_Anims[0].actionableHitPointInFrames[0]);
                     _cAnimator.EndShake();
                     _cAnimator.isHit = false;
-                    yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[2].timeDifference[0]);
+                    //yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[2].timeDifference[0]);
                     _cAnimator.isHit = false;
                     SetHitStateFalse();
                 }
@@ -533,28 +504,28 @@ public class Character_HitController : MonoBehaviour
         {
             case HitLevel.SlightKnockback:
                 smallHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 0);
-                await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 0);
+                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
                 break;
             case HitLevel.MediumKnockback:
                 smallHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 1);
-                await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 1);
+                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
                 break;
             case HitLevel.SoaringHit:
                 smallHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 2);
-                await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 2);
+                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
                 break;
             case HitLevel.Crumple:
                 bigHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 3);
-                await ReactToBlock(_characterHitAnimations.standingblock_Anims[1], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 3);
+                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[1], attackProperty);
                 break;
             case HitLevel.Spiral:
                 bigHitRecovering = true;
-                ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 4);
-                await ReactToBlock(_characterHitAnimations.standingblock_Anims[1], attackProperty);
+                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 4);
+                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[1], attackProperty);
                 break;
             default:
                 Debug.LogError($"{attackProperty.hitLevel} type hit provided not accounted for in switch case");
@@ -639,6 +610,7 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator BlockRecover()
     {
+        yield return null;
         if (standingBlocking)
         {
             if (!hasRecovered)
@@ -647,7 +619,7 @@ public class Character_HitController : MonoBehaviour
                 _cAnimator.SetShake(false);
                 _cAnimator.EndShake();
                 _cAnimator.isHit = false;
-                yield return new WaitForSeconds(_characterHitAnimations.standingblock_Anims[0].timeDifference[0]);
+                //yield return new WaitForSeconds(_characterHitAnimations.standingblock_Anims[0].timeDifference[0]);
                 SetBlockStateFalse();
             }
         }
@@ -659,7 +631,7 @@ public class Character_HitController : MonoBehaviour
                 _cAnimator.SetShake(false);
                 _cAnimator.EndShake();
                 _cAnimator.isHit = false;
-                yield return new WaitForSeconds(_characterHitAnimations.crouchingblock_Anims[0].timeDifference[0]);
+                //yield return new WaitForSeconds(_characterHitAnimations.crouchingblock_Anims[0].timeDifference[0]);
                 SetBlockStateFalse();
             }
         }
@@ -683,17 +655,13 @@ public class HitAnimationHolder
     public List<HitAnimationField> GroundAnims;
     public List<HitAnimationField> getUp_Anims;
     public List<HitAnimationField> air_HitAnims;
-    public List<HitAnimationField> air_RecoveryAnims;
-    public List<HitAnimationField> standingblock_Anims;
-    public List<HitAnimationField> crouchingblock_Anims;
+    public List<HitAnimationField> block_Anims;
     public void Setup() 
     {
         GroundAnims = new List<HitAnimationField>();
         getUp_Anims = new List<HitAnimationField>();
         air_HitAnims = new List<HitAnimationField>();
-        air_RecveryAnims = new List<HitAnimationField>();
-        standingblock_Anims = new List<HitAnimationField>();
-        crouchingblock_Anims = new List<HitAnimationField>();
+        block_Anims = new List<HitAnimationField>();
     }
 }
 
@@ -706,14 +674,16 @@ public class HitAnimationField
     public string animName;
     public int animHash;
     public HitReactionType hitReactionType;
+    public HitLevel hitLevel;
     public bool isGroundedReaction;
-    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName,HitReactionType _hitReactionType, bool _isGroundedReaction = true) 
+    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName,HitReactionType _hitReactionType, HitLevel _hitLevel, bool _isGroundedReaction = true) 
     {
         anim = _anim;
         animLength = _animLength;
         animName = _animName;
         animHash = Animator.StringToHash(animName);
         hitReactionType = _hitReactionType;
+        hitLevel = _hitLevel;
         isGroundedReaction = _isGroundedReaction;
     }
 }
