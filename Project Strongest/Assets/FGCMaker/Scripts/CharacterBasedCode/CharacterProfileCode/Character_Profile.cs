@@ -51,6 +51,7 @@ public class Character_Profile : ScriptableObject
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public GameObject CharacterModel;
     public HitReactions _hitReactions;
+    public List<CharacterAnimResponse> hitResponseAnimations;
     #endregion
 
     #region Character MoveList Info
@@ -73,6 +74,12 @@ public class Character_Profile : ScriptableObject
         cAnimatorScript = animator;
      
     }
+}
+[Serializable]
+public class CharacterAnimResponse 
+{
+    public AnimationClip _clip;
+    public HitReactionType _hitReactionType;
 }
 
 [Serializable]
