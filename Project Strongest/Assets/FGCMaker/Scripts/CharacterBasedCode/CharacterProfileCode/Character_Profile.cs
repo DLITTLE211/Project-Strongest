@@ -81,7 +81,7 @@ public class CharacterAnimResponse
     public AnimationClip _clip;
     public HitReactionType _hitReactionType;
     public HitLevel _hitResponseLevel;
-    public bool groundedReaction;
+    public bool groundedReaction, isLowResponse;
 }
 
 [Serializable]
