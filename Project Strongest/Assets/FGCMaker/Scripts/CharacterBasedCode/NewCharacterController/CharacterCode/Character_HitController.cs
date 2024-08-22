@@ -39,8 +39,38 @@ public class Character_HitController : MonoBehaviour
     void SetUpHitAnimations()
     {
         _characterTotalHitReactions.Setup();
-           //characterTotalHitReactions = new List<HitAnimationField>();
-        for (int i = 0; i < _characterHitAnimations.air_RecoverAnims.Count; i++)
+        //characterTotalHitReactions = new List<HitAnimationField>();
+        for (int i = 0; i < _base.characterProfile.hitResponseAnimations.Count; i++)
+        {
+            CharacterAnimResponse responseAnim = _base.characterProfile.hitResponseAnimations[i];
+            AnimationClip curClip = _base.characterProfile.hitResponseAnimations[i]._clip;
+            HitAnimationField newHitAnimField = new HitAnimationField(curClip, curClip.length, curClip.name, responseAnim._hitReactionType, responseAnim.groundedReaction);
+            if (newHitAnimField != null) 
+            {
+                _characterTotalHitReactions.GroundAnims.Add(newHitAnimField);
+            }
+            if (newHitAnimField != null)
+            {
+                _characterTotalHitReactions.air_HitAnims.Add(newHitAnimField);
+            }
+            if (newHitAnimField != null)
+            {
+                _characterTotalHitReactions.air_RecoveryAnims.Add(newHitAnimField);
+            }
+            if (newHitAnimField != null)
+            {
+                _characterTotalHitReactions.getUp_Anims.Add(newHitAnimField);
+            }
+            if (newHitAnimField != null)
+            {
+                _characterTotalHitReactions.standingblock_Anims.Add(newHitAnimField);
+            }
+            if (newHitAnimField != null)
+            {
+                _characterTotalHitReactions.crouchingblock_Anims.Add(newHitAnimField);
+            }
+        }
+        /*for (int i = 0; i < _characterHitAnimations.air_RecoverAnims.Count; i++)
         {
             _characterHitAnimations.air_RecoverAnims[i].SetCurrentAnim();
             HitAnimationField newHitAnimField = new HitAnimationField(
@@ -105,7 +135,7 @@ public class Character_HitController : MonoBehaviour
                 _characterHitAnimations.crouchingblock_Anims[i].actionableHitPointInFrames[0] * (1 / 60f),
                 _characterHitAnimations.crouchingblock_Anims[i].reaction);
             //characterTotalHitReactions.Add(newHitAnimField);
-        }
+        }*/
 
         reactionFunctionDictionary = new Dictionary<HitLevel, Callback>();
         for (int i = 0; i < Enum.GetNames(typeof(HitLevel)).Length; i++) 
@@ -174,7 +204,7 @@ public class Character_HitController : MonoBehaviour
         recoverTrigger = false;
         float waitTime = (currentProperty.hitstunValue * (1 / 60f));
         float oneFrame = (1 / 60f);
-        while (waitTime > curField.actionablePointInFrames) 
+        while (waitTime > 0) 
         {
             waitTime -= oneFrame;
             yield return new WaitForSeconds(waitTime);
@@ -653,7 +683,7 @@ public class HitAnimationHolder
     public List<HitAnimationField> GroundAnims;
     public List<HitAnimationField> getUp_Anims;
     public List<HitAnimationField> air_HitAnims;
-    public List<HitAnimationField> air_RecveryAnims;
+    public List<HitAnimationField> air_RecoveryAnims;
     public List<HitAnimationField> standingblock_Anims;
     public List<HitAnimationField> crouchingblock_Anims;
     public void Setup() 
@@ -675,15 +705,13 @@ public class HitAnimationField
     public float animLength;
     public string animName;
     public int animHash;
-    public float actionablePointInFrames;
     public HitReactionType hitReactionType;
     public bool isGroundedReaction;
-    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName,float _actionablePointInFrames, HitReactionType _hitReactionType, bool _isGroundedReaction = true) 
+    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName,HitReactionType _hitReactionType, bool _isGroundedReaction = true) 
     {
         anim = _anim;
         animLength = _animLength;
         animName = _animName;
-        actionablePointInFrames = _actionablePointInFrames;
         animHash = Animator.StringToHash(animName);
         hitReactionType = _hitReactionType;
         isGroundedReaction = _isGroundedReaction;
