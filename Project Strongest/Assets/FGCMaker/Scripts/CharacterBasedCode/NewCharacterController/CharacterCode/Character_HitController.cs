@@ -11,6 +11,7 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private Character_Animator _cAnimator;
     [SerializeField] private Character_Base _base;
     [SerializeField] private Dictionary<HitAnimationField, Callback> characterHitReactions;
+    KeyValuePair<HitAnimationField, Callback> currentReaction;
 
     bool recoverTrigger;
     public bool smallHitRecovering, bigHitRecovering, airRecoverPossible;
@@ -25,42 +26,67 @@ public class Character_HitController : MonoBehaviour
     }
     public void SetCharacterHitReactionDictionary()
     {
-        for (int i = 0; i < _characterHitAnimations.ground_hitAnims.Count; i++)
+        characterHitReactions = new Dictionary<HitAnimationField, Callback>(new HitReactionKeyComparer());
+        try
         {
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                _characterHitAnimations.ground_hitAnims[i].animClip,
-                _characterHitAnimations.ground_hitAnims[i].animLength,
-                _characterHitAnimations.ground_hitAnims[i].animName,
-                _characterHitAnimations.ground_hitAnims[i].actionableHitPointInFrames[0] * (1/60f),
-                _characterHitAnimations.ground_hitAnims[i].reaction);
+            for (int i = 0; i < _characterHitAnimations.ground_hitAnims.Count; i++)
+            {
+                HitAnimationField newHitAnimField = new HitAnimationField(
+                    _characterHitAnimations.ground_hitAnims[i].animClip,
+                    _characterHitAnimations.ground_hitAnims[i].animLength,
+                    _characterHitAnimations.ground_hitAnims[i].animName,
+                    _characterHitAnimations.ground_hitAnims[i].actionableHitPointInFrames[0] * (1 / 60f),
+                    _characterHitAnimations.ground_hitAnims[i].reaction);
+            }
+            for (int i = 0; i < _characterHitAnimations.air_HitAnims.Count; i++)
+            {
+
+            }
+            for (int i = 0; i < _characterHitAnimations.getUp_Anims.Count; i++)
+            {
+
+            }
+            for (int i = 0; i < _characterHitAnimations.standingblock_Anims.Count; i++)
+            {
+
+            }
+            for (int i = 0; i < _characterHitAnimations.crouchingblock_Anims.Count; i++)
+            {
+
+            }
+            for (int i = 0; i < _characterHitAnimations.air_RecoverAnims.Count; i++)
+            {
+
+            }
         }
-        for (int i = 0; i < _characterHitAnimations.air_HitAnims.Count; i++)
+        catch (Exception ex) 
         {
-
+            Debug.LogException(ex);
         }
-        for (int i = 0; i < _characterHitAnimations.getUp_Anims.Count; i++)
-        {
-
-        }
-        for (int i = 0; i < _characterHitAnimations.standingblock_Anims.Count; i++)
-        {
-
-        }
-        for (int i = 0; i < _characterHitAnimations.crouchingblock_Anims.Count; i++)
-        {
-
-        }
-        for (int i = 0; i < _characterHitAnimations.air_RecoverAnims.Count; i++)
-        {
-
-        }
-
-
-
     }
 
-    Callback ReturnCallbackFunction() 
+    Callback ReturnCallbackFunction(HitReactionType type) 
     {
+        if (type == HitReactionType.StandardHit ^ type == HitReactionType.StandardBlock) 
+        {
+
+        }
+        if (type == HitReactionType.KnockdownHit)
+        {
+
+        }
+        if (type == HitReactionType.GuardBreakBlock)
+        {
+
+        }
+        if (type == HitReactionType.GetupReactionQuick)
+        {
+
+        }
+        if (type == HitReactionType.GetupReactionSlow)
+        {
+
+        }
         return null;
     }
     public void SetHitReactions(Character_Animator myAnim,HitReactions newHitReactions) 
@@ -552,6 +578,20 @@ public class Character_HitController : MonoBehaviour
                 SetBlockStateFalse();
             }
         }
+    }
+}
+[SerializeField]
+public class HitReactionKeyComparer : IEqualityComparer<HitAnimationField>
+{
+    public bool Equals(HitAnimationField x, HitAnimationField y)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int GetHashCode(HitAnimationField obj)
+    {
+        int objHash = (int)(obj.hitReactionType.GetHashCode() | obj.animName.GetHashCode());
+        return objHash;
     }
 }
 
