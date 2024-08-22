@@ -9,7 +9,9 @@ public class Character_HitController : MonoBehaviour
 {
     [SerializeField] private HitReactions _characterHitAnimations;
     [SerializeField] private Character_Animator _cAnimator;
-    public Character_Base _base;
+    [SerializeField] private Character_Base _base;
+    [SerializeField] private Dictionary<HitAnimationField, Callback> characterHitReactions;
+
     bool recoverTrigger;
     public bool smallHitRecovering, bigHitRecovering, airRecoverPossible;
     public bool crouchBlocking, standingBlocking;
@@ -17,10 +19,49 @@ public class Character_HitController : MonoBehaviour
     public Attack_KnockDown last_KD;
     private float recoveryTime;
 
-
     public void Start()
     {
         recoveryTime = 0;
+    }
+    public void SetCharacterHitReactionDictionary()
+    {
+        for (int i = 0; i < _characterHitAnimations.ground_hitAnims.Count; i++)
+        {
+            HitAnimationField newHitAnimField = new HitAnimationField(
+                _characterHitAnimations.ground_hitAnims[i].animClip,
+                _characterHitAnimations.ground_hitAnims[i].animLength,
+                _characterHitAnimations.ground_hitAnims[i].animName,
+                _characterHitAnimations.ground_hitAnims[i].actionableHitPointInFrames[0] * (1/60f),
+                _characterHitAnimations.ground_hitAnims[i].reaction);
+        }
+        for (int i = 0; i < _characterHitAnimations.air_HitAnims.Count; i++)
+        {
+
+        }
+        for (int i = 0; i < _characterHitAnimations.getUp_Anims.Count; i++)
+        {
+
+        }
+        for (int i = 0; i < _characterHitAnimations.standingblock_Anims.Count; i++)
+        {
+
+        }
+        for (int i = 0; i < _characterHitAnimations.crouchingblock_Anims.Count; i++)
+        {
+
+        }
+        for (int i = 0; i < _characterHitAnimations.air_RecoverAnims.Count; i++)
+        {
+
+        }
+
+
+
+    }
+
+    Callback ReturnCallbackFunction() 
+    {
+        return null;
     }
     public void SetHitReactions(Character_Animator myAnim,HitReactions newHitReactions) 
     {
@@ -512,4 +553,34 @@ public class Character_HitController : MonoBehaviour
             }
         }
     }
+}
+
+[Serializable]
+public class HitAnimationField 
+{
+    public AnimationClip anim;
+    public float animLength;
+    public string animName;
+    public int animHash;
+    public float actionablePointInFrames;
+    public HitReactionType hitReactionType;
+    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName,float _actionablePointInFrames, HitReactionType _hitReactionType) 
+    {
+        anim = _anim;
+        animLength = _animLength;
+        animName = _animName;
+        actionablePointInFrames = _actionablePointInFrames;
+        animHash = Animator.StringToHash(animName);
+        hitReactionType = _hitReactionType;
+    }
+}
+[Serializable]
+public enum HitReactionType 
+{
+    StandardHit,
+    KnockdownHit,
+    StandardBlock,
+    GuardBreakBlock,
+    GetupReactionQuick,
+    GetupReactionSlow,
 }

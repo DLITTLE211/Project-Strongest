@@ -27,6 +27,7 @@ public class ResponseAnim_Base
     public List<int> actionableHitPoint;
     public List<float> actionableHitPointInFrames;
     public List<float> timeDifference;
+    public HitReactionType reaction;
     public void SetCurrentAnim() 
     {
         animLength = animClip.length;
