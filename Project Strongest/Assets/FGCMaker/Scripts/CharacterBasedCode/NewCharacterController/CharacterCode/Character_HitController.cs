@@ -505,6 +505,11 @@ public class Character_HitController : MonoBehaviour
 
     IEnumerator DoRecovery(Attack_KnockDown knockDownType)
     {
+        if (_base._cHurtBox.IsGrounded())
+        {
+            _base._cAnimator.PlayNextAnimation(Animator.StringToHash("Landing_After_AirHit"), 0, true);
+            yield return new WaitForSeconds(0.4f);
+        }
         HitAnimationField curAnimationField = CheckRecoveryAnim();
         if (knockDownType == Attack_KnockDown.NONE)
         {
