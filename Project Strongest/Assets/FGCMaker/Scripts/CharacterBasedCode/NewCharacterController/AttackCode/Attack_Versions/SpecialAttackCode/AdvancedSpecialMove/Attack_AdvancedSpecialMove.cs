@@ -54,6 +54,14 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     public void PreformAttack(Callback SendAttackOnSucess)
     {
         ResetCombo();
+        if (property._moveType == MoveType.Super)
+        {
+            property.InputTimer.SetTimerType(TimerType.Super);
+        }
+        else 
+        {
+            property.InputTimer.SetTimerType(TimerType.Special);
+        }
         _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);
     }
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUP = null)

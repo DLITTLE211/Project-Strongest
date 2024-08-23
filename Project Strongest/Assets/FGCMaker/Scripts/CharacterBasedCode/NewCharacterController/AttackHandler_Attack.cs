@@ -288,6 +288,10 @@ public class AttackHandler_Attack : AttackHandler_Base
             yield return new WaitForSeconds(waitTime);
         }
         _playerCAnimator.SetCanTransitionIdle(true);
+        if (character._cAttackTimer._type == TimerType.Special) 
+        {
+            character._cAttackTimer.ClearAttackLanded();
+        }
         if (requiredHitboxCallBacks.Count == 1)
         {
             requiredHitboxCallBacks[0].func();

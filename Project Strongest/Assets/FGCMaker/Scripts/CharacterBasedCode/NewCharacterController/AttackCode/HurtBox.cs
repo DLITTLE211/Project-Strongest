@@ -432,7 +432,6 @@ public class HurtBox : CollisionDetection
                     StartCoroutine(thisPlayerForce.DoWallLaunch());
                     Debug.Log("Will Wall Bounce on Hit");
                 }
-                currentHitProperties = null;
             }
 
             else
@@ -456,7 +455,6 @@ public class HurtBox : CollisionDetection
                         thisPlayerForce.DoGroundBounce(currentHitProperties);
                         Debug.Log("Will Ground Bounce");
                     }
-                    currentHitProperties = null;
                 }
             }
         }

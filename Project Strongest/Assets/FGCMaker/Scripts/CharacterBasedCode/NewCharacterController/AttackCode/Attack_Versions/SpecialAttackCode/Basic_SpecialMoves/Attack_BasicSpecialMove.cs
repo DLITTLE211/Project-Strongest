@@ -37,6 +37,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     }*/
     public void PreformAttack(Callback SendAttackOnSucess)
     {
+        property.InputTimer.SetTimerType(TimerType.Special);
         _curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
     }
     public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)

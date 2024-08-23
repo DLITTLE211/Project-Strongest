@@ -79,9 +79,8 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 _type = newType;
                 return;
             }
-            if (newType == TimerType.Super)
+            if (newType == TimerType.Super || newType == TimerType.Throw || newType == TimerType.Special)
             {
-                superLanded = true;
                 SetStartingValues(newTime);
                 _type = newType;
                 return;
@@ -184,6 +183,8 @@ public class Character_InputTimer_Attacks : Character_InputTimer
 public enum TimerType 
 {
     Normal,
+    Throw,
+    Special,
     InRekka,
     InStance,
     Super,

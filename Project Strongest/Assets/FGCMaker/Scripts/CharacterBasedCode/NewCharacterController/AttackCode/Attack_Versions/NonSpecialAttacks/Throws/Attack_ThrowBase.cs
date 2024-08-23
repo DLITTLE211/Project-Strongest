@@ -59,6 +59,7 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
     {
         Attack_BaseProperties newAttack = _attackInput._correctInput[0].property;
         _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
+        _attackInput._correctInput[0].property.InputTimer.SetTimerType(TimerType.Throw);
     }
 
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
