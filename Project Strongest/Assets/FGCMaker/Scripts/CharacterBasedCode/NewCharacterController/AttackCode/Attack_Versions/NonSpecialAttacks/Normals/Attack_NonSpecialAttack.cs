@@ -104,7 +104,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
 
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (followUp.InputTimer != null)
+        if (followUp != null)
         {
             if (!blockedAttack)
             {

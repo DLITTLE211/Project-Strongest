@@ -10,7 +10,6 @@ public class Attack_Manager : MonoBehaviour
     [SerializeField] private Character_Animator _cAnimator;
     public Character_Animator C_Animator { set { _cAnimator = value; } }
     public List<Attack_BaseProperties> Combo;
-    //public Attack_BaseProperties newAttack, lastAttack;
     public int currentCount;
     private bool CanTransitionAnimation;
 
@@ -50,6 +49,10 @@ public class Attack_Manager : MonoBehaviour
             _cAnimator.negativeFrameCount = 0;
             _cAnimator.inStanceState = false;
             _cAnimator.inRekkaState = false;
+            if (_base.comboList3_0 != null)
+            {
+                _base.comboList3_0.ClearAttackData();
+            }
         }
     }
 
@@ -357,14 +360,4 @@ public class Attack_Manager : MonoBehaviour
             _cAnimator.SetNextAttackStartVariables(attack);
         }
     }
-    #region HitBox Management Code
-    /*public void SetHitBoxStartState() 
-    {
-        for (int i = 0; i < hitBoxes.Count; i++) 
-        {
-            hitBoxes[i].SetHitColliderType(hitBoxes[i], HitBoxType.nullified);
-            hitBoxes[i].SetHitboxSize(hitBoxes[i]);
-        }
-    }*/
-    #endregion
 }

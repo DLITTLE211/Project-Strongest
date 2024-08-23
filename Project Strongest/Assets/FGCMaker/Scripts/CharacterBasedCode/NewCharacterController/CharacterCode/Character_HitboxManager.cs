@@ -8,7 +8,7 @@ public class Character_HitboxManager : MonoBehaviour
     public List<HitBox> totalHitBoxes;
     public Transform hitBoxHolder;
     public int hitBoxCount;
-    private int hitBoxIndex;
+    [SerializeField] private int hitBoxIndex;
     public void SetupHitboxes(int playerID) 
     {
         totalHitBoxes = new List<HitBox>();
@@ -47,6 +47,5 @@ public class Character_HitboxManager : MonoBehaviour
     public void DisableCurrentHitbox() 
     {
         totalHitBoxes[hitBoxIndex].DestroyHitbox(totalHitBoxes[hitBoxIndex]);
-        totalHitBoxes[hitBoxIndex].hitboxProperties = null;
     }
 }

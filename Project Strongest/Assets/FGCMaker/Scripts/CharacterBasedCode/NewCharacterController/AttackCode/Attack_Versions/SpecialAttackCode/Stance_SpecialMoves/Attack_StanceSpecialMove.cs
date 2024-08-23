@@ -135,7 +135,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
 
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (followUp.InputTimer != null)
+        if (followUp != null)
         {
             if (!blockedAttack)
             {
@@ -151,26 +151,19 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         {
             if (!blockedAttack)
             {
-                SendCounterHitInfo(target);
-                target._cDamageCalculator.TakeDamage(stanceStartProperty);
+                SendCounterHitInfo(target,main);
+                target._cDamageCalculator.TakeDamage(main);
             }
             else
             {
-                target._cDamageCalculator.TakeChipDamage(stanceStartProperty);
+                target._cDamageCalculator.TakeChipDamage(main);
             }
         }
     }
 
-    public void SendCounterHitInfo(Character_Base target,Attack_BaseProperties followUp = null)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties main)
     {
-        if (followUp.InputTimer != null)
-        {
-            target._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
-        }
-        else
-        {
-            target._cDamageCalculator.ReceiveCounterHitMultiplier(stanceStartProperty.counterHitDamageMult);
-        }
+        target._cDamageCalculator.ReceiveCounterHitMultiplier(main.counterHitDamageMult);
     }
     #endregion
 

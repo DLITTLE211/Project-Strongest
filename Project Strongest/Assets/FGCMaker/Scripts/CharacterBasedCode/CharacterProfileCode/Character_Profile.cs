@@ -82,6 +82,7 @@ public class CharacterAnimResponse
     public HitReactionType _hitReactionType;
     public HitLevel _hitResponseLevel;
     public bool groundedReaction, isLowResponse;
+    public Attack_KnockDown _knockDownLevel;
 }
 
 [Serializable]

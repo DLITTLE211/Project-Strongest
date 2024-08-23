@@ -132,7 +132,7 @@ public class Character_DamageCalculator : MonoBehaviour
     void ApplyScalingForNextAttack(Attack_BaseProperties currentAttack)
     {
         
-        _base._cHitController.HandleHitState(currentAttack, currentAttack.hitstunValue, calculatedScaling);
+        _base._cHitController.HandleHitState(currentAttack,currentAttack.hitstunValue, calculatedScaling);
         if (_oppCounter.CurrentHitCount <= 1)
         {
             calculatedScaling = 0;

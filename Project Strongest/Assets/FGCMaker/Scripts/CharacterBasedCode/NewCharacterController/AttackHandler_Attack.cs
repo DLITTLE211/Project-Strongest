@@ -71,6 +71,10 @@ public class AttackHandler_Attack : AttackHandler_Base
     public void GetPlacementLocation(Character_Base curBase)
     {
         HitBox newHitBox = curBase._cHitboxManager.GetCurrentHitbox();
+        if (newHitBox.hitboxProperties != null) 
+        {
+            newHitBox.hitboxProperties = null;
+        }
         HitBox = newHitBox;
 
         if (character.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)

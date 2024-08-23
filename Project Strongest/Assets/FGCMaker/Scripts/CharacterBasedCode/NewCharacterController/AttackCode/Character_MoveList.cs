@@ -365,6 +365,11 @@ public class Character_MoveList : MonoBehaviour
     {
         followUp = _followUp;
     }
+    public void ClearAttackData() 
+    {
+        currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
+        followUp = null;
+    }
 
     public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack) 
     {

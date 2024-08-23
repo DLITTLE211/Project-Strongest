@@ -105,20 +105,13 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         inRekkaState = true;
     }
-    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUp = null)
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties main)
     {
-        if (followUp.InputTimer != null)
-        {
-            target._cDamageCalculator.ReceiveCounterHitMultiplier(followUp.counterHitDamageMult);
-        }
-        else
-        {
-            target._cDamageCalculator.ReceiveCounterHitMultiplier(rekkaInput.mainAttackProperty.counterHitDamageMult);
-        }
+        target._cDamageCalculator.ReceiveCounterHitMultiplier(main.counterHitDamageMult);
     }
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
     {
-        if (followUp.InputTimer != null)
+        if (followUp != null)
         {
             if (!blockedAttack)
             {
@@ -127,19 +120,19 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             }
             else
             {
-                target._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
+                target._cDamageCalculator.TakeChipDamage(followUp);
             }
         }
         else
         {
             if (!blockedAttack)
             {
-                SendCounterHitInfo(target);
-                target._cDamageCalculator.TakeDamage(followUp);
+                SendCounterHitInfo(target, main);
+                target._cDamageCalculator.TakeDamage(main);
             }
             else
             {
-                target._cDamageCalculator.TakeChipDamage(rekkaInput.mainAttackProperty);
+                target._cDamageCalculator.TakeChipDamage(main);
             }
         }
     }
