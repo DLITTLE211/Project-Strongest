@@ -20,6 +20,9 @@ public class Character_HitController : MonoBehaviour
     private float recoveryTime;
     Attack_BaseProperties currentProperty;
     IEnumerator activeHitResponseRoutine, recoverRoutine;
+    public float currentHitstun,hitStunScaling;
+
+
     List<MoveType> lockMoveTypes = new List<MoveType>()
     {
         MoveType.Counter,
@@ -29,6 +32,8 @@ public class Character_HitController : MonoBehaviour
     };
     public void Start()
     {
+        hitStunScaling = 0;
+        currentHitstun = 0;
         recoveryTime = 0;
     }
     public void SetHitReactions(Character_Animator myAnim,HitReactions newHitReactions) 
@@ -191,13 +196,17 @@ public class Character_HitController : MonoBehaviour
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
         recoverTrigger = false;
-        float waitTime = (currentProperty.hitstunValue * (1 / 60f));
         float oneFrame = (1 / 60f);
-        while (waitTime > 0) 
+        float hitStunInFrames = currentHitstun * oneFrame;
+        _base._cAnimator.PlayNextAnimation(curField.animHash,0,true);
+        _base._cAnimator.SetShake(true);
+        _base._cAnimator.SetCanRecover(true);
+        while (hitStunInFrames > 0) 
         {
-            waitTime -= oneFrame;
-            yield return new WaitForSeconds(waitTime);
+            hitStunInFrames -= (oneFrame + hitStunScaling);
+            yield return new WaitForSeconds(oneFrame);
         }
+        _base._cAnimator.EndShake();
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             if (recoverRoutine != null)
@@ -213,28 +222,19 @@ public class Character_HitController : MonoBehaviour
             {
                 smallHitRecovering = false;
             }
-            if (crouchBlocking)
-            {
-                crouchBlocking = false;
-            }
-            if (standingBlocking)
-            {
-                standingBlocking = false;
-            }
             if (airRecoverPossible)
             {
                 airRecoverPossible = false;
             }
-            _base._cAnimator.SetCanRecover(true);
+            SetRecoverable();
             _base._cHurtBox.SetHurboxState();
         }
     }
     #region Successful Hit Code
-    void MakeRecoverable(float frameCount)
+    void SetRecoverable()
     {
-        Debug.Log(frameCount * 60 + "on init");
         _cAnimator.isHit = false; 
-        _base._cAnimator.SetCanRecover(true);
+        _base._cAnimator.SetCanRecover(false);
         recoverTrigger = true;
     }
     public async Task ReactToHit(ResponseAnim_Base hitanim, Attack_BaseProperties attackProperty)
@@ -251,7 +251,7 @@ public class Character_HitController : MonoBehaviour
         {
             if (frameCount >= (waitTime + hitstunInFrames) && recoverTrigger == false)
             {
-                MakeRecoverable(frameCount);
+                //MakeRecoverable(frameCount);
             }
             frameCount += (1 / 60f);
             await Task.Delay((int)((1 / 60f) * 1000f));
@@ -269,7 +269,7 @@ public class Character_HitController : MonoBehaviour
             await RecoverAfterHit();
         }
     }
-    public void HandleHitState(Attack_BaseProperties attackProperty)
+    public void HandleHitState(Attack_BaseProperties attackProperty, float hitStunValue, float calculatedScaling)
     {
         smallHitRecovering = false;
         bigHitRecovering = false;
@@ -278,7 +278,8 @@ public class Character_HitController : MonoBehaviour
         _cAnimator.isHit = true;
         currentProperty = attackProperty;
         Callback funcCall = null;
-
+        currentHitstun = hitStunValue;
+        hitStunScaling = calculatedScaling;
         if (reactionFunctionDictionary.TryGetValue(currentProperty.hitLevel, out funcCall))
         {
             funcCall();

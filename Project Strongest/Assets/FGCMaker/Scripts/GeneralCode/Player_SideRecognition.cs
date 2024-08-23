@@ -14,7 +14,6 @@ public class Character_Position
     [SerializeField] private Transform CollisionDetectionTransform;
     [SerializeField] private Transform modelTransform;
     public Transform ModelTransform { get { return modelTransform; } }
-    public HitBox[] hitBoxes;
     public HitBox projectile_HitBox;
     public HurtBox extendedHurbox;
     public Transform _targetCharacter;
@@ -98,11 +97,7 @@ public class Character_Position
                 }
             }
         }
-        return ReturnPhysicalSideHitBox();
-    }
-    public HitBox ReturnPhysicalSideHitBox()
-    {
-        return _directionFacing == Character_Face_Direction.FacingRight ? hitBoxes[1] : hitBoxes[0];
+        return null;
     }
     public HurtBox GiveHurtBox()
     {

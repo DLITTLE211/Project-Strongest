@@ -129,8 +129,10 @@ public class Character_DamageCalculator : MonoBehaviour
     }
     #endregion
 
-    void ApplyScalingForNextAttack(Attack_BaseProperties currentAttack) 
+    void ApplyScalingForNextAttack(Attack_BaseProperties currentAttack)
     {
+        
+        _base._cHitController.HandleHitState(currentAttack, currentAttack.hitstunValue, calculatedScaling);
         if (_oppCounter.CurrentHitCount <= 1)
         {
             calculatedScaling = 0;
@@ -139,11 +141,11 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             if (_oppCounter.CurrentHitCount > 7)
             {
-                calculatedScaling = currentAttack.attackScalingPercent * 0.005f;
+                calculatedScaling += currentAttack.attackScalingPercent * 0.005f;
             }
             else
             {
-                calculatedScaling = currentAttack.attackScalingPercent * 0.01f;
+                calculatedScaling += currentAttack.attackScalingPercent * 0.01f;
             }
         }
     }

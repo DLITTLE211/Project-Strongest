@@ -110,11 +110,20 @@ public class State_Idle : BaseState
             {
                 if (_cAnim.CheckAttackAndMobility())
                 {
-                    if ((_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                    if (_base._subState == Character_SubStates.Dummy)
                     {
                         isAnimatingIdle = true;
                         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
                         _base._aManager.ResetMoveHierarchy();
+                    }
+                    else
+                    {
+                        if ((_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                        {
+                            isAnimatingIdle = true;
+                            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+                            _base._aManager.ResetMoveHierarchy();
+                        }
                     }
                 }
                 else 

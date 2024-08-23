@@ -134,6 +134,14 @@ public class CollisionDetection : MonoBehaviour
                 hitboxInfo.currentCollider = boxColliderSpawnPoint.GetComponent<BoxCollider>();
                 hitboxInfo.currentCollider.isTrigger = true;
             }
+            else 
+            {
+                hitboxInfo.currentCollider.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
+                if (!hitboxInfo.currentCollider.isTrigger)
+                {
+                    hitboxInfo.currentCollider.isTrigger = true;
+                }
+            }
         }
         xSize = sizeX;
         ySize = sizeY;

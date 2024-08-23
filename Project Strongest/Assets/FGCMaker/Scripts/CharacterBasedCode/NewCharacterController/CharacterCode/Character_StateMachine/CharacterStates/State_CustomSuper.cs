@@ -10,7 +10,7 @@ public class State_CustomSuper : BaseState
     }
     public override void OnEnter()
     {
-        Attack_BaseProperties hitboxProperty = _base.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
+        Attack_BaseProperties hitboxProperty = _base._cHitboxManager.GetCurrentHitbox().hitboxProperties;
         if (hitboxProperty._moveType == MoveType.Super)
         {
             _base._cComboDetection.inSuper = true;

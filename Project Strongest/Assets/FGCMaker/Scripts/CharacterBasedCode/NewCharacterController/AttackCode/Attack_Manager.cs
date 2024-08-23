@@ -9,7 +9,6 @@ public class Attack_Manager : MonoBehaviour
     public Character_Base _base;
     [SerializeField] private Character_Animator _cAnimator;
     public Character_Animator C_Animator { set { _cAnimator = value; } }
-    public List<HitBox> hitBoxes;
     public List<Attack_BaseProperties> Combo;
     //public Attack_BaseProperties newAttack, lastAttack;
     public int currentCount;
@@ -23,7 +22,6 @@ public class Attack_Manager : MonoBehaviour
     public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } } 
     void Start()
     {
-        SetHitBoxStartState();
         Combo = new List<Attack_BaseProperties>();
         _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
         CanTransitionAnimation = true;
@@ -360,13 +358,13 @@ public class Attack_Manager : MonoBehaviour
         }
     }
     #region HitBox Management Code
-    public void SetHitBoxStartState() 
+    /*public void SetHitBoxStartState() 
     {
         for (int i = 0; i < hitBoxes.Count; i++) 
         {
             hitBoxes[i].SetHitColliderType(hitBoxes[i], HitBoxType.nullified);
             hitBoxes[i].SetHitboxSize(hitBoxes[i]);
         }
-    }
+    }*/
     #endregion
 }
