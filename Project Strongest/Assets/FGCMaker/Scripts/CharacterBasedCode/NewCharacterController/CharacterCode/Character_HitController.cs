@@ -174,7 +174,7 @@ public class Character_HitController : MonoBehaviour
         }
         int randomHitReaction = UnityEngine.Random.Range(0, _characterTotalHitReactions.bigReactions.Count);
         HitAnimationField hitReaction = _characterTotalHitReactions.bigReactions[randomHitReaction];
-        //CheckAndStartHitResponse();
+        CheckAndStartHitResponse(hitReaction);
     }
     void LockHitDetect()
     {
@@ -197,7 +197,7 @@ public class Character_HitController : MonoBehaviour
     {
         recoverTrigger = false;
         float oneFrame = (1 / 60f);
-        float hitStunInFrames = currentHitstun * oneFrame;
+        float hitStunInFrames = curField.animLength + (currentHitstun * oneFrame);
         _base._cAnimator.PlayNextAnimation(curField.animHash,0,true);
         _base._cAnimator.SetShake(true);
         _base._cAnimator.SetCanRecover(true);

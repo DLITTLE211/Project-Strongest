@@ -47,5 +47,6 @@ public class Character_HitboxManager : MonoBehaviour
     public void DisableCurrentHitbox() 
     {
         totalHitBoxes[hitBoxIndex].DestroyHitbox(totalHitBoxes[hitBoxIndex]);
+        totalHitBoxes[hitBoxIndex].hitboxProperties = null;
     }
 }
