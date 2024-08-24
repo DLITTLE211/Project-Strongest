@@ -128,6 +128,7 @@ public enum HitLevel
     Spiral = 32,
     StandardBlock = 64,
     GuardBreak = 128,
+    
 }
 /*
  * SKD = Soft KnockDown
