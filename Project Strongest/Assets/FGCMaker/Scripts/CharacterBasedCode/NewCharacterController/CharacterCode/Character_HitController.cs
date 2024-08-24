@@ -10,7 +10,7 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] private HitAnimationHolder _characterTotalHitReactions;
     [SerializeField] private HitAnimationHolder2 characterTotalHitReactions;
-    Dictionary<HitLevel, Callback> reactionFunctionDictionary;
+    Dictionary<HitLevel, Callback<Attack_BaseProperties>> reactionFunctionDictionary;
 
     bool recoverTrigger;
     public bool smallHitRecovering, bigHitRecovering, airRecoverPossible;
@@ -60,7 +60,8 @@ public class Character_HitController : MonoBehaviour
             characterTotalHitReactions.hitReactions.Add(_base.characterProfile.properHitResponseAnimations[i]);
             characterTotalHitReactions.hitReactions[i].DoAnimationInfoSetup();
         }
-        for (int i = 0; i < _base.characterProfile.hitResponseAnimations.Count; i++)
+
+        /*for (int i = 0; i < _base.characterProfile.hitResponseAnimations.Count; i++)
         {
             CharacterAnimResponse responseAnim = _base.characterProfile.hitResponseAnimations[i];
             AnimationClip curClip = _base.characterProfile.hitResponseAnimations[i]._clip;
@@ -122,8 +123,9 @@ public class Character_HitController : MonoBehaviour
                     continue;
                 }
             }
-        }
-        reactionFunctionDictionary = new Dictionary<HitLevel, Callback>();
+        }*/
+
+        reactionFunctionDictionary = new Dictionary<HitLevel, Callback<Attack_BaseProperties>>();
         for (int i = 0; i < Enum.GetNames(typeof(HitLevel)).Length; i++)
         {
             HitLevel curHitReaction = (HitLevel)i;
@@ -166,43 +168,55 @@ public class Character_HitController : MonoBehaviour
             }
         }
     }
+    HitAnimationField FilterHitReactions() 
+    {
+        for (int i = 0; i < characterTotalHitReactions.hitReactions.Count; i++) 
+        {
 
-    void SmallHitDetect()
+        }
+        return null;
+    }
+
+    void SmallHitDetect(Attack_BaseProperties currentAttack = null)
     {
         if (IsBlocking())
         {
-            BlockHitDetect();
+            BlockHitDetect(currentAttack);
             return;
         }
         if (lockMoveTypes.Contains(currentProperty._moveType))
         {
-            LockHitDetect();
+            LockHitDetect(currentAttack);
             return;
         }
-        List<HitAnimationField> reactionList = CheckCurrentHitState();
+        /*List<HitAnimationField> reactionList = CheckCurrentHitState();
         int randomHitReaction = 0;
         if (reactionList.Count > 1)
         {
             randomHitReaction = UnityEngine.Random.Range(0, reactionList.Count);
+        }*/
+        //HitAnimationField hitReaction = reactionList[randomHitReaction];
+        HitAnimationField hitReaction = FilterHitReactions();
+        if (hitReaction != null)
+        {
+            CheckAndStartHitResponse(hitReaction);
         }
-        HitAnimationField hitReaction = reactionList[randomHitReaction];
-        CheckAndStartHitResponse(hitReaction);
     }
-    void BigHitDetect()
+    void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
         if (IsBlocking())
         {
-            BlockHitDetect();
+            BlockHitDetect(currentAttack);
             return;
         }
         if (lockMoveTypes.Contains(currentProperty._moveType))
         {
-            LockHitDetect();
+            LockHitDetect(currentAttack);
             return;
         }
         int randomHitReaction = 0;
-        HitAnimationField hitReaction = null;
-        if (currentProperty.hitLevel == HitLevel.Crumple)
+        //HitAnimationField hitReaction = null;
+        /*if (currentProperty.hitLevel == HitLevel.Crumple)
         {
             hitReaction = _characterTotalHitReactions.crumpleReaction;
         }
@@ -210,15 +224,30 @@ public class Character_HitController : MonoBehaviour
         {
             randomHitReaction = UnityEngine.Random.Range(0, _characterTotalHitReactions.bigReactions.Count);
             hitReaction = _characterTotalHitReactions.bigReactions[randomHitReaction];
+        }*/
+        HitAnimationField hitReaction = FilterHitReactions();
+        if (hitReaction != null)
+        {
+            CheckAndStartHitResponse(hitReaction);
         }
         CheckAndStartHitResponse(hitReaction);
     }
-    void LockHitDetect()
+    void LockHitDetect(Attack_BaseProperties currentAttack)
     {
+        HitAnimationField hitReaction = FilterHitReactions();
+        if (hitReaction != null)
+        {
+            CheckAndStartHitResponse(hitReaction);
+        }
         //CheckAndStartHitResponse();
     }
-    void BlockHitDetect()
+    void BlockHitDetect(Attack_BaseProperties currentAttack)
     {
+        HitAnimationField hitReaction = FilterHitReactions();
+        if (hitReaction != null)
+        {
+            CheckAndStartHitResponse(hitReaction);
+        }
         //CheckAndStartHitResponse();
     }
     void CheckAndStartHitResponse(HitAnimationField curField)
@@ -323,12 +352,12 @@ public class Character_HitController : MonoBehaviour
         hasRecovered = false;
         _cAnimator.isHit = true;
         currentProperty = currentAttack;
-        Callback funcCall = null;
+        Callback<Attack_BaseProperties> funcCall = null;
         currentHitstun = hitStunValue;
         hitStunScaling = calculatedScaling;
         if (reactionFunctionDictionary.TryGetValue(currentProperty.hitLevel, out funcCall))
         {
-            funcCall();
+            funcCall(currentAttack);
         }
     }
     /*async void SetGroundedHitReaction(Attack_BaseProperties attackProperty)
