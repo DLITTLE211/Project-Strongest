@@ -165,25 +165,6 @@ public class Character_HitController : MonoBehaviour
         return blocking;
     }
 
-    List<HitAnimationField> CheckCurrentHitState()
-    {
-        /* if (!_base._cHurtBox.IsGrounded())
-         {
-             return _characterTotalHitReactions.AirlightReactions;
-         }
-         else
-         {
-             if (_base._cHitboxManager.GetCurrentHitbox().HBType == HitBoxType.Low)
-             {
-                 return _characterTotalHitReactions.lightLowReactions;
-             }
-             else
-             {
-                 return _characterTotalHitReactions.lightHighReactions;
-             }
-         }*/
-        return null;
-    }
     List<HitAnimationField> FilterHitReactions(Attack_BaseProperties currentAttack)
     {
         List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
@@ -238,7 +219,7 @@ public class Character_HitController : MonoBehaviour
                 continue;
             }
         }
-        for (int i = refField.Count-1; i > 0; i--)
+        for (int i = refField.Count-1; i >= 0; i--)
         {
             if (refField[i] == null)
             {
@@ -273,18 +254,14 @@ public class Character_HitController : MonoBehaviour
             LockHitDetect(currentAttack);
             return;
         }
-        /*List<HitAnimationField> reactionList = CheckCurrentHitState();
+        List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
         int randomHitReaction = 0;
-        if (reactionList.Count > 1)
+        if (hitReactionList.Count > 1)
         {
-            randomHitReaction = UnityEngine.Random.Range(0, reactionList.Count);
-        }*/
-        //HitAnimationField hitReaction = reactionList[randomHitReaction];
-        List<HitAnimationField> hitReaction = FilterHitReactions(currentAttack);
-        if (hitReaction.Count < 1)
-        {
-            //CheckAndStartHitResponse(hitReaction);
+            randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count);
         }
+        HitAnimationField hitReaction = hitReactionList[randomHitReaction];
+        CheckAndStartHitResponse(hitReaction);
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
@@ -293,25 +270,20 @@ public class Character_HitController : MonoBehaviour
             LockHitDetect(currentAttack);
             return;
         }
-        if (currentAttack.hitLevel.HasFlag(HitLevel.Crumple)) 
+        if (currentAttack.hitLevel.HasFlag(HitLevel.Crumple))
         {
 
         }
-        int randomHitReaction = 0;
-        //HitAnimationField hitReaction = null;
-        /*if (currentProperty.hitLevel == HitLevel.Crumple)
+        else 
         {
-            hitReaction = _characterTotalHitReactions.crumpleReaction;
-        }
-        else
-        {
-            randomHitReaction = UnityEngine.Random.Range(0, _characterTotalHitReactions.bigReactions.Count);
-            hitReaction = _characterTotalHitReactions.bigReactions[randomHitReaction];
-        }*/
-        List<HitAnimationField> hitReaction = FilterHitReactions(currentAttack);
-        if (hitReaction != null)
-        {
-           // CheckAndStartHitResponse(hitReaction);
+            List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
+            int randomHitReaction = 0;
+            if (hitReactionList.Count > 1)
+            {
+                randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count);
+            }
+            HitAnimationField hitReaction = hitReactionList[randomHitReaction];
+            CheckAndStartHitResponse(hitReaction);
         }
     }
     void LockHitDetect(Attack_BaseProperties currentAttack)
