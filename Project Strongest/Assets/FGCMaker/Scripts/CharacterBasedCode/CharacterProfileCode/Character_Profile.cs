@@ -52,6 +52,7 @@ public class Character_Profile : ScriptableObject
     public GameObject CharacterModel;
     public HitReactions _hitReactions;
     public List<CharacterAnimResponse> hitResponseAnimations;
+    public List<HitAnimationField> properHitResponseAnimations;
     #endregion
 
     #region Character MoveList Info

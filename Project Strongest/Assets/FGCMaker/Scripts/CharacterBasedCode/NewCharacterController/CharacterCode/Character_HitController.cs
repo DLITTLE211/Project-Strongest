@@ -6,10 +6,10 @@ using System;
 
 public class Character_HitController : MonoBehaviour
 {
-    //[SerializeField] private HitReactions _characterHitAnimations;
     [SerializeField] private Character_Animator _cAnimator;
     [SerializeField] private Character_Base _base;
     [SerializeField] private HitAnimationHolder _characterTotalHitReactions;
+    [SerializeField] private HitAnimationHolder2 characterTotalHitReactions;
     Dictionary<HitLevel, Callback> reactionFunctionDictionary;
 
     bool recoverTrigger;
@@ -54,6 +54,12 @@ public class Character_HitController : MonoBehaviour
     void SetUpHitAnimations()
     {
         _characterTotalHitReactions.Setup();
+        characterTotalHitReactions.Setup();
+        for (int i = 0; i < _base.characterProfile.properHitResponseAnimations.Count; i++)
+        {
+            characterTotalHitReactions.hitReactions.Add(_base.characterProfile.properHitResponseAnimations[i]);
+            characterTotalHitReactions.hitReactions[i].DoAnimationInfoSetup();
+        }
         for (int i = 0; i < _base.characterProfile.hitResponseAnimations.Count; i++)
         {
             CharacterAnimResponse responseAnim = _base.characterProfile.hitResponseAnimations[i];
@@ -785,6 +791,16 @@ public class HitAnimationHolder
     }
 }
 
+[Serializable]
+public class HitAnimationHolder2
+{
+    public List<HitAnimationField> hitReactions;
+    public void Setup()
+    {
+        hitReactions = new List<HitAnimationField>();
+    }
+}
+
 
 [Serializable]
 public class HitAnimationField 
@@ -810,6 +826,13 @@ public class HitAnimationField
         isLowReaction = _isLowReaction;
         knockdownAnimType = _knockdownAnimType;
     }
+    public void DoAnimationInfoSetup() 
+    {
+        animLength = anim.length;
+        animName = anim.name;
+        animHash = Animator.StringToHash(animName);
+    }
+    
 }
 [Serializable]
 public enum HitReactionType 

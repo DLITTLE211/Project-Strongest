@@ -229,6 +229,142 @@ MonoBehaviour:
     groundedReaction: 1
     isLowResponse: 0
     _knockDownLevel: 0
+  properHitResponseAnimations:
+  - anim: {fileID: -3977307983880513915, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 6
+  - anim: {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 1
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+  - anim: {fileID: -389730627734710113, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 0
+  - anim: {fileID: 5778651045872708591, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 0
+  - anim: {fileID: 4924918340411067150, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 1
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+  - anim: {fileID: 7237084685499626062, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 2
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 12
+  - anim: {fileID: -7835788572680383352, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 4
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+  - anim: {fileID: 2207197074920698395, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 3
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 8
+  - anim: {fileID: 5532375748658717885, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+  - anim: {fileID: 2896725252375600880, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 8
+  - anim: {fileID: -8144785306977315781, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 2
+  - anim: {fileID: 1004197965378419970, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 0
+  - anim: {fileID: 4796337506762950774, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 0
+  - anim: {fileID: -1131065339644128694, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 0
+  - anim: {fileID: 6069034043394549626, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 0
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 0
   _characterMoveList: {fileID: -3225154758481460539, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}
   moveListCount: 1
   CharacterMoveListPrefab:

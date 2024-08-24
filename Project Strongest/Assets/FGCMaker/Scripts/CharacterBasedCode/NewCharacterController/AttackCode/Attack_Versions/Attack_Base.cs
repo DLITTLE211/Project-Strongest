@@ -131,12 +131,12 @@ public enum HitLevel
  * SKD = Soft KnockDown
  * HKD = Hard KnockDown
  */
-[Serializable]
+[Serializable, Flags]
 public enum Attack_KnockDown
 {
-    NONE,
-    SKD,
-    HKD
+    NONE = 2,
+    SKD = 4,
+    HKD = 8,
 }
 [Serializable]
 public enum AirAttackInfo
