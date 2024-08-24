@@ -503,7 +503,7 @@ public enum HitPointCall
     TeleportForward = 16,
     KillStance = 32,
     ToggleArmor = 64,
-    ToggleInvincible = 125,
+    ToggleInvincible = 128,
     ToggleAntiAir = 256,
     ActivateMobilityAction = 512,
     ClearMobility = 1024,

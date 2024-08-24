@@ -59,7 +59,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 30
       hitstunValue: 25
-      hitLevel: 4
+      hitLevel: 40
       attackHashes: 
       _meterRequirement: 1
       _meterAwardedOnHit: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 2
         Value: 5
-      KnockDown: 1
+      KnockDown: 4
     _customAnimation: []
     movementPortionLength: 0
     finalAttackButton: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 17
       hitstunValue: 12
-      hitLevel: 1
+      hitLevel: 16
       attackHashes: 
       _meterRequirement: 2
       _meterAwardedOnHit: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 2
+      KnockDown: 4
     _customAnimation:
     - playerAnim: {fileID: 0}
       animClip: {fileID: 3872982864370342849, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -752,7 +752,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 1
       hitstunValue: 1
-      hitLevel: 0
+      hitLevel: 2
       attackHashes: 
       _meterRequirement: 3
       _meterAwardedOnHit: 0
@@ -799,7 +799,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
+      KnockDown: 2
     _customAnimation: []
     movementPortionLength: 0
     finalAttackButton: 95
@@ -821,7 +821,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 0
       hitstunValue: 0
-      hitLevel: 0
+      hitLevel: 16
       attackHashes: 
       _meterRequirement: 0
       _meterAwardedOnHit: 0
@@ -916,7 +916,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
+      KnockDown: 8
     _customAnimation:
     - playerAnim: {fileID: 0}
       animClip: {fileID: -4925350466757417409, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -1109,7 +1109,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 0
       hitstunValue: 0
-      hitLevel: 0
+      hitLevel: 16
       attackHashes: 
       _meterRequirement: 0
       _meterAwardedOnHit: 0
@@ -1156,7 +1156,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
+      KnockDown: 8
     _customAnimation:
     - playerAnim: {fileID: 0}
       animClip: {fileID: -211915676100462324, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -1300,7 +1300,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 0
       hitstunValue: 0
-      hitLevel: 0
+      hitLevel: 16
       attackHashes: 
       _meterRequirement: 0
       _meterAwardedOnHit: 0
@@ -1347,7 +1347,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
+      KnockDown: 8
     _customAnimation:
     - playerAnim: {fileID: 0}
       animClip: {fileID: -211915676100462324, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -4548,7 +4548,7 @@ MonoBehaviour:
           counterHitDamageMult: 0
           hitstopValue: 25
           hitstunValue: 1
-          hitLevel: 0
+          hitLevel: 128
           attackHashes: 
           _meterRequirement: 0
           _meterAwardedOnHit: 9
@@ -4595,7 +4595,7 @@ MonoBehaviour:
           verticalKBP:
             verticalKBP: 0
             Value: 0
-          KnockDown: 0
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -4618,7 +4618,7 @@ MonoBehaviour:
           counterHitDamageMult: 0
           hitstopValue: 25
           hitstunValue: 1
-          hitLevel: 0
+          hitLevel: 128
           attackHashes: 
           _meterRequirement: 0
           _meterAwardedOnHit: 9
@@ -4665,7 +4665,7 @@ MonoBehaviour:
           verticalKBP:
             verticalKBP: 0
             Value: 0
-          KnockDown: 0
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -4689,7 +4689,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.038
           hitstopValue: 0
           hitstunValue: 0
-          hitLevel: 0
+          hitLevel: 132
           attackHashes: 
           _meterRequirement: 0
           _meterAwardedOnHit: 5
@@ -4736,7 +4736,7 @@ MonoBehaviour:
           verticalKBP:
             verticalKBP: 0
             Value: 0
-          KnockDown: 0
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -4859,7 +4859,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.038
           hitstopValue: 0
           hitstunValue: 0
-          hitLevel: 0
+          hitLevel: 132
           attackHashes: 
           _meterRequirement: 0
           _meterAwardedOnHit: 5
@@ -4906,7 +4906,7 @@ MonoBehaviour:
           verticalKBP:
             verticalKBP: 0
             Value: 0
-          KnockDown: 0
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -5014,15 +5014,6 @@ MonoBehaviour:
     curAttack: 0
     lastDirection: 0
     _curBase: {fileID: 0}
-  basicSpecialProperties: []
-  rekkaBaseProperties: []
-  rekkaSubAttackProperties: []
-  stanceMainProperties: []
-  stanceAttackProperties: []
-  stanceKillProperties: []
-  counterProperties: []
-  commandThrowProperties: []
-  basicSuperAttackProperties: []
   followUp:
     _attackName: 
     _cTimer: {fileID: 0}

@@ -37,23 +37,6 @@ public class Character_MoveList : MonoBehaviour
     [Space(15)]
     [Header("_____Basic Throws_____")]
     [SerializeField] protected internal List<Attack_ThrowBase> BasicThrows;
-    [Space(15)]
-
-    [Header("Normal Attack Properties Properties")]
-    [Space(15)]
-    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> basicNormalsProperties;
-    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> commandNormalsProperties;
-    [SerializeField] private Dictionary<Attack_BaseProperties, Attack_NonSpecialAttack> StringNormalsProperties;
-    [Space(15)]
-    [SerializeField] private List<Attack_BaseProperties> basicSpecialProperties;
-    [SerializeField] private List<Attack_BaseProperties> rekkaBaseProperties;
-    [SerializeField] private List<Attack_BaseProperties> rekkaSubAttackProperties;
-    [SerializeField] private List<Attack_BaseProperties> stanceMainProperties;
-    [SerializeField] private List<Attack_BaseProperties> stanceAttackProperties;
-    [SerializeField] private List<Attack_BaseProperties> stanceKillProperties;
-    [SerializeField] private List<Attack_BaseProperties> counterProperties;
-    [SerializeField] private List<Attack_BaseProperties> commandThrowProperties;
-    [SerializeField] private List<Attack_BaseProperties> basicSuperAttackProperties;
 
     [Header("KeyValue Property")]
     [Space(15)]

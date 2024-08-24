@@ -118,14 +118,16 @@ public enum Attack_KnockBack_Vertical
     Heavy_KD,
     FullForceGroundBounce,
 }
-[Serializable]
+[Serializable, Flags]
 public enum HitLevel
 {
-    SlightKnockback,
-    MediumKnockback,
-    SoaringHit,
-    Crumple,
-    Spiral,
+    SlightKnockback = 2,
+    MediumKnockback = 4,
+    SoaringHit = 8,
+    Crumple = 16,
+    Spiral = 32,
+    StandardBlock = 64,
+    GuardBreak = 128,
 }
 /*
  * SKD = Soft KnockDown
