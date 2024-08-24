@@ -59,7 +59,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 30
       hitstunValue: 25
-      hitLevel: 40
+      hitLevel: 104
       attackHashes: 
       _meterRequirement: 1
       _meterAwardedOnHit: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 17
       hitstunValue: 12
-      hitLevel: 16
+      hitLevel: 144
       attackHashes: 
       _meterRequirement: 2
       _meterAwardedOnHit: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 25
       hitstunValue: 15
-      hitLevel: 0
+      hitLevel: 80
       attackHashes: 
       _meterRequirement: 3
       _meterAwardedOnHit: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
       counterHitDamageMult: 0
       hitstopValue: 1
       hitstunValue: 1
-      hitLevel: 2
+      hitLevel: 130
       attackHashes: 
       _meterRequirement: 3
       _meterAwardedOnHit: 0
@@ -1557,7 +1557,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
+      KnockDown: 2
     stanceInput:
       _stanceInput:
         attackString: 6323B
@@ -1580,7 +1580,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.65
               hitstopValue: 20
               hitstunValue: 19
-              hitLevel: 4
+              hitLevel: 68
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 0
@@ -1627,7 +1627,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 2
                 Value: 4
-              KnockDown: 0
+              KnockDown: 4
             attackInputState:
               _state: 2
               directionalInput: 0
@@ -1651,7 +1651,7 @@ MonoBehaviour:
         counterHitDamageMult: 1.025
         hitstopValue: 17
         hitstunValue: 14
-        hitLevel: 1
+        hitLevel: 76
         attackHashes: 
         _meterRequirement: 0
         _meterAwardedOnHit: 6
@@ -1698,7 +1698,7 @@ MonoBehaviour:
         verticalKBP:
           verticalKBP: 0
           Value: 0
-        KnockDown: 0
+        KnockDown: 6
       mainAttackInputState:
         _state: 0
         directionalInput: 0
@@ -1717,7 +1717,7 @@ MonoBehaviour:
               counterHitDamageMult: 0
               hitstopValue: 12
               hitstunValue: 10
-              hitLevel: 1
+              hitLevel: 76
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 4
@@ -1764,7 +1764,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 2
                 Value: 7
-              KnockDown: 0
+              KnockDown: 4
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -1782,7 +1782,7 @@ MonoBehaviour:
               counterHitDamageMult: 0
               hitstopValue: 14
               hitstunValue: 10
-              hitLevel: 0
+              hitLevel: 68
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 5
@@ -1829,7 +1829,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 1
                 Value: 2
-              KnockDown: 1
+              KnockDown: 4
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -1923,7 +1923,7 @@ MonoBehaviour:
         verticalKBP:
           verticalKBP: 0
           Value: 0
-        KnockDown: 0
+        KnockDown: 2
       mainAttackInputState:
         _state: 0
         directionalInput: 0
@@ -1942,7 +1942,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.015
               hitstopValue: 25
               hitstunValue: 22
-              hitLevel: 2
+              hitLevel: 152
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 5
@@ -1989,7 +1989,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 2
                 Value: 4
-              KnockDown: 1
+              KnockDown: 4
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -2007,7 +2007,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.065
               hitstopValue: 18
               hitstunValue: 15
-              hitLevel: 2
+              hitLevel: 68
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 4
@@ -2025,7 +2025,7 @@ MonoBehaviour:
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
-                attackType: 0
+                attackType: 1
                 hb_placement: {x: 1.05, y: 1, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
                 hb_size: {x: 0.8, y: 0.75}
@@ -2054,7 +2054,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 1
                 Value: 3
-              KnockDown: 0
+              KnockDown: 6
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -2072,7 +2072,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.035
               hitstopValue: 20
               hitstunValue: 17
-              hitLevel: 1
+              hitLevel: 66
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 6
@@ -2119,7 +2119,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 1
                 Value: 2
-              KnockDown: 0
+              KnockDown: 2
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -2232,7 +2232,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.015
               hitstopValue: 25
               hitstunValue: 22
-              hitLevel: 2
+              hitLevel: 152
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 5
@@ -2279,7 +2279,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 2
                 Value: 4
-              KnockDown: 1
+              KnockDown: 4
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -2297,7 +2297,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.065
               hitstopValue: 18
               hitstunValue: 15
-              hitLevel: 2
+              hitLevel: 68
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 4
@@ -2344,7 +2344,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 1
                 Value: 3
-              KnockDown: 0
+              KnockDown: 4
             attackInputState:
               _state: 0
               directionalInput: 0
@@ -2362,7 +2362,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.035
               hitstopValue: 20
               hitstunValue: 17
-              hitLevel: 1
+              hitLevel: 2
               attackHashes: 
               _meterRequirement: 0
               _meterAwardedOnHit: 6
@@ -2409,7 +2409,7 @@ MonoBehaviour:
               verticalKBP:
                 verticalKBP: 1
                 Value: 2
-              KnockDown: 0
+              KnockDown: 2
             attackInputState:
               _state: 0
               directionalInput: 0
