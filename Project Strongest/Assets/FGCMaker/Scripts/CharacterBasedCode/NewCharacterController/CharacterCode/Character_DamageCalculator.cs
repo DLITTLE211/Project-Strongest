@@ -21,7 +21,7 @@ public class Character_DamageCalculator : MonoBehaviour
     float damageTextAmount;
     public HitPointCall customDamageCall;
     #region Damage Functions
-    public void TakeDamage(CustomDamageField currentAttack, bool finalAttack)
+    public void TakeCustomDamage(CustomDamageField currentAttack, bool finalAttack)
     {
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = currentAttack.rawAttackDamage;
@@ -47,6 +47,17 @@ public class Character_DamageCalculator : MonoBehaviour
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
         _base._cHitController.ForceCustomLockAnim(currentAttack,finalAttack);
+    }
+    public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked) 
+    {
+        if (blocked)
+        {
+            TakeChipDamage(currentAttack);
+        }
+        else
+        {
+            TakeDamage(currentAttack);
+        }
     }
     public void TakeDamage(Attack_BaseProperties currentAttack)
     {

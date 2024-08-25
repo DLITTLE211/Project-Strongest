@@ -48,10 +48,6 @@ public class Character_HitStun : MonoBehaviour
         await Task.Delay(delayTimeIn_MS);
         animSpeed = 1f;
         Messenger.Broadcast<int, string>(Events.SendReturnTime, 0, _cAnimator._base.gameObject.name);
-        /*DOTween.To(() => animSpeed, x => animSpeed = x, 1, hitstunValue / 10).OnComplete(() => 
-        {
-            
-        });*/
 
     }
 

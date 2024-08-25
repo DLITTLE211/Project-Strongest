@@ -56,10 +56,12 @@ MonoBehaviour:
       _attackName: Dash Attack
       _cTimer: {fileID: 0}
       rawAttackDamage: 18
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 30
+      blockStunValue: 0
       hitstunValue: 25
-      hitLevel: 104
+      hitLevel: 72
       attackHashes: 
       _meterRequirement: 1
       _meterAwardedOnHit: 0
@@ -95,7 +97,7 @@ MonoBehaviour:
           lastFrame: 0
           _extraPoints:
           - hitFramePoints: 15
-            call: 4
+            call: 2
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
@@ -120,7 +122,7 @@ MonoBehaviour:
                 Value: 0
               KnockDown: 0
           - hitFramePoints: 15
-            call: 8
+            call: 4
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
@@ -174,8 +176,10 @@ MonoBehaviour:
       _attackName: Triceratops Fist (Startup)
       _cTimer: {fileID: 0}
       rawAttackDamage: 10
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 17
+      blockStunValue: 0
       hitstunValue: 12
       hitLevel: 144
       attackHashes: 
@@ -521,8 +525,10 @@ MonoBehaviour:
       _attackName: 
       _cTimer: {fileID: 0}
       rawAttackDamage: 20
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 25
+      blockStunValue: 0
       hitstunValue: 15
       hitLevel: 80
       attackHashes: 
@@ -766,8 +772,10 @@ MonoBehaviour:
       _attackName: Blood Activation (Super)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 1
+      blockStunValue: 0
       hitstunValue: 1
       hitLevel: 130
       attackHashes: 
@@ -835,8 +843,10 @@ MonoBehaviour:
       _attackName: Spinning Lotus Grab
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 0
+      blockStunValue: 0
       hitstunValue: 0
       hitLevel: 16
       attackHashes: 
@@ -1131,8 +1141,10 @@ MonoBehaviour:
       _attackName: TIger King (Start)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 0
+      blockStunValue: 0
       hitstunValue: 0
       hitLevel: 16
       attackHashes: 
@@ -1326,8 +1338,10 @@ MonoBehaviour:
       _attackName: TIger King (Start)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 0
+      blockStunValue: 0
       hitstunValue: 0
       hitLevel: 16
       attackHashes: 
@@ -1516,8 +1530,10 @@ MonoBehaviour:
       _attackName: Blink Strike (Walk)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
+      rawChipDamage: 0
       counterHitDamageMult: 0
       hitstopValue: 0
+      blockStunValue: 0
       hitstunValue: 0
       hitLevel: 0
       attackHashes: 
@@ -1611,8 +1627,10 @@ MonoBehaviour:
               _attackName: Blink Strike (Release)
               _cTimer: {fileID: 0}
               rawAttackDamage: 18
+              rawChipDamage: 0
               counterHitDamageMult: 1.65
               hitstopValue: 20
+              blockStunValue: 0
               hitstunValue: 19
               hitLevel: 68
               attackHashes: 
@@ -1682,8 +1700,10 @@ MonoBehaviour:
         _attackName: Hanma Assault (Main)
         _cTimer: {fileID: 0}
         rawAttackDamage: 10
+        rawChipDamage: 0
         counterHitDamageMult: 1.025
         hitstopValue: 17
+        blockStunValue: 0
         hitstunValue: 14
         hitLevel: 76
         attackHashes: 
@@ -1748,8 +1768,10 @@ MonoBehaviour:
               _attackName: High Roundhouse
               _cTimer: {fileID: 0}
               rawAttackDamage: 8
+              rawChipDamage: 0
               counterHitDamageMult: 0
               hitstopValue: 12
+              blockStunValue: 0
               hitstunValue: 10
               hitLevel: 76
               attackHashes: 
@@ -1813,8 +1835,10 @@ MonoBehaviour:
               _attackName: Low Sweep
               _cTimer: {fileID: 0}
               rawAttackDamage: 8
+              rawChipDamage: 0
               counterHitDamageMult: 0
               hitstopValue: 14
+              blockStunValue: 0
               hitstunValue: 10
               hitLevel: 68
               attackHashes: 
@@ -1883,8 +1907,10 @@ MonoBehaviour:
         _attackName: Flash Step (Teleport)
         _cTimer: {fileID: 0}
         rawAttackDamage: 0
+        rawChipDamage: 0
         counterHitDamageMult: 0
         hitstopValue: 1
+        blockStunValue: 0
         hitstunValue: 1
         hitLevel: 0
         attackHashes: 
@@ -1974,8 +2000,10 @@ MonoBehaviour:
               _attackName: Flash Step (Multipunch)
               _cTimer: {fileID: 0}
               rawAttackDamage: 20
+              rawChipDamage: 0
               counterHitDamageMult: 1.015
               hitstopValue: 25
+              blockStunValue: 0
               hitstunValue: 22
               hitLevel: 152
               attackHashes: 
@@ -2039,8 +2067,10 @@ MonoBehaviour:
               _attackName: Flash Step (Uppercut)
               _cTimer: {fileID: 0}
               rawAttackDamage: 10
+              rawChipDamage: 0
               counterHitDamageMult: 1.065
               hitstopValue: 18
+              blockStunValue: 0
               hitstunValue: 15
               hitLevel: 68
               attackHashes: 
@@ -2104,8 +2134,10 @@ MonoBehaviour:
               _attackName: Flash Step (NutShot)
               _cTimer: {fileID: 0}
               rawAttackDamage: 12
+              rawChipDamage: 0
               counterHitDamageMult: 1.035
               hitstopValue: 20
+              blockStunValue: 0
               hitstunValue: 17
               hitLevel: 66
               attackHashes: 
@@ -2174,8 +2206,10 @@ MonoBehaviour:
         _attackName: Flash Step (Teleport)
         _cTimer: {fileID: 0}
         rawAttackDamage: 0
+        rawChipDamage: 0
         counterHitDamageMult: 0
         hitstopValue: 1
+        blockStunValue: 0
         hitstunValue: 1
         hitLevel: 0
         attackHashes: 
@@ -2265,8 +2299,10 @@ MonoBehaviour:
               _attackName: Flash Step (Multipunch)
               _cTimer: {fileID: 0}
               rawAttackDamage: 20
+              rawChipDamage: 0
               counterHitDamageMult: 1.015
               hitstopValue: 25
+              blockStunValue: 0
               hitstunValue: 22
               hitLevel: 152
               attackHashes: 
@@ -2330,8 +2366,10 @@ MonoBehaviour:
               _attackName: Flash Step (Uppercut)
               _cTimer: {fileID: 0}
               rawAttackDamage: 10
+              rawChipDamage: 0
               counterHitDamageMult: 1.065
               hitstopValue: 18
+              blockStunValue: 0
               hitstunValue: 15
               hitLevel: 68
               attackHashes: 
@@ -2395,8 +2433,10 @@ MonoBehaviour:
               _attackName: Flash Step (NutShot)
               _cTimer: {fileID: 0}
               rawAttackDamage: 12
+              rawChipDamage: 0
               counterHitDamageMult: 1.035
               hitstopValue: 20
+              blockStunValue: 0
               hitstunValue: 17
               hitLevel: 2
               attackHashes: 
@@ -2462,8 +2502,10 @@ MonoBehaviour:
       _attackName: Strike (Uppercut)
       _cTimer: {fileID: 0}
       rawAttackDamage: 15
+      rawChipDamage: 0
       counterHitDamageMult: 1.065
       hitstopValue: 20
+      blockStunValue: 0
       hitstunValue: 19
       hitLevel: 72
       attackHashes: 
@@ -2527,8 +2569,10 @@ MonoBehaviour:
       _attackName: High Slap
       _cTimer: {fileID: 0}
       rawAttackDamage: 18
+      rawChipDamage: 0
       counterHitDamageMult: 1.045
       hitstopValue: 17
+      blockStunValue: 0
       hitstunValue: 17
       hitLevel: 68
       attackHashes: 
@@ -2592,8 +2636,10 @@ MonoBehaviour:
       _attackName: Low Slap
       _cTimer: {fileID: 0}
       rawAttackDamage: 15
+      rawChipDamage: 0
       counterHitDamageMult: 1.025
       hitstopValue: 17
+      blockStunValue: 0
       hitstunValue: 17
       hitLevel: 68
       attackHashes: 
@@ -2665,8 +2711,10 @@ MonoBehaviour:
           _attackName: 4LP
           _cTimer: {fileID: 0}
           rawAttackDamage: 8
+          rawChipDamage: 0
           counterHitDamageMult: 1.015
           hitstopValue: 7
+          blockStunValue: 0
           hitstunValue: 11
           hitLevel: 68
           attackHashes: 
@@ -2728,8 +2776,10 @@ MonoBehaviour:
           _attackName: 5HP
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
+          rawChipDamage: 0
           counterHitDamageMult: 1.035
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 17
           hitLevel: 68
           attackHashes: 
@@ -2791,8 +2841,10 @@ MonoBehaviour:
           _attackName: 3HK
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
+          rawChipDamage: 0
           counterHitDamageMult: 1.025
           hitstopValue: 12
+          blockStunValue: 0
           hitstunValue: 20
           hitLevel: 76
           attackHashes: 
@@ -2861,8 +2913,10 @@ MonoBehaviour:
           _attackName: Jab
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
+          rawChipDamage: 0
           counterHitDamageMult: 1.005
           hitstopValue: 9
+          blockStunValue: 0
           hitstunValue: 10
           hitLevel: 66
           attackHashes: 
@@ -2924,8 +2978,10 @@ MonoBehaviour:
           _attackName: Liver Kick
           _cTimer: {fileID: 0}
           rawAttackDamage: 12
+          rawChipDamage: 0
           counterHitDamageMult: 1.95
           hitstopValue: 9
+          blockStunValue: 0
           hitstunValue: 17
           hitLevel: 68
           attackHashes: 
@@ -2987,8 +3043,10 @@ MonoBehaviour:
           _attackName: Spinning Heel Shot
           _cTimer: {fileID: 0}
           rawAttackDamage: 14
+          rawChipDamage: 0
           counterHitDamageMult: 1.65
           hitstopValue: 9
+          blockStunValue: 0
           hitstunValue: 18
           hitLevel: 72
           attackHashes: 
@@ -3057,8 +3115,10 @@ MonoBehaviour:
           _attackName: Cross
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
+          rawChipDamage: 0
           counterHitDamageMult: 1.035
           hitstopValue: 8
+          blockStunValue: 0
           hitstunValue: 14
           hitLevel: 68
           attackHashes: 
@@ -3120,8 +3180,10 @@ MonoBehaviour:
           _attackName: Sweeping Knuckle
           _cTimer: {fileID: 0}
           rawAttackDamage: 7
+          rawChipDamage: 0
           counterHitDamageMult: 1.65
           hitstopValue: 9
+          blockStunValue: 0
           hitstunValue: 12
           hitLevel: 66
           attackHashes: 
@@ -3183,8 +3245,10 @@ MonoBehaviour:
           _attackName: Uppercut
           _cTimer: {fileID: 0}
           rawAttackDamage: 7
+          rawChipDamage: 0
           counterHitDamageMult: 1.015
           hitstopValue: 7
+          blockStunValue: 0
           hitstunValue: 14
           hitLevel: 76
           attackHashes: 
@@ -3253,8 +3317,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 6
+          rawChipDamage: 0
           counterHitDamageMult: 1.0035
           hitstopValue: 7
+          blockStunValue: 0
           hitstunValue: 15
           hitLevel: 68
           attackHashes: 
@@ -3316,8 +3382,10 @@ MonoBehaviour:
           _attackName: Ankle Strike
           _cTimer: {fileID: 0}
           rawAttackDamage: 7
+          rawChipDamage: 0
           counterHitDamageMult: 1.018
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 18
           hitLevel: 68
           attackHashes: 
@@ -3379,8 +3447,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
+          rawChipDamage: 0
           counterHitDamageMult: 1.09
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 18
           hitLevel: 68
           attackHashes: 
@@ -3449,8 +3519,10 @@ MonoBehaviour:
           _attackName: Standing Heavy Kick
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
+          rawChipDamage: 0
           counterHitDamageMult: 1.035
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 17
           hitLevel: 68
           attackHashes: 
@@ -3512,8 +3584,10 @@ MonoBehaviour:
           _attackName: Flurry Punches
           _cTimer: {fileID: 0}
           rawAttackDamage: 5
+          rawChipDamage: 0
           counterHitDamageMult: 1.25
           hitstopValue: 12
+          blockStunValue: 0
           hitstunValue: 24
           hitLevel: 68
           attackHashes: 
@@ -3575,8 +3649,10 @@ MonoBehaviour:
           _attackName: Sequence High Kick
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
+          rawChipDamage: 0
           counterHitDamageMult: 1.025
           hitstopValue: 8
+          blockStunValue: 0
           hitstunValue: 16
           hitLevel: 68
           attackHashes: 
@@ -3646,8 +3722,10 @@ MonoBehaviour:
           _attackName: 6LP
           _cTimer: {fileID: 0}
           rawAttackDamage: 5
+          rawChipDamage: 0
           counterHitDamageMult: 1
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 7
           hitLevel: 66
           attackHashes: 
@@ -3716,8 +3794,10 @@ MonoBehaviour:
           _attackName: 6HP
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
+          rawChipDamage: 0
           counterHitDamageMult: 1.05
           hitstopValue: 13
+          blockStunValue: 0
           hitstunValue: 9
           hitLevel: 72
           attackHashes: 
@@ -3786,8 +3866,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
+          rawChipDamage: 0
           counterHitDamageMult: 1.035
           hitstopValue: 11
+          blockStunValue: 0
           hitstunValue: 8
           hitLevel: 68
           attackHashes: 
@@ -3856,8 +3938,10 @@ MonoBehaviour:
           _attackName: 2LK
           _cTimer: {fileID: 0}
           rawAttackDamage: 8
+          rawChipDamage: 0
           counterHitDamageMult: 1.0125
           hitstopValue: 9
+          blockStunValue: 0
           hitstunValue: 4
           hitLevel: 68
           attackHashes: 
@@ -3926,8 +4010,10 @@ MonoBehaviour:
           _attackName: 2HK
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
+          rawChipDamage: 0
           counterHitDamageMult: 1.0125
           hitstopValue: 12
+          blockStunValue: 0
           hitstunValue: 10
           hitLevel: 68
           attackHashes: 
@@ -4022,8 +4108,10 @@ MonoBehaviour:
           _attackName: Crouch Jab
           _cTimer: {fileID: 0}
           rawAttackDamage: 5
+          rawChipDamage: 0
           counterHitDamageMult: 1.0025
           hitstopValue: 5
+          blockStunValue: 0
           hitstunValue: 3
           hitLevel: 66
           attackHashes: 
@@ -4092,8 +4180,10 @@ MonoBehaviour:
           _attackName: Crouch Cross
           _cTimer: {fileID: 0}
           rawAttackDamage: 7
+          rawChipDamage: 0
           counterHitDamageMult: 1.005
           hitstopValue: 6
+          blockStunValue: 0
           hitstunValue: 5
           hitLevel: 68
           attackHashes: 
@@ -4162,8 +4252,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 6
+          rawChipDamage: 0
           counterHitDamageMult: 1.0035
           hitstopValue: 7
+          blockStunValue: 0
           hitstunValue: 3
           hitLevel: 66
           attackHashes: 
@@ -4232,8 +4324,10 @@ MonoBehaviour:
           _attackName: Heavy Sweep
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
+          rawChipDamage: 0
           counterHitDamageMult: 1.03
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 5
           hitLevel: 68
           attackHashes: 
@@ -4302,8 +4396,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 5
+          rawChipDamage: 0
           counterHitDamageMult: 1.003
           hitstopValue: 9
+          blockStunValue: 0
           hitstunValue: 4
           hitLevel: 66
           attackHashes: 
@@ -4372,8 +4468,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 8
+          rawChipDamage: 0
           counterHitDamageMult: 1.008
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 7
           hitLevel: 68
           attackHashes: 
@@ -4442,8 +4540,10 @@ MonoBehaviour:
           _attackName: Jumping Light Kick
           _cTimer: {fileID: 0}
           rawAttackDamage: 8
+          rawChipDamage: 0
           counterHitDamageMult: 1.0035
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 4
           hitLevel: 66
           attackHashes: 
@@ -4512,8 +4612,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 8
+          rawChipDamage: 0
           counterHitDamageMult: 1.02
           hitstopValue: 10
+          blockStunValue: 0
           hitstunValue: 7
           hitLevel: 68
           attackHashes: 
@@ -4582,8 +4684,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
+          rawChipDamage: 0
           counterHitDamageMult: 0
           hitstopValue: 25
+          blockStunValue: 0
           hitstunValue: 1
           hitLevel: 130
           attackHashes: 
@@ -4652,8 +4756,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
+          rawChipDamage: 0
           counterHitDamageMult: 0
           hitstopValue: 25
+          blockStunValue: 0
           hitstunValue: 1
           hitLevel: 130
           attackHashes: 
@@ -4723,8 +4829,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
+          rawChipDamage: 0
           counterHitDamageMult: 1.038
           hitstopValue: 0
+          blockStunValue: 0
           hitstunValue: 0
           hitLevel: 132
           attackHashes: 
@@ -4896,8 +5004,10 @@ MonoBehaviour:
           _attackName: 
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
+          rawChipDamage: 0
           counterHitDamageMult: 1.038
           hitstopValue: 0
+          blockStunValue: 0
           hitstunValue: 0
           hitLevel: 132
           attackHashes: 
@@ -5086,8 +5196,10 @@ MonoBehaviour:
     _attackName: 
     _cTimer: {fileID: 0}
     rawAttackDamage: 0
+    rawChipDamage: 0
     counterHitDamageMult: 0
     hitstopValue: 0
+    blockStunValue: 0
     hitstunValue: 0
     hitLevel: 0
     attackHashes: 

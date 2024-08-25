@@ -26,8 +26,6 @@ public abstract class BaseState : IState
     //protected static readonly int eCblockHash = Animator.StringToHash("ExitCrouchBlock");
     protected static readonly int moveFHash = Animator.StringToHash("Walk_Forward");
     protected static readonly int moveBHash = Animator.StringToHash("Walk_Backward");
-    protected static readonly int dashFHash = Animator.StringToHash("Dash_Forward");
-    protected static readonly int dashBHash = Animator.StringToHash("Dash_Backward");
     protected static readonly int jumpHash = Animator.StringToHash("Jump_Neutral");
     protected const float _crossFade = 0.25f;
 

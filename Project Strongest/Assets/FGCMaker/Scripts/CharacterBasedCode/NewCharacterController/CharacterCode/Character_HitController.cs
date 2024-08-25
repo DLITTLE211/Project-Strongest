@@ -20,6 +20,7 @@ public class Character_HitController : MonoBehaviour
     public Attack_KnockDown last_KD;
     private float recoveryTime;
     Attack_BaseProperties currentProperty;
+    CustomDamageField currentCustomDamageField;
     IEnumerator activeHitResponseRoutine, recoverRoutine;
     public float currentHitstun, hitStunScaling;
 
@@ -93,22 +94,33 @@ public class Character_HitController : MonoBehaviour
         recoverRoutine = null;
         activeHitResponseRoutine = null;
     }
-    bool IsBlocking()
-    {
-        IState currentState = _base._cStateMachine._playerState.current.State;
-        bool blocking = currentState == _base._cStateMachine.crouchBlockRef ^ currentState == _base._cStateMachine.standBlockRef;
-        return blocking;
-    }
 
+    /* bool IsBlocking()
+     {
+         IState currentState = _base._cStateMachine._playerState.current.State;
+         bool blocking = currentState == _base._cStateMachine.crouchBlockRef ^ currentState == _base._cStateMachine.standBlockRef;
+         return blocking;
+     }*/
+
+
+    #region Filter Animation Functions
     List<HitAnimationField> FilterHitReactions(Attack_BaseProperties currentAttack)
     {
         List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
         bool IsGrounded = _base._cHurtBox.IsGrounded();
+
         for (int i = 0; i < refField.Count; i++)
         {
-            bool falseGroundedResponse = IsGrounded && !refField[i].isGroundedReaction;
-            bool falseLowedResponse = refField[i].isLowReaction && currentAttack.AttackAnims.attackType != HitBoxType.Low;
+            bool trueGroundedResponse = IsGrounded && !refField[i].isGroundedReaction;
+            bool falseGroundedResponse = !IsGrounded && refField[i].isGroundedReaction;
+            bool trueLowedResponse = refField[i].isLowReaction && currentAttack.AttackAnims.attackType != HitBoxType.Low;
+            bool falseLowedResponse = !refField[i].isLowReaction && currentAttack.AttackAnims.attackType == HitBoxType.Low;
             if (!(currentAttack.hitLevel.HasFlag(refField[i].hitLevel)))
+            {
+                refField[i] = null;
+                continue;
+            }
+            if (trueGroundedResponse)
             {
                 refField[i] = null;
                 continue;
@@ -118,17 +130,12 @@ public class Character_HitController : MonoBehaviour
                 refField[i] = null;
                 continue;
             }
-            if (!falseGroundedResponse)
+            if (trueLowedResponse)
             {
                 refField[i] = null;
                 continue;
             }
             if (falseLowedResponse)
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (!falseLowedResponse)
             {
                 refField[i] = null;
                 continue;
@@ -144,6 +151,7 @@ public class Character_HitController : MonoBehaviour
                 continue;
             }
         }
+
         for (int i = refField.Count-1; i >= 0; i--)
         {
             if (refField[i] == null)
@@ -155,23 +163,45 @@ public class Character_HitController : MonoBehaviour
         return refField;
     }
 
-    HitAnimationField FilterGroundLockReactions(CustomDamageField currentAttack)
+    HitAnimationField FilterGroundLockReactions(HitLevel _levelOfAttack = default)
     {
         List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
-        for (int i = 0; i < refField.Count; i++)
+        if (currentCustomDamageField != null)
         {
-            if (!refField[i].hitLevel.HasFlag(currentAttack.hitLevel))
+            for (int i = 0; i < refField.Count; i++)
             {
-                refField[i] = null;
-                continue;
+                if (!refField[i].hitLevel.HasFlag(currentCustomDamageField.hitLevel))
+                {
+                    refField[i] = null;
+                    continue;
+                }
+            }
+            for (int i = refField.Count - 1; i >= 0; i--)
+            {
+                if (refField[i] == null)
+                {
+                    refField.RemoveAt(i);
+                }
             }
         }
-        for (int i = refField.Count - 1; i >= 0; i--)
+        else
         {
-            if (refField[i] == null)
+            for (int i = 0; i < refField.Count; i++)
             {
-                refField.RemoveAt(i);
+                if (!_levelOfAttack.HasFlag(refField[i].hitLevel))
+                {
+                    refField[i] = null;
+                    continue;
+                }
             }
+            for (int i = refField.Count - 1; i >= 0; i--)
+            {
+                if (refField[i] == null)
+                {
+                    refField.RemoveAt(i);
+                }
+            }
+
         }
 
         return refField[0];
@@ -193,6 +223,8 @@ public class Character_HitController : MonoBehaviour
         }
         return refField;
     }
+    #endregion
+
 
     void SmallHitDetect(Attack_BaseProperties currentAttack = null)
     {
@@ -207,25 +239,24 @@ public class Character_HitController : MonoBehaviour
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        if (currentAttack.hitLevel.HasFlag(HitLevel.Crumple))
+        if (lockMoveTypes.Contains(currentAttack._moveType)) 
         {
-
+            CallLockedHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
+            return;
         }
-        else 
+        List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
+        int randomHitReaction = 0;
+        if (hitReactionList.Count > 1)
         {
-            List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
-            int randomHitReaction = 0;
-            if (hitReactionList.Count > 1)
-            {
-                randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count);
-            }
-            HitAnimationField hitReaction = hitReactionList[randomHitReaction];
-            CheckAndStartHitResponse(hitReaction);
+            randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count);
         }
+        HitAnimationField hitReaction = hitReactionList[randomHitReaction];
+        CheckAndStartHitResponse(hitReaction);
     }
     void LockHitDetect(CustomDamageField currentAttack, bool finalAttack)
     {
-        HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack);
+        currentCustomDamageField = currentAttack;
+        HitAnimationField hitReaction = FilterGroundLockReactions();
         if (hitReaction != null)
         {
             if (finalAttack) 
@@ -315,7 +346,7 @@ public class Character_HitController : MonoBehaviour
         _base._cAnimator.SetCanRecover(false);
         recoverTrigger = true;
     }
-    public async Task ReactToHit(ResponseAnim_Base hitanim, Attack_BaseProperties attackProperty)
+    /*public async Task ReactToHit(ResponseAnim_Base hitanim, Attack_BaseProperties attackProperty)
     {
         recoverTrigger = false;
         float waitTime = hitanim.actionableHitPointInFrames[0];
@@ -346,8 +377,8 @@ public class Character_HitController : MonoBehaviour
         {
             await RecoverAfterHit();
         }
-    }
-    public void HandleHitState(Attack_BaseProperties currentAttack, float StunValue, float calculatedScaling, bool blockedAttack)
+    }*/
+    public async void HandleHitState(Attack_BaseProperties currentAttack, float StunValue, float calculatedScaling, bool blockedAttack)
     {
         smallHitRecovering = false;
         bigHitRecovering = false;
@@ -358,11 +389,8 @@ public class Character_HitController : MonoBehaviour
         Callback<Attack_BaseProperties> funcCall = null;
         currentHitstun = StunValue;
         hitStunScaling = calculatedScaling;
+        //await _base._cHitstun.ApplyHitStun(StunValue);
         SearchHitResponseDictionary(currentAttack, blockedAttack);
-       /* if (reactionFunctionDictionary.TryGetValue(currentProperty.hitLevel, out funcCall))
-        {
-            funcCall(currentAttack);
-        }*/
     }
     public void ForceCustomLockAnim(CustomDamageField currentAttack, bool finalAttack)
     {
@@ -497,10 +525,10 @@ public class Character_HitController : MonoBehaviour
     {
         if (knockDownType.HasFlag(Attack_KnockDown.SKD) || knockDownType.HasFlag(Attack_KnockDown.HKD))
         {
-            HitAnimationField recoveryAnim = CheckRecoveryAnim();
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
             _base._cAnimator.PlayNextAnimation(Animator.StringToHash("Landing_After_AirHit"), 0, true);
             yield return new WaitForSeconds(0.4f);
+            HitAnimationField recoveryAnim = CheckRecoveryAnim();
             _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
             yield return new WaitForSeconds(recoveryAnim.animLength);
             if (bigHitRecovering)
