@@ -239,10 +239,18 @@ public class Character_HitController : MonoBehaviour
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        if (lockMoveTypes.Contains(currentAttack._moveType) && _base.opponentPlayer.comboList3_0.GetCurrentSuperCustomAnimLength() > 0)
+        if (lockMoveTypes.Contains(currentAttack._moveType))
         {
-            CallLockedHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
-            return;
+            if (_base.opponentPlayer.comboList3_0.GetCurrentSuperCustomAnimLength() > 0)
+            {
+                CallLockedHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
+                return;
+            }
+            else 
+            {
+                CheckAndStartHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
+                return;
+            }
         }
         List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
         int randomHitReaction = 0;
