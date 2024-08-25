@@ -1411,7 +1411,7 @@ MonoBehaviour:
   attackButtons: []
   _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
   _extraMoveControls: []
-  activationCall: 1536
+  activationCall: 768
   xVal: 0
   yVal: 0
   controllerYield:
@@ -1810,6 +1810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curRawDamage: 0
+  curChipDamage: 0
   calculatedDamage: 0
   calculatedRecovDamage: 0
   calculatedScaling: 0
@@ -1821,7 +1822,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
   _damageText: {fileID: 752586224}
-  customDamageCall: 524288
+  customDamageCall: 262144
 --- !u!1 &132508870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,9 +1869,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 993311525}
   _cAnimator: {fileID: 0}
-  hitBoxes:
-  - {fileID: 0}
-  - {fileID: 0}
   Combo: []
   currentCount: 0
   curTypeHierarchy: 0
@@ -3103,8 +3101,10 @@ MonoBehaviour:
     _attackName: 
     _cTimer: {fileID: 0}
     rawAttackDamage: 0
+    rawChipDamage: 0
     counterHitDamageMult: 0
     hitstopValue: 0
+    blockStunValue: 0
     hitstunValue: 0
     hitLevel: 0
     attackHashes: 
@@ -5537,9 +5537,6 @@ MonoBehaviour:
   thisPosition:
     CollisionDetectionTransform: {fileID: 475772376}
     modelTransform: {fileID: 475772376}
-    hitBoxes:
-    - {fileID: 0}
-    - {fileID: 0}
     projectile_HitBox: {fileID: 3267700318180617927, guid: 06750b42c3cef894fbcf0287962a6212, type: 3}
     extendedHurbox: {fileID: 2067993362}
     _targetCharacter: {fileID: 993311515}
@@ -6281,7 +6278,7 @@ MonoBehaviour:
   _base: {fileID: 993311525}
   xVal: 0
   yVal: 0
-  forceHitCall: 32796
+  forceHitCall: 16398
   teleportCall: 64
   isFrozen: 0
   xSpeed: 0
@@ -7205,8 +7202,10 @@ MonoBehaviour:
     _attackName: 
     _cTimer: {fileID: 0}
     rawAttackDamage: 0
+    rawChipDamage: 0
     counterHitDamageMult: 0
     hitstopValue: 0
+    blockStunValue: 0
     hitstunValue: 0
     hitLevel: 0
     attackHashes: 
@@ -7302,13 +7301,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cAnimator: {fileID: 0}
   _base: {fileID: 94923329}
-  _characterTotalHitReactions:
-    AirlightReactions: []
-    lightHighReactions: []
-    lightLowReactions: []
-    bigReactions: []
-    getUp_Anims: []
-    block_Anims: []
+  characterTotalHitReactions:
+    hitReactions: []
+    blockReactions: []
+    getUpReactions: []
   smallHitRecovering: 0
   bigHitRecovering: 0
   airRecoverPossible: 0
@@ -7365,6 +7361,7 @@ MonoBehaviour:
   totalHitBoxes: []
   hitBoxHolder: {fileID: 60956039}
   hitBoxCount: 4
+  hitBoxIndex: 0
 --- !u!1 &639725657
 GameObject:
   m_ObjectHideFlags: 0
@@ -8550,6 +8547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curRawDamage: 0
+  curChipDamage: 0
   calculatedDamage: 0
   calculatedRecovDamage: 0
   calculatedScaling: 0
@@ -8561,7 +8559,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
   _damageText: {fileID: 1216137438}
-  customDamageCall: 524288
+  customDamageCall: 262144
 --- !u!1 &761506510
 GameObject:
   m_ObjectHideFlags: 0
@@ -12337,7 +12335,7 @@ MonoBehaviour:
   attackButtons: []
   _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
   _extraMoveControls: []
-  activationCall: 1536
+  activationCall: 768
   xVal: 0
   yVal: 0
   controllerYield:
@@ -12668,13 +12666,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cAnimator: {fileID: 0}
   _base: {fileID: 993311525}
-  _characterTotalHitReactions:
-    AirlightReactions: []
-    lightHighReactions: []
-    lightLowReactions: []
-    bigReactions: []
-    getUp_Anims: []
-    block_Anims: []
+  characterTotalHitReactions:
+    hitReactions: []
+    blockReactions: []
+    getUpReactions: []
   smallHitRecovering: 0
   bigHitRecovering: 0
   airRecoverPossible: 0
@@ -13190,7 +13185,7 @@ MonoBehaviour:
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
-  forceHitCall: 32796
+  forceHitCall: 16398
   teleportCall: 64
   isFrozen: 0
   xSpeed: 0
@@ -14588,9 +14583,6 @@ MonoBehaviour:
   thisPosition:
     CollisionDetectionTransform: {fileID: 405498831}
     modelTransform: {fileID: 0}
-    hitBoxes:
-    - {fileID: 0}
-    - {fileID: 0}
     projectile_HitBox: {fileID: 0}
     extendedHurbox: {fileID: 599738360}
     _targetCharacter: {fileID: 94923331}
@@ -15877,9 +15869,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 94923329}
   _cAnimator: {fileID: 0}
-  hitBoxes:
-  - {fileID: 0}
-  - {fileID: 0}
   Combo: []
   currentCount: 0
   curTypeHierarchy: 0
@@ -19399,6 +19388,7 @@ MonoBehaviour:
   totalHitBoxes: []
   hitBoxHolder: {fileID: 340028145}
   hitBoxCount: 4
+  hitBoxIndex: 0
 --- !u!1 &1663233168
 GameObject:
   m_ObjectHideFlags: 0
@@ -21800,8 +21790,10 @@ MonoBehaviour:
     _attackName: 
     _cTimer: {fileID: 0}
     rawAttackDamage: 0
+    rawChipDamage: 0
     counterHitDamageMult: 0
     hitstopValue: 0
+    blockStunValue: 0
     hitstunValue: 0
     hitLevel: 0
     attackHashes: 
@@ -22420,8 +22412,10 @@ MonoBehaviour:
     _attackName: 
     _cTimer: {fileID: 0}
     rawAttackDamage: 0
+    rawChipDamage: 0
     counterHitDamageMult: 0
     hitstopValue: 0
+    blockStunValue: 0
     hitstunValue: 0
     hitLevel: 0
     attackHashes: 

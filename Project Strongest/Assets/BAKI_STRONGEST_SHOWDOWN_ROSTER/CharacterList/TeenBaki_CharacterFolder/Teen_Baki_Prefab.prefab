@@ -1048,8 +1048,10 @@ MonoBehaviour:
     _attackName: 
     _cTimer: {fileID: 0}
     rawAttackDamage: 0
+    rawChipDamage: 0
     counterHitDamageMult: 0
     hitstopValue: 0
+    blockStunValue: 0
     hitstunValue: 0
     hitLevel: 0
     attackHashes: 
@@ -1109,9 +1111,9 @@ MonoBehaviour:
   _canRecover: 0
   canTransitionIdle: 0
   currentAttackLevel: 0
-  _freezeCall: 30720
-  _mobilityCall: 1536
-  _attackCall: 34
+  _freezeCall: 15360
+  _mobilityCall: 768
+  _attackCall: 17
   customSuperHit: 0
 --- !u!4 &6419358225984342237 stripped
 Transform:
