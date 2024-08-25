@@ -15,6 +15,7 @@ public interface IAttackFunctionality
     #endregion
 
     #region Virtual Functions
+    virtual int GetCustomAnimLength() { return -1; }
     virtual void DoFollowUpKill(int kill) { }
     virtual void DoFollowUpAttack(Character_ButtonInput buttonInput,int attack, Callback SendAttackOnSucess) { }
     virtual void DoFollowUpAttack(int attack, Callback SendAttackOnSucess) { }

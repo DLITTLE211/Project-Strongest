@@ -43,6 +43,21 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> currentAttack;
     [SerializeField] private Attack_BaseProperties followUp;
 
+    public void SetCurrentAttack(KeyValuePair<AttackInputTypes, IAttackFunctionality> newAttack)
+    {
+        Debug.LogError("Re-Assigned Attack Value in setcurrentattack");
+        currentAttack = newAttack;
+    }
+    public void SetFollowAttack(Attack_BaseProperties _followUp)
+    {
+        followUp = _followUp;
+    }
+    public void ClearAttackData()
+    {
+        Debug.LogError("Cleared attack data");
+        currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
+        followUp = null;
+    }
 
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {
@@ -68,6 +83,10 @@ public class Character_MoveList : MonoBehaviour
         GetCustomSuperSpecials(baseCharacterInfo);
         #endregion
         
+    }
+    public int GetCurrentSuperCustomAnimLength() 
+    {
+        return currentAttack.Value.GetCustomAnimLength();
     }
 
     #region Extract AttackType Functions
@@ -340,23 +359,10 @@ public class Character_MoveList : MonoBehaviour
         }
     }
 
-    public void SetCurrentAttack(KeyValuePair<AttackInputTypes, IAttackFunctionality> newAttack) 
-    {
-        currentAttack = newAttack;
-    }
-    public void SetFollowAttack(Attack_BaseProperties _followUp)
-    {
-        followUp = _followUp;
-    }
-    public void ClearAttackData() 
-    {
-        currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
-        followUp = null;
-    }
 
     public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack) 
     {
-        if (currentAttack.Value != null) 
+        if (currentAttack.Value != null)
         {
             if (followUp != null)
             {

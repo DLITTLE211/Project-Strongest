@@ -100,6 +100,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         }
         return;
     }
+    public int GetCustomAnimLength() 
+    { 
+        return _customAnimation.Count; 
+    }
     public void PlayNextCustomAnim()
     {
         currentCustomAnim++;

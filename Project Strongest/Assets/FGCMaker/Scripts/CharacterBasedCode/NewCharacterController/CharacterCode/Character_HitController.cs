@@ -239,7 +239,7 @@ public class Character_HitController : MonoBehaviour
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        if (lockMoveTypes.Contains(currentAttack._moveType)) 
+        if (lockMoveTypes.Contains(currentAttack._moveType) && _base.opponentPlayer.comboList3_0.GetCurrentSuperCustomAnimLength() > 0)
         {
             CallLockedHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
             return;
