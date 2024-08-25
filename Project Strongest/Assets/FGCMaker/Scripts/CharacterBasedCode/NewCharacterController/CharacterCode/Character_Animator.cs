@@ -148,17 +148,27 @@ public class Character_Animator : MonoBehaviour
     }
     #endregion
 
-    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, int overrideTime = 0)
+    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, int overrideTime = 0, bool lockedHit = false)
     {
-        if (attackOverride)
+        if (lockedHit)
         {
-            shadowAnim.Play(animHash,0, overrideTime);
+            shadowAnim.Play(animHash, 0, overrideTime);
             myAnim.Play(animHash, 0, overrideTime);
+            shadowAnim.StopPlayback();
+            myAnim.StopPlayback();
         }
         else
         {
-            myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
-            shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+            if (attackOverride)
+            {
+                shadowAnim.Play(animHash, 0, overrideTime);
+                myAnim.Play(animHash, 0, overrideTime);
+            }
+            else
+            {
+                myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+                shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+            }
         }
     }
 

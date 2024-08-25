@@ -18,8 +18,10 @@ public class Attack_BaseProperties
     [Space(20)]
     [Header("_______DAMAGE NUMBERS______")]
     public float rawAttackDamage;
+    public float rawChipDamage;
     public float counterHitDamageMult;
     [Range(1, 100)] public int hitstopValue;
+    [Range(1, 50)] public int blockStunValue;
     [Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
     [SerializeField] public List<int> attackHashes;
@@ -55,7 +57,9 @@ public class Attack_BaseProperties
         attackHashes = new List<int>();
         AttackAnims.SetAttackAnim(animator);
         attackHashes.Add(Animator.StringToHash(AttackAnims.animName));
+        rawChipDamage = (rawChipDamage / 10f);
     }
+    
 }
 [Serializable]
 public class CustomDamageField 
@@ -129,7 +133,8 @@ public enum HitLevel
     Spiral = 32,
     StandardBlock = 64,
     GuardBreak = 128,
-    
+    Scorpion = 256,
+
 }
 /*
  * SKD = Soft KnockDown

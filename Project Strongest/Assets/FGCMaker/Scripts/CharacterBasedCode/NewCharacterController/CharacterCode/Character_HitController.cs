@@ -87,6 +87,7 @@ public class Character_HitController : MonoBehaviour
         reactionFunctionDictionary.Add(HitLevel.SoaringHit, BigHitDetect);
         reactionFunctionDictionary.Add(HitLevel.Spiral, BigHitDetect);
         reactionFunctionDictionary.Add(HitLevel.Crumple, BigHitDetect);
+        reactionFunctionDictionary.Add(HitLevel.Scorpion, BigHitDetect);
         reactionFunctionDictionary.Add(HitLevel.StandardBlock, BlockHitDetect);
         reactionFunctionDictionary.Add(HitLevel.GuardBreak, BlockHitDetect);
         recoverRoutine = null;
@@ -229,22 +230,28 @@ public class Character_HitController : MonoBehaviour
         {
             if (finalAttack) 
             {
-
+                CheckAndStartHitResponse(hitReaction);
             }
             else 
             {
-
+                CallLockedHitResponse(hitReaction);
             }
-          //  CheckAndStartHitResponse(hitReaction);
         }
     }
     void BlockHitDetect(Attack_BaseProperties currentAttack)
     {
-        List<HitAnimationField> blockReaction = FilterBlockReactions(currentAttack);
-        if (blockReaction != null)
+        List<HitAnimationField> blockReactionList = FilterBlockReactions(currentAttack);
+        int randomHitReaction = 0;
+        if (blockReactionList.Count > 1)
         {
-           // CheckAndStartHitResponse(hitReaction);
+            randomHitReaction = UnityEngine.Random.Range(0, blockReactionList.Count);
         }
+        HitAnimationField blockReaction = blockReactionList[randomHitReaction];
+        CheckAndStartHitResponse(blockReaction);
+    }
+    void CallLockedHitResponse(HitAnimationField curField)
+    {
+        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
     }
     void CheckAndStartHitResponse(HitAnimationField curField)
     {
