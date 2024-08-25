@@ -57,9 +57,13 @@ public class Attack_BaseProperties
         attackHashes = new List<int>();
         AttackAnims.SetAttackAnim(animator);
         attackHashes.Add(Animator.StringToHash(AttackAnims.animName));
-        rawChipDamage = (rawChipDamage / 10f);
+        SetChipDamageValue();
     }
-    
+    public void SetChipDamageValue()
+    {
+        rawChipDamage = (rawAttackDamage / 10f);
+    }
+
 }
 [Serializable]
 public class CustomDamageField 

@@ -40,6 +40,7 @@ public class Attack_BaseInput
     {
         property.attackHashes.Clear();
         property.AttackAnims.SetAttackAnim(animController);
+        property.SetChipDamageValue();
         property.attackHashes.Add(Animator.StringToHash(property.AttackAnims.animName));
 
     }
