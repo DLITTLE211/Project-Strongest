@@ -21,7 +21,7 @@ public class Character_DamageCalculator : MonoBehaviour
     float damageTextAmount;
     public HitPointCall customDamageCall;
     #region Damage Functions
-    public void TakeDamage(CustomDamageField currentAttack)
+    public void TakeDamage(CustomDamageField currentAttack, bool finalAttack)
     {
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = currentAttack.rawAttackDamage;
@@ -46,6 +46,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+        _base._cHitController.ForceCustomLockAnim(currentAttack,finalAttack);
     }
     public void TakeDamage(Attack_BaseProperties currentAttack)
     {
@@ -83,9 +84,9 @@ public class Character_DamageCalculator : MonoBehaviour
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
         ApplyScalingForNextAttack(currentAttack);
     }
-    public void TakeChipDamage(Attack_BaseProperties _curRawDamage)
+    public void TakeChipDamage(Attack_BaseProperties currentAttack)
     {
-        curRawDamage = _curRawDamage.rawAttackDamage;
+        curRawDamage = currentAttack.rawAttackDamage;
         if (CheckAfflictionState())
         {
             afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
@@ -100,7 +101,7 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : (defenseValue + (currentComboHitCount * _curRawDamage.attackScalingPercent / 100));
+        calculatedScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : (defenseValue + (currentComboHitCount * currentAttack.attackScalingPercent / 100));
         calculatedDamage = ((counterHitValue * curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
         calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
         float calculatedChipDamage = calculatedDamage / 10f;
@@ -114,10 +115,10 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedChipRecovDamage = (calculatedChipDamage / 2) / currentComboHitCount;
         }
 
-        if (_curRawDamage._meterRequirement <= 0)
+        if (currentAttack._meterRequirement <= 0)
         {
-            calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : _curRawDamage._meterAwardedOnHit / (currentComboHitCount * 0.5f);
-            float scaledMeterValue = (Mathf.Abs((_curRawDamage._meterAwardedOnHit - calculatedMeterScaling))) / 100f;
+            calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : currentAttack._meterAwardedOnHit / (currentComboHitCount * 0.5f);
+            float scaledMeterValue = (Mathf.Abs((currentAttack._meterAwardedOnHit - calculatedMeterScaling))) / 100f;
 
             _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
         }
@@ -126,13 +127,13 @@ public class Character_DamageCalculator : MonoBehaviour
         UpdateDamageText(calculatedChipDamage);
 
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedChipRecovDamage));
+        _base._cHitController.HandleHitState(currentAttack, currentAttack.hitstunValue, calculatedScaling, true);
     }
     #endregion
 
     void ApplyScalingForNextAttack(Attack_BaseProperties currentAttack)
     {
-        
-        _base._cHitController.HandleHitState(currentAttack,currentAttack.hitstunValue, calculatedScaling);
+        _base._cHitController.HandleHitState(currentAttack,currentAttack.hitstunValue, calculatedScaling,false);
         if (_oppCounter.CurrentHitCount <= 1)
         {
             calculatedScaling = 0;

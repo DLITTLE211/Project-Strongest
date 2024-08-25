@@ -81,72 +81,6 @@ public class Character_HitController : MonoBehaviour
             }
         }
 
-        #region Old hitResponse Anim
-        /*for (int i = 0; i < _base.characterProfile.hitResponseAnimations.Count; i++)
-        {
-            CharacterAnimResponse responseAnim = _base.characterProfile.hitResponseAnimations[i];
-            AnimationClip curClip = _base.characterProfile.hitResponseAnimations[i]._clip;
-            HitAnimationField newHitAnimField = new HitAnimationField(
-                curClip,
-                curClip.length,
-                curClip.name,
-                responseAnim._hitReactionType,
-                responseAnim._hitResponseLevel,
-                responseAnim.groundedReaction,
-                responseAnim.isLowResponse,
-                responseAnim._knockDownLevel);
-
-            if (newHitAnimField.hitReactionType == HitReactionType.StandardBlock ^ newHitAnimField.hitReactionType == HitReactionType.GuardBreakBlock)
-            {
-                _characterTotalHitReactions.block_Anims.Add(newHitAnimField);
-                continue;
-            }
-            if (newHitAnimField.hitReactionType == HitReactionType.Getup)
-            {
-                _characterTotalHitReactions.getUp_Anims.Add(newHitAnimField);
-                if (newHitAnimField.isGroundedReaction) 
-                {
-                    _characterTotalHitReactions.groundedGetUp_Anims.Add(newHitAnimField);
-                }
-                continue;
-            }
-            else
-            {
-                if (responseAnim._hitResponseLevel == HitLevel.SlightKnockback ^ responseAnim._hitResponseLevel == HitLevel.MediumKnockback)
-                {
-                    if (!responseAnim.groundedReaction)
-                    {
-                        _characterTotalHitReactions.AirlightReactions.Add(newHitAnimField);
-                        continue;
-                    }
-                    else
-                    {
-                        if (!responseAnim.isLowResponse)
-                        {
-                            _characterTotalHitReactions.lightHighReactions.Add(newHitAnimField);
-                            continue;
-                        }
-                        else
-                        {
-                            _characterTotalHitReactions.lightLowReactions.Add(newHitAnimField);
-                            continue;
-                        }
-                    }
-                }
-                else
-                {
-                    if (responseAnim._hitResponseLevel == HitLevel.Crumple)
-                    {
-                        _characterTotalHitReactions.crumpleReaction = newHitAnimField;
-                        continue;
-                    }
-                    _characterTotalHitReactions.bigReactions.Add(newHitAnimField);
-                    continue;
-                }
-            }
-        }*/
-        #endregion
-
         reactionFunctionDictionary = new Dictionary<HitLevel, Callback<Attack_BaseProperties>>();
         reactionFunctionDictionary.Add(HitLevel.SlightKnockback, SmallHitDetect);
         reactionFunctionDictionary.Add(HitLevel.MediumKnockback, SmallHitDetect);
@@ -171,49 +105,39 @@ public class Character_HitController : MonoBehaviour
         bool IsGrounded = _base._cHurtBox.IsGrounded();
         for (int i = 0; i < refField.Count; i++)
         {
+            bool falseGroundedResponse = IsGrounded && !refField[i].isGroundedReaction;
+            bool falseLowedResponse = refField[i].isLowReaction && currentAttack.AttackAnims.attackType != HitBoxType.Low;
             if (!(currentAttack.hitLevel.HasFlag(refField[i].hitLevel)))
             {
                 refField[i] = null;
                 continue;
             }
-            if (IsGrounded)
+            if (falseGroundedResponse)
             {
-                if (!refField[i].isGroundedReaction)
-                {
-                    refField[i] = null;
-                    continue;
-                }
+                refField[i] = null;
+                continue;
             }
-            else
+            if (!falseGroundedResponse)
             {
-                if (refField[i].isGroundedReaction)
-                {
-                    refField[i] = null;
-                    continue;
-                }
+                refField[i] = null;
+                continue;
             }
-            if (refField[i].isLowReaction)
+            if (falseLowedResponse)
             {
-                if (currentAttack.AttackAnims.attackType != HitBoxType.Low)
-                {
-                    refField[i] = null;
-                    continue;
-                }
+                refField[i] = null;
+                continue;
             }
-            else 
+            if (!falseLowedResponse)
             {
-                if (currentAttack.AttackAnims.attackType == HitBoxType.Low)
-                {
-                    refField[i] = null;
-                    continue;
-                }
+                refField[i] = null;
+                continue;
             }
             if (!currentAttack.hitLevel.HasFlag(HitLevel.Spiral) && refField[i].hitLevel == HitLevel.Spiral)
             {
                 refField[i] = null;
                 continue;
             }
-            if (refField[i].hitLevel == HitLevel.Crumple)
+            if (refField[i].hitLevel == HitLevel.Crumple && !currentAttack.hitLevel.HasFlag(HitLevel.Crumple))
             {
                 refField[i] = null;
                 continue;
@@ -228,6 +152,28 @@ public class Character_HitController : MonoBehaviour
         }
 
         return refField;
+    }
+
+    HitAnimationField FilterGroundLockReactions(CustomDamageField currentAttack)
+    {
+        List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
+        for (int i = 0; i < refField.Count; i++)
+        {
+            if (!refField[i].hitLevel.HasFlag(currentAttack.hitLevel))
+            {
+                refField[i] = null;
+                continue;
+            }
+        }
+        for (int i = refField.Count - 1; i >= 0; i--)
+        {
+            if (refField[i] == null)
+            {
+                refField.RemoveAt(i);
+            }
+        }
+
+        return refField[0];
     }
     List<HitAnimationField> FilterBlockReactions(Attack_BaseProperties currentAttack)
     {
@@ -249,11 +195,6 @@ public class Character_HitController : MonoBehaviour
 
     void SmallHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        if (lockMoveTypes.Contains(currentProperty._moveType))
-        {
-            LockHitDetect(currentAttack);
-            return;
-        }
         List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
         int randomHitReaction = 0;
         if (hitReactionList.Count > 1)
@@ -265,11 +206,6 @@ public class Character_HitController : MonoBehaviour
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        if (lockMoveTypes.Contains(currentProperty._moveType))
-        {
-            LockHitDetect(currentAttack);
-            return;
-        }
         if (currentAttack.hitLevel.HasFlag(HitLevel.Crumple))
         {
 
@@ -286,11 +222,19 @@ public class Character_HitController : MonoBehaviour
             CheckAndStartHitResponse(hitReaction);
         }
     }
-    void LockHitDetect(Attack_BaseProperties currentAttack)
+    void LockHitDetect(CustomDamageField currentAttack, bool finalAttack)
     {
-        List<HitAnimationField> hitReaction = FilterHitReactions(currentAttack);
+        HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack);
         if (hitReaction != null)
         {
+            if (finalAttack) 
+            {
+
+            }
+            else 
+            {
+
+            }
           //  CheckAndStartHitResponse(hitReaction);
         }
     }
@@ -396,7 +340,7 @@ public class Character_HitController : MonoBehaviour
             await RecoverAfterHit();
         }
     }
-    public void HandleHitState(Attack_BaseProperties currentAttack, float hitStunValue, float calculatedScaling)
+    public void HandleHitState(Attack_BaseProperties currentAttack, float StunValue, float calculatedScaling, bool blockedAttack)
     {
         smallHitRecovering = false;
         bigHitRecovering = false;
@@ -405,15 +349,19 @@ public class Character_HitController : MonoBehaviour
         _cAnimator.isHit = true;
         currentProperty = currentAttack;
         Callback<Attack_BaseProperties> funcCall = null;
-        currentHitstun = hitStunValue;
+        currentHitstun = StunValue;
         hitStunScaling = calculatedScaling;
-        SearchHitResponseDictionary(currentAttack);
+        SearchHitResponseDictionary(currentAttack, blockedAttack);
        /* if (reactionFunctionDictionary.TryGetValue(currentProperty.hitLevel, out funcCall))
         {
             funcCall(currentAttack);
         }*/
     }
-    void SearchHitResponseDictionary(Attack_BaseProperties attackHitLevel)
+    public void ForceCustomLockAnim(CustomDamageField currentAttack, bool finalAttack)
+    {
+        LockHitDetect(currentAttack, finalAttack);
+    }
+    void SearchHitResponseDictionary(Attack_BaseProperties attackHitLevel,bool blockedAttack)
     {
         KeyValuePair<HitLevel, Callback<Attack_BaseProperties>> entry = new KeyValuePair<HitLevel, Callback<Attack_BaseProperties>>();
         for (int i = 0; i < reactionFunctionDictionary.Count; i++)
@@ -425,7 +373,7 @@ public class Character_HitController : MonoBehaviour
             }
             else 
             {
-                if (IsBlocking())
+                if (blockedAttack)
                 {
                     if (blockTypes.Contains(entry.Key))
                     {
@@ -445,103 +393,7 @@ public class Character_HitController : MonoBehaviour
         }
     }
 
-    /*async void SetGroundedHitReaction(Attack_BaseProperties attackProperty)
-    {
-        switch (attackProperty.hitLevel)
-        {
-            case HitLevel.SlightKnockback:
-                smallHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 0);
-                //await ReactToHit(_characterHitAnimations.ground_hitAnims[0], attackProperty);
-                break;
-            case HitLevel.MediumKnockback:
-                smallHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 1);
-                //await ReactToHit(_characterHitAnimations.ground_hitAnims[1], attackProperty);
-                break;
-            case HitLevel.SoaringHit:
-                bigHitRecovering = true;
-                _base._cHurtBox.ChangeHeightOnDowned();
-                _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 2);
-                //await ReactToHit(_characterHitAnimations.ground_hitAnims[2], attackProperty);
-                break;
-            case HitLevel.Crumple:
-                bigHitRecovering = true;
-                _base._cHurtBox.ChangeHeightOnDowned();
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 3);
-               // await ReactToHit(_characterHitAnimations.ground_hitAnims[3], attackProperty);
-                break;
-            case HitLevel.Spiral:
-                bigHitRecovering = true;
-                _base._cHurtBox.ChangeHeightOnDowned();
-                _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 4);
-                //await ReactToHit(_characterHitAnimations.ground_hitAnims[4], attackProperty);
-                break;
-            default:
-                Debug.LogError($"{attackProperty.hitLevel} type hit provided not accounted for in switch case");
-                Debug.Break();
-                break;
-        }
-    }
-    async void SetAirHitReaction(Attack_BaseProperties attackProperty)
-    {
-        airRecoverPossible = true;
-        switch (attackProperty.hitLevel)
-        {
-            case HitLevel.SlightKnockback:
-                smallHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 0);
-                //await ReactToHit(_characterHitAnimations.air_HitAnims[0], attackProperty);
-                break;
-            case HitLevel.MediumKnockback:
-                smallHitRecovering = true;
-                _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-               // ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1);
-                //await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
-                break;
-            case HitLevel.SoaringHit:
-                bigHitRecovering = true;
-                _base._cHurtBox.ChangeHeightOnDowned();
-                _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1);
-                //await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
-                break;
-            case HitLevel.Crumple:
-                bigHitRecovering = true;
-                airRecoverPossible = false;
-                _base._cHurtBox.ChangeHeightOnDowned();
-                _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.air_HitAnims, 1, Attack_KnockDown.SKD);
-                //await ReactToHit(_characterHitAnimations.air_HitAnims[1], attackProperty);
-                break;
-            case HitLevel.Spiral:
-                bigHitRecovering = true;
-                airRecoverPossible = false;
-                _base._cHurtBox.ChangeHeightOnDowned();
-                _base._cHurtBox.SetHitboxSize(HurtBoxSize.Downed);
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.ground_hitAnims, 4, Attack_KnockDown.SKD);
-                //await ReactToHit(_characterHitAnimations.ground_hitAnims[4], attackProperty);
-                break;
-            default:
-                Debug.LogError($"{attackProperty.hitLevel} type hit provided not accounted for in switch case");
-                Debug.Break();
-                break;
-        }
-    }
-    public void ApplyHitInfo(Attack_BaseProperties attackProperty, List<ResponseAnim_Base> animation ,int level, Attack_KnockDown possibleKnockdown = Attack_KnockDown.NONE) 
-    {
-        animation[level].PlayAnimation(_cAnimator, animation[level].animName);
-        if(possibleKnockdown != Attack_KnockDown.NONE)
-        {
-            last_KD = possibleKnockdown;
-        }
-        else 
-        {
-            last_KD = attackProperty.KnockDown;
-        }
-    }*/
+
 
     public async Task RecoverAfterHit()
     {
@@ -659,57 +511,6 @@ public class Character_HitController : MonoBehaviour
         SetRecoverable();
         _base._cHurtBox.SetHurboxState();
     }
-    IEnumerator DoGetUp()
-    {
-        yield return null; 
-        if (_base._cHurtBox.IsGrounded())
-        {
-            _cAnimator.SetShake(false);
-            SetHurtboxOnHit(last_KD);
-
-            if (!hasRecovered)
-            {
-                if (last_KD == Attack_KnockDown.SKD)
-                {
-                    hasRecovered = true;
-                    //_characterHitAnimations.getUp_Anims[0].PlayAnimation(_cAnimator, _characterHitAnimations.getUp_Anims[0].animName);
-                    //yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[1].actionableHitPointInFrames[0]);
-                    _base._cAnimator.myAnim.SetTrigger("SKD");
-                   // _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.getUp_Anims[1].actionableHitPointInFrames[0]);
-                    _cAnimator.EndShake();
-                    _cAnimator.isHit = false;
-                   // yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[1].timeDifference[0]);
-                    _cAnimator.isHit = false;
-                    SetHitStateFalse();
-                }
-                else if (last_KD == Attack_KnockDown.HKD)
-                {
-                    hasRecovered = true;
-                    //_characterHitAnimations.getUp_Anims[0].PlayAnimation(_cAnimator);
-                    //yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[2].actionableHitPointInFrames[0]);
-                    //_base._cAnimator.myAnim.SetTrigger("HKD");
-                   // _base._cHurtBox.ChangeHeightOnStanding(_characterHitAnimations.getUp_Anims[0].actionableHitPointInFrames[0]);
-                    _cAnimator.EndShake();
-                    _cAnimator.isHit = false;
-                    //yield return new WaitForSeconds(_characterHitAnimations.getUp_Anims[2].timeDifference[0]);
-                    _cAnimator.isHit = false;
-                    SetHitStateFalse();
-                }
-            }
-        }
-        else
-        {
-            if (!hasRecovered)
-            {
-              //  StartCoroutine(RecallGetUp());
-            }
-        }
-    }
-    IEnumerator RecallGetUp() 
-    {
-        yield return new WaitForSeconds(1 / 60f);
-        //StartCoroutine(DoGetUp());
-    }
     public void SetHitStateFalse()
     {
         if(smallHitRecovering) 
@@ -725,7 +526,7 @@ public class Character_HitController : MonoBehaviour
     }
     public void SetHurtboxOnHit(Attack_KnockDown knockDown)
     {
-        switch (knockDown) 
+        switch (knockDown)
         {
             case Attack_KnockDown.HKD:
                 _base._cHurtBox.SetHurboxState(HurtBoxType.HardKnockdown);

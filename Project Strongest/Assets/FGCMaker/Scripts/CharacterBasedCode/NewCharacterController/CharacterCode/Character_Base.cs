@@ -365,7 +365,7 @@ public class Character_Base : MonoBehaviour
                 switch (callback.customCall)
                 {
                     case HitPointCall.DealCustomDamage:
-                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage, callback.customDamage.isFinalAttack);
                         break;
                 }
             }
@@ -407,7 +407,7 @@ public class Character_Base : MonoBehaviour
                 switch (waitingCheck.awaitingCheck)
                 {
                     case HitPointCall.DealCustomDamage:
-                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage);
+                        opponentPlayer._cDamageCalculator.TakeDamage(callback.customDamage, callback.customDamage.isFinalAttack);
                         break;
                 }
             }
