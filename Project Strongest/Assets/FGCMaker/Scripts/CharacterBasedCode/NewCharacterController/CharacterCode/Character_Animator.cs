@@ -304,6 +304,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(BasicAttackRoutine);
             BasicAttackRoutine = null;
         }
+        lastAttack.AttackAnims.SetIsFollowUpAttack(false);
         PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate));
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
@@ -316,6 +317,7 @@ public class Character_Animator : MonoBehaviour
             BasicAttackRoutine = null;
         }
         lastAttack = throwProperty;
+        throwCustom.SetIsFollowUpAttack(true);
         PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
         ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
         StartCoroutine(ThrowAttackRoutine);
@@ -331,6 +333,12 @@ public class Character_Animator : MonoBehaviour
         customSuperHit = true;
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
         PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate));
+        superCustom.SetIsFollowUpAttack(true);
+        if (SuperAttackRoutine != null) 
+        {
+            StopCoroutine(SuperAttackRoutine);
+            SuperAttackRoutine = null;
+        }
         SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, curAnim, animCount, nextAnimIterator);
         StartCoroutine(SuperAttackRoutine);
     }
@@ -397,6 +405,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(SuperAttackRoutine);
             SuperAttackRoutine = null;
         }
+        _base._cHitboxManager.IterateHitBox();
     }
     public void NullifyMobilityOption()
     {

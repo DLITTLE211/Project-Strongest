@@ -351,7 +351,7 @@ public class HurtBox : CollisionDetection
         {
             if (_hitbox.HBType != HitBoxType.nullified)
             {
-                Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetCurrentHitbox().hitboxProperties;
+                Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
 
                 currentAttack.hitConnected = true;
                 Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
@@ -408,7 +408,7 @@ public class HurtBox : CollisionDetection
         
         if (_hitbox.HBType != HitBoxType.nullified)
         {
-            Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetCurrentHitbox().hitboxProperties;
+            Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
             currentAttack.hitConnected = true;
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
             await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);

@@ -12,7 +12,8 @@ public class State_Attacking : BaseState
     { }
     public override void OnEnter()
     {
-        switch (_base._cAnimator.lastAttack._moveType)
+        Attack_BaseProperties hitboxProperty = _base._cHitboxManager.GetActiveHitBox().hitboxProperties;
+        switch (hitboxProperty._moveType)
         {
             case MoveType.Rekka:
                 SetRekka();

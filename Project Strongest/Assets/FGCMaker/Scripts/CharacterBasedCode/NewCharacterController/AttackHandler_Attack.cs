@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEditor;
+using System.Collections.Generic;
 
-[System.Serializable]
+[Serializable]
 public class AttackHandler_Attack : AttackHandler_Base
 {
     #region HitBox Variables
@@ -24,6 +22,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     [SerializeField] internal Vector3 hu_placement;
     [SerializeField] internal Vector3 hu_orientation = new Vector3(0, 0, 0);
     [SerializeField] internal Vector2 hu_size;
+    [Space(15)]
     #endregion
 
     private Character_Base character;
@@ -35,13 +34,17 @@ public class AttackHandler_Attack : AttackHandler_Base
 
     List<RequiredCallback> requiredHitboxCallBacks;
     List<CustomCallback> customHitboxCallBacks;
+
     bool init;
     bool startup;
     bool active;
     bool inactive;
     bool lastFrame;
-
-
+    bool isFollowUpAttack;
+    public void SetIsFollowUpAttack(bool state) 
+    {
+        isFollowUpAttack = state;
+    }
 
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
@@ -70,10 +73,14 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public void GetPlacementLocation(Character_Base curBase)
     {
-        HitBox newHitBox = curBase._cHitboxManager.GetCurrentHitbox();
-        if (newHitBox.hitboxProperties != null) 
+        HitBox newHitBox = curBase._cHitboxManager.GetActiveHitBox();
+
+        if (HitBox != null)
         {
-            newHitBox.hitboxProperties = null;
+            if (HitBox.hitboxProperties != null)
+            {
+                HitBox.hitboxProperties = null;
+            }
         }
         HitBox = newHitBox;
 
@@ -100,6 +107,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         init = true;
         GetPlacementLocation(curBase);
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
+
         if (newAttackProperties != null)
         {
             HitBox.SetHitBoxProperties(newAttackProperties);
@@ -113,7 +121,14 @@ public class AttackHandler_Attack : AttackHandler_Base
         startup = true;
         extendedHitBox.ActivateHurtbox(extendedHitBox);
         character._cHurtBox.SetHurboxState(extendedHitBox.huBType);
-        HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
+        try
+        {
+            HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
+        }
+        catch (Exception) 
+        {
+
+        }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
     }
     public override void OnStay(Character_Base curBase)
@@ -297,13 +312,6 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        if (lastAttack._moveType == MoveType.Super)
-        {
-            if (character._cAttackTimer._type == TimerType.Super)
-            {
-                character._cAttackTimer.ClearSuperLanded();
-            }
-        }
         if (lastAttack._moveType == MoveType.Throw)
         {
             if (!lastAttack.hitConnected)
@@ -316,7 +324,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
         }
     }
-    public IEnumerator TickAnimCustomCount(AttackHandler_Attack throwProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
+    public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
         frameCount = 0;
         if (!_playerCAnimator.canTick)
@@ -332,7 +340,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        while (frameCount <= throwProp.animLength)
+        while (frameCount <= customProp.animLength)
         {
             try
             {
@@ -352,6 +360,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                         float curCustomTimeStamp = waitTime * customHitboxCallBacks[0].timeStamp;
                         if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
+                            Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
                             character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
                             customHitboxCallBacks.RemoveAt(0);
                         }
@@ -361,17 +370,23 @@ public class AttackHandler_Attack : AttackHandler_Base
             catch (Exception e)
             {
                 Debug.LogError(e.ToString());
-                frameCount = throwProp.animLength + 1f;
+                frameCount = customProp.animLength + 1f;
                 Debug.Log("Null Check");
-                Debug.Log($"Inactive frame: {throwProp._frameData.inactive}");
-                Debug.Log($"Last Attack null?: {throwProp == null}");
+                Debug.Log($"Inactive frame: {customProp._frameData.inactive}");
+                Debug.Log($"Last Attack null?: {customProp == null}");
                 Debug.Log($"Inactive bool state: {inactive}");
                 Debug.Break();
             }
             frameCount += 1f * waitTime;
             yield return new WaitForSeconds(waitTime);
         }
-        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        Attack_BaseProperties thisAttack = character._cHitboxManager.GetActiveHitBox().hitboxProperties;
+        if (thisAttack._moveType == MoveType.Throw)
+        {
+            character._cAttackTimer.ClearThrowLanded();
+            _playerCAnimator.SetCanTransitionIdle(true);
+        }
+        if (thisAttack._moveType == MoveType.Super)
         {
             if (curAnim >= animCount)
             {
@@ -379,20 +394,12 @@ public class AttackHandler_Attack : AttackHandler_Base
                 _playerCAnimator.SetCanTransitionIdle(true);
             }
         }
-        else
-        {
-            if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
-            {
-                character._cAttackTimer.ClearThrowLanded();
-            }
-            _playerCAnimator.SetCanTransitionIdle(true);
-        }
         if (requiredHitboxCallBacks.Count == 1)
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        _playerCAnimator.CountUpNegativeFrames(throwProp._frameData.recovery);
+        _playerCAnimator.CountUpNegativeFrames(customProp._frameData.recovery);
     }
 }
 
@@ -467,7 +474,16 @@ public class CustomCallback
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
     public CustomDamageField customDamage;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null, AwaitClass _awaitEnum = null)
+    public CustomCallback (HitPointCall _customCall, 
+        float _timeStamp, 
+        bool _funcBool, 
+        Vector3 position, 
+        Vector3 rotation, 
+        float _forceFloat = -1, 
+        float _projectileFloat = -1, 
+        bool isSnapping = false, 
+        CustomDamageField _customDamage = null, 
+        AwaitClass _awaitEnum = null)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;

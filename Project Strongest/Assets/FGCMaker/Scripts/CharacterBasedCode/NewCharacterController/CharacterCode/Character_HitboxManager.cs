@@ -33,15 +33,17 @@ public class Character_HitboxManager : MonoBehaviour
         }
         hitBoxIndex = 0;
     }
-
-    public HitBox GetCurrentHitbox() 
+    public void IterateHitBox() 
     {
-        if(hitBoxIndex >= totalHitBoxes.Count) 
+        hitBoxIndex++;
+    }
+    public HitBox GetActiveHitBox() 
+    {
+        if (hitBoxIndex >= totalHitBoxes.Count)
         {
             hitBoxIndex = 0;
         }
         HitBox currentHitbox = totalHitBoxes[hitBoxIndex];
-        hitBoxIndex++;
         return currentHitbox;
     }
     public void DisableCurrentHitbox() 

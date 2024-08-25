@@ -56,6 +56,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         ResetCombo();
         if (property._moveType == MoveType.Super)
         {
+            ResetCombo();
             property.InputTimer.SetTimerType(TimerType.Super);
         }
         else 
@@ -89,7 +90,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {
-        if (_customAnimation.Count > 0)
+        if (currentCustomAnim <= _customAnimation.Count-1)
         {
             _customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
             _customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);

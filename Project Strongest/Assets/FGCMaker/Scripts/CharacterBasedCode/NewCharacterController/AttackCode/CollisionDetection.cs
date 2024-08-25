@@ -176,7 +176,10 @@ public class CollisionDetection : MonoBehaviour
         _hitbox.transform.localPosition = _position;
         _hitbox.transform.localRotation = _rotate;
         _hitbox.HBType = _hitType;
-        SetHitboxState(_hitbox.hitboxProperties.AttackAnims.attackType);
+        if (_hitbox.hitboxProperties != null)
+        {
+            SetHitboxState(_hitbox.hitboxProperties.AttackAnims.attackType);
+        }
         if (!_hitbox.gameObject.activeInHierarchy) 
         {
             _hitbox.gameObject.SetActive(true);
