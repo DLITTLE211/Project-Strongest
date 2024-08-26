@@ -107,7 +107,6 @@ public class AttackHandler_Attack : AttackHandler_Base
         init = true;
         GetPlacementLocation(curBase);
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
-
         if (newAttackProperties != null)
         {
             HitBox.SetHitBoxProperties(newAttackProperties);
@@ -120,6 +119,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         startup = true;
         extendedHitBox.ActivateHurtbox(extendedHitBox);
+        extendedHitBox.SetHurtboxState(extendedHitBox.huBType);
         character._cHurtBox.SetHurboxState(extendedHitBox.huBType);
         try
         {
@@ -310,6 +310,10 @@ public class AttackHandler_Attack : AttackHandler_Base
         if (character._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
         {
             character._cAttackTimer.ClearSuperLanded();
+        }
+        if (character._cAttackTimer._type == TimerType.Throw && lastAttack._moveType == MoveType.Throw)
+        {
+            character._cAttackTimer.ClearThrowLanded();
         }
         if (requiredHitboxCallBacks.Count == 1)
         {

@@ -14,51 +14,11 @@ public class HurtBox : CollisionDetection
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
     {
         SetHurtBoxSize(0,0,false,ColliderType.Trigger,hu_Sizing);
+        SetHurtboxState(huBType);
     }
     public void SetCounterMoveProperty(Attack_BaseProperties counterProperty) 
     {
         CounterMoveProperty = counterProperty;
-    }
-    void FixedUpdate()
-    {
-        CheckDefenseState();
-    }
-    public void CheckDefenseState()
-    {
-        switch (huBType)
-        {
-            case HurtBoxType.NoBlock:
-                SetRendererColor(new Color32(255, 0, 170, 95)); //Pink
-                break;
-            case HurtBoxType.BlockLow:
-                SetRendererColor(new Color32(102, 222, 255, 95)); //Teal
-                break;
-            case HurtBoxType.BlockHigh:
-                SetRendererColor(new Color32(197, 255, 102, 95)); //Lime Green
-                break;
-            case HurtBoxType.ParryLow:
-                SetRendererColor(new Color32(236, 220, 188, 95)); //Tan
-                break;
-            case HurtBoxType.ParryHigh:
-                SetRendererColor(new Color32(155, 97, 52, 95)); //Brown
-                break;
-            case HurtBoxType.SoftKnockdown:
-                SetRendererColor(new Color32(57, 207, 255, 95)); //Skyblue
-                break;
-            case HurtBoxType.HardKnockdown:
-                SetRendererColor(new Color32(135, 135, 135, 95)); //grey
-                break;
-            case HurtBoxType.Invincible:
-                SetRendererColor(new Color32(255, 255, 255, 95)); //White
-                break;
-            case HurtBoxType.Armor:
-                SetRendererColor(new Color32(188, 106, 106, 95)); //Off Red
-                break;
-            default:
-                DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HurtboxType Detected.");
-                break;
-        }
-        SetText($"Current HurtboxType: {huBType}");
     }
     #region Multi-Hit Functions
     #region Hit Portion Functions

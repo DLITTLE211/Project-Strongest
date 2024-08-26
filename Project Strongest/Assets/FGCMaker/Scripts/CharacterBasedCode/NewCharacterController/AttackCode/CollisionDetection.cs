@@ -50,6 +50,7 @@ public class CollisionDetection : MonoBehaviour
     public CollisionType collisionType;
     public bool allowHitCheck;
     private Dictionary<HitBoxType, Color> hitboxColor = new Dictionary<HitBoxType, Color>();
+    private Dictionary<HurtBoxType, Color32> hurtboxColor = new Dictionary<HurtBoxType, Color32>();
     private void Start()
     {
         allowHitCheck = false;
@@ -67,12 +68,40 @@ public class CollisionDetection : MonoBehaviour
         hitboxColor.Add(HitBoxType.nullified, Color.black);
         hitboxColor.Add(HitBoxType.CommandGrab_Air, Color.magenta);
     }
-    void SetHitboxState(HitBoxType _hitProperty)
+    public void SetupHurtboxDictionary()
+    {
+        hurtboxColor = new Dictionary<HurtBoxType, Color32>();
+        hurtboxColor.Add(HurtBoxType.NoBlock, Color.magenta);
+        hurtboxColor.Add(HurtBoxType.BlockHigh, Color.blue);
+        hurtboxColor.Add(HurtBoxType.BlockLow, Color.red);
+        hurtboxColor.Add(HurtBoxType.ParryLow, Color.yellow);
+        hurtboxColor.Add(HurtBoxType.ParryHigh, Color.green);
+        hurtboxColor.Add(HurtBoxType.SoftKnockdown, Color.grey);
+        hurtboxColor.Add(HurtBoxType.HardKnockdown, Color.white);
+        hurtboxColor.Add(HurtBoxType.Invincible, Color.black);
+        hurtboxColor.Add(HurtBoxType.Armor, Color.clear);
+        hurtboxColor.Add(HurtBoxType.FullParry, Color.cyan);
+    }
+    public void SetHitboxState(HitBoxType _hitProperty)
     {
         if (hitboxColor.ContainsKey(_hitProperty))
         {
             SetRendererColor(hitboxColor[_hitProperty]);
             SetText($"Current HitboxType: {_hitProperty}");
+        }
+        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
+    }
+    public void SetHurtboxState(HurtBoxType _hurtProperty)
+    {
+        if(hurtboxColor.Count == 0) 
+        {
+            SetupHurtboxDictionary();
+        }
+        if (hurtboxColor.ContainsKey(_hurtProperty))
+        {
+            SetRendererColor(hurtboxColor[_hurtProperty]);
+            SetText($"Current HitboxType: {_hurtProperty}");
+            return;
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
     }
@@ -191,7 +220,6 @@ public class CollisionDetection : MonoBehaviour
         hurtBox.SetHurtBoxSize(_sizeX, _sizeY,true);
         hurtBox.transform.localPosition = _position;
         hurtBox.transform.localRotation = _rotate;
-
         hurtBox.huBType = _hurtType;
     }
     public void ActivateHurtbox(HurtBox hurtBox)
