@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class HurtBox : CollisionDetection
@@ -11,6 +12,7 @@ public class HurtBox : CollisionDetection
     public ColliderType colliderType;
     private Attack_BaseProperties currentHitProperties;
     public Attack_BaseProperties CounterMoveProperty;
+    public Dictionary<HurtBoxType, Callback> hitResponseDictionary;
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
     {
         SetHurtBoxSize(0,0,false,ColliderType.Trigger,hu_Sizing);
