@@ -65,7 +65,6 @@ public class AttackInputDetection : MonoBehaviour
     }
     public void returnButtonPressName(ButtonInput buttonInput)
     {
-        Messenger.Broadcast<ButtonInput>(Events.SendAttackInput,buttonInput);
         _Timer.UpdateInputLogger(buttonInput);
         _Timer.setStartValues(buttonInput);
     }

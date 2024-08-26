@@ -22,7 +22,6 @@ public class InGameCameraController : MonoBehaviour
     private void Start()
     {
         InitCameraInformation();
-        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {

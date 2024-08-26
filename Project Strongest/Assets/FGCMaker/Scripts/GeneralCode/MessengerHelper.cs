@@ -38,18 +38,8 @@ using UnityEngine.SceneManagement;
 //and must mantain it very clearfully
 public enum Events
 {
-    TestCall,
-    InitializeContollerInputs,
-    SendAttackInput,
-    ClearComboString,
     ResetMoveOnTimer,
 
-    SendHitToHurtBox,
-    SendHurtToCombo,
-    SendAttackToCharacter,
-
-    SuccessfulAttackSent,
-    SuccessfulExtraMovementSent,
     SendNegativeEffect,
     SendPositiveEffect,
     SendAfflictionToTarget,
@@ -58,12 +48,8 @@ public enum Events
     PlayCutscene,
     SceneComplete,
 
-    ClearLastInput,
-    Update_PathData,
     SendReturnTime,
     ClearLastTime,
-    CustomCallback,
-    AddNegativeFrames,
     DisplayCharacterInfo,
     ClearCharacterInfo,
     TryApplyCharacter,

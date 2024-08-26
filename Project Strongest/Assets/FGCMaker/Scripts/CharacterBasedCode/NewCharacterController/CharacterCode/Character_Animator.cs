@@ -57,8 +57,6 @@ public class Character_Animator : MonoBehaviour
         customSuperHit = false;
         inputWindowOpen = true;
         startPos = _model.localPosition;
-        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames);
-        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
         inRekkaState = false;
         inStanceState = false;
     }

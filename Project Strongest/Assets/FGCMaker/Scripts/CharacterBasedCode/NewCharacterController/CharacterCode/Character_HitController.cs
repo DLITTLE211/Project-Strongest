@@ -2,27 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Linq;
 
 public class Character_HitController : MonoBehaviour
 {
+    [SerializeField] private Slider _hitStunSlider;
     [SerializeField] private Character_Animator _cAnimator;
     [SerializeField] private Character_Base _base;
-    //[SerializeField] private HitAnimationHolder _characterTotalHitReactions;
-    [SerializeField] private HitAnimationHolder2 characterTotalHitReactions;
+    [SerializeField] private HitAnimationHolder characterTotalHitReactions;
     Dictionary<HitLevel, Callback<Attack_BaseProperties>> reactionFunctionDictionary;
 
-    bool recoverTrigger;
-    public bool smallHitRecovering, bigHitRecovering, airRecoverPossible;
-    public bool crouchBlocking, standingBlocking;
-    private bool hasRecovered;
     public Attack_KnockDown last_KD;
     private float recoveryTime;
     Attack_BaseProperties currentProperty;
     CustomDamageField currentCustomDamageField;
     IEnumerator activeHitResponseRoutine, recoverRoutine;
-    public float currentHitstun, hitStunScaling;
+    public float currentHitstun;
+    public float hitStunScaling;
+
+    [SerializeField] private bool smallHitRecovering;
+    [SerializeField] private bool bigHitRecovering;
+    [SerializeField] private bool airRecoverPossible;
+    [SerializeField] private bool crouchBlocking;
+    [SerializeField] private bool standingBlocking;
+    [SerializeField] private bool hasRecovered;
 
 
     List<MoveType> lockMoveTypes = new List<MoveType>()
@@ -311,15 +316,16 @@ public class Character_HitController : MonoBehaviour
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
         ClearRecoveryRoutine();
-        recoverTrigger = false;
         float oneFrame = (1 / 60f);
         float hitStunInFrames = curField.animLength + (currentHitstun * oneFrame);
+        SetStunMeterValue(hitStunInFrames);
         _base._cAnimator.PlayNextAnimation(curField.animHash,0,true);
         _base._cAnimator.SetShake(true);
         _base._cAnimator.SetCanRecover(true);
         while (hitStunInFrames > 0) 
         {
             hitStunInFrames -= (oneFrame);// + hitStunScaling);
+            UpdateMeterValue(oneFrame);
             yield return new WaitForSeconds(oneFrame);
         }
         _base._cAnimator.EndShake();
@@ -352,7 +358,6 @@ public class Character_HitController : MonoBehaviour
     {
         _cAnimator.isHit = false; 
         _base._cAnimator.SetCanRecover(false);
-        recoverTrigger = true;
     }
     /*public async Task ReactToHit(ResponseAnim_Base hitanim, Attack_BaseProperties attackProperty)
     {
@@ -581,7 +586,15 @@ public class Character_HitController : MonoBehaviour
     }
     #endregion
 
-
+    void SetStunMeterValue(float TopValue)
+    {
+        _hitStunSlider.maxValue = TopValue;
+        _hitStunSlider.value = _hitStunSlider.maxValue;
+    }
+    void UpdateMeterValue(float subtractValue)
+    {
+        _hitStunSlider.value -= subtractValue;
+    }
     public async void HandleBlockState(Attack_BaseProperties attackProperty)
     {
         standingBlocking = true;
@@ -737,29 +750,6 @@ public class Character_HitController : MonoBehaviour
 
 [Serializable]
 public class HitAnimationHolder
-{
-    public List<HitAnimationField> AirlightReactions;
-    public List<HitAnimationField> lightHighReactions;
-    public List<HitAnimationField> lightLowReactions;
-    public List<HitAnimationField> bigReactions;
-    public HitAnimationField crumpleReaction;
-    public List<HitAnimationField> getUp_Anims;
-    public List<HitAnimationField> groundedGetUp_Anims;
-    public List<HitAnimationField> block_Anims;
-    public void Setup() 
-    {
-        AirlightReactions = new List<HitAnimationField>();
-        lightHighReactions = new List<HitAnimationField>();
-        lightLowReactions = new List<HitAnimationField>();
-        bigReactions = new List<HitAnimationField>();
-        getUp_Anims = new List<HitAnimationField>();
-        groundedGetUp_Anims = new List<HitAnimationField>();
-        block_Anims = new List<HitAnimationField>();
-    }
-}
-
-[Serializable]
-public class HitAnimationHolder2
 {
     public List<HitAnimationField> hitReactions;
     public List<HitAnimationField> blockReactions;

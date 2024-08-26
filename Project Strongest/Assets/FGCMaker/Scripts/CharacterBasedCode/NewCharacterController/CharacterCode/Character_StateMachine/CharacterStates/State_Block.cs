@@ -52,10 +52,6 @@ public class State_Block : BaseState
         {
             _base._cHurtBox.SetHurboxState();
         }
-        if (_base._cHitController.bigHitRecovering) 
-        {
-            _base._cHurtBox.SetHurboxState();
-        }
         base.OnExit();
     }
 }

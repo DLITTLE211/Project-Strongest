@@ -10,7 +10,6 @@ public class Player_SideManager : MonoBehaviour
     public HitPointCall sideCall;
     private void Start()
     {
-        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
         StartCoroutine(OnStartSideSwitch());
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
