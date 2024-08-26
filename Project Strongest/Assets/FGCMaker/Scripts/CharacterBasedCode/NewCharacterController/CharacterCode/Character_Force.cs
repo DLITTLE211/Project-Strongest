@@ -49,7 +49,7 @@ public class Character_Force : MonoBehaviour
     public bool CanSendForce()
     {
         return !sendingForce;
-    }
+    }/*
     void ApplyForceOnCustomCallback(CustomCallback callback) 
     {
         if (forceHitCall.HasFlag(callback.customCall)) 
@@ -75,7 +75,7 @@ public class Character_Force : MonoBehaviour
                 TeleportOnCommand(-callback.forceFloat);
             }
         }
-    }
+    }*/
     private void Update()
     {
         if (_base._cAnimator != null)

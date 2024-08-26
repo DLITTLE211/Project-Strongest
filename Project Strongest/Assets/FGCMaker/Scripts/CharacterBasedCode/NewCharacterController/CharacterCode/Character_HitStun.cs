@@ -16,14 +16,15 @@ public class Character_HitStun : MonoBehaviour
     {
         _cAnimator = myAnim;
     }
-    public void HandleAnimatorFreeze(bool state)
+    public void HandleAnimatorFreeze(bool state, float speed = 0.25f)
     {
         if (state)
         {
             if (!isFrozen)
             {
                 isFrozen = true;
-                _cAnimator.myAnim.speed = 0.25f;
+                _cAnimator.myAnim.speed = speed;
+                _cAnimator.shadowAnim.speed = speed;
             }
         }
         else
@@ -32,17 +33,26 @@ public class Character_HitStun : MonoBehaviour
             {
                 isFrozen = false;
                 _cAnimator.myAnim.speed = animSpeed;
+                _cAnimator.shadowAnim.speed = animSpeed;
             }
         }
+    }
+    public bool IsFrozen() 
+    {
+        return isFrozen;
     }
     void SetStartCharacterAnimSpeed() 
     {
         animSpeed = 1;
     }
+    public async void CallHitStun(float hitstunValue) 
+    {
+        await ApplyHitStun(hitstunValue);
+    }
     public async Task ApplyHitStun(float hitstunValue)
     {
         animSpeed = 0.05f;
-        float waitTime = hitstunValue * (1 / 60f);
+        float waitTime = hitstunValue;
         int delayTimeIn_MS = (int)(waitTime * 1000f);
         _cAnimator.SetCanRecover(true);
         await Task.Delay(delayTimeIn_MS);
@@ -58,6 +68,7 @@ public class Character_HitStun : MonoBehaviour
             if (_cAnimator != null)
             {
                 _cAnimator.myAnim.speed = animSpeed;
+                _cAnimator.shadowAnim.speed = animSpeed;
             }
         }
     }

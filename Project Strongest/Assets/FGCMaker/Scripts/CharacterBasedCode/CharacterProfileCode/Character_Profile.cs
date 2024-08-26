@@ -50,8 +50,6 @@ public class Character_Profile : ScriptableObject
     public Character_Animator cAnimatorScript;
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public GameObject CharacterModel;
-    public HitReactions _hitReactions;
-    public List<CharacterAnimResponse> hitResponseAnimations;
     public List<HitAnimationField> properHitResponseAnimations;
     #endregion
 
@@ -75,15 +73,6 @@ public class Character_Profile : ScriptableObject
         cAnimatorScript = animator;
      
     }
-}
-[Serializable]
-public class CharacterAnimResponse 
-{
-    public AnimationClip _clip;
-    public HitReactionType _hitReactionType;
-    public HitLevel _hitResponseLevel;
-    public bool groundedReaction, isLowResponse;
-    public Attack_KnockDown _knockDownLevel;
 }
 
 [Serializable]

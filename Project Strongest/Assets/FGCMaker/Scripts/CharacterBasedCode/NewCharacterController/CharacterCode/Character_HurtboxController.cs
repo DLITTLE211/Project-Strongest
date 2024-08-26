@@ -72,8 +72,7 @@ public class Character_HurtboxController : MonoBehaviour
                     }
                     else
                     {
-                        groundCheck = false;
-                        return groundCheck;
+                        continue;
                     }
                 }
             }

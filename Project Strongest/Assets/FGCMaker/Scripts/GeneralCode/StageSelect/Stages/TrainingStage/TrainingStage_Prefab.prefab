@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14d7d6b2d208838498f09e4ff7614a41, type: 2}
+  - {fileID: 2100000, guid: bfa96633ce2a91d40b53c8d4049762d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ebe9bbea2300440b992711c218fee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHitEndWall: 0
 --- !u!1 &427755749481044980
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427755749481044980}
   m_LocalRotation: {x: -0, y: -0.003541455, z: -0, w: 0.99999374}
-  m_LocalPosition: {x: 2.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -180,7 +181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802322604459136589}
   m_LocalRotation: {x: -0, y: 0.003541455, z: -0, w: 0.99999374}
-  m_LocalPosition: {x: -2.0499482, y: -1.21, z: 2}
+  m_LocalPosition: {x: 0, y: -1.21, z: 2}
   m_LocalScale: {x: 30, y: 0.5, z: 13}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -218,7 +219,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14d7d6b2d208838498f09e4ff7614a41, type: 2}
+  - {fileID: 2100000, guid: bfa96633ce2a91d40b53c8d4049762d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ebe9bbea2300440b992711c218fee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHitEndWall: 0
 --- !u!1 &1195617435002915208
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195617435002915208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9500002, y: 5, z: -0.07}
+  m_LocalPosition: {x: -2, y: 5, z: 1.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -318,8 +320,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 57.49
-  m_Range: 10
+  m_Intensity: 987.9
+  m_Range: 96.99
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -363,7 +365,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.0028198909, y: NaN, z: -0.94005245, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2370254, z: 7.82e-43, w: 4.86e-43}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -571,8 +573,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4823944795155084092}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.487198, y: 11.3, z: 0.0011207458}
-  m_LocalScale: {x: 0.020860834, y: 24, z: 0.99488467}
+  m_LocalPosition: {x: -0.51, y: 11.3, z: 0.001}
+  m_LocalScale: {x: 0.02, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 960041717161876418}
@@ -606,7 +608,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 08e507a8eb0d5e44f9275e75d3846fe8, type: 2}
+  - {fileID: 2100000, guid: bfa96633ce2a91d40b53c8d4049762d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -635,7 +637,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4823944795155084092}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 296607c0064467e4eb5f49ed2b0702b9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -661,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ebe9bbea2300440b992711c218fee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHitEndWall: 0
 --- !u!1 &6085648144151254177
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,8 +692,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6085648144151254177}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.48380208, y: 11.3, z: 0.0011207381}
-  m_LocalScale: {x: 0.019582491, y: 24, z: 1.0433462}
+  m_LocalPosition: {x: 0.51, y: 11.3, z: 0.001}
+  m_LocalScale: {x: 0.02, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 960041717161876418}
@@ -724,7 +727,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 08e507a8eb0d5e44f9275e75d3846fe8, type: 2}
+  - {fileID: 2100000, guid: bfa96633ce2a91d40b53c8d4049762d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -753,7 +756,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6085648144151254177}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 296607c0064467e4eb5f49ed2b0702b9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -779,6 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ebe9bbea2300440b992711c218fee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHitEndWall: 0
 --- !u!1 &6905584581088073532
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +859,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8204909749646306913}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 5, z: 0}
+  m_LocalPosition: {x: -12.05, y: 5, z: 1.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -874,8 +878,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 57.49
-  m_Range: 10
+  m_Intensity: 987.9
+  m_Range: 96.99
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1005,7 +1009,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8977925666410631900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.9599996, y: 5, z: -0.14}
+  m_LocalPosition: {x: 5.5, y: 5, z: 1.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1024,8 +1028,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 57.49
-  m_Range: 10
+  m_Intensity: 987.9
+  m_Range: 96.99
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1069,7 +1073,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 326.2229, z: 7.82e-43, w: 2.62e-43}
+  m_BoundingSphereOverride: {x: 0, y: 2370254, z: 7.82e-43, w: 4.86e-43}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

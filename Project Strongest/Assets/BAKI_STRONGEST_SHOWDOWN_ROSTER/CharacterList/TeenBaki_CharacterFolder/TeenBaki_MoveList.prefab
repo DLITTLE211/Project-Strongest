@@ -307,7 +307,7 @@ MonoBehaviour:
           hitFrameBool: 0
           awaitEnum:
             keyRef: 1
-            awaitingCheck: 4
+            awaitingCheck: 2
           Force: 1
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -602,7 +602,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 2
+      KnockDown: 8
     _customAnimation:
     - playerAnim: {fileID: 0}
       animClip: {fileID: 3120397125411222643, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -650,7 +650,7 @@ MonoBehaviour:
             verticalKBP:
               verticalKBP: 0
               Value: 0
-            KnockDown: 0
+            KnockDown: 8
         - hitFramePoints: 85
           call: 262144
           hitFrameBool: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
             verticalKBP:
               verticalKBP: 0
               Value: 0
-            KnockDown: 0
+            KnockDown: 8
         - hitFramePoints: 115
           call: 262144
           hitFrameBool: 0
@@ -700,7 +700,7 @@ MonoBehaviour:
             verticalKBP:
               verticalKBP: 0
               Value: 0
-            KnockDown: 0
+            KnockDown: 8
         - hitFramePoints: 135
           call: 262144
           hitFrameBool: 0
@@ -725,7 +725,7 @@ MonoBehaviour:
             verticalKBP:
               verticalKBP: 0
               Value: 0
-            KnockDown: 0
+            KnockDown: 8
         - hitFramePoints: 150
           call: 262144
           hitFrameBool: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
             verticalKBP:
               verticalKBP: 0
               Value: 0
-            KnockDown: 0
+            KnockDown: 8
       _hitCount:
         _count: 0
         _startCount: 0
@@ -1575,7 +1575,7 @@ MonoBehaviour:
             hitFrameBool: 0
             awaitEnum:
               keyRef: 2
-              awaitingCheck: 4
+              awaitingCheck: 2
             Force: 0.25
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
@@ -1705,7 +1705,7 @@ MonoBehaviour:
         hitstopValue: 17
         blockStunValue: 0
         hitstunValue: 14
-        hitLevel: 76
+        hitLevel: 72
         attackHashes: 
         _meterRequirement: 0
         _meterAwardedOnHit: 6
@@ -1750,8 +1750,8 @@ MonoBehaviour:
           lateralKBP: 2
           Value: 3
         verticalKBP:
-          verticalKBP: 0
-          Value: 0
+          verticalKBP: 2
+          Value: 4
         KnockDown: 6
       mainAttackInputState:
         _state: 0
@@ -3026,7 +3026,7 @@ MonoBehaviour:
           hitConnected: 0
           lateralKBP:
             lateralKBP: 3
-            Value: 4
+            Value: 2
           verticalKBP:
             verticalKBP: 0
             Value: 0
@@ -3093,9 +3093,9 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 2
+            verticalKBP: 0
             Value: 7
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0

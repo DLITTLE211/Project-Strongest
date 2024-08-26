@@ -19,7 +19,7 @@ public class State_Hit : BaseState
                 CheckRecovDirection();
                 if (_base.ReturnMovementInputs().Button_State.directionalInput > 3)
                 {
-                    await _base._cHitController.RecoverAfterHit();
+                    //await _base._cHitController.RecoverAfterHit();
                 }
                 else
                 {
@@ -43,7 +43,7 @@ public class State_Hit : BaseState
         await Task.Delay((int)delayWakeUpTime);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            await _base._cHitController.RecoverAfterHit();
+            //await _base._cHitController.RecoverAfterHit();
         }
     }
     public override void OnRecov()

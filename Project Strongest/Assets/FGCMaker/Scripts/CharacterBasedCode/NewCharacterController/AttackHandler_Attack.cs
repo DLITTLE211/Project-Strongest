@@ -307,6 +307,10 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.ClearAttackLanded();
         }
+        if (character._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
+        {
+            character._cAttackTimer.ClearSuperLanded();
+        }
         if (requiredHitboxCallBacks.Count == 1)
         {
             requiredHitboxCallBacks[0].func();

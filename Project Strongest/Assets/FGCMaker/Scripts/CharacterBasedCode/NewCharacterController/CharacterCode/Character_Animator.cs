@@ -146,17 +146,20 @@ public class Character_Animator : MonoBehaviour
     }
     #endregion
 
-    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, int overrideTime = 0, bool lockedHit = false)
+    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false)
     {
         if (lockedHit)
         {
             shadowAnim.Play(animHash, 0, overrideTime);
             myAnim.Play(animHash, 0, overrideTime);
-            shadowAnim.StopPlayback();
-            myAnim.StopPlayback();
+            _base._cHitstun.HandleAnimatorFreeze(true,0f);
         }
         else
         {
+            if (_base._cHitstun.IsFrozen())
+            {
+                _base._cHitstun.HandleAnimatorFreeze(false);
+            }
             if (attackOverride)
             {
                 shadowAnim.Play(animHash, 0, overrideTime);
@@ -184,15 +187,18 @@ public class Character_Animator : MonoBehaviour
     }
     public void SetSelfFreeze()
     {
-        _base._cForce.HandleForceFreeze(true);
+        //_base._cForce.HandleForceFreeze(true);
         _base._cHitstun.HandleAnimatorFreeze(true);
         _base._cGravity.HandleGravityFreeze(true);
     }
     public void SetSelfUnfreeze()
     {
         _base._cForce.HandleForceFreeze(false);
-        _base._cHitstun.HandleAnimatorFreeze(false);
         _base._cGravity.HandleGravityFreeze(false);
+        if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.hitStateRef)
+        {
+            _base._cHitstun.HandleAnimatorFreeze(false);
+        }
     }
     public bool CheckAttackAndMobility()
     {

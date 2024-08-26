@@ -15,6 +15,7 @@ public class Character_StateMachine : MonoBehaviour
     [HideInInspector] public State_Jump jumpRef;
     [HideInInspector] public State_Block standBlockRef;
     [HideInInspector] public State_CrouchBlock crouchBlockRef;
+    [HideInInspector] public State_Hit hitStateRef;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class Character_StateMachine : MonoBehaviour
         var DashState = new State_Dash(_base);
         dashStateRef = DashState;
         var Hitstate = new State_Hit(_base);
+        hitStateRef = Hitstate;
         var CrouchState = new State_Crouch(_base);
         crouchStateRef = CrouchState;
         var S_BlockState = new State_Block(_base);// S = Stand
