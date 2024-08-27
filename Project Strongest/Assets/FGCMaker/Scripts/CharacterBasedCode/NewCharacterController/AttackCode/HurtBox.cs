@@ -33,7 +33,7 @@ public class HurtBox : CollisionDetection
     public void SetupHitResponseDicitonary()
     {
         hitResponseDictionary = new Dictionary<HurtBoxType, Callback>();
-        for (int i = 0; i < Enum.GetNames(typeof(HurtBoxType)).Length-2; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(HurtBoxType)).Length; i++)
         {
             HurtBoxType curType = (HurtBoxType)i;
             if (curType == HurtBoxType.NoBlock)
@@ -71,7 +71,7 @@ public class HurtBox : CollisionDetection
         #region ParryLowCheck
         AttackBoolCheck ParryLowCheck = delegate ()
         {
-            return CheckAttackIfBlockLow();
+            return CheckAttackIfParryLow();
         };
         AttackCheckDictionary.Add(ParryLowCheck, () => ReceiveParryData());
         #endregion
@@ -116,12 +116,12 @@ public class HurtBox : CollisionDetection
         AttackCheckDictionary.Add(ArmorCheck, () => ReceiveAttackData(true));
         #endregion
 
-        #region Full Parry Check
-        AttackBoolCheck FullParry = delegate ()
+        #region Full Counter Check
+        AttackBoolCheck FullCounter = delegate ()
         {
-            return CheckAttackIfFullParry();
+            return CheckAttackIfFullCounter();
         };
-        AttackCheckDictionary.Add(FullParry, () => ReceiveParryData());
+        AttackCheckDictionary.Add(FullCounter, () => ReceiveCounterData());
         #endregion
 
         #region Low Immunity
@@ -145,7 +145,7 @@ public class HurtBox : CollisionDetection
     void FindAttackResponse()
     {
         Callback hitResponse = null;
-        if (AttackCheckDictionary.Count == 0) 
+        if (AttackCheckDictionary == null) 
         {
             SetAttackCheckDictionary();
         }
@@ -223,9 +223,9 @@ public class HurtBox : CollisionDetection
         {
             return;
         }*/
-        ReceiveAttackData(false);
     }
 
+    #region Boolean Check Field
     bool CheckAttackIfBlockLow() 
     {
         bool lowAttack = currentHitbox.HBType == HitBoxType.Low;
@@ -241,14 +241,20 @@ public class HurtBox : CollisionDetection
     bool CheckAttackIfParryLow()
     {
         bool lowAttack = currentHitbox.HBType == HitBoxType.Low;
-        bool parryLow = huBType == HurtBoxType.ParryLow || huBType == HurtBoxType.FullParry;
+        bool parryLow = huBType == HurtBoxType.ParryLow;
         return lowAttack && parryLow;
     }
     bool CheckAttackIfParryHigh()
     {
-        bool highAttack = currentHitbox.HBType == HitBoxType.Low;
-        bool parryHigh = huBType == HurtBoxType.ParryHigh || huBType == HurtBoxType.FullParry;
+        bool highAttack = currentHitbox.HBType == HitBoxType.High;
+        bool parryHigh = huBType == HurtBoxType.ParryHigh;
         return highAttack && parryHigh;
+    }
+    bool CheckAttackIfFullCounter()
+    {
+        bool armorThroughAttack = !refList.GrabList.Contains(currentHitbox.HBType);
+        bool parryFull = huBType == HurtBoxType.FullCounter;
+        return armorThroughAttack && parryFull;
     }
     bool CheckAttackIfSoftKnockdown()
     {
@@ -270,12 +276,6 @@ public class HurtBox : CollisionDetection
         bool armorState = huBType == HurtBoxType.Armor;
         return armorThroughAttack && armorState;
     }
-    bool CheckAttackIfFullParry()
-    {
-        bool armorThroughAttack = !refList.GrabList.Contains(currentHitbox.HBType);
-        bool parryFull = huBType == HurtBoxType.FullParry;
-        return armorThroughAttack && parryFull;
-    }
     bool CheckAttackIfHighImmune()
     {
         bool highAttack = refList.HighAttacks.Contains(currentHitbox.HBType);
@@ -288,8 +288,7 @@ public class HurtBox : CollisionDetection
         bool parryFull = huBType == HurtBoxType.LowImmune;
         return lowAttack && parryFull;
     }
-
-
+    #endregion
 
     public void ReceieveHitBox(HitBox _hitbox, Transform _target,Callback endFunc)
     {
@@ -297,8 +296,8 @@ public class HurtBox : CollisionDetection
         target = _target;
         endingFunction = endFunc;
         FindAttackResponse();
-
-        switch (huBType)
+        #region Dead Code
+        /*switch (huBType)
         {
             case HurtBoxType.NoBlock:
                 //Send Do Damage;
@@ -512,7 +511,8 @@ public class HurtBox : CollisionDetection
             default:
                 DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HurtboxType Detected.");
                 break;
-        }
+        }*/
+        #endregion
     }
     void ReceiveCounterData()
     {

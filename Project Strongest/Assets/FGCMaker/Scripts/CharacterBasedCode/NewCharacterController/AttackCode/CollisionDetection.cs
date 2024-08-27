@@ -19,7 +19,7 @@ public enum HurtBoxType
     HardKnockdown,
     Invincible,
     Armor,
-    FullParry,
+    FullCounter,
     LowImmune,
     HighImmune,
 }
@@ -82,7 +82,7 @@ public class CollisionDetection : MonoBehaviour
         hurtboxColor.Add(HurtBoxType.HardKnockdown, Color.white);
         hurtboxColor.Add(HurtBoxType.Invincible, Color.black);
         hurtboxColor.Add(HurtBoxType.Armor, Color.clear);
-        hurtboxColor.Add(HurtBoxType.FullParry, Color.cyan);
+        hurtboxColor.Add(HurtBoxType.FullCounter, Color.cyan);
     }
     public void SetHitboxState(HitBoxType _hitProperty)
     {
@@ -227,7 +227,7 @@ public class CollisionDetection : MonoBehaviour
     public void ActivateHurtbox(HurtBox hurtBox)
     {
         hurtBox.gameObject.SetActive(true);
-        if (hurtBox.hitResponseDictionary.Count == 0)
+        if (hurtBox.hitResponseDictionary == null)
         {
             hurtBox.SetupHitResponseDicitonary();
         }
