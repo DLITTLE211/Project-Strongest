@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
@@ -13,18 +14,12 @@ public class HurtBox : CollisionDetection
     private Attack_BaseProperties currentHitProperties;
     public Attack_BaseProperties CounterMoveProperty;
     public Dictionary<HurtBoxType, Callback> hitResponseDictionary;
+    public Dictionary<AttackBoolCheck, Callback> AttackCheckDictionary;
 
     private HitBox currentHitbox;
     private Transform target;
     Callback endingFunction;
-
-    List<HitBoxType> unblockableAttacks = new List<HitBoxType>()
-    {
-        HitBoxType.Throw,
-        HitBoxType.CommandGrab_Air,
-        HitBoxType.CommandGrab_Ground,
-        HitBoxType.Unblockable,
-    };
+    HitboxTypeList refList;
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing)
     {
         SetHurtBoxSize(0, 0, false, ColliderType.Trigger, hu_Sizing);
@@ -38,12 +33,12 @@ public class HurtBox : CollisionDetection
     public void SetupHitResponseDicitonary()
     {
         hitResponseDictionary = new Dictionary<HurtBoxType, Callback>();
-        for (int i = 0; i < Enum.GetNames(typeof(HurtBoxType)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(HurtBoxType)).Length-2; i++)
         {
             HurtBoxType curType = (HurtBoxType)i;
             if (curType == HurtBoxType.NoBlock)
             {
-                hitResponseDictionary.Add(curType, () => DoHitResponse());
+                hitResponseDictionary.Add(curType, () => ReceiveAttackData());
             }
             else 
             {
@@ -51,94 +46,251 @@ public class HurtBox : CollisionDetection
             }
         }
     }
-    void DetermineIfAttackPossible() 
+    void SetAttackCheckDictionary() 
     {
-        if (CheckAttackIfBlockLow())
+        AttackCheckDictionary = new Dictionary<AttackBoolCheck, Callback>();
+
+        #region FullCheckList
+
+        #region LowCheck
+        AttackBoolCheck lowblock = delegate()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfBlockHigh())
+            return CheckAttackIfBlockLow();
+        };
+        AttackCheckDictionary.Add(lowblock, () =>ReceiveAttackData(true));
+        #endregion
+
+        #region HighCheck
+        AttackBoolCheck highBlock = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfParryLow())
+            return CheckAttackIfBlockHigh();
+        };
+        AttackCheckDictionary.Add(highBlock, () => ReceiveAttackData(true));
+        #endregion
+
+        #region ParryLowCheck
+        AttackBoolCheck ParryLowCheck = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfParryHigh())
+            return CheckAttackIfBlockLow();
+        };
+        AttackCheckDictionary.Add(ParryLowCheck, () => ReceiveParryData());
+        #endregion
+
+        #region ParryHighCheck
+        AttackBoolCheck ParryHighCheck = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfSoftKnockdown())
+            return CheckAttackIfParryHigh();
+        };
+        AttackCheckDictionary.Add(ParryHighCheck, () => ReceiveParryData());
+        #endregion
+
+        #region SKD
+        AttackBoolCheck SKDCheck = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfHardKnockdown())
+            return CheckAttackIfSoftKnockdown();
+        };
+        AttackCheckDictionary.Add(SKDCheck, null);
+        #endregion
+
+        #region HKD
+        AttackBoolCheck HKDCheck = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfInvincible())
+            return CheckAttackIfHardKnockdown();
+        };
+        AttackCheckDictionary.Add(HKDCheck, () => ReceiveAttackData(false));
+        #endregion
+
+        #region InvicibilityCheck
+        AttackBoolCheck FullInvulCheck = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfArmor())
+            return CheckAttackIfInvincible();
+        };
+        AttackCheckDictionary.Add(FullInvulCheck, null);
+        #endregion
+
+        #region Armor Check
+        AttackBoolCheck ArmorCheck = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        if (CheckAttackIfFullParry())
+            return CheckAttackIfArmor();
+        };
+        AttackCheckDictionary.Add(ArmorCheck, () => ReceiveAttackData(true));
+        #endregion
+
+        #region Full Parry Check
+        AttackBoolCheck FullParry = delegate ()
         {
-            //DoHitResponse(true);
-        }
-        DoHitResponse(false);
+            return CheckAttackIfFullParry();
+        };
+        AttackCheckDictionary.Add(FullParry, () => ReceiveParryData());
+        #endregion
+
+        #region Low Immunity
+        AttackBoolCheck LowImmune = delegate ()
+        {
+            return CheckAttackIfLowImmune();
+        };
+        AttackCheckDictionary.Add(LowImmune,null);
+        #endregion
+
+        #region High Immunity
+        AttackBoolCheck HighImmune = delegate ()
+        {
+            return CheckAttackIfHighImmune();
+        };
+        AttackCheckDictionary.Add(HighImmune, null);
+        #endregion
+        #endregion
     }
 
-    bool CheckAttackIfBlockLow() 
-    {
-        return false;
-    }
-    bool CheckAttackIfBlockHigh()
-    {
-        return false;
-    }
-    bool CheckAttackIfParryLow()
-    {
-        return false;
-    }
-    bool CheckAttackIfParryHigh()
-    {
-        return false;
-    }
-    bool CheckAttackIfSoftKnockdown()
-    {
-        return false;
-    }
-    bool CheckAttackIfHardKnockdown()
-    {
-        return false;
-    }
-    bool CheckAttackIfInvincible()
-    {
-        return false;
-    }
-    bool CheckAttackIfArmor()
-    {
-        return false;
-    }
-    bool CheckAttackIfFullParry()
-    {
-        return false;
-    }
-
-
-
-    void FindAttackResponse() 
+    void FindAttackResponse()
     {
         Callback hitResponse = null;
-        if (hitResponseDictionary.TryGetValue(huBType, out hitResponse)) 
+        if (AttackCheckDictionary.Count == 0) 
+        {
+            SetAttackCheckDictionary();
+        }
+        if (hitResponseDictionary.TryGetValue(huBType, out hitResponse))
         {
             hitResponse();
         }
     }
+    void DetermineIfAttackPossible() 
+    {
+        for (int i = 0; i < AttackCheckDictionary.Count; i++) 
+        {
+            KeyValuePair<AttackBoolCheck, Callback> boolCallbackCombo = AttackCheckDictionary.ElementAt(i);
+            if (boolCallbackCombo.Key()) 
+            {
+                if (boolCallbackCombo.Value != null)
+                {
+                    boolCallbackCombo.Value();
+                }
+                return;
+            }
+            continue;
+        }
+        ReceiveAttackData(false);
+        return;
+        /*if (CheckAttackIfBlockLow())
+        {
+            ReceiveAttackData(true);
+            return;
+        }
+        if (CheckAttackIfBlockHigh())
+        {
+            ReceiveAttackData(true);
+            return;
+        }
+        if (CheckAttackIfParryLow())
+        {
+            ReceiveParryData();
+            return;
+        }
+        if (CheckAttackIfParryHigh())
+        {
+            ReceiveParryData();
+            return;
+        }
+        if (CheckAttackIfSoftKnockdown())
+        {
+            return;
+        }
+        if (CheckAttackIfHardKnockdown())
+        {
+            ReceiveAttackData(false);
+            return;
+        }
+        if (CheckAttackIfInvincible())
+        {
+            //ReceiveAttackData(true);
+            return;
+        }
+        if (CheckAttackIfArmor())
+        {
+            //ReceiveAttackData(true);
+            return;
+        }
+        if (CheckAttackIfFullParry())
+        {
+            ReceiveParryData();
+            return;
+        }
+        if (CheckAttackIfHighImmune())
+        {
+            return;
+        }
+        if (CheckAttackIfLowImmune())
+        {
+            return;
+        }*/
+        ReceiveAttackData(false);
+    }
+
+    bool CheckAttackIfBlockLow() 
+    {
+        bool lowAttack = currentHitbox.HBType == HitBoxType.Low;
+        bool lowBlock = huBType == HurtBoxType.BlockLow;
+        return lowAttack && lowBlock;
+    }
+    bool CheckAttackIfBlockHigh()
+    {
+        bool highAttack = refList.HighAttacks.Contains(currentHitbox.HBType);
+        bool highBlock = huBType == HurtBoxType.BlockHigh;
+        return highAttack && highBlock;
+    }
+    bool CheckAttackIfParryLow()
+    {
+        bool lowAttack = currentHitbox.HBType == HitBoxType.Low;
+        bool parryLow = huBType == HurtBoxType.ParryLow || huBType == HurtBoxType.FullParry;
+        return lowAttack && parryLow;
+    }
+    bool CheckAttackIfParryHigh()
+    {
+        bool highAttack = currentHitbox.HBType == HitBoxType.Low;
+        bool parryHigh = huBType == HurtBoxType.ParryHigh || huBType == HurtBoxType.FullParry;
+        return highAttack && parryHigh;
+    }
+    bool CheckAttackIfSoftKnockdown()
+    {
+        return huBType == HurtBoxType.SoftKnockdown;
+    }
+    bool CheckAttackIfHardKnockdown()
+    {
+        bool lowAttack = currentHitbox.HBType == HitBoxType.Low && currentHitbox.hitboxProperties.KnockDown.HasFlag(Attack_KnockDown.NONE);
+        bool hardKnockdown = huBType == HurtBoxType.HardKnockdown;
+        return lowAttack && hardKnockdown;
+    }
+    bool CheckAttackIfInvincible()
+    {
+        return huBType == HurtBoxType.Invincible;
+    }
+    bool CheckAttackIfArmor()
+    {
+        bool armorThroughAttack = !refList.GrabList.Contains(currentHitbox.HBType);
+        bool armorState = huBType == HurtBoxType.Armor;
+        return armorThroughAttack && armorState;
+    }
+    bool CheckAttackIfFullParry()
+    {
+        bool armorThroughAttack = !refList.GrabList.Contains(currentHitbox.HBType);
+        bool parryFull = huBType == HurtBoxType.FullParry;
+        return armorThroughAttack && parryFull;
+    }
+    bool CheckAttackIfHighImmune()
+    {
+        bool highAttack = refList.HighAttacks.Contains(currentHitbox.HBType);
+        bool armorState = huBType == HurtBoxType.HighImmune;
+        return highAttack && armorState;
+    }
+    bool CheckAttackIfLowImmune()
+    {
+        bool lowAttack = currentHitbox.HBType == HitBoxType.Low;
+        bool parryFull = huBType == HurtBoxType.LowImmune;
+        return lowAttack && parryFull;
+    }
+
+
+
     public void ReceieveHitBox(HitBox _hitbox, Transform _target,Callback endFunc)
     {
         currentHitbox = _hitbox;
@@ -362,8 +514,15 @@ public class HurtBox : CollisionDetection
                 break;
         }
     }
+    void ReceiveCounterData()
+    {
 
-    void DoHitResponse(bool blockedAttack = false) 
+    }
+    void ReceiveParryData() 
+    {
+
+    }
+    void ReceiveAttackData(bool blockedAttack = false) 
     {
         if (blockedAttack)
         {
@@ -557,3 +716,23 @@ public class HurtBox : CollisionDetection
         }
     }
 }
+
+
+[Serializable]
+public class HitboxTypeList 
+{
+    public List<HitBoxType> GrabList = new List<HitBoxType>()
+    {
+        HitBoxType.Throw,
+        HitBoxType.CommandGrab_Air,
+        HitBoxType.CommandGrab_Ground,
+    };
+    public List<HitBoxType> HighAttacks = new List<HitBoxType>()
+    {
+        HitBoxType.High,
+        HitBoxType.Overhead,
+        HitBoxType.Anti_Air,
+    };
+}
+[Serializable]
+public delegate bool AttackBoolCheck();
