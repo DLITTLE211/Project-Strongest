@@ -225,6 +225,10 @@ public class CollisionDetection : MonoBehaviour
     public void ActivateHurtbox(HurtBox hurtBox)
     {
         hurtBox.gameObject.SetActive(true);
+        if (hurtBox.hitResponseDictionary.Count == 0)
+        {
+            hurtBox.SetupHitResponseDicitonary();
+        }
     }
     public void ActivateHitbox(HitBox _hitbox, HurtBox hurtbox,string attackName, HitCount _hitCount, Attack_BaseProperties property)
     {

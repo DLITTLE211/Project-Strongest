@@ -13,69 +13,139 @@ public class HurtBox : CollisionDetection
     private Attack_BaseProperties currentHitProperties;
     public Attack_BaseProperties CounterMoveProperty;
     public Dictionary<HurtBoxType, Callback> hitResponseDictionary;
-    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing) 
+
+    private HitBox currentHitbox;
+    private Transform target;
+    Callback endingFunction;
+
+    List<HitBoxType> unblockableAttacks = new List<HitBoxType>()
     {
-        SetHurtBoxSize(0,0,false,ColliderType.Trigger,hu_Sizing);
+        HitBoxType.Throw,
+        HitBoxType.CommandGrab_Air,
+        HitBoxType.CommandGrab_Ground,
+        HitBoxType.Unblockable,
+    };
+    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing)
+    {
+        SetHurtBoxSize(0, 0, false, ColliderType.Trigger, hu_Sizing);
         SetHurtboxState(huBType);
+        SetupHitResponseDicitonary();
     }
-    public void SetCounterMoveProperty(Attack_BaseProperties counterProperty) 
+    public void SetCounterMoveProperty(Attack_BaseProperties counterProperty)
     {
         CounterMoveProperty = counterProperty;
     }
-    #region Multi-Hit Functions
-    #region Hit Portion Functions
-    IEnumerator DoMultiHit(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    public void SetupHitResponseDicitonary()
     {
-        //Base_Target.comboList3_0.Check(attackName, Base_Target);
-        Base_Target._cAnimator.isHit = true;
-        HandleMultiHitProperties(_hitbox, hitCount, Base_Target, Base_Attacker);
-        Base_Target._cGravity.UpdateGravityScaleOnHit(_hitbox.hitboxProperties.hitstunValue);// Base_Attacker._cAnimator.lastAttack.hitstunValue);
-        for (int i = 0; i < hitCount._count; i++)
+        hitResponseDictionary = new Dictionary<HurtBoxType, Callback>();
+        for (int i = 0; i < Enum.GetNames(typeof(HurtBoxType)).Length; i++)
         {
-            yield return new WaitForSeconds(hitCount._refreshRate);
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target,Base_Attacker,false,currentHitProperties);
+            HurtBoxType curType = (HurtBoxType)i;
+            if (curType == HurtBoxType.NoBlock)
+            {
+                hitResponseDictionary.Add(curType, () => DoHitResponse());
+            }
+            else 
+            {
+                hitResponseDictionary.Add(curType, DetermineIfAttackPossible);
+            }
         }
-        _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
-        hitCount.ResetRefresh();
-        hitCount.ResetHitCount();
-        //Base_Attacker._cAnimator.ClearLastAttack();
     }
-    async void HandleMultiHitProperties(HitBox _hitbox,HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    void DetermineIfAttackPossible() 
     {
-        Base_Target._cForce.SendKnockBackOnHit(_hitbox.hitboxProperties); 
-        //Base_Target._cHitController.HandleHitState(_hitbox.hitboxProperties);
-        //await Base_Target._cHitstun.ApplyHitStun(_hitbox.hitboxProperties.hitstunValue);
-        await Character_Hitstop.Instance.CallHitStop(_hitbox.hitboxProperties, _hitbox.hitboxProperties.hitstopValue, Base_Target);
+        if (CheckAttackIfBlockLow())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfBlockHigh())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfParryLow())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfParryHigh())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfSoftKnockdown())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfHardKnockdown())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfInvincible())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfArmor())
+        {
+            //DoHitResponse(true);
+        }
+        if (CheckAttackIfFullParry())
+        {
+            //DoHitResponse(true);
+        }
+        DoHitResponse(false);
     }
-    #endregion
 
-    #region Block Portion Functions
-    IEnumerator DoMultiHit_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    bool CheckAttackIfBlockLow() 
     {
-        //Base_Target.comboList3_0.Check(attackName, Base_Target);
-        Base_Target._cAnimator.isHit = true;
-        HandleMultiHitProperties_OnBlock(_hitbox, hitCount, Base_Target, Base_Attacker);
-        for (int i = 0; i < hitCount._count; i++)
+        return false;
+    }
+    bool CheckAttackIfBlockHigh()
+    {
+        return false;
+    }
+    bool CheckAttackIfParryLow()
+    {
+        return false;
+    }
+    bool CheckAttackIfParryHigh()
+    {
+        return false;
+    }
+    bool CheckAttackIfSoftKnockdown()
+    {
+        return false;
+    }
+    bool CheckAttackIfHardKnockdown()
+    {
+        return false;
+    }
+    bool CheckAttackIfInvincible()
+    {
+        return false;
+    }
+    bool CheckAttackIfArmor()
+    {
+        return false;
+    }
+    bool CheckAttackIfFullParry()
+    {
+        return false;
+    }
+
+
+
+    void FindAttackResponse() 
+    {
+        Callback hitResponse = null;
+        if (hitResponseDictionary.TryGetValue(huBType, out hitResponse)) 
         {
-            yield return new WaitForSeconds(hitCount._refreshRate);
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
+            hitResponse();
         }
-        _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
-        hitCount.ResetRefresh();
-        hitCount.ResetHitCount();
-        //Base_Attacker._cAnimator.ClearLastAttack();
     }
-    async void HandleMultiHitProperties_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    public void ReceieveHitBox(HitBox _hitbox, Transform _target,Callback endFunc)
     {
-        Base_Target._cForce.SendKnockBackOnHit(_hitbox.hitboxProperties);
-        Base_Target._cHitController.HandleBlockState(_hitbox.hitboxProperties);
-        //await Base_Target._cHitstun.ApplyHitStun(_hitbox.hitboxProperties.hitstunValue/5f);
-        await Character_Hitstop.Instance.CallHitStop(_hitbox.hitboxProperties, _hitbox.hitboxProperties.hitstopValue/5f, Base_Target);
-    }
-    #endregion
-    #endregion
-    public void ReceieveHitBox(HitBox _hitbox, Transform target,Callback endFunc)
-    {
+        currentHitbox = _hitbox;
+        target = _target;
+        endingFunction = endFunc;
+        FindAttackResponse();
+
         switch (huBType)
         {
             case HurtBoxType.NoBlock:
@@ -292,6 +362,18 @@ public class HurtBox : CollisionDetection
                 break;
         }
     }
+
+    void DoHitResponse(bool blockedAttack = false) 
+    {
+        if (blockedAttack)
+        {
+
+        }
+        else 
+        {
+
+        }
+    }
     public async void OnSuccessfulBlock(HitBox _hitbox, Transform target, Callback endFunc)
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
@@ -380,7 +462,60 @@ public class HurtBox : CollisionDetection
         }
         endFunc();
     }
-    
+
+    #region Multi-Hit Functions
+    #region Hit Portion Functions
+    IEnumerator DoMultiHit(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    {
+        //Base_Target.comboList3_0.Check(attackName, Base_Target);
+        Base_Target._cAnimator.isHit = true;
+        HandleMultiHitProperties(_hitbox, hitCount, Base_Target, Base_Attacker);
+        Base_Target._cGravity.UpdateGravityScaleOnHit(_hitbox.hitboxProperties.hitstunValue);// Base_Attacker._cAnimator.lastAttack.hitstunValue);
+        for (int i = 0; i < hitCount._count; i++)
+        {
+            yield return new WaitForSeconds(hitCount._refreshRate);
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
+        }
+        _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
+        hitCount.ResetRefresh();
+        hitCount.ResetHitCount();
+        //Base_Attacker._cAnimator.ClearLastAttack();
+    }
+    async void HandleMultiHitProperties(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    {
+        Base_Target._cForce.SendKnockBackOnHit(_hitbox.hitboxProperties);
+        //Base_Target._cHitController.HandleHitState(_hitbox.hitboxProperties);
+        //await Base_Target._cHitstun.ApplyHitStun(_hitbox.hitboxProperties.hitstunValue);
+        await Character_Hitstop.Instance.CallHitStop(_hitbox.hitboxProperties, _hitbox.hitboxProperties.hitstopValue, Base_Target);
+    }
+    #endregion
+
+    #region Block Portion Functions
+    IEnumerator DoMultiHit_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    {
+        //Base_Target.comboList3_0.Check(attackName, Base_Target);
+        Base_Target._cAnimator.isHit = true;
+        HandleMultiHitProperties_OnBlock(_hitbox, hitCount, Base_Target, Base_Attacker);
+        for (int i = 0; i < hitCount._count; i++)
+        {
+            yield return new WaitForSeconds(hitCount._refreshRate);
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
+        }
+        _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
+        hitCount.ResetRefresh();
+        hitCount.ResetHitCount();
+        //Base_Attacker._cAnimator.ClearLastAttack();
+    }
+    async void HandleMultiHitProperties_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
+    {
+        Base_Target._cForce.SendKnockBackOnHit(_hitbox.hitboxProperties);
+        Base_Target._cHitController.HandleBlockState(_hitbox.hitboxProperties);
+        //await Base_Target._cHitstun.ApplyHitStun(_hitbox.hitboxProperties.hitstunValue/5f);
+        await Character_Hitstop.Instance.CallHitStop(_hitbox.hitboxProperties, _hitbox.hitboxProperties.hitstopValue / 5f, Base_Target);
+    }
+    #endregion
+    #endregion
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Wall")
