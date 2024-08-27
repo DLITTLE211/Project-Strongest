@@ -38,11 +38,11 @@ public class LaunchController : MonoBehaviour
         Property = property;
         projectileHitbox.hitboxProperties = Property;
     }
-    public void SendHitTarget(Transform target)
+    public void SendHitTarget(Transform target, HurtBox hitHurtBox)
     {
         if (projectileHitbox.HBType != HitBoxType.nullified)
         {
-            projectileHitbox.SendHitStateAndHurtBox(projectileHitbox, target, () => ClearAdditionalHit(projectileHitbox));
+            projectileHitbox.SendHitStateAndHurtBox(projectileHitbox, hitHurtBox, target, () => ClearAdditionalHit(projectileHitbox));
             projectileHitbox.currentCollider.enabled = false;
             KillProjectile();
         }

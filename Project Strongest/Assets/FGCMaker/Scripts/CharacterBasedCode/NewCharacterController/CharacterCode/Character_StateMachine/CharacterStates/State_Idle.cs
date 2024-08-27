@@ -138,7 +138,10 @@ public class State_Idle : BaseState
                     _cAnim.ClearLastAttack();
                 }
             }
-            _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+            if (_base._subState != Character_SubStates.Dummy)
+            {
+                _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+            }
             _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
             ResetComboInformation();
         }

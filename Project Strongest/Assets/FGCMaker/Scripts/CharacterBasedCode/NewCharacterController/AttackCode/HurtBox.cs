@@ -32,6 +32,7 @@ public class HurtBox : CollisionDetection
     }
     public void SetupHitResponseDicitonary()
     {
+        refList = new HitboxTypeList();
         hitResponseDictionary = new Dictionary<HurtBoxType, Callback>();
         for (int i = 0; i < Enum.GetNames(typeof(HurtBoxType)).Length; i++)
         {
@@ -228,7 +229,7 @@ public class HurtBox : CollisionDetection
     #region Boolean Check Field
     bool CheckAttackIfBlockLow() 
     {
-        bool lowAttack = currentHitbox.HBType == HitBoxType.Low;
+        bool lowAttack = refList.LowOKList.Contains(currentHitbox.HBType);
         bool lowBlock = huBType == HurtBoxType.BlockLow;
         return lowAttack && lowBlock;
     }
@@ -514,9 +515,27 @@ public class HurtBox : CollisionDetection
         }*/
         #endregion
     }
-    void ReceiveCounterData()
+    async void ReceiveCounterData()
     {
+        Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
+        Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
+        if (Base_Attacker._cAnimator.lastAttack != null)
+        {
+            CounterMoveProperty = Base_Attacker._cAnimator.lastAttack;
+        }
 
+        if (currentHitbox.HBType != HitBoxType.nullified)
+        {
+            Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
+            currentAttack.hitConnected = true;
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
+            await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
+            Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
+            //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
+            currentHitbox.DestroyHitbox(currentHitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
+        }
+        endingFunction();
+        endingFunction = null;
     }
     void ReceiveParryData() 
     {
@@ -599,7 +618,7 @@ public class HurtBox : CollisionDetection
         }
         endFunc();
     }
-    
+   /* 
     public async void OnSuccessfulCounter(HitBox _hitbox, Transform target, Callback endFunc)
     {
         Character_Base Base_Target = _hitbox.GetComponentInParent<Character_Base>();
@@ -620,7 +639,7 @@ public class HurtBox : CollisionDetection
             _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         }
         endFunc();
-    }
+    }*/
 
     #region Multi-Hit Functions
     #region Hit Portion Functions
@@ -726,6 +745,11 @@ public class HitboxTypeList
         HitBoxType.Throw,
         HitBoxType.CommandGrab_Air,
         HitBoxType.CommandGrab_Ground,
+    }; public List<HitBoxType> LowOKList = new List<HitBoxType>()
+    {
+        HitBoxType.High,
+        HitBoxType.Anti_Air,
+        HitBoxType.Low,
     };
     public List<HitBoxType> HighAttacks = new List<HitBoxType>()
     {

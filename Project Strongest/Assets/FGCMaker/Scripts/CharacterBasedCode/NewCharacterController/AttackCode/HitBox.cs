@@ -50,7 +50,7 @@ public class HitBox : CollisionDetection
                 Transform target = c.transform.root;
                 if (HBType != HitBoxType.nullified)
                 {
-                    SendHitStateAndHurtBox(this, target, () => ClearAdditionalHit(this));
+                    SendHitStateAndHurtBox(this, c.GetComponentInParent<HurtBox>(),target, () => ClearAdditionalHit(this));
                     allowHitCheck = false;
                     DestroySelf();
                 }
@@ -65,9 +65,10 @@ public class HitBox : CollisionDetection
     {
         SetHitColliderType(this, HitBoxType.nullified);
     }
-    public void SendHitStateAndHurtBox(HitBox thisHitbox, Transform target,Callback endFunc)
+    public void SendHitStateAndHurtBox(HitBox thisHitbox,HurtBox hitHurtbox,Transform target,Callback endFunc)
     {
-        target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target, endFunc);
+        hitHurtbox.ReceieveHitBox(thisHitbox, target, endFunc);
+        //target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target, endFunc);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -91,7 +92,7 @@ public class HitBox : CollisionDetection
                     if (this.gameObject.GetComponent<LaunchController>())
                     {
                         Debug.Log("Hit Other Player");
-                        this.GetComponent<LaunchController>().SendHitTarget(target);
+                        this.GetComponent<LaunchController>().SendHitTarget(target, c.GetComponentInParent<HurtBox>());
                     }
                 }
                 if (c.transform.gameObject.layer == 7)
