@@ -69,17 +69,13 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
     }
-    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         if (!blockedAttack)
         {
             SendCounterHitInfo(target);
-            target._cDamageCalculator.TakeDamage(property);
         }
-        else
-        {
-            target._cDamageCalculator.TakeChipDamage(property);
-        }
+        target._cDamageCalculator.ReceiveDamage(property, blockedAttack, armoredAttack);
     }
     public void HandleSubAnimAttackInfo()
     {
@@ -114,7 +110,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         return property._moveType;
     }
 
-    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
         if (property._moveType == MoveType.Super)

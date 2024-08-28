@@ -62,11 +62,11 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
         _attackInput._correctInput[0].property.InputTimer.SetTimerType(TimerType.Throw);
     }
 
-    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         if (_attackInput._correctInput[0].property.rawAttackDamage > 0)
         {
-            target._cDamageCalculator.TakeDamage(_attackInput._correctInput[0].property);
+            target._cDamageCalculator.ReceiveDamage(_attackInput._correctInput[0].property,blockedAttack,false);
         }
         SendCounterHitInfo(target, null);
     }
@@ -83,7 +83,7 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
         _throwAnimation[0].AddCustomCallbacks(_throwAnimation[0]);
         _curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
     }
-    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
         HandleThrowAnimAttackInfo();

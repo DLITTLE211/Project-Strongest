@@ -7,11 +7,9 @@ public class Character_Hitstop : MonoBehaviour
 {
     [SerializeField] private Character_Animator p1, p2;
     [SerializeField,Range(0,1f)] private float TimeScale;
-    public static Character_Hitstop Instance;
     public bool canHS;
     private void Start()
     {
-        Instance = this; 
         SetStartTimeScale();
     }
     public void SetStartTimeScale() 
@@ -43,6 +41,11 @@ public class Character_Hitstop : MonoBehaviour
                 p1 = anim;
             }
         }
+    }
+
+    public async void TriggerHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease = 0, Character_Base targetBase = null) 
+    {
+        await CallHitStop(lastAttack,rateOfIncrease,targetBase);
     }
     public async Task CallHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease = 0, Character_Base targetBase = null)
     {

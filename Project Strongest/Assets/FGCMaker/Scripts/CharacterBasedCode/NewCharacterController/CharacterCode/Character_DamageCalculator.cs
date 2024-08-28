@@ -48,7 +48,7 @@ public class Character_DamageCalculator : MonoBehaviour
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
         _base._cHitController.ForceCustomLockAnim(currentAttack,finalAttack);
     }
-    public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked) 
+    public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked, bool armoredAttack = false)
     {
         if (blocked)
         {
@@ -56,10 +56,10 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
-            TakeDamage(currentAttack);
+            TakeDamage(currentAttack,armoredAttack);
         }
     }
-    public void TakeDamage(Attack_BaseProperties currentAttack)
+    private void TakeDamage(Attack_BaseProperties currentAttack,bool armoredAttack)
     {
         curRawDamage = currentAttack.rawAttackDamage;
         if (CheckAfflictionState())
@@ -94,7 +94,7 @@ public class Character_DamageCalculator : MonoBehaviour
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
         ApplyScalingForNextAttack(currentAttack);
     }
-    public void TakeChipDamage(Attack_BaseProperties currentAttack)
+    private void TakeChipDamage(Attack_BaseProperties currentAttack)
     {
         curChipDamage = currentAttack.rawChipDamage;
         if (CheckAfflictionState())

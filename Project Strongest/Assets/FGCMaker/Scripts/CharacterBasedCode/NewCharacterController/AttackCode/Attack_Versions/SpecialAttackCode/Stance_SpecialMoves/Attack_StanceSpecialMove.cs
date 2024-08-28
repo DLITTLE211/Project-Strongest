@@ -133,31 +133,24 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
 
 
-    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         if (followUp != null)
         {
             if (!blockedAttack)
             {
                 SendCounterHitInfo(target, followUp);
-                target._cDamageCalculator.TakeDamage(followUp);
+                //target._cDamageCalculator.TakeDamage(followUp);
             }
-            else
-            {
-                target._cDamageCalculator.TakeChipDamage(followUp);
-            }
+            target._cDamageCalculator.ReceiveDamage(followUp, blockedAttack, armoredAttack);
         }
         else
         {
             if (!blockedAttack)
             {
                 SendCounterHitInfo(target,main);
-                target._cDamageCalculator.TakeDamage(main);
             }
-            else
-            {
-                target._cDamageCalculator.TakeChipDamage(main);
-            }
+            target._cDamageCalculator.ReceiveDamage(followUp, blockedAttack, armoredAttack);
         }
     }
 
@@ -172,7 +165,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         return stanceStartProperty._moveType;
     }
 
-    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main,followUp);
     }

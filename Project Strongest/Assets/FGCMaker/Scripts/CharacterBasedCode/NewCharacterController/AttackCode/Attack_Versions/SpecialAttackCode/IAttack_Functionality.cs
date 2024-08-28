@@ -5,12 +5,12 @@ public interface IAttackFunctionality
 {
     #region Universal Functions
     void PreformAttack(Callback SendAttackOnSucess);
-    void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null);
+    void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false);
     void SendCounterHitInfo(Character_Base curBase, Attack_BaseProperties followUp = null);
     void SetComboTimer();
     void SetStarterInformation(Character_Base _base);
 
-    void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null);
+    void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null,bool armoredAttack = false);
     MoveType GetAttackMoveType();
     #endregion
 

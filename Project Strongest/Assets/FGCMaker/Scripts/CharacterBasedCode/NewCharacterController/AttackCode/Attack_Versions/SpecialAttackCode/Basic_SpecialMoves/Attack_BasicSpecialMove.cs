@@ -40,7 +40,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
         property.InputTimer.SetTimerType(TimerType.Special);
         _curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
     }
-    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         SendSuccessfulDamageInfo(attacker, target,blockedAttack,main);
     }
@@ -48,17 +48,13 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
     }
-    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null)
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         if (!blockedAttack)
         {
             SendCounterHitInfo(target,main);
-            target._cDamageCalculator.TakeDamage(main);
         }
-        else
-        {
-            target._cDamageCalculator.TakeChipDamage(main);
-        }
+        target._cDamageCalculator.ReceiveDamage(main,blockedAttack,armoredAttack);
     }
     #endregion
     public MoveType GetAttackMoveType()

@@ -98,7 +98,7 @@ public class HurtBox : CollisionDetection
         {
             return CheckAttackIfHardKnockdown();
         };
-        AttackCheckDictionary.Add(HKDCheck, () => ReceiveAttackData(false));
+        AttackCheckDictionary.Add(HKDCheck, null);
         #endregion
 
         #region InvicibilityCheck
@@ -172,58 +172,6 @@ public class HurtBox : CollisionDetection
         }
         ReceiveAttackData(false);
         return;
-        /*if (CheckAttackIfBlockLow())
-        {
-            ReceiveAttackData(true);
-            return;
-        }
-        if (CheckAttackIfBlockHigh())
-        {
-            ReceiveAttackData(true);
-            return;
-        }
-        if (CheckAttackIfParryLow())
-        {
-            ReceiveParryData();
-            return;
-        }
-        if (CheckAttackIfParryHigh())
-        {
-            ReceiveParryData();
-            return;
-        }
-        if (CheckAttackIfSoftKnockdown())
-        {
-            return;
-        }
-        if (CheckAttackIfHardKnockdown())
-        {
-            ReceiveAttackData(false);
-            return;
-        }
-        if (CheckAttackIfInvincible())
-        {
-            //ReceiveAttackData(true);
-            return;
-        }
-        if (CheckAttackIfArmor())
-        {
-            //ReceiveAttackData(true);
-            return;
-        }
-        if (CheckAttackIfFullParry())
-        {
-            ReceiveParryData();
-            return;
-        }
-        if (CheckAttackIfHighImmune())
-        {
-            return;
-        }
-        if (CheckAttackIfLowImmune())
-        {
-            return;
-        }*/
     }
 
     #region Boolean Check Field
@@ -263,7 +211,7 @@ public class HurtBox : CollisionDetection
     }
     bool CheckAttackIfHardKnockdown()
     {
-        bool lowAttack = currentHitbox.HBType == HitBoxType.Low && currentHitbox.hitboxProperties.KnockDown.HasFlag(Attack_KnockDown.NONE);
+        bool lowAttack = (refList.HighAttacks.Contains(currentHitbox.HBType) && !refList.GrabList.Contains(currentHitbox.HBType)  && currentHitbox.hitboxProperties.KnockDown.HasFlag(Attack_KnockDown.NONE));
         bool hardKnockdown = huBType == HurtBoxType.HardKnockdown;
         return lowAttack && hardKnockdown;
     }
@@ -294,226 +242,10 @@ public class HurtBox : CollisionDetection
     public void ReceieveHitBox(HitBox _hitbox, Transform _target,Callback endFunc)
     {
         currentHitbox = _hitbox;
+        currentHitProperties = currentHitbox.hitboxProperties;
         target = _target;
         endingFunction = endFunc;
         FindAttackResponse();
-        #region Dead Code
-        /*switch (huBType)
-        {
-            case HurtBoxType.NoBlock:
-                //Send Do Damage;
-                OnSuccessfulHit(_hitbox, target, endFunc);
-                break;
-            case HurtBoxType.BlockLow:
-                if (_hitbox.HBType == HitBoxType.Low)
-                {
-                    OnSuccessfulBlock(_hitbox, target, endFunc);
-                }
-                else 
-                {
-                    if (_hitbox.HBType == HitBoxType.Throw)
-                    {
-                        //Send Throw;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
-                    {
-                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded()) 
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
-                    {
-                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else 
-                    {
-                        //Send Do Damage;
-                    }
-                }
-                break;
-            case HurtBoxType.BlockHigh:
-                if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead)
-                {
-                    OnSuccessfulBlock(_hitbox, target, endFunc);
-                }
-                else
-                {
-                    if (_hitbox.HBType == HitBoxType.Throw)
-                    {
-                        //Send Throw;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
-                    {
-                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
-                    {
-                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else
-                    {
-                        //Send Do Damage;
-                    }
-                }
-                break;
-            case HurtBoxType.ParryLow:
-                if (_hitbox.HBType == HitBoxType.Low ^ _hitbox.HBType == HitBoxType.Unblockable)
-                {
-                    //Send ParrierForceIdle();
-                }
-                else
-                {
-                    if (_hitbox.HBType == HitBoxType.Throw)
-                    {
-                        //Send Throw With Counter Hit;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
-                    {
-                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
-                    {
-                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.High)
-                    {
-                        //Send High With Counter Hit;
-                    }
-                }
-                break;
-            case HurtBoxType.ParryHigh:
-                if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable)
-                {
-                    //Send ParrierForceIdle();
-                }
-                else
-                {
-                    if (_hitbox.HBType == HitBoxType.Throw)
-                    {
-                        //Send Throw With Counter Hit;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
-                    {
-                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
-                    {
-                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.Low)
-                    {
-                        //Send Low With Counter Hit;
-                    }
-                }
-                break;
-            case HurtBoxType.FullParry:
-                if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable ^ _hitbox.HBType == HitBoxType.Low)
-                {
-                    OnSuccessfulCounter(_hitbox, target, endFunc);
-                }
-                else
-                {
-                    if (_hitbox.HBType == HitBoxType.Throw)
-                    {
-                        //Send Throw With Counter Hit;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
-                    {
-                        if (this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                    else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
-                    {
-                        if (!this.GetComponentInParent<Character_Base>()._cHurtBox.IsGrounded())
-                        {
-                            //Send Command Throw;
-                            return;
-                        }
-                        //Send Not Connected;
-                    }
-                }
-                break;
-            case HurtBoxType.SoftKnockdown:
-                //Send Hit on SoftKnockdown
-                break;
-            case HurtBoxType.HardKnockdown:
-                if (_hitbox.HBType == HitBoxType.Low)
-                {
-                    //Send Hit with Low;
-                }
-                break;
-            case HurtBoxType.Invincible:
-                //Send Hit InvulBody
-                break;
-            case HurtBoxType.Armor:
-                if (_hitbox.HBType == HitBoxType.Throw)
-                {
-                    //Send Throw;
-                }
-                else if (_hitbox.HBType == HitBoxType.CommandGrab_Ground)
-                {
-                    //Send Command Throw;
-                }
-                else if (_hitbox.HBType == HitBoxType.CommandGrab_Air)
-                {
-                    //Send Not Connected;
-                }
-                else if (_hitbox.HBType == HitBoxType.Unblockable)
-                {
-                    //Send Hit with Unblockable;
-                }
-                else 
-                {
-                    //Send reduce unit of Armor by 1
-                }
-                break;
-            default:
-                DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HurtboxType Detected.");
-                break;
-        }*/
-        #endregion
     }
     async void ReceiveCounterData()
     {
@@ -529,7 +261,7 @@ public class HurtBox : CollisionDetection
             Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
             currentAttack.hitConnected = true;
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
-            await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
+            //await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
             Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
             //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
             currentHitbox.DestroyHitbox(currentHitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
@@ -539,160 +271,52 @@ public class HurtBox : CollisionDetection
     }
     void ReceiveParryData() 
     {
-
+        Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
+        Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
+        Base_Attacker._aManager.ClearAttacks();
+        Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Target);
+        endingFunction();
+        endingFunction = null;
     }
     void ReceiveAttackData(bool blockedAttack = false) 
     {
-        if (blockedAttack)
-        {
-
-        }
-        else 
-        {
-
-        }
+        StartCoroutine(HandleHitResponse(blockedAttack));
     }
-    public async void OnSuccessfulBlock(HitBox _hitbox, Transform target, Callback endFunc)
+    IEnumerator HandleHitResponse(bool BlockedAttack)
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
-        Character_Base Base_Attacker = _hitbox.GetComponentInParent<Character_Base>();
-        if (_hitbox.hitboxProperties != null)
-        {
-            currentHitProperties = _hitbox.hitboxProperties;
-        }
+        Character_Base Base_Attacker = currentHitbox.GetComponentInParent<Character_Base>();
         HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
-        if (hitCount._count > 1)
+        int curHit = 0;
+        while (curHit < hitCount._count) 
         {
-            if (_hitbox.HBType != HitBoxType.nullified)
+            currentHitProperties.hitConnected = true;
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
+            if (BlockedAttack)
             {
-                currentHitProperties.hitConnected = true;
-                StartCoroutine(DoMultiHit_OnBlock(_hitbox, hitCount, Base_Target, Base_Attacker));
+                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue / 10f), Base_Target);
             }
-        }
-        else if (hitCount._count <= 1)
-        {
-            if (_hitbox.HBType != HitBoxType.nullified)
+            else
             {
-                Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
-
-                currentAttack.hitConnected = true;
-                Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
-                await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue/5f, Base_Target);
-                //Base_Target._cHitController.HandleBlockState(currentAttack);
-                //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue/5f);
-                _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
-            }
-        }
-        endFunc();
-    }
-    public async void OnSuccessfulHit(HitBox _hitbox, Transform target, Callback endFunc) 
-    {
-        Character_Base Base_Target = target.GetComponent<Character_Base>();
-        Character_Base Base_Attacker = _hitbox.GetComponentInParent<Character_Base>();
-        if (_hitbox.hitboxProperties != null)
-        {
-            currentHitProperties = _hitbox.hitboxProperties;
-        }
-        HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
-        if (hitCount._count > 1)
-        {
-            if (_hitbox.HBType != HitBoxType.nullified)
-            {
-                currentHitProperties.hitConnected = true;
-                StartCoroutine(DoMultiHit(_hitbox, hitCount, Base_Target, Base_Attacker));
-            }
-        }
-        else if (hitCount._count <= 1)
-        {
-            if (_hitbox.HBType != HitBoxType.nullified)
-            {
-                currentHitProperties.hitConnected = true;
-
-                Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
-                await Character_Hitstop.Instance.CallHitStop(currentHitProperties, currentHitProperties.hitstopValue, Base_Target);
-                //Base_Target._cHitController.HandleHitState(currentHitProperties);
+                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Target);
                 Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
-                //await Base_Target._cHitstun.ApplyHitStun(currentHitProperties.hitstunValue);
-                _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
             }
+            if (hitCount._refreshRate > 0)
+            {
+                yield return new WaitForSeconds(hitCount._refreshRate * (1 / 60f));
+            }
+            else
+            {
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            curHit++;
         }
-        endFunc();
-    }
-   /* 
-    public async void OnSuccessfulCounter(HitBox _hitbox, Transform target, Callback endFunc)
-    {
-        Character_Base Base_Target = _hitbox.GetComponentInParent<Character_Base>();
-        Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
-        if (Base_Attacker._cAnimator.lastAttack != null) 
-        {
-            CounterMoveProperty = Base_Attacker._cAnimator.lastAttack;
-        }
-        
-        if (_hitbox.HBType != HitBoxType.nullified)
-        {
-            Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
-            currentAttack.hitConnected = true;
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
-            await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
-            Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
-            //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
-            _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
-        }
-        endFunc();
-    }*/
-
-    #region Multi-Hit Functions
-    #region Hit Portion Functions
-    IEnumerator DoMultiHit(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
-    {
-        //Base_Target.comboList3_0.Check(attackName, Base_Target);
-        Base_Target._cAnimator.isHit = true;
-        HandleMultiHitProperties(_hitbox, hitCount, Base_Target, Base_Attacker);
-        Base_Target._cGravity.UpdateGravityScaleOnHit(_hitbox.hitboxProperties.hitstunValue);// Base_Attacker._cAnimator.lastAttack.hitstunValue);
-        for (int i = 0; i < hitCount._count; i++)
-        {
-            yield return new WaitForSeconds(hitCount._refreshRate);
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
-        }
-        _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
         hitCount.ResetHitCount();
-        //Base_Attacker._cAnimator.ClearLastAttack();
+        endingFunction();
+        endingFunction = null;
+        currentHitbox.DestroyHitbox(currentHitbox, currentHitbox.hitboxProperties.AttackAnims.extendedHitBox);
     }
-    async void HandleMultiHitProperties(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
-    {
-        Base_Target._cForce.SendKnockBackOnHit(_hitbox.hitboxProperties);
-        //Base_Target._cHitController.HandleHitState(_hitbox.hitboxProperties);
-        //await Base_Target._cHitstun.ApplyHitStun(_hitbox.hitboxProperties.hitstunValue);
-        await Character_Hitstop.Instance.CallHitStop(_hitbox.hitboxProperties, _hitbox.hitboxProperties.hitstopValue, Base_Target);
-    }
-    #endregion
-
-    #region Block Portion Functions
-    IEnumerator DoMultiHit_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
-    {
-        //Base_Target.comboList3_0.Check(attackName, Base_Target);
-        Base_Target._cAnimator.isHit = true;
-        HandleMultiHitProperties_OnBlock(_hitbox, hitCount, Base_Target, Base_Attacker);
-        for (int i = 0; i < hitCount._count; i++)
-        {
-            yield return new WaitForSeconds(hitCount._refreshRate);
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, true, currentHitProperties);
-        }
-        _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
-        hitCount.ResetRefresh();
-        hitCount.ResetHitCount();
-        //Base_Attacker._cAnimator.ClearLastAttack();
-    }
-    async void HandleMultiHitProperties_OnBlock(HitBox _hitbox, HitCount hitCount, Character_Base Base_Target, Character_Base Base_Attacker)
-    {
-        Base_Target._cForce.SendKnockBackOnHit(_hitbox.hitboxProperties);
-        Base_Target._cHitController.HandleBlockState(_hitbox.hitboxProperties);
-        //await Base_Target._cHitstun.ApplyHitStun(_hitbox.hitboxProperties.hitstunValue/5f);
-        await Character_Hitstop.Instance.CallHitStop(_hitbox.hitboxProperties, _hitbox.hitboxProperties.hitstopValue / 5f, Base_Target);
-    }
-    #endregion
-    #endregion
 
     private void OnTriggerEnter(Collider other)
     {

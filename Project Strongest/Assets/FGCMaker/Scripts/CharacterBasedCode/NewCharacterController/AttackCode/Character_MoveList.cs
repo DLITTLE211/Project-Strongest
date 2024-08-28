@@ -360,7 +360,7 @@ public class Character_MoveList : MonoBehaviour
     }
 
 
-    public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack) 
+    public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack, bool armoredHit = false) 
     {
         if (currentAttack.Value != null)
         {
@@ -374,7 +374,7 @@ public class Character_MoveList : MonoBehaviour
                 else
                 {
                     attacker._cComboCounter.OnHit_CountUp();
-                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack,followUp);
+                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack,followUp, armoredHit);
                     //Call interface function for dealing damage w/ block;
                 }
             }
@@ -388,7 +388,7 @@ public class Character_MoveList : MonoBehaviour
                 else
                 {
                     attacker._cComboCounter.OnHit_CountUp();
-                    currentAttack.Value.HandleDamageDealing(attacker, target,blockedAttack, attack);
+                    currentAttack.Value.HandleDamageDealing(attacker, target,blockedAttack, attack,null ,armoredHit);
                     //Call interface function for dealing damage w/ block;
                 }
             }
