@@ -288,7 +288,7 @@ public class HurtBox : CollisionDetection
         Character_Base Base_Attacker = currentHitbox.GetComponentInParent<Character_Base>();
         HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
         int curHit = 0;
-        while (curHit < hitCount._count) 
+        while (curHit < hitCount._count)
         {
             currentHitProperties.hitConnected = true;
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
@@ -316,12 +316,7 @@ public class HurtBox : CollisionDetection
         hitCount.ResetHitCount();
         endingFunction();
         endingFunction = null;
-        try
-        {
-            currentHitbox.DestroyHitbox(currentHitbox, currentHitbox.hitboxProperties.AttackAnims.extendedHitBox);
-        }
-        catch (Exception) 
-        { };
+        currentHitbox.DestroyHitbox(currentHitbox);
     }
 
     private void OnTriggerEnter(Collider other)

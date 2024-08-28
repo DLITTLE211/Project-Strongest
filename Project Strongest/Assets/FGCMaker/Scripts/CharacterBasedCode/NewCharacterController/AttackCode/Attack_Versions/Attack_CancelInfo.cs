@@ -6,6 +6,7 @@ using System;
 public class Attack_CancelInfo 
 {
     public Cancel_State cancelFrom;
+    public Cancel_State CurrentLevel;
     public Cancel_State cancelTo;
 }
 [Serializable]
@@ -26,4 +27,5 @@ public enum Cancel_State
     Stance_Input_FollowUp = 12,
     Super_Attack = 13,
     Maximum_Attack = 14,
+    Parry =15,
 }
