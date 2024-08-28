@@ -304,7 +304,7 @@ public class Attack_Manager : MonoBehaviour
             }
             else
             {
-                int newAttackHierarchy = (int)newAttack.cancelProperty.cancelFrom;
+                int newAttackHierarchy = (int)newAttack.cancelProperty.CurrentLevel;
                 int lastAttackHierachy = (int)lastState.cancelTo;
                 if (newAttackHierarchy >= lastAttackHierachy)
                 {
