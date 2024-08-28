@@ -210,9 +210,9 @@ public class Character_Base : MonoBehaviour
         _chosenCharacter.transform.localRotation = Quaternion.identity;
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
-        Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
+        Character_Animator _chosenCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
-        SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
+        SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier);
     }
 
     void ResetInputLog()

@@ -1,4 +1,4 @@
-
+using System.Collections.Generic;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -51,7 +51,7 @@ public class Character_Animator : MonoBehaviour
     public HitPointCall AttackCall { get { return _attackCall; } }
     bool hitNewAnim;
     public bool customSuperHit;
-    IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
+    public IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
     private void Start()
     {
         customSuperHit = false;
@@ -59,6 +59,10 @@ public class Character_Animator : MonoBehaviour
         startPos = _model.localPosition;
         inRekkaState = false;
         inStanceState = false;
+    }
+    public bool RoutineActive() 
+    {
+        return BasicAttackRoutine == null && ThrowAttackRoutine == null && SuperAttackRoutine == null;
     }
     public void SetStanceBool(bool state) 
     {
@@ -68,7 +72,7 @@ public class Character_Animator : MonoBehaviour
     {
         inRekkaState = state;
     }
-    void ApplyForceOnCustomCallback(CustomCallback callback)
+ /*   void ApplyForceOnCustomCallback(CustomCallback callback)
     {
         if (_freezeCall.HasFlag(callback.customCall))
         {
@@ -111,7 +115,7 @@ public class Character_Animator : MonoBehaviour
                     break;
             }
         }
-    }
+    }*/
     #region Shake Player Code
     private void Update()
     {
@@ -319,7 +323,7 @@ public class Character_Animator : MonoBehaviour
             BasicAttackRoutine = null;
         }
         lastAttack.AttackAnims.SetIsFollowUpAttack(false);
-        PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate));
+        PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate),true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
     }
@@ -346,7 +350,7 @@ public class Character_Animator : MonoBehaviour
         lastAttack = superProperty;
         customSuperHit = true;
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
-        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate));
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate),true);
         superCustom.SetIsFollowUpAttack(true);
         if (SuperAttackRoutine != null) 
         {

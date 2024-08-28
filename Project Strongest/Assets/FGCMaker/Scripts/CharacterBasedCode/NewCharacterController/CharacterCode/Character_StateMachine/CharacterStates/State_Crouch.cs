@@ -8,7 +8,6 @@ public class State_Crouch : BaseState
     public override async void OnEnter()
     {
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter CrouchState");
-
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
         await WaitToChargeSuperMobility();
@@ -22,7 +21,10 @@ public class State_Crouch : BaseState
         await Task.Delay(TentimeInMS);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            _cAnim.PlayNextAnimation(crouchHash, 2 * (1 / 60f));
+            if (_cAnim.RoutineActive())
+            {
+                _cAnim.PlayNextAnimation(crouchHash, 2 * (1 / 60f));
+            }
         }
     }
     async Task ActivateSuperMobility(float OneFrame) 
