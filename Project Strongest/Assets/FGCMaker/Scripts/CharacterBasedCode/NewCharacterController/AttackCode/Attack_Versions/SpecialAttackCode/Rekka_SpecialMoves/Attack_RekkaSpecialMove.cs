@@ -83,6 +83,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
+        _curBase.comboList3_0.ClearFollowUpAttack();
         _curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess);
         SetRekkaStateTrue();
         ResetCombo();

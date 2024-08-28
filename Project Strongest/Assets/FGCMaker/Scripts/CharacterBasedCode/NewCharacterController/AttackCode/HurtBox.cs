@@ -316,7 +316,12 @@ public class HurtBox : CollisionDetection
         hitCount.ResetHitCount();
         endingFunction();
         endingFunction = null;
-        currentHitbox.DestroyHitbox(currentHitbox, currentHitbox.hitboxProperties.AttackAnims.extendedHitBox);
+        try
+        {
+            currentHitbox.DestroyHitbox(currentHitbox, currentHitbox.hitboxProperties.AttackAnims.extendedHitBox);
+        }
+        catch (Exception) 
+        { };
     }
 
     private void OnTriggerEnter(Collider other)

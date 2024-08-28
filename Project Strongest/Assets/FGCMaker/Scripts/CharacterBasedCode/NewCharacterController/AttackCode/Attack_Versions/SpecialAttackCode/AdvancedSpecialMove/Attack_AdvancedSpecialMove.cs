@@ -63,6 +63,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         {
             property.InputTimer.SetTimerType(TimerType.Special);
         }
+        _curBase.comboList3_0.ClearFollowUpAttack();
         _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);
     }
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUP = null)

@@ -95,8 +95,9 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
                     return;
                 }
             }
-        _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
-        curAttack++;
+            _curBase.comboList3_0.ClearFollowUpAttack();
+            _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
+            curAttack++;
         }
         catch (ArgumentOutOfRangeException)
         {

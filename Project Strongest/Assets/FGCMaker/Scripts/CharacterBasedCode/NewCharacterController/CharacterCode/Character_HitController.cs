@@ -109,7 +109,7 @@ public class Character_HitController : MonoBehaviour
 
 
     #region Filter Animation Functions
-    List<HitAnimationField> FilterHitReactions(Attack_BaseProperties currentAttack)
+/*    List<HitAnimationField> FilterHitReactions(Attack_BaseProperties currentAttack)
     {
         List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
         bool IsGrounded = _base._cHurtBox.IsGrounded();
@@ -166,7 +166,7 @@ public class Character_HitController : MonoBehaviour
         }
 
         return refField;
-    }
+    }*/
 
     HitAnimationField FilterGroundLockReactions(HitLevel _levelOfAttack = default)
     {
@@ -238,44 +238,47 @@ public class Character_HitController : MonoBehaviour
         bool IsGrounded = _base._cHurtBox.IsGrounded();
         for (int i = 0; i < refField.Count; i++)
         {
-            if ((currentAttack.hitLevel.HasFlag(refField[i].hitLevel)))
+            if (currentAttack.hitLevel.HasFlag(refField[i].hitLevel))
             {
                 prunedList.Add(refField[i]);// = null;
             }
             continue;
         }
-        for (int i = prunedList.Count-1; i > -1; i--) 
+        if (!currentAttack.hitLevel.HasFlag(HitLevel.Spiral))
         {
-            if (IsGrounded)
+            for (int i = prunedList.Count - 1; i > -1; i--)
             {
-                if (!prunedList[i].isGroundedReaction) 
+                if (IsGrounded)
                 {
-                    prunedList.RemoveAt(i);
-                    continue;
+                    if (!prunedList[i].isGroundedReaction)
+                    {
+                        prunedList.RemoveAt(i);
+                        continue;
+                    }
                 }
-            }
-            else 
-            {
-                if (prunedList[i].isGroundedReaction)
+                else
                 {
-                    prunedList.RemoveAt(i);
-                    continue;
+                    if (prunedList[i].isGroundedReaction)
+                    {
+                        prunedList.RemoveAt(i);
+                        continue;
+                    }
                 }
-            }
-            if (lowHit)
-            {
-                if (!prunedList[i].isLowReaction)
+                if (lowHit)
                 {
-                    prunedList.RemoveAt(i);
-                    continue;
+                    if (!prunedList[i].isLowReaction)
+                    {
+                        prunedList.RemoveAt(i);
+                        continue;
+                    }
                 }
-            }
-            else 
-            {
-                if (prunedList[i].isLowReaction)
+                else
                 {
-                    prunedList.RemoveAt(i);
-                    continue;
+                    if (prunedList[i].isLowReaction)
+                    {
+                        prunedList.RemoveAt(i);
+                        continue;
+                    }
                 }
             }
         }

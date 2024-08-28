@@ -114,6 +114,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {
+        _curBase.comboList3_0.ClearFollowUpAttack();
         _curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
         stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance,(stanceHeldTime * (1/60f)));
         SetStanceStateTrue();

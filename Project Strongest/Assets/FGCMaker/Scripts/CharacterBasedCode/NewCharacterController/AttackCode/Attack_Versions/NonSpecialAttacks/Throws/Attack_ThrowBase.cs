@@ -58,6 +58,7 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
     public void PreformAttack(Callback SendAttackOnSucess)
     {
         Attack_BaseProperties newAttack = _attackInput._correctInput[0].property;
+        _curBase.comboList3_0.ClearFollowUpAttack();
         _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
         _attackInput._correctInput[0].property.InputTimer.SetTimerType(TimerType.Throw);
     }

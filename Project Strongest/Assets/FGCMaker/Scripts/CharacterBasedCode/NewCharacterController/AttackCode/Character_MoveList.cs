@@ -52,6 +52,10 @@ public class Character_MoveList : MonoBehaviour
     {
         followUp = _followUp;
     }
+    public void ClearFollowUpAttack() 
+    {
+        SetFollowAttack(null);
+    }
     public void ClearAttackData()
     {
         Debug.LogError("Cleared attack data");

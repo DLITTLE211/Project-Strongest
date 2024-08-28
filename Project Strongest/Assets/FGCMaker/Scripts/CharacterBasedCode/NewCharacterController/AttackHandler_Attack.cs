@@ -253,6 +253,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
+        character._cHitboxManager.IterateHitBox();
         if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
@@ -334,6 +335,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
+        character._cHitboxManager.IterateHitBox();
         frameCount = 0;
         if (!_playerCAnimator.canTick)
         {
