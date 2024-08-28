@@ -230,16 +230,89 @@ public class Character_HitController : MonoBehaviour
     }
     #endregion
 
+    HitAnimationField FindAnimationOfType(Attack_BaseProperties currentAttack = null, CustomDamageField currentCustom = null) 
+    {
+        List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
+        List<HitAnimationField> prunedList = new List<HitAnimationField>();
+        bool lowHit = currentAttack.AttackAnims.attackType == HitBoxType.Low;
+        bool IsGrounded = _base._cHurtBox.IsGrounded();
+        for (int i = 0; i < refField.Count; i++)
+        {
+            if ((currentAttack.hitLevel.HasFlag(refField[i].hitLevel)))
+            {
+                prunedList.Add(refField[i]);// = null;
+            }
+            continue;
+        }
+        for (int i = prunedList.Count-1; i > -1; i--) 
+        {
+            if (IsGrounded)
+            {
+                if (!prunedList[i].isGroundedReaction) 
+                {
+                    prunedList.RemoveAt(i);
+                    continue;
+                }
+            }
+            else 
+            {
+                if (prunedList[i].isGroundedReaction)
+                {
+                    prunedList.RemoveAt(i);
+                    continue;
+                }
+            }
+            if (lowHit)
+            {
+                if (!prunedList[i].isLowReaction)
+                {
+                    prunedList.RemoveAt(i);
+                    continue;
+                }
+            }
+            else 
+            {
+                if (prunedList[i].isLowReaction)
+                {
+                    prunedList.RemoveAt(i);
+                    continue;
+                }
+            }
+        }
+        if (prunedList.Count == 1)
+        {
+            return prunedList[0];
+        }
+        else 
+        {
+            if (prunedList.Count == 0)
+            {
+                return null;
+            }
+            else 
+            {
+                int randomHitReaction = UnityEngine.Random.Range(0, prunedList.Count);
+                return prunedList[randomHitReaction];
+            }
+        }
+    }
 
     void SmallHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
-        int randomHitReaction = 0;
+        //List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
+       /* int randomHitReaction = 0;
         if (hitReactionList.Count > 1)
         {
             randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count);
         }
         HitAnimationField hitReaction = hitReactionList[randomHitReaction];
+        CheckAndStartHitResponse(hitReaction);*/
+        HitAnimationField hitReaction = FindAnimationOfType(currentAttack);
+        if (hitReaction == null) 
+        {
+            Debug.LogError("Null Event Reached");
+            Debug.Break();
+        }
         CheckAndStartHitResponse(hitReaction);
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
@@ -257,21 +330,29 @@ public class Character_HitController : MonoBehaviour
                 return;
             }
         }
-        List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
-        int randomHitReaction = 0;
-        if (hitReactionList.Count > 1)
+        /* List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
+         int randomHitReaction = 0;
+         if (hitReactionList.Count > 1)
+         {
+             randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count-1);
+         }
+         try
+         {
+             HitAnimationField hitReaction = hitReactionList[randomHitReaction];
+             CheckAndStartHitResponse(hitReaction);
+         }
+         catch (ArgumentOutOfRangeException) 
+         {
+             //Debug.Break();
+         }*/
+        HitAnimationField hitReaction = FindAnimationOfType(currentAttack);
+        if (hitReaction == null)
         {
-            randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count-1);
-        }
-        try
-        {
-            HitAnimationField hitReaction = hitReactionList[randomHitReaction];
-            CheckAndStartHitResponse(hitReaction);
-        }
-        catch (ArgumentOutOfRangeException) 
-        {
+            Debug.LogError("Null Event Reached");
             //Debug.Break();
+            hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
         }
+        CheckAndStartHitResponse(hitReaction);
     }
     void LockHitDetect(CustomDamageField currentAttack, bool finalAttack)
     {

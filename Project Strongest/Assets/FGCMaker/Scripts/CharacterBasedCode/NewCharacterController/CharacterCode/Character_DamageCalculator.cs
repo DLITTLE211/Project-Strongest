@@ -92,6 +92,10 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+        if (!armoredAttack)
+        {
+            _base._cHitController.HandleHitState(currentAttack, currentAttack.hitstunValue, calculatedScaling, false);
+        }
         ApplyScalingForNextAttack(currentAttack);
     }
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
@@ -118,7 +122,6 @@ public class Character_DamageCalculator : MonoBehaviour
 
     void ApplyScalingForNextAttack(Attack_BaseProperties currentAttack)
     {
-        _base._cHitController.HandleHitState(currentAttack,currentAttack.hitstunValue, calculatedScaling,false);
         if (_oppCounter.CurrentHitCount <= 1)
         {
             calculatedScaling = 0;

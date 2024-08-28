@@ -298,6 +298,7 @@ public class HurtBox : CollisionDetection
             }
             else
             {
+                Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
                 Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Target);
                 Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
             }

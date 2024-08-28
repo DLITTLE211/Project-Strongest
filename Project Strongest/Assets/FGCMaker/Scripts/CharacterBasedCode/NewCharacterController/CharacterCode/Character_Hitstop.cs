@@ -63,7 +63,6 @@ public class Character_Hitstop : MonoBehaviour
         await Task.Delay(waitTime_milli);
         p1.SetSelfUnfreeze();
         p2.SetSelfUnfreeze();
-        targetBase._cForce.SendKnockBackOnHit(lastAttack);
     }
     
 }
