@@ -300,7 +300,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 Debug.Log($"Inactive bool state: {inactive}");
                 Debug.Break();
             }
-            frameCount += 1f * waitTime;
+            frameCount += waitTime;
             yield return new WaitForSeconds(waitTime);
         }
         _playerCAnimator.SetCanTransitionIdle(true);
@@ -387,7 +387,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 Debug.Log($"Inactive bool state: {inactive}");
                 Debug.Break();
             }
-            frameCount += 1f * waitTime;
+             frameCount += waitTime;
             yield return new WaitForSeconds(waitTime);
         }
         Attack_BaseProperties thisAttack = character._cHitboxManager.GetActiveHitBox().hitboxProperties;

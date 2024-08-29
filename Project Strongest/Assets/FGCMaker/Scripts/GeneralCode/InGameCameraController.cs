@@ -14,32 +14,54 @@ public class InGameCameraController : MonoBehaviour
     private Vector3 velocity;
     [SerializeField] float zPos;
 
+    [SerializeField] Transform cameraObjectHolder;
     [SerializeField] Camera orthoCamera, perspectiveBGCamera;
     [SerializeField] Transform[] playerCharacters;
     [SerializeField] Vector3 offset;
+    Vector3 startPos;
     [SerializeField] private HitPointCall cameraControlCalls;
     [SerializeField] private bool isTracking;
+    IEnumerator ShakeRoutine;
     private void Start()
     {
         InitCameraInformation();
     }
-    void ApplyForceOnCustomCallback(CustomCallback callback)
+    public void CallCameraShake(float duration, int intensity) 
     {
-        if (cameraControlCalls.HasFlag(callback.customCall))
+        isTracking = false;
+        if(ShakeRoutine != null) 
         {
-            switch (callback.customCall)
-            {
-                case HitPointCall.PanPosOnTarget:
-                    PositionChangeOnTarget(callback);
-                    break;
-                case HitPointCall.PanRotateOnTarget:
-                    RotateOnTarget(callback);
-                    break;
-                case HitPointCall.PanZoomOnTarget:
-                    ZoomOnTarget(callback);
-                    break;
-            }
+            StopCoroutine(ShakeRoutine);
+            ShakeRoutine = null;
         }
+        startPos = cameraObjectHolder.localPosition;
+        ShakeRoutine = ShakeCamera(duration,intensity);
+        StartCoroutine(ShakeRoutine);
+
+    }
+    IEnumerator ShakeCamera(float duration, int intensity) 
+    {
+        float oneFrame = 1 / 60f;
+        float durationInFrames = (duration/2) * oneFrame;
+        while (durationInFrames > 0) 
+        {
+            Shake(intensity);
+            durationInFrames -= oneFrame;
+            yield return new WaitForSeconds(oneFrame);
+            cameraObjectHolder.localPosition = startPos;
+        }
+        ShakeRoutine = null;
+        isTracking = true;
+    }
+    void Shake(int intensity) 
+    {
+         float xRange = intensity * 0.0001f;
+        float yRange = intensity * 0.0005f;
+        float r_Xpos = Random.Range(-xRange, xRange);
+        float r_Ypos = Random.Range(-yRange, yRange);
+        float offSetX = cameraObjectHolder.localPosition.x + r_Xpos;
+        float offSetY = cameraObjectHolder.localPosition.y + r_Ypos;
+        cameraObjectHolder.localPosition = new Vector3(offSetX, offSetY, 0f);
     }
     #region Function Summary
     /// <summary>

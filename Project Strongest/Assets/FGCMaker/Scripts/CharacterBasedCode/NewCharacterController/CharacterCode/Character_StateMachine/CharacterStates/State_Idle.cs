@@ -77,7 +77,6 @@ public class State_Idle : BaseState
     }
     async void ResetComboInformation()
     {
-        _base._cAnimator.SetShake(false);
         await CheckOutOfThrow();
         _base._cStateMachine.opponentComboCounter.OnEndCombo();
 

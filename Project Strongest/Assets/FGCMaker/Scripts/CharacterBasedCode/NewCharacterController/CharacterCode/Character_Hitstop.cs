@@ -1,68 +1,44 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using DG.Tweening;
 
 public class Character_Hitstop : MonoBehaviour
 {
+    [SerializeField] private InGameCameraController _cameraController;
     [SerializeField] private Character_Animator p1, p2;
-    [SerializeField,Range(0,1f)] private float TimeScale;
-    public bool canHS;
+    IEnumerator hitStopSequence;
     private void Start()
     {
-        SetStartTimeScale();
+        hitStopSequence = null;
     }
-    public void SetStartTimeScale() 
+    public void TriggerHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target)
     {
-        TimeScale = 1;
-    }
-    private void Update()
-    {
-        Time.timeScale = TimeScale;
-    }
-    public void SetCharacterAnimator(int id, Character_Animator anim) 
-    {
-        if (id == 0) 
+        if (hitStopSequence != null) 
         {
-            p1 = anim;
+            StopCoroutine(hitStopSequence);
+            hitStopSequence = null;
         }
-        if(id == 1) 
-        {
-            p2 = anim;
-        }
-        if (id == -1)
-        {
-            if (p1 != null)
-            {
-                p2 = anim;
-            }
-            else 
-            {
-                p1 = anim;
-            }
-        }
+        hitStopSequence = HandleHitStop(lastAttack, rateOfIncrease, attacker, target);
+        StartCoroutine(hitStopSequence);
     }
-
-    public async void TriggerHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease = 0, Character_Base targetBase = null) 
+    IEnumerator HandleHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target)
     {
-        await CallHitStop(lastAttack,rateOfIncrease,targetBase);
-    }
-    public async Task CallHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease = 0, Character_Base targetBase = null)
-    {
-        //Sets Total HitstopTime
-        float actualWaitTime = rateOfIncrease * (1 / 60f);
-        int waitTime_milli = (int)(actualWaitTime * 1000f);
-        if(waitTime_milli <= 0) 
+        float oneFrame = 1 / 60f;
+        float actualWaitTime = rateOfIncrease * oneFrame;
+        attacker._cAnimator.SetSelfFreeze();
+        target._cAnimator.SetSelfFreeze();
+        _cameraController.CallCameraShake(rateOfIncrease, lastAttack.hitstopValue);
+        while (actualWaitTime > 0)
         {
-            return;
+            actualWaitTime -= (oneFrame);
+            yield return new WaitForSeconds(oneFrame);
         }
-
-        p1.SetSelfFreeze();
-        p2.SetSelfFreeze();
-        targetBase._cAnimator.SetShake(true);
-        await Task.Delay(waitTime_milli);
-        p1.SetSelfUnfreeze();
-        p2.SetSelfUnfreeze();
+        yield return new WaitForSeconds(actualWaitTime);
+        attacker._cAnimator.SetSelfUnfreeze();
+        target._cAnimator.SetSelfUnfreeze();
+        hitStopSequence = null;
     }
-    
 }

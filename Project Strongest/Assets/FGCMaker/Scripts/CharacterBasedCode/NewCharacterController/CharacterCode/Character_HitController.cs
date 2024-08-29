@@ -411,7 +411,6 @@ public class Character_HitController : MonoBehaviour
         float hitStunInFrames = curField.animLength + (currentHitstun * oneFrame);
         SetStunMeterValue(hitStunInFrames);
         _base._cAnimator.PlayNextAnimation(curField.animHash,0,true);
-        _base._cAnimator.SetShake(true);
         _base._cAnimator.SetCanRecover(true);
         _base._cHitstun.CallHitStun(hitStunInFrames);
         while (hitStunInFrames > 0) 
@@ -420,7 +419,6 @@ public class Character_HitController : MonoBehaviour
             UpdateMeterValue(oneFrame);
             yield return new WaitForSeconds(oneFrame);
         }
-        _base._cAnimator.EndShake();
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             ClearRecoveryRoutine();

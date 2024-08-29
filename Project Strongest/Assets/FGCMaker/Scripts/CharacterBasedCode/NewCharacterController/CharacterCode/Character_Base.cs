@@ -145,7 +145,7 @@ public class Character_Base : MonoBehaviour
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
         _cHitboxManager.SetupHitboxes(playerID + 1);
-        _cHitstop.SetCharacterAnimator(playerID, _cAnimator);
+        //_cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         InitCombos();
         SetAwaitEnums();
@@ -283,7 +283,6 @@ public class Character_Base : MonoBehaviour
         moveAxes = new List<Character_ButtonInput>();
         try
         {
-            //newElements = map.GetElementMaps();
             _map = player.controllers.maps.GetMap(playerID);
             newElements = player.controllers.maps.GetMap(ControllerType.Joystick, playerID, $"TestPlayer", $"TestPlayer{playerID}").GetElementMaps();
 
@@ -327,8 +326,6 @@ public class Character_Base : MonoBehaviour
                     break;
             }
             newButton.SetButton(newElements[i]);
-            //buttons.Add(newButton);
-            //buttons[i].SetButton(newElements[i]);
             int index = 0;
             if (newActions.TryGetValue(newButton.Button_Element.actionId, out index)) 
             {
@@ -351,7 +348,6 @@ public class Character_Base : MonoBehaviour
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
             await AwaitCustomCall2(callback, superIteratorCallback);
-            //StartCoroutine(AwaitCustomCall(callback, superIteratorCallback));
             return;
         }
         CheckCallback(callback);

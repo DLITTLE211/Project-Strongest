@@ -3116,6 +3116,7 @@ MonoBehaviour:
     _airInfo: 0
     cancelProperty:
       cancelFrom: 0
+      CurrentLevel: 0
       cancelTo: 0
     _moveType: 0
     AttackAnims:
@@ -6954,6 +6955,7 @@ MonoBehaviour:
   maxWidth: 0
   wallBoundBias: 1.75
   zPos: -2.5
+  cameraObjectHolder: {fileID: 550802476}
   orthoCamera: {fileID: 474224558}
   perspectiveBGCamera: {fileID: 1505004387}
   playerCharacters:
@@ -7307,6 +7309,7 @@ MonoBehaviour:
     _airInfo: 0
     cancelProperty:
       cancelFrom: 0
+      CurrentLevel: 0
       cancelTo: 0
     _moveType: 0
     AttackAnims:
@@ -17113,6 +17116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911741f06d7577348836cd09197c0522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cameraController: {fileID: 550802477}
   p1: {fileID: 0}
   p2: {fileID: 0}
   TimeScale: 1
@@ -22293,6 +22297,7 @@ MonoBehaviour:
     _airInfo: 0
     cancelProperty:
       cancelFrom: 0
+      CurrentLevel: 0
       cancelTo: 0
     _moveType: 0
     AttackAnims:
@@ -22915,6 +22920,7 @@ MonoBehaviour:
     _airInfo: 0
     cancelProperty:
       cancelFrom: 0
+      CurrentLevel: 0
       cancelTo: 0
     _moveType: 0
     AttackAnims:

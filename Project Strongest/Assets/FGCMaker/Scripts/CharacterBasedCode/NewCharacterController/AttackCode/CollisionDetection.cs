@@ -73,16 +73,16 @@ public class CollisionDetection : MonoBehaviour
     public void SetupHurtboxDictionary()
     {
         hurtboxColor = new Dictionary<HurtBoxType, Color32>();
-        hurtboxColor.Add(HurtBoxType.NoBlock, Color.magenta);
-        hurtboxColor.Add(HurtBoxType.BlockHigh, Color.blue);
-        hurtboxColor.Add(HurtBoxType.BlockLow, Color.red);
-        hurtboxColor.Add(HurtBoxType.ParryLow, Color.yellow);
-        hurtboxColor.Add(HurtBoxType.ParryHigh, Color.green);
-        hurtboxColor.Add(HurtBoxType.SoftKnockdown, Color.grey);
-        hurtboxColor.Add(HurtBoxType.HardKnockdown, Color.white);
-        hurtboxColor.Add(HurtBoxType.Invincible, Color.black);
-        hurtboxColor.Add(HurtBoxType.Armor, Color.clear);
-        hurtboxColor.Add(HurtBoxType.FullCounter, Color.cyan);
+        hurtboxColor.Add(HurtBoxType.NoBlock, new Color32(255,0,170,95));
+        hurtboxColor.Add(HurtBoxType.BlockHigh, new Color32(102, 222, 255, 95));
+        hurtboxColor.Add(HurtBoxType.BlockLow, new Color32(197, 255, 102, 95));
+        hurtboxColor.Add(HurtBoxType.ParryLow, new Color32(236, 220, 188, 95));
+        hurtboxColor.Add(HurtBoxType.ParryHigh, new Color32(155, 97, 52, 95));
+        hurtboxColor.Add(HurtBoxType.SoftKnockdown, new Color32(57, 207, 255, 95));
+        hurtboxColor.Add(HurtBoxType.HardKnockdown, new Color32(135, 135, 135, 95));
+        hurtboxColor.Add(HurtBoxType.Invincible, new Color32(255, 255, 255, 95));
+        hurtboxColor.Add(HurtBoxType.Armor, new Color32(0, 0, 0, 95));
+        hurtboxColor.Add(HurtBoxType.FullCounter, new Color32(188, 106, 106, 95));
     }
     public void SetHitboxState(HitBoxType _hitProperty)
     {

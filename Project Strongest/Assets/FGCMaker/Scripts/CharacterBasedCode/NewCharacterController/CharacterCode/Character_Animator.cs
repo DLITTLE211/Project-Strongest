@@ -27,9 +27,6 @@ public class Character_Animator : MonoBehaviour
     [SerializeField] public Character_Mobility activatedInput;
     [SerializeField] public Attack_BaseProperties lastAttack;
 
-    [SerializeField] private bool Shake;
-    public bool ISShaking { get { return Shake; } }
-
     public Transform _model;
     public bool inRekkaState,inStanceState;
     public bool canBlock;
@@ -116,39 +113,6 @@ public class Character_Animator : MonoBehaviour
             }
         }
     }*/
-    #region Shake Player Code
-    private void Update()
-    {
-        if (Shake)
-        {
-            StartCoroutine(CallShake());
-        }
-    }
-    IEnumerator CallShake()
-    {
-        float r_Xpos = UnityEngine.Random.Range(-0.05f, 0.05f);
-        float r_Ypos = UnityEngine.Random.Range(-0.05f, 0.05f);
-        _model.localPosition = new Vector3(r_Xpos, r_Ypos, 0f);
-        yield return null;
-        _model.localPosition = startPos;
-    }
-    public void SetShake(bool state)
-    {
-        if (Shake != state)
-        {
-            Shake = state;
-            if (!state)
-            {
-                _model.localPosition = startPos;
-            }
-        }
-    }
-    public void EndShake()
-    {
-        SetShake(false);
-        StopCoroutine(CallShake());
-    }
-    #endregion
 
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false)
     {
@@ -191,7 +155,6 @@ public class Character_Animator : MonoBehaviour
     }
     public void SetSelfFreeze()
     {
-        //_base._cForce.HandleForceFreeze(true);
         _base._cHitstun.HandleAnimatorFreeze(true);
         _base._cGravity.HandleGravityFreeze(true);
     }
