@@ -41,14 +41,14 @@ public class CharacterSelect_Setup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetupPlayerPage(_leftPlayerPage);
-        SetupPlayerPage(_rightPlayerPage);
 
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
+        //SetupPlayerPage(_leftPlayerPage);
+        //SetupPlayerPage(_rightPlayerPage);
 
-        AddCharacterSelectButtons();
+        //AddCharacterSelectButtons();
     }
     void SetupPlayerPage(CharacterSelect_Page playerPage) 
     {
