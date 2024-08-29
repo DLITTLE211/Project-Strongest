@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using TMPro;
 using Rewired;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class Menu_Manager : MonoBehaviour
 {
     public Character_AvailableID players;
     [SerializeField] private Player _mainMenuPlayer;
     [SerializeField] private int _mainMenuPlayerID;
+
+    [SerializeField] private MenuButtonHolder FirstMenuButtonLayer;
+    [SerializeField] private MenuButtonHolder SecondMenuButtonLayer;
     private void Start()
     {
         SetPlayerControllers();
@@ -37,3 +43,4 @@ public class Menu_Manager : MonoBehaviour
             $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
     }
 }
+
