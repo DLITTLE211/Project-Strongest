@@ -14,17 +14,17 @@ public class Character_Hitstop : MonoBehaviour
     {
         hitStopSequence = null;
     }
-    public void TriggerHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target)
+    public void TriggerHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target,Callback func)
     {
         if (hitStopSequence != null) 
         {
             StopCoroutine(hitStopSequence);
             hitStopSequence = null;
         }
-        hitStopSequence = HandleHitStop(lastAttack, rateOfIncrease, attacker, target);
+        hitStopSequence = HandleHitStop(lastAttack, rateOfIncrease, attacker, target, func);
         StartCoroutine(hitStopSequence);
     }
-    IEnumerator HandleHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target)
+    IEnumerator HandleHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target, Callback func)
     {
         float oneFrame = 1 / 60f;
         float actualWaitTime = rateOfIncrease * oneFrame;
@@ -40,5 +40,9 @@ public class Character_Hitstop : MonoBehaviour
         attacker._cAnimator.SetSelfUnfreeze();
         target._cAnimator.SetSelfUnfreeze();
         hitStopSequence = null;
+        if (func != null)
+        {
+            func();
+        }
     }
 }

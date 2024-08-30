@@ -274,7 +274,7 @@ public class HurtBox : CollisionDetection
         Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
         Base_Attacker._aManager.ClearAttacks();
-        Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker, Base_Target);
+        Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker, Base_Target,null);
         endingFunction();
         endingFunction = null;
     }
@@ -291,15 +291,15 @@ public class HurtBox : CollisionDetection
         while (curHit < hitCount._count)
         {
             currentHitProperties.hitConnected = true;
+            Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
             if (BlockedAttack)
             {
-                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue / 10f), Base_Attacker, Base_Target);
+                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
             }
             else
             {
-                Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
-                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker,Base_Target);
+                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker,Base_Target, applyForceAfterStop);
                 Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
             }
             if (hitCount._refreshRate > 0)
