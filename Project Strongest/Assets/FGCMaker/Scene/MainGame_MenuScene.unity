@@ -1871,10 +1871,25 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 505535121}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641516430}
+        m_TargetAssemblyTypeName: Menu_Manager, Assembly-CSharp
+        m_MethodName: TrainingSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonBackgroundImage: {fileID: 59521424}
+  buttonImage: {fileID: 505535121}
+  buttonNameText: {fileID: 1091694694}
   backgroundHighligtedColor:
     serializedVersion: 2
-    rgba: 4278190244
+    rgba: 4278190176
   NavigationButton: {fileID: 59521422}
   backgroundImage: {fileID: 0}
 --- !u!1 &529025239
@@ -2621,6 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3a746f00178443b4cb39d161d1425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _eventSystem: {fileID: 1982503669}
   players:
     availableIds: 
     totalPlayers: []
@@ -2628,20 +2644,20 @@ MonoBehaviour:
     currentNames: []
     usedIntID: 
     usedStrings: []
-  _mainMenuPlayerID: -1
   FirstMenuButtonLayer:
-    buttonHolder: {fileID: 1691372229}
+    buttonHolder: {fileID: 1691372230}
     buttonList:
     - {fileID: 505535123}
     - {fileID: 1336606861}
     - {fileID: 1623713034}
     - {fileID: 1942176588}
   SecondMenuButtonLayer:
-    buttonHolder: {fileID: 1776764141}
+    buttonHolder: {fileID: 1776764142}
     buttonList:
     - {fileID: 890026749}
     - {fileID: 2018935892}
   _backgroundImage: {fileID: 1966183755}
+  _titleText: {fileID: 1276099089}
 --- !u!1 &645487068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,7 +2972,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &725151358
 GameObject:
@@ -3513,7 +3529,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 890026746}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641516428}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonBackgroundImage: {fileID: 963441220}
+  buttonImage: {fileID: 890026746}
+  buttonNameText: {fileID: 566487566}
   backgroundHighligtedColor:
     serializedVersion: 2
     rgba: 0
@@ -3622,7 +3653,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &951474043
 GameObject:
@@ -7202,7 +7233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6034375, y: 0.89500004}
   m_AnchorMax: {x: 0.6034375, y: 0.89500004}
-  m_AnchoredPosition: {x: -1.201416, y: 151.19995}
+  m_AnchoredPosition: {x: -1.201416, y: 435}
   m_SizeDelta: {x: 2034.3833, y: 263.567}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1276099089
@@ -7714,7 +7745,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1336606859}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641516428}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonBackgroundImage: {fileID: 59521424}
+  buttonImage: {fileID: 505535121}
+  buttonNameText: {fileID: 647738985}
   backgroundHighligtedColor:
     serializedVersion: 2
     rgba: 4287502592
@@ -9018,7 +9064,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1623713032}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641516428}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonBackgroundImage: {fileID: 529025242}
+  buttonImage: {fileID: 1623713032}
+  buttonNameText: {fileID: 2044652886}
   backgroundHighligtedColor:
     serializedVersion: 2
     rgba: 4284809164
@@ -9252,7 +9313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.33400002, y: 0.5}
   m_AnchorMax: {x: 0.33400002, y: 0.5}
-  m_AnchoredPosition: {x: -855, y: 0}
+  m_AnchoredPosition: {x: -2605, y: 0}
   m_SizeDelta: {x: 1481.959, y: 1440}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &1735383070
@@ -10411,7 +10472,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1942176586}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641516428}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonBackgroundImage: {fileID: 1291546003}
+  buttonImage: {fileID: 1942176586}
+  buttonNameText: {fileID: 1601383729}
   backgroundHighligtedColor:
     serializedVersion: 2
     rgba: 4279900696
@@ -10468,7 +10544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9339623, g: 0, b: 0, a: 0.4117647}
+  m_Color: {r: 0.9339623, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10652,7 +10728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 505535118}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!1 &1997312419
@@ -10852,7 +10928,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2018935890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641516428}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonBackgroundImage: {fileID: 1968464989}
+  buttonImage: {fileID: 2018935890}
+  buttonNameText: {fileID: 59435320}
   backgroundHighligtedColor:
     serializedVersion: 2
     rgba: 0

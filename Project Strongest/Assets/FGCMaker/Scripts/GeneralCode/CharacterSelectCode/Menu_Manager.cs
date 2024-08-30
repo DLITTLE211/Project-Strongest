@@ -2,25 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Threading.Tasks;
 using UnityEngine.UI;
 using TMPro;
 using Rewired;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class Menu_Manager : MonoBehaviour
 {
+    [SerializeField] private EventSystem _eventSystem; 
     public Character_AvailableID players;
     [SerializeField] private Player _mainMenuPlayer;
-    [SerializeField] private int _mainMenuPlayerID;
+     private int _mainMenuPlayerID;
 
     [SerializeField] private MenuButtonHolder FirstMenuButtonLayer;
     [SerializeField] private MenuButtonHolder SecondMenuButtonLayer;
+    [Space(15)]
     [SerializeField] private Image _backgroundImage;
+    [SerializeField] private TMP_Text _titleText;
+    Transform _titleTextTransform;
     private void Start()
     {
+        _titleTextTransform = _titleText.GetComponent<Transform>();
         Cursor.lockState = CursorLockMode.Locked;
+        float moveUpPos = _titleTextTransform.localPosition.y - 225f;
+        _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f).SetEase(Ease.InOutBack);
         SetPlayerControllers();
         SetButtonHolderImages();
+        FirstMenuButtonLayer.SlideHolderIn(SetActiveButton);
+    }
+    void SetActiveButton() 
+    {
+        _eventSystem.firstSelectedGameObject = FirstMenuButtonLayer.buttonList[0].gameObject;
+        FirstMenuButtonLayer.buttonList[0].Select();
     }
     void SetPlayerControllers()
     {
@@ -44,10 +59,51 @@ public class Menu_Manager : MonoBehaviour
         player.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
             $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
     }
-    public void SetButtonHolderImages() 
+    public void SetButtonHolderImages()
     {
         FirstMenuButtonLayer.SetImageObject(_backgroundImage);
         SecondMenuButtonLayer.SetImageObject(_backgroundImage);
+        FirstMenuButtonLayer.EnableButtons();
+        FirstMenuButtonLayer.EnableButtons();
+    }
+
+    public async void TrainingSelected()
+    {
+        Task[] tasks = new Task[]
+        {
+            CloseMainMenuScreen(),
+        };
+            //_characterSelectSetup.ClearCharacterSelectInfo(),
+            //_characterSelectSetup.ClearLeftPlayerInfo(),
+            //_characterSelectSetup.ClearRightPlayerInfo(),
+            //};
+        await Task.WhenAll(tasks);
+    }
+    public async Task CloseMainMenuScreen()
+    {
+        FirstMenuButtonLayer.DisableButtons();
+        FirstMenuButtonLayer.DisableButtons();
+        _titleText.DOFade(0, 1.5f);
+        FirstMenuButtonLayer.SlideHolderOut();
+        float moveUpPos = _titleTextTransform.localPosition.y + 50f;
+        _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f);
+        _backgroundImage.DOFade(0, 1.5f);
+        await Task.Delay(40);
+    }
+
+}
+[Serializable]
+public class GameModeSet
+{
+    public GameMode gameMode;
+    public GameModeSet (GameMode _gameMode) 
+    {
+        gameMode = _gameMode;
     }
 }
-
+[Serializable]
+public enum GameMode 
+{
+    Training,
+    Versus,
+}

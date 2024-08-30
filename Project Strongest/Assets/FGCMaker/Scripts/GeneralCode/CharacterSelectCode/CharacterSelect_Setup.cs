@@ -41,7 +41,6 @@ public class CharacterSelect_Setup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
@@ -244,6 +243,12 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
             }
         }
+    }
+    public void ClearListeners() 
+    {
+        Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
+        Messenger.RemoveListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
+        Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
     }
 
     #region CursorController
