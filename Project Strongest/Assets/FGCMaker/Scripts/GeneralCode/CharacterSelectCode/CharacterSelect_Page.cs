@@ -39,19 +39,13 @@ public class CharacterSelect_Page : MonoBehaviour
         chosenAmplifier = null;
     }
 
-    public void SetPlayerInfo()
+    public void SetPlayerInfo(float value)
     {
-        characterBackgroundImage.DOFade(1f, 0f);
-        characterName.DOFade(1f, 0f);
-        characterAmplify.SetAmplifyInfo();
+        characterBackgroundImage.DOFade(value, 1.5f);
+        characterName.DOFade(value, 1.5f);
+        characterAmplify.SetAmplifyInfo(value);
     }
 
-    public void ClearPlayerInfo()
-    {
-        characterBackgroundImage.DOFade(0f, 1.5f);
-        characterName.DOFade(0f, 1.5f);
-        characterAmplify.ClearAmplifyInfo();
-    }
     public IEnumerator DelayResetBool() 
     {
         amplifySelectCooldown = true;

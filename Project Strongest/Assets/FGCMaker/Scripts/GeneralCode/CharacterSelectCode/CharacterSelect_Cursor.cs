@@ -40,4 +40,9 @@ public class CharacterSelect_Cursor : MonoBehaviour
         cursorPage.characterName.text = "Choose Your Character";
         cursorObject.transform.DOScale(1f, 0.15f);
     }
+
+    public void DesyncController()
+    {
+        isConnected = false;
+    }
 }

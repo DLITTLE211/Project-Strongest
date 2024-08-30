@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
-        if (SceneManager.GetActiveScene().name == "MainGame_CharacterSelect") 
+        if (SceneManager.GetActiveScene().name == "MainGame_MenuScene") 
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainGame_Arena"));
         } 

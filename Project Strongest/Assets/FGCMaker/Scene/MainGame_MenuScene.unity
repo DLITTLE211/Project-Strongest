@@ -2636,6 +2636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3a746f00178443b4cb39d161d1425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSelect: {fileID: 1107754684}
+  _mainMenuHolder: {fileID: 1512261973}
   _eventSystem: {fileID: 1982503669}
   players:
     availableIds: 
@@ -6618,6 +6620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f233efdd21fcef34f98639a2e3d41afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainObjectHolder: {fileID: 184170190}
   characterSelectButtonPrefab: {fileID: 9206346132393860188, guid: 417349bc215c33a4586da392c385e985, type: 3}
   characterSelectHolder: {fileID: 1767974627}
   characterSelect_Header: {fileID: 2066079323}
@@ -6674,6 +6677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ce6bf8a8109b349a6337485f01595b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainMenuCamera: {fileID: 1066661553}
   _characterSelectSetup: {fileID: 1107754684}
 --- !u!1 &1113682857
 GameObject:
@@ -8319,7 +8323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1512261974
 Transform:
   m_ObjectHideFlags: 0

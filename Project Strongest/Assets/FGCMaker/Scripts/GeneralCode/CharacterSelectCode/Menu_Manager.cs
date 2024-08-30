@@ -11,6 +11,8 @@ using UnityEngine.EventSystems;
 
 public class Menu_Manager : MonoBehaviour
 {
+    [SerializeField] private CharacterSelect_Setup _characterSelect;
+    [SerializeField] private GameObject _mainMenuHolder;
     [SerializeField] private EventSystem _eventSystem; 
     [SerializeField] private Player _mainMenuPlayer;
     private int _mainMenuPlayerID;
@@ -23,6 +25,7 @@ public class Menu_Manager : MonoBehaviour
     Transform _titleTextTransform;
     private void Start()
     {
+        ToggleMainMenuState(true);
         _titleTextTransform = _titleText.GetComponent<Transform>();
         Cursor.lockState = CursorLockMode.Locked;
         float moveUpPos = _titleTextTransform.localPosition.y - 225f;
@@ -72,11 +75,15 @@ public class Menu_Manager : MonoBehaviour
         {
             CloseMainMenuScreen(),
         };
-            //_characterSelectSetup.ClearCharacterSelectInfo(),
-            //_characterSelectSetup.ClearLeftPlayerInfo(),
-            //_characterSelectSetup.ClearRightPlayerInfo(),
-            //};
         await Task.WhenAll(tasks);
+        await Task.Delay(750);
+        ToggleMainMenuState(false);
+        await Task.Delay(200);
+        _characterSelect.SetUpCharacterSelectScreen(players);
+    }
+    void ToggleMainMenuState(bool state) 
+    {
+        _mainMenuHolder.SetActive(state);
     }
     public async Task CloseMainMenuScreen()
     {

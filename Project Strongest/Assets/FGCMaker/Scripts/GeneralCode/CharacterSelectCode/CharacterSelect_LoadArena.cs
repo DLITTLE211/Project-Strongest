@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class CharacterSelect_LoadArena : MonoBehaviour
 {
+    [SerializeField] private GameObject _mainMenuCamera;
     [SerializeField] private CharacterSelect_Setup _characterSelectSetup;
     private bool _arenaLoaded;
     public static ChosenCharacter leftPlayerChosenProfile, rightPlayerChosenProfile;
@@ -22,26 +23,27 @@ public class CharacterSelect_LoadArena : MonoBehaviour
 
     async Task LoadArena()
     {
-        if (SceneManager.GetActiveScene().name == "MainGame_CharacterSelect")
+        if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
             leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
             rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();
             chosenStage = _characterSelectSetup.GetChosenStage();
             Task[] tasks = new Task[]
             {
-            _characterSelectSetup.ClearStageSelect(),
-            _characterSelectSetup.ClearCharacterSelectInfo(),
-            _characterSelectSetup.ClearLeftPlayerInfo(),
-            _characterSelectSetup.ClearRightPlayerInfo(),
+            _characterSelectSetup.DisableCharacterCursors(),
+            _characterSelectSetup.ToggleStageSelectState(false),
+            _characterSelectSetup.ToggleCharacterSelectInfo(false,0),
+            _characterSelectSetup.TogglePlayerInfo(0),
             };
             await Task.WhenAll(tasks);
-            SceneManager.UnloadSceneAsync("MainGame_CharacterSelect");
+            _mainMenuCamera.SetActive(false);
+            SceneManager.UnloadSceneAsync("MainGame_MenuScene");
             SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
         }
     }
     public void OnApplicationQuit()
     {
-        SceneManager.LoadScene("MainGame_CharacterSelect", LoadSceneMode.Additive);
+        SceneManager.LoadScene("MainGame_MenuScene", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("MainGame_Arena");
         _arenaLoaded = false;
     }

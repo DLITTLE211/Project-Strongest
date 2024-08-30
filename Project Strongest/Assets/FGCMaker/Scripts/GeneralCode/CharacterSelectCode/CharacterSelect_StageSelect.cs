@@ -49,10 +49,10 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         _mainHolder.SetActive(false);
         stageSelectActive = false;
     }
-    public void CloseStageSelect()
+    public void SetStageSelect(bool state)
     {
-        _mainHolder.SetActive(false);
-        stageSelectActive = false;
+        _mainHolder.SetActive(state);
+        stageSelectActive = state;
     }
     public void UpdateInfoDown()
     {

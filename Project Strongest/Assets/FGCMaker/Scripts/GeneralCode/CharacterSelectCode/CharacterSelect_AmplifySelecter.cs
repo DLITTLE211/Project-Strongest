@@ -45,17 +45,10 @@ public class CharacterSelect_AmplifySelecter :MonoBehaviour
         chosenAmplifierText.text = curAmplifier.amplifier.ToString();
         chosenAmplifier = curAmplifier;
     }
-
-    public void SetAmplifyInfo()
+    public void SetAmplifyInfo(float value)
     {
-        chosenAmplifierText.DOFade(1f, 0f);
-        LeftBumperImage.DOFade(1f, 0f);
-        RightBumperImage.DOFade(1f, 0f);
-    }
-    public void ClearAmplifyInfo()
-    {
-        chosenAmplifierText.DOFade(0f, 1.5f);
-        LeftBumperImage.DOFade(0f, 1.5f);
-        RightBumperImage.DOFade(0f, 1.5f);
+        chosenAmplifierText.DOFade(value, 1.5f);
+        LeftBumperImage.DOFade(value, 1.5f);
+        RightBumperImage.DOFade(value, 1.5f);
     }
 }

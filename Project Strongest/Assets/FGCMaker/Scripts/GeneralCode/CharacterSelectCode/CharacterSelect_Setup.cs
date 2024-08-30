@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 public class CharacterSelect_Setup : MonoBehaviour
 {
     [Header("____CharacterSelect Assets____")]
+    [SerializeField] private GameObject mainObjectHolder;
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
     [SerializeField] private GameObject characterSelect_Header;
@@ -44,15 +45,29 @@ public class CharacterSelect_Setup : MonoBehaviour
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
-        //SetupPlayerPage(_leftPlayerPage);
-        //SetupPlayerPage(_rightPlayerPage);
+        SetupPlayerPage(_leftPlayerPage);
+        SetupPlayerPage(_rightPlayerPage);
 
-        //AddCharacterSelectButtons();
+        //
     }
     void SetupPlayerPage(CharacterSelect_Page playerPage) 
     {
         playerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
-        playerPage.SetPlayerInfo();
+        playerPage.SetPlayerInfo(255f);
+      
+    }
+    public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers)
+    {
+        mainObjectHolder.SetActive(true);
+           players = _characterSelectplayers;
+        Task[] tasks = new Task[]
+        {
+            ToggleStageSelectState(true),
+            ToggleCharacterSelectInfo(true,255f),
+            TogglePlayerInfo(255f),
+        };
+        await Task.WhenAll(tasks);
+        AddCharacterSelectButtons();
     }
 
     private void Update()
@@ -159,36 +174,45 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
     }
     #region Deactivate Character Select
-    public async Task ClearCharacterSelectInfo() 
+    public async Task ToggleCharacterSelectInfo(bool state, float fadeValue) 
     {
         for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
         {
-            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().interactable = false;
-            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(0f, 1.5f);
-            activeCharacterSelectButtons[i].SetActive(false);
+            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().interactable = state;
+            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(fadeValue, 1.5f);
+            activeCharacterSelectButtons[i].SetActive(state);
         }
-        characterSelectBackgroundImage.gameObject.SetActive(false);
-        characterSelect_Header.SetActive(false);
-        characterSelectHolder.SetActive(false);
+        characterSelectBackgroundImage.gameObject.SetActive(state);
+        characterSelect_Header.SetActive(state);
+        characterSelectHolder.SetActive(state);
         await Task.Delay(400);
     }
-    public async Task ClearLeftPlayerInfo()
+    public async Task DisableCharacterCursors() 
     {
-        _leftPlayerPage.ClearPlayerInfo();
+        _leftPlayer.DesyncController();
+        _rightPlayer.DesyncController();
         await Task.Delay(400);
     }
-    public async Task ClearRightPlayerInfo()
+    public async Task TogglePlayerInfo(float value) 
     {
-        _rightPlayerPage.ClearPlayerInfo();
-        for (int i = 0; i < characterSelect_Assets.Count; i++)
+        _leftPlayerPage.SetPlayerInfo(value);
+        _rightPlayerPage.SetPlayerInfo(value);
+        if (value == 0) 
         {
-            characterSelect_Assets[i].SetActive(false);
+            for (int i = 0; i < characterSelect_Assets.Count; i++)
+            {
+                characterSelect_Assets[i].SetActive(false);
+            }
+            await Task.Delay(200);
+            mainObjectHolder.SetActive(false);
+            await Task.Delay(200);
+            return;
         }
         await Task.Delay(400);
     }
-    public async Task ClearStageSelect() 
+    public async Task ToggleStageSelectState(bool state) 
     {
-        _stageSelecter.CloseStageSelect();
+        _stageSelecter.SetStageSelect(state);
         await Task.Delay(400);
     }
     #endregion
