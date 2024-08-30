@@ -6,6 +6,7 @@ using Rewired;
 using System.Threading.Tasks;
 public class Character_Base : MonoBehaviour
 {
+    public float animfloat;
     #region Character Profile Data
     [Header("__________Character Profile Data__________")]
     public Character_Profile characterProfile;

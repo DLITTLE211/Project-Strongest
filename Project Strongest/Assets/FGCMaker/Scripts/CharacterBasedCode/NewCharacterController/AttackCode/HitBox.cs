@@ -26,7 +26,7 @@ public class HitBox : CollisionDetection
     }
     private void Update()
     {
-        if (HBType != HitBoxType.nullified)
+        if (HBType != HitBoxType.nullified && allowHitCheck)
         {
             CheckForCollision();
         }

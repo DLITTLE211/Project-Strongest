@@ -267,10 +267,15 @@ public class AttackHandler_Attack : AttackHandler_Base
         //character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
-            float waitTime = oneFrame * character._cHitstun.animSpeed;
+            float frameIterator = oneFrame * character._cHitstun.animSpeed;
+            float waitTime = oneFrame / character._cHitstun.animSpeed;
+            if (character._cHitstun.animSpeed == 0.25f)
+            {
+                frameCount = frameCount - (frameCount * character._cHitstun.animSpeed);
+            }
             try
             {
-                float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
+                float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
                 if (requiredHitboxCallBacks.Count > 0)
                 {
                     if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
@@ -283,7 +288,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 {
                     if (customHitboxCallBacks.Count > 0)
                     {
-                        if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                        if (frameCount >= oneFrame * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
                             character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
                             customHitboxCallBacks.RemoveAt(0);
@@ -301,7 +306,8 @@ public class AttackHandler_Attack : AttackHandler_Base
                 Debug.Log($"Inactive bool state: {inactive}");
                 Debug.Break();
             }
-            frameCount += waitTime;
+            character.animfloat = frameCount;
+            frameCount += frameIterator;
             yield return new WaitForSeconds(waitTime);
         }
         _playerCAnimator.SetCanTransitionIdle(true);
@@ -353,10 +359,12 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         while (frameCount <= customProp.animLength)
         {
-            float waitTime = oneFrame * character._cHitstun.animSpeed;
+            float frameIterator = oneFrame * character._cHitstun.animSpeed;
+            float waitTime = oneFrame / character._cHitstun.animSpeed;
+            frameCount = frameCount * character._cHitstun.animSpeed;
             try
             {
-                float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
+                float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
                 if (requiredHitboxCallBacks.Count > 0)
                 {
                     if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
@@ -369,7 +377,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 {
                     if (customHitboxCallBacks.Count > 0)
                     {
-                        float curCustomTimeStamp = waitTime * customHitboxCallBacks[0].timeStamp;
+                        float curCustomTimeStamp = oneFrame * customHitboxCallBacks[0].timeStamp;
                         if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                         {
                             Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
@@ -389,7 +397,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 Debug.Log($"Inactive bool state: {inactive}");
                 Debug.Break();
             }
-             frameCount += waitTime;
+            frameCount += frameIterator;
             yield return new WaitForSeconds(waitTime);
         }
         Attack_BaseProperties thisAttack = character._cHitboxManager.GetActiveHitBox().hitboxProperties;
