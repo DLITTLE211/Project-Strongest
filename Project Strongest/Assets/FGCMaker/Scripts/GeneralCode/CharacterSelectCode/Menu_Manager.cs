@@ -12,15 +12,14 @@ using UnityEngine.EventSystems;
 public class Menu_Manager : MonoBehaviour
 {
     [SerializeField] private EventSystem _eventSystem; 
-    public Character_AvailableID players;
     [SerializeField] private Player _mainMenuPlayer;
-     private int _mainMenuPlayerID;
-
+    private int _mainMenuPlayerID;
+    public Character_AvailableID players;
     [SerializeField] private MenuButtonHolder FirstMenuButtonLayer;
     [SerializeField] private MenuButtonHolder SecondMenuButtonLayer;
     [Space(15)]
-    [SerializeField] private Image _backgroundImage;
-    [SerializeField] private TMP_Text _titleText;
+    [SerializeField] private Image _backgroundImage,whiteFillerImage;
+    [SerializeField] private TMP_Text _titleText,_versionText;
     Transform _titleTextTransform;
     private void Start()
     {
@@ -84,10 +83,23 @@ public class Menu_Manager : MonoBehaviour
         FirstMenuButtonLayer.DisableButtons();
         FirstMenuButtonLayer.DisableButtons();
         _titleText.DOFade(0, 1.5f);
+        _versionText.DOFade(0, 1.5f);
         FirstMenuButtonLayer.SlideHolderOut();
         float moveUpPos = _titleTextTransform.localPosition.y + 50f;
         _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f);
         _backgroundImage.DOFade(0, 1.5f);
+        whiteFillerImage.DOFade(0, 1.5f);
+        await Task.Delay(40);
+    }
+    public async Task OpenMainMenuScreen()
+    {
+        FirstMenuButtonLayer.SlideHolderIn(SetActiveButton);
+        _titleText.DOFade(255f, 1.5f);
+        _versionText.DOFade(255f, 1.5f);
+        float moveUpPos = _titleTextTransform.localPosition.y - 225f;
+        _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f).SetEase(Ease.InOutBack);
+        _backgroundImage.DOFade(255f, 1.5f);
+        whiteFillerImage.DOFade(255f, 1.5f);
         await Task.Delay(40);
     }
 

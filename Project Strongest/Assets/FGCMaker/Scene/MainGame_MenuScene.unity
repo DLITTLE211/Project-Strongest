@@ -2657,7 +2657,9 @@ MonoBehaviour:
     - {fileID: 890026749}
     - {fileID: 2018935892}
   _backgroundImage: {fileID: 1966183755}
+  whiteFillerImage: {fileID: 1762408976}
   _titleText: {fileID: 1276099089}
+  _versionText: {fileID: 1019730587}
 --- !u!1 &645487068
 GameObject:
   m_ObjectHideFlags: 0
@@ -7256,7 +7258,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: baki strongest showdown
+  m_text: 'baki strongest showdown
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9399,18 +9403,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762408974}
-  m_LocalRotation: {x: -0, y: -0, z: 0.2302124, w: 0.9731404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1788043158}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.619}
-  m_AnchorMin: {x: 0.82943755, y: 0.63500005}
-  m_AnchorMax: {x: 0.82943755, y: 0.63500005}
-  m_AnchoredPosition: {x: 2.1900024, y: 0.98046875}
-  m_SizeDelta: {x: 93.062, y: 107.21161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.61600006, y: 0.5}
+  m_AnchorMax: {x: 0.61600006, y: 0.5}
+  m_AnchoredPosition: {x: 2.4899902, y: 0.6000061}
+  m_SizeDelta: {x: 78.252, y: 57.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1762408976
 MonoBehaviour:
