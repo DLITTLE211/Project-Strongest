@@ -5,7 +5,6 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 using Rewired;
-using UnityEngine.EventSystems;
 using DG.Tweening;
 
 public class Menu_Manager : MonoBehaviour
@@ -16,9 +15,12 @@ public class Menu_Manager : MonoBehaviour
 
     [SerializeField] private MenuButtonHolder FirstMenuButtonLayer;
     [SerializeField] private MenuButtonHolder SecondMenuButtonLayer;
+    [SerializeField] private Image _backgroundImage;
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         SetPlayerControllers();
+        SetButtonHolderImages();
     }
     void SetPlayerControllers()
     {
@@ -41,6 +43,11 @@ public class Menu_Manager : MonoBehaviour
         player.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
         player.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
             $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+    }
+    public void SetButtonHolderImages() 
+    {
+        FirstMenuButtonLayer.SetImageObject(_backgroundImage);
+        SecondMenuButtonLayer.SetImageObject(_backgroundImage);
     }
 }
 

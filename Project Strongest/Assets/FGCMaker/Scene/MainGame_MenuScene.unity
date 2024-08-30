@@ -401,7 +401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39741644, y: 0.6736945}
   m_AnchorMax: {x: 0.39741644, y: 0.6736945}
-  m_AnchoredPosition: {x: -2.348877, y: -2}
+  m_AnchoredPosition: {x: 0, y: -2}
   m_SizeDelta: {x: 1118.5093, y: 188.7056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &59521424
@@ -1760,8 +1760,8 @@ GameObject:
   m_Component:
   - component: {fileID: 505535119}
   - component: {fileID: 505535122}
-  - component: {fileID: 505535121}
   - component: {fileID: 505535123}
+  - component: {fileID: 505535121}
   m_Layer: 0
   m_Name: 'Training Button '
   m_TagString: Untagged
@@ -1852,7 +1852,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     m_PressedColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1872,8 +1872,11 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  NavigationButton: {fileID: 0}
-  navigateButtonTransform: {fileID: 0}
+  backgroundHighligtedColor:
+    serializedVersion: 2
+    rgba: 4278190244
+  NavigationButton: {fileID: 59521422}
+  backgroundImage: {fileID: 0}
 --- !u!1 &529025239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,7 +1913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.57524925, y: 0.32869446}
   m_AnchorMax: {x: 0.57524925, y: 0.32869446}
-  m_AnchoredPosition: {x: -5.793213, y: -1}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 1118.5093, y: 188.7056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529025242
@@ -2628,10 +2631,17 @@ MonoBehaviour:
   _mainMenuPlayerID: -1
   FirstMenuButtonLayer:
     buttonHolder: {fileID: 1691372229}
-    buttonList: []
+    buttonList:
+    - {fileID: 505535123}
+    - {fileID: 1336606861}
+    - {fileID: 1623713034}
+    - {fileID: 1942176588}
   SecondMenuButtonLayer:
     buttonHolder: {fileID: 1776764141}
-    buttonList: []
+    buttonList:
+    - {fileID: 890026749}
+    - {fileID: 2018935892}
+  _backgroundImage: {fileID: 1966183755}
 --- !u!1 &645487068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3504,8 +3514,11 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  NavigationButton: {fileID: 0}
-  navigateButtonTransform: {fileID: 0}
+  backgroundHighligtedColor:
+    serializedVersion: 2
+    rgba: 0
+  NavigationButton: {fileID: 963441219}
+  backgroundImage: {fileID: 0}
 --- !u!1 &919151971
 GameObject:
   m_ObjectHideFlags: 0
@@ -7325,7 +7338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -26.80774, y: -1}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 1118.5093, y: 188.7056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1290105370
@@ -7402,7 +7415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.66, y: 0.15275002}
   m_AnchorMax: {x: 0.66, y: 0.15275002}
-  m_AnchoredPosition: {x: -0.7932129, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 1118.5093, y: 188.7056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1291546003
@@ -7682,7 +7695,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     m_PressedColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -7697,13 +7710,16 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1336606859}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  NavigationButton: {fileID: 0}
-  navigateButtonTransform: {fileID: 0}
+  backgroundHighligtedColor:
+    serializedVersion: 2
+    rgba: 4287502592
+  NavigationButton: {fileID: 1290105368}
+  backgroundImage: {fileID: 0}
 --- !u!1 &1368814059
 GameObject:
   m_ObjectHideFlags: 0
@@ -8983,7 +8999,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     m_PressedColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -8998,13 +9014,16 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1623713032}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  NavigationButton: {fileID: 0}
-  navigateButtonTransform: {fileID: 0}
+  backgroundHighligtedColor:
+    serializedVersion: 2
+    rgba: 4284809164
+  NavigationButton: {fileID: 529025240}
+  backgroundImage: {fileID: 0}
 --- !u!1 &1669735719
 GameObject:
   m_ObjectHideFlags: 0
@@ -10373,7 +10392,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     m_PressedColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10393,8 +10412,11 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  NavigationButton: {fileID: 0}
-  navigateButtonTransform: {fileID: 0}
+  backgroundHighligtedColor:
+    serializedVersion: 2
+    rgba: 4279900696
+  NavigationButton: {fileID: 1291546001}
+  backgroundImage: {fileID: 0}
 --- !u!1 &1966183753
 GameObject:
   m_ObjectHideFlags: 0
@@ -10597,20 +10619,20 @@ MonoBehaviour:
   rewiredInputManager: {fileID: 1038265044}
   useAllRewiredGamePlayers: 0
   useRewiredSystemPlayer: 0
-  rewiredPlayerIds: 0000000001000000
+  rewiredPlayerIds: 00000000
   usePlayingPlayersOnly: 1
   playerMice: []
   moveOneElementPerAxisPress: 0
-  setActionsById: 0
+  setActionsById: 1
   horizontalActionId: -1
-  verticalActionId: -1
-  submitActionId: -1
-  cancelActionId: -1
-  m_HorizontalAxis: UIHorizontal
-  m_VerticalAxis: UIVertical
-  m_SubmitButton: UISubmit
-  m_CancelButton: UICancel
-  m_InputActionsPerSecond: 10
+  verticalActionId: 14
+  submitActionId: 17
+  cancelActionId: 18
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: C
+  m_CancelButton: D
+  m_InputActionsPerSecond: 3
   m_RepeatDelay: 0
   m_allowMouseInput: 1
   m_allowMouseInputIfTouchSupported: 1
@@ -10831,8 +10853,11 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  NavigationButton: {fileID: 0}
-  navigateButtonTransform: {fileID: 0}
+  backgroundHighligtedColor:
+    serializedVersion: 2
+    rgba: 0
+  NavigationButton: {fileID: 1968464988}
+  backgroundImage: {fileID: 0}
 --- !u!1 &2021797714
 GameObject:
   m_ObjectHideFlags: 0

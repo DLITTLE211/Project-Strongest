@@ -259,7 +259,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
         frameCount = 0;
-        float waitTime = 1f / 60f;
+        float oneFrame = 1f / 60f;
         if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
@@ -267,6 +267,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         //character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
+            float waitTime = oneFrame * character._cHitstun.animSpeed;
             try
             {
                 float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
@@ -341,7 +342,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             _playerCAnimator.canTick = true;
         }
-        float waitTime = 1f / 60f;
+        float oneFrame = 1f / 60f;
         if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
         {
             character._cAttackTimer.PauseTimerOnThrowSuccess();
@@ -352,6 +353,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         while (frameCount <= customProp.animLength)
         {
+            float waitTime = oneFrame * character._cHitstun.animSpeed;
             try
             {
                 float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
