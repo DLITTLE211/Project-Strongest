@@ -17,28 +17,31 @@ public class Character_HitStun : MonoBehaviour
         _cAnimator = myAnim;
     }
     public float GetCurrentAnimSpeed() { return animSpeed; }
-    public void HandleAnimatorFreeze(bool state, float speed = 0.25f)
+    public void HandleAnimatorFreeze(bool state, float speed = 1f)
     {
-        if (state)
+        if (isFrozen != state)
         {
-            if (!isFrozen)
-            {
-                isFrozen = true;
-                _cAnimator.myAnim.speed = speed;
-                _cAnimator.shadowAnim.speed = speed;
-                animSpeed = speed;
-            }
+            isFrozen = state;
         }
-        else
+        SetTargetFreezeState(speed);
+        /*if (!isFrozen)
         {
-            if (isFrozen)
-            {
-                isFrozen = false;
-                _cAnimator.myAnim.speed = 1;
-                _cAnimator.shadowAnim.speed = 1;
-                animSpeed = 1;
-            }
+            _cAnimator.myAnim.speed = speed;
+            _cAnimator.shadowAnim.speed = speed;
+            animSpeed = speed;
         }
+        if (isFrozen)
+        {
+            _cAnimator.myAnim.speed = 1;
+            _cAnimator.shadowAnim.speed = 1;
+            animSpeed = 1;
+        }*/
+    }
+    void SetTargetFreezeState(float speed)
+    {
+        _cAnimator.myAnim.speed = speed;
+        _cAnimator.shadowAnim.speed = speed;
+        animSpeed = speed;
     }
     public bool IsFrozen() 
     {

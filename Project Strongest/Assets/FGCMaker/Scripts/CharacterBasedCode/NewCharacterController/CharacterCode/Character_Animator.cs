@@ -150,12 +150,12 @@ public class Character_Animator : MonoBehaviour
     public void SetOpponentFreeze()
     {
         _base.opponentPlayer._cForce.HandleForceFreeze(true);
-        _base.opponentPlayer._cHitstun.HandleAnimatorFreeze(true);
+        _base.opponentPlayer._cHitstun.HandleAnimatorFreeze(true, 0.25f);
         _base.opponentPlayer._cGravity.HandleGravityFreeze(true);
     }
     public void SetSelfFreeze()
     {
-        _base._cHitstun.HandleAnimatorFreeze(true);
+        _base._cHitstun.HandleAnimatorFreeze(true, 0.25f);
         _base._cGravity.HandleGravityFreeze(true);
     }
     public void SetSelfUnfreeze()
