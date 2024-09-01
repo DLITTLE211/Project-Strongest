@@ -274,7 +274,7 @@ public class Character_HitController : MonoBehaviour
     {
         currentCustomDamageField = currentAttack;
         ClearRecoveryRoutine();
-        HitAnimationField hitReaction = FilterGroundLockReactions();
+        HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
         if (hitReaction != null)
         {
             if (finalAttack) 
@@ -317,6 +317,7 @@ public class Character_HitController : MonoBehaviour
         {
             StopCoroutine(recoverRoutine);
         }
+        _base._cComboCounter.StopFadeRoutine();
     }
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
@@ -438,7 +439,7 @@ public class Character_HitController : MonoBehaviour
         }
         return refField[0];
     }
-    bool CheckNextAttackCatch()
+    /*bool CheckNextAttackCatch()
     {
         Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
         if (_opponentProperty != null)
@@ -453,7 +454,7 @@ public class Character_HitController : MonoBehaviour
             }
         }
         return false;
-    }
+    }*/
     bool CheckNextAttackCatchPostLanding()
     {
         Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
@@ -476,7 +477,7 @@ public class Character_HitController : MonoBehaviour
         if (playGroundedAnim.hitLevel != HitLevel.Crumple)
         {
             yield return new WaitForEndOfFrame();
-            if (CheckNextAttackCatch())
+            if (CheckNextAttackCatchPostLanding())
             {
                 yield break;
             }
@@ -490,7 +491,6 @@ public class Character_HitController : MonoBehaviour
         }
 
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
-        Attack_BaseProperties opponentPlayerProperty = _base.opponentPlayer._cAnimator.lastAttack;
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
         yield return new WaitForEndOfFrame();
         if (CheckNextAttackCatchPostLanding())

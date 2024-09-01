@@ -401,7 +401,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             yield return new WaitForSeconds(waitTime);
         }
         Attack_BaseProperties thisAttack = character._cHitboxManager.GetActiveHitBox().hitboxProperties;
-        if (thisAttack._moveType == MoveType.Throw)
+        if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
         {
             character._cAttackTimer.ClearThrowLanded();
             _playerCAnimator.SetCanTransitionIdle(true);

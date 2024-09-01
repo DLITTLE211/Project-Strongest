@@ -150,9 +150,10 @@ public class State_Idle : BaseState
     {
         isAnimatingIdle = true;
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
     }
-    void IdleCheck()
+/*    void IdleCheck()
     {
         try
         {
@@ -165,12 +166,12 @@ public class State_Idle : BaseState
                     }
                     else
                     {
-                        /*if ((_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
+                        if ((_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
                         {
                             isAnimatingIdle = true;
                             _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
                             _base._aManager.ResetMoveHierarchy();
-                        }*/
+                        }
                     }
                 }
                 else 
@@ -196,8 +197,7 @@ public class State_Idle : BaseState
         {
             return;
         }
-    }
-
+    }*/
     public override void OnExit()
     {
         Messenger.Broadcast(Events.ClearLastTime);

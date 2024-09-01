@@ -130,6 +130,19 @@ public class Character_ComboCounter : MonoBehaviour
             fadeTextRoutine = null;
         });
     }
+    public void StopFadeRoutine() 
+    {
+        if (fadeTextOut != null) 
+        {
+            fadeTextOut.Kill();
+            fadeTextOut = null;
+        }
+        if (fadeTextRoutine != null)
+        {
+            StopCoroutine(fadeTextRoutine);
+            fadeTextRoutine = null;
+        }
+    }
 
     public void OnEndCombo()
     {
