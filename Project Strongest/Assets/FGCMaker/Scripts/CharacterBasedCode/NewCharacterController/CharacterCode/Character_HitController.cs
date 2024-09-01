@@ -438,40 +438,64 @@ public class Character_HitController : MonoBehaviour
         }
         return refField[0];
     }
+    bool CheckNextAttackCatch()
+    {
+        Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
+        if (_opponentProperty != null)
+        {
+            if (_opponentProperty.hitConnected == true)
+            {
+                if (lockMoveTypes.Contains(_opponentProperty._moveType))
+                {
+                    CallLockedHitResponse(FilterGroundLockReactions(_opponentProperty.hitLevel));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    bool CheckNextAttackCatchPostLanding()
+    {
+        Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
+        if (_opponentProperty != null)
+        {
+            if (_opponentProperty.hitConnected == true && _opponentProperty != currentProperty)
+            {
+                if (lockMoveTypes.Contains(_opponentProperty._moveType))
+                {
+                    CallLockedHitResponse(FilterGroundLockReactions(_opponentProperty.hitLevel));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
     IEnumerator DoRecovery(Attack_KnockDown knockDownType, HitAnimationField playGroundedAnim)
     {
-
         if (playGroundedAnim.hitLevel != HitLevel.Crumple)
         {
             yield return new WaitForEndOfFrame();
-            Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
-            if (_opponentProperty != null)
+            if (CheckNextAttackCatch())
             {
-                if (_opponentProperty.hitConnected == true && _opponentProperty != currentProperty)
-                {
-                    yield break;
-                }
+                yield break;
             }
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
             yield return new WaitForSeconds(0.4f);
         }
-        else 
+        else
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
         Attack_BaseProperties opponentPlayerProperty = _base.opponentPlayer._cAnimator.lastAttack;
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
         yield return new WaitForEndOfFrame();
-        if (opponentPlayerProperty != null)
+        if (CheckNextAttackCatchPostLanding())
         {
-            if (opponentPlayerProperty.hitConnected == true && opponentPlayerProperty != currentProperty)
-            {
-                yield break;
-            }
+            yield break;
         }
         _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
         yield return new WaitForSeconds(recoveryAnim.animLength);

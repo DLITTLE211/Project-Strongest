@@ -222,7 +222,7 @@ public class Character_Force : MonoBehaviour
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             value *= -1;
-            newPos = new Vector3(-(_myRB.transform.position.x + value), _myRB.transform.position.y, _myRB.transform.position.z);
+            newPos = new Vector3((_myRB.transform.position.x + value), _myRB.transform.position.y, _myRB.transform.position.z);
             _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
             return;
         }
