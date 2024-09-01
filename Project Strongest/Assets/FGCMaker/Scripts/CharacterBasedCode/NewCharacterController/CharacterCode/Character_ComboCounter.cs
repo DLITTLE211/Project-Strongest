@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
@@ -15,16 +16,42 @@ public class Character_ComboCounter : MonoBehaviour
     [Range(0,255f)] public float alphaLevel;
     [SerializeField] Transform comboHolder;
     Tween fadeTextTween;
+    [SerializeField] private Dictionary<int, Callback> _comboProficiencyDictionary;
     bool canFade;
+    Sequence fadeTextOut;
+    IEnumerator fadeTextRoutine;
+    public int ReturnCurrentComboCount()
+    {
+        return _currentComboCount;
+    }
+    private void Start()
+    {
+        SetComboProficiencyDictionary();
+    }
+    void SetComboProficiencyDictionary() 
+    {
+        _comboProficiencyDictionary = new Dictionary<int, Callback>();
+
+        _comboProficiencyDictionary.Add(5, () => UpdateQualityText("Basic"));
+        _comboProficiencyDictionary.Add(10, () => UpdateQualityText("Advanced"));
+        _comboProficiencyDictionary.Add(15, () => UpdateQualityText("Amazing"));
+        _comboProficiencyDictionary.Add(20, () => UpdateQualityText("Superior"));
+        _comboProficiencyDictionary.Add(25, () => UpdateQualityText("Fantastic"));
+        _comboProficiencyDictionary.Add(30, () => UpdateQualityText("Unbelievable"));
+        _comboProficiencyDictionary.Add(35, () => UpdateQualityText("Unreal"));
+        _comboProficiencyDictionary.Add(45, () => UpdateQualityText("Maximum"));
+        fadeTextOut = null;
+        fadeTextRoutine = null;
+    }
+
     public void SetStartComboCounter()
     {
-        CurrentHitCount = 0;
         UpdateQualityText();
         UpdateText();
     }
-    public void ResetComboCounter() 
+    public void ResetComboCounter()
     {
-        SetStartComboCounter();
+        CurrentHitCount = 0; 
     }
     public void OnHit_CountUp() 
     {
@@ -37,10 +64,6 @@ public class Character_ComboCounter : MonoBehaviour
         DOTween.Complete(comboHolder);
         comboHolder.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         comboHolder.DOScale(new Vector3(1f, 1f, 1f), 0.65f);
-    }
-    public int ReturnCurrentComboCount() 
-    {
-        return _currentComboCount;
     }
 
     #region UpdateComboCounter
@@ -65,15 +88,17 @@ public class Character_ComboCounter : MonoBehaviour
             {
                 _counterText.text = $"{CurrentHitCount} {hitCount}";
             }
-        
         }
-        
     }
     void UpdateQualityText(string qualityType = "")
     {
         if (qualityType == "")
         {
             _QualityText.text = qualityType;
+            if (fadeTextOut != null)
+            {
+                fadeTextOut = null;
+            }
             return;
         }
         else
@@ -90,89 +115,46 @@ public class Character_ComboCounter : MonoBehaviour
         }
     }
     #endregion
-
-    private void Update()
-    {
-        //SetColorNumbers();
-        if (canFade)
-        {
-            //FadeToClear();
-        }
-
-    }
+    
     void FadeOutText()
     {
         canFade = true;
-        fadeTextTween = _counterText.DOFade(0,1.15f);
-        fadeTextTween.OnStart(() => 
-        {
-            _QualityText.DOFade(0, 1.15f);
-        }).OnComplete(() =>
+        ResetComboCounter();
+        fadeTextOut = DOTween.Sequence();
+        fadeTextOut.Append(_counterText.DOFade(0, .75f));
+        _QualityText.DOFade(0, .45f);
+        fadeTextOut.OnComplete(() =>
         {
             canFade = false;
-            ResetComboCounter();
-            UpdateQualityText();
+            SetStartComboCounter();
+            fadeTextRoutine = null;
         });
-    }
-    void SetColorNumbers() 
-    {
-        _counterText.color = _counterColor;
-        _QualityText.color = _QualityColor;
-        _counterColor.a = (byte)alphaLevel;
-        _QualityColor.a = (byte)alphaLevel;
-    }
-    void FadeToClear() 
-    {
-        if (alphaLevel <= 0)
-        {
-            alphaLevel = 0;
-            canFade = false;
-            ResetComboCounter();
-            UpdateQualityText();
-        }
-        else 
-        {
-            alphaLevel -= 3.75f;
-        }
     }
 
     public void OnEndCombo()
     {
-        OnEndComboCount();
+        if (fadeTextRoutine != null)
+        {
+            fadeTextRoutine = null;
+        }
+        fadeTextRoutine = OnEndComboCount();
+        StartCoroutine(fadeTextRoutine);
     }
-    void OnEndComboCount() 
+    IEnumerator OnEndComboCount() 
     {
         #region Check ComboQualityOnQuickEnd
-        if (CurrentHitCount >= 45)
+        for (int i = _comboProficiencyDictionary.Keys.Count -1; i >= 0; i--) 
         {
-            UpdateQualityText("Maximum");
+            int keyRef = _comboProficiencyDictionary.Keys.ElementAt(i);
+            if (_currentComboCount >= keyRef) 
+            {
+                _comboProficiencyDictionary[keyRef]();
+            }
+            continue;
         }
-        else if (CurrentHitCount >= 30)
-        {
-            UpdateQualityText("Unbelievable");
-        }
-        else if (CurrentHitCount >= 25)
-        {
-            UpdateQualityText("Fantastic");
-        }
-        else if (CurrentHitCount >= 20)
-        {
-            UpdateQualityText("Superior");
-        }
-        else if (CurrentHitCount >= 15)
-        {
-            UpdateQualityText("Amazing");
-        }
-        else if (CurrentHitCount >= 10)
-        {
-            UpdateQualityText("Advanced");
-        }
-        else if (CurrentHitCount >= 5)
-        {
-            UpdateQualityText("Basic");
-        }
-        #endregion
+        yield return new WaitForSeconds(1.75f);
         FadeOutText();
         canFade = true;
+        #endregion
     }
 }

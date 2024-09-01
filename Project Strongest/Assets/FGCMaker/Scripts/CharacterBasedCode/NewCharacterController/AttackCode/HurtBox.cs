@@ -251,6 +251,10 @@ public class HurtBox : CollisionDetection
     {
         Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
+        if (Base_Target._cHitController.Recovering)
+        {
+            Base_Target._cHitController.ClearRecoveryRoutine();
+        }
         if (Base_Attacker._cAnimator.lastAttack != null)
         {
             CounterMoveProperty = Base_Attacker._cAnimator.lastAttack;
@@ -273,6 +277,11 @@ public class HurtBox : CollisionDetection
     {
         Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
+
+        if (Base_Target._cHitController.Recovering)
+        {
+            Base_Target._cHitController.ClearRecoveryRoutine();
+        }
         Base_Attacker._aManager.ClearAttacks();
         Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker, Base_Target,null);
         endingFunction();
@@ -288,6 +297,10 @@ public class HurtBox : CollisionDetection
         Character_Base Base_Attacker = currentHitbox.GetComponentInParent<Character_Base>();
         HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
         int curHit = 0;
+        if (Base_Target._cHitController.Recovering) 
+        {
+            Base_Target._cHitController.ClearRecoveryRoutine();
+        }
         while (curHit < hitCount._count)
         {
             currentHitProperties.hitConnected = true;

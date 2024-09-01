@@ -27,7 +27,8 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private bool airRecoverPossible;
     [SerializeField] private bool crouchBlocking;
     [SerializeField] private bool standingBlocking;
-    [SerializeField] private bool hasRecovered;
+    [SerializeField] private bool _isRecovering;
+    public bool Recovering { get{ return _isRecovering;  } }
 
 
     List<MoveType> lockMoveTypes = new List<MoveType>()
@@ -100,74 +101,7 @@ public class Character_HitController : MonoBehaviour
         activeHitResponseRoutine = null;
     }
 
-    /* bool IsBlocking()
-     {
-         IState currentState = _base._cStateMachine._playerState.current.State;
-         bool blocking = currentState == _base._cStateMachine.crouchBlockRef ^ currentState == _base._cStateMachine.standBlockRef;
-         return blocking;
-     }*/
-
-
     #region Filter Animation Functions
-/*    List<HitAnimationField> FilterHitReactions(Attack_BaseProperties currentAttack)
-    {
-        List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
-        bool IsGrounded = _base._cHurtBox.IsGrounded();
-
-        for (int i = 0; i < refField.Count; i++)
-        {
-            bool trueGroundedResponse = IsGrounded && !refField[i].isGroundedReaction;
-            bool falseGroundedResponse = !IsGrounded && refField[i].isGroundedReaction;
-            bool trueLowedResponse = refField[i].isLowReaction && currentAttack.AttackAnims.attackType != HitBoxType.Low;
-            bool falseLowedResponse = !refField[i].isLowReaction && currentAttack.AttackAnims.attackType == HitBoxType.Low;
-            if (!(currentAttack.hitLevel.HasFlag(refField[i].hitLevel)))
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (trueGroundedResponse)
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (falseGroundedResponse)
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (trueLowedResponse)
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (falseLowedResponse)
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (!currentAttack.hitLevel.HasFlag(HitLevel.Spiral) && refField[i].hitLevel == HitLevel.Spiral)
-            {
-                refField[i] = null;
-                continue;
-            }
-            if (refField[i].hitLevel == HitLevel.Crumple && !currentAttack.hitLevel.HasFlag(HitLevel.Crumple))
-            {
-                refField[i] = null;
-                continue;
-            }
-        }
-
-        for (int i = refField.Count-1; i >= 0; i--)
-        {
-            if (refField[i] == null)
-            {
-                refField.RemoveAt(i);
-            }
-        }
-
-        return refField;
-    }*/
-
     HitAnimationField FilterGroundLockReactions(HitLevel _levelOfAttack = default)
     {
         List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.hitReactions);
@@ -302,14 +236,6 @@ public class Character_HitController : MonoBehaviour
 
     void SmallHitDetect(Attack_BaseProperties currentAttack = null)
     {
-        //List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
-       /* int randomHitReaction = 0;
-        if (hitReactionList.Count > 1)
-        {
-            randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count);
-        }
-        HitAnimationField hitReaction = hitReactionList[randomHitReaction];
-        CheckAndStartHitResponse(hitReaction);*/
         HitAnimationField hitReaction = FindAnimationOfType(currentAttack);
         if (hitReaction == null) 
         {
@@ -324,30 +250,17 @@ public class Character_HitController : MonoBehaviour
         {
             if (_base.opponentPlayer.comboList3_0.GetCurrentSuperCustomAnimLength() > 0)
             {
+                ClearRecoveryRoutine();
                 CallLockedHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
                 return;
             }
-            else 
+            else
             {
+                ClearRecoveryRoutine();
                 CheckAndStartHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
                 return;
             }
         }
-        /* List<HitAnimationField> hitReactionList = FilterHitReactions(currentAttack);
-         int randomHitReaction = 0;
-         if (hitReactionList.Count > 1)
-         {
-             randomHitReaction = UnityEngine.Random.Range(0, hitReactionList.Count-1);
-         }
-         try
-         {
-             HitAnimationField hitReaction = hitReactionList[randomHitReaction];
-             CheckAndStartHitResponse(hitReaction);
-         }
-         catch (ArgumentOutOfRangeException) 
-         {
-             //Debug.Break();
-         }*/
         HitAnimationField hitReaction = FindAnimationOfType(currentAttack);
         if (hitReaction == null)
         {
@@ -360,6 +273,7 @@ public class Character_HitController : MonoBehaviour
     void LockHitDetect(CustomDamageField currentAttack, bool finalAttack)
     {
         currentCustomDamageField = currentAttack;
+        ClearRecoveryRoutine();
         HitAnimationField hitReaction = FilterGroundLockReactions();
         if (hitReaction != null)
         {
@@ -397,7 +311,7 @@ public class Character_HitController : MonoBehaviour
         activeHitResponseRoutine = DoHitResponse(curField);
         StartCoroutine(activeHitResponseRoutine);
     }
-    void ClearRecoveryRoutine()
+    public void ClearRecoveryRoutine()
     {
         if (recoverRoutine != null)
         {
@@ -422,7 +336,8 @@ public class Character_HitController : MonoBehaviour
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             ClearRecoveryRoutine();
-            recoverRoutine = DoRecovery(currentProperty.KnockDown, curField);
+            _isRecovering = true;
+             recoverRoutine = DoRecovery(currentProperty.KnockDown, curField);
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
             StartCoroutine(recoverRoutine);
         }
@@ -461,7 +376,6 @@ public class Character_HitController : MonoBehaviour
         smallHitRecovering = false;
         bigHitRecovering = false;
         airRecoverPossible = false;
-        hasRecovered = false;
         _cAnimator.isHit = true;
         currentProperty = currentAttack;
         Callback<Attack_BaseProperties> funcCall = null;
@@ -527,73 +441,50 @@ public class Character_HitController : MonoBehaviour
 
     IEnumerator DoRecovery(Attack_KnockDown knockDownType, HitAnimationField playGroundedAnim)
     {
-        //if (knockDownType.HasFlag(Attack_KnockDown.HKD))
-        //{
+
         if (playGroundedAnim.hitLevel != HitLevel.Crumple)
         {
+            yield return new WaitForEndOfFrame();
+            Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
+            if (_opponentProperty != null)
+            {
+                if (_opponentProperty.hitConnected == true && _opponentProperty != currentProperty)
+                {
+                    yield break;
+                }
+            }
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
             yield return new WaitForSeconds(0.4f);
         }
+        else 
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
+        Attack_BaseProperties opponentPlayerProperty = _base.opponentPlayer._cAnimator.lastAttack;
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
+        yield return new WaitForEndOfFrame();
+        if (opponentPlayerProperty != null)
+        {
+            if (opponentPlayerProperty.hitConnected == true && opponentPlayerProperty != currentProperty)
+            {
+                yield break;
+            }
+        }
         _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
         yield return new WaitForSeconds(recoveryAnim.animLength);
         if (bigHitRecovering)
         {
             bigHitRecovering = false;
         }
-        //}
-        /*else
-        {
-            yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
-            _base._cAnimator.PlayNextAnimation(Animator.StringToHash("Landing_After_AirHit"), 0, true);
-            yield return new WaitForSeconds(0.4f);
-            HitAnimationField recoveryAnim = CheckRecoveryAnim(Attack_KnockDown.SKD);
-            _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
-            yield return new WaitForSeconds(recoveryAnim.animLength);
-            if (bigHitRecovering)
-            {
-                bigHitRecovering = false;
-            }
-        }*/
-        /*else
-        {
-            HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
-            _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
-            yield return new WaitForSeconds(recoveryAnim.animLength);
-        }*/
         recoverRoutine = null;
+        _isRecovering = false;
         SetRecoverable();
         _base._cHurtBox.SetHurboxState();
     }
-    public void SetHitStateFalse()
-    {
-        if(smallHitRecovering) 
-        {
-            smallHitRecovering = false;
-        }
-        if (bigHitRecovering)
-        {
-            bigHitRecovering = false;
-        }
-        _base._cAnimator.SetCanRecover(false);
-        _base._cHurtBox.SetHurboxState();
-    }
-    public void SetHurtboxOnHit(Attack_KnockDown knockDown)
-    {
-        switch (knockDown)
-        {
-            case Attack_KnockDown.HKD:
-                _base._cHurtBox.SetHurboxState(HurtBoxType.HardKnockdown);
-                break;
-            case Attack_KnockDown.SKD:
-                _base._cHurtBox.SetHurboxState(HurtBoxType.SoftKnockdown);
-                break;
-        }
-    }
     #endregion
-
     void SetStunMeterValue(float TopValue)
     {
         _hitStunSlider.maxValue = TopValue;
@@ -603,44 +494,6 @@ public class Character_HitController : MonoBehaviour
     {
         _hitStunSlider.value -= subtractValue;
     }
-    public async void HandleBlockState(Attack_BaseProperties attackProperty)
-    {
-        standingBlocking = true;
-        switch (attackProperty.hitLevel)
-        {
-            case HitLevel.SlightKnockback:
-                smallHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 0);
-                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
-                break;
-            case HitLevel.MediumKnockback:
-                smallHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 1);
-                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
-                break;
-            case HitLevel.SoaringHit:
-                smallHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 2);
-                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[0], attackProperty);
-                break;
-            case HitLevel.Crumple:
-                bigHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 3);
-                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[1], attackProperty);
-                break;
-            case HitLevel.Spiral:
-                bigHitRecovering = true;
-                //ApplyHitInfo(attackProperty, _characterHitAnimations.standingblock_Anims, 4);
-                //await ReactToBlock(_characterHitAnimations.standingblock_Anims[1], attackProperty);
-                break;
-            default:
-                Debug.LogError($"{attackProperty.hitLevel} type hit provided not accounted for in switch case");
-                Debug.Break();
-                break;
-        }
-
-    }
-
     public bool ReturnStandBlock()
     {
         return standingBlocking;
@@ -649,78 +502,4 @@ public class Character_HitController : MonoBehaviour
     {
         return crouchBlocking;
     }
-
-
-  /*  public async Task RecoverAfterBlock()
-    {
-        while (recoveryTime > 0)
-        {
-            await Task.Delay((int)((1 / 60f) * 1000f));
-        }
-        hasRecovered = false;
-        StartCoroutine(BlockRecover());
-    }*/
-   /* public void SetBlockStateFalse()
-    {
-        if (smallHitRecovering)
-        {
-            smallHitRecovering = false;
-        }
-        if (bigHitRecovering)
-        {
-            bigHitRecovering = false;
-        }
-        if (standingBlocking)
-        {
-            standingBlocking = false;
-            _base._cAnimator.SetCanRecover(false);
-            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);
-        }
-        if (crouchBlocking)
-        {
-            crouchBlocking = false;
-            _base._cAnimator.SetCanRecover(false);
-            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
-        }
-    }*/
-    /*
-    IEnumerator BlockRecover()
-    {
-        yield return null;
-        if (standingBlocking)
-        {
-            if (!hasRecovered)
-            {
-                hasRecovered = true;
-                _cAnimator.SetShake(false);
-                _cAnimator.EndShake();
-                _cAnimator.isHit = false;
-                //yield return new WaitForSeconds(_characterHitAnimations.standingblock_Anims[0].timeDifference[0]);
-                SetBlockStateFalse();
-            }
-        }
-        else if (crouchBlocking) 
-        {
-            if (!hasRecovered)
-            {
-                hasRecovered = true;
-                _cAnimator.SetShake(false);
-                _cAnimator.EndShake();
-                _cAnimator.isHit = false;
-                //yield return new WaitForSeconds(_characterHitAnimations.crouchingblock_Anims[0].timeDifference[0]);
-                SetBlockStateFalse();
-            }
-        }
-        else
-        {
-            if (!hasRecovered)
-            {
-                hasRecovered = true;
-                _cAnimator.SetShake(false);
-                _cAnimator.EndShake();
-                _cAnimator.isHit = false;
-                SetBlockStateFalse();
-            }
-        }
-    }*/
 }

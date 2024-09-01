@@ -27,7 +27,7 @@ public class Menu_Manager : MonoBehaviour
     {
         ToggleMainMenuState(true);
         _titleTextTransform = _titleText.GetComponent<Transform>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         float moveUpPos = _titleTextTransform.localPosition.y - 225f;
         _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f).SetEase(Ease.InOutBack);
         SetPlayerControllers();
