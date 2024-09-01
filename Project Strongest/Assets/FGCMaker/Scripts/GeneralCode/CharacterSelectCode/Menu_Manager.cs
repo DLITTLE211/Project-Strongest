@@ -117,15 +117,17 @@ public class Menu_Manager : MonoBehaviour
 public class GameModeSet
 {
     public GameMode gameMode;
+
+    public List<Callback> startupFunctions;
     public GameModeSet (GameMode _gameMode) 
     {
         gameMode = _gameMode;
     }
-    public void DoStartup(List<Callback> _startupFunctions) 
+    public void DoStartup() 
     {
-        for (int i = 0; i < _startupFunctions.Count; i++) 
+        for (int i = 0; i < startupFunctions.Count; i++) 
         {
-            _startupFunctions[i]();
+            startupFunctions[i]();
         }
     }
 }

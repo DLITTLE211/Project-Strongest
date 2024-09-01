@@ -5,25 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private MainGame_SettingsController _settingsController;
+    [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
+    [SerializeField] private MainGame_Timer stopWatchController;
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
     GameModeSet _gameModeSet;
-    List<Callback> _arcadeStartup = new List<Callback>()
-    {
-
-    }; 
-    List<Callback> _trainingStartup = new List<Callback>()
-    {
-
-    }; 
-    List<Callback> _versusStartup = new List<Callback>()
-    {
-
-    };
     void Start()
     {
+        stopWatchController = GetComponent<MainGame_Timer>();
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
@@ -38,18 +30,18 @@ public class GameManager : MonoBehaviour
         }
         SetupPlayers();
         _gameModeSet = Menu_Manager.currentMode;
-        switch (_gameModeSet.gameMode) 
+        _gameModeSet.startupFunctions = new List<Callback>();
+        if (_gameModeSet.gameMode == GameMode.Training)
         {
-            case GameMode.Training:
-                _gameModeSet.DoStartup(_trainingStartup);
-                break;
-            case GameMode.Arcade:
-                _gameModeSet.DoStartup(_arcadeStartup);
-                break;
-            case GameMode.Versus:
-                _gameModeSet.DoStartup(_versusStartup);
-                break;
+            _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues());
         }
+        else
+        {
+            _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(99));
+        }
+        _gameModeSet.startupFunctions.Add(() => p1UIManager.SetActiveUI(_gameModeSet.gameMode));
+        _gameModeSet.startupFunctions.Add(() => p2UIManager.SetActiveUI(_gameModeSet.gameMode));
+        _gameModeSet.DoStartup();
     }
 
     public void SetTargetFrameRate(int frameRate = 60) 
