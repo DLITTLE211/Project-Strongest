@@ -6,22 +6,24 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
-
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
+    GameModeSet _gameModeSet;
+    List<Callback> _arcadeStartup = new List<Callback>()
+    {
+
+    }; 
+    List<Callback> _trainingStartup = new List<Callback>()
+    {
+
+    }; 
+    List<Callback> _versusStartup = new List<Callback>()
+    {
+
+    };
     void Start()
     {
-        /*
-         * Use (Reinput.ControllerConnected) event to Initialize Player with unused ID's, 
-         * set controller active state from training dummy to Controlled player, etc.
-         * include array of ints (0,1) that holds current unused ID's for player assignment
-         * Upon event called, assign first available ID to left character
-         * (will be made to choose character and side at later date)
-         * If no new controller is plugged in yet the controller count is greater than 0, 
-         * setup player one on previous described information.
-         */
-
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
@@ -35,6 +37,19 @@ public class GameManager : MonoBehaviour
             LoadPlayerAssets();
         }
         SetupPlayers();
+        _gameModeSet = Menu_Manager.currentMode;
+        switch (_gameModeSet.gameMode) 
+        {
+            case GameMode.Training:
+                _gameModeSet.DoStartup(_trainingStartup);
+                break;
+            case GameMode.Arcade:
+                _gameModeSet.DoStartup(_arcadeStartup);
+                break;
+            case GameMode.Versus:
+                _gameModeSet.DoStartup(_versusStartup);
+                break;
+        }
     }
 
     public void SetTargetFrameRate(int frameRate = 60) 

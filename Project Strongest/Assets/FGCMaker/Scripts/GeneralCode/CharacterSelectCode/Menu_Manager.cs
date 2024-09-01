@@ -22,6 +22,7 @@ public class Menu_Manager : MonoBehaviour
     [Space(15)]
     [SerializeField] private Image _backgroundImage,whiteFillerImage;
     [SerializeField] private TMP_Text _titleText,_versionText;
+    public static GameModeSet currentMode;
     Transform _titleTextTransform;
     private void Start()
     {
@@ -79,6 +80,7 @@ public class Menu_Manager : MonoBehaviour
         await Task.Delay(750);
         ToggleMainMenuState(false);
         await Task.Delay(200);
+        currentMode = new GameModeSet(GameMode.Training);
         _characterSelect.SetUpCharacterSelectScreen(players);
     }
     void ToggleMainMenuState(bool state) 
@@ -119,10 +121,18 @@ public class GameModeSet
     {
         gameMode = _gameMode;
     }
+    public void DoStartup(List<Callback> _startupFunctions) 
+    {
+        for (int i = 0; i < _startupFunctions.Count; i++) 
+        {
+            _startupFunctions[i]();
+        }
+    }
 }
 [Serializable]
 public enum GameMode 
 {
     Training,
     Versus,
+    Arcade,
 }
