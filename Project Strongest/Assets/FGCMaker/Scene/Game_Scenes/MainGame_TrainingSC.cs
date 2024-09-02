@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 using System.Threading.Tasks;
+using DG.Tweening;
 
 public class MainGame_TrainingSC : MainGame_SettingsController
 {
     public Dictionary<int, Callback> teleportPositions;
     public TeleportPoint leftPos,centerPos,rightPos;
+    [SerializeField] private Image _trainingCoverImage;
+    Sequence coverTweenSequence;
+    private bool teleporting;
     public override void SetTeleportPositions() 
     {
         teleportPositions = new Dictionary<int, Callback>();
@@ -28,13 +33,17 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         leftPos.SetPositionPos("Left_TP");
         centerPos.SetPositionPos("Center_TP");
         rightPos.SetPositionPos("Right_TP");
+        _trainingCoverImage = GameObject.Find("Training_ImageCover").GetComponent<Image>();
     }
     public override void SetPlayersPosition() 
     {
         Callback teleportFunction = null;
-        if (teleportPositions.TryGetValue(mainPlayer.ReturnMovementInputs().Button_State.directionalInput, out teleportFunction)) 
+        if (!teleporting)
         {
-            teleportFunction();
+            if (teleportPositions.TryGetValue(mainPlayer.ReturnMovementInputs().Button_State.directionalInput, out teleportFunction))
+            {
+                teleportFunction();
+            }
         }
     }
     private async Task LandingCheck() 
@@ -44,42 +53,72 @@ public class MainGame_TrainingSC : MainGame_SettingsController
             await Task.Yield();
         }
     }
+    void TeleportTweenController(Vector3 pos1, Vector3 pos2)
+    {
+        if (coverTweenSequence != null)
+        {
+            coverTweenSequence.Kill();
+        }
+        teleporting = true;
+        coverTweenSequence = DOTween.Sequence();
+        coverTweenSequence.Append(_trainingCoverImage.DOFade(1f, 0.15f));
+        coverTweenSequence.OnComplete(() =>
+        {
+            mainPlayer.transform.position = pos1;
+            secondaryPlayer.transform.position = pos2;
+            _trainingCoverImage.DOFade(0f, 0.15f);
+        });
+        coverTweenSequence = null;
+        teleporting = false;
+    }
     async void TeleportLeft() 
     {
         await LandingCheck();
-        mainPlayer.transform.position = leftPos._leftSidePos;
-        secondaryPlayer.transform.position = leftPos._rightSidePos;
-
+        TeleportTweenController(leftPos._leftSidePos, leftPos._rightSidePos);
+       /* coverTweenSequence = DOTween.Sequence();
+        coverTweenSequence.Append(_trainingCoverImage.DOFade(255f, 0.35f));
+        coverTweenSequence.OnComplete(() =>
+        {
+            mainPlayer.transform.position = leftPos._leftSidePos;
+            secondaryPlayer.transform.position = leftPos._rightSidePos;
+        });
+        coverTweenSequence.Append(_trainingCoverImage.DOFade(0f, 0.35f));
+        coverTweenSequence = null;*/
     }
     async void TeleportLeftInverse()
     {
         await LandingCheck();
-        mainPlayer.transform.position = leftPos._rightSidePos;
-        secondaryPlayer.transform.position = leftPos._leftSidePos;
+        TeleportTweenController(leftPos._rightSidePos, leftPos._leftSidePos);
+        //mainPlayer.transform.position = leftPos._rightSidePos;
+        //secondaryPlayer.transform.position = leftPos._leftSidePos;
     }
     async void TeleportRightInverse()
     {
         await LandingCheck();
-        mainPlayer.transform.position = rightPos._rightSidePos;
-        secondaryPlayer.transform.position = rightPos._leftSidePos;
+        TeleportTweenController(rightPos._rightSidePos, rightPos._leftSidePos);
+        //mainPlayer.transform.position = rightPos._rightSidePos;
+        //secondaryPlayer.transform.position = rightPos._leftSidePos;
     }
     async void TeleportRight()
     {
         await LandingCheck();
-        mainPlayer.transform.position = rightPos._leftSidePos;
-        secondaryPlayer.transform.position = rightPos._rightSidePos;
+        TeleportTweenController(rightPos._leftSidePos, rightPos._rightSidePos);
+        //mainPlayer.transform.position = rightPos._leftSidePos;
+        //secondaryPlayer.transform.position = rightPos._rightSidePos;
     }
     async void TeleportCenterInverse()
     {
         await LandingCheck();
-        mainPlayer.transform.position = centerPos._rightSidePos;
-        secondaryPlayer.transform.position = centerPos._leftSidePos;
+        TeleportTweenController(centerPos._rightSidePos, centerPos._leftSidePos);
+        //mainPlayer.transform.position = centerPos._rightSidePos;
+        //secondaryPlayer.transform.position = centerPos._leftSidePos;
     }
     async void TeleportCenter()
     {
         await LandingCheck();
-        mainPlayer.transform.position = centerPos._leftSidePos;
-        secondaryPlayer.transform.position = centerPos._rightSidePos;
+        TeleportTweenController(centerPos._leftSidePos, centerPos._rightSidePos);
+        //mainPlayer.transform.position = centerPos._leftSidePos;
+        //secondaryPlayer.transform.position = centerPos._rightSidePos;
     }
 }
 
@@ -91,7 +130,7 @@ public class TeleportPoint
     public void SetPositionPos(string objectName)
     {
         _teleportPoint = GameObject.Find(objectName).GetComponent<Transform>();
-           _leftSidePos = new Vector3(_teleportPoint.localPosition.x - 0.10f, _teleportPoint.localPosition.y,0);
-        _rightSidePos = new Vector3(_teleportPoint.localPosition.x + 0.10f, _teleportPoint.localPosition.y, 0);
+        _leftSidePos = new Vector3(_teleportPoint.position.x - 1.10f, _teleportPoint.position.y,0);
+        _rightSidePos = new Vector3(_teleportPoint.position.x + 1.10f, _teleportPoint.position.y, 0);
     }
 }
