@@ -34,6 +34,11 @@ public class MainGame_SettingsController : MonoBehaviour
             }
         }
     }
+
+    public virtual void SetPlayersPosition() 
+    {
+
+    }
     public void TogglePauseMenu() 
     {
         if (_pauseMenu.activeInHierarchy)

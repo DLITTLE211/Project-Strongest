@@ -29,7 +29,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         centerPos.SetPositionPos("Center_TP");
         rightPos.SetPositionPos("Right_TP");
     }
-    public void SetPlayersPosition() 
+    public override void SetPlayersPosition() 
     {
         Callback teleportFunction = null;
         if (teleportPositions.TryGetValue(mainPlayer.ReturnMovementInputs().Button_State.directionalInput, out teleportFunction)) 

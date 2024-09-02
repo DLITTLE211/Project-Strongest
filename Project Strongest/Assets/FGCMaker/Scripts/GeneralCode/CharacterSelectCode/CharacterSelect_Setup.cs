@@ -310,7 +310,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (currentController.curPlayer.GetButtonDown(19))
+            if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                 //{
@@ -318,7 +318,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                 currentController.cursorPage.characterAmplify.UpdateInfoUp();
                 //}
             }
-            if (currentController.curPlayer.GetButtonDown(21))
+            if (currentController.curPlayer.GetButtonDown("Shift_Left"))
             {
                 //if (!currentController.cursorPage.amplifySelectCooldown)
                 // {

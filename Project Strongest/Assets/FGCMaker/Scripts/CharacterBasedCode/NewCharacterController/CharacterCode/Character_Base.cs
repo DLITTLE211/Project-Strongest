@@ -324,11 +324,12 @@ public class Character_Base : MonoBehaviour
                     newButton.Button_State.OnDirectional();
                     break;
                 default:
-                    if (newButton.Button_Element.actionDescriptiveName.ToLower().Contains("center")) 
+                    newButton.Button_State.OnReleased();
+                    if (newButton.Button_Element.actionDescriptiveName.ToLower().Contains("button")) 
                     {
                         _cSystemButtons.AddSystemButton(newButton);
+                        break;
                     }
-                    newButton.Button_State.OnReleased();
                     break;
             }
             newButton.SetButton(newElements[i]);
@@ -338,7 +339,10 @@ public class Character_Base : MonoBehaviour
                 newButton.TryAddButton(_actions[index].name);
                 if (newButton.Button_State._state == ButtonStateMachine.InputState.released)
                 {
-                    attackButtons.Add(newButton);
+                    if (!_cSystemButtons._systemButtons.Contains(newButton))
+                    {
+                        attackButtons.Add(newButton);
+                    }
                 }
                 else
                 {
@@ -353,7 +357,7 @@ public class Character_Base : MonoBehaviour
     {
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 
         {
-            await AwaitCustomCall2(callback, superIteratorCallback);
+            await AwaitCustomCall(callback, superIteratorCallback);
             return;
         }
         CheckCallback(callback);
@@ -503,7 +507,7 @@ public class Character_Base : MonoBehaviour
         { 
             return null; 
         }
-        return attackButtons[9];
+        return attackButtons[7];
     }
     public Character_ButtonInput ReturnTechButton()
     {
@@ -556,7 +560,7 @@ public class Character_Base : MonoBehaviour
             func();
         }
     }
-    async Task AwaitCustomCall2(CustomCallback customBoolAwait, Callback superIteratorCallback) 
+    async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback) 
     {
         if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
         {
@@ -576,7 +580,7 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
-    IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
+    /*IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
     {
         if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
         {
@@ -594,8 +598,7 @@ public class Character_Base : MonoBehaviour
                 superIteratorCallback();
             }
         }
-    }
-
+    }*/
 }
 [Serializable]
 public class ButtonInput

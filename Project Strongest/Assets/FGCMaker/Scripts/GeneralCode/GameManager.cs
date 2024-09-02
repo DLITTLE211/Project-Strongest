@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
     GameModeSet _gameModeSet;
+    public static GameManager instance;
     void Start()
     {
+        instance = this;
         stopWatchController = GetComponent<MainGame_Timer>();
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
@@ -130,6 +132,15 @@ public class GameManager : MonoBehaviour
                 players.totalPlayers[i].Initialize(Character_SubStates.Dummy, null, -1);
             }
         }
+    }
+
+    public void PauseGame() 
+    {
+        _settingsController.TogglePauseMenu();
+    }
+    public void TeleportPosition()
+    {
+        _settingsController.SetPlayersPosition();
     }
 
     private void OnApplicationQuit()
