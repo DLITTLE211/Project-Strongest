@@ -111,7 +111,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             HitBox.SetHitBoxProperties(newAttackProperties);
         }
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
+        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
         _playerCAnimator.SetCanTransitionIdle(false);
         _playerCAnimator._base._aManager.SetStartNextAttack(false);
     }
@@ -129,17 +129,17 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
 
         }
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
+        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
     }
     public override void OnStay(Character_Base curBase)
     {
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered stay");
+        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered stay");
     }
     public override void OnActive(Character_Base curBase)
     {
         active = true;
         HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount,_playerCAnimator.lastAttack);
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered active");
+        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered active");
     }
     public override void OnRecov(Character_Base curBase)
     {

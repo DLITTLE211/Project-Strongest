@@ -295,25 +295,44 @@ public class HurtBox : CollisionDetection
     {
         Character_Base Base_Target = target.GetComponent<Character_Base>();
         Character_Base Base_Attacker = currentHitbox.GetComponentInParent<Character_Base>();
-        HitCount hitCount = currentHitProperties.AttackAnims._hitCount;
+        HitCount hitCount = null;
+        if (currentHitProperties != null)
+        {
+            hitCount = currentHitProperties.AttackAnims._hitCount;
+        }
+        else 
+        {
+            hitCount = currentHitbox.hitboxProperties.AttackAnims._hitCount;
+        }
         int curHit = 0;
         if (Base_Target._cHitController.Recovering) 
         {
             Base_Target._cHitController.ClearRecoveryRoutine();
         }
+
         while (curHit < hitCount._count)
         {
-            currentHitProperties.hitConnected = true;
-            Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
-            if (BlockedAttack)
+            try
             {
-                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
+                currentHitProperties.hitConnected = true;
+                Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
+                Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
+                if (BlockedAttack)
+                {
+                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
+                }
+                else
+                {
+                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker, Base_Target, applyForceAfterStop);
+                    Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
+                }
             }
-            else
+            catch (Exception)
             {
-                Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker,Base_Target, applyForceAfterStop);
-                Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
+                curHit = 10;
+                Debug.LogError($"Null Check of HitProperty: {currentHitProperties}");
+                Debug.LogError($"Null Check of HitCount: {hitCount}");
+                Debug.Break();
             }
             if (hitCount._refreshRate > 0)
             {

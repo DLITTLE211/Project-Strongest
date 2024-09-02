@@ -91,7 +91,7 @@ public class CollisionDetection : MonoBehaviour
             SetRendererColor(hitboxColor[_hitProperty]);
             SetText($"Current HitboxType: {_hitProperty}");
         }
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
+        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
     }
     public void SetHurtboxState(HurtBoxType _hurtProperty)
     {
@@ -105,7 +105,7 @@ public class CollisionDetection : MonoBehaviour
             SetText($"Current HitboxType: {_hurtProperty}");
             return;
         }
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
+        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");
     }
     public void SetHurtBoxSize( float sizeX, float sizeY, bool isHurtboxTypeBox, ColliderType collisionType = ColliderType.Trigger, Character_HurtBoxSizing sizing = null)
     {

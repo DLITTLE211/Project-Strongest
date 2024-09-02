@@ -75,50 +75,31 @@ public class MainGame_TrainingSC : MainGame_SettingsController
     {
         await LandingCheck();
         TeleportTweenController(leftPos._leftSidePos, leftPos._rightSidePos);
-       /* coverTweenSequence = DOTween.Sequence();
-        coverTweenSequence.Append(_trainingCoverImage.DOFade(255f, 0.35f));
-        coverTweenSequence.OnComplete(() =>
-        {
-            mainPlayer.transform.position = leftPos._leftSidePos;
-            secondaryPlayer.transform.position = leftPos._rightSidePos;
-        });
-        coverTweenSequence.Append(_trainingCoverImage.DOFade(0f, 0.35f));
-        coverTweenSequence = null;*/
     }
     async void TeleportLeftInverse()
     {
         await LandingCheck();
         TeleportTweenController(leftPos._rightSidePos, leftPos._leftSidePos);
-        //mainPlayer.transform.position = leftPos._rightSidePos;
-        //secondaryPlayer.transform.position = leftPos._leftSidePos;
     }
     async void TeleportRightInverse()
     {
         await LandingCheck();
         TeleportTweenController(rightPos._rightSidePos, rightPos._leftSidePos);
-        //mainPlayer.transform.position = rightPos._rightSidePos;
-        //secondaryPlayer.transform.position = rightPos._leftSidePos;
     }
     async void TeleportRight()
     {
         await LandingCheck();
         TeleportTweenController(rightPos._leftSidePos, rightPos._rightSidePos);
-        //mainPlayer.transform.position = rightPos._leftSidePos;
-        //secondaryPlayer.transform.position = rightPos._rightSidePos;
     }
     async void TeleportCenterInverse()
     {
         await LandingCheck();
         TeleportTweenController(centerPos._rightSidePos, centerPos._leftSidePos);
-        //mainPlayer.transform.position = centerPos._rightSidePos;
-        //secondaryPlayer.transform.position = centerPos._leftSidePos;
     }
     async void TeleportCenter()
     {
         await LandingCheck();
         TeleportTweenController(centerPos._leftSidePos, centerPos._rightSidePos);
-        //mainPlayer.transform.position = centerPos._leftSidePos;
-        //secondaryPlayer.transform.position = centerPos._rightSidePos;
     }
 }
 

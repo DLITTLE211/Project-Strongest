@@ -69,6 +69,7 @@ public class Character_ComboCounter : MonoBehaviour
     #region UpdateComboCounter
     void UpdateText() 
     {
+        StopFadeRoutine();
         string hitCount = CurrentHitCount <= 1 ? "HIT" : "HITS";
         if (CurrentHitCount == 0)
         {
@@ -165,7 +166,7 @@ public class Character_ComboCounter : MonoBehaviour
             }
             continue;
         }
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(0.75f);
         FadeOutText();
         canFade = true;
         #endregion
