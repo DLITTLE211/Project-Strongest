@@ -51,7 +51,20 @@ public class GameManager : MonoBehaviour
         _gameModeSet.DoStartup();
         SetupPlayers();
     }
-
+    public bool CheckWallGreaterPos(ref Vector3 teleportingCharacter) 
+    {
+        if(teleportingCharacter.x >= _chosenStage.RightWall.position.x)
+        {
+            teleportingCharacter.x = _chosenStage.RightWall.position.x-0.1f;
+            return true;
+        }
+        if (teleportingCharacter.x <= _chosenStage.LeftWall.position.x)
+        {
+            teleportingCharacter.x = _chosenStage.RightWall.position.x + 0.1f;
+            return true;
+        }
+        return false;
+    }
     public void SetTargetFrameRate(int frameRate = 60) 
     {
         Application.targetFrameRate = frameRate;
