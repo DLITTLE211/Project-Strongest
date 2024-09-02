@@ -1,5 +1,7 @@
 using Rewired;
 using System.Collections.Generic;
+using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,20 +30,24 @@ public class GameManager : MonoBehaviour
             LoadStageAsset();
             LoadPlayerAssets();
         }
-        SetupPlayers();
         _gameModeSet = Menu_Manager.currentMode;
         _gameModeSet.startupFunctions = new List<Callback>();
         if (_gameModeSet.gameMode == GameMode.Training)
         {
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues());
+            gameObject.AddComponent<MainGame_TrainingSC>();
+            _settingsController = gameObject.GetComponent<MainGame_TrainingSC>();
         }
         else
         {
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(99));
+            gameObject.AddComponent<MainGame_SettingsController>();
+            _settingsController = gameObject.GetComponent<MainGame_SettingsController>();
         }
         _gameModeSet.startupFunctions.Add(() => p1UIManager.SetActiveUI(_gameModeSet.gameMode));
         _gameModeSet.startupFunctions.Add(() => p2UIManager.SetActiveUI(_gameModeSet.gameMode));
         _gameModeSet.DoStartup();
+        SetupPlayers();
     }
 
     public void SetTargetFrameRate(int frameRate = 60) 
@@ -80,6 +86,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < players.totalPlayers.Count; i++)
             {
                 players.totalPlayers[i].Initialize(Character_SubStates.Dummy,null,-1);
+                _settingsController.SetPlayerData(players.totalPlayers[i]);
             }
         }
         else
@@ -90,9 +97,11 @@ public class GameManager : MonoBehaviour
                 players.totalPlayers[0].characterProfile = playerProfiles[0].chosenCharacter;
                 players.totalPlayers[0].Initialize(Character_SubStates.Controlled, playerProfiles[0].chosenAmplifier, players.availableIds[0]);
                 players.AddUsedID(players.joystickNames[0]);
+                _settingsController.SetPlayerData(players.totalPlayers[0]);
 
                 players.totalPlayers[1].characterProfile = playerProfiles[1].chosenCharacter;
                 players.totalPlayers[1].Initialize(Character_SubStates.Dummy, null, -1);
+                _settingsController.SetPlayerData(players.totalPlayers[1]);
             }
             else
             {
@@ -103,11 +112,13 @@ public class GameManager : MonoBehaviour
                         players.totalPlayers[i].characterProfile = playerProfiles[i].chosenCharacter;
                         players.totalPlayers[i].Initialize(Character_SubStates.Controlled, playerProfiles[i].chosenAmplifier, players.availableIds[0]);
                         players.AddUsedID(players.joystickNames[i]);
+                        _settingsController.SetPlayerData(players.totalPlayers[i]);
                     }
                     else { continue; }
                 }
             }
         }
+        _settingsController.SetTeleportPositions();
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)
     {

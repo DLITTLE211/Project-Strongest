@@ -4311,43 +4311,25 @@ MonoBehaviour:
         _ruleSets: []
     actions:
     - _id: 13
-      _name: Horizontal
+      _name: Lateral
       _type: 0
-      _descriptiveName: Horizontal
-      _positiveDescriptiveName: Forward
-      _negativeDescriptiveName: Backward
+      _descriptiveName: Lateral
+      _positiveDescriptiveName: Right
+      _negativeDescriptiveName: Left
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
     - _id: 14
-      _name: Vertical
+      _name: Longitudinal
       _type: 0
-      _descriptiveName: Vertical
-      _positiveDescriptiveName: Upward
-      _negativeDescriptiveName: Downward
-      _behaviorId: 0
-      _userAssignable: 1
-      _categoryId: 1
-    - _id: 15
-      _name: A
-      _type: 1
-      _descriptiveName: ActionButton1
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
-      _behaviorId: 0
-      _userAssignable: 1
-      _categoryId: 1
-    - _id: 16
-      _name: B
-      _type: 1
-      _descriptiveName: ActionButton2
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
+      _descriptiveName: Longitudinal
+      _positiveDescriptiveName: Up
+      _negativeDescriptiveName: Down
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
     - _id: 17
-      _name: C
+      _name: Select
       _type: 1
       _descriptiveName: ActionButton3
       _positiveDescriptiveName: 
@@ -4355,8 +4337,26 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
+    - _id: 68
+      _name: Shift_Left
+      _type: 1
+      _descriptiveName: ActionButton5
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 1
+    - _id: 67
+      _name: Shift_Right
+      _type: 1
+      _descriptiveName: ActionButton6
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 1
     - _id: 18
-      _name: D
+      _name: Cancel
       _type: 1
       _descriptiveName: ActionButton4
       _positiveDescriptiveName: 
@@ -4364,69 +4364,123 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
-    - _id: 19
+    - _id: 54
+      _name: Horizontal
+      _type: 0
+      _descriptiveName: Horizontal
+      _positiveDescriptiveName: Forward
+      _negativeDescriptiveName: Backward
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 55
+      _name: Vertical
+      _type: 0
+      _descriptiveName: Vertical
+      _positiveDescriptiveName: Upward
+      _negativeDescriptiveName: Downward
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 56
+      _name: A
+      _type: 1
+      _descriptiveName: A
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 57
+      _name: B
+      _type: 1
+      _descriptiveName: B
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 58
+      _name: C
+      _type: 1
+      _descriptiveName: C
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 59
+      _name: D
+      _type: 1
+      _descriptiveName: D
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 60
       _name: E
       _type: 1
-      _descriptiveName: Bumper1
+      _descriptiveName: E
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
-    - _id: 20
+      _categoryId: 0
+    - _id: 61
       _name: F
       _type: 1
-      _descriptiveName: Bumper2
+      _descriptiveName: F
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
-    - _id: 21
+      _categoryId: 0
+    - _id: 62
       _name: G
       _type: 1
-      _descriptiveName: Trigger1
+      _descriptiveName: G
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
-    - _id: 22
+      _categoryId: 0
+    - _id: 63
       _name: H
       _type: 1
-      _descriptiveName: Trigger2
+      _descriptiveName: H
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
-    - _id: 23
-      _name: CenterButton1
+      _categoryId: 0
+    - _id: 64
+      _name: Pause
       _type: 1
-      _descriptiveName: CenterButton1
+      _descriptiveName: Pause
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
-    - _id: 24
-      _name: CenterButton2
+      _categoryId: 0
+    - _id: 65
+      _name: CenterButton
       _type: 1
-      _descriptiveName: CenterButton2
+      _descriptiveName: CenterButton
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
-    - _id: 25
-      _name: CenterButton3
+      _categoryId: 0
+    - _id: 66
+      _name: ShareButton
       _type: 1
-      _descriptiveName: CenterButton3
+      _descriptiveName: ShareButton
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
-      _categoryId: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Default
@@ -4441,9 +4495,9 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 
+        actionIds: 360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f000000400000004100000042000000
       - categoryId: 1
-        actionIds: 0d0000000e0000000f00000010000000110000001200000013000000140000001500000016000000170000001800000019000000
+        actionIds: 0d0000000e00000011000000120000004400000043000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -4521,7 +4575,7 @@ MonoBehaviour:
       customControllerUid: 0
       actionElementMaps:
       - _actionCategoryId: 0
-        _actionId: 14
+        _actionId: 55
         _elementType: 1
         _elementIdentifierId: 19
         _axisRange: 0
@@ -4532,7 +4586,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 54
         _elementType: 1
         _elementIdentifierId: 20
         _axisRange: 0
@@ -4543,7 +4597,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 14
+        _actionId: 55
         _elementType: 1
         _elementIdentifierId: 21
         _axisRange: 0
@@ -4554,7 +4608,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 54
         _elementType: 1
         _elementIdentifierId: 22
         _axisRange: 0
@@ -4565,7 +4619,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 54
         _elementType: 0
         _elementIdentifierId: 0
         _axisRange: 0
@@ -4576,7 +4630,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 14
+        _actionId: 55
         _elementType: 0
         _elementIdentifierId: 1
         _axisRange: 0
@@ -4587,7 +4641,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 15
+        _actionId: 56
         _elementType: 1
         _elementIdentifierId: 7
         _axisRange: 0
@@ -4598,7 +4652,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 16
+        _actionId: 57
         _elementType: 1
         _elementIdentifierId: 8
         _axisRange: 0
@@ -4609,7 +4663,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 18
+        _actionId: 59
         _elementType: 1
         _elementIdentifierId: 5
         _axisRange: 0
@@ -4620,7 +4674,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 17
+        _actionId: 58
         _elementType: 1
         _elementIdentifierId: 4
         _axisRange: 0
@@ -4631,7 +4685,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 19
+        _actionId: 60
         _elementType: 1
         _elementIdentifierId: 12
         _axisRange: 0
@@ -4642,7 +4696,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 21
+        _actionId: 62
         _elementType: 1
         _elementIdentifierId: 13
         _axisRange: 0
@@ -4653,7 +4707,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 20
+        _actionId: 61
         _elementType: 1
         _elementIdentifierId: 10
         _axisRange: 0
@@ -4664,7 +4718,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 22
+        _actionId: 63
         _elementType: 1
         _elementIdentifierId: 11
         _axisRange: 0
@@ -4675,7 +4729,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 23
+        _actionId: 64
         _elementType: 1
         _elementIdentifierId: 14
         _axisRange: 0
@@ -4686,7 +4740,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 24
+        _actionId: 65
         _elementType: 1
         _elementIdentifierId: 15
         _axisRange: 0
@@ -4697,7 +4751,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 25
+        _actionId: 66
         _elementType: 1
         _elementIdentifierId: 16
         _axisRange: 0
@@ -4715,7 +4769,7 @@ MonoBehaviour:
       customControllerUid: 0
       actionElementMaps:
       - _actionCategoryId: 0
-        _actionId: 14
+        _actionId: 55
         _elementType: 1
         _elementIdentifierId: 19
         _axisRange: 0
@@ -4726,7 +4780,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 54
         _elementType: 1
         _elementIdentifierId: 20
         _axisRange: 0
@@ -4737,7 +4791,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 14
+        _actionId: 55
         _elementType: 1
         _elementIdentifierId: 21
         _axisRange: 0
@@ -4748,7 +4802,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 54
         _elementType: 1
         _elementIdentifierId: 22
         _axisRange: 0
@@ -4759,7 +4813,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 54
         _elementType: 0
         _elementIdentifierId: 0
         _axisRange: 0
@@ -4770,7 +4824,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 14
+        _actionId: 55
         _elementType: 0
         _elementIdentifierId: 1
         _axisRange: 0
@@ -4781,7 +4835,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 15
+        _actionId: 56
         _elementType: 1
         _elementIdentifierId: 7
         _axisRange: 0
@@ -4792,7 +4846,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 16
+        _actionId: 57
         _elementType: 1
         _elementIdentifierId: 8
         _axisRange: 0
@@ -4803,7 +4857,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 18
+        _actionId: 59
         _elementType: 1
         _elementIdentifierId: 5
         _axisRange: 0
@@ -4814,7 +4868,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 17
+        _actionId: 58
         _elementType: 1
         _elementIdentifierId: 4
         _axisRange: 0
@@ -4825,7 +4879,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 19
+        _actionId: 60
         _elementType: 1
         _elementIdentifierId: 12
         _axisRange: 0
@@ -4836,7 +4890,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 21
+        _actionId: 62
         _elementType: 1
         _elementIdentifierId: 13
         _axisRange: 0
@@ -4847,7 +4901,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 20
+        _actionId: 61
         _elementType: 1
         _elementIdentifierId: 10
         _axisRange: 0
@@ -4858,7 +4912,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 22
+        _actionId: 63
         _elementType: 1
         _elementIdentifierId: 11
         _axisRange: 0
@@ -4869,7 +4923,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 23
+        _actionId: 64
         _elementType: 1
         _elementIdentifierId: 14
         _axisRange: 0
@@ -4880,7 +4934,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 24
+        _actionId: 65
         _elementType: 1
         _elementIdentifierId: 15
         _axisRange: 0
@@ -4891,7 +4945,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 25
+        _actionId: 66
         _elementType: 1
         _elementIdentifierId: 16
         _axisRange: 0
@@ -4996,7 +5050,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 21
+        _actionId: 68
         _elementType: 1
         _elementIdentifierId: 10
         _axisRange: 0
@@ -5007,7 +5061,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 19
+        _actionId: 67
         _elementType: 1
         _elementIdentifierId: 12
         _axisRange: 0
@@ -5032,28 +5086,6 @@ MonoBehaviour:
         _actionId: 14
         _elementType: 0
         _elementIdentifierId: 1
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 23
-        _elementType: 1
-        _elementIdentifierId: 14
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 25
-        _elementType: 1
-        _elementIdentifierId: 16
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -5135,7 +5167,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 21
+        _actionId: 68
         _elementType: 1
         _elementIdentifierId: 10
         _axisRange: 0
@@ -5146,7 +5178,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 19
+        _actionId: 67
         _elementType: 1
         _elementIdentifierId: 12
         _axisRange: 0
@@ -5178,28 +5210,6 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 23
-        _elementType: 1
-        _elementIdentifierId: 14
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 25
-        _elementType: 1
-        _elementIdentifierId: 16
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
     keyboardMaps: []
     mouseMaps: []
     customControllerMaps: []
@@ -5207,7 +5217,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 4
-    actionIdCounter: 54
+    actionIdCounter: 69
     actionCategoryIdCounter: 4
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 5

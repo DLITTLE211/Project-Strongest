@@ -33,6 +33,7 @@ public class Character_Base : MonoBehaviour
     public Character_HitController _cHitController;
     public Character_SuperMeter _cSuperMeter;
     public Attack_Manager _aManager;
+    public Character_SystemButtons _cSystemButtons;
     [SerializeField] private Player_SideManager _sideManager;
     public Character_HitboxManager _cHitboxManager;
     [Space(10)]
@@ -323,6 +324,10 @@ public class Character_Base : MonoBehaviour
                     newButton.Button_State.OnDirectional();
                     break;
                 default:
+                    if (newButton.Button_Element.actionDescriptiveName.ToLower().Contains("center")) 
+                    {
+                        _cSystemButtons.AddSystemButton(newButton);
+                    }
                     newButton.Button_State.OnReleased();
                     break;
             }
