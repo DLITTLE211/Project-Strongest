@@ -53,8 +53,9 @@ public class MainGame_TrainingSC : MainGame_SettingsController
             await Task.Yield();
         }
     }
-    void TeleportTweenController(Vector3 pos1, Vector3 pos2)
+    IEnumerator TeleportTweenController(Vector3 pos1, Vector3 pos2)
     {
+        bool teleported = false;
         if (coverTweenSequence != null)
         {
             coverTweenSequence.Kill();
@@ -66,40 +67,43 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         {
             mainPlayer.transform.position = pos1;
             secondaryPlayer.transform.position = pos2;
-            _trainingCoverImage.DOFade(0f, 0.15f);
+            teleported = true;
         });
         coverTweenSequence = null;
+
+        yield return new WaitUntil(() => teleported);
+        _trainingCoverImage.DOFade(0f, 0.15f);
         teleporting = false;
     }
     async void TeleportLeft() 
     {
         await LandingCheck();
-        TeleportTweenController(leftPos._leftSidePos, leftPos._rightSidePos);
+        StartCoroutine(TeleportTweenController(leftPos._leftSidePos, leftPos._rightSidePos));
     }
     async void TeleportLeftInverse()
     {
         await LandingCheck();
-        TeleportTweenController(leftPos._rightSidePos, leftPos._leftSidePos);
+        StartCoroutine(TeleportTweenController(leftPos._rightSidePos, leftPos._leftSidePos));
     }
     async void TeleportRightInverse()
     {
         await LandingCheck();
-        TeleportTweenController(rightPos._rightSidePos, rightPos._leftSidePos);
+        StartCoroutine(TeleportTweenController(rightPos._rightSidePos, rightPos._leftSidePos));
     }
     async void TeleportRight()
     {
         await LandingCheck();
-        TeleportTweenController(rightPos._leftSidePos, rightPos._rightSidePos);
+        StartCoroutine(TeleportTweenController(rightPos._leftSidePos, rightPos._rightSidePos));
     }
     async void TeleportCenterInverse()
     {
         await LandingCheck();
-        TeleportTweenController(centerPos._rightSidePos, centerPos._leftSidePos);
+        StartCoroutine(TeleportTweenController(centerPos._rightSidePos, centerPos._leftSidePos));
     }
     async void TeleportCenter()
     {
         await LandingCheck();
-        TeleportTweenController(centerPos._leftSidePos, centerPos._rightSidePos);
+        StartCoroutine(TeleportTweenController(centerPos._leftSidePos, centerPos._rightSidePos));
     }
 }
 
