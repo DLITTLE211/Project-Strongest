@@ -98,7 +98,8 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         if (!(attack > stanceInput.stanceAttack._stanceButtonInput._correctInput.Count-1))
         {
             Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
-           
+
+            newAttack.InputTimer.SetTimerType(TimerType.InStance, (stanceHeldTime * (1 / 60f)));
             _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess));
             ResetCombo();
         }

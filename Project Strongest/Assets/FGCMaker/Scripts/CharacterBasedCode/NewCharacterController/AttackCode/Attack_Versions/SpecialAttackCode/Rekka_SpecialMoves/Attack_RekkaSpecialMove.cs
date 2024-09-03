@@ -74,6 +74,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         }
         curRekkaInput++;
         usedRekkas.Add(newProperty);
+        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, leewayTime);
         _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess));
     }
     public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 
