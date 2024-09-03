@@ -330,7 +330,7 @@ public class Character_HitController : MonoBehaviour
         _base._cHitstun.CallHitStun(hitStunInFrames);
         while (hitStunInFrames > 0) 
         {
-            hitStunInFrames -= (oneFrame);
+            hitStunInFrames -= (oneFrame* _base._cHitstun.animSpeed);
             UpdateMeterValue(oneFrame);
             yield return new WaitForSeconds(oneFrame);
         }
@@ -439,22 +439,6 @@ public class Character_HitController : MonoBehaviour
         }
         return refField[0];
     }
-    /*bool CheckNextAttackCatch()
-    {
-        Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
-        if (_opponentProperty != null)
-        {
-            if (_opponentProperty.hitConnected == true)
-            {
-                if (lockMoveTypes.Contains(_opponentProperty._moveType))
-                {
-                    CallLockedHitResponse(FilterGroundLockReactions(_opponentProperty.hitLevel));
-                }
-                return true;
-            }
-        }
-        return false;
-    }*/
     bool CheckNextAttackCatchPostLanding()
     {
         Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
@@ -487,7 +471,7 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
         }
 
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);

@@ -184,15 +184,20 @@ public class Character_ComboDetection : MonoBehaviour
                         string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
                         if (keyRef.Contains(movementOnlyString) && keyRef.Contains(attackButton))
                         {
-                            try
+                            int nextButtonInput = keyRef.IndexOf(movementOnlyString) + movementOnlyString.Length;
+                            string pressedAttackButton = keyRef[nextButtonInput].ToString();
+                            if (pressedAttackButton == attackButton)
                             {
-                                keyRef = keyRef.Remove(movementOnlyString.IndexOf(movementOnlyString), movementOnlyString.Length);
-                                keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
-                                return entry;
-                            }
-                            catch (ArgumentOutOfRangeException) 
-                            {
-                                continue;
+                                try
+                                {
+                                    keyRef = keyRef.Remove(movementOnlyString.IndexOf(movementOnlyString), movementOnlyString.Length);
+                                    keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                                    return entry;
+                                }
+                                catch (ArgumentOutOfRangeException)
+                                {
+                                    continue;
+                                }
                             }
                         }
                     }
