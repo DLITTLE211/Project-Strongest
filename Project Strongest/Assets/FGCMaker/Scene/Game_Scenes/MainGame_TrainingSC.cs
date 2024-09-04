@@ -72,6 +72,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         coverTweenSequence = null;
 
         yield return new WaitUntil(() => teleported);
+        yield return new WaitForSeconds(0.25f);
         _trainingCoverImage.DOFade(0f, 0.15f);
         teleporting = false;
     }

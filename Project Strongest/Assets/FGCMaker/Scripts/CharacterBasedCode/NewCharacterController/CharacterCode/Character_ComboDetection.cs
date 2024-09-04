@@ -182,22 +182,14 @@ public class Character_ComboDetection : MonoBehaviour
                     {
                         string attackButton = moveInDict.Substring(moveInDict.Length - 1);
                         string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
-                        if (keyRef.Contains(movementOnlyString) && keyRef.Contains(attackButton))
+                        if (keyRef.Contains(movementOnlyString))
                         {
-                            int nextButtonInput = keyRef.IndexOf(movementOnlyString) + movementOnlyString.Length;
-                            string pressedAttackButton = keyRef[nextButtonInput].ToString();
-                            if (pressedAttackButton == attackButton)
+                            int motionEndIndex = keyRef.IndexOf(movementOnlyString[movementOnlyString.Length - 1]);
+                            keyRef = keyRef.Substring(motionEndIndex);
+                            if (keyRef.Contains(attackButton)) 
                             {
-                                try
-                                {
-                                    keyRef = keyRef.Remove(movementOnlyString.IndexOf(movementOnlyString), movementOnlyString.Length);
-                                    keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
-                                    return entry;
-                                }
-                                catch (ArgumentOutOfRangeException)
-                                {
-                                    continue;
-                                }
+                                keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                                return entry;
                             }
                         }
                     }
@@ -209,6 +201,10 @@ public class Character_ComboDetection : MonoBehaviour
                 {
                     if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
                     {
+                        string normalButton = entry.Key.normalTypeInput[0].Substring(entry.Key.normalTypeInput[0].Length-1);
+                        int normalButtonIndex = key.specialMoveTypeInput.attackString.IndexOf(normalButton);
+                        string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
+                        key.specialMoveTypeInput.attackString = clearAttackButton;
                         key.currentAttackInput = key.currentAttackInput.Remove(key.currentAttackInput.IndexOf(entry.Key.normalTypeInput[0]), entry.Key.normalTypeInput[0].Length);
                         Debug.Log(entry.Value);
                         return entry;
