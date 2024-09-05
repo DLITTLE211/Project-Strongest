@@ -309,6 +309,15 @@ public class HurtBox : CollisionDetection
         {
             Base_Target._cHitController.ClearRecoveryRoutine();
         }
+        if (currentHitProperties._moveType == MoveType.Super)
+        {
+            Base_Target._cHitController.ClearHitResponseRoutine();
+            if (Base_Target._cHitController.Recovering)
+            {
+                Base_Target._cHitController.ClearRecoveryRoutine();
+            }
+            Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
+        }
 
         while (curHit < hitCount._count)
         {

@@ -42,59 +42,6 @@ public class State_Idle : BaseState
             }
             DummyIdleCheck();
         }
-
-        //if (_base._cStateMachine.opponentComboCounter.CurrentHitCount > 0)
-        //{
-        //}
-        //await WaitToEndSuperMobility();
-        /*if (_base._cHurtBox.IsGrounded())
-        {
-            IdleCheck();
-        }
-        else
-        {
-            await CheckOnLanding();
-        }*/
-        #region Returning to Idle if Subject is Hit
-       /* if (_base._cHurtBox.IsGrounded())
-        {
-            if (_base._cStateMachine.opponentComboCounter.CurrentHitCount > 0)
-            {
-                if (_cAnim.lastAttack == null)
-                {
-                    ResetComboInformation();
-                }
-                IdleCheck();
-            }
-            else
-            {
-                if (_cAnim.lastAttack == null)
-                {
-                    ResetComboInformation();
-                }
-                IdleCheck();
-
-            }
-        }
-        else
-        {
-            await CheckOnLanding(); 
-            if (_cAnim.lastAttack == null)
-            {
-                ResetComboInformation();
-            }
-            IdleCheck();
-        }*/
-
-        #endregion
-        /*try
-        {
-            if (_base.ReturnMovementInputs() != null)
-            {
-                _baseForce.SetWalkForce(_base.ReturnMovementInputs());
-            }
-        }
-        catch (ArgumentOutOfRangeException) { return; }*/
     }
     public async Task CheckOutOfThrow()
     {
@@ -129,10 +76,6 @@ public class State_Idle : BaseState
 
     public override void OnUpdate()
     {
-        if (!isAnimatingIdle) 
-        {
-           // IdleCheck();
-        }
         base.OnUpdate();
     }
     void PlayerCPUIdleCheck()
@@ -153,58 +96,12 @@ public class State_Idle : BaseState
         
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
     }
-/*    void IdleCheck()
-    {
-        try
-        {
-            if (!isAnimatingIdle)
-            {
-                if (_cAnim.CheckAttackAndMobility())
-                {
-                    if (_base._subState == Character_SubStates.Dummy)
-                    {
-                    }
-                    else
-                    {
-                        if ((_base.ReturnMovementInputs().Button_State.directionalInput != 6 ^ _base.ReturnMovementInputs().Button_State.directionalInput <= 4))
-                        {
-                            isAnimatingIdle = true;
-                            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
-                            _base._aManager.ResetMoveHierarchy();
-                        }
-                    }
-                }
-                else 
-                {
-                    _cAnim.ClearLastAttack();
-                }
-            }
-            else
-            {
-                if (_cAnim.lastAttack != null)
-                {
-                    _cAnim.ClearLastAttack();
-                }
-            }
-            if (_base._subState != Character_SubStates.Dummy)
-            {
-                //_base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-            }
-            //_base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
-            ResetComboInformation();
-        }
-        catch (NullReferenceException) 
-        {
-            return;
-        }
-    }*/
     public override void OnExit()
     {
         Messenger.Broadcast(Events.ClearLastTime);
         base.OnExit();
         isAnimatingIdle = false;
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
-
         if (nextTransition.To == _base._cStateMachine.moveStateRef)
         {
             if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)

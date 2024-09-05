@@ -264,7 +264,6 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        //character._cComboDetection.OnSuccessfulSpecialMove(lastAttack);
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
             float frameIterator = oneFrame * character._cHitstun.animSpeed;
@@ -298,6 +297,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
             catch (Exception e)
             {
+                HitBox.DestroySelf();
                 Debug.LogError(e.ToString());
                 frameCount = lastAttack.AttackAnims.animLength + 1f;
                 Debug.Log("Null Check");
@@ -389,6 +389,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
             catch (Exception e)
             {
+                HitBox.DestroySelf();
                 Debug.LogError(e.ToString());
                 frameCount = customProp.animLength + 1f;
                 Debug.Log("Null Check");

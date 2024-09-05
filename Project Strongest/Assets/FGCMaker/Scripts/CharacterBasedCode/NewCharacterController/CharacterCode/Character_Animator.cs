@@ -155,6 +155,7 @@ public class Character_Animator : MonoBehaviour
     }
     public void SetSelfFreeze()
     {
+        
         _base._cHitstun.HandleAnimatorFreeze(true, 0.45f);
         _base._cGravity.HandleGravityFreeze(true);
     }
@@ -165,6 +166,10 @@ public class Character_Animator : MonoBehaviour
         if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.hitStateRef)
         {
             _base._cHitstun.HandleAnimatorFreeze(false);
+        }
+        else 
+        {
+            _base._cHitstun.HandleAnimatorFreeze(true,0f);
         }
     }
     public bool CheckAttackAndMobility()

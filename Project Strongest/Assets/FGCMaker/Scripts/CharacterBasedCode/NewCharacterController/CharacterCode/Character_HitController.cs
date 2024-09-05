@@ -304,18 +304,23 @@ public class Character_HitController : MonoBehaviour
     }
     void CheckAndStartHitResponse(HitAnimationField curField)
     {
+        ClearHitResponseRoutine();
+        activeHitResponseRoutine = DoHitResponse(curField);
+        StartCoroutine(activeHitResponseRoutine);
+    }
+    public void ClearHitResponseRoutine() 
+    {
         if (activeHitResponseRoutine != null)
         {
             StopCoroutine(activeHitResponseRoutine);
         }
-        activeHitResponseRoutine = DoHitResponse(curField);
-        StartCoroutine(activeHitResponseRoutine);
     }
     public void ClearRecoveryRoutine()
     {
         if (recoverRoutine != null)
         {
             StopCoroutine(recoverRoutine);
+            _isRecovering = false;
         }
         _base._cComboCounter.StopFadeRoutine();
     }
@@ -448,12 +453,17 @@ public class Character_HitController : MonoBehaviour
             {
                 if (lockMoveTypes.Contains(_opponentProperty._moveType))
                 {
-                    CallLockedHitResponse(FilterGroundLockReactions(_opponentProperty.hitLevel));
+                    ForceLockHitAnim(_opponentProperty.hitLevel);
                 }
                 return true;
             }
         }
         return false;
+    }
+
+    public void ForceLockHitAnim(HitLevel _level) 
+    {
+        CallLockedHitResponse(FilterGroundLockReactions(_level));
     }
 
     IEnumerator DoRecovery(Attack_KnockDown knockDownType, HitAnimationField playGroundedAnim)

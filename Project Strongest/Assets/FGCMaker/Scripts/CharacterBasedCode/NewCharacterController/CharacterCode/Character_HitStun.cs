@@ -69,13 +69,10 @@ public class Character_HitStun : MonoBehaviour
 
     private void Update()
     {
-        if (!isFrozen)
+        if (_cAnimator != null)
         {
-            if (_cAnimator != null)
-            {
-                _cAnimator.myAnim.speed = animSpeed;
-                _cAnimator.shadowAnim.speed = animSpeed;
-            }
+            _cAnimator.myAnim.speed = animSpeed;
+            _cAnimator.shadowAnim.speed = animSpeed;
         }
     }
 }

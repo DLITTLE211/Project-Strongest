@@ -87,8 +87,11 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {
+        _curBase.opponentPlayer._cHitController.ClearHitResponseRoutine();
+        _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine();
         if (currentCustomAnim <= _customAnimation.Count-1)
         {
+            _curBase.opponentPlayer._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
             _customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
             _customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);
             _customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimation[currentCustomAnim]);

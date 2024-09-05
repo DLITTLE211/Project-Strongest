@@ -61,7 +61,7 @@ public class HitBox : CollisionDetection
             else { continue; }
         }
     }
-    void DestroySelf() 
+    public void DestroySelf() 
     {
         SetHitColliderType(this, HitBoxType.nullified);
     }
