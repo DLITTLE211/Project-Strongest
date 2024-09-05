@@ -12,18 +12,6 @@ public class Player_SideManager : MonoBehaviour
     {
         StartCoroutine(OnStartSideSwitch());
     }
-    void ApplyForceOnCustomCallback(CustomCallback callback)
-    {
-        if (sideCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
-            {
-                case HitPointCall.ForceSideSwitch:
-                    ForceSideSwitch();
-                    break;
-            }
-        }
-    }
     IEnumerator OnStartSideSwitch() 
     {
         yield return new WaitUntil(() => _p1Position.thisPosition.ModelTransform != null);

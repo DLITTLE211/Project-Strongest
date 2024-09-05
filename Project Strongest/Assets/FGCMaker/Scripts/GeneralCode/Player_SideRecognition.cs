@@ -13,6 +13,7 @@ public class Character_Position
 {
     [SerializeField] private Transform CollisionDetectionTransform;
     [SerializeField] private Transform modelTransform;
+    [SerializeField] private Character_Base _base;
     public Transform ModelTransform { get { return modelTransform; } }
     public HitBox projectile_HitBox;
     public HurtBox extendedHurbox;
@@ -36,6 +37,17 @@ public class Character_Position
             }
         }
     }
+    bool NeutralStateTurn() 
+    {
+        List<IState> slowTurnStates = new List<IState>() 
+        {
+            _base._cStateMachine.idleStateRef,
+            _base._cStateMachine.crouchStateRef,
+            _base._cStateMachine.jumpRef,
+        };
+        bool fullCheck = slowTurnStates.Contains(_base._cStateMachine._playerState.current.State);
+        return fullCheck;
+    }
 
     void TurnModel(Vector3 direction, float flipSide, Character_Face_Direction _face)
     {
@@ -52,16 +64,21 @@ public class Character_Position
             _directionFacing = _face;
             return;
         }
+        float speed = 0.15f;
+        if (!NeutralStateTurn()) 
+        {
+            speed = 0;
+        }
         modelTransform.localScale = new Vector3(1f, 1f, flipSide);
-        modelTransform.DORotate(direction, 0.15f).OnStart(() =>
+        modelTransform.DORotate(direction, speed).OnStart(() =>
         {
             if (_face == Character_Face_Direction.FacingRight)
             {
-                CollisionDetectionTransform.DOLocalMoveX(-0.25f, 0.15f);
+                CollisionDetectionTransform.DOLocalMoveX(-0.25f, speed);
             }
             else if (_face == Character_Face_Direction.FacingLeft)
             {
-                CollisionDetectionTransform.DOLocalMoveX(0.25f, 0.15f);
+                CollisionDetectionTransform.DOLocalMoveX(0.25f, speed);
             }
         }).OnComplete(() =>
         {
