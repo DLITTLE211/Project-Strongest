@@ -47,10 +47,9 @@ public class AttackInputTypes
     }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide)
     {
-        if (specialMoveTypeInput.attackString.Length > 8)
+        if (specialMoveTypeInput.attackString.Length >= 8)
         {
-            string attackSubString = specialMoveTypeInput.attackString.Substring(1);
-            specialMoveTypeInput.attackString = attackSubString;
+            specialMoveTypeInput.attackString = specialMoveTypeInput.attackString.Remove(0, 1);
         }
         if (faceSide == Character_Face_Direction.FacingLeft) 
         {
