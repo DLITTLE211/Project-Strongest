@@ -61,12 +61,13 @@ public class Character_Profile : ScriptableObject
     public Character_MobilityAsset _CharacterMobility;
     #endregion
 
-
     #region Character Interaction Info
     [Header("Character Interaction Information")]
     public List<CharacterIntro> BasicCharacterInteractions = new List<CharacterIntro>();
     public List<CharacterIntro> SpecialCharacterInteractions = new List<CharacterIntro>();
     #endregion
+
+    
     public void SetCharacterAnimator(Character_Animator animator)
     {
         characterAnimator = characterModel.GetComponent<Animator>();

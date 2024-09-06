@@ -1,13 +1,18 @@
 using System;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.Animations;
 
 public class State_Idle : BaseState
 {
-    private bool isAnimatingIdle;
+    private bool canDoSecondaryIdle;
+    private const float startSecondaryIdle = 10f;
+    private float timeTillSecondaryIdle;
+    private bool inIdle;
     public State_Idle(Character_Base playerBase) : base(playerBase){ }
     public override async void OnEnter()
     {
+        canDoSecondaryIdle = false;
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         if (_base._subState == Character_SubStates.Controlled)
         {
@@ -74,9 +79,43 @@ public class State_Idle : BaseState
         _base._cComboDetection.superMobilityOption = false;
     }
 
-    public override void OnUpdate()
+    public async override void OnUpdate()
     {
+        if (canDoSecondaryIdle)
+        {
+            if (timeTillSecondaryIdle >= 0)
+            {
+                timeTillSecondaryIdle -= (1 / 60f);
+            }
+            else 
+            {
+                await PlaySecondaryAnim();
+            }
+        }
         base.OnUpdate();
+    }
+    async Task PlaySecondaryAnim() 
+    {
+        float startTime = 0;
+        canDoSecondaryIdle = false;
+        _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+        await Task.Delay(100);
+        int secondaryAnimDelayTime = (int)(_cAnim.myAnim.GetCurrentAnimatorStateInfo(0).length * 1000);
+        while (startTime < secondaryAnimDelayTime) 
+        {
+            startTime += 16;
+            await Task.Yield();
+        }
+        if (inIdle)
+        {
+            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        }
+        ResetTime();
+    }
+    void ResetTime() 
+    {
+        timeTillSecondaryIdle = startSecondaryIdle;
+        canDoSecondaryIdle = true;
     }
     void PlayerCPUIdleCheck()
     {
@@ -84,23 +123,28 @@ public class State_Idle : BaseState
         _cAnim.ClearLastAttack();
         if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
         {
-            isAnimatingIdle = true;
             _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
             _base._aManager.ResetMoveHierarchy();
         }
+        canDoSecondaryIdle = true;
+        inIdle = true;
+        timeTillSecondaryIdle = startSecondaryIdle;
     }
+    
     void DummyIdleCheck()
     {
-        isAnimatingIdle = true;
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        canDoSecondaryIdle = true;
+        inIdle = true;
+        timeTillSecondaryIdle = startSecondaryIdle;
     }
     public override void OnExit()
     {
         Messenger.Broadcast(Events.ClearLastTime);
         base.OnExit();
-        isAnimatingIdle = false;
+        inIdle = false;
+        canDoSecondaryIdle = false;
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To == _base._cStateMachine.moveStateRef)
         {

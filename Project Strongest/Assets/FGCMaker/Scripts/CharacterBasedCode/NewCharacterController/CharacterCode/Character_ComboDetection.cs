@@ -184,7 +184,7 @@ public class Character_ComboDetection : MonoBehaviour
                         string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
                         if (keyRef.Contains(movementOnlyString))
                         {
-                            int motionEndIndex = keyRef.IndexOf(movementOnlyString[movementOnlyString.Length - 1]);
+                            int motionEndIndex = keyRef.IndexOf(movementOnlyString[0]);
                             keyRef = keyRef.Substring(motionEndIndex);
                             if (keyRef.Contains(attackButton)) 
                             {

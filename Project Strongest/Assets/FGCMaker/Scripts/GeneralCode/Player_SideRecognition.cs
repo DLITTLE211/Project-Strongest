@@ -7,6 +7,13 @@ using DG.Tweening;
 public class Player_SideRecognition : MonoBehaviour
 {
     public Character_Position thisPosition;
+    private void Update()
+    {
+        if(thisPosition.delayTurnActionTime > 0) 
+        {
+            thisPosition.delayTurnActionTime -= (1 / 60f);
+        }
+    }
 }
 [System.Serializable]
 public class Character_Position
@@ -20,8 +27,11 @@ public class Character_Position
     public Transform _targetCharacter;
     public float LW_Distance, RW_Distance;
     public Character_Face_Direction _directionFacing;
-    private Vector3 leftFace = new Vector3(0f, 180f, 0f), rightFace = new Vector3(0f, 0f, 0f);
-    Tween switchFaceDirection;
+    private Vector3 leftFace = new Vector3(0f, 180f, 0f);
+    private Vector3 rightFace = new Vector3(0f, 0f, 0f);
+    public float delayTurnActionTime = 0;
+    [SerializeField] private float startDelayTime = 20f;
+
     public void SetFacingState(Character_Face_Direction face) 
     {
         if (_directionFacing != face) 
@@ -51,6 +61,19 @@ public class Character_Position
 
     void TurnModel(Vector3 direction, float flipSide, Character_Face_Direction _face)
     {
+        float speed = 0.15f;
+        if (delayTurnActionTime > 0) 
+        {
+            return;
+        }
+        if (!NeutralStateTurn())
+        {
+            speed = 0;
+        }
+        else
+        {
+            delayTurnActionTime = startDelayTime * (1 / 60f);
+        }
         if (modelTransform == null)
         {
             return;
@@ -63,11 +86,6 @@ public class Character_Position
         {
             _directionFacing = _face;
             return;
-        }
-        float speed = 0.15f;
-        if (!NeutralStateTurn()) 
-        {
-            speed = 0;
         }
         modelTransform.localScale = new Vector3(1f, 1f, flipSide);
         modelTransform.DORotate(direction, speed).OnStart(() =>

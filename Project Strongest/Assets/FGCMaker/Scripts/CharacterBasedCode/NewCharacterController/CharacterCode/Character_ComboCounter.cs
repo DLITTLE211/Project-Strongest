@@ -9,17 +9,17 @@ using UnityEngine;
 public class Character_ComboCounter : MonoBehaviour
 {
     [SerializeField] private int _currentComboCount;
-    public int CurrentHitCount { get {return _currentComboCount; } set { _currentComboCount = value; } }
-
-    [SerializeField] private TMP_Text _counterText,_QualityText;
-    [SerializeField] private Color32 _counterColor, _QualityColor;
-    [Range(0,255f)] public float alphaLevel;
+    [SerializeField] private TMP_Text _counterText, _QualityText;
     [SerializeField] Transform comboHolder;
+    [SerializeField] private List<ComboProficiencyLevel> _comboProficiencyList;
     Tween fadeTextTween;
-    [SerializeField] private Dictionary<int, Callback> _comboProficiencyDictionary;
-    bool canFade;
     Sequence fadeTextOut;
     IEnumerator fadeTextRoutine;
+    public int CurrentHitCount
+    {
+        get { return _currentComboCount; }
+        set { _currentComboCount = value; }
+    }
     public int ReturnCurrentComboCount()
     {
         return _currentComboCount;
@@ -30,16 +30,29 @@ public class Character_ComboCounter : MonoBehaviour
     }
     void SetComboProficiencyDictionary() 
     {
-        _comboProficiencyDictionary = new Dictionary<int, Callback>();
+        _comboProficiencyList = new List<ComboProficiencyLevel>();
+        #region Define Combo Levels
+        ComboProficiencyLevel basicLevel = new ComboProficiencyLevel(3, "Basic");
+        ComboProficiencyLevel advancedLevel = new ComboProficiencyLevel(6, "Advanced");
+        ComboProficiencyLevel amazingLevel = new ComboProficiencyLevel(9, "Amazing");
+        ComboProficiencyLevel superiorLevel = new ComboProficiencyLevel(12, "Superior");
+        ComboProficiencyLevel fantasticLevel = new ComboProficiencyLevel(15, "Fantastic");
+        ComboProficiencyLevel unbelievableLevel = new ComboProficiencyLevel(20, "Unbelievable");
+        ComboProficiencyLevel unrealLevel = new ComboProficiencyLevel(25, "Unreal");
+        ComboProficiencyLevel maximumLevel = new ComboProficiencyLevel(30, "Maximum");
+        #endregion
 
-        _comboProficiencyDictionary.Add(5, () => UpdateQualityText("Basic"));
-        _comboProficiencyDictionary.Add(10, () => UpdateQualityText("Advanced"));
-        _comboProficiencyDictionary.Add(15, () => UpdateQualityText("Amazing"));
-        _comboProficiencyDictionary.Add(20, () => UpdateQualityText("Superior"));
-        _comboProficiencyDictionary.Add(25, () => UpdateQualityText("Fantastic"));
-        _comboProficiencyDictionary.Add(30, () => UpdateQualityText("Unbelievable"));
-        _comboProficiencyDictionary.Add(35, () => UpdateQualityText("Unreal"));
-        _comboProficiencyDictionary.Add(45, () => UpdateQualityText("Maximum"));
+        #region Add Levels to List
+        _comboProficiencyList.Add(basicLevel);
+        _comboProficiencyList.Add(advancedLevel);
+        _comboProficiencyList.Add(amazingLevel);
+        _comboProficiencyList.Add(superiorLevel);
+        _comboProficiencyList.Add(fantasticLevel);
+        _comboProficiencyList.Add(unbelievableLevel);
+        _comboProficiencyList.Add(unrealLevel);
+        _comboProficiencyList.Add(maximumLevel);
+        #endregion
+
         fadeTextOut = null;
         fadeTextRoutine = null;
     }
@@ -58,7 +71,6 @@ public class Character_ComboCounter : MonoBehaviour
         fadeTextTween.Kill();
         fadeTextTween = null;
         CurrentHitCount++;
-        canFade = false;
         UpdateText();
 
         DOTween.Complete(comboHolder);
@@ -119,14 +131,12 @@ public class Character_ComboCounter : MonoBehaviour
     
     void FadeOutText()
     {
-        canFade = true;
         ResetComboCounter();
         fadeTextOut = DOTween.Sequence();
         fadeTextOut.Append(_counterText.DOFade(0, .75f));
         _QualityText.DOFade(0, .45f);
         fadeTextOut.OnComplete(() =>
         {
-            canFade = false;
             SetStartComboCounter();
             fadeTextRoutine = null;
         });
@@ -157,18 +167,30 @@ public class Character_ComboCounter : MonoBehaviour
     IEnumerator OnEndComboCount() 
     {
         #region Check ComboQualityOnQuickEnd
-        for (int i = _comboProficiencyDictionary.Keys.Count -1; i >= 0; i--) 
+        for (int i = _comboProficiencyList.Count -1; i >= 0; i--) 
         {
-            int keyRef = _comboProficiencyDictionary.Keys.ElementAt(i);
-            if (_currentComboCount >= keyRef) 
+            if (_currentComboCount >= _comboProficiencyList[i].comboLevel) 
             {
-                _comboProficiencyDictionary[keyRef]();
+                UpdateQualityText(_comboProficiencyList[i].comboLevelSubText);
+                break;
             }
             continue;
         }
         yield return new WaitForSeconds(0.75f);
         FadeOutText();
-        canFade = true;
         #endregion
+    }
+}
+
+[Serializable]
+public class ComboProficiencyLevel 
+{
+    public int comboLevel;
+    public string comboLevelSubText;
+
+    public ComboProficiencyLevel(int _level, string _text) 
+    {
+        comboLevel = _level;
+        comboLevelSubText = _text;
     }
 }
