@@ -135,7 +135,8 @@ public class Character_SuperMeter : MonoBehaviour
 
     public bool CanTakeFromMeter(float meterRequirement) 
     {
-        return meterRequirement > fullMeterLevel;
+        float _requiredMeter = meterRequirement * 30;
+        return fullMeterLevel >= _requiredMeter;
     }
 
     public void AddMeter(float _scaledMeterGain)

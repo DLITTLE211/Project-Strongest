@@ -24,7 +24,10 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         curRekkaInput = 0;
         try
         {
-            rekkaInput.mainAttackInput.turnStringToArray();
+            for (int i = 0; i < rekkaInput.mainAttackInput.Count; i++)
+            {
+                rekkaInput.mainAttackInput[i].turnStringToArray();
+            }
             inRekkaState = false;
             usedRekkas = new List<Attack_BaseProperties>();
         }

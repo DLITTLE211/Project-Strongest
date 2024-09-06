@@ -31,10 +31,6 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         property.InputTimer = _curBase._cAttackTimer;
     }
-    /*public void PreformAttack(Character_Base curBase, Callback SendAttackOnSucess)
-    {
-        curBase._aManager.ReceiveAttack(property);
-    }*/
     public void PreformAttack(Callback SendAttackOnSucess)
     {
         _curBase.comboList3_0.ClearFollowUpAttack();

@@ -47,7 +47,11 @@ MonoBehaviour:
   BasicSuperAttacks:
   - specialMoveName: Cockroach Dash (Super)
     attackInput:
-      attackString: 2363236A
+    - attackString: 2363236A
+      attackStringArray: 
+    - attackString: 236236A
+      attackStringArray: 
+    - attackString: 2365236A
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -168,7 +172,11 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Triceratops Fist
     attackInput:
-      attackString: 2141214B
+    - attackString: 2141214B
+      attackStringArray: 
+    - attackString: 214214B
+      attackStringArray: 
+    - attackString: 2145214B
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -543,7 +551,11 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Ultimate Guillotine Choke
     attackInput:
-      attackString: 2363236C
+    - attackString: 2363236C
+      attackStringArray: 
+    - attackString: 236236C
+      attackStringArray: 
+    - attackString: 2365236C
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -816,7 +828,11 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Demon Blood Activation (Ultra)
     attackInput:
-      attackString: 2363236D
+    - attackString: 2363236D
+      attackStringArray: 
+    - attackString: 236236D
+      attackStringArray: 
+    - attackString: 2365236D
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -888,7 +904,9 @@ MonoBehaviour:
   CommandThrows:
   - specialMoveName: Spinning Lotus
     attackInput:
-      attackString: 63214B
+    - attackString: 63214B
+      attackStringArray: 
+    - attackString: 624B
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -1187,7 +1205,9 @@ MonoBehaviour:
   CounterAttacks:
   - specialMoveName: Tiger King (Light)
     attackInput:
-      attackString: 6323C
+    - attackString: 6323C
+      attackStringArray: 
+    - attackString: 623C
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -1385,7 +1405,9 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Tiger King (Heavy)
     attackInput:
-      attackString: 6323D
+    - attackString: 6323D
+      attackStringArray: 
+    - attackString: 623D
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -1668,7 +1690,9 @@ MonoBehaviour:
       KnockDown: 2
     stanceInput:
       _stanceInput:
-        attackString: 6323B
+      - attackString: 6323B
+        attackStringArray: 
+      - attackString: 623B
         attackStringArray: 
       _stanceInputState:
         _state: 1
@@ -1753,7 +1777,9 @@ MonoBehaviour:
   - RekkaSpecialAttack_Name: Hanma Assault
     rekkaInput:
       mainAttackInput:
-        attackString: 236A
+      - attackString: 236A
+        attackStringArray: 
+      - attackString: 26A
         attackStringArray: 
       mainAttackProperty:
         _attackName: Hanma Assault (Main)
@@ -1963,7 +1989,9 @@ MonoBehaviour:
   - RekkaSpecialAttack_Name: Flash Step (Light Series)
     rekkaInput:
       mainAttackInput:
-        attackString: 214C
+      - attackString: 214C
+        attackStringArray: 
+      - attackString: 24C
         attackStringArray: 
       mainAttackProperty:
         _attackName: Flash Step (Teleport)
@@ -2266,7 +2294,9 @@ MonoBehaviour:
   - RekkaSpecialAttack_Name: Flash Step (Heavy Series)
     rekkaInput:
       mainAttackInput:
-        attackString: 214D
+      - attackString: 214D
+        attackStringArray: 
+      - attackString: 24D
         attackStringArray: 
       mainAttackProperty:
         _attackName: Flash Step (Teleport)

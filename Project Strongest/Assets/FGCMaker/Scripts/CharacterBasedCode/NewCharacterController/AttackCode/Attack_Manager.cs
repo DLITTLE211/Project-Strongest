@@ -260,7 +260,7 @@ public class Attack_Manager : MonoBehaviour
         }
         else 
         {
-            if (!_base._cSuperMeter.CanTakeFromMeter(newAttack._meterRequirement)) 
+            if (_base._cSuperMeter.CanTakeFromMeter(newAttack._meterRequirement)) 
             {
                 _base._cSuperMeter.TakeMeter(newAttack._meterRequirement);
                 return true;

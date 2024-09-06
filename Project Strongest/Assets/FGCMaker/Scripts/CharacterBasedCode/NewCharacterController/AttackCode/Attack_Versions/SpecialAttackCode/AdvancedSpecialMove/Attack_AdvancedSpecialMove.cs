@@ -7,7 +7,7 @@ using Rewired;
 public abstract class AdvancedSpecialBase
 {
     public string specialMoveName;
-    public Attack_Input attackInput;
+    public List<Attack_Input> attackInput;
     public ButtonStateMachine attackInputState;
     public Attack_BaseProperties property;
     public List<AttackHandler_Attack> _customAnimation;
@@ -33,7 +33,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     {
         try
         {
-            attackInput.turnStringToArray();
+            for (int i = 0; i < attackInput.Count; i++)
+            {
+                attackInput[i].turnStringToArray();
+            }
         }
         catch (ArgumentNullException e)
         {
@@ -87,10 +90,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {
-        _curBase.opponentPlayer._cHitController.ClearHitResponseRoutine();
-        _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine();
         if (currentCustomAnim <= _customAnimation.Count-1)
         {
+            _curBase.opponentPlayer._cHitController.ClearHitResponseRoutine();
+            _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine();
             _curBase.opponentPlayer._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
             _customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
             _customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);

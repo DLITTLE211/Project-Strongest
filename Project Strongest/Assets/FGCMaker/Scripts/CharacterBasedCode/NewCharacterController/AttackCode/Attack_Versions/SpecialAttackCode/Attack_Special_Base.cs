@@ -63,7 +63,7 @@ public abstract class Attack_Special_Rekka
 [Serializable]
 public class RekkaInput
 {
-    public Attack_Input mainAttackInput;
+    public List<Attack_Input> mainAttackInput;
     public Attack_BaseProperties mainAttackProperty;
     public ButtonStateMachine mainAttackInputState;
     public List<RekkaAttack> _rekkaPortion;
@@ -105,7 +105,7 @@ public abstract class Attack_Special_Stance
 [Serializable]
 public class StanceInput
 {
-    public Attack_Input _stanceInput;
+    public List<Attack_Input> _stanceInput;
     public ButtonStateMachine _stanceInputState;
     public StanceAttack stanceAttack;
     public StanceAttack stanceKill;

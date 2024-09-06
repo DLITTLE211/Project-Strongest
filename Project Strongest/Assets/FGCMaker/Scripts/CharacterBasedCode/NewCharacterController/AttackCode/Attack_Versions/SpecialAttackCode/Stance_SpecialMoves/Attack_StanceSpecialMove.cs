@@ -11,7 +11,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     [SerializeField] internal bool inStanceState;
     [SerializeField] internal int stanceHeldTime;
     [SerializeField] private Character_Base _curBase;
-    //AttackData newAttackData;
 
     public void SetStarterInformation(Character_Base _base)
     {
@@ -26,7 +25,10 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         curInput = 0;
         try
         {
-            stanceInput._stanceInput.turnStringToArray();
+            for (int i = 0; i < stanceInput._stanceInput.Count; i++)
+            {
+                stanceInput._stanceInput[i].turnStringToArray();
+            }
         }
         catch (ArgumentNullException e)
         {
