@@ -20,7 +20,10 @@ public class Attack_BaseProperties
     public float rawAttackDamage;
     public float rawChipDamage;
     public float counterHitDamageMult;
-    [Range(1, 100)] public int hitstopValue;
+
+    public Attack_StunValues attackMainStunValues;
+    [Space(20)]
+    [Range(1, 20)] public int hitstopValue;
     [Range(1, 50)] public int blockStunValue;
     [Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
@@ -66,10 +69,22 @@ public class Attack_BaseProperties
 
 }
 [Serializable]
+public class Attack_StunValues
+{
+    [Range(1, 100)] public int hitstunValue;
+    [Range(0, 50)] public int blockStunValue;
+    [Range(0, 20)] public int hitstopValue;
+    [Range(0, 10)] public int blockStopValue;
+}
+
+[Serializable]
 public class CustomDamageField 
 {
     public float rawAttackDamage;
     public float counterHitDamageMult;
+
+    public Attack_StunValues customDamageFieldStunValues;
+    [Space(20)]
     [Range(1, 100)] public int hitstopValue;
     [Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
