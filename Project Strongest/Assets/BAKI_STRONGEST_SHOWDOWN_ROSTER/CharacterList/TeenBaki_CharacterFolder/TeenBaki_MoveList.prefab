@@ -63,10 +63,10 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 0
       attackMainStunValues:
-        hitstunValue: 0
-        blockStunValue: 0
-        hitstopValue: 0
-        blockStopValue: 0
+        hitstunValue: 25
+        blockStunValue: 12
+        hitstopValue: 9
+        blockStopValue: 3
       hitstopValue: 30
       blockStunValue: 0
       hitstunValue: 25
@@ -203,10 +203,10 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 0
       attackMainStunValues:
-        hitstunValue: 0
-        blockStunValue: 0
-        hitstopValue: 0
-        blockStopValue: 0
+        hitstunValue: 12
+        blockStunValue: 5
+        hitstopValue: 7
+        blockStopValue: 2
       hitstopValue: 17
       blockStunValue: 0
       hitstunValue: 12
@@ -444,9 +444,9 @@ MonoBehaviour:
             rawAttackDamage: 4
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
-              hitstopValue: 0
+              hitstopValue: 2
               blockStopValue: 0
             hitstopValue: 10
             hitstunValue: 0
@@ -474,9 +474,9 @@ MonoBehaviour:
             rawAttackDamage: 5
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
-              hitstopValue: 0
+              hitstopValue: 2
               blockStopValue: 0
             hitstopValue: 10
             hitstunValue: 0
@@ -504,9 +504,9 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
-              hitstopValue: 0
+              hitstopValue: 2
               blockStopValue: 0
             hitstopValue: 15
             hitstunValue: 0
@@ -534,9 +534,9 @@ MonoBehaviour:
             rawAttackDamage: 10
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 17
               blockStunValue: 0
-              hitstopValue: 0
+              hitstopValue: 6
               blockStopValue: 0
             hitstopValue: 1
             hitstunValue: 1
@@ -637,10 +637,10 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 0
       attackMainStunValues:
-        hitstunValue: 0
-        blockStunValue: 0
-        hitstopValue: 0
-        blockStopValue: 0
+        hitstunValue: 20
+        blockStunValue: 8
+        hitstopValue: 7
+        blockStopValue: 2
       hitstopValue: 25
       blockStunValue: 0
       hitstunValue: 15
@@ -761,7 +761,7 @@ MonoBehaviour:
             rawAttackDamage: 0
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -791,7 +791,7 @@ MonoBehaviour:
             rawAttackDamage: 3
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
             rawAttackDamage: 5
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -851,7 +851,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -881,7 +881,7 @@ MonoBehaviour:
             rawAttackDamage: 8
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -911,7 +911,7 @@ MonoBehaviour:
             rawAttackDamage: 10
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1187,7 +1187,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1217,7 +1217,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1247,7 +1247,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1277,7 +1277,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1473,7 +1473,7 @@ MonoBehaviour:
             rawAttackDamage: 5
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1503,7 +1503,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1533,7 +1533,7 @@ MonoBehaviour:
             rawAttackDamage: 10
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1698,7 +1698,7 @@ MonoBehaviour:
             rawAttackDamage: 7
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1728,7 +1728,7 @@ MonoBehaviour:
             rawAttackDamage: 9
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1758,7 +1758,7 @@ MonoBehaviour:
             rawAttackDamage: 14
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 10
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1932,10 +1932,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.65
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 20
+                blockStunValue: 3
+                hitstopValue: 12
+                blockStopValue: 3
               hitstopValue: 20
               blockStunValue: 0
               hitstunValue: 19
@@ -2013,10 +2013,10 @@ MonoBehaviour:
         rawChipDamage: 0
         counterHitDamageMult: 1.025
         attackMainStunValues:
-          hitstunValue: 0
-          blockStunValue: 0
-          hitstopValue: 0
-          blockStopValue: 0
+          hitstunValue: 17
+          blockStunValue: 9
+          hitstopValue: 5
+          blockStopValue: 1
         hitstopValue: 17
         blockStunValue: 0
         hitstunValue: 14
@@ -2087,10 +2087,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 0
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 15
+                blockStunValue: 7
+                hitstopValue: 6
+                blockStopValue: 2
               hitstopValue: 12
               blockStunValue: 0
               hitstunValue: 10
@@ -2160,10 +2160,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 0
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 14
+                blockStunValue: 8
+                hitstopValue: 6
+                blockStopValue: 1
               hitstopValue: 14
               blockStunValue: 0
               hitstunValue: 10
@@ -2344,10 +2344,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.015
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 20
+                blockStunValue: 13
+                hitstopValue: 3
+                blockStopValue: 1
               hitstopValue: 15
               blockStunValue: 0
               hitstunValue: 20
@@ -2391,7 +2391,7 @@ MonoBehaviour:
                   _count: 0
                   _startCount: 3
                   _refreshRate: 0
-                  _startRefreshRate: 2
+                  _startRefreshRate: 5
               hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
@@ -2417,10 +2417,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.065
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 17
+                blockStunValue: 9
+                hitstopValue: 5
+                blockStopValue: 1
               hitstopValue: 18
               blockStunValue: 0
               hitstunValue: 15
@@ -2490,10 +2490,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.035
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 14
+                blockStunValue: 5
+                hitstopValue: 5
+                blockStopValue: 2
               hitstopValue: 20
               blockStunValue: 0
               hitstunValue: 17
@@ -2674,10 +2674,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.015
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 20
+                blockStunValue: 13
+                hitstopValue: 3
+                blockStopValue: 1
               hitstopValue: 15
               blockStunValue: 0
               hitstunValue: 20
@@ -2747,10 +2747,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.065
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 17
+                blockStunValue: 9
+                hitstopValue: 5
+                blockStopValue: 1
               hitstopValue: 18
               blockStunValue: 0
               hitstunValue: 15
@@ -2820,10 +2820,10 @@ MonoBehaviour:
               rawChipDamage: 0
               counterHitDamageMult: 1.035
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
+                hitstunValue: 14
+                blockStunValue: 5
+                hitstopValue: 5
+                blockStopValue: 2
               hitstopValue: 20
               blockStunValue: 0
               hitstunValue: 17
@@ -2895,10 +2895,10 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 1.065
       attackMainStunValues:
-        hitstunValue: 0
-        blockStunValue: 0
-        hitstopValue: 0
-        blockStopValue: 0
+        hitstunValue: 20
+        blockStunValue: 3
+        hitstopValue: 12
+        blockStopValue: 3
       hitstopValue: 20
       blockStunValue: 0
       hitstunValue: 19
@@ -2968,10 +2968,10 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 1.045
       attackMainStunValues:
-        hitstunValue: 0
-        blockStunValue: 0
-        hitstopValue: 0
-        blockStopValue: 0
+        hitstunValue: 17
+        blockStunValue: 10
+        hitstopValue: 6
+        blockStopValue: 2
       hitstopValue: 17
       blockStunValue: 0
       hitstunValue: 17
@@ -3041,10 +3041,10 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 1.025
       attackMainStunValues:
-        hitstunValue: 0
-        blockStunValue: 0
-        hitstopValue: 0
-        blockStopValue: 0
+        hitstunValue: 15
+        blockStunValue: 7
+        hitstopValue: 5
+        blockStopValue: 2
       hitstopValue: 17
       blockStunValue: 0
       hitstunValue: 17
@@ -3931,7 +3931,7 @@ MonoBehaviour:
           hitstopValue: 10
           blockStunValue: 0
           hitstunValue: 18
-          hitLevel: 68
+          hitLevel: 320
           attackHashes: 0
           _meterRequirement: 0
           _meterAwardedOnHit: 6
@@ -3975,10 +3975,10 @@ MonoBehaviour:
           hitConnected: 0
           lateralKBP:
             lateralKBP: 2
-            Value: 9
+            Value: 4
           verticalKBP:
-            verticalKBP: 0
-            Value: 3
+            verticalKBP: 7
+            Value: 8
           KnockDown: 4
         attackInputState:
           _state: 0

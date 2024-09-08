@@ -13,17 +13,17 @@ public class MainGame_Timer : MonoBehaviour
         stopwatchTime = startingTime;
         if (startingTime == Mathf.Infinity) 
         {
-            stopwatchText.text = "Timer: \n \u221E";
+            stopwatchText.text = "Timer \n \u221E";
             tickDownStopWatch = false;
             return;
         }
         tickDownStopWatch = true;
-        stopwatchText.text = $"Timer: \n {startingTime.ToString()}";
+        stopwatchText.text = $"Timer \n {startingTime.ToString()}";
     }
     void UpdateTimer() 
     {
         stopwatchTime -= Time.deltaTime;
-        stopwatchText.text = $"Timer: \n {stopwatchTime.ToString("n0")}";
+        stopwatchText.text = $"Timer \n {stopwatchTime.ToString("n0")}";
     }
     private void Update()
     {
