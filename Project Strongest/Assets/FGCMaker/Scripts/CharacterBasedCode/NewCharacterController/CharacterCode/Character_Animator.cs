@@ -291,7 +291,7 @@ public class Character_Animator : MonoBehaviour
             BasicAttackRoutine = null;
         }
         lastAttack.AttackAnims.SetIsFollowUpAttack(false);
-        PlayNextAnimation(lastAttack.attackHashes[0], 2 * (1f / lastAttack.AttackAnims.animClip.frameRate),true);
+        PlayNextAnimation(lastAttack.attackHashes, 2 * (1f / lastAttack.AttackAnims.animClip.frameRate),true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
     }

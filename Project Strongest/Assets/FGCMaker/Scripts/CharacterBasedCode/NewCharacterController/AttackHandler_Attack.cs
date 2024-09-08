@@ -428,7 +428,7 @@ public class AttackHandler_Attack : AttackHandler_Base
 public class HitCount
 {
     public int _count, _startCount;
-    [Range(0, 30)] public float _refreshRate, _startRefreshRate;
+    [Range(0, 30)] public int _refreshRate, _startRefreshRate;
     public void ResetRefresh()
     {
         _refreshRate = _startRefreshRate;

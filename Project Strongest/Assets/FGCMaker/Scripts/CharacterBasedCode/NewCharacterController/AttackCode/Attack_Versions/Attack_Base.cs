@@ -27,7 +27,7 @@ public class Attack_BaseProperties
     [Range(1, 50)] public int blockStunValue;
     [Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
-    [SerializeField] public List<int> attackHashes;
+    [SerializeField] public int attackHashes;
     [Space(20)]
     #endregion
 
@@ -57,9 +57,8 @@ public class Attack_BaseProperties
     public void SetAttackAnims(Character_Animator animator)
     {
         hitConnected = false;
-        attackHashes = new List<int>();
         AttackAnims.SetAttackAnim(animator);
-        attackHashes.Add(Animator.StringToHash(AttackAnims.animName));
+        attackHashes = Animator.StringToHash(AttackAnims.animName);
         SetChipDamageValue();
     }
     public void SetChipDamageValue()
@@ -71,8 +70,10 @@ public class Attack_BaseProperties
 [Serializable]
 public class Attack_StunValues
 {
+    [Header("Stun Values")]
     [Range(1, 100)] public int hitstunValue;
     [Range(0, 50)] public int blockStunValue;
+    [Header("Stop Values")]
     [Range(0, 20)] public int hitstopValue;
     [Range(0, 10)] public int blockStopValue;
 }
