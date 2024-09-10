@@ -266,7 +266,7 @@ public class HurtBox : CollisionDetection
             currentAttack.hitConnected = true;
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
             //await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
-            Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);
+            Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.attackMainStunValues.hitstunValue);
             //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
             currentHitbox.DestroyHitbox(currentHitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         }
@@ -283,7 +283,7 @@ public class HurtBox : CollisionDetection
             Base_Target._cHitController.ClearRecoveryRoutine();
         }
         Base_Attacker._aManager.ClearAttacks();
-        Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker, Base_Target,null);
+        Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, Base_Target,null);
         endingFunction();
         endingFunction = null;
     }
@@ -328,12 +328,12 @@ public class HurtBox : CollisionDetection
                 Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
                 if (BlockedAttack)
                 {
-                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
+                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
                 }
                 else
                 {
-                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.hitstopValue), Base_Attacker, Base_Target, applyForceAfterStop);
-                    Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.hitstunValue);
+                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, Base_Target, applyForceAfterStop);
+                    Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.attackMainStunValues.hitstunValue);
                 }
             }
             catch (Exception)

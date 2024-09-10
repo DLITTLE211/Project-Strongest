@@ -18,7 +18,7 @@ public class Player_SideManager : MonoBehaviour
         yield return new WaitUntil(() => _p2Position.thisPosition.ModelTransform != null);
         SetStartingFaceState();
     }
-    public void ForceSideSwitch() 
+    public void ForceSideSwitch(CustomCallback callback = null) 
     {
         SetStartingFaceState();
     }

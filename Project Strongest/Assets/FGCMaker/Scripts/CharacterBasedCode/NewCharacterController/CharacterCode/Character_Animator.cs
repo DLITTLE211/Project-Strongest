@@ -39,13 +39,6 @@ public class Character_Animator : MonoBehaviour
     Vector3 startPos;
     public Cancel_State currentAttackLevel;
 
-
-    [SerializeField] private HitPointCall _freezeCall;
-    [SerializeField] private HitPointCall _mobilityCall;
-    [SerializeField] private HitPointCall _attackCall;
-    public HitPointCall FreezeCall { get { return _freezeCall; } }
-    public HitPointCall MobilityCall { get { return _mobilityCall; } }
-    public HitPointCall AttackCall { get { return _attackCall; } }
     bool hitNewAnim;
     public bool customSuperHit;
     public IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
@@ -69,50 +62,6 @@ public class Character_Animator : MonoBehaviour
     {
         inRekkaState = state;
     }
- /*   void ApplyForceOnCustomCallback(CustomCallback callback)
-    {
-        if (_freezeCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
-            {
-                case HitPointCall.ToggleFreeze_Both:
-                    SetOpponentFreeze();
-                    SetSelfFreeze();
-                    break;
-                case HitPointCall.ToggleFreeze_Other:
-                    SetOpponentFreeze();
-                    break;
-                case HitPointCall.ToggleFreeze_Self:
-                    SetSelfFreeze();
-                    break;
-                case HitPointCall.UnFreeze:
-                    SetSelfUnfreeze();
-                    break;
-            }
-        }
-        if (_mobilityCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
-            {
-                case HitPointCall.ClearMobility:
-                    ClearLastActivatedInput();
-                    break;
-            }
-        }
-        if (_attackCall.HasFlag(callback.customCall))
-        {
-            switch (callback.customCall)
-            {
-                case HitPointCall.KillStance:
-                    ClearLastAttack();
-                    _base._cAttackTimer.SetTimerType();
-                    break;
-                case HitPointCall.ShootProjectile:
-                    ShootProjectile();
-                    break;
-            }
-        }
-    }*/
 
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false)
     {
@@ -147,19 +96,24 @@ public class Character_Animator : MonoBehaviour
     }
 
     #region AnimEvent Functions
-    public void SetOpponentFreeze()
+    public void SetOpponentFreeze(CustomCallback callback = null)
     {
         _base.opponentPlayer._cForce.HandleForceFreeze(true);
         _base.opponentPlayer._cHitstun.HandleAnimatorFreeze(true, 0.45f);
         _base.opponentPlayer._cGravity.HandleGravityFreeze(true);
     }
-    public void SetSelfFreeze()
+    public void SetSelfFreeze(CustomCallback callback = null)
     {
         
         _base._cHitstun.HandleAnimatorFreeze(true, 0.45f);
         _base._cGravity.HandleGravityFreeze(true);
     }
-    public void SetSelfUnfreeze()
+    public void FreezeBoth(CustomCallback callback = null) 
+    {
+        SetSelfFreeze();
+        SetOpponentFreeze();
+    }
+    public void SetSelfUnfreeze(CustomCallback callback = null)
     {
         _base._cForce.HandleForceFreeze(false);
         _base._cGravity.HandleGravityFreeze(false);

@@ -19,12 +19,11 @@ public class Character_DamageCalculator : MonoBehaviour
 
     [SerializeField] private TMP_Text _damageText;
     float damageTextAmount;
-    public HitPointCall customDamageCall;
     #region Damage Functions
-    public void TakeCustomDamage(CustomDamageField currentAttack, bool finalAttack)
+    public void TakeCustomDamage(CustomCallback callback = null)
     {
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
-        curRawDamage = currentAttack.rawAttackDamage;
+        curRawDamage = callback.customDamage.rawAttackDamage;
         if (CheckAfflictionState())
         {
             afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
@@ -46,7 +45,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-        _base._cHitController.ForceCustomLockAnim(currentAttack,finalAttack);
+        _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
     }
     public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked, bool armoredAttack = false)
     {
@@ -94,7 +93,7 @@ public class Character_DamageCalculator : MonoBehaviour
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
         if (!armoredAttack)
         {
-            _base._cHitController.HandleHitState(currentAttack, currentAttack.hitstunValue, calculatedScaling, false);
+            _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.hitstunValue, calculatedScaling, false);
         }
         ApplyScalingForNextAttack(currentAttack);
     }
@@ -116,7 +115,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-        _base._cHitController.HandleHitState(currentAttack, currentAttack.blockStunValue, calculatedScaling, true);
+        _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
     }
     #endregion
 

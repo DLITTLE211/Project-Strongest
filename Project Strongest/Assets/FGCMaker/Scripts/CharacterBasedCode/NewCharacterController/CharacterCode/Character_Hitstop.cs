@@ -30,7 +30,7 @@ public class Character_Hitstop : MonoBehaviour
         float actualWaitTime = rateOfIncrease * oneFrame;
         attacker._cAnimator.SetSelfFreeze();
         target._cAnimator.SetSelfFreeze();
-        _cameraController.CallCameraShake(rateOfIncrease, lastAttack.hitstopValue);
+        _cameraController.CallCameraShake(rateOfIncrease, lastAttack.attackMainStunValues.hitstopValue);
         while (actualWaitTime > 0)
         {
             actualWaitTime -= (oneFrame);

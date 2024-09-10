@@ -12,6 +12,7 @@ public class Character_Base : MonoBehaviour
     public Character_Profile characterProfile;
     [Space(20)]
     #endregion
+
     #region Script References
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
     public Character_Hitstop _cHitstop;
@@ -40,7 +41,6 @@ public class Character_Base : MonoBehaviour
     public Character_Timer _timer;
     [Space(20)]
     #endregion
-
 
     #region Rewired Controls
     [Header("__________REWIRED CONTROLS__________")]
@@ -135,6 +135,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
+    private Dictionary<HitPointCall, Callback<CustomCallback>> mainCallbackDictionary = new Dictionary<HitPointCall, Callback<CustomCallback>>();
     private bool hitWallCheck;
     public bool awaitCondition;
 
@@ -204,6 +205,7 @@ public class Character_Base : MonoBehaviour
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();
         _extraMoveAsset = characterProfile._CharacterMobility;
+        SetMainCustomCallbackDictionary();
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier)
     {
@@ -351,6 +353,37 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
+
+    public void SetMainCustomCallbackDictionary() 
+    {
+        mainCallbackDictionary.Add(HitPointCall.ShootProjectile,null);
+
+        mainCallbackDictionary.Add(HitPointCall.Force_Right, _cForce.AddLateralForceOnCommand);
+        mainCallbackDictionary.Add(HitPointCall.Force_Up, _cForce.AddVerticalForceOnCommand);
+        mainCallbackDictionary.Add(HitPointCall.TeleportForward, _cForce.TeleportOnCommand);
+        mainCallbackDictionary.Add(HitPointCall.TeleportBackward, _cForce.TeleportOnCommand);
+
+        //mainCallbackDictionary.Add(HitPointCall.KillStance, null);
+
+        mainCallbackDictionary.Add(HitPointCall.ToggleArmor, null);
+        mainCallbackDictionary.Add(HitPointCall.ToggleInvincible, null);
+        mainCallbackDictionary.Add(HitPointCall.ToggleAntiAir, null);
+
+        //mainCallbackDictionary.Add(HitPointCall.ActivateMobilityAction, null);
+        //mainCallbackDictionary.Add(HitPointCall.ClearMobility, null);
+
+        mainCallbackDictionary.Add(HitPointCall.UnFreeze, _cAnimator.SetSelfUnfreeze);
+        mainCallbackDictionary.Add(HitPointCall.ToggleFreeze_Self, _cAnimator.SetSelfFreeze);
+        mainCallbackDictionary.Add(HitPointCall.ToggleFreeze_Other, _cAnimator.SetOpponentFreeze);
+        mainCallbackDictionary.Add(HitPointCall.ToggleFreeze_Both, _cAnimator.FreezeBoth);
+
+        mainCallbackDictionary.Add(HitPointCall.PanPosOnTarget, null);
+        mainCallbackDictionary.Add(HitPointCall.PanRotateOnTarget, null);
+        mainCallbackDictionary.Add(HitPointCall.PanZoomOnTarget, null);
+
+        mainCallbackDictionary.Add(HitPointCall.DealCustomDamage, opponentPlayer._cDamageCalculator.TakeCustomDamage);
+        mainCallbackDictionary.Add(HitPointCall.ForceSideSwitch, _sideManager.ForceSideSwitch);
+    }
     #endregion
 
     public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
@@ -366,80 +399,20 @@ public class Character_Base : MonoBehaviour
     {
         if (waitingCheck == null)
         {
-            if (_cDamageCalculator.customDamageCall.HasFlag(callback.customCall))
+            Callback<CustomCallback> dictionaryFunc = null;
+            if (mainCallbackDictionary.TryGetValue(callback.customCall , out dictionaryFunc)) 
             {
-                switch (callback.customCall)
-                {
-                    case HitPointCall.DealCustomDamage:
-                        opponentPlayer._cDamageCalculator.TakeCustomDamage(callback.customDamage, callback.customDamage.isFinalAttack);
-                        break;
-                }
-            }
-            if (_cForce.ForceCall.HasFlag(callback.customCall))
-            {
-                switch (callback.customCall)
-                {
-                    case HitPointCall.Force_Right:
-                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                        break;
-                    case HitPointCall.Force_Up:
-                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                        break;
-                    case HitPointCall.TeleportForward:
-                        _cForce.TeleportOnCommand(callback.forceFloat);
-                        break;
-                    case HitPointCall.TeleportBackward:
-                        _cForce.TeleportOnCommand(-callback.forceFloat);
-                        break;
-                }
-            }
-            if (_cAnimator.AttackCall.HasFlag(callback.customCall))
-            {
-                switch (callback.customCall)
-                {
-                    case HitPointCall.Force_Right:
-                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                        break;
-                    case HitPointCall.Force_Up:
-                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                        break;
-                }
+                dictionaryFunc(callback);
+                return;
             }
         }
         else 
         {
-            if (_cDamageCalculator.customDamageCall.HasFlag(waitingCheck.awaitingCheck))
+            Callback<CustomCallback> dictionaryFunc = null;
+            if (mainCallbackDictionary.TryGetValue(waitingCheck.awaitingCheck, out dictionaryFunc))
             {
-                switch (waitingCheck.awaitingCheck)
-                {
-                    case HitPointCall.DealCustomDamage:
-                        opponentPlayer._cDamageCalculator.TakeCustomDamage(callback.customDamage, callback.customDamage.isFinalAttack);
-                        break;
-                }
-            }
-            if (_cForce.ForceCall.HasFlag(waitingCheck.awaitingCheck))
-            {
-                switch (waitingCheck.awaitingCheck)
-                {
-                    case HitPointCall.Force_Right:
-                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                        break;
-                    case HitPointCall.Force_Up:
-                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                        break;
-                }
-            }
-            if (_cAnimator.AttackCall.HasFlag(waitingCheck.awaitingCheck))
-            {
-                switch (waitingCheck.awaitingCheck)
-                {
-                    case HitPointCall.Force_Right:
-                        _cForce.AddLateralForceOnCommand(callback.forceFloat);
-                        break;
-                    case HitPointCall.Force_Up:
-                        _cForce.AddVerticalForceOnCommand(callback.forceFloat);
-                        break;
-                }
+                dictionaryFunc(callback);
+                return;
             }
         }
     }

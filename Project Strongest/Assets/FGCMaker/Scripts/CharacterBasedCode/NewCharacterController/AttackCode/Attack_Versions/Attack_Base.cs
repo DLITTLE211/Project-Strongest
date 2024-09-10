@@ -23,9 +23,9 @@ public class Attack_BaseProperties
 
     public Attack_StunValues attackMainStunValues;
     [Space(20)]
-    [Range(1, 20)] public int hitstopValue;
-    [Range(1, 50)] public int blockStunValue;
-    [Range(1, 200)] public int hitstunValue;
+    //[Range(1, 20)] public int hitstopValue;
+    //[Range(1, 50)] public int blockStunValue;
+    //[Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
     [SerializeField] public int attackHashes;
     [Space(20)]

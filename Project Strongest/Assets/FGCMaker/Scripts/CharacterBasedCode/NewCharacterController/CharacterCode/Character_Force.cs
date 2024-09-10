@@ -26,10 +26,7 @@ public class Character_Force : MonoBehaviour
     [SerializeField] private float xVal, yVal;
     [SerializeField] private Rigidbody _myRB => _base.myRb;
     [SerializeField] private Player_SideRecognition _side => _base.pSide;
-    [SerializeField] private HitPointCall forceHitCall;
-    [SerializeField] private HitPointCall teleportCall;
-    public HitPointCall ForceCall {get { return forceHitCall; }}
-    public HitPointCall TeleportCall { get { return teleportCall; }}
+
     private float jumpSpeed;
     private float forwardSpeed;
     [SerializeField] bool isFrozen;
@@ -49,33 +46,7 @@ public class Character_Force : MonoBehaviour
     public bool CanSendForce()
     {
         return !sendingForce;
-    }/*
-    void ApplyForceOnCustomCallback(CustomCallback callback) 
-    {
-        if (forceHitCall.HasFlag(callback.customCall)) 
-        {
-            switch (callback.customCall) 
-            {
-                case HitPointCall.Force_Up:
-                    AddVerticalForceOnCommand(callback.forceFloat);
-                    break;
-                case HitPointCall.Force_Right:
-                    AddLateralForceOnCommand(callback.forceFloat);
-                    break;
-            }
-        }
-        if (teleportCall.HasFlag(callback.customCall))
-        {
-            if (callback.customCall == HitPointCall.TeleportForward) 
-            {
-                TeleportOnCommand(callback.forceFloat);
-            }
-            if (callback.customCall == HitPointCall.TeleportBackward)
-            {
-                TeleportOnCommand(-callback.forceFloat);
-            }
-        }
-    }*/
+    }
     private void Update()
     {
         if (_base._cAnimator != null)
@@ -198,6 +169,46 @@ public class Character_Force : MonoBehaviour
             beingPushed = false;
         }
     }
+    #region Callback Functions
+    public void AddLateralForceOnCommand(CustomCallback callback = null)
+    {
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            callback.forceFloat *= -1;
+        }
+        _myRB.AddForce(transform.right * callback.forceFloat, ForceMode.VelocityChange);
+        if (beingPushed)
+        {
+            beingPushed = false;
+        }
+    }
+    public void AddVerticalForceOnCommand(CustomCallback callback = null)
+    {
+        _myRB.AddForce(transform.up * callback.forceFloat, ForceMode.VelocityChange);
+    }
+    public void TeleportOnCommand(CustomCallback callback = null)
+    {
+        Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ?
+            new Vector3(_myRB.transform.position.x + -callback.forceFloat, _myRB.transform.position.y, _myRB.transform.position.z) :
+            new Vector3(_myRB.transform.position.x + callback.forceFloat, _myRB.transform.position.y, _myRB.transform.position.z);
+        if (!GameManager.instance.CheckWallGreaterPos(ref newPos))
+        {
+            float opponentX = _base.opponentPlayer._cForce._myRB.transform.localPosition.x;
+            float bias;
+            if (GetBiasForTeleportPos(newPos.x, opponentX, out bias))
+            {
+                if (bias != 0)
+                {
+                    newPos = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ?
+                       new Vector3(opponentX + bias, _myRB.transform.position.y, _myRB.transform.position.z) :
+                       new Vector3(opponentX - bias, _myRB.transform.position.y, _myRB.transform.position.z);
+                }
+            }
+        }
+        _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
+    }
+    #endregion
     public void InstantForceAway(float value, bool forceDirection = false)
     {
         if (!forceDirection)
