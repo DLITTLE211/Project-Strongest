@@ -296,7 +296,12 @@ public class Attack_Manager : MonoBehaviour
             }
             if (lastState.cancelTo == Cancel_State.Super_Attack)
             {
-                if (newAttack == Combo[Combo.Count - 1])
+                int lastInputtedAttackIndex = Combo.Count - 2;
+                if(lastInputtedAttackIndex <= 0) 
+                {
+                    return true;
+                }
+                if (newAttack == Combo[lastInputtedAttackIndex])
                 {
                     return false;
                 }

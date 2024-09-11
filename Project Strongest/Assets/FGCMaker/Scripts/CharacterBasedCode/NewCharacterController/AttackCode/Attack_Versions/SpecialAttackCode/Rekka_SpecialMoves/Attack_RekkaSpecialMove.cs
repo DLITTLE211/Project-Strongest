@@ -79,11 +79,19 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         usedRekkas.Add(newProperty);
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, leewayTime);
         _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess));
+    
     }
     public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 
     {
         SendAttackOnSucess();
         _curBase.comboList3_0.SetFollowAttack(newProperty);
+        if (newProperty.cancelProperty.cancelTo != Cancel_State.Rekka_Input_FollowUp)
+        {
+            //_curBase._aManager.ClearAttacks();
+            _curBase._cAttackTimer.SetTimerType(TimerType.Special, 1 / 60f);
+            //_curBase._cComboDetection.ResetCombos();
+            _curBase._cAttackTimer.CheckForInput = true;
+        }
     }
     public void PreformAttack(Callback SendAttackOnSucess)
     {

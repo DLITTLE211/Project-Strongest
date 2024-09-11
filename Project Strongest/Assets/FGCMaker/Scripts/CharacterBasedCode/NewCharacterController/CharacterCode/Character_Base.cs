@@ -67,7 +67,6 @@ public class Character_Base : MonoBehaviour
     public List<Character_Mobility> _extraMoveControls;
     public HitPointCall activationCall;
     [SerializeField] public float xVal, yVal;
-    //[SerializeField, Range(0f, 1f)] public float xYield, yYield;
     public ControllerYield controllerYield;
     [SerializeField] public int numpadValue;
     [SerializeField] public Vector2 numpadVector;
@@ -136,7 +135,6 @@ public class Character_Base : MonoBehaviour
 
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
     private Dictionary<HitPointCall, Callback<CustomCallback>> mainCallbackDictionary = new Dictionary<HitPointCall, Callback<CustomCallback>>();
-    private bool hitWallCheck;
     public bool awaitCondition;
 
     [SerializeField]
@@ -553,25 +551,6 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
-    /*IEnumerator AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback)
-    {
-        if (awaitEnums.ContainsKey(customBoolAwait.awaitEnum.keyRef))
-        {
-            AwaitCheck stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
-            awaitCondition = false;
-            while (!stateCheck.testCall(stateCheck.check) && _cAnimator.lastAttack != null)
-            {
-                CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
-                yield return new WaitForSeconds(1 / 60f);
-            }
-            awaitCondition = true;
-
-            if (_cAnimator.lastAttack != null && superIteratorCallback != null)
-            {
-                superIteratorCallback();
-            }
-        }
-    }*/
 }
 [Serializable]
 public class ButtonInput

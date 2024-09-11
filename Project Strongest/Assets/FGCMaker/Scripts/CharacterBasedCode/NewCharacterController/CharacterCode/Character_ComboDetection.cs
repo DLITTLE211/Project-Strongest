@@ -16,6 +16,12 @@ public class Character_ComboDetection : MonoBehaviour
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
+    public string stringRef;
+
+    private void Update()
+    {
+        stringRef = currentInput.specialMoveTypeInput.attackString;
+    }
     private void Start()
     {
         canCheckMovement = false;
@@ -70,6 +76,7 @@ public class Character_ComboDetection : MonoBehaviour
     }
     void AddToCurrentInput(int direction, Character_ButtonInput attack = null)
     {
+        currentInput.ClearFirstIndex();
         if (attack != null)
         {
             currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing, attack, _base._cHurtBox.IsGrounded());
@@ -99,9 +106,7 @@ public class Character_ComboDetection : MonoBehaviour
             if (followUpAttackIndex >= 0)
             {
                 ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(lastAddedinput,followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
-
             }
-
         }
         else
         {
@@ -119,11 +124,15 @@ public class Character_ComboDetection : MonoBehaviour
                         FullMovelistCheck();
                     }
                 }
-                else
+                if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Rekka)
                 {
                     if (followUpAttackIndex > -1)
                     {
                         ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                    }
+                    else
+                    {
+                        FullMovelistCheck();
                     }
                 }
             }

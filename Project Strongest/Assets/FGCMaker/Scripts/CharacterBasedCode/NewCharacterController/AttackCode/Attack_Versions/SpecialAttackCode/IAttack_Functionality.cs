@@ -47,17 +47,23 @@ public class AttackInputTypes
     }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide)
     {
-        if (specialMoveTypeInput.attackString.Length >= 8)
-        {
-            specialMoveTypeInput.attackString = specialMoveTypeInput.attackString.Remove(0, 1);
-        }
-        if (faceSide == Character_Face_Direction.FacingLeft) 
+
+        if (faceSide == Character_Face_Direction.FacingLeft)
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(directionalInput);
             specialMoveTypeInput.attackString += alteredInput.ToString();
-            return;
         }
-        specialMoveTypeInput.attackString += directionalInput.ToString();
+        else
+        {
+            specialMoveTypeInput.attackString += directionalInput.ToString();
+        }
+    }
+    public void ClearFirstIndex() 
+    {
+        if (specialMoveTypeInput.attackString.Length >= 10)
+        {
+            specialMoveTypeInput.attackString = specialMoveTypeInput.attackString.Remove(0, 1);
+        }
     }
     public void AddAttackInput(int lastDirection, Character_Face_Direction faceSide, Character_ButtonInput attackInput, bool groundState)
     {
