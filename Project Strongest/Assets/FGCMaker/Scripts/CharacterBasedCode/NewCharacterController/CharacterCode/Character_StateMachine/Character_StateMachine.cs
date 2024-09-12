@@ -80,7 +80,7 @@ public class Character_StateMachine : MonoBehaviour
         At(Hitstate, CrouchState, new Predicate(() => At_2Crouch()));
         At(DashState, CrouchState, new Predicate(() => At_2Crouch()));
 
-        At(AttackState, Hitstate, new Predicate(() => checkAttackValue(Character_Animator.lastAttackState.nullified) && At_2Crouch()));
+        At(AttackState, Hitstate, new Predicate(() => checkAttackValue(lastAttackState.nullified) && At_2Crouch()));
         At(IdleState, Hitstate, new Predicate(() => ToHitState()));
         At(JumpState, Hitstate, new Predicate(() => ToHitState()));
         At(MoveState, Hitstate, new Predicate(() => ToHitState()));
@@ -150,7 +150,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking = false;
         bool _currentInput = false;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
 
         if (_base._subState != Character_SubStates.Controlled)
         {
@@ -170,7 +170,7 @@ public class Character_StateMachine : MonoBehaviour
         bool notRecovering = _base._cHitController.ReturnCrouchBlock() || _base._cHitController.ReturnStandBlock();
         bool _currentInput = true;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
 
         if (_base._subState != Character_SubStates.Controlled)
         {
@@ -199,7 +199,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking;
         bool _currentInput;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -277,7 +277,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _inRekkaOrStance = _base._cAnimator.inStanceState || _base._cAnimator.inRekkaState;
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -312,7 +312,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _canTransitionIdle = _base._cAnimator.canTransitionIdle;
         inputtedDash = CheckLastMovementValue();
-        lastAttackValue = checkAttackValue(Character_Animator.lastAttackState.nullified);
+        lastAttackValue = checkAttackValue(lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -344,7 +344,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput;
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(Character_Animator.lastAttackState.nullified);
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -406,7 +406,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isHit = _base._cAnimator.isHit;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _isBlocking;
-        bool _isLastMovePopulated = checkMovementValue(Character_Animator.lastMovementState.nullified);
+        bool _isLastMovePopulated = checkMovementValue(lastMovementState.nullified);
         bool _currentInput;
         try
         {
@@ -441,7 +441,7 @@ public class Character_StateMachine : MonoBehaviour
         bool populatedMove;
         isHit = _base._cAnimator.isHit;
         inputtedDash = CheckLastMovementValue();
-        populatedMove = _base._cAnimator._lastMovementState == Character_Animator.lastMovementState.populated;
+        populatedMove = _base._cAnimator._lastMovementState == lastMovementState.populated;
         if (_base._subState != Character_SubStates.Controlled)
         {
             return false;
@@ -459,7 +459,7 @@ public class Character_StateMachine : MonoBehaviour
         bool isHit;
         bool lastAttackValue;
         isHit = _base._cAnimator.isHit;
-        lastAttackValue =checkAttackValue(Character_Animator.lastAttackState.populated);
+        lastAttackValue =checkAttackValue(lastAttackState.populated);
         if (_base._subState != Character_SubStates.Controlled)
         {
             return false;
@@ -476,18 +476,18 @@ public class Character_StateMachine : MonoBehaviour
     }
 
     #region Individual Boolean Checks
-    bool checkMovementValue(Character_Animator.lastMovementState desiredState)
+    bool checkMovementValue(lastMovementState desiredState)
     {
         return _base._cAnimator._lastMovementState == desiredState;
     }
 
-    bool checkAttackValue(Character_Animator.lastAttackState desiredState)
+    bool checkAttackValue(lastAttackState desiredState)
     {
         if (_base._subState != Character_SubStates.Controlled)
         {
             return true;
         }
-        if (desiredState == Character_Animator.lastAttackState.nullified) 
+        if (desiredState == lastAttackState.nullified) 
         {
             return _base._cAnimator._lastAttackState == desiredState || _base._aManager.Combo.Count == 0;
         }
@@ -515,9 +515,9 @@ public class Character_StateMachine : MonoBehaviour
         }
         if(_base.ReturnMovementInputs().Button_State.directionalInput >= 7 && _base._cHurtBox.IsGrounded() == true) 
         {
-            return true && (checkMovementValue(Character_Animator.lastMovementState.nullified));//|| _base._aManager.Combo.Count == 0);
+            return true && (checkMovementValue(lastMovementState.nullified));//|| _base._aManager.Combo.Count == 0);
         }
-        return (_base.ReturnMovementInputs().Button_State.directionalInput == 5 && _base._cHurtBox.IsGrounded() == true && checkMovementValue(Character_Animator.lastMovementState.nullified));
+        return (_base.ReturnMovementInputs().Button_State.directionalInput == 5 && _base._cHurtBox.IsGrounded() == true && checkMovementValue(lastMovementState.nullified));
     }
     #endregion
     #endregion

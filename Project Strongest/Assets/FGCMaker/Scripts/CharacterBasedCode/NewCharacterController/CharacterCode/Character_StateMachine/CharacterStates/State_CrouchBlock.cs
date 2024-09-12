@@ -53,7 +53,7 @@ public class State_CrouchBlock : BaseState
         {
             _base._cAnimator.canBlock = false;
         }
-        if (_base._cAnimator._lastMovementState != Character_Animator.lastMovementState.nullified)
+        if (_base._cAnimator._lastMovementState != lastMovementState.nullified)
         {
            // _base._cAnimator.NullifyMobilityOption();
         }

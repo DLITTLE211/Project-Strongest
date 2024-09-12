@@ -19,9 +19,7 @@ public class Character_Animator : MonoBehaviour
     #region Enums
     [Header("Enums")]
     public lastMovementState _lastMovementState;
-    public enum lastMovementState { nullified, populated };
     public lastAttackState _lastAttackState;
-    public enum lastAttackState { nullified, populated };
     #endregion
 
     [SerializeField] public Character_Mobility activatedInput;
@@ -380,4 +378,16 @@ public class Character_Animator : MonoBehaviour
         }
     }
     #endregion
+}
+[Serializable]
+public enum lastAttackState 
+{
+    nullified, 
+    populated
+}
+[Serializable]
+public enum lastMovementState 
+{ 
+    nullified, 
+    populated 
 }

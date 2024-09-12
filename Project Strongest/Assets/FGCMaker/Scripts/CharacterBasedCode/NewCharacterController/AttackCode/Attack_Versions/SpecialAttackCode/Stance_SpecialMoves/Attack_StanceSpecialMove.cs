@@ -132,7 +132,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         {
             _curBase.awaitCondition = true;
         }
-        _curBase._cAnimator._lastAttackState = Character_Animator.lastAttackState.nullified;
+        _curBase._cAnimator._lastAttackState = lastAttackState.nullified;
          inStanceState = false;
     }
 

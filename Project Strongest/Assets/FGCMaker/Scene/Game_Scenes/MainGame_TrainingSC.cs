@@ -48,10 +48,11 @@ public class MainGame_TrainingSC : MainGame_SettingsController
     }
     private async Task LandingCheck() 
     {
-        while (!mainPlayer._cHurtBox.IsGrounded() && !secondaryPlayer._cHurtBox.IsGrounded()) 
-        {
-            await Task.Yield();
-        }
+        await mainPlayer.ResetPlayerOnTeleport();
+        await secondaryPlayer.ResetPlayerOnTeleport();
+
+        mainPlayer._cStateMachine.idleStateRef.OnEnter();
+        secondaryPlayer._cStateMachine.idleStateRef.OnEnter();
     }
     IEnumerator TeleportTweenController(Vector3 pos1, Vector3 pos2)
     {

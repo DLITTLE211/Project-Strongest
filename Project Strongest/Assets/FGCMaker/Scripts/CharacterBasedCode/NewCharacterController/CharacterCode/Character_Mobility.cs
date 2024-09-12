@@ -168,7 +168,7 @@ public class Character_Mobility : IMobility
     {
         if (curBase._cHurtBox.IsGrounded() == true && curBase._cForce.CanSendForce())
         {
-            if (curBase._cAnimator._lastMovementState == Character_Animator.lastMovementState.nullified)
+            if (curBase._cAnimator._lastMovementState == lastMovementState.nullified)
             {
                 if (mobilityAnim._customMobilityCallBacks.Count <= 0)
                 {

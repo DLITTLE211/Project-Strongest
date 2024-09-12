@@ -499,7 +499,7 @@ public class Character_Base : MonoBehaviour
         {
             yield return new WaitForSeconds(1f / 60f);
         }
-        if (_cAnimator._lastAttackState == Character_Animator.lastAttackState.populated)
+        if (_cAnimator._lastAttackState == lastAttackState.populated)
         {
             _cAnimator.canTransitionIdle = false;
         }
@@ -550,6 +550,19 @@ public class Character_Base : MonoBehaviour
                 superIteratorCallback();
             }
         }
+    }
+    public async Task ResetPlayerOnTeleport() 
+    {
+        awaitCondition = true;
+        _cComboDetection.ResetCombos();
+        _aManager.ResetMoveHierarchy();
+        _cAttackTimer.SetTimerType();
+        _aManager.ClearAttacks();
+        _cAnimator.CountUpNegativeFrames(0);
+        _cAnimator.lastAttack = null;
+        _cAnimator.canTransitionIdle = true;
+        _cAnimator._lastAttackState = lastAttackState.nullified;
+        await Task.Delay(50);
     }
 }
 [Serializable]

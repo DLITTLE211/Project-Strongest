@@ -28,6 +28,7 @@ public class State_CustomSuper : BaseState
     public override void OnExit()
     {
         _base._cComboDetection.inSuper = false;
+
         _base._cAttackTimer.SetTimerType(TimerType.Normal);
         base.OnExit();
     }

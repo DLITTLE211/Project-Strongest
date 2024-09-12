@@ -135,7 +135,7 @@ public class Character_Force : MonoBehaviour
     #endregion
     public void SetWalkForce(Character_ButtonInput dInput)
     {
-        if (_base._cAnimator._lastAttackState == Character_Animator.lastAttackState.nullified)
+        if (_base._cAnimator._lastAttackState == lastAttackState.nullified)
         {
             switch (dInput.Button_State.directionalInput)
             {
