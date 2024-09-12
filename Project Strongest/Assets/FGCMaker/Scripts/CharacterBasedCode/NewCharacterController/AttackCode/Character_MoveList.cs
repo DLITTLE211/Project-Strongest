@@ -48,6 +48,18 @@ public class Character_MoveList : MonoBehaviour
         Debug.LogError("Re-Assigned Attack Value in setcurrentattack");
         currentAttack = newAttack;
     }
+    public IAttackFunctionality ReturnCurrentAttack() 
+    {
+        return currentAttack.Value;
+    }
+    public MoveType GetCurrentActiveMoveType() 
+    {
+        if(currentAttack.Value != null) 
+        {
+            return currentAttack.Value.GetAttackMoveType();
+        }
+        return (MoveType)0;
+    }
     public void SetFollowAttack(Attack_BaseProperties _followUp)
     {
         followUp = _followUp;

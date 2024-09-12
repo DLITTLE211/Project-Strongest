@@ -87,9 +87,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         _curBase.comboList3_0.SetFollowAttack(newProperty);
         if (newProperty.cancelProperty.cancelTo != Cancel_State.Rekka_Input_FollowUp)
         {
-            //_curBase._aManager.ClearAttacks();
-            _curBase._cAttackTimer.SetTimerType(TimerType.Special, 1 / 60f);
-            //_curBase._cComboDetection.ResetCombos();
+            _curBase._cAttackTimer.SetTimerType(TimerType.Special,0.7f);
             _curBase._cAttackTimer.CheckForInput = true;
         }
     }

@@ -14,7 +14,7 @@ public class StageWallColliderIgnore : MonoBehaviour
         if (collision.gameObject.tag == "CollisionBox" || collision.gameObject.tag == "PCharacter")
         {
             playerHitEndWall = true;
-            collision.gameObject.GetComponentInParent<Character_Base>()._cForce.AddLateralForceOnCommand(2);
+           // collision.gameObject.GetComponentInParent<Character_Base>()._cForce.AddLateralForceOnCommand(2);
         }
     }
     private void OnCollisionStay(Collision collision)

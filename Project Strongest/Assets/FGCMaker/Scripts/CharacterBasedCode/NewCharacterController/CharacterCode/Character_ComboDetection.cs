@@ -52,8 +52,6 @@ public class Character_ComboDetection : MonoBehaviour
             if (_base._cAnimator.inputWindowOpen)
             {
                 _base._cAttackTimer.CheckForInput = true;
-                // SpecialInputVerifier(input);
-                //SimpleInputVerifier(input);
                 lastAddedinput = input;
                 AddToCurrentInput(lastInput, input);
             }
@@ -68,7 +66,6 @@ public class Character_ComboDetection : MonoBehaviour
                     _base._cAttackTimer.ResetTimerSuccess();
                 }
                 lastInput = input.Button_State.directionalInput;
-                // SpecialInputVerifier(input);
                 AddToCurrentInput(lastInput);
             }
             ExtraMovementVerifier(input);
@@ -126,6 +123,11 @@ public class Character_ComboDetection : MonoBehaviour
                 }
                 if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Rekka)
                 {
+                    IAttackFunctionality newInputtedSpecial = SpecialMoveOnlyCheck();
+                    if (newInputtedSpecial != null)
+                    {
+                        return;
+                    }
                     if (followUpAttackIndex > -1)
                     {
                         ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
@@ -137,6 +139,41 @@ public class Character_ComboDetection : MonoBehaviour
                 }
             }
         }
+    }
+    IAttackFunctionality SpecialMoveOnlyCheck() 
+    {
+        if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
+        {
+            KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
+            refAttackType = SpecialMovePreliminaryCheck(currentInput);
+            if (refAttackType.Value != null && refAttackType.Value != _base.comboList3_0.ReturnCurrentAttack())
+            {
+                MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
+                if (_base._aManager.MoveTypeHierarchy > indexMoveType)
+                {
+                    Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
+                    return null;
+                }
+                else
+                {
+                    refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                    if (followUpInputMoveTypes.Contains(refAttackType.Value.GetAttackMoveType()))
+                    {
+                        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
+                    }
+                    else
+                    {
+                        ResetCombos();
+                    }
+                    Debug.Log("attack found");
+                    return refAttackType.Value;
+                }
+            }
+            Debug.Log("attack not found");
+            return null;
+        }
+        return null;
+
     }
     void FullMovelistCheck() 
     {
@@ -198,6 +235,7 @@ public class Character_ComboDetection : MonoBehaviour
                             if (keyRef.Contains(attackButton)) 
                             {
                                 keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                                key.specialMoveTypeInput.attackString = keyRef;
                                 return entry;
                             }
                         }
@@ -206,17 +244,52 @@ public class Character_ComboDetection : MonoBehaviour
             }
             else
             {
-                if (entry.Key.normalAirAttackInfo == key.keyGroundCheck)
-                {
-                    if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
+                if ((int)_base.comboList3_0.GetCurrentActiveMoveType() <=3) {
+                    if (entry.Key.normalAirAttackInfo == key.keyGroundCheck)
                     {
-                        string normalButton = entry.Key.normalTypeInput[0].Substring(entry.Key.normalTypeInput[0].Length-1);
-                        int normalButtonIndex = key.specialMoveTypeInput.attackString.IndexOf(normalButton);
-                        string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
-                        key.specialMoveTypeInput.attackString = clearAttackButton;
-                        key.currentAttackInput = key.currentAttackInput.Remove(key.currentAttackInput.IndexOf(entry.Key.normalTypeInput[0]), entry.Key.normalTypeInput[0].Length);
-                        Debug.Log(entry.Value);
-                        return entry;
+                        if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
+                        {
+                            string normalButton = entry.Key.normalTypeInput[0].Substring(entry.Key.normalTypeInput[0].Length - 1);
+                            int normalButtonIndex = key.specialMoveTypeInput.attackString.IndexOf(normalButton);
+                            string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
+                            //key.specialMoveTypeInput.attackString = clearAttackButton;
+                            key.currentAttackInput = "";
+                            Debug.Log(entry.Value);
+                            return entry;
+                        }
+                    }
+                }
+            }
+            continue;
+        }
+        entry = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(key, null);
+        return entry;
+    }
+    private KeyValuePair<AttackInputTypes, IAttackFunctionality> SpecialMovePreliminaryCheck(AttackInputTypes key) 
+    {
+        KeyValuePair<AttackInputTypes, IAttackFunctionality> entry = new KeyValuePair<AttackInputTypes, IAttackFunctionality>();
+        for (int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
+        {
+            entry = _base.CharacterMoveListAttacks.ElementAt(i);
+            if ((int)entry.Value.GetAttackMoveType() > 3)
+            {
+                if (entry.Key.specialMoveTypeInput != null)
+                {
+                    string moveInDict = entry.Key.specialMoveTypeInput.attackString;
+                    string keyRef = key.specialMoveTypeInput.attackString;
+                    if (entry.Key.specialMoveTypeInput.attackString.Length > 0)
+                    {
+                        string attackButton = moveInDict.Substring(moveInDict.Length - 1);
+                        string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
+                        if (keyRef.Contains(movementOnlyString))
+                        {
+                            int motionEndIndex = keyRef.IndexOf(movementOnlyString[0]);
+                            keyRef = keyRef.Substring(motionEndIndex);
+                            if (keyRef.Contains(attackButton))
+                            {
+                                return entry;
+                            }
+                        }
                     }
                 }
             }
@@ -246,6 +319,7 @@ public class Character_ComboDetection : MonoBehaviour
 
                 if (keyInput.currentAttackInput.Contains(stringCheck))
                 {
+                    keyInput.currentAttackInput = "";
                     return 1;
                 }
             }
@@ -267,6 +341,7 @@ public class Character_ComboDetection : MonoBehaviour
                     Comparison = Comparison.Remove(0, 1);
                     if (KeyString.Contains(Comparison))
                     {
+                        keyInput.currentAttackInput = "";
                         return i;
                     }
                 }
