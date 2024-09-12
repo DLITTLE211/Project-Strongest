@@ -13,7 +13,7 @@ public class Character_SuperMeter : MonoBehaviour
 
     public float meterTier;
     public float fullMeterLevel;
-    public const float maxMeterLevel = 90;
+    public const float maxMeterLevel = 120;
     public const float meterMaxThreshold = 30;
     // Start is called before the first frame update
     void Start()
@@ -24,15 +24,19 @@ public class Character_SuperMeter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            IncreaseMeterValue(10);
+            IncreaseMeterValue(30);
         }
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            IncreaseMeterValue(20);
+            IncreaseMeterValue(60);
         }
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            IncreaseMeterValue(30);
+            IncreaseMeterValue(90);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            IncreaseMeterValue(120);
         }
     }
     void SetStartValue()
@@ -75,7 +79,7 @@ public class Character_SuperMeter : MonoBehaviour
         }
         else
         {
-            meterTier = 3;
+            meterTier = 4;
             SetMeterTierText();
             superMeter.currentValue = meterMaxThreshold;
             fullMeterLevel = maxMeterLevel;
