@@ -5,83 +5,95 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class TrainingMenu_Controller : MonoBehaviour
-{
+{ 
     [SerializeField] private Transform buttonSpawnPoint;
     [SerializeField] private GameObject spawnedButton;
-    [SerializeField] private Button trainingButtons;
     [SerializeField] private List<TrainingButtonObject> trainingButtonDictionary = new List<TrainingButtonObject>();
+    List<(string,UnityAction)> funcList;
     // Start is called before the first frame update
     void Start()
     {
-        SetupTraininButtons();
+        
     }
-    void SetupTraininButtons() 
+    public TrainingButtonObject ReturnTopButton() 
     {
-        for(int i = 0; i < 6; i++) 
+        return trainingButtonDictionary[0];
+    }
+    public void SetupTrainingButtons()
+    {
+        funcList = new List<(string, UnityAction)>()
+        {
+            ("Health Settings",() => ActivateHealthMenu()),
+            ("Meter Settings",() => ActivateMeterMenu()),
+            ("Dummy Settings",() => ActivateDummySettingsMenu()),
+            ("Info Display",() => ActivateInfoDisplayMenu()),
+            ("Move Lists",() => ActivateMoveListMenu()),
+            ("Character Select",() => ReturnToCharacterSelect()),
+            ("Main Menu",() => ReturnToMainMenu()),
+        };
+        for (int i = 0; i < 7; i++)
         {
             GameObject buttonObject = Instantiate(spawnedButton, buttonSpawnPoint);
             TrainingButtonObject buttonScript = buttonObject.GetComponent<TrainingButtonObject>();
-            switch (i) 
+            buttonScript.Make(funcList[i].Item1, funcList[i].Item2);
+            trainingButtonDictionary.Add(buttonScript);
+        }
+        for (int i = 0; i < trainingButtonDictionary.Count; i++)
+        {
+            Navigation curButtonNavigation = new Navigation();
+            curButtonNavigation.mode = Navigation.Mode.Explicit;
+            if (i == 0)
             {
-                case 0:
-                    buttonScript.Make("Health Settings", ActivateHealthMenu);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
-                case 1:
-                    buttonScript.Make("Meter Settings", ActivateMeterMenu);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
-                case 2:
-                    buttonScript.Make("Dummy Controls", ActivateDummySettingsMenu);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
-                case 3:
-                    buttonScript.Make("Info Display", ActivateInfoDisplayMenu);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
-                case 4:
-                    buttonScript.Make("Move Lists", ActivateMoveListMenu);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
-                case 5:
-                    buttonScript.Make("Character Select", ReturnToCharacterSelect);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
-                case 6:
-                    buttonScript.Make("Main Menu", ReturnToMainMenu);
-                    trainingButtonDictionary.Add(buttonScript);
-                    break;
+                curButtonNavigation.selectOnDown = trainingButtonDictionary[1].menuButton;
+                curButtonNavigation.selectOnUp = trainingButtonDictionary[trainingButtonDictionary.Count-1].menuButton;
+                trainingButtonDictionary[i].menuButton.navigation = curButtonNavigation;
+                continue;
+            }
+            if (i == trainingButtonDictionary.Count - 1)
+            {
+                curButtonNavigation.selectOnUp = trainingButtonDictionary[i-1].menuButton;
+                curButtonNavigation.selectOnDown = trainingButtonDictionary[0].menuButton;
+                trainingButtonDictionary[i].menuButton.navigation = curButtonNavigation;
+                continue;
+            }
+            else 
+            {
+                curButtonNavigation.selectOnUp = trainingButtonDictionary[i-1].menuButton;
+                curButtonNavigation.selectOnDown = trainingButtonDictionary[i+1].menuButton;
+                trainingButtonDictionary[i].menuButton.navigation = curButtonNavigation;
+                continue;
             }
         }
     }
-    void ActivateHealthMenu() 
+    public void ActivateHealthMenu() 
     {
-
+        Debug.Log("Hit Health");
     }
-    void ActivateMeterMenu()
+    public void ActivateMeterMenu()
     {
-
+        Debug.Log("Hit Meter");
     }
-    void ActivateDummySettingsMenu()
+    public void ActivateDummySettingsMenu()
     {
-
+        Debug.Log("Hit DummySettings");
     }
-    void ActivateInfoDisplayMenu()
+    public void ActivateInfoDisplayMenu()
     {
-
+        Debug.Log("Hit InfoDisplay");
     }
-    void ActivateMoveListMenu()
+    public void ActivateMoveListMenu()
     {
-
+        Debug.Log("Hit MoveList");
     }
-    void ReturnToCharacterSelect()
+    public void ReturnToCharacterSelect()
     {
-
+        Debug.Log("Hit CS");
     }
-    void ReturnToMainMenu()
+    public void ReturnToMainMenu()
     {
-
+        Debug.Log("Hit Main");
     }
 }

@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private Transform pauseMenuHolder;
+    [SerializeField] private GameObject trainingStageMenu, versusStageMenu;
     [SerializeField] private MainGame_SettingsController _settingsController;
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
     [SerializeField] private MainGame_Timer stopWatchController;
@@ -18,6 +22,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     void Start()
     {
+        GameObject systemInScene = GameObject.Find("EventSystem");
+        _eventSystem = systemInScene.GetComponent<EventSystem>();
         instance = this;
         stopWatchController = GetComponent<MainGame_Timer>();
         ReInput.ControllerConnectedEvent += SetupPlayers;
@@ -38,13 +44,20 @@ public class GameManager : MonoBehaviour
         {
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues());
             gameObject.AddComponent<MainGame_TrainingSC>();
+            GameObject trainingMenu = Instantiate(trainingStageMenu, pauseMenuHolder);
             _settingsController = gameObject.GetComponent<MainGame_TrainingSC>();
+            _settingsController._pauseMenu = trainingMenu;
+            trainingMenu.transform.localPosition = new Vector3(0, -500f, 0);
+
         }
         else
         {
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(99));
             gameObject.AddComponent<MainGame_SettingsController>();
+            GameObject versusMenu = Instantiate(versusStageMenu, pauseMenuHolder);
             _settingsController = gameObject.GetComponent<MainGame_SettingsController>();
+            _settingsController._pauseMenu = versusMenu;
+            versusMenu.transform.localPosition = new Vector3(0, -500f, 0);
         }
         _gameModeSet.startupFunctions.Add(() => p1UIManager.SetActiveUI(_gameModeSet.gameMode));
         _gameModeSet.startupFunctions.Add(() => p2UIManager.SetActiveUI(_gameModeSet.gameMode));
@@ -133,7 +146,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        _settingsController.SetTeleportPositions();
+        _settingsController.SetTeleportPositions(_eventSystem);
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)
     {

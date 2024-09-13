@@ -17,5 +17,8 @@ public class TrainingButtonObject : MonoBehaviour
             UnityAction buttonAction = func;
             menuButton.onClick.AddListener(buttonAction);
         }
-    
+    public void OnApplicationQuit()
+    {
+        menuButton.onClick.RemoveAllListeners();
+    }
 }

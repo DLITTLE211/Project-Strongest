@@ -5,6 +5,7 @@ using System;
 using UnityEngine.UI;
 using System.Threading.Tasks;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class MainGame_TrainingSC : MainGame_SettingsController
 {
@@ -13,7 +14,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
     [SerializeField] private Image _trainingCoverImage;
     Sequence coverTweenSequence;
     private bool teleporting;
-    public override void SetTeleportPositions() 
+    public override void SetTeleportPositions(EventSystem eventSystem) 
     {
         teleportPositions = new Dictionary<int, Callback>();
         teleportPositions.Add(1, TeleportLeftInverse);
@@ -23,8 +24,11 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         teleportPositions.Add(5, TeleportCenter);
         teleportPositions.Add(6, TeleportRight);
         StartCoroutine(DelayGetTeleportPositions());
+        _pauseMenu.SetActive(false);
+        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetupTrainingButtons();
+        _eventSystem = eventSystem;
     }
-    IEnumerator DelayGetTeleportPositions() 
+    IEnumerator DelayGetTeleportPositions()
     {
         yield return new WaitForSeconds(3 / 60f);
         leftPos = new TeleportPoint();
@@ -34,6 +38,18 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         centerPos.SetPositionPos("Center_TP");
         rightPos.SetPositionPos("Right_TP");
         _trainingCoverImage = GameObject.Find("Training_ImageCover").GetComponent<Image>();
+    }
+    public override void TogglePauseMenu()
+    {
+        base.TogglePauseMenu();
+        if (_pauseMenu.activeInHierarchy)
+        {
+            _eventSystem.firstSelectedGameObject = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnTopButton().gameObject;
+        }
+        else 
+        {
+            _eventSystem.firstSelectedGameObject = null;
+        }
     }
     public override void SetPlayersPosition() 
     {

@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MainGame_SettingsController : MonoBehaviour
 {
+    protected EventSystem _eventSystem;
     protected Character_Base mainPlayer, secondaryPlayer;
-    protected GameObject _pauseMenu;
+    public GameObject _pauseMenu;
 
-    public virtual void SetTeleportPositions() 
+    public virtual void SetTeleportPositions(EventSystem eventSystem) 
     {
         //Nothing TODO
     }
@@ -39,7 +41,7 @@ public class MainGame_SettingsController : MonoBehaviour
     {
 
     }
-    public void TogglePauseMenu() 
+    public virtual void TogglePauseMenu() 
     {
         if (_pauseMenu.activeInHierarchy)
         {

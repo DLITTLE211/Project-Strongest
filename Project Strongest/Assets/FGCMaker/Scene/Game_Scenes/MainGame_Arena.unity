@@ -1239,6 +1239,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+  stringRef: 
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,7 +1853,6 @@ MonoBehaviour:
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
   _damageText: {fileID: 752586224}
-  customDamageCall: 262144
 --- !u!1 &132508870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3161,11 +3161,13 @@ MonoBehaviour:
     rawAttackDamage: 0
     rawChipDamage: 0
     counterHitDamageMult: 0
-    hitstopValue: 0
-    blockStunValue: 0
-    hitstunValue: 0
+    attackMainStunValues:
+      hitstunValue: 0
+      blockStunValue: 0
+      hitstopValue: 0
+      blockStopValue: 0
     hitLevel: 0
-    attackHashes: 
+    attackHashes: 0
     _meterRequirement: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
@@ -5603,6 +5605,8 @@ MonoBehaviour:
     LW_Distance: 0
     RW_Distance: 0
     _directionFacing: 2
+    delayTurnActionTime: 0
+    startDelayTime: 20
 --- !u!1 &443929009
 GameObject:
   m_ObjectHideFlags: 0
@@ -6428,8 +6432,6 @@ MonoBehaviour:
   _base: {fileID: 993311525}
   xVal: 0
   yVal: 0
-  forceHitCall: 16398
-  teleportCall: 64
   isFrozen: 0
   xSpeed: 0
   beingPushed: 0
@@ -7097,6 +7099,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+  stringRef: 
 --- !u!1 &580190454
 GameObject:
   m_ObjectHideFlags: 0
@@ -7369,11 +7372,13 @@ MonoBehaviour:
     rawAttackDamage: 0
     rawChipDamage: 0
     counterHitDamageMult: 0
-    hitstopValue: 0
-    blockStunValue: 0
-    hitstunValue: 0
+    attackMainStunValues:
+      hitstunValue: 0
+      blockStunValue: 0
+      hitstopValue: 0
+      blockStopValue: 0
     hitLevel: 0
-    attackHashes: 
+    attackHashes: 0
     _meterRequirement: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
@@ -8839,7 +8844,6 @@ MonoBehaviour:
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
   _damageText: {fileID: 1216137438}
-  customDamageCall: 262144
 --- !u!1 &761506510
 GameObject:
   m_ObjectHideFlags: 0
@@ -13535,8 +13539,6 @@ MonoBehaviour:
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
-  forceHitCall: 16398
-  teleportCall: 64
   isFrozen: 0
   xSpeed: 0
   beingPushed: 0
@@ -14967,14 +14969,8 @@ MonoBehaviour:
   _currentComboCount: 0
   _counterText: {fileID: 313190236}
   _QualityText: {fileID: 918945923}
-  _counterColor:
-    serializedVersion: 2
-    rgba: 0
-  _QualityColor:
-    serializedVersion: 2
-    rgba: 0
-  alphaLevel: 0
   comboHolder: {fileID: 1118025207}
+  _comboProficiencyList: []
 --- !u!1 &1192763485
 GameObject:
   m_ObjectHideFlags: 0
@@ -15022,14 +15018,8 @@ MonoBehaviour:
   _currentComboCount: 0
   _counterText: {fileID: 108609099}
   _QualityText: {fileID: 360568982}
-  _counterColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  _QualityColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  alphaLevel: 0
   comboHolder: {fileID: 58170352}
+  _comboProficiencyList: []
 --- !u!1 &1193655371
 GameObject:
   m_ObjectHideFlags: 0
@@ -15121,6 +15111,8 @@ MonoBehaviour:
     LW_Distance: 0
     RW_Distance: 0
     _directionFacing: 2
+    delayTurnActionTime: 0
+    startDelayTime: 20
 --- !u!1 &1216137436
 GameObject:
   m_ObjectHideFlags: 0
@@ -17448,6 +17440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1232a1bf985ede54eb1edca0486fdbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuHolder: {fileID: 1087749870}
+  trainingStageMenu: {fileID: 197967047138326680, guid: 7d03b0a05e3c3af4481da96ff6519426, type: 3}
+  versusStageMenu: {fileID: 0}
   _settingsController: {fileID: 0}
   p1UIManager: {fileID: 1318979522}
   p2UIManager: {fileID: 740525645}
@@ -22755,11 +22750,13 @@ MonoBehaviour:
     rawAttackDamage: 0
     rawChipDamage: 0
     counterHitDamageMult: 0
-    hitstopValue: 0
-    blockStunValue: 0
-    hitstunValue: 0
+    attackMainStunValues:
+      hitstunValue: 0
+      blockStunValue: 0
+      hitstopValue: 0
+      blockStopValue: 0
     hitLevel: 0
-    attackHashes: 
+    attackHashes: 0
     _meterRequirement: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
@@ -23378,11 +23375,13 @@ MonoBehaviour:
     rawAttackDamage: 0
     rawChipDamage: 0
     counterHitDamageMult: 0
-    hitstopValue: 0
-    blockStunValue: 0
-    hitstunValue: 0
+    attackMainStunValues:
+      hitstunValue: 0
+      blockStunValue: 0
+      hitstopValue: 0
+      blockStopValue: 0
     hitLevel: 0
-    attackHashes: 
+    attackHashes: 0
     _meterRequirement: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
