@@ -27,6 +27,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         _pauseMenu.SetActive(false);
         _pauseMenu.GetComponent<TrainingMenu_Controller>().SetupTrainingButtons();
         _eventSystem = eventSystem;
+        _eventSystem.firstSelectedGameObject = null;
     }
     IEnumerator DelayGetTeleportPositions()
     {
@@ -44,7 +45,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         base.TogglePauseMenu();
         if (_pauseMenu.activeInHierarchy)
         {
-            _eventSystem.firstSelectedGameObject = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnTopButton().gameObject;
+            _eventSystem.SetSelectedGameObject(_pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnTopButton().gameObject);
         }
         else 
         {

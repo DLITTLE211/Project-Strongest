@@ -5,34 +5,28 @@ using UnityEngine;
 public class Character_GravityScaler : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
+    [SerializeField, Range(0f, 15f)] private float curGravity, gravity;
     private Rigidbody _rb => _base.myRb;
-    [SerializeField,Range(0f,15f)] private float curGravity, gravity;
-    int hitCountScaler => _base._cComboCounter.ReturnCurrentComboCount();
+    [SerializeField] private int hitCountScaler => _base._cComboCounter.ReturnCurrentComboCount();
     [SerializeField] bool isFrozen;
     private void Start()
     {
         gravity = 10f;
         isFrozen = false;
     }
+    
 
     public void HandleGravityFreeze(bool state)
     {
-        if (state)
+        if (isFrozen != state) 
         {
-            if (!isFrozen)
-            {
-                isFrozen = true;
-                gravity = 0f;
-            }
+            isFrozen = state;
         }
-        else
-        {
-            if (isFrozen)
-            {
-                isFrozen = false;
-                gravity = 10f;
-            }
-        }
+        SetGravity(isFrozen);
+    }
+    void SetGravity(bool gravityState) 
+    {
+        gravity = gravityState == true ? 0f : 10f;
     }
     public float ReturnCurrentGravity() 
     {
@@ -71,12 +65,12 @@ public class Character_GravityScaler : MonoBehaviour
         else 
         {
             curGravity = 0;
-            gravity = 0;
         }
     }
 
     public void UpdateGravityScaleOnHit(float hitStunValue) 
     {
-        curGravity += (hitStunValue/ hitCountScaler);
+        float value = hitStunValue * _base._cDamageCalculator.GetCurrentScaling();
+        curGravity += value;
     }
 }

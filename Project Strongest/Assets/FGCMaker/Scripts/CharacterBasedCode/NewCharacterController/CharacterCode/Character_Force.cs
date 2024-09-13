@@ -389,8 +389,8 @@ public class Character_Force : MonoBehaviour
     #endregion
     public void SendKnockBackOnHit(Attack_BaseProperties property)
     {
-        int H_KnockBack = property.lateralKBP.Value;
-        int V_KnockDown = property.verticalKBP.Value;
+        float H_KnockBack = property.lateralKBP.Value;
+        float V_KnockDown = property.verticalKBP.Value - _base._cDamageCalculator.GetCurrentScaling();
         if (property.verticalKBP.verticalKBP.ToString().Contains("_KD")) 
         {
             V_KnockDown = -property.verticalKBP.Value;

@@ -137,7 +137,10 @@ public class Character_DamageCalculator : MonoBehaviour
             }
         }
     }
-    
+    public float GetCurrentScaling() 
+    {
+        return calculatedScaling * 3;
+    }
     public void ResetScaling() 
     {
         calculatedScaling = 0;
