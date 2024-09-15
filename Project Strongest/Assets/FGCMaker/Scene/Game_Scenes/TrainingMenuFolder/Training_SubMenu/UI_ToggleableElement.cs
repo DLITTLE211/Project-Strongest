@@ -14,10 +14,12 @@ public class UI_ToggleableElement : MonoBehaviour
     #region if Slider Toggle
     public Slider _elementSlider;
     #endregion
-    #region if Slider Toggle
+
+    #region if Button Toggle
     public Button _leftButton,_rightButton;
-    List<object> activeObject = new List<object>();
     #endregion
+
+    List<object> activeObject = new List<object>();
     public List<object> GetActiveObject() 
     {
         if(activeObject.Count != 0) 
