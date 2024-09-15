@@ -46,17 +46,13 @@ public class UI_ToggleableElement : MonoBehaviour
 
             if (element._toggleStyle == ToggledElement.ButtonToggle)
             {
-                element._elementSlider = null;
                 element._leftButton = (Button)EditorGUILayout.ObjectField(element._leftButton,typeof(Button),true);
                 element._rightButton = (Button)EditorGUILayout.ObjectField(element._rightButton, typeof(Button), true);
             }
             if (element._toggleStyle == ToggledElement.SliderToggle)
             {
                 element._elementSlider = (Slider)EditorGUILayout.ObjectField(element._elementSlider, typeof(Slider), true);
-                element._leftButton = null;
-                element._rightButton = null;
             }
-
         }
     }
 #endif
