@@ -16,26 +16,35 @@ public class UI_ToggleableElement : MonoBehaviour
     #endregion
     #region if Slider Toggle
     public Button _leftButton,_rightButton;
+    List<object> activeObject = new List<object>();
     #endregion
+    public List<object> GetActiveObject() 
+    {
+        if(activeObject.Count != 0) 
+        {
+            return activeObject;
+        }
+        if (_toggleStyle == ToggledElement.ButtonToggle) 
+        {
+            activeObject.Add(_elementSlider);
+        }
+        if(_toggleStyle == ToggledElement.SliderToggle) 
+        {
+            activeObject.Add(_leftButton);
+            activeObject.Add(_rightButton);
+        }
+        return activeObject;
+    }
 #if UNITY_EDITOR
     [CustomEditor(typeof(UI_ToggleableElement)),CanEditMultipleObjects]
     public class ToggleableElementEditor : Editor
     {
         private SerializedProperty textField;
         private SerializedProperty elementImage;
-
-
-        private SerializedProperty sliderVal;
-        private SerializedProperty leftButton;
-        private SerializedProperty rightButton;
         private void OnEnable()
         {
             textField = serializedObject.FindProperty("_elementTextField");
             elementImage = serializedObject.FindProperty("_elementBackgroundImage");
-
-            sliderVal = serializedObject.FindProperty("_elementSlider");
-            leftButton = serializedObject.FindProperty("_leftButton");
-            rightButton = serializedObject.FindProperty("_rightButton");
         }
         public override void OnInspectorGUI()
         {
