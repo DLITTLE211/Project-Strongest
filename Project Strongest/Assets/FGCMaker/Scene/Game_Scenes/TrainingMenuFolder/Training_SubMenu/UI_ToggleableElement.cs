@@ -34,7 +34,6 @@ public class UI_ToggleableElement : MonoBehaviour
             elementImage = serializedObject.FindProperty("_elementBackgroundImage");
 
             sliderVal = serializedObject.FindProperty("_elementSlider");
-
             leftButton = serializedObject.FindProperty("_leftButton");
             rightButton = serializedObject.FindProperty("_rightButton");
         }
@@ -47,12 +46,15 @@ public class UI_ToggleableElement : MonoBehaviour
 
             if (element._toggleStyle == ToggledElement.ButtonToggle)
             {
-                EditorGUILayout.PropertyField(leftButton);
-                EditorGUILayout.PropertyField(rightButton);
+                element._elementSlider = null;
+                element._leftButton = (Button)EditorGUILayout.ObjectField(element._leftButton,typeof(Button),true);
+                element._rightButton = (Button)EditorGUILayout.ObjectField(element._rightButton, typeof(Button), true);
             }
             if (element._toggleStyle == ToggledElement.SliderToggle)
             {
-                EditorGUILayout.PropertyField(sliderVal);
+                element._elementSlider = (Slider)EditorGUILayout.ObjectField(element._elementSlider, typeof(Slider), true);
+                element._leftButton = null;
+                element._rightButton = null;
             }
 
         }
