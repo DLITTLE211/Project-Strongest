@@ -83,6 +83,7 @@ public class Character_Base : MonoBehaviour
 
     #region Combo Structures (New)
     [SerializeField] private Dictionary<AttackInputTypes, IAttackFunctionality> _characterMoveListAttacks;
+    public Dictionary<AttackInputTypes, IAttackFunctionality> ChosenCharacterMoveList { get { return _characterMoveListAttacks; } }
     public List<AttackInputTypes> inputVisualiser;
     public Dictionary<AttackInputTypes, IAttackFunctionality> CharacterMoveListAttacks 
     { 

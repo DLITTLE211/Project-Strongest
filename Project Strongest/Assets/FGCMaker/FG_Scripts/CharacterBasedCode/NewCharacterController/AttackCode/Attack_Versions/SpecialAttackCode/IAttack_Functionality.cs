@@ -26,8 +26,9 @@ public interface IAttackFunctionality
 }
 
 [Serializable]
-public class AttackInputTypes 
+public class AttackInputTypes
 {
+    public string AttackName;
     public Attack_Input specialMoveTypeInput;
     public List<string> normalTypeInput;
     public string currentAttackInput;

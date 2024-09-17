@@ -4183,13 +4183,17 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2819297257283796468, guid: 75ee168c6f058074fb696d6aef89d271, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 3569092030688014962}
+    - target: {fileID: 2819297257283796468, guid: 75ee168c6f058074fb696d6aef89d271, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 4412497926984414014}
     - target: {fileID: 2819297257283796468, guid: 75ee168c6f058074fb696d6aef89d271, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
-      objectReference: {fileID: 3569092030688014962}
+      objectReference: {fileID: 0}
     - target: {fileID: 3351236245322469953, guid: 75ee168c6f058074fb696d6aef89d271, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
