@@ -4,22 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public abstract class UI_SubMenuBase : MonoBehaviour
+public class UI_SubMenuBase : MonoBehaviour
 {
     [Header("Objects for Menu Visual Controls")]
     public List<Image> menuImageList;
     public List<UI_ToggleableElement> toggleableElements;
-
+    public MenuType _menuType;
     public void EnableMenu(Callback<object> func) 
     {
         FadeElements(1);
         func(toggleableElements[0].GetActiveObject()[0]);
     }
-    public void DisableMenu() 
+    public void DisableMenu(Callback func) 
     {
-        FadeElements(0);
+        FadeElements(0,func);
     }
-    private void FadeElements(float value) 
+    private void FadeElements(float value, Callback func = null) 
     {
         for(int i = 0; i < menuImageList.Count; i++) 
         {
@@ -34,9 +34,25 @@ public abstract class UI_SubMenuBase : MonoBehaviour
             }
             if(toggleableElements[i]._toggleStyle == ToggledElement.SliderToggle) 
             {
-                toggleableElements[i]._elementSlider.targetGraphic.DOFade(value, 0.75f);
+                toggleableElements[i]._elementSlider.targetGraphic.DOFade(value, 0.75f).OnComplete(() => 
+                {
+                    if (func != null)
+                    {
+                        func();
+                    }
+                });
             }
         }
     }
+}
+
+public enum MenuType 
+{
+    HealthToggle =0,
+    MeterToggle = 1,
+    DummyController =2,
+    InfoDisplay = 3,
+    MoveListDisplay = 4,
+
 }
 

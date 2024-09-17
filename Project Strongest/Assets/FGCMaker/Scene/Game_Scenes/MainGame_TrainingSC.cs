@@ -25,7 +25,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         teleportPositions.Add(6, TeleportRight);
         StartCoroutine(DelayGetTeleportPositions());
         _pauseMenu.SetActive(false);
-        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetupTrainingButtons();
+        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetupTrainingButtons(eventSystem);
         _eventSystem = eventSystem;
         _eventSystem.firstSelectedGameObject = null;
     }
