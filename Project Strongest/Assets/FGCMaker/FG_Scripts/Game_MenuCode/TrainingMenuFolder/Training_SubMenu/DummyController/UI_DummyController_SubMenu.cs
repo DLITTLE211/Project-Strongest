@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_DummyController_SubMenu : MonoBehaviour
+public class UI_DummyController_SubMenu : UI_SubMenuBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Space(20)]
+    public UI_ToggleableElement EnemyType;
+    public UI_ToggleableElement EnemyPoseType;
+    [Space(20)]
+    public UI_ToggleableElement EnemyGuardType;
+    public UI_ToggleableElement EnemyGuardSwitchType;
 
-    // Update is called once per frame
-    void Update()
+   /* public float ReturnP1MeterValue()
     {
-        
+        return P1MeterSlider._elementSlider.value;
     }
+    public float ReturnP1AmplifyValue()
+    {
+        return P1AmplifySlider._elementSlider.value;
+    }
+    public float ReturnP2MeterValue()
+    {
+        return P2MeterSlider._elementSlider.value;
+    }
+    public float ReturnP2AmplifyValue()
+    {
+        return P2AmplifySlider._elementSlider.value;
+    }*/
 }
