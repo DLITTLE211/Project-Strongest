@@ -19,21 +19,21 @@ public class UI_ToggleableElement : MonoBehaviour
     public Button _leftButton,_rightButton;
     #endregion
 
-    List<object> activeObject = new List<object>();
-    public List<object> GetActiveObject() 
+    List<GameObject> activeObject = new List<GameObject>();
+    public List<GameObject> GetActiveObject() 
     {
         if(activeObject.Count != 0) 
         {
             return activeObject;
         }
-        if (_toggleStyle == ToggledElement.ButtonToggle) 
+        if (_toggleStyle == ToggledElement.SliderToggle) 
         {
-            activeObject.Add(_elementSlider);
+            activeObject.Add(_elementSlider.gameObject);
         }
-        if(_toggleStyle == ToggledElement.SliderToggle) 
+        if(_toggleStyle == ToggledElement.ButtonToggle) 
         {
-            activeObject.Add(_leftButton);
-            activeObject.Add(_rightButton);
+            activeObject.Add(_leftButton.gameObject);
+            activeObject.Add(_rightButton.gameObject);
         }
         return activeObject;
     }

@@ -128,7 +128,7 @@ public class TrainingMenu_Controller : MonoBehaviour
         }
         eventSystem.SetSelectedGameObject(trainingButtonDictionary[0].gameObject);
     }
-    void SetActiveButton(object button) 
+    void SetActiveButton(GameObject button) 
     {
         eventSystem.SetSelectedGameObject((GameObject)button);
     }

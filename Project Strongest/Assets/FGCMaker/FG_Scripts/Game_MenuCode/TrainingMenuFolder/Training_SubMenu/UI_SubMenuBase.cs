@@ -10,7 +10,7 @@ public class UI_SubMenuBase : MonoBehaviour
     public List<Image> menuImageList;
     public List<UI_ToggleableElement> toggleableElements;
     public MenuType _menuType;
-    public void EnableMenu(Callback<object> func) 
+    public void EnableMenu(Callback<GameObject> func) 
     {
         FadeElements(1);
         func(toggleableElements[0].GetActiveObject()[0]);
@@ -21,26 +21,27 @@ public class UI_SubMenuBase : MonoBehaviour
     }
     private void FadeElements(float value, Callback func = null) 
     {
-        for(int i = 0; i < menuImageList.Count; i++) 
+        ActivateMenuItems(value, func);
+        for (int i = 0; i < menuImageList.Count; i++) 
         {
             menuImageList[i].DOFade(value, 0.75f);
         }
+    }
+    private void ActivateMenuItems(float value,Callback func = null) 
+    {
         for (int i = 0; i < toggleableElements.Count; i++)
         {
-            if (toggleableElements[i]._toggleStyle == ToggledElement.ButtonToggle)
+            if (value == 0)
             {
-                toggleableElements[i]._leftButton.targetGraphic.DOFade(value, 0.75f);
-                toggleableElements[i]._rightButton.targetGraphic.DOFade(value, 0.75f);
-            }
-            if(toggleableElements[i]._toggleStyle == ToggledElement.SliderToggle) 
-            {
-                toggleableElements[i]._elementSlider.targetGraphic.DOFade(value, 0.75f).OnComplete(() => 
+                toggleableElements[i].gameObject.SetActive(false);
+                if (func != null)
                 {
-                    if (func != null)
-                    {
-                        func();
-                    }
-                });
+                    func();
+                }
+            }
+            else
+            {
+                toggleableElements[i].gameObject.SetActive(true);
             }
         }
     }
