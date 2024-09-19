@@ -42,13 +42,14 @@ public class CharacterSelect_Setup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetupPlayerPage(_leftPlayerPage);
+        SetupPlayerPage(_rightPlayerPage);
+    }
+    public void SetListeners() 
+    {
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
-        SetupPlayerPage(_leftPlayerPage);
-        SetupPlayerPage(_rightPlayerPage);
-
-        //
     }
     void SetupPlayerPage(CharacterSelect_Page playerPage) 
     {
@@ -58,6 +59,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers)
     {
+        SetListeners(); 
         mainObjectHolder.SetActive(true);
            players = _characterSelectplayers;
         Task[] tasks = new Task[]
@@ -67,7 +69,27 @@ public class CharacterSelect_Setup : MonoBehaviour
             TogglePlayerInfo(255f),
         };
         await Task.WhenAll(tasks);
+        if (activeCharacterSelectButtons != null)
+        {
+            if (activeCharacterSelectButtons.Count > 0)
+            {
+                for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
+                {
+                    Destroy(activeCharacterSelectButtons[i]);
+                }
+                activeCharacterSelectButtons = new List<GameObject>();
+            }
+        }
         AddCharacterSelectButtons();
+        for(int i = 0; i < characterSelect_Assets.Count; i++) 
+        {
+            if(i == 1) 
+            {
+                characterSelect_Assets[i].SetActive(false);
+                continue;
+            }
+            characterSelect_Assets[i].SetActive(true);
+        }
     }
 
     private void Update()
@@ -107,8 +129,9 @@ public class CharacterSelect_Setup : MonoBehaviour
         SetPlayerControllers();
     }
 
-    void SetPlayerControllers() 
+    void SetPlayerControllers()
     {
+        _stageSelecter.ClearStageSelect();
         if (ReInput.controllers.GetJoystickNames().Length <= 0)
         {
             return;
@@ -120,7 +143,16 @@ public class CharacterSelect_Setup : MonoBehaviour
             if (ReInput.controllers.GetJoystickNames().Length == 1)
             {
                 players.AddUsedID(players.joystickNames[0]);
-                SetCharacterSelectCursorState(_leftPlayer, 0);
+                if (_leftPlayer.curPlayer == null)
+                {
+                    SetCharacterSelectCursorState(_leftPlayer, 0);
+                }
+                else
+                {
+                    _leftPlayer.UnlockCharacterChoice();
+                    _leftPlayer.isConnected = true;
+                    _leftPlayerPage.ClearInfo();
+                }
             }
             else
             {
@@ -130,11 +162,29 @@ public class CharacterSelect_Setup : MonoBehaviour
                     players.AddUsedID(players.joystickNames[i]);
                     if (i == 0)
                     {
-                        SetCharacterSelectCursorState(_leftPlayer, i);
+                        if (_leftPlayer.curPlayer == null)
+                        {
+                            SetCharacterSelectCursorState(_leftPlayer, i);
+                        }
+                        else
+                        {
+                            _leftPlayer.UnlockCharacterChoice();
+                            _leftPlayer.isConnected = true;
+                            _leftPlayerPage.ClearInfo();
+                        }
                     }
                     if (i == 1)
                     {
-                        SetCharacterSelectCursorState(_rightPlayer, i);
+                        if (_rightPlayer.curPlayer == null)
+                        {
+                            SetCharacterSelectCursorState(_rightPlayer, i);
+                        }
+                        else
+                        {
+                            _rightPlayer.UnlockCharacterChoice();
+                            _rightPlayer.isConnected = true;
+                            _rightPlayerPage.ClearInfo();
+                        }
                     }
                     else { continue; }
                 }
@@ -442,8 +492,9 @@ public class CharacterSelect_Setup : MonoBehaviour
         CheckIfBothPlayersLockedIn(cursor);
     }
 
-    void ActivateStageSelector() 
+    void ActivateStageSelector()
     {
+        characterSelect_Assets[1].SetActive(true);
         _stageSelecter.SetArrowsLitState(_activeStages);
     }
     #region Return Character Select Information
