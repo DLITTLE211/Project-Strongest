@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class TrainingMenu_Controller : MonoBehaviour
 { 
@@ -134,10 +135,14 @@ public class TrainingMenu_Controller : MonoBehaviour
     }
     public void ReturnToCharacterSelect()
     {
+        Menu_Manager.instance.DelayChosenPage(() => Menu_Manager.instance.TrainingSelected());
+        GameManager.instance.UnloadFightingArena();
         Debug.Log("Hit CS");
     }
     public void ReturnToMainMenu()
     {
+        Menu_Manager.instance.DelayChosenPage(() => Menu_Manager.instance.ActivateMainMenuPage());
+        GameManager.instance.UnloadFightingArena();
         Debug.Log("Hit Main");
     }
 }

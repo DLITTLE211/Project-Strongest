@@ -9,11 +9,13 @@ using Rewired;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 
+
 public class Menu_Manager : MonoBehaviour
 {
     [SerializeField] private CharacterSelect_Setup _characterSelect;
     [SerializeField] private GameObject _mainMenuHolder;
     [SerializeField] private GameObject _titleScreenHolder;
+    [SerializeField] private GameObject _mainCamera;
     [SerializeField] private EventSystem _eventSystem; 
     [SerializeField] private Player _mainMenuPlayer;
     private int _mainMenuPlayerID;
@@ -26,7 +28,37 @@ public class Menu_Manager : MonoBehaviour
     public static GameModeSet currentMode;
     public OutOfMatchGameState menuGameState;
     Transform _titleTextTransform;
+    public static Menu_Manager instance;
+    public static bool subsequentLoad;
+    public static IEnumerator OnActivateSceneIEnumerator;
+    public static Callback OnActiveSceneCallback;
     private void Start()
+    {
+        DontDestroyOnLoad(this);
+        instance = this;
+        if (!subsequentLoad)
+        {
+            SetTitlePage(); 
+            _mainCamera.SetActive(true);
+        }
+        else 
+        {
+            //if(OnActivateSceneIEnumerator != null) 
+            //{
+                //StartCoroutine(OnActivateSceneIEnumerator);
+                
+           // }
+        }
+    }
+
+    public void SetStaticValues(bool state, IEnumerator awaitFunc, Callback awaitCallback) 
+    {
+        subsequentLoad = state;
+        OnActivateSceneIEnumerator = awaitFunc;
+        OnActiveSceneCallback = awaitCallback;
+
+    }
+    public void SetTitlePage() 
     {
         ToggleTitleState(true);
         SetPlayerControllers();
@@ -45,12 +77,17 @@ public class Menu_Manager : MonoBehaviour
             }
         }
     }
-    async void ActivateMainMenuPage()
+    public async void ActivateMainMenuPage()
     {
         ToggleTitleState(false);
         ToggleMainMenuState(true);
         await OpenMainMenuScreen();
         menuGameState = OutOfMatchGameState.Menu;
+    }
+    public void DelayChosenPage(Callback func) 
+    {
+        func();
+        _mainCamera.SetActive(true);
     }
     void SetActiveButton() 
     {
