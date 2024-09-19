@@ -13,6 +13,7 @@ public class Menu_Manager : MonoBehaviour
 {
     [SerializeField] private CharacterSelect_Setup _characterSelect;
     [SerializeField] private GameObject _mainMenuHolder;
+    [SerializeField] private GameObject _titleScreenHolder;
     [SerializeField] private EventSystem _eventSystem; 
     [SerializeField] private Player _mainMenuPlayer;
     private int _mainMenuPlayerID;
@@ -23,17 +24,37 @@ public class Menu_Manager : MonoBehaviour
     [SerializeField] private Image _backgroundImage,whiteFillerImage;
     [SerializeField] private TMP_Text _titleText,_versionText;
     public static GameModeSet currentMode;
+    public OutOfMatchGameState menuGameState;
     Transform _titleTextTransform;
     private void Start()
     {
+        ToggleTitleState(true);
+        SetPlayerControllers();
+        menuGameState = OutOfMatchGameState.Title;
+    }
+    private void Update()
+    {
+        if (_mainMenuPlayer != null)
+        {
+            if (menuGameState == OutOfMatchGameState.Title)
+            {
+                if (_mainMenuPlayer.GetAnyButton())
+                {
+                    ActivateMainMenuPage();
+                }
+            }
+        }
+    }
+    void ActivateMainMenuPage()
+    {
+        ToggleTitleState(false);
         ToggleMainMenuState(true);
         _titleTextTransform = _titleText.GetComponent<Transform>();
-        //Cursor.lockState = CursorLockMode.Locked;
         float moveUpPos = _titleTextTransform.localPosition.y - 225f;
         _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f).SetEase(Ease.InOutBack);
-        SetPlayerControllers();
         SetButtonHolderImages();
         FirstMenuButtonLayer.SlideHolderIn(SetActiveButton);
+        menuGameState = OutOfMatchGameState.Menu;
     }
     void SetActiveButton() 
     {
@@ -51,15 +72,15 @@ public class Menu_Manager : MonoBehaviour
             players.InitAvailableIDs();
             players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
             players.AddUsedID(players.joystickNames[0]);
-            SetCharacterSelectCursorState(_mainMenuPlayer, 0);
+            SetCharacterSelectCursorState(0);
         }
     }
-    void SetCharacterSelectCursorState(Player player, int ID)
+    void SetCharacterSelectCursorState(int ID)
     {
-        player = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
+        _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
         _mainMenuPlayerID = ID;
-        player.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
-        player.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
+        _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
+        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
             $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
     }
     public void SetButtonHolderImages()
@@ -83,7 +104,11 @@ public class Menu_Manager : MonoBehaviour
         currentMode = new GameModeSet(GameMode.Training);
         _characterSelect.SetUpCharacterSelectScreen(players);
     }
-    void ToggleMainMenuState(bool state) 
+    void ToggleTitleState(bool state) 
+    {
+        _titleScreenHolder.SetActive(state);
+    }
+    void ToggleMainMenuState(bool state)
     {
         _mainMenuHolder.SetActive(state);
     }
@@ -137,4 +162,12 @@ public enum GameMode
     Training,
     Versus,
     Arcade,
+    Title,
+}
+[Serializable]
+public enum OutOfMatchGameState
+{
+    Title,
+    Menu,
+    Settings,
 }
