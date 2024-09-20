@@ -37,7 +37,10 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     // Update is called once per frame
     private void Update()
     {
-        TimerTickDown();
+        if (_base._cHurtBox.IsGrounded())
+        {
+            TimerTickDown();
+        }
       
     }
     public void TimerTickDown()
