@@ -266,49 +266,56 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         while (frameCount <= lastAttack.AttackAnims.animLength)
         {
-            float frameIterator = oneFrame * character._cHitstun.animSpeed;
-            float waitTime = oneFrame / character._cHitstun.animSpeed;
-            if (character._cHitstun.animSpeed == 0.25f)
+            if (character.ReturnIfPaused())
             {
-                frameCount = frameCount - (frameCount * character._cHitstun.animSpeed);
+                yield return new WaitForSeconds(oneFrame);
             }
-            try
+            else
             {
-                float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
-                if (requiredHitboxCallBacks.Count > 0)
+                float frameIterator = oneFrame * character._cHitstun.animSpeed;
+                float waitTime = oneFrame / character._cHitstun.animSpeed;
+                if (character._cHitstun.animSpeed == 0.25f)
                 {
-                    if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
-                    {
-                        requiredHitboxCallBacks[0].func();
-                        requiredHitboxCallBacks.RemoveAt(0);
-                    }
+                    frameCount = frameCount - (frameCount * character._cHitstun.animSpeed);
                 }
-                if (customHitboxCallBacks != null)
+                try
                 {
-                    if (customHitboxCallBacks.Count > 0)
+                    float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
+                    if (requiredHitboxCallBacks.Count > 0)
                     {
-                        if (frameCount >= oneFrame * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                        if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
                         {
-                            character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
-                            customHitboxCallBacks.RemoveAt(0);
+                            requiredHitboxCallBacks[0].func();
+                            requiredHitboxCallBacks.RemoveAt(0);
+                        }
+                    }
+                    if (customHitboxCallBacks != null)
+                    {
+                        if (customHitboxCallBacks.Count > 0)
+                        {
+                            if (frameCount >= oneFrame * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                            {
+                                character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
+                                customHitboxCallBacks.RemoveAt(0);
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    HitBox.DestroySelf();
+                    Debug.LogError(e.ToString());
+                    frameCount = lastAttack.AttackAnims.animLength + 1f;
+                    Debug.Log("Null Check");
+                    Debug.Log($"Inactive frame: {lastAttack.AttackAnims._frameData.inactive}");
+                    Debug.Log($"Last Attack null?: {lastAttack == null}");
+                    Debug.Log($"Inactive bool state: {inactive}");
+                    Debug.Break();
+                }
+                character.animfloat = frameCount;
+                frameCount += frameIterator;
+                yield return new WaitForSeconds(waitTime);
             }
-            catch (Exception e)
-            {
-                HitBox.DestroySelf();
-                Debug.LogError(e.ToString());
-                frameCount = lastAttack.AttackAnims.animLength + 1f;
-                Debug.Log("Null Check");
-                Debug.Log($"Inactive frame: {lastAttack.AttackAnims._frameData.inactive}");
-                Debug.Log($"Last Attack null?: {lastAttack == null}");
-                Debug.Log($"Inactive bool state: {inactive}");
-                Debug.Break();
-            }
-            character.animfloat = frameCount;
-            frameCount += frameIterator;
-            yield return new WaitForSeconds(waitTime);
         }
         _playerCAnimator.SetCanTransitionIdle(true);
         if (character._cAttackTimer._type == TimerType.Special) 
@@ -359,47 +366,54 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         while (frameCount <= customProp.animLength)
         {
-            float frameIterator = oneFrame * character._cHitstun.animSpeed;
-            float waitTime = oneFrame / character._cHitstun.animSpeed;
-            frameCount = frameCount * character._cHitstun.animSpeed;
-            try
+            if (character.ReturnIfPaused())
             {
-                float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
-                if (requiredHitboxCallBacks.Count > 0)
+                yield return new WaitForSeconds(oneFrame);
+            }
+            else
+            {
+                float frameIterator = oneFrame * character._cHitstun.animSpeed;
+                float waitTime = oneFrame / character._cHitstun.animSpeed;
+                frameCount = frameCount * character._cHitstun.animSpeed;
+                try
                 {
-                    if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                    float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
+                    if (requiredHitboxCallBacks.Count > 0)
                     {
-                        requiredHitboxCallBacks[0].func();
-                        requiredHitboxCallBacks.RemoveAt(0);
-                    }
-                }
-                if (customHitboxCallBacks != null)
-                {
-                    if (customHitboxCallBacks.Count > 0)
-                    {
-                        float curCustomTimeStamp = oneFrame * customHitboxCallBacks[0].timeStamp;
-                        if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
+                        if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
                         {
-                            Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
-                            character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
-                            customHitboxCallBacks.RemoveAt(0);
+                            requiredHitboxCallBacks[0].func();
+                            requiredHitboxCallBacks.RemoveAt(0);
+                        }
+                    }
+                    if (customHitboxCallBacks != null)
+                    {
+                        if (customHitboxCallBacks.Count > 0)
+                        {
+                            float curCustomTimeStamp = oneFrame * customHitboxCallBacks[0].timeStamp;
+                            if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
+                            {
+                                Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
+                                character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
+                                customHitboxCallBacks.RemoveAt(0);
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    HitBox.DestroySelf();
+                    Debug.LogError(e.ToString());
+                    frameCount = customProp.animLength + 1f;
+                    Debug.Log("Null Check");
+                    Debug.Log($"Inactive frame: {customProp._frameData.inactive}");
+                    Debug.Log($"Last Attack null?: {customProp == null}");
+                    Debug.Log($"Inactive bool state: {inactive}");
+                    Debug.Break();
+                }
+                frameCount += frameIterator;
+                yield return new WaitForSeconds(waitTime);
             }
-            catch (Exception e)
-            {
-                HitBox.DestroySelf();
-                Debug.LogError(e.ToString());
-                frameCount = customProp.animLength + 1f;
-                Debug.Log("Null Check");
-                Debug.Log($"Inactive frame: {customProp._frameData.inactive}");
-                Debug.Log($"Last Attack null?: {customProp == null}");
-                Debug.Log($"Inactive bool state: {inactive}");
-                Debug.Break();
-            }
-            frameCount += frameIterator;
-            yield return new WaitForSeconds(waitTime);
         }
         Attack_BaseProperties thisAttack = character._cHitboxManager.GetActiveHitBox().hitboxProperties;
         if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)

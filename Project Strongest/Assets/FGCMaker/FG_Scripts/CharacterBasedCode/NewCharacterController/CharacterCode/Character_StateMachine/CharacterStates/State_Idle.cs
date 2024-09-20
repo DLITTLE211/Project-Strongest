@@ -81,15 +81,18 @@ public class State_Idle : BaseState
 
     public async override void OnUpdate()
     {
-        if (canDoSecondaryIdle)
+        if (!_base.isLockedPause)
         {
-            if (timeTillSecondaryIdle >= 0)
+            if (canDoSecondaryIdle)
             {
-                timeTillSecondaryIdle -= (1 / 60f);
-            }
-            else 
-            {
-                await PlaySecondaryAnim();
+                if (timeTillSecondaryIdle >= 0)
+                {
+                    timeTillSecondaryIdle -= (1 / 60f);
+                }
+                else
+                {
+                    await PlaySecondaryAnim();
+                }
             }
         }
         base.OnUpdate();

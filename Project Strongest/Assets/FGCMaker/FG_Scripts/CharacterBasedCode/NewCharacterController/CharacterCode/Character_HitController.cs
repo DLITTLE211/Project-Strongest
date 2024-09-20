@@ -335,9 +335,16 @@ public class Character_HitController : MonoBehaviour
         _base._cHitstun.CallHitStun(hitStunInFrames);
         while (hitStunInFrames > 0) 
         {
-            hitStunInFrames -= (oneFrame* _base._cHitstun.animSpeed);
-            UpdateMeterValue(oneFrame);
-            yield return new WaitForSeconds(oneFrame);
+            if (_base.ReturnIfPaused())
+            {
+                yield return new WaitForSeconds(oneFrame);
+            }
+            else
+            {
+                hitStunInFrames -= (oneFrame * _base._cHitstun.animSpeed);
+                UpdateMeterValue(oneFrame);
+                yield return new WaitForSeconds(oneFrame);
+            }
         }
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {

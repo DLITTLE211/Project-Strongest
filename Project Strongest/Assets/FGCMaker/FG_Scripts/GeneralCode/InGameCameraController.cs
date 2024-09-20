@@ -43,12 +43,19 @@ public class InGameCameraController : MonoBehaviour
     {
         float oneFrame = 1 / 60f;
         float durationInFrames = (duration/2) * oneFrame;
-        while (durationInFrames > 0) 
+        while (durationInFrames > 0)
         {
-            Shake(intensity);
-            durationInFrames -= oneFrame;
-            yield return new WaitForSeconds(oneFrame);
-            cameraObjectHolder.localPosition = startPos;
+            if (GameManager.instance.settingsController._isPause)
+            {
+                yield return new WaitForSeconds(oneFrame);
+            }
+            else
+            {
+                Shake(intensity);
+                durationInFrames -= oneFrame;
+                yield return new WaitForSeconds(oneFrame);
+                cameraObjectHolder.localPosition = startPos;
+            }
         }
         ShakeRoutine = null;
         isTracking = true;

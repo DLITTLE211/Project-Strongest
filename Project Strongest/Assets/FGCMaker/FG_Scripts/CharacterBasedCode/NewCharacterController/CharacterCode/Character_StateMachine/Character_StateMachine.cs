@@ -140,7 +140,11 @@ public class Character_StateMachine : MonoBehaviour
     #region Boolean Checks
     public bool _CheckBlockButton()
     {
-        return _base.ReturnBlockButton().Button_State._state == ButtonStateMachine.InputState.pressed || _base.ReturnBlockButton().Button_State._state == ButtonStateMachine.InputState.held;
+        if (_base.ReturnBlockButton() == null) 
+        { 
+            return false; 
+        }
+        return _base.ReturnBlockButton().Button_State._state != ButtonStateMachine.InputState.released;
     }
     bool At_2SBlock()
     {

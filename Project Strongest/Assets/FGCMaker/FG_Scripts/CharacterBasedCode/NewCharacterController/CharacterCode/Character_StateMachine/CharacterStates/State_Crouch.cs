@@ -46,15 +46,18 @@ public class State_Crouch : BaseState
     }
     public async override void OnUpdate()
     {
-        if (canDoSecondaryCrouch)
+        if (!_base.isLockedPause)
         {
-            if (timeTillSecondaryCrouch >= 0)
+            if (canDoSecondaryCrouch)
             {
-                timeTillSecondaryCrouch -= (1 / 60f);
-            }
-            else
-            {
-                await PlaySecondaryAnim();
+                if (timeTillSecondaryCrouch >= 0)
+                {
+                    timeTillSecondaryCrouch -= (1 / 60f);
+                }
+                else
+                {
+                    await PlaySecondaryAnim();
+                }
             }
         }
         base.OnUpdate();

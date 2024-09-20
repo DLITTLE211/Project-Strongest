@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform pauseMenuHolder;
     [SerializeField] private GameObject trainingStageMenu, versusStageMenu;
     [SerializeField] private MainGame_SettingsController _settingsController;
+    public MainGame_SettingsController settingsController { get { return _settingsController; } }
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
     [SerializeField] private MainGame_Timer stopWatchController;
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;

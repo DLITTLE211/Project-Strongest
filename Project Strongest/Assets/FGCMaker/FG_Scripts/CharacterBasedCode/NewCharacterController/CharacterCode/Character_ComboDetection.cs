@@ -16,12 +16,7 @@ public class Character_ComboDetection : MonoBehaviour
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
-    public string stringRef;
 
-    private void Update()
-    {
-        stringRef = currentInput.specialMoveTypeInput.attackString;
-    }
     private void Start()
     {
         canCheckMovement = false;
@@ -47,6 +42,10 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void StoreNewInput(Character_ButtonInput input)
     {
+        if (_base.ReturnIfPaused())
+        {
+            return;
+        }
         if (input.Button_State._state != ButtonStateMachine.InputState.directional)
         {
             if (_base._cAnimator.inputWindowOpen)

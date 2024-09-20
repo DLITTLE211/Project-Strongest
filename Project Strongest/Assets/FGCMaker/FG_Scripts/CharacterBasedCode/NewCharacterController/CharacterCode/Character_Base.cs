@@ -134,6 +134,9 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
+    private float storedXVelocity, storedYVelocity;
+    internal bool isLockedPause;
+
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
     private Dictionary<HitPointCall, Callback<CustomCallback>> mainCallbackDictionary = new Dictionary<HitPointCall, Callback<CustomCallback>>();
     public bool awaitCondition;
@@ -435,9 +438,12 @@ public class Character_Base : MonoBehaviour
     }
     private void Update()
     {
-        _cADetection.CheckButtonPressed();
-        _cADetection.CallReturnButton();
-        _timer.TimerCountDown();
+        if (!ReturnIfPaused())
+        {
+            _cADetection.CheckButtonPressed();
+            _cADetection.CallReturnButton();
+            _timer.TimerCountDown();
+        }
 
     }
     bool SetBoolStates(bool check = false) 
@@ -452,18 +458,29 @@ public class Character_Base : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _cInput.ReceiveInput();
+        if (!ReturnIfPaused())
+        {
+            _cInput.ReceiveInput();
+        }
     }
-    public int ReturnInputValue(int value) 
+    public int ReturnInputValue(int value)
     {
-        if (_subState != Character_SubStates.Controlled) 
-        { 
-            return -1; 
+        if (ReturnIfPaused())
+        {
+            return -1;
+        }
+        if (_subState != Character_SubStates.Controlled)
+        {
+            return -1;
         }
 
         moveAxes[0].Button_State.directionalInput = value;
         _cComboDetection.CheckPossibleCombos(moveAxes[0]);
-        return value; 
+        return value;
+    }
+    public bool ReturnIfPaused() 
+    {
+        return isLockedPause;
     }
     public Character_ButtonInput ReturnMovementInputs()
     {
@@ -475,6 +492,10 @@ public class Character_Base : MonoBehaviour
     }
     public Character_ButtonInput ReturnBlockButton()
     {
+        if (ReturnIfPaused())
+        {
+            return null;
+        }
         if (_subState != Character_SubStates.Controlled)
         { 
             return null; 
@@ -483,6 +504,10 @@ public class Character_Base : MonoBehaviour
     }
     public Character_ButtonInput ReturnTechButton()
     {
+        if (ReturnIfPaused())
+        {
+            return null;
+        }
         if (_subState != Character_SubStates.Controlled)
         {
             return null;
@@ -538,7 +563,7 @@ public class Character_Base : MonoBehaviour
         {
             AwaitCheck stateCheck = awaitEnums[customBoolAwait.awaitEnum.keyRef];
             awaitCondition = false;
-            while ((!awaitCondition) && (!stateCheck.testCall(stateCheck.check) && _cAnimator.lastAttack != null))
+            while (!isLockedPause && (!awaitCondition) && (!stateCheck.testCall(stateCheck.check) && _cAnimator.lastAttack != null))
             {
                 CheckCallback(customBoolAwait, customBoolAwait.awaitEnum);
                 int singleFrameInInt = (int)(1000 * (1 / 60f));
@@ -564,6 +589,30 @@ public class Character_Base : MonoBehaviour
         _cAnimator.canTransitionIdle = true;
         _cAnimator._lastAttackState = lastAttackState.nullified;
         await Task.Delay(50);
+    }
+    public void LockPlayerInPause() 
+    {
+        storedXVelocity = myRb.velocity.x;
+        storedYVelocity = myRb.velocity.y;
+        myRb.velocity = new Vector3(0f,0f,0f);
+        myRb.useGravity = false;
+        myRb.isKinematic = true; 
+        isLockedPause = true;
+        myRb.constraints = RigidbodyConstraints.FreezeAll;
+        _cHitstun.HandleAnimatorFreeze(true, 0f);
+        _cHitboxManager.DisableCurrentHitbox();
+    }
+    public float factor;
+    public void UnlockPlayerInPause()
+    {
+        myRb.isKinematic = false;
+        myRb.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
+        myRb.velocity = new Vector3(storedXVelocity, storedYVelocity, 0f);
+        storedXVelocity = 0f; 
+        storedYVelocity = 0f;
+        myRb.useGravity = true;
+        isLockedPause = false;
+        _cHitstun.HandleAnimatorFreeze(false);
     }
 }
 [Serializable]

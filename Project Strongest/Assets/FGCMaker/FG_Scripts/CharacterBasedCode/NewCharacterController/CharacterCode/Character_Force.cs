@@ -428,12 +428,12 @@ public class Character_Force : MonoBehaviour
         }
     }
 
-    float EvaluateAndReturnJumpValue() 
+    public float EvaluateAndReturnJumpValue() 
     {
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         return jumpSpeed;
     }
-    float EvaluateAndReturnForwardValue()
+    public float EvaluateAndReturnForwardValue()
     {
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
         return forwardSpeed;
