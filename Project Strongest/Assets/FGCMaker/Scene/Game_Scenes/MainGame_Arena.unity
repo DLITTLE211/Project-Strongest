@@ -7165,6 +7165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f5a212f30fe4090ea66dbf5ea326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chosenCharacterProfileImage: {fileID: 1447069828}
   health_Main:
     meterSlider: {fileID: 2001293386}
     startValue: 100
@@ -8136,6 +8137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f5a212f30fe4090ea66dbf5ea326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chosenCharacterProfileImage: {fileID: 808710508}
   health_Main:
     meterSlider: {fileID: 44666232}
     startValue: 0
@@ -9807,7 +9809,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 951638811a5ed5441bb5d628c9242022, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -19239,7 +19241,7 @@ GameObject:
   - component: {fileID: 1447069829}
   - component: {fileID: 1447069828}
   m_Layer: 5
-  m_Name: PlayerIcon
+  m_Name: P1_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19285,7 +19287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 951638811a5ed5441bb5d628c9242022, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

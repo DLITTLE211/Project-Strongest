@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Character_Health : MonoBehaviour
 {
+    [SerializeField] private Image _chosenCharacterProfileImage;
     public MainMeterController health_Main;
     public MainMeterController health_Recov;
     public StunMeterController stunController;
@@ -24,6 +26,7 @@ public class Character_Health : MonoBehaviour
         health_Main.SetStartMeterValues(profile.MaxHealth);
         health_Recov.SetStartMeterValues(profile.MaxHealth);
         recoverHealthRate = profile.HealthRegenRate;
+        _chosenCharacterProfileImage.sprite = profile.CharacterProfileImage;
     }
     public void ApplyAffliction(Affliction curAffliction)
     {
