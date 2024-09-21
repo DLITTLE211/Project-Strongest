@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class StatusEffect : ScriptableObject
+using System;
+public class StatusEffect : MonoBehaviour
 {
     public enum Effect_Amplify 
     {
-        /*Permanent*/
-        WillPower, 
-        Iron, 
-        Perfectionist, 
-        /*Timed*/
-        HeavyHitter, 
-        Might,
-        Focus,
-        Bloodthirsty,
+        Bloodthirsty,/*Timed*/
+        Focus,/*Timed*/
+        HeavyHitter,/*Timed*/
+        Iron, /*Permanent*/
+        Might, /*Timed*/
+        Perfectionist, /*Permanent*/
+        WillPower, /*Permanent*/
     };
     /*
      *  WillPower: Decrease to stun damage taken
@@ -62,4 +61,16 @@ public class StatusEffect : ScriptableObject
      *  Slice: D.O.T. Stronger (Damage over time) after successful hit of last attack.
      *  Severed: Locks out meter gain for a short time
      */
+}
+[Serializable]
+public enum DurationType
+{
+    Permenant,
+    Timed,
+}
+[Serializable]
+public enum ActiveState
+{
+    Active,
+    Inactive,
 }

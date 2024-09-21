@@ -4,13 +4,13 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
-[System.Serializable]
-[CreateAssetMenu(fileName = "New Status Effect", menuName = "Amplifier")]
+[Serializable]
 public class Amplifiers : StatusEffect 
 {
     public Effect_Amplify amplifier;
-    public AmplifyType amplifyType;
-    [Range(1f,5f)] public float fillTime;
+    public DurationType durationType;
+    public ActiveState currentState = ActiveState.Inactive;
+    public int fillTime;
     public float activeDuration;
     void SendEffect()
     {
@@ -23,34 +23,26 @@ public class Amplifiers : StatusEffect
     [CustomEditor(typeof(Amplifiers)), CanEditMultipleObjects]
     public class AmplifiersEditor : Editor
     {
-        private SerializedProperty currentAmplifer;
-        private SerializedProperty fillTime;
         private void OnEnable()
         {
-            currentAmplifer = serializedObject.FindProperty("amplifier");
-            fillTime = serializedObject.FindProperty("fillTime");
+            Amplifiers element = (Amplifiers)target;
         }
         public override void OnInspectorGUI()
         {
             Amplifiers element = (Amplifiers)target;
             element.amplifier = (Effect_Amplify)EditorGUILayout.EnumPopup(element.amplifier);
-            EditorGUILayout.PropertyField(fillTime);
-            element.amplifyType = (AmplifyType)EditorGUILayout.EnumPopup(element.amplifyType);
+            element.fillTime = EditorGUILayout.IntSlider(element.fillTime,0, 5);
+            element.durationType = (DurationType)EditorGUILayout.EnumPopup(element.durationType);
+            element.currentState = (ActiveState)EditorGUILayout.EnumPopup(element.currentState);
 
-            if (element.amplifyType == AmplifyType.Permenant)
+            if (element.durationType == DurationType.Permenant)
             {
             }
-            if (element.amplifyType == AmplifyType.Timed)
+            if (element.durationType == DurationType.Timed)
             {
-                element.activeDuration = (float)EditorGUILayout.FloatField(element.activeDuration);
+                element.activeDuration = (float)EditorGUILayout.Slider(element.activeDuration,1,7);
             }
         }
     }
     #endif
-}
-[Serializable]
-public enum AmplifyType 
-{
-    Permenant,
-    Timed,
 }

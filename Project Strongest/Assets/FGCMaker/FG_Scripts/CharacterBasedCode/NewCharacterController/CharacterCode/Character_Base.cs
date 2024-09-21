@@ -17,6 +17,8 @@ public class Character_Base : MonoBehaviour
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
     public Character_Hitstop _cHitstop;
     public Character_AttackDetection _cADetection;
+    public Character_AfflictionManager _afflictionManager;
+    public Character_AmplifyController _amplifyController;
     public Character_ComboDetection _cComboDetection;
     public Character_Animator _cAnimator;
     public Character_InputDetection _cInput;

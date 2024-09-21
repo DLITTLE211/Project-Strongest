@@ -18,7 +18,7 @@ public class Character_AmplifyController : MonoBehaviour
     }
     public void DrainMeter()
     {
-        if (chosenAmplifier.amplifyType != AmplifyType.Permenant)
+        if (chosenAmplifier.durationType != DurationType.Permenant)
         {
             _amplifySlider.DOValue(0f, chosenAmplifier.activeDuration);
         }

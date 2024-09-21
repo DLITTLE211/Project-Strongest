@@ -1410,6 +1410,8 @@ MonoBehaviour:
   characterProfile: {fileID: 0}
   _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 498465949}
+  _afflictionManager: {fileID: 1509354414}
+  _amplifyController: {fileID: 285658159}
   _cComboDetection: {fileID: 566836026}
   _cAnimator: {fileID: 0}
   _cInput: {fileID: 830645725}
@@ -3419,6 +3421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d801fef786b7c0d4c9d554ffb14e688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chosenAmplifier: {fileID: 0}
+  _amplifySlider: {fileID: 2058276817}
 --- !u!1 &287939232
 GameObject:
   m_ObjectHideFlags: 0
@@ -13002,6 +13006,8 @@ MonoBehaviour:
   characterProfile: {fileID: 0}
   _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 510088399}
+  _afflictionManager: {fileID: 1952859375}
+  _amplifyController: {fileID: 1502884059}
   _cComboDetection: {fileID: 89504893}
   _cAnimator: {fileID: 0}
   _cInput: {fileID: 4569801}
@@ -19973,6 +19979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d801fef786b7c0d4c9d554ffb14e688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chosenAmplifier: {fileID: 0}
+  _amplifySlider: {fileID: 1172058075}
 --- !u!1 &1505004385
 GameObject:
   m_ObjectHideFlags: 0
@@ -20146,6 +20154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea07f725a0ee66f4b87b320d8697561b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appliedAffliction: {fileID: 0}
 --- !u!1 &1522484671
 GameObject:
   m_ObjectHideFlags: 0
@@ -23339,6 +23348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea07f725a0ee66f4b87b320d8697561b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appliedAffliction: {fileID: 0}
 --- !u!1 &1953611135
 GameObject:
   m_ObjectHideFlags: 0
