@@ -46,10 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplifier: 2
   durationType: 1
-  fillType: 0
+  fillType: 1
   currentState: 0
-  fillRateInFrames: 0
-  fillRate: 6
+  meterColor:
+    serializedVersion: 2
+    rgba: 4278992301
+  fillRateInFrames: 1
+  fillRate: 35
   activeDuration: 15
   percentBonus: 10
   _perfectionistDebuff: 0

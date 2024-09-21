@@ -13,11 +13,12 @@ public class Amplifiers : StatusEffect
     public DurationType durationType;
     public FillType fillType;
     public ActiveState currentState = ActiveState.Inactive;
+    public Color32 meterColor;
     [Space(15)]
 
     [Header("Fill Meter Variables")]
     public float fillRateInFrames;
-    [Range(1, 20)]public int fillRate;
+    [Range(10, 60)]public int fillRate;
     [Range(10, 50)] public float activeDuration;
     [Space(15)]
 
@@ -27,16 +28,17 @@ public class Amplifiers : StatusEffect
     [Space(15)]
     [Header("Perfectionist --ONLY-- Debuff")]
     public int _perfectionistDebuff;
-    private void Start()
+   
+    public void SetFillVariables() 
     {
-        if(fillType == FillType.Instant) 
+        if (fillType == FillType.Instant)
         {
             fillRate = 1;
             fillRateInFrames = 1f;
         }
-        else 
+        else
         {
-            fillRateInFrames = Base_FrameCode.ONE_FRAME * (1/fillRate);
+            fillRateInFrames = Base_FrameCode.ONE_FRAME * (1 / (float)fillRate);
         }
     }
     public void SendEffect()

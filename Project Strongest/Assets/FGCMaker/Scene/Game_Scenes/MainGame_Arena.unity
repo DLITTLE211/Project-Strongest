@@ -3421,8 +3421,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d801fef786b7c0d4c9d554ffb14e688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 94923329}
   chosenAmplifier: {fileID: 0}
   _amplifySlider: {fileID: 2058276817}
+  _amplifyText: {fileID: 1255184145}
+  allowFill: 0
 --- !u!1 &287939232
 GameObject:
   m_ObjectHideFlags: 0
@@ -9410,7 +9413,7 @@ GameObject:
   - component: {fileID: 805144423}
   - component: {fileID: 805144422}
   m_Layer: 5
-  m_Name: Amplify_Type_Text
+  m_Name: P1_Amplify_TypeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15166,7 +15169,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 526103242}
   m_FillRect: {fileID: 526103241}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
@@ -16147,7 +16150,7 @@ GameObject:
   - component: {fileID: 1255184146}
   - component: {fileID: 1255184145}
   m_Layer: 5
-  m_Name: Amplify_Type_Text
+  m_Name: P2_Amplify_TypeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19979,8 +19982,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d801fef786b7c0d4c9d554ffb14e688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 993311525}
   chosenAmplifier: {fileID: 0}
   _amplifySlider: {fileID: 1172058075}
+  _amplifyText: {fileID: 805144422}
+  allowFill: 0
 --- !u!1 &1505004385
 GameObject:
   m_ObjectHideFlags: 0
@@ -24348,7 +24354,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1207586909}
   m_FillRect: {fileID: 1207586908}
   m_HandleRect: {fileID: 0}
   m_Direction: 0

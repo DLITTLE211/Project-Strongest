@@ -48,8 +48,11 @@ MonoBehaviour:
   durationType: 1
   fillType: 1
   currentState: 0
-  fillRateInFrames: 0
-  fillRate: 15
+  meterColor:
+    serializedVersion: 2
+    rgba: 4278190335
+  fillRateInFrames: 0.0011111111
+  fillRate: 45
   activeDuration: 15
   percentBonus: 12
   _perfectionistDebuff: 0

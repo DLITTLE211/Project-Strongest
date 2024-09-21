@@ -156,6 +156,8 @@ public class Character_Base : MonoBehaviour
         ResetInputLog();
         InitCombos();
         SetAwaitEnums();
+
+        _amplifyController.SetChosenAmplifier(choseAmplifiers);
         _cComboCounter.SetStartComboCounter();
         _cAnimator.canTransitionIdle = true;
         awaitCondition = true;
