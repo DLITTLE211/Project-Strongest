@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using FightingGame_FrameData;
 
 public class InGameCameraController : MonoBehaviour
 {
@@ -41,19 +42,18 @@ public class InGameCameraController : MonoBehaviour
     }
     IEnumerator ShakeCamera(float duration, int intensity) 
     {
-        float oneFrame = 1 / 60f;
-        float durationInFrames = (duration/2) * oneFrame;
+        float durationInFrames = (duration/2) * Base_FrameCode.ONE_FRAME;
         while (durationInFrames > 0)
         {
             if (GameManager.instance.settingsController._isPause)
             {
-                yield return new WaitForSeconds(oneFrame);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
                 Shake(intensity);
-                durationInFrames -= oneFrame;
-                yield return new WaitForSeconds(oneFrame);
+                durationInFrames -= Base_FrameCode.ONE_FRAME;
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 cameraObjectHolder.localPosition = startPos;
             }
         }

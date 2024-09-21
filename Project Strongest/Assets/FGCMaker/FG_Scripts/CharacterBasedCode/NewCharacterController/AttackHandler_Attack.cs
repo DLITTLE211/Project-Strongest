@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using FightingGame_FrameData;
 
 [Serializable]
 public class AttackHandler_Attack : AttackHandler_Base
@@ -259,7 +260,6 @@ public class AttackHandler_Attack : AttackHandler_Base
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
         frameCount = 0;
-        float oneFrame = 1f / 60f;
         if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
@@ -268,19 +268,19 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             if (character.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(oneFrame);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                float frameIterator = oneFrame * character._cHitstun.animSpeed;
-                float waitTime = oneFrame / character._cHitstun.animSpeed;
+                float frameIterator = Base_FrameCode.ONE_FRAME * character._cHitstun.animSpeed;
+                float waitTime = Base_FrameCode.ONE_FRAME / character._cHitstun.animSpeed;
                 if (character._cHitstun.animSpeed == 0.25f)
                 {
                     frameCount = frameCount - (frameCount * character._cHitstun.animSpeed);
                 }
                 try
                 {
-                    float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
+                    float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
                         if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
@@ -293,7 +293,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (customHitboxCallBacks.Count > 0)
                         {
-                            if (frameCount >= oneFrame * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                            if (frameCount >= Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
                                 character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
                                 customHitboxCallBacks.RemoveAt(0);
@@ -355,7 +355,6 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             _playerCAnimator.canTick = true;
         }
-        float oneFrame = 1f / 60f;
         if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
         {
             character._cAttackTimer.PauseTimerOnThrowSuccess();
@@ -368,16 +367,16 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             if (character.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(oneFrame);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                float frameIterator = oneFrame * character._cHitstun.animSpeed;
-                float waitTime = oneFrame / character._cHitstun.animSpeed;
+                float frameIterator = Base_FrameCode.ONE_FRAME * character._cHitstun.animSpeed;
+                float waitTime = Base_FrameCode.ONE_FRAME / character._cHitstun.animSpeed;
                 frameCount = frameCount * character._cHitstun.animSpeed;
                 try
                 {
-                    float curFuncTimeStamp = oneFrame * requiredHitboxCallBacks[0].timeStamp;
+                    float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
                         if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
@@ -390,7 +389,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (customHitboxCallBacks.Count > 0)
                         {
-                            float curCustomTimeStamp = oneFrame * customHitboxCallBacks[0].timeStamp;
+                            float curCustomTimeStamp = Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp;
                             if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
                                 Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");

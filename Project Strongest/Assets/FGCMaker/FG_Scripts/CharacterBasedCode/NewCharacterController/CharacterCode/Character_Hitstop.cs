@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using DG.Tweening;
+using FightingGame_FrameData;
 
 public class Character_Hitstop : MonoBehaviour
 {
@@ -26,15 +27,14 @@ public class Character_Hitstop : MonoBehaviour
     }
     IEnumerator HandleHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target, Callback func)
     {
-        float oneFrame = 1 / 60f;
-        float actualWaitTime = rateOfIncrease * oneFrame;
+        float actualWaitTime = rateOfIncrease * Base_FrameCode.ONE_FRAME;
         attacker._cAnimator.SetSelfFreeze();
         target._cAnimator.SetSelfFreeze();
         _cameraController.CallCameraShake(rateOfIncrease, lastAttack.attackMainStunValues.hitstopValue);
         while (actualWaitTime > 0)
         {
-            actualWaitTime -= (oneFrame);
-            yield return new WaitForSeconds(oneFrame);
+            actualWaitTime -= (Base_FrameCode.ONE_FRAME);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
         yield return new WaitForSeconds(actualWaitTime);
         attacker._cAnimator.SetSelfUnfreeze();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StatusEffect : ScriptableObject
 {
-    public float effectNumber;
     public enum Effect_Amplify 
     {
         /*Permanent*/

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using FightingGame_FrameData;
 
 public class Character_HitStun : MonoBehaviour
 {
@@ -58,18 +59,17 @@ public class Character_HitStun : MonoBehaviour
     {
         animSpeed = 0.05f;
         float stunTime = 0;
-        float oneFrame = 1f / 60f;
         _cAnimator.SetCanRecover(true);
         while (stunTime < hitStunValue)
         {
             if (_cAnimator._base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(oneFrame);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                stunTime += oneFrame;
-                yield return new WaitForSeconds(oneFrame);
+                stunTime += Base_FrameCode.ONE_FRAME;
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
         animSpeed = 1f;

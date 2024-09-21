@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using FightingGame_FrameData;
 
 public class Character_HitController : MonoBehaviour
 {
@@ -327,8 +328,7 @@ public class Character_HitController : MonoBehaviour
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
         ClearRecoveryRoutine();
-        float oneFrame = (1 / 60f);
-        float hitStunInFrames = curField.animLength + (currentHitstun * oneFrame);
+        float hitStunInFrames = curField.animLength + (currentHitstun * Base_FrameCode.ONE_FRAME);
         SetStunMeterValue(hitStunInFrames);
         _base._cAnimator.PlayNextAnimation(curField.animHash,0,true);
         _base._cAnimator.SetCanRecover(true);
@@ -337,13 +337,13 @@ public class Character_HitController : MonoBehaviour
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(oneFrame);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                hitStunInFrames -= (oneFrame * _base._cHitstun.animSpeed);
-                UpdateMeterValue(oneFrame);
-                yield return new WaitForSeconds(oneFrame);
+                hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
         if (curField.hitReactionType == HitReactionType.KnockdownHit)

@@ -7,7 +7,8 @@ using UnityEngine;
 public class Affliction : StatusEffect
 {
     public Effect_Affliction affliction;
-
+    public float activeDuration;
+    public bool _isConsumed;
     void SendEffect() 
     {
         AssignStatusEffect(affliction);
