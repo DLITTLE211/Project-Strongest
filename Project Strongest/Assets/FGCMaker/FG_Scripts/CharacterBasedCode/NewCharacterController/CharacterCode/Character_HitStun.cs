@@ -1,12 +1,13 @@
 using UnityEngine;
-using DG.Tweening;
-using System.Threading.Tasks;
+using System;
+using System.Collections;
 
 public class Character_HitStun : MonoBehaviour
 {
     [SerializeField] private Character_Animator _cAnimator;
     public float animSpeed;
     [SerializeField] bool isFrozen;
+    [SerializeField] private IEnumerator hitStunRoutine;
     void Start()
     {
         isFrozen = false;
@@ -24,18 +25,6 @@ public class Character_HitStun : MonoBehaviour
             isFrozen = state;
         }
         SetTargetFreezeState(speed);
-        /*if (!isFrozen)
-        {
-            _cAnimator.myAnim.speed = speed;
-            _cAnimator.shadowAnim.speed = speed;
-            animSpeed = speed;
-        }
-        if (isFrozen)
-        {
-            _cAnimator.myAnim.speed = 1;
-            _cAnimator.shadowAnim.speed = 1;
-            animSpeed = 1;
-        }*/
     }
     void SetTargetFreezeState(float speed)
     {
@@ -51,20 +40,40 @@ public class Character_HitStun : MonoBehaviour
     {
         animSpeed = 1;
     }
-    public async void CallHitStun(float hitstunValue) 
+    void ActivateHitStun(float hitstunValue) 
     {
-        await ApplyHitStun(hitstunValue);
+        if(hitStunRoutine != null) 
+        {
+            StopCoroutine(hitStunRoutine);
+            hitStunRoutine = null;
+        }
+        hitStunRoutine = ApplyHitstun(hitstunValue);
+        StartCoroutine(hitStunRoutine);
     }
-    public async Task ApplyHitStun(float hitstunValue)
+    public void CallHitStun(float hitstunValue) 
+    {
+        ActivateHitStun(hitstunValue);
+    }
+    IEnumerator ApplyHitstun(float hitStunValue)
     {
         animSpeed = 0.05f;
-        float waitTime = hitstunValue;
-        int delayTimeIn_MS = (int)(waitTime * 1000f);
+        float stunTime = 0;
+        float oneFrame = 1f / 60f;
         _cAnimator.SetCanRecover(true);
-        await Task.Delay(delayTimeIn_MS);
+        while (stunTime < hitStunValue)
+        {
+            if (_cAnimator._base.ReturnIfPaused())
+            {
+                yield return new WaitForSeconds(oneFrame);
+            }
+            else
+            {
+                stunTime += oneFrame;
+                yield return new WaitForSeconds(oneFrame);
+            }
+        }
         animSpeed = 1f;
         Messenger.Broadcast<int, string>(Events.SendReturnTime, 0, _cAnimator._base.gameObject.name);
-
     }
 
     private void Update()
