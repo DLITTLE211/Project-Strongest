@@ -6,17 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Status Effect", menuName = "Affliction")]
 public class Affliction : StatusEffect
 {
-    public NegativeStatusEffect affliction;
-    private void Awake()
-    {
-        Messenger.AddListener(Events.SendAfflictionToTarget,SendEffect);
-    }
+    public Effect_Affliction affliction;
+
     void SendEffect() 
     {
         AssignStatusEffect(affliction);
     }
-    public void AssignStatusEffect(NegativeStatusEffect effect)
+    public void AssignStatusEffect(Effect_Affliction effect)
     {
-        Messenger.Broadcast<NegativeStatusEffect>(Events.SendNegativeEffect, effect);
     }
 }

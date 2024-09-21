@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Character_AmplifyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Amplifiers chosenAmplifier;
 
-    // Update is called once per frame
-    void Update()
+    public void SetChosenAmplifier(Amplifiers _chosenAmplifier) 
     {
-        
+        chosenAmplifier = _chosenAmplifier;
     }
+    
 }

@@ -20,7 +20,6 @@ public class HealthController : MonoBehaviour
     {
         health_Main.SetStartMeterValues(100);
         health_Recov.SetStartMeterValues(100);
-        Messenger.AddListener<Affliction>(Events.SendAfflictionToTarget, ApplyAffliction);
     }
     public void ApplyAffliction(Affliction curAffliction) 
     {

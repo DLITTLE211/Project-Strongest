@@ -24,10 +24,10 @@ public class Character_DamageCalculator : MonoBehaviour
     {
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = callback.customDamage.rawAttackDamage;
-        if (CheckAfflictionState())
+        /*if (CheckAfflictionState())
         {
             afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-        }
+        }*/
         if (!CheckCounterHitState())
         {
             counterHitMult = 1;
@@ -61,10 +61,10 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeDamage(Attack_BaseProperties currentAttack,bool armoredAttack)
     {
         curRawDamage = currentAttack.rawAttackDamage;
-        if (CheckAfflictionState())
+        /*if (CheckAfflictionState())
         {
             afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-        }
+        }*/
         if (!CheckCounterHitState())
         {
             counterHitMult = 1;
@@ -100,10 +100,10 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
     {
         curChipDamage = currentAttack.rawChipDamage;
-        if (CheckAfflictionState())
+        /*if (CheckAfflictionState())
         {
             afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-        }
+        }*/
         float defenseValue = _healtController.defenseValue / 100;
 
         calculatedDamage = curChipDamage  - defenseValue;

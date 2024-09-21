@@ -17,7 +17,6 @@ public class Character_Health : MonoBehaviour
 
     void Start()
     {
-        Messenger.AddListener<Affliction>(Events.SendAfflictionToTarget, ApplyAffliction);
     }
 
     public void SetHealthInformation(Character_Profile profile) 

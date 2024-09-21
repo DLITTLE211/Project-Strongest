@@ -40,11 +40,6 @@ public enum Events
 {
     ResetMoveOnTimer,
 
-    SendNegativeEffect,
-    SendPositiveEffect,
-    SendAfflictionToTarget,
-    SendAmpliferToSelf,
-
     PlayCutscene,
     SceneComplete,
 

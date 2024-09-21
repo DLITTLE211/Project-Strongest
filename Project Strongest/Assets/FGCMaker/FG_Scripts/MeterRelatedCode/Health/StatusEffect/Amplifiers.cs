@@ -6,17 +6,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Status Effect", menuName = "Amplifier")]
 public class Amplifiers : StatusEffect 
 {
-    public PositiveStatusEffect amplifier;
-    private void Awake()
-    {
-        Messenger.AddListener(Events.SendAmpliferToSelf, SendEffect);
-    }
+    public Effect_Amplify amplifier;
     void SendEffect()
     {
         AssignStatusEffect(amplifier);
     }
-    public void AssignStatusEffect(PositiveStatusEffect effect)
+    public void AssignStatusEffect(Effect_Amplify effect)
     {
-        Messenger.Broadcast<PositiveStatusEffect>(Events.SendPositiveEffect, effect);
+    }
+    public void AddToMeter() 
+    {
+
     }
 }
