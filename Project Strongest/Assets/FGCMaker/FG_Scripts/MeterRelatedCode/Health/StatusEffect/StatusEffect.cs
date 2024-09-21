@@ -6,13 +6,13 @@ public class StatusEffect : MonoBehaviour
 {
     public enum Effect_Amplify 
     {
-        Bloodthirsty,/*Timed*/
-        Focus,/*Timed*/
-        HeavyHitter,/*Timed*/
-        Iron, /*Permanent*/
-        Might, /*Timed*/
-        Perfectionist, /*Permanent*/
-        WillPower, /*Permanent*/
+        Bloodthirsty = 0,/*Timed*/
+        Focus = 1,/*Timed*/
+        HeavyHitter = 2,/*Timed*/
+        Iron = 3, /*Permanent*/
+        Might = 4, /*Timed*/
+        Perfectionist = 5, /*Permanent*/
+        WillPower = 6, /*Permanent*/
     };
     /*
      *  WillPower: Decrease to stun damage taken
@@ -26,23 +26,23 @@ public class StatusEffect : MonoBehaviour
     public enum Effect_Affliction 
     {
         /*Weak Afflictions*/
-        Dizzy,
-        Immobile, 
-        Paralysis,
-        Slashed,
-        Fragile,
+        Dizzy = 0,
+        Immobile = 1, 
+        Paralysis = 2,
+        Slashed = 3,
+        Fragile = 4,
         /*Medium Afflictions*/
-        Hollow,
-        Ravaged,
-        Shattered,
-        Weakened,
-        Yielded,
+        Hollow = 5,
+        Ravaged = 6,
+        Shattered = 7,
+        Weakened = 8,
+        Yielded = 9,
         /*Strong Afflictions*/
-        Defenseless,
-        Terror,
-        Erratic,
-        Sliced,
-        Severed,
+        Defenseless = 10,
+        Terror = 11,
+        Erratic = 12,
+        Sliced = 13,
+        Severed = 14,
     };
     /*
      *  Dizzy: Increase to stun damage taken on last attack
