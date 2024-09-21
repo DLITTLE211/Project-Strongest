@@ -9,15 +9,17 @@ public class StatusEffect : MonoBehaviour
         Bloodthirsty = 0,/*Timed*/
         Focus = 1,/*Timed*/
         HeavyHitter = 2,/*Timed*/
-        Iron = 3, /*Permanent*/
+        Iron = 3, /*Timed*/
         Might = 4, /*Timed*/
         Perfectionist = 5, /*Permanent*/
-        WillPower = 6, /*Permanent*/
+        FleetFoot = 6, /*Permanent*/
+        WillPower = 7, /*Timed*/
     };
     /*
      *  WillPower: Decrease to stun damage taken
      *  Iron: Increase to character defense value
      *  Perfectionist: Increases ChipDamage on block but greatly enhances Parry abilities
+     *  Perfectionist: Increases movement speed and dash distance
      *  HeavyHitter: Buffs damage output for Amplify Duration
      *  Might: Increase to chip damage of attacks for Amplify Duration
      *  Focus: Increase to meter gain for Amplify Duration

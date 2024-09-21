@@ -8,13 +8,21 @@ public class Character_AmplifyController : MonoBehaviour
 {
     [SerializeField] private Amplifiers chosenAmplifier;
     [SerializeField] private Slider _amplifySlider;
+    public bool allowFill;
     public void SetChosenAmplifier(Amplifiers _chosenAmplifier)
     {
         chosenAmplifier = _chosenAmplifier;
     }
+    private void Update()
+    {
+        if (allowFill && _amplifySlider.value != _amplifySlider.maxValue) 
+        {
+            AllowFillMeter();
+        }
+    }
     public void AllowFillMeter() 
     {
-        _amplifySlider.DOValue(1f,chosenAmplifier.fillTime);
+        _amplifySlider.value += chosenAmplifier.fillRateInFrames;
     }
     public void DrainMeter()
     {

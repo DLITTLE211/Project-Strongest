@@ -13,20 +13,14 @@ public class Affliction : StatusEffect
     public float activeDuration;
     public float damageValue;
     public bool _isConsumed;
-    void SendEffect() 
+    public void SendEffect() 
     {
-        AssignStatusEffect(affliction);
-    }
-    public void AssignStatusEffect(Effect_Affliction effect)
-    {
+
     }
 #if UNITY_EDITOR
     [CustomEditor(typeof(Affliction)), CanEditMultipleObjects]
     public class AfflictionEditor : Editor
     {
-        private void OnEnable()
-        {
-        }
         public override void OnInspectorGUI()
         {
             Affliction element = (Affliction)target;
@@ -45,4 +39,9 @@ public class Affliction : StatusEffect
         }
     }
 #endif
+}
+[Serializable]
+public enum AfflictionApplictionType 
+{
+
 }

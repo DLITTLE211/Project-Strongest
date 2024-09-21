@@ -3,46 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEditor;
+using FightingGame_FrameData;
 
 [Serializable]
 public class Amplifiers : StatusEffect 
 {
+    [Header("Amplifier Type")]
     public Effect_Amplify amplifier;
     public DurationType durationType;
+    public FillType fillType;
     public ActiveState currentState = ActiveState.Inactive;
-    public int fillTime;
-    public float activeDuration;
-    void SendEffect()
-    {
-        AssignStatusEffect(amplifier);
-    }
-    public void AssignStatusEffect(Effect_Amplify effect)
-    {
-    }
-    #if UNITY_EDITOR
-    [CustomEditor(typeof(Amplifiers)), CanEditMultipleObjects]
-    public class AmplifiersEditor : Editor
-    {
-        private void OnEnable()
-        {
-            Amplifiers element = (Amplifiers)target;
-        }
-        public override void OnInspectorGUI()
-        {
-            Amplifiers element = (Amplifiers)target;
-            element.amplifier = (Effect_Amplify)EditorGUILayout.EnumPopup(element.amplifier);
-            element.fillTime = EditorGUILayout.IntSlider(element.fillTime,0, 5);
-            element.durationType = (DurationType)EditorGUILayout.EnumPopup(element.durationType);
-            element.currentState = (ActiveState)EditorGUILayout.EnumPopup(element.currentState);
+    [Space(15)]
 
-            if (element.durationType == DurationType.Permenant)
-            {
-            }
-            if (element.durationType == DurationType.Timed)
-            {
-                element.activeDuration = (float)EditorGUILayout.Slider(element.activeDuration,1,7);
-            }
+    [Header("Fill Meter Variables")]
+    public float fillRateInFrames;
+    [Range(1, 20)]public int fillRate;
+    [Range(10, 50)] public float activeDuration;
+    [Space(15)]
+
+
+    [Header("Percent Bonus Upon Activation")]
+    [Range(5, 45)] public float percentBonus;
+    [Space(15)]
+    [Header("Perfectionist --ONLY-- Debuff")]
+    public int _perfectionistDebuff;
+    private void Start()
+    {
+        if(fillType == FillType.Instant) 
+        {
+            fillRate = 1;
+            fillRateInFrames = 1f;
+        }
+        else 
+        {
+            fillRateInFrames = Base_FrameCode.ONE_FRAME * (1/fillRate);
         }
     }
-    #endif
+    public void SendEffect()
+    {
+    }
+}
+public enum FillType 
+{
+    Instant,
+    Standard,
 }
