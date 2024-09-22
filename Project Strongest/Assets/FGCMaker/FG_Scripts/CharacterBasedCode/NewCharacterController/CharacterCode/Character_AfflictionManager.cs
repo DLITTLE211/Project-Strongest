@@ -5,8 +5,9 @@ using FightingGame_FrameData;
 
 public class Character_AfflictionManager : MonoBehaviour
 {
-    [SerializeField] private Affliction appliedAffliction;
-    IEnumerator ApplyAfflictionRoutine;
+    [SerializeField] private List<Affliction> appliedAffliction;
+    [SerializeField] private IEnumerator ApplyAfflictionRoutine;
+    public Transform targetInstantiationPosition;
     public void ClearAppliedAffliction() 
     {
         if(appliedAffliction != null) 
@@ -16,7 +17,10 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     public void ApplyAffliction(Affliction _appliedAffliction) 
     {
-        appliedAffliction = _appliedAffliction;
+        //GameObject afflictionInstance = Instantiate(_appliedAffliction.gameObject, targetInstantiationPosition);
+        _appliedAffliction.durationSlider.value = 1;
+        
+        appliedAffliction.Add(_appliedAffliction);
     }
     public void CheckToApplyAffliction(Attack_BaseProperties _specialMoveProperty) 
     {

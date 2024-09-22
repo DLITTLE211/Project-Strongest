@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEditor;
+using FightingGame_FrameData;
+using TMPro;
+using DG.Tweening;
+using UnityEngine.UI;
 
 [Serializable]
 public class Affliction : StatusEffect
@@ -10,35 +14,29 @@ public class Affliction : StatusEffect
     public Effect_Affliction affliction;
     public DurationType durationType;
     public ActiveState currentState;
-    public float activeDuration;
+    [Range(5,30)]public int activeDuration;
     public float damageValue;
     public bool _isConsumed;
-    public void SendEffect() 
+    public Slider durationSlider;
+    [Header("TempValues")]
+    public TMP_Text textField;
+    public void SendEffect(Callback endFunc) 
     {
-
-    }
-#if UNITY_EDITOR
-    [CustomEditor(typeof(Affliction)), CanEditMultipleObjects]
-    public class AfflictionEditor : Editor
-    {
-        public override void OnInspectorGUI()
+        if (durationType != DurationType.Permenant)
         {
-            Affliction element = (Affliction)target;
-            element.affliction = (Effect_Affliction)EditorGUILayout.EnumPopup("AfflictionType", element.affliction);
-            element.durationType = (DurationType)EditorGUILayout.EnumPopup("DurationType", element.durationType);
-            element.currentState = (ActiveState)EditorGUILayout.EnumPopup("ActiveState", element.currentState);
-            element.damageValue = EditorGUILayout.FloatField("DamageValue", element.damageValue);
-            element._isConsumed = EditorGUILayout.Toggle("IsConsumed",element._isConsumed);
-            if (element.durationType == DurationType.Permenant)
+            durationSlider.DOValue(0, (float)activeDuration).OnComplete(() =>
             {
-            }
-            if (element.durationType == DurationType.Timed)
-            {
-                element.activeDuration = (float)EditorGUILayout.Slider("DurationActiveTime",element.activeDuration, 1, 7);
-            }
+                endFunc();
+            });
         }
     }
-#endif
+    public void SetDurationValues() 
+    {
+        if(durationType == DurationType.Permenant) 
+        {
+            activeDuration = -1;
+        }
+    }
 }
 [Serializable]
 public enum AfflictionApplictionType 
