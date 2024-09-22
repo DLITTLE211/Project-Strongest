@@ -19,17 +19,21 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     public void Start()
     {
-        for(int i = 0; i < TotalAfflictions.Count; i++) 
+        for(int i = 0; i < TotalAfflictions.Count; i++)
         {
+            TotalAfflictions[i].SetAffliction();
             TotalAfflictions[i]._afflictionObject.SetActive(false);
         }
+        appliedAffliction.Clear();
     }
-    public void ApplyAffliction(Affliction_Object _appliedAffliction,int AfflictionIndex) 
+    public void ApplyAffliction(Affliction_Object _appliedAffliction,int index)
     {
-        Affliction currentAffliction = _appliedAffliction._afflictionObject.GetComponent<Affliction>();
-        currentAffliction.durationSlider.value = 1;
-        currentAffliction.ActivateAffliction(() => DeactivateAffliction(_appliedAffliction,AfflictionIndex));
-        appliedAffliction.Add(_appliedAffliction);
+        Affliction activeAffliction = TotalAfflictions[index]._afflictionObject.GetComponent<Affliction>();
+        TotalAfflictions[index]._afflictionObject.SetActive(true);
+        activeAffliction.SetDurationValues();
+        activeAffliction.durationSlider.value = 1;
+        activeAffliction.ActivateAffliction(() => DeactivateAffliction(TotalAfflictions[index], index));
+        appliedAffliction.Add(TotalAfflictions[index]);
     }
     void DeactivateAffliction(Affliction_Object _appliedAffliction,int _index) 
     {
@@ -63,7 +67,7 @@ public class Character_AfflictionManager : MonoBehaviour
         }
         */
     }
-    public bool Activate;
+    public bool Activate = false;
     [Range(0, 14)] public int value;
     public void Update()
     {
@@ -75,8 +79,16 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     public void TestSendAffliction(int Value) 
     {
-        Affliction _affliction = TotalAfflictions[Value]._afflictionObject.GetComponent<Affliction>();
-        _base.opponentPlayer._afflictionManager.ApplyAffliction(TotalAfflictions[Value], (int)_affliction.affliction);
+        Affliction _affliction = TotalAfflictions[Value]._afflictionBase;
+        for (int i = 0; i < TotalAfflictions.Count; i++) 
+        {
+            if (TotalAfflictions[i]._afflictionBase.affliction == _affliction.affliction) 
+            {
+                _base.opponentPlayer._afflictionManager.ApplyAffliction(TotalAfflictions[Value], i);
+                break;
+            }
+            continue;
+        }
     }
 }
 [Serializable]
@@ -84,4 +96,10 @@ public class Affliction_Object
 {
     public StatusEffect.Effect_Affliction _afflictionType;
     public GameObject _afflictionObject;
+    public Affliction _afflictionBase;
+    public void SetAffliction() 
+    {
+        _afflictionBase = _afflictionObject.GetComponent<Affliction>();
+        
+    }
 }

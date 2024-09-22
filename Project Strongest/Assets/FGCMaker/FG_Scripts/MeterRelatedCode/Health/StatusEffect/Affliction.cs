@@ -14,7 +14,8 @@ public class Affliction : StatusEffect
     public Effect_Affliction affliction;
     public DurationType durationType;
     public ActiveState currentState;
-    [Range(5,30)]public int activeDuration;
+    [SerializeField,Range(5,30)]private int activeDuration;
+    public float duration;
     public float damageValue;
     public bool _isConsumed;
     public Slider durationSlider;
@@ -24,7 +25,7 @@ public class Affliction : StatusEffect
     {
         if (durationType != DurationType.Permenant)
         {
-            durationSlider.DOValue(0, (float)activeDuration).OnComplete(() =>
+            durationSlider.DOValue(0, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 endFunc();
             });
@@ -35,6 +36,11 @@ public class Affliction : StatusEffect
         if(durationType == DurationType.Permenant) 
         {
             activeDuration = -1;
+            duration = 9999;
+        }
+        else 
+        {
+            duration = activeDuration;
         }
     }
 }
