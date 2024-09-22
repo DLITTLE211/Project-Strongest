@@ -100,6 +100,6 @@ public class Affliction_Object
     public void SetAffliction() 
     {
         _afflictionBase = _afflictionObject.GetComponent<Affliction>();
-        
+        _afflictionBase.SetTextValue();
     }
 }

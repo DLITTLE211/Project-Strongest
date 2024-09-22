@@ -21,6 +21,10 @@ public class Affliction : StatusEffect
     public Slider durationSlider;
     [Header("TempValues")]
     public TMP_Text textField;
+    public void SetTextValue() 
+    {
+        textField.text = $"{affliction.ToString()[0]}{affliction.ToString()[1]}";
+    }
     public void ActivateAffliction(Callback endFunc) 
     {
         if (durationType != DurationType.Permenant)
