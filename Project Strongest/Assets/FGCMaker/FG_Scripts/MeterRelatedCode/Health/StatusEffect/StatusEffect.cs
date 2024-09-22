@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public class StatusEffect : MonoBehaviour
 {
+    [Serializable]
     public enum Effect_Amplify 
     {
         Bloodthirsty = 0,/*Timed*/
@@ -25,6 +26,7 @@ public class StatusEffect : MonoBehaviour
      *  Focus: Increase to meter gain for Amplify Duration
      *  Bloodthirsty: Steals meter from opponent on hit/block
      */
+    [Serializable]
     public enum Effect_Affliction 
     {
         /*Weak Afflictions*/

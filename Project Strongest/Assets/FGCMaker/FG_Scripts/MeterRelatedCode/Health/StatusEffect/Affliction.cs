@@ -20,7 +20,7 @@ public class Affliction : StatusEffect
     public Slider durationSlider;
     [Header("TempValues")]
     public TMP_Text textField;
-    public void SendEffect(Callback endFunc) 
+    public void ActivateAffliction(Callback endFunc) 
     {
         if (durationType != DurationType.Permenant)
         {
