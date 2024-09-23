@@ -13,8 +13,12 @@ public class UI_ToggleableElement : MonoBehaviour
     public ToggledElement _toggleStyle;
     #region if Slider Toggle
     public Slider _elementSlider;
+    public TMP_Text _sliderValue;
     #endregion
-
+    private void Update()
+    {
+        _sliderValue.text = $"{_elementSlider.value}%";
+    }
     #region if Button Toggle
     public Button _leftButton,_rightButton;
     #endregion
@@ -62,6 +66,7 @@ public class UI_ToggleableElement : MonoBehaviour
             }
             if (element._toggleStyle == ToggledElement.SliderToggle)
             {
+                element._sliderValue = (TMP_Text)EditorGUILayout.ObjectField(element._sliderValue, typeof(TMP_Text));
                 element._elementSlider = (Slider)EditorGUILayout.ObjectField(element._elementSlider, typeof(Slider), true);
             }
         }

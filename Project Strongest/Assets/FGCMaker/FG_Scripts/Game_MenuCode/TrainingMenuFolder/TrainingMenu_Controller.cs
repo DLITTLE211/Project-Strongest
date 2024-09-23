@@ -17,11 +17,10 @@ public class TrainingMenu_Controller : MonoBehaviour
     [SerializeField] private List<UI_SubMenuBase> trainingMenuObject;
     public MenuType chosenMenuType;
     [SerializeField] private EventSystem eventSystem;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private UI_HealthSettings_SubMenu healthReturnValues;
+    [SerializeField] private UI_MeterSetting_SubMenu meterReturnValues;
+    [SerializeField] private UI_DummyController_SubMenu EnemySettingReturnValues;
+    [SerializeField] private UI_InfoDisplay_SubMenu InfoDisplayReturnValues;
     public TrainingButtonObject ReturnTopButton() 
     {
         return trainingButtonDictionary[0];
@@ -129,6 +128,21 @@ public class TrainingMenu_Controller : MonoBehaviour
         }
         eventSystem.SetSelectedGameObject(trainingButtonDictionary[0].gameObject);
     }
+
+    #region Return ToggledHealthValues
+    public void ReturnHealthValues() 
+    {
+        List<float> returnValues = new List<float>();
+        returnValues.Add(healthReturnValues.ReturnP1HealthValue());
+        returnValues.Add(healthReturnValues.ReturnP2HealthValue());
+        returnValues.Add(healthReturnValues.ReturnP1StunValue());
+        returnValues.Add(healthReturnValues.ReturnP2StunValue());
+    }
+    #endregion
+
+
+
+
     void SetActiveButton(GameObject button) 
     {
         eventSystem.SetSelectedGameObject((GameObject)button);
