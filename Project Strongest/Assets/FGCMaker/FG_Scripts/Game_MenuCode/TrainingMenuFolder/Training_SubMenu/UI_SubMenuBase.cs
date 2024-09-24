@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class UI_SubMenuBase : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class UI_SubMenuBase : MonoBehaviour
     public List<Image> menuImageList;
     public List<UI_ToggleableElement> toggleableElements;
     public MenuType _menuType;
+
+    internal int meterRecoveryLength;
+    private void Start()
+    {
+    }
+    
     public void EnableMenu(Callback<GameObject> func) 
     {
         FadeElements(1);

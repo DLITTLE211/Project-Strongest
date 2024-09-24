@@ -17,7 +17,10 @@ public class UI_ToggleableElement : MonoBehaviour
     #endregion
     private void Update()
     {
-        _sliderValue.text = $"{_elementSlider.value}%";
+        if (_elementSlider != null)
+        {
+            _sliderValue.text = $"{_elementSlider.value}%";
+        }
     }
     #region if Button Toggle
     public Button _leftButton,_rightButton;

@@ -25,6 +25,10 @@ public class TrainingMenu_Controller : MonoBehaviour
     {
         return trainingButtonDictionary[0];
     }
+    private void Start()
+    {
+        DeactivateMenuOnStart();
+    }
     public void SetupTrainingButtons(EventSystem _eventSystem)
     {
         eventSystem = _eventSystem;
@@ -113,6 +117,13 @@ public class TrainingMenu_Controller : MonoBehaviour
                 break;
             }
             continue;
+        }
+    }
+    void DeactivateMenuOnStart() 
+    {
+        for (int i = 0; i < trainingMenuObject.Count; i++)
+        {
+            trainingMenuObject[i].DisableMenu(() => trainingMenuObject[i].gameObject.SetActive(false));
         }
     }
     public void DeactivateMenu() 
