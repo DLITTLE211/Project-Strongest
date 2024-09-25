@@ -47,9 +47,9 @@ MonoBehaviour:
   BasicSuperAttacks:
   - specialMoveName: Cockroach Dash (Super)
     attackInput:
-    - attackString: 2363236A
-      attackStringArray: 
     - attackString: 236236A
+      attackStringArray: 
+    - attackString: 2363236A
       attackStringArray: 
     - attackString: 2365236A
       attackStringArray: 
@@ -184,9 +184,9 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Triceratops Fist
     attackInput:
-    - attackString: 2141214B
-      attackStringArray: 
     - attackString: 214214B
+      attackStringArray: 
+    - attackString: 2141214B
       attackStringArray: 
     - attackString: 2145214B
       attackStringArray: 
@@ -615,9 +615,9 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Ultimate Guillotine Choke
     attackInput:
-    - attackString: 2363236C
-      attackStringArray: 
     - attackString: 236236C
+      attackStringArray: 
+    - attackString: 2363236C
       attackStringArray: 
     - attackString: 2365236C
       attackStringArray: 
@@ -929,9 +929,9 @@ MonoBehaviour:
     currentCustomAnim: 0
   - specialMoveName: Demon Blood Activation (Ultra)
     attackInput:
-    - attackString: 2363236D
-      attackStringArray: 
     - attackString: 236236D
+      attackStringArray: 
+    - attackString: 2363236D
       attackStringArray: 
     - attackString: 2365236D
       attackStringArray: 
@@ -4103,7 +4103,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 6LP
+          _attackName: Jumping Jaw Strike
           _cTimer: {fileID: 0}
           rawAttackDamage: 5
           rawChipDamage: 0
@@ -4178,7 +4178,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 6HP
+          _attackName: Oi Zuki
           _cTimer: {fileID: 0}
           rawAttackDamage: 10
           rawChipDamage: 0
@@ -4253,7 +4253,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 
+          _attackName: High Kick
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
           rawChipDamage: 0
@@ -4328,7 +4328,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 2LK
+          _attackName: Flying Knee (Air Only)
           _cTimer: {fileID: 0}
           rawAttackDamage: 8
           rawChipDamage: 0
@@ -4403,7 +4403,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 2HK
+          _attackName: DiveKick (Air Only)
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
           rawChipDamage: 0
@@ -5260,7 +5260,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 
+          _attackName: Throw Combo (Forward)
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
           rawChipDamage: 0
@@ -5453,7 +5453,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 
+          _attackName: Throw Combo (Backward)
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
           rawChipDamage: 0

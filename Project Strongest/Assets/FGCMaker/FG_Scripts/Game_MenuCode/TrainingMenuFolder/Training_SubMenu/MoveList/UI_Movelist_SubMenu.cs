@@ -52,11 +52,21 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         for (int i = moveList.stanceSpecials.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.stanceSpecials[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
+            for (int j = moveList.stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput.Count - 1; j > -1; j--)
+            {
+                Attack_BaseInput curStanceAttack = moveList.stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput[j];
+                MakeAndSetText(curStanceAttack.CreateMoveListData(), moveListObject.moveListInformationTarget);
+            }
         }
 
         for (int i = moveList.rekkaSpecials.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.rekkaSpecials[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
+            for (int j = moveList.rekkaSpecials[i].rekkaInput._rekkaPortion.Count - 1; j > -1; j--)
+            {
+                Attack_BaseInput curRekkaAttack = moveList.rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0];
+                MakeAndSetText(curRekkaAttack.CreateMoveListData(), moveListObject.moveListInformationTarget);
+            }
         }
 
         for (int i = moveList.special_Simple.Count - 1; i > -1; i--)
@@ -101,9 +111,9 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         TMP_Text moveTextField = curMoveTextAsset.GetComponentInChildren<TMP_Text>();
 
         string meterAddendum = newAttack.meterRequirement > 1 ? "bars of meter" : "bar of meter";
-        string meterMessage = newAttack.meterRequirement > 0 ? $"<size={18}>(requires {newAttack.meterRequirement} {meterAddendum})" : "";
+        string meterMessage = newAttack.meterRequirement > 0 ? $"<size={14}>(requires {newAttack.meterRequirement} {meterAddendum})" : "";
 
-        string Message = $"{newAttack.AttackName} {meterMessage} \n <size={18}>{newAttack.AttackInput}";
+        string Message = $"<size={18}>{newAttack.AttackInput}\n <size={25}>{newAttack.AttackName} {meterMessage} ";
         moveTextField.text = Message;
     }
 }

@@ -43,7 +43,15 @@ public class Attack_BaseInput
         property.attackHashes = Animator.StringToHash(property.AttackAnims.animName);
 
     }
+    public MoveListAttackInfo CreateMoveListData()
+    {
+        string attackName = property._attackName;
+        string specialMoveInput = _correctSequence;
+        int _meterRequirement = property._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
+        return newMoveListAttackInfo;
+    }
     public void SetAttackInfo(string NewAttackString, string specialAttackName)
     {
         correctInput = (NewAttackString.ToCharArray()[1]);
