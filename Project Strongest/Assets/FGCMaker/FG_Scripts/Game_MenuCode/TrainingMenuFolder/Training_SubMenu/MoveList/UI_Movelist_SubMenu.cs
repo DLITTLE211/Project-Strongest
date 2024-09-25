@@ -111,9 +111,9 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         TMP_Text moveTextField = curMoveTextAsset.GetComponentInChildren<TMP_Text>();
 
         string meterAddendum = newAttack.meterRequirement > 1 ? "bars of meter" : "bar of meter";
-        string meterMessage = newAttack.meterRequirement > 0 ? $"<size={14}>(requires {newAttack.meterRequirement} {meterAddendum})" : "";
+        string meterMessage = newAttack.meterRequirement > 0 ? $"<size={16}>(requires {newAttack.meterRequirement} {meterAddendum})" : "";
 
-        string Message = $"<size={18}>{newAttack.AttackInput}\n <size={25}>{newAttack.AttackName} {meterMessage} ";
+        string Message = $"<size={18}>{newAttack.AttackInput} <size={25}>{newAttack.AttackName} {meterMessage} ";
         moveTextField.text = Message;
     }
 }

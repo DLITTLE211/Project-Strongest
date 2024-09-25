@@ -46,7 +46,7 @@ public class Attack_BaseInput
     public MoveListAttackInfo CreateMoveListData()
     {
         string attackName = property._attackName;
-        string specialMoveInput = _correctSequence;
+        string specialMoveInput = _correctSequence.Contains("0") ?_correctSequence.Remove(0,1) : _correctSequence;
         int _meterRequirement = property._meterRequirement;
         MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 

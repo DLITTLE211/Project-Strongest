@@ -133,7 +133,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     public MoveListAttackInfo CreateMoveListData()
     {
         string attackName = _attackInput._correctInput[0].property._attackName;
-        string specialMoveInput = _attackInput._correctInput[0]._correctSequence;
+        string specialMoveInput = _attackInput._correctInput[0]._correctSequence.Contains("0") ? _attackInput._correctInput[0]._correctSequence.Remove(0): _attackInput._correctInput[0]._correctSequence;
         int _meterRequirement = _attackInput._correctInput[0].property._meterRequirement;
         MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 

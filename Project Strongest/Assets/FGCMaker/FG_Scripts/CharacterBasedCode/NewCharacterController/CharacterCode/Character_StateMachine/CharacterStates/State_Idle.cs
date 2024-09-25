@@ -104,6 +104,7 @@ public class State_Idle : BaseState
         _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
         await Task.Delay(100);
         int secondaryAnimDelayTime = (int)(_cAnim.myAnim.GetCurrentAnimatorStateInfo(0).length * 1000);
+
         while (startTime < secondaryAnimDelayTime) 
         {
             startTime += 16;

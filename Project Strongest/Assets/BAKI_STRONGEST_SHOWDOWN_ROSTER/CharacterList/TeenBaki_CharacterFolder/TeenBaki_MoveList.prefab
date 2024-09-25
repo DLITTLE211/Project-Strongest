@@ -57,7 +57,7 @@ MonoBehaviour:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: Dash Attack
+      _attackName: 'Cockroach Dash '
       _cTimer: {fileID: 0}
       rawAttackDamage: 18
       rawChipDamage: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: Triceratops Fist (Startup)
+      _attackName: 'Triceratops Fist '
       _cTimer: {fileID: 0}
       rawAttackDamage: 10
       rawChipDamage: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: Guillotine Choke
+      _attackName: Ultimate Guillotine Choke
       _cTimer: {fileID: 0}
       rawAttackDamage: 20
       rawChipDamage: 0
@@ -939,7 +939,7 @@ MonoBehaviour:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: Blood Activation (Super)
+      _attackName: 'Demon Blood Activation '
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
       rawChipDamage: 0
@@ -1358,7 +1358,7 @@ MonoBehaviour:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: TIger King (Start)
+      _attackName: Tiger King (Light)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
       rawChipDamage: 0
@@ -1580,7 +1580,7 @@ MonoBehaviour:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: TIger King (Start)
+      _attackName: Tiger King (Heavy)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
       rawChipDamage: 0
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   stanceSpecials:
   - StanceSpecialAttack_Name: Blink Strike (Heavy)
     stanceStartProperty:
-      _attackName: Blink Strike (Walk)
+      _attackName: Blink Strike (Heavy)
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
       rawChipDamage: 0
@@ -1980,7 +1980,7 @@ MonoBehaviour:
       - attackString: 26A
         attackStringArray: 
       mainAttackProperty:
-        _attackName: Hanma Assault (Main)
+        _attackName: 'Hanma Assault '
         _cTimer: {fileID: 0}
         rawAttackDamage: 10
         rawChipDamage: 0
@@ -2051,7 +2051,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: High Roundhouse
+              _attackName: Hanma Assault (Roundhouse)
               _cTimer: {fileID: 0}
               rawAttackDamage: 8
               rawChipDamage: 0
@@ -2121,7 +2121,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Low Sweep
+              _attackName: Hanma Assault (Low Sweep)
               _cTimer: {fileID: 0}
               rawAttackDamage: 8
               rawChipDamage: 0
@@ -2198,7 +2198,7 @@ MonoBehaviour:
       - attackString: 24C
         attackStringArray: 
       mainAttackProperty:
-        _attackName: Flash Step (Teleport)
+        _attackName: Flash Step (Light Series)
         _cTimer: {fileID: 0}
         rawAttackDamage: 0
         rawChipDamage: 0
@@ -2299,7 +2299,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Flash Step (Multipunch)
+              _attackName: (L) Flash Step (Multipunch)
               _cTimer: {fileID: 0}
               rawAttackDamage: 20
               rawChipDamage: 0
@@ -2369,7 +2369,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Flash Step (Uppercut)
+              _attackName: (L) Flash Step (Uppercut)
               _cTimer: {fileID: 0}
               rawAttackDamage: 10
               rawChipDamage: 0
@@ -2439,7 +2439,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Flash Step (NutShot)
+              _attackName: (L) Flash Step (NutShot)
               _cTimer: {fileID: 0}
               rawAttackDamage: 12
               rawChipDamage: 0
@@ -2516,7 +2516,7 @@ MonoBehaviour:
       - attackString: 24D
         attackStringArray: 
       mainAttackProperty:
-        _attackName: Flash Step (Teleport)
+        _attackName: Flash Step (Heavy Series)
         _cTimer: {fileID: 0}
         rawAttackDamage: 0
         rawChipDamage: 0
@@ -2617,7 +2617,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Flash Step (Multipunch)
+              _attackName: (H) Flash Step (Multipunch)
               _cTimer: {fileID: 0}
               rawAttackDamage: 20
               rawChipDamage: 0
@@ -2687,7 +2687,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Flash Step (Uppercut)
+              _attackName: (H) Flash Step (Uppercut)
               _cTimer: {fileID: 0}
               rawAttackDamage: 10
               rawChipDamage: 0
@@ -2757,7 +2757,7 @@ MonoBehaviour:
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Flash Step (NutShot)
+              _attackName: (H) Flash Step (NutShot)
               _cTimer: {fileID: 0}
               rawAttackDamage: 12
               rawChipDamage: 0
@@ -2829,7 +2829,7 @@ MonoBehaviour:
   special_Simple:
   - BasicSpecialAttack_Name: Blink Strike
     property:
-      _attackName: Strike (Uppercut)
+      _attackName: Blink Strike (Light)
       _cTimer: {fileID: 0}
       rawAttackDamage: 15
       rawChipDamage: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
     framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Benda Slap (High)
     property:
-      _attackName: High Slap
+      _attackName: Benda Slap (High)
       _cTimer: {fileID: 0}
       rawAttackDamage: 18
       rawChipDamage: 0
@@ -2969,7 +2969,7 @@ MonoBehaviour:
     framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Benda Slap (Low)
     property:
-      _attackName: Low Slap
+      _attackName: Benda Slap (Low)
       _cTimer: {fileID: 0}
       rawAttackDamage: 15
       rawChipDamage: 0

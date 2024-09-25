@@ -45,6 +45,7 @@ public class MainGame_SettingsController : MonoBehaviour
     {
         if (_pauseMenu.activeInHierarchy)
         {
+            _pauseMenu.GetComponent<TrainingMenu_Controller>().DeactivateMenuOnStart();
             _pauseMenu.SetActive(false);
             mainPlayer.UnlockPlayerInPause();
             secondaryPlayer.UnlockPlayerInPause();

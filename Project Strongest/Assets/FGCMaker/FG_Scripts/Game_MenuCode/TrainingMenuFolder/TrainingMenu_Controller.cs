@@ -129,7 +129,7 @@ public class TrainingMenu_Controller : MonoBehaviour
             continue;
         }
     }
-    void DeactivateMenuOnStart() 
+    public void DeactivateMenuOnStart() 
     {
         for (int i = 0; i < trainingMenuObject.Count; i++)
         {
