@@ -3214,6 +3214,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SubMenu_MovelistPage
       objectReference: {fileID: 0}
+    - target: {fileID: 314044186503788332, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8801299471925071989}
+    - target: {fileID: 314044186503788332, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DeactivateMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 314044186503788332, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TrainingMenu_Controller, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 314044186503788332, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2966789736765178240, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

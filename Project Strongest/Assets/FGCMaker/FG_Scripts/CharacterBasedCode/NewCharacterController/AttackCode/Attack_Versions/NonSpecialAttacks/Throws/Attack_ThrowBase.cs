@@ -39,7 +39,15 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
         }
         _throwAnimation[0].SetAttackAnim(_curBase._cAnimator);
     }
+    public MoveListAttackInfo CreateMoveListData()
+    {
+        string attackName = _attackInput._correctInput[0].property._attackName;
+        string specialMoveInput = _attackInput._correctInput[0]._correctSequence;
+        int _meterRequirement = _attackInput._correctInput[0].property._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
+        return newMoveListAttackInfo;
+    }
     public MoveType GetAttackMoveType()
     {
         return _attackInput._correctInput[0].property._moveType;

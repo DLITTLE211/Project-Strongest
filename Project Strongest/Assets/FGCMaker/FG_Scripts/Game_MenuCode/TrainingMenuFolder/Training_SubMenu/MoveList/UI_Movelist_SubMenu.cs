@@ -34,34 +34,42 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
     }
     public void SetMovelist(Character_MoveList moveList, MoveListObject moveListObject)
     {
-        for(int i = 0; i < moveList.BasicSuperAttacks.Count; i++) 
+        for(int i = moveList.BasicSuperAttacks.Count-1; i > -1; i--) 
         {
             MakeAndSetText(moveList.BasicSuperAttacks[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
         }
 
-        for (int i = 0; i < moveList.CommandThrows.Count; i++)
+        for (int i = moveList.CommandThrows.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.CommandThrows[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
         }
 
-        for (int i = 0; i < moveList.CounterAttacks.Count; i++)
+        for (int i = moveList.CounterAttacks.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.CounterAttacks[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
         }
 
-        for (int i = 0; i < moveList.stanceSpecials.Count; i++)
+        for (int i = moveList.stanceSpecials.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.stanceSpecials[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
         }
 
-        for (int i = 0; i < moveList.rekkaSpecials.Count; i++)
+        for (int i = moveList.rekkaSpecials.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.rekkaSpecials[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
         }
 
-        for (int i = 0; i < moveList.special_Simple.Count; i++)
+        for (int i = moveList.special_Simple.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.special_Simple[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
+        }
+        for (int i = moveList.commandNormalAttacks.Count - 1; i > -1; i--)
+        {
+            MakeAndSetText(moveList.commandNormalAttacks[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
+        }
+        for (int i = moveList.BasicThrows.Count - 1; i > -1; i--)
+        {
+            MakeAndSetText(moveList.BasicThrows[i].CreateMoveListData(), moveListObject.moveListInformationTarget);
         }
     }
     public void CycleMovelist() 
@@ -87,14 +95,15 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         
     }
 
-    public void MakeAndSetText(MoveListAttackInfo newAttack, Transform location) 
+    public void MakeAndSetText(MoveListAttackInfo newAttack, Transform location)
     {
-        string Message = $"{newAttack.AttackName} \n <size=25>{newAttack.AttackInput}";
-        string meterAddendum = newAttack.meterRequirement > 1 ? "bars of meter" : "bar of meter";
-        string meterMessage = newAttack.meterRequirement > 0 ? $"\n <size=25><align=right> requires {newAttack.meterRequirement} {meterAddendum}" : "";
-        Message = Message + meterMessage;
         GameObject curMoveTextAsset = GameObject.Instantiate(TextSample, location);
         TMP_Text moveTextField = curMoveTextAsset.GetComponentInChildren<TMP_Text>();
+
+        string meterAddendum = newAttack.meterRequirement > 1 ? "bars of meter" : "bar of meter";
+        string meterMessage = newAttack.meterRequirement > 0 ? $"<size={18}>(requires {newAttack.meterRequirement} {meterAddendum})" : "";
+
+        string Message = $"{newAttack.AttackName} {meterMessage} \n <size={18}>{newAttack.AttackInput}";
         moveTextField.text = Message;
     }
 }

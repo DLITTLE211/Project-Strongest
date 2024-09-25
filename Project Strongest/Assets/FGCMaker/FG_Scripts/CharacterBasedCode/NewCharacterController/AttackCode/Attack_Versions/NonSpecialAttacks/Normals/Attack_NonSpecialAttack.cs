@@ -130,6 +130,15 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             target._cDamageCalculator.ReceiveDamage(main, blockedAttack, armoredAttack);
         }
     }
+    public MoveListAttackInfo CreateMoveListData()
+    {
+        string attackName = _attackInput._correctInput[0].property._attackName;
+        string specialMoveInput = _attackInput._correctInput[0]._correctSequence;
+        int _meterRequirement = _attackInput._correctInput[0].property._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
+
+        return newMoveListAttackInfo;
+    }
     public MoveType GetAttackMoveType()
     {
         return _attackInput._correctInput[0].property._moveType;
