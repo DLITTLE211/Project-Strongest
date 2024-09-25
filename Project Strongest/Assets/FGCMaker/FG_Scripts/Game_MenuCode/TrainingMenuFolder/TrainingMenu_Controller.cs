@@ -20,6 +20,7 @@ public class TrainingMenu_Controller : MonoBehaviour
     [SerializeField] private UI_HealthSettings_SubMenu healthReturnValues;
     [SerializeField] private UI_MeterSetting_SubMenu meterReturnValues;
     [SerializeField] private UI_DummyController_SubMenu EnemySettingReturnValues;
+    [SerializeField] private UI_Movelist_SubMenu movelistMenu;
     [SerializeField] private UI_InfoDisplay_SubMenu InfoDisplayReturnValues;
     public TrainingButtonObject ReturnTopButton() 
     {
@@ -28,6 +29,15 @@ public class TrainingMenu_Controller : MonoBehaviour
     private void Start()
     {
         DeactivateMenuOnStart();
+    }
+
+    public void SetP1MoveListInformation(Character_MoveList movelist,string characterName) 
+    {
+        movelistMenu.SetPlayer1MoveListData(movelist, characterName);
+    }
+    public void SetP2MoveListInformation(Character_MoveList movelist, string characterName)
+    {
+        movelistMenu.SetPlayer2MoveListData(movelist, characterName);
     }
     public void SetupTrainingButtons(EventSystem _eventSystem)
     {

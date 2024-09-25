@@ -132,5 +132,14 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
             }
         }
     }
+    public MoveListAttackInfo CreateMoveListData() 
+    {
+        string attackName = property._attackName;
+        string specialMoveInput = attackInput[0].attackString;
+        int _meterRequirement = property._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
+
+        return newMoveListAttackInfo;
+    }
     #endregion
 }

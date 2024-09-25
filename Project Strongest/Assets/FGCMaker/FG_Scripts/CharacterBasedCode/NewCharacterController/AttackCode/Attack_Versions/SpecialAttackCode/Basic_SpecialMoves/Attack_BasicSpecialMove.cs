@@ -58,5 +58,13 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         return property._moveType;
     }
+    public MoveListAttackInfo CreateMoveListData()
+    {
+        string attackName = property._attackName;
+        string specialMoveInput = attackInput[0].attackString;
+        int _meterRequirement = property._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
+        return newMoveListAttackInfo;
+    }
 }

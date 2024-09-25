@@ -173,4 +173,13 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main,followUp);
     }
+    public MoveListAttackInfo CreateMoveListData()
+    {
+        string attackName = stanceStartProperty._attackName;
+        string specialMoveInput = stanceInput._stanceInput[0].attackString;
+        int _meterRequirement = stanceStartProperty._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
+
+        return newMoveListAttackInfo;
+    }
 }

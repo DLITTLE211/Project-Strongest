@@ -139,7 +139,15 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             target._cDamageCalculator.ReceiveDamage(main, blockedAttack, armoredAttack);
         }
     }
+    public MoveListAttackInfo CreateMoveListData()
+    {
+        string attackName = rekkaInput.mainAttackProperty._attackName;
+        string specialMoveInput = rekkaInput.mainAttackInput[0].attackString;
+        int _meterRequirement = rekkaInput.mainAttackProperty._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
+        return newMoveListAttackInfo;
+    }
     public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main, followUp);
