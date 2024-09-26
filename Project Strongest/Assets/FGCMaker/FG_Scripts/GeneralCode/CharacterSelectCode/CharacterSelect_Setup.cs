@@ -26,9 +26,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private TMP_Text advidoryMessage;
     [SerializeField] private ChooseSide_Object player1;
     [SerializeField] private ChooseSide_Object player2;
-    [SerializeField] private Transform _leftSide;
-    [SerializeField] private Transform _centerSide;
-    [SerializeField] private Transform _rightSide;
+    [SerializeField] private CharacterSelect_ChosenSideController sideController;
     [Space(15)]
 
     [Header("____Character Cursor Information____")]
@@ -49,13 +47,15 @@ public class CharacterSelect_Setup : MonoBehaviour
     [Header("____Rewired Players____")]
     public Character_AvailableID players;
     public Transform upBound,downBound,leftBound,rightBound;
-
+    GameModeSet currentSet;
     [SerializeField] private bool stageSelectCooldown;
     // Start is called before the first frame update
     void Start()
     {
         SetupPlayerPage(_leftPlayerPage);
         SetupPlayerPage(_rightPlayerPage);
+        player1.sideIterator = 1;
+        player2.sideIterator = 1;
     }
     public void SetListeners() 
     {
@@ -120,6 +120,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         mainObjectHolder.SetActive(true);
         CharacterSelectObject.SetActive(false);
         players = _characterSelectplayers;
+        currentSet = set;
         if (set.gameMode == GameMode.Versus)
         {
             advidoryMessage.gameObject.SetActive(false);
@@ -290,8 +291,11 @@ public class CharacterSelect_Setup : MonoBehaviour
         player.ID = ID;
         player.curPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
         player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[ID]}");
-        player.cursorObject.SetActive(true);
-        player.cursorText.text = $"{players.UsedID.Item1[ID] + 1}";
+        if (currentSet.gameMode == GameMode.Training)
+        {
+            player.cursorObject.SetActive(true);
+            player.cursorText.text = $"{players.UsedID.Item1[ID] + 1}";
+        }
         player.isConnected = true;
     }
     public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, CharacterSelect_Cursor cursorHighlight)
@@ -457,19 +461,13 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
-                //if (!currentController.cursorPage.amplifySelectCooldown)
-                //{
                 StartCoroutine(currentController.cursorPage.DelayResetBool());
                 currentController.cursorPage.characterAmplify.UpdateInfoUp();
-                //}
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Left"))
             {
-                //if (!currentController.cursorPage.amplifySelectCooldown)
-                // {
                 StartCoroutine(currentController.cursorPage.DelayResetBool());
                 currentController.cursorPage.characterAmplify.UpdateInfoDown();
-                // }
             }
             if (currentController.profile == null)
             {
@@ -478,24 +476,32 @@ public class CharacterSelect_Setup : MonoBehaviour
                 currentController.xVal = (currentController.xVal >= currentController.xYield) ? 1 : ((currentController.xVal <= -currentController.xYield) ? -1 : 0);
                 currentController.yVal = (currentController.yVal >= currentController.yYield) ? 1 : ((currentController.yVal <= -currentController.yYield) ? -1 : 0);
 
+
                 if (currentController.xVal == 0 && currentController.yVal == 0)
                 {
                     currentController.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
                 }
                 else
                 {
-                    float xVal = currentController.xVal * 3;
-                    float yVal = currentController.yVal * 3;
-                    currentController.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
-                    if (HitHeightBound(currentController.cursorObject.transform))
+                    if (SideSelectionObject.activeInHierarchy)
                     {
-                        xVal = 0;
+                        sideController.UpdateControllerSide(currentController.ID == 0 ? player1 : player2, (int)currentController.xVal); 
                     }
-                    if (HitWidthBound(currentController.cursorObject.transform))
+                    else
                     {
-                        yVal = 0;
+                        float xVal = currentController.xVal * 3;
+                        float yVal = currentController.yVal * 3;
+                        currentController.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                        if (HitHeightBound(currentController.cursorObject.transform))
+                        {
+                            xVal = 0;
+                        }
+                        if (HitWidthBound(currentController.cursorObject.transform))
+                        {
+                            yVal = 0;
+                        }
+                        currentController.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
                     }
-                    currentController.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
                 }
             }
             else
@@ -652,28 +658,38 @@ public class ChosenCharacter
 [Serializable]
 public class ChooseSide_Object
 {
+    public int sideIterator;
     public GameObject _object;
     public Image _coloredControllerImage;
     public TMP_Text objectText;
-    public void SetImageCPU() 
+    public void SetImageCPU(bool setText = true) 
     {
-        _coloredControllerImage.DOColor(Color.gray, 0.75f).OnComplete(() => 
+        _coloredControllerImage.DOColor(Color.gray, 0.45f).OnComplete(() =>
         {
-            objectText.text = "CPU";
+            if (setText)
+            {
+                objectText.text = "CPU";
+            }
         });
     }
-    public void SetImageP1()
+    public void SetImageP1(bool setText = true)
     {
-        _coloredControllerImage.DOColor(Color.red, 0.75f).OnComplete(() =>
+        _coloredControllerImage.DOColor(Color.red, 0.45f).OnComplete(() =>
         {
-            objectText.text = "P1";
+            if (setText)
+            {
+                objectText.text = "P1";
+            }
         });
     }
-    public void SetImageP2()
+    public void SetImageP2(bool setText = true)
     {
-        _coloredControllerImage.DOColor(Color.blue, 0.75f).OnComplete(() =>
+        _coloredControllerImage.DOColor(Color.blue, 0.45f).OnComplete(() =>
         {
-            objectText.text = "P2";
+            if (setText)
+            {
+                objectText.text = "P2";
+            }
         });
     }
 }
