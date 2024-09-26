@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainGame_Arena")
         {
-            Menu_Manager.subsequentLoad = true;
             Scene menuScene = SceneManager.GetSceneByName("MainGame_MenuScene");
             SceneManager.SetActiveScene(menuScene);
             SceneManager.UnloadSceneAsync("MainGame_Arena");

@@ -30,33 +30,12 @@ public class Menu_Manager : MonoBehaviour
     Transform _titleTextTransform;
     public static Menu_Manager instance;
     public static bool subsequentLoad;
-    public static IEnumerator OnActivateSceneIEnumerator;
-    public static Callback OnActiveSceneCallback;
     private void Start()
     {
         DontDestroyOnLoad(this);
         instance = this;
-        if (!subsequentLoad)
-        {
-            SetTitlePage(); 
-            _mainCamera.SetActive(true);
-        }
-        else 
-        {
-            //if(OnActivateSceneIEnumerator != null) 
-            //{
-                //StartCoroutine(OnActivateSceneIEnumerator);
-                
-           // }
-        }
-    }
-
-    public void SetStaticValues(bool state, IEnumerator awaitFunc, Callback awaitCallback) 
-    {
-        subsequentLoad = state;
-        OnActivateSceneIEnumerator = awaitFunc;
-        OnActiveSceneCallback = awaitCallback;
-
+        SetTitlePage();
+        _mainCamera.SetActive(true);
     }
     public void SetTitlePage() 
     {
@@ -123,6 +102,42 @@ public class Menu_Manager : MonoBehaviour
         FirstMenuButtonLayer.EnableButtons();
         FirstMenuButtonLayer.EnableButtons();
     }
+    #region Training Button Response
+    public async void TrainingSelected()
+    {
+        Task[] tasks = new Task[]
+        {
+            CloseMainMenuScreen(),
+        };
+        await Task.WhenAll(tasks);
+        await Task.Delay(750);
+        ToggleMainMenuState(false);
+        await Task.Delay(200);
+        currentMode = new GameModeSet(GameMode.Training);
+        _characterSelect.SetUpCharacterSelectScreen(players, currentMode);
+    }
+    #endregion
+    #region Versus Button Response
+    public async void VersusSelected()
+    {
+        Task[] tasks = new Task[]
+        {
+            CloseMainMenuScreen(),
+        };
+        await Task.WhenAll(tasks);
+        await Task.Delay(750);
+        ToggleMainMenuState(false);
+        await Task.Delay(200);
+        currentMode = new GameModeSet(GameMode.Versus);
+        _characterSelect.SetUpCharacterSelectScreen(players, currentMode);
+    }
+    #endregion
+    #region Options Button Response
+    public void OptionsSelected()
+    {
+        ToggleMainMenuState(false);
+    }
+    #endregion
     public async void ExitSelected()
     {
         Task[] tasks = new Task[]
@@ -135,19 +150,6 @@ public class Menu_Manager : MonoBehaviour
         await Task.Delay(200);
         ToggleTitleState(true);
         menuGameState = OutOfMatchGameState.Title;
-    }
-    public async void TrainingSelected()
-    {
-        Task[] tasks = new Task[]
-        {
-            CloseMainMenuScreen(),
-        };
-        await Task.WhenAll(tasks);
-        await Task.Delay(750);
-        ToggleMainMenuState(false);
-        await Task.Delay(200);
-        currentMode = new GameModeSet(GameMode.Training);
-        _characterSelect.SetUpCharacterSelectScreen(players);
     }
     void ToggleTitleState(bool state) 
     {

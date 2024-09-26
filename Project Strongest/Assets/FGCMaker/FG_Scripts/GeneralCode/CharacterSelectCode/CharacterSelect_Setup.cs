@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using System;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using TMPro;
 
 public class CharacterSelect_Setup : MonoBehaviour
 {
     [Header("____CharacterSelect Assets____")]
+    [SerializeField] private GameObject SideSelectionObject;
     [SerializeField] private GameObject mainObjectHolder;
+    [SerializeField] private GameObject CharacterSelectObject;
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
     [SerializeField] private GameObject characterSelect_Header;
@@ -18,6 +22,14 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private Image characterSelectBackgroundImage;
     [Space(15)]
 
+    [Header("____Character Side Information____")]
+    [SerializeField] private TMP_Text advidoryMessage;
+    [SerializeField] private ChooseSide_Object player1;
+    [SerializeField] private ChooseSide_Object player2;
+    [SerializeField] private Transform _leftSide;
+    [SerializeField] private Transform _centerSide;
+    [SerializeField] private Transform _rightSide;
+    [Space(15)]
 
     [Header("____Character Cursor Information____")]
     [SerializeField] private List<Character_Profile> _activeProfiles;
@@ -50,25 +62,106 @@ public class CharacterSelect_Setup : MonoBehaviour
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
+        ReInput.ControllerConnectedEvent += AddControllerCounter;
+        ReInput.ControllerDisconnectedEvent += SubtractControllerCounter;
     }
     void SetupPlayerPage(CharacterSelect_Page playerPage) 
     {
         playerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         playerPage.SetPlayerInfo(255f);
-      
+
     }
-    public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers)
+    public void SubtractControllerCounter(ControllerStatusChangedEventArgs args = null)
     {
-        SetListeners(); 
-        mainObjectHolder.SetActive(true);
-           players = _characterSelectplayers;
-        Task[] tasks = new Task[]
+        players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
+        CheckPlayerCount(args);
+    }
+    public void AddControllerCounter(ControllerStatusChangedEventArgs args = null)
+    {
+        List<string> controllerNames = new List<string>();
+        controllerNames = ReInput.controllers.GetJoystickNames().ToList();
+        for (int i = 0; i < controllerNames.Count; i++) 
         {
+            if (players.UsedID.Item2.Contains(controllerNames[i])) 
+            {
+                continue;
+            }
+            players.AddUsedID(controllerNames[i]);
+        }
+        CheckPlayerCount(args);
+    }
+    public void CheckPlayerCount(ControllerStatusChangedEventArgs args = null) 
+    {
+        if (players.UsedID.Item1.Count == 0)
+        {
+            advidoryMessage.text = "Please Plug in a controller to continue";
+            advidoryMessage.gameObject.SetActive(true);
+            player1.SetImageCPU();
+            player2.SetImageCPU();
+        }
+        advidoryMessage.gameObject.SetActive(false);
+        if (players.UsedID.Item1.Count == 1)
+        {
+            players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
+            player1.SetImageP1();
+            player2.SetImageCPU();
+        }
+        else if (players.UsedID.Item1.Count == 2)
+        {
+            player1.SetImageP1();
+            player2.SetImageP2();
+        }
+    }
+    
+    public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers, GameModeSet set)
+    {
+        SetListeners();
+        SideSelectionObject.SetActive(false);
+        mainObjectHolder.SetActive(true);
+        CharacterSelectObject.SetActive(false);
+        players = _characterSelectplayers;
+        if (set.gameMode == GameMode.Versus)
+        {
+            advidoryMessage.gameObject.SetActive(false);
+            SideSelectionObject.SetActive(true);
+            if (players.UsedID.Item1.Count == 0)
+            {
+                advidoryMessage.gameObject.SetActive(true);
+                player1.SetImageCPU();
+                player2.SetImageCPU();
+                CheckPlayerCount();
+            }
+            if (players.UsedID.Item1.Count == 1)
+            {
+                player1.SetImageP1();
+                player2.SetImageCPU();
+            }
+            else
+            {
+                player1.SetImageP1();
+                player2.SetImageP2();
+            }
+        }
+        if (set.gameMode == GameMode.Training)
+        {
+            CharacterSelectObject.SetActive(true);
+            Task[] tasks = new Task[]
+            {
             ToggleStageSelectState(true),
             ToggleCharacterSelectInfo(true,255f),
             TogglePlayerInfo(255f),
-        };
-        await Task.WhenAll(tasks);
+            };
+            await Task.WhenAll(tasks);
+            for (int i = 0; i < characterSelect_Assets.Count; i++)
+            {
+                if (i == 1)
+                {
+                    characterSelect_Assets[i].SetActive(false);
+                    continue;
+                }
+                characterSelect_Assets[i].SetActive(true);
+            }
+        }
         if (activeCharacterSelectButtons != null)
         {
             if (activeCharacterSelectButtons.Count > 0)
@@ -81,17 +174,17 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
         }
         AddCharacterSelectButtons();
-        for(int i = 0; i < characterSelect_Assets.Count; i++) 
-        {
-            if(i == 1) 
-            {
-                characterSelect_Assets[i].SetActive(false);
-                continue;
-            }
-            characterSelect_Assets[i].SetActive(true);
-        }
     }
-
+    public async void ActivateMenuAssets() 
+    {
+        Task[] tasks = new Task[]
+        {
+            ToggleStageSelectState(true),
+            ToggleCharacterSelectInfo(true,255f),
+            TogglePlayerInfo(255f),
+        };
+        await Task.WhenAll(tasks);
+    }
     private void Update()
     {
         CursorController(_leftPlayer);
@@ -320,6 +413,8 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public void ClearListeners() 
     {
+        ReInput.ControllerConnectedEvent -= AddControllerCounter;
+        ReInput.ControllerDisconnectedEvent -= SubtractControllerCounter;
         Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.RemoveListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
@@ -552,5 +647,33 @@ public class ChosenCharacter
     {
         chosenCharacter = _chosenCharacter;
         chosenAmplifier = _chosenAmplifier;
+    }
+}
+[Serializable]
+public class ChooseSide_Object
+{
+    public GameObject _object;
+    public Image _coloredControllerImage;
+    public TMP_Text objectText;
+    public void SetImageCPU() 
+    {
+        _coloredControllerImage.DOColor(Color.gray, 0.75f).OnComplete(() => 
+        {
+            objectText.text = "CPU";
+        });
+    }
+    public void SetImageP1()
+    {
+        _coloredControllerImage.DOColor(Color.red, 0.75f).OnComplete(() =>
+        {
+            objectText.text = "P1";
+        });
+    }
+    public void SetImageP2()
+    {
+        _coloredControllerImage.DOColor(Color.blue, 0.75f).OnComplete(() =>
+        {
+            objectText.text = "P2";
+        });
     }
 }
