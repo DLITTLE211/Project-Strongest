@@ -174,9 +174,13 @@ public class Character_Force : MonoBehaviour
     {
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
-            callback.forceFloat *= -1;
+            float val = callback.forceFloat * -1;
+            _myRB.AddForce(transform.right * val, ForceMode.VelocityChange);
         }
-        _myRB.AddForce(transform.right * callback.forceFloat, ForceMode.VelocityChange);
+        else
+        {
+            _myRB.AddForce(transform.right * callback.forceFloat, ForceMode.VelocityChange);
+        }
         if (beingPushed)
         {
             beingPushed = false;

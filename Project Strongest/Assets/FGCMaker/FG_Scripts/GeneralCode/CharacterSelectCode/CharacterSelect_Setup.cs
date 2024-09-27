@@ -301,55 +301,34 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         else
         {
-            players.InitAvailableIDs();
-            players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
-            if (ReInput.controllers.GetJoystickNames().Length == 1)
+            for (int i = 0; i < players.UsedID.Item1.Count; i++)
             {
-                players.AddUsedID(players.joystickNames[0]);
-                if (_player1_Cursor.curPlayer == null)
+                if (i == 0)
                 {
-                    SetCharacterSelectCursorState(_player1_Cursor, 0);
-                }
-                else
-                {
-                    _player1_Cursor.UnlockCharacterChoice();
-                    _player1_Cursor.isConnected = true;
-                    _player1_PlayerPage.ClearInfo();
-                }
-            }
-            else
-            {
-                players.InitAvailableIDs();
-                for (int i = 0; i < ReInput.controllers.GetJoystickNames().Length; i++)
-                {
-                    players.AddUsedID(players.joystickNames[i]);
-                    if (i == 0)
+                    if (_player1_Cursor.curPlayer == null)
                     {
-                        if (_player1_Cursor.curPlayer == null)
-                        {
-                            SetCharacterSelectCursorState(_player1_Cursor, i);
-                        }
-                        else
-                        {
-                            _player1_Cursor.UnlockCharacterChoice();
-                            _player1_Cursor.isConnected = true;
-                            _player1_PlayerPage.ClearInfo();
-                        }
+                        SetCharacterSelectCursorState(_player1_Cursor, 0);
                     }
-                    if (i == 1)
+                    else
                     {
-                        if (_player2_Cursor.curPlayer == null)
-                        {
-                            SetCharacterSelectCursorState(_player2_Cursor, i);
-                        }
-                        else
-                        {
-                            _player2_Cursor.UnlockCharacterChoice();
-                            _player2_Cursor.isConnected = true;
-                            _player2_PlayerPage.ClearInfo();
-                        }
+
+                        _player1_Cursor.UnlockCharacterChoice();
+                        _player1_Cursor.isConnected = true;
+                        _player1_PlayerPage.ClearInfo();
                     }
-                    else { continue; }
+                }
+                else if (i == 1) 
+                {
+                    if (_player2_Cursor.curPlayer == null)
+                    {
+                        SetCharacterSelectCursorState(_player2_Cursor, i);
+                    }
+                    else
+                    {
+                        _player2_Cursor.UnlockCharacterChoice();
+                        _player2_Cursor.isConnected = true;
+                        _player2_PlayerPage.ClearInfo();
+                    }
                 }
             }
         }
@@ -364,6 +343,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         {
             player.cursorObject.SetActive(true);
             player.cursorText.text = $"{players.UsedID.Item1[ID] + 1}";
+
         }
         player.isConnected = true;
     }
@@ -530,13 +510,19 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
-                StartCoroutine(currentController.cursorPage.DelayResetBool());
-                currentController.cursorPage.characterAmplify.UpdateInfoUp();
+                if (!SideSelectionObject.activeInHierarchy)
+                {
+                    StartCoroutine(currentController.cursorPage.DelayResetBool());
+                    currentController.cursorPage.characterAmplify.UpdateInfoUp();
+                }
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Left"))
             {
-                StartCoroutine(currentController.cursorPage.DelayResetBool());
-                currentController.cursorPage.characterAmplify.UpdateInfoDown();
+                if (!SideSelectionObject.activeInHierarchy)
+                {
+                    StartCoroutine(currentController.cursorPage.DelayResetBool());
+                    currentController.cursorPage.characterAmplify.UpdateInfoDown();
+                }
             }
             if (currentController.profile == null)
             {
