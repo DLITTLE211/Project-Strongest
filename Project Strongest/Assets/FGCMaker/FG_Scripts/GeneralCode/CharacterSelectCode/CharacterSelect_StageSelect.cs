@@ -18,21 +18,19 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     List<Stage_StageAsset> totalStages;
     private int _currentStage;
     public bool allowStageSelect;
-    private void Start()
+    public void ActivateStateSeector()
     {
-        allowStageSelect = false;
-        _mainHolder.SetActive(false);
+        _mainHolder.SetActive(true);
     }
-    public void SetArrowsLitState(List<Stage_StageAsset> _totalStages) 
+    public void SetArrowsLitState(List<Stage_StageAsset> _totalStages)
     {
         totalStages = _totalStages;
-        _mainHolder.SetActive(true); 
-        if (totalStages.Count > 1) 
+        if (totalStages.Count > 1)
         {
             _leftArrow.color = new Color(1, 1, 1, 0.75f);
             _rightArrow.color = new Color(1, 1, 1, 0.75f);
         }
-        else 
+        else
         {
             _leftArrow.color = new Color(1, 1, 1, 1);
             _rightArrow.color = new Color(1, 1, 1, 1);

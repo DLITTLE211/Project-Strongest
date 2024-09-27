@@ -16,11 +16,11 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public bool isConnected;
     public Character_Profile profile;
     public CharacterSelect_Page cursorPage;
+    public int ChosenPlayerSide;
     [SerializeField] public float xVal, yVal;
     [SerializeField, Range(0f, 1f)] public float xYield, yYield;
 
     public bool canChooseStage;
-
     public void LockinCharacterChoice(Character_Profile chosenProfile)
     {
         profile = chosenProfile;

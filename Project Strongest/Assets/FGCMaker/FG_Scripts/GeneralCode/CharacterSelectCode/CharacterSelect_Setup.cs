@@ -24,8 +24,6 @@ public class CharacterSelect_Setup : MonoBehaviour
 
     [Header("____Character Side Information____")]
     [SerializeField] private TMP_Text advidoryMessage;
-    [SerializeField] private ChooseSide_Object player1;
-    [SerializeField] private ChooseSide_Object player2;
     [SerializeField] private CharacterSelect_ChosenSideController sideController;
     [Space(15)]
 
@@ -33,8 +31,11 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private List<Character_Profile> _activeProfiles;
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
-    [SerializeField] private CharacterSelect_Page _leftPlayerPage,_rightPlayerPage;
-    [SerializeField] private CharacterSelect_Cursor _leftPlayer, _rightPlayer;
+
+    [SerializeField] private CharacterSelect_Page _player1_PlayerPage, _player2_PlayerPage;
+    [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
+    [SerializeField] private ChooseSide_Object player1;
+    [SerializeField] private ChooseSide_Object player2;
     [Space(15)]
 
 
@@ -52,10 +53,15 @@ public class CharacterSelect_Setup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetupPlayerPage(_leftPlayerPage);
-        SetupPlayerPage(_rightPlayerPage);
+        SetupPlayerPage(_player1_PlayerPage);
+        SetupPlayerPage(_player2_PlayerPage);
         player1.sideIterator = 1;
         player2.sideIterator = 1;
+    }
+    private void Update()
+    {
+        CursorController(_player1_Cursor);
+        CursorController(_player2_Cursor);
     }
     public void SetListeners() 
     {
@@ -112,7 +118,75 @@ public class CharacterSelect_Setup : MonoBehaviour
             player2.SetImageP2();
         }
     }
-    
+    async void SetPlayerInformation_OnCharacterSelect()
+    {
+        CharacterSelectObject.SetActive(true);
+        Task[] tasks = new Task[]
+        {
+            ToggleStageSelectState(true),
+            ToggleCharacterSelectInfo(true,255f),
+            TogglePlayerInfo(255f),
+        };
+        await Task.WhenAll(tasks);
+        for (int i = 0; i < characterSelect_Assets.Count; i++)
+        {
+            if (i == 1)
+            {
+                characterSelect_Assets[i].SetActive(false);
+                continue;
+            }
+            characterSelect_Assets[i].SetActive(true);
+        }
+        if (player1.sideIterator == 1) 
+        {
+            Debug.Log("Dummy Player_Null 1");
+        }
+        else
+        {
+            _player1_Cursor.gameObject.SetActive(true);
+            if (player1.sideIterator == 0)
+            {
+                _player1_Cursor.ChosenPlayerSide = 0;
+                _player1_Cursor.cursorPage = _player1_PlayerPage;
+                _player1_Cursor.cursorText.text = $"{_player1_Cursor.ID + 1}_L";
+            }
+            if (player1.sideIterator == 2)
+            {
+                _player1_Cursor.ChosenPlayerSide = 1;
+                _player1_Cursor.cursorPage = _player2_PlayerPage;
+                _player1_Cursor.cursorText.text = $"{_player1_Cursor.ID + 1}_R";
+            }
+        }
+        if (player2.sideIterator == 1)
+        {
+            if (player1.sideIterator == 0)
+            {
+                _player2_Cursor.cursorPage = _player2_PlayerPage;
+            }
+            if (player1.sideIterator == 2)
+            {
+                _player2_Cursor.cursorPage = _player1_PlayerPage;
+            }
+        }
+        else
+        {
+            _player2_Cursor.gameObject.SetActive(true);
+            if (player2.sideIterator == 0)
+            {
+                _player2_Cursor.ChosenPlayerSide = 0;
+                _player2_Cursor.cursorPage = _player1_PlayerPage;
+                _player2_Cursor.cursorText.text = $"{_player1_Cursor.ID + 1}_L";
+
+            }
+            if (player2.sideIterator == 2)
+            {
+                _player2_Cursor.ChosenPlayerSide = 1;
+                _player2_Cursor.cursorPage = _player2_PlayerPage;
+                _player2_Cursor.cursorText.text = $"{_player1_Cursor.ID + 1}_R";
+            }
+        }
+
+    }
     public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers, GameModeSet set)
     {
         SetListeners();
@@ -186,11 +260,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         };
         await Task.WhenAll(tasks);
     }
-    private void Update()
-    {
-        CursorController(_leftPlayer);
-        CursorController(_rightPlayer);
-    }
     public void AddCharacterSelectButtons()
     {
         for (int i = 0; i < _activeProfiles.Count; i++)
@@ -203,8 +272,8 @@ public class CharacterSelect_Setup : MonoBehaviour
             selectButton.GetComponentInChildren<Button>().interactable = true;
             GameObject _selectButtonInfo = selectButton;
             _selectButtonInfo.GetComponent<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
-            _selectButtonInfo.GetComponent<CharacterSelect_Button>().GetLeftCursor(_leftPlayer.cursorObject.transform);
-            _selectButtonInfo.GetComponent<CharacterSelect_Button>().GetRightCursor(_rightPlayer.cursorObject.transform);
+            _selectButtonInfo.GetComponent<CharacterSelect_Button>().GetLeftCursor(_player1_Cursor.cursorObject.transform);
+            _selectButtonInfo.GetComponent<CharacterSelect_Button>().GetRightCursor(_player2_Cursor.cursorObject.transform);
             activeCharacterSelectButtons.Add(_selectButtonInfo);
         }
         StartCoroutine(CascadeScaleSelectButtons());
@@ -237,15 +306,15 @@ public class CharacterSelect_Setup : MonoBehaviour
             if (ReInput.controllers.GetJoystickNames().Length == 1)
             {
                 players.AddUsedID(players.joystickNames[0]);
-                if (_leftPlayer.curPlayer == null)
+                if (_player1_Cursor.curPlayer == null)
                 {
-                    SetCharacterSelectCursorState(_leftPlayer, 0);
+                    SetCharacterSelectCursorState(_player1_Cursor, 0);
                 }
                 else
                 {
-                    _leftPlayer.UnlockCharacterChoice();
-                    _leftPlayer.isConnected = true;
-                    _leftPlayerPage.ClearInfo();
+                    _player1_Cursor.UnlockCharacterChoice();
+                    _player1_Cursor.isConnected = true;
+                    _player1_PlayerPage.ClearInfo();
                 }
             }
             else
@@ -256,28 +325,28 @@ public class CharacterSelect_Setup : MonoBehaviour
                     players.AddUsedID(players.joystickNames[i]);
                     if (i == 0)
                     {
-                        if (_leftPlayer.curPlayer == null)
+                        if (_player1_Cursor.curPlayer == null)
                         {
-                            SetCharacterSelectCursorState(_leftPlayer, i);
+                            SetCharacterSelectCursorState(_player1_Cursor, i);
                         }
                         else
                         {
-                            _leftPlayer.UnlockCharacterChoice();
-                            _leftPlayer.isConnected = true;
-                            _leftPlayerPage.ClearInfo();
+                            _player1_Cursor.UnlockCharacterChoice();
+                            _player1_Cursor.isConnected = true;
+                            _player1_PlayerPage.ClearInfo();
                         }
                     }
                     if (i == 1)
                     {
-                        if (_rightPlayer.curPlayer == null)
+                        if (_player2_Cursor.curPlayer == null)
                         {
-                            SetCharacterSelectCursorState(_rightPlayer, i);
+                            SetCharacterSelectCursorState(_player2_Cursor, i);
                         }
                         else
                         {
-                            _rightPlayer.UnlockCharacterChoice();
-                            _rightPlayer.isConnected = true;
-                            _rightPlayerPage.ClearInfo();
+                            _player2_Cursor.UnlockCharacterChoice();
+                            _player2_Cursor.isConnected = true;
+                            _player2_PlayerPage.ClearInfo();
                         }
                     }
                     else { continue; }
@@ -300,24 +369,17 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, CharacterSelect_Cursor cursorHighlight)
     {
-        if (cursorHighlight.ID == 0)
-        {
-            _leftPlayerPage.UpdateInfo(hoveredProfile);
-        }
-        if (cursorHighlight.ID == 1)
-        {
-            _rightPlayerPage.UpdateInfo(hoveredProfile);
-        }
+        cursorHighlight.cursorPage.UpdateInfo(hoveredProfile);
     }
     public void ClearCharacterSelectInformation(int curHighlightedPlayerID)
     {
         if (curHighlightedPlayerID == 0)
         {
-            _leftPlayerPage.ClearInfo();
+            _player1_PlayerPage.ClearInfo();
         }
         if (curHighlightedPlayerID == 1)
         {
-            _rightPlayerPage.ClearInfo();
+            _player2_PlayerPage.ClearInfo();
         }
     }
     #region Deactivate Character Select
@@ -336,14 +398,14 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public async Task DisableCharacterCursors() 
     {
-        _leftPlayer.DesyncController();
-        _rightPlayer.DesyncController();
+        _player1_Cursor.DesyncController();
+        _player2_Cursor.DesyncController();
         await Task.Delay(400);
     }
     public async Task TogglePlayerInfo(float value) 
     {
-        _leftPlayerPage.SetPlayerInfo(value);
-        _rightPlayerPage.SetPlayerInfo(value);
+        _player1_PlayerPage.SetPlayerInfo(value);
+        _player2_PlayerPage.SetPlayerInfo(value);
         if (value == 0) 
         {
             for (int i = 0; i < characterSelect_Assets.Count; i++)
@@ -366,50 +428,51 @@ public class CharacterSelect_Setup : MonoBehaviour
 
     void CheckIfBothPlayersLockedIn(CharacterSelect_Cursor cursor)
     {
-        if (cursor == _leftPlayer)
+
+        if (cursor == _player1_Cursor)
         {
             if (cursor.cursorPage.lockedIn == true)
             {
-                if (_rightPlayer.cursorObject.activeInHierarchy && !_rightPlayer.cursorPage.lockedIn && !_rightPlayer.canChooseStage)
+                if (_player2_Cursor.cursorObject.activeInHierarchy && !_player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
                 {
-                    _leftPlayer.canChooseStage = true;
+                    _player1_Cursor.canChooseStage = true;
                 }
-                else if (_rightPlayer.cursorObject.activeInHierarchy && _rightPlayer.cursorPage.lockedIn && !_rightPlayer.canChooseStage)
+                else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
                 {
-                    _rightPlayer.canChooseStage = true;
+                    _player2_Cursor.canChooseStage = true;
                     ActivateStageSelector();
                 }
-                else if (_rightPlayer.cursorObject.activeInHierarchy && _rightPlayer.cursorPage.lockedIn && _rightPlayer.canChooseStage)
+                else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && _player2_Cursor.canChooseStage)
                 {
                     ActivateStageSelector();
                 }
                 else
                 {
-                    _leftPlayer.canChooseStage = true;
+                    _player1_Cursor.canChooseStage = true;
                     ActivateStageSelector();
                 }
             }
         }
-        else if (cursor == _rightPlayer) 
+        else if (cursor == _player2_Cursor) 
         {
             if (cursor.cursorPage.lockedIn == true)
             {
-                if (_leftPlayer.cursorObject.activeInHierarchy && !_leftPlayer.cursorPage.lockedIn && !_leftPlayer.canChooseStage)
+                if (_player1_Cursor.cursorObject.activeInHierarchy && !_player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
                 {
-                    _rightPlayer.canChooseStage = true;
+                    _player2_Cursor.canChooseStage = true;
                 }
-                else if (_leftPlayer.cursorObject.activeInHierarchy && _leftPlayer.cursorPage.lockedIn && !_leftPlayer.canChooseStage)
+                else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
                 {
-                    _leftPlayer.canChooseStage = true;
+                    _player1_Cursor.canChooseStage = true;
                     ActivateStageSelector();
                 }
-                else if (_leftPlayer.cursorObject.activeInHierarchy && _leftPlayer.cursorPage.lockedIn && _leftPlayer.canChooseStage)
+                else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && _player1_Cursor.canChooseStage)
                 {
                     ActivateStageSelector();
                 }
                 else
                 {
-                    _rightPlayer.canChooseStage = true;
+                    _player2_Cursor.canChooseStage = true;
                     ActivateStageSelector();
                 }
             }
@@ -423,7 +486,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         Messenger.RemoveListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
     }
-
     #region CursorController
     void CursorController(CharacterSelect_Cursor currentController) 
     {
@@ -431,16 +493,23 @@ public class CharacterSelect_Setup : MonoBehaviour
         {
             if (currentController.curPlayer.GetButtonDown(17))
             {
-                if (currentController.profile == null)
+                if (SideSelectionObject.activeInHierarchy)
                 {
-                    Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, currentController);
+                    sideController.CloseChooseSideMenu(SetPlayerInformation_OnCharacterSelect);
                 }
                 else
                 {
-                    if (currentController.canChooseStage && _stageSelecter.allowStageSelect)
+                    if (currentController.profile == null)
                     {
-                        _chosenStage = _stageSelecter._stageAsset;
-                        _arenaLoader.OnCharactersAndStageSelected();
+                        Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, currentController);
+                    }
+                    else
+                    {
+                        if (currentController.canChooseStage && _stageSelecter.allowStageSelect)
+                        {
+                            _chosenStage = _stageSelecter._stageAsset;
+                            _arenaLoader.OnCharactersAndStageSelected();
+                        }
                     }
                 }
             }
@@ -543,7 +612,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         stageSelectCooldown = true;
         yield return new WaitForSeconds(1f);
         stageSelectCooldown = false;
-
     }
     bool HitHeightBound(Transform cursorTransform) 
     {
@@ -596,33 +664,42 @@ public class CharacterSelect_Setup : MonoBehaviour
     void ActivateStageSelector()
     {
         characterSelect_Assets[1].SetActive(true);
+        _stageSelecter.ActivateStateSeector();
         _stageSelecter.SetArrowsLitState(_activeStages);
     }
     #region Return Character Select Information
     public ChosenCharacter GetLeftPlayerProfile() 
     {
-        if (_leftPlayer.cursorPage.chosenCharacter != null)
+        if (_player1_Cursor.cursorPage.chosenCharacter != null)
         {
-            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(_leftPlayer.cursorPage.chosenCharacter, _leftPlayer.cursorPage.chosenAmplifier);
+            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(_player1_Cursor.cursorPage.chosenCharacter, _player1_Cursor.cursorPage.chosenAmplifier, _player1_Cursor.ChosenPlayerSide,Character_SubStates.Controlled);
             return leftPlayerCharacter;
         }
-        return RandomizeChoice();
+        return RandomizeChoice(player1, _player1_Cursor);
     }
     public ChosenCharacter GetRightPlayerProfile()
     {
-        if(_rightPlayer.cursorPage.chosenCharacter != null)
+        if(_player2_Cursor.cursorPage.chosenCharacter != null)
         {
-            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_rightPlayer.cursorPage.chosenCharacter, _rightPlayer.cursorPage.chosenAmplifier);
+            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_player2_Cursor.cursorPage.chosenCharacter, _player2_Cursor.cursorPage.chosenAmplifier, _player2_Cursor.ChosenPlayerSide, Character_SubStates.Controlled);
             return rightPlayerCharacter;
         }
-        return RandomizeChoice();
+        return RandomizeChoice(player2, _player2_Cursor);
     }
-    public ChosenCharacter RandomizeChoice()
+    public ChosenCharacter RandomizeChoice(ChooseSide_Object chosenSide, CharacterSelect_Cursor cursorObject)
     {
         int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);
         int randomAmplifier = UnityEngine.Random.Range(0, _activeAmplifiers.Count - 1);
-        ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier]);
-        return _randomizedCharacter;
+        if (chosenSide.sideIterator == 1)
+        {
+            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], -1);
+            return _randomizedCharacter;
+        }
+        else 
+        {
+            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], cursorObject.ChosenPlayerSide, Character_SubStates.Controlled);
+            return _randomizedCharacter;
+        }
     }
     public Stage_StageAsset GetChosenStage()
     {
@@ -649,10 +726,14 @@ public class ChosenCharacter
 {
     public Character_Profile chosenCharacter;
     public Amplifiers chosenAmplifier;
-    public ChosenCharacter(Character_Profile _chosenCharacter, Amplifiers _chosenAmplifier) 
+    public int ChosenPlayerSide;
+    public Character_SubStates subState;
+    public ChosenCharacter(Character_Profile _chosenCharacter, Amplifiers _chosenAmplifier,int _chosenSide, Character_SubStates _subState = Character_SubStates.Dummy) 
     {
         chosenCharacter = _chosenCharacter;
         chosenAmplifier = _chosenAmplifier;
+        ChosenPlayerSide = _chosenSide;
+        subState = _subState;
     }
 }
 [Serializable]
@@ -662,6 +743,11 @@ public class ChooseSide_Object
     public GameObject _object;
     public Image _coloredControllerImage;
     public TMP_Text objectText;
+    public int ID;
+    public void SetID(int _ID) 
+    {
+        ID = _ID;
+    }
     public void SetImageCPU(bool setText = true) 
     {
         _coloredControllerImage.DOColor(Color.gray, 0.45f).OnComplete(() =>

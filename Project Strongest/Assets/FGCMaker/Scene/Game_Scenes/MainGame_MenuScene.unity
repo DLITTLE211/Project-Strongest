@@ -3362,7 +3362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &740334089
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6583,6 +6583,7 @@ MonoBehaviour:
   isConnected: 0
   profile: {fileID: 0}
   cursorPage: {fileID: 2070314386}
+  ChosenPlayerSide: 0
   xVal: 0
   yVal: 0
   xYield: 0.5
@@ -7361,16 +7362,6 @@ MonoBehaviour:
   - {fileID: 1838552049}
   characterSelectBackgroundImage: {fileID: 1370398434}
   advidoryMessage: {fileID: 2005574724}
-  player1:
-    sideIterator: 0
-    _object: {fileID: 2116554835}
-    _coloredControllerImage: {fileID: 538079214}
-    objectText: {fileID: 1127269905}
-  player2:
-    sideIterator: 0
-    _object: {fileID: 1826259320}
-    _coloredControllerImage: {fileID: 1551697519}
-    objectText: {fileID: 833554650}
   sideController: {fileID: 1107754686}
   _activeProfiles:
   - {fileID: 11400000, guid: 0cf4e6787272b2b448ab5d372f552710, type: 2}
@@ -7384,10 +7375,22 @@ MonoBehaviour:
   - {fileID: -5299378299407337814, guid: 3d9559830dc5a76498dfa214a6c5f46b, type: 3}
   - {fileID: -5299378299407337814, guid: 885fb9a40e1277548b8516c885fb8fcf, type: 3}
   activeCharacterSelectButtons: []
-  _leftPlayerPage: {fileID: 1120126771}
-  _rightPlayerPage: {fileID: 2070314386}
-  _leftPlayer: {fileID: 1368814061}
-  _rightPlayer: {fileID: 1062440636}
+  _player1_PlayerPage: {fileID: 1120126771}
+  _player2_PlayerPage: {fileID: 2070314386}
+  _player1_Cursor: {fileID: 1368814061}
+  _player2_Cursor: {fileID: 1062440636}
+  player1:
+    sideIterator: 0
+    _object: {fileID: 2116554835}
+    _coloredControllerImage: {fileID: 538079214}
+    objectText: {fileID: 1127269905}
+    ID: 0
+  player2:
+    sideIterator: 0
+    _object: {fileID: 1826259320}
+    _coloredControllerImage: {fileID: 1551697519}
+    objectText: {fileID: 833554650}
+    ID: 0
   _stageSelecter: {fileID: 251012960}
   _activeStages:
   - {fileID: 3537958316884096584, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
@@ -7436,6 +7439,7 @@ MonoBehaviour:
   - {fileID: 1023774955}
   - {fileID: 1681054303}
   - {fileID: 223002713}
+  chooseCharacterSelectObject: {fileID: 925046485}
 --- !u!1 &1113682857
 GameObject:
   m_ObjectHideFlags: 0
@@ -8862,6 +8866,7 @@ MonoBehaviour:
   isConnected: 0
   profile: {fileID: 0}
   cursorPage: {fileID: 1120126771}
+  ChosenPlayerSide: 0
   xVal: 0
   yVal: 0
   xYield: 0.5

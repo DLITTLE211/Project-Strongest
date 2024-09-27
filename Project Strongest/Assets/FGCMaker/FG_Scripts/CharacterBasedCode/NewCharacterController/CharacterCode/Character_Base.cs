@@ -147,11 +147,11 @@ public class Character_Base : MonoBehaviour
     public int newField;
 
     #region Initialization Code
-    public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
+    public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
-        _cHitboxManager.SetupHitboxes(playerID + 1);
+        _cHitboxManager.SetupHitboxes(hitboxSideDetection + 1);
         //_cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
         InitCombos();

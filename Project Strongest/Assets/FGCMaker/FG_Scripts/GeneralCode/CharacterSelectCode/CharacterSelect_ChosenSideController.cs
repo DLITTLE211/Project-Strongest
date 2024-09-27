@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CharacterSelect_ChosenSideController : MonoBehaviour
 {
     [SerializeField] private List<Transform> sides;
+    [SerializeField] private GameObject chooseCharacterSelectObject;
     bool canSwitch;
     private void Start()
     {
@@ -46,6 +47,11 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
 
             StartCoroutine(StartCoolDownTimer());
         }
+    }
+    public void CloseChooseSideMenu(Callback func) 
+    {
+        chooseCharacterSelectObject.SetActive(false);
+        func();
     }
     IEnumerator StartCoolDownTimer() 
     {
