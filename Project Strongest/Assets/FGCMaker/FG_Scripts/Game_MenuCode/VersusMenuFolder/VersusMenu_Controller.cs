@@ -8,12 +8,12 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class TrainingMenu_Controller : MonoBehaviour
-{ 
+public class VersusMenu_Controller : MonoBehaviour
+{
     [SerializeField] private Transform buttonSpawnPoint;
     [SerializeField] private GameObject spawnedButton;
     [SerializeField] private List<TrainingButtonObject> trainingButtonDictionary = new List<TrainingButtonObject>();
-    List<(string,UnityAction)> funcList;
+    List<(string, UnityAction)> funcList;
     [SerializeField] private List<UI_SubMenuBase> trainingMenuObject;
     public MenuType chosenMenuType;
     [SerializeField] private EventSystem eventSystem;
@@ -22,7 +22,7 @@ public class TrainingMenu_Controller : MonoBehaviour
     [SerializeField] private UI_DummyController_SubMenu EnemySettingReturnValues;
     [SerializeField] private UI_Movelist_SubMenu movelistMenu;
     [SerializeField] private UI_InfoDisplay_SubMenu InfoDisplayReturnValues;
-    public TrainingButtonObject ReturnTopButton() 
+    public TrainingButtonObject ReturnTopButton()
     {
         return trainingButtonDictionary[0];
     }
@@ -31,7 +31,7 @@ public class TrainingMenu_Controller : MonoBehaviour
         DeactivateMenuOnStart();
     }
 
-    public void SetP1MoveListInformation(Character_MoveList movelist,string characterName) 
+    public void SetP1MoveListInformation(Character_MoveList movelist, string characterName)
     {
         movelistMenu.SetPlayer1MoveListData(movelist, characterName);
     }
@@ -44,15 +44,11 @@ public class TrainingMenu_Controller : MonoBehaviour
         eventSystem = _eventSystem;
         funcList = new List<(string, UnityAction)>()
         {
-            ("Health Settings",() => ActivateHealthMenu()),
-            ("Meter Settings",() => ActivateMeterMenu()),
-            ("Dummy Settings",() => ActivateDummySettingsMenu()),
-            ("Info Display",() => ActivateInfoDisplayMenu()),
             ("Move Lists",() => ActivateMoveListMenu()),
             ("Character Select",() => ReturnToCharacterSelect()),
             ("Main Menu",() => ReturnToMainMenu()),
         };
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < funcList.Count; i++)
         {
             GameObject buttonObject = Instantiate(spawnedButton, buttonSpawnPoint);
             TrainingButtonObject buttonScript = buttonObject.GetComponent<TrainingButtonObject>();
@@ -85,31 +81,6 @@ public class TrainingMenu_Controller : MonoBehaviour
                 continue;
             }
         }
-        this.gameObject.SetActive(false);
-    }
-    public void ActivateHealthMenu() 
-    {
-        chosenMenuType = MenuType.HealthToggle;
-        ActivateMenu();
-        Debug.Log("Hit Health");
-    }
-    public void ActivateMeterMenu()
-    {
-        chosenMenuType = MenuType.MeterToggle;
-        ActivateMenu();
-        Debug.Log("Hit Meter");
-    }
-    public void ActivateDummySettingsMenu()
-    {
-        chosenMenuType = MenuType.DummyController;
-        ActivateMenu();
-        Debug.Log("Hit DummySettings");
-    }
-    public void ActivateInfoDisplayMenu()
-    {
-        chosenMenuType = MenuType.InfoDisplay;
-        ActivateMenu();
-        Debug.Log("Hit InfoDisplay");
     }
     public void ActivateMoveListMenu()
     {
@@ -117,11 +88,11 @@ public class TrainingMenu_Controller : MonoBehaviour
         ActivateMenu();
         Debug.Log("Hit MoveList");
     }
-    void ActivateMenu() 
+    void ActivateMenu()
     {
-        for(int i = 0; i < trainingMenuObject.Count; i++) 
+        for (int i = 0; i < trainingMenuObject.Count; i++)
         {
-            if(trainingMenuObject[i]._menuType == chosenMenuType) 
+            if (trainingMenuObject[i]._menuType == chosenMenuType)
             {
                 trainingMenuObject[i].gameObject.SetActive(true);
                 trainingMenuObject[i].EnableMenu(SetActiveButton);
@@ -130,14 +101,14 @@ public class TrainingMenu_Controller : MonoBehaviour
             continue;
         }
     }
-    public void DeactivateMenuOnStart() 
+    public void DeactivateMenuOnStart()
     {
         for (int i = 0; i < trainingMenuObject.Count; i++)
         {
             trainingMenuObject[i].DisableMenu(() => trainingMenuObject[i].gameObject.SetActive(false));
         }
     }
-    public void DeactivateMenu() 
+    public void DeactivateMenu()
     {
         for (int i = 0; i < trainingMenuObject.Count; i++)
         {
@@ -151,21 +122,7 @@ public class TrainingMenu_Controller : MonoBehaviour
         eventSystem.SetSelectedGameObject(trainingButtonDictionary[0].gameObject);
     }
 
-    #region Return ToggledHealthValues
-    public void ReturnHealthValues() 
-    {
-        List<float> returnValues = new List<float>();
-        returnValues.Add(healthReturnValues.ReturnP1HealthValue());
-        returnValues.Add(healthReturnValues.ReturnP2HealthValue());
-        returnValues.Add(healthReturnValues.ReturnP1StunValue());
-        returnValues.Add(healthReturnValues.ReturnP2StunValue());
-    }
-    #endregion
-
-
-
-
-    void SetActiveButton(GameObject button) 
+    void SetActiveButton(GameObject button)
     {
         eventSystem.SetSelectedGameObject((GameObject)button);
     }

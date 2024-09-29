@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
-    GameModeSet _gameModeSet;
+    public GameModeSet _gameModeSet;
     public static GameManager instance;
     void Start()
     {
@@ -56,9 +56,9 @@ public class GameManager : MonoBehaviour
         else
         {
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(99));
-            gameObject.AddComponent<MainGame_SettingsController>();
+            gameObject.AddComponent<MainGame_VersusSC>();
             GameObject versusMenu = Instantiate(versusStageMenu, pauseMenuHolder);
-            _settingsController = gameObject.GetComponent<MainGame_SettingsController>();
+            _settingsController = gameObject.GetComponent<MainGame_VersusSC>();
             _settingsController._pauseMenu = versusMenu;
             versusMenu.transform.localPosition = new Vector3(0, -500f, 0);
         }

@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966789736765178240}
-  - component: {fileID: 8801299471925071989}
+  - component: {fileID: 4177104439550995425}
   m_Layer: 0
   m_Name: Versus_Menu_Prefab
   m_TagString: Untagged
@@ -180,7 +180,7 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: -65}
   m_SizeDelta: {x: 600, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8801299471925071989
+--- !u!114 &4177104439550995425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 197967047138326680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5dda75d24ace3c418f8071371280a47, type: 3}
+  m_Script: {fileID: 11500000, guid: 47b69970939b9b54b8f4dfb9e29963ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSpawnPoint: {fileID: 4467277268016656437}
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Training Menu
+  m_text: Versus Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1928,10 +1928,6 @@ PrefabInstance:
       value: AmplifyType_TextField
       objectReference: {fileID: 0}
     - target: {fileID: 5456564933005332642, guid: c4ed0fc6abe5d9a4aa38bf7b7c4d088c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8801299471925071989}
-    - target: {fileID: 5456564933005332642, guid: c4ed0fc6abe5d9a4aa38bf7b7c4d088c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeactivateMenu
       objectReference: {fileID: 0}
@@ -2324,10 +2320,6 @@ PrefabInstance:
       propertyPath: _sliderValue
       value: 
       objectReference: {fileID: 3933222832134859359}
-    - target: {fileID: 1164604050807346564, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8801299471925071989}
     - target: {fileID: 1164604050807346564, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeactivateMenu
@@ -2939,10 +2931,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 695794344364213012, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8801299471925071989}
-    - target: {fileID: 695794344364213012, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeactivateMenu
       objectReference: {fileID: 0}
@@ -3214,10 +3202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SubMenu_MovelistPage
       objectReference: {fileID: 0}
-    - target: {fileID: 314044186503788332, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8801299471925071989}
+    - target: {fileID: 197967047138326680, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 314044186503788332, guid: 845d98176095ea1478e4c64bf5f12dd7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeactivateMenu
@@ -3439,10 +3427,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2968961927572170229, guid: aefaec766809f0044af62ad625b69b15, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8801299471925071989}
     - target: {fileID: 2968961927572170229, guid: aefaec766809f0044af62ad625b69b15, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeactivateMenu

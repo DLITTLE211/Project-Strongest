@@ -7,7 +7,7 @@ public class MainGame_SettingsController : MonoBehaviour
     protected Character_Base mainPlayer, secondaryPlayer;
     public GameObject _pauseMenu;
     public bool _isPause = false;
-    public virtual void SetTeleportPositions(EventSystem eventSystem) 
+    public virtual void SetTeleportPositions(EventSystem eventSystem)
     {
         //Nothing TODO
     }
@@ -45,7 +45,14 @@ public class MainGame_SettingsController : MonoBehaviour
     {
         if (_pauseMenu.activeInHierarchy)
         {
-            _pauseMenu.GetComponent<TrainingMenu_Controller>().DeactivateMenuOnStart();
+            if (GameManager.instance._gameModeSet.gameMode == GameMode.Training)
+            {
+                _pauseMenu.GetComponent<TrainingMenu_Controller>().DeactivateMenuOnStart();
+            }
+            if (GameManager.instance._gameModeSet.gameMode == GameMode.Versus) 
+            {
+                _pauseMenu.GetComponent<VersusMenu_Controller>().DeactivateMenuOnStart();
+            }
             _pauseMenu.SetActive(false);
             mainPlayer.UnlockPlayerInPause();
             secondaryPlayer.UnlockPlayerInPause();
