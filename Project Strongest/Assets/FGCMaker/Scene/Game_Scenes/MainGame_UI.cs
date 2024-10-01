@@ -7,5 +7,6 @@ public class MainGame_UI : MonoBehaviour
 public enum UI_Type 
 {
     General,
-    Training
+    Training,
+    Versus,
 }
