@@ -198,6 +198,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         if (set.gameMode == GameMode.Versus)
         {
             _player1_Cursor.UnlockCharacterChoice();
+            _player1_PlayerPage.ClearInfo();
             _player2_Cursor.UnlockCharacterChoice();
             player1.InitSideIterator();
             player2.InitSideIterator();
