@@ -171,6 +171,7 @@ public class TrainingMenu_Controller : MonoBehaviour
     }
     public void ReturnToCharacterSelect()
     {
+        
         Menu_Manager.instance.DelayChosenPage(() => Menu_Manager.instance.TrainingSelected());
         GameManager.instance.UnloadFightingArena();
         Debug.Log("Hit CS");

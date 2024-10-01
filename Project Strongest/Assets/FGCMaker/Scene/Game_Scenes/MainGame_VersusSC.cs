@@ -9,7 +9,7 @@ public class MainGame_VersusSC : MainGame_SettingsController
     {
        
         _pauseMenu.SetActive(false);
-        _pauseMenu.GetComponent<VersusMenu_Controller>().SetupTrainingButtons(eventSystem);
+        _pauseMenu.GetComponent<VersusMenu_Controller>().SetupVersusButtons(eventSystem);
         _eventSystem = eventSystem;
         _eventSystem.firstSelectedGameObject = null;
 

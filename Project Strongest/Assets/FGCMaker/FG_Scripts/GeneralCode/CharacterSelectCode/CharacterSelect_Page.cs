@@ -37,6 +37,7 @@ public class CharacterSelect_Page : MonoBehaviour
         characterBackgroundImage.sprite = null;
         characterName.text = "Choose Your Character";
         chosenAmplifier = null;
+        chosenCharacter = null;
     }
 
     public void SetPlayerInfo(float value)

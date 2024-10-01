@@ -197,6 +197,10 @@ public class CharacterSelect_Setup : MonoBehaviour
         currentSet = set;
         if (set.gameMode == GameMode.Versus)
         {
+            _player1_Cursor.UnlockCharacterChoice();
+            _player2_Cursor.UnlockCharacterChoice();
+            player1.InitSideIterator();
+            player2.InitSideIterator();
             advidoryMessage.gameObject.SetActive(false);
             SideSelectionObject.SetActive(true);
             if (players.UsedID.Item1.Count == 0)
@@ -311,7 +315,6 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                     else
                     {
-
                         _player1_Cursor.UnlockCharacterChoice();
                         _player1_Cursor.isConnected = true;
                         _player1_PlayerPage.ClearInfo();
@@ -729,10 +732,10 @@ public class ChooseSide_Object
     public GameObject _object;
     public Image _coloredControllerImage;
     public TMP_Text objectText;
-    public int ID;
-    public void SetID(int _ID) 
+
+    public void InitSideIterator() 
     {
-        ID = _ID;
+        sideIterator = 1;
     }
     public void SetImageCPU(bool setText = true) 
     {

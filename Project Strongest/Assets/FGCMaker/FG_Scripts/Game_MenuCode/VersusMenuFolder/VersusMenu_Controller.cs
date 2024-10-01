@@ -39,7 +39,7 @@ public class VersusMenu_Controller : MonoBehaviour
     {
         movelistMenu.SetPlayer2MoveListData(movelist, characterName);
     }
-    public void SetupTrainingButtons(EventSystem _eventSystem)
+    public void SetupVersusButtons(EventSystem _eventSystem)
     {
         eventSystem = _eventSystem;
         funcList = new List<(string, UnityAction)>()
@@ -128,7 +128,7 @@ public class VersusMenu_Controller : MonoBehaviour
     }
     public void ReturnToCharacterSelect()
     {
-        Menu_Manager.instance.DelayChosenPage(() => Menu_Manager.instance.TrainingSelected());
+        Menu_Manager.instance.DelayChosenPage(() => Menu_Manager.instance.VersusSelected());
         GameManager.instance.UnloadFightingArena();
         Debug.Log("Hit CS");
     }
