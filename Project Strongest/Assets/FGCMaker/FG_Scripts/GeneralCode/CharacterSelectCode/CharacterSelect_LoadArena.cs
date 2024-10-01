@@ -12,6 +12,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     private bool _arenaLoaded;
     public static ChosenCharacter leftPlayerChosenProfile, rightPlayerChosenProfile;
     public static Stage_StageAsset chosenStage;
+    public static Round_Info _roundInfo;
     private void Awake()
     {
         _arenaLoaded = false;

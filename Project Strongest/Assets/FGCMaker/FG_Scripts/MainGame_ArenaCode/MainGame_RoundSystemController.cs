@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MainGame_RoundSystemController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize(Round_Info currentRoundInfo)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+        Debug.Log(currentRoundInfo.totalRounds);
+        Debug.Log(currentRoundInfo.winningRoundCount);
+    } 
+}
+[Serializable]
+public class Round_Info 
+{
+    public int totalRounds;
+    public int winningRoundCount;
+    public Round_Info(int _winningRoundCount) 
     {
-        
+        winningRoundCount = _winningRoundCount;
+        totalRounds = (_winningRoundCount * 2)-1;
     }
 }

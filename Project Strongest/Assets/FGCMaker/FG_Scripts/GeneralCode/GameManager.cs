@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MainGame_SettingsController _settingsController;
     public MainGame_SettingsController settingsController { get { return _settingsController; } }
 
+    [SerializeField] private MainGame_RoundSystemController _RoundSystemController;
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
     [SerializeField] private MainGame_Timer stopWatchController;
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         _gameModeSet.startupFunctions = new List<Callback>();
         if (_gameModeSet.gameMode == GameMode.Training)
         {
+            _RoundSystemController.enabled = false;
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues());
             gameObject.AddComponent<MainGame_TrainingSC>();
             GameObject trainingMenu = Instantiate(trainingStageMenu, pauseMenuHolder);
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            _RoundSystemController.enabled = true;
             _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(99));
             gameObject.AddComponent<MainGame_VersusSC>();
             GameObject versusMenu = Instantiate(versusStageMenu, pauseMenuHolder);
@@ -148,6 +151,10 @@ public class GameManager : MonoBehaviour
             }
         }
         _settingsController.SetTeleportPositions(_eventSystem);
+        if (_RoundSystemController.enabled) 
+        {
+            _RoundSystemController.Initialize(CharacterSelect_LoadArena._roundInfo);
+        }
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)
     {

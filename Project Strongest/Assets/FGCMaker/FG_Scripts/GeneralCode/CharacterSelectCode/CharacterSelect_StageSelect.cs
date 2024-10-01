@@ -13,14 +13,32 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     [SerializeField] private Image _rightArrow;
     [SerializeField] private Image _stageImageSlot;
     [SerializeField] private TMP_Text _stageNameText;
+    [SerializeField] private GameObject _roundSettingsObject;
+    [SerializeField] private TMP_Text _roundSettingsText;
+    [Range(1,5),SerializeField] private int winningRoundCount;
     public Stage_StageAsset _stageAsset;
     public bool stageSelectActive;
     List<Stage_StageAsset> totalStages;
     private int _currentStage;
     public bool allowStageSelect;
-    public void ActivateStateSeector()
+    public void ActivateStateSeector(GameMode _curGameMode)
     {
         _mainHolder.SetActive(true);
+        if (_curGameMode == GameMode.Training)
+        {
+            _roundSettingsObject.SetActive(false);
+        }
+        else if (_curGameMode != GameMode.Title) 
+        {
+            _roundSettingsObject.SetActive(true);
+            winningRoundCount = 2;
+            SetRoundCount();
+        }
+    }
+    public void SetRoundCount() 
+    {
+        string roundText = winningRoundCount == 1 ? "Round" : "Rounds";
+        _roundSettingsText.text = $"Best Of {winningRoundCount} {roundText}";
     }
     public void SetArrowsLitState(List<Stage_StageAsset> _totalStages)
     {
@@ -51,6 +69,24 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     {
         _mainHolder.SetActive(state);
         stageSelectActive = state;
+    }
+    public void UpdateRoundCountDown()
+    {
+        if (winningRoundCount < 1)
+        {
+            winningRoundCount = 1;
+        }
+        else { winningRoundCount--; }
+        SetRoundCount();
+    }
+    public void UpdateRoundCountUp()
+    {
+        if (winningRoundCount > 5)
+        {
+            winningRoundCount = 5;
+        }
+        else { winningRoundCount++; }
+        SetRoundCount();
     }
     public void UpdateInfoDown()
     {

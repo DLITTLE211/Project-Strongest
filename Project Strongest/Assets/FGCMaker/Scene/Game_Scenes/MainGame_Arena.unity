@@ -20807,6 +20807,7 @@ GameObject:
   - component: {fileID: 1359521217}
   - component: {fileID: 1359521223}
   - component: {fileID: 1359521224}
+  - component: {fileID: 1359521225}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -20906,6 +20907,7 @@ MonoBehaviour:
   trainingStageMenu: {fileID: 197967047138326680, guid: 7d03b0a05e3c3af4481da96ff6519426, type: 3}
   versusStageMenu: {fileID: 197967047138326680, guid: e9f2d0c740dc6dd42b8df096d01ef54d, type: 3}
   _settingsController: {fileID: 0}
+  _RoundSystemController: {fileID: 1359521225}
   p1UIManager: {fileID: 1318979522}
   p2UIManager: {fileID: 740525645}
   stopWatchController: {fileID: 0}
@@ -20965,6 +20967,18 @@ MonoBehaviour:
   stopwatchTime: 0
   stopwatchText: {fileID: 1413524063}
   tickDownStopWatch: 0
+--- !u!114 &1359521225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359521216}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89422f1f01c640e4fb98a4ac0fc12a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1362609699
 PrefabInstance:
   m_ObjectHideFlags: 0

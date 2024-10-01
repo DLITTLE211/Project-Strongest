@@ -654,7 +654,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     void ActivateStageSelector()
     {
         characterSelect_Assets[1].SetActive(true);
-        _stageSelecter.ActivateStateSeector();
+        _stageSelecter.ActivateStateSeector(currentSet.gameMode);
         _stageSelecter.SetArrowsLitState(_activeStages);
     }
     #region Return Character Select Information
