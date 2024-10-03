@@ -63,6 +63,10 @@ public class Character_Animator : MonoBehaviour
 
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false)
     {
+        if (myAnim == null) 
+        {
+            return;
+        }
         if (lockedHit)
         {
             shadowAnim.Play(animHash, 0, overrideTime);

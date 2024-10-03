@@ -689,6 +689,10 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         return RandomizeChoice(player2, _player2_Cursor);
     }
+    public Round_Info GetRoundInfomation()
+    {
+        return new Round_Info(_stageSelecter.winningRoundCount);
+    }
     public ChosenCharacter RandomizeChoice(ChooseSide_Object chosenSide, CharacterSelect_Cursor cursorObject)
     {
         int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);

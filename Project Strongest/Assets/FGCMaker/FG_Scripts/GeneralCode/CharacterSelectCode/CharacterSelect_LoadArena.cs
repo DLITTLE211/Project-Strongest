@@ -26,6 +26,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
+            _roundInfo = _characterSelectSetup.GetRoundInfomation();
             leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
             rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();
             chosenStage = _characterSelectSetup.GetChosenStage();

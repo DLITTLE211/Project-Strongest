@@ -15,7 +15,7 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     [SerializeField] private TMP_Text _stageNameText;
     [SerializeField] private GameObject _roundSettingsObject;
     [SerializeField] private TMP_Text _roundSettingsText;
-    [Range(1,5),SerializeField] private int winningRoundCount;
+    [Range(1,5)] public int winningRoundCount;
     public Stage_StageAsset _stageAsset;
     public bool stageSelectActive;
     List<Stage_StageAsset> totalStages;
