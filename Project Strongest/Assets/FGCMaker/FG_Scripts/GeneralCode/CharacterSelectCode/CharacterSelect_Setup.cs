@@ -489,10 +489,17 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                     else
                     {
-                        if (currentController.canChooseStage && _stageSelecter.allowStageSelect)
+                        if (_stageSelecter.allowRoundSelect)
                         {
-                            _chosenStage = _stageSelecter._stageAsset;
-                            _arenaLoader.OnCharactersAndStageSelected();
+                            _stageSelecter.ActivateStageSelectObject();
+                        }
+                        else
+                        {
+                            if (currentController.canChooseStage && _stageSelecter.allowStageSelect)
+                            {
+                                _chosenStage = _stageSelecter._stageAsset;
+                                _arenaLoader.OnCharactersAndStageSelected();
+                            }
                         }
                     }
                 }
@@ -514,18 +521,24 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
-                if (!SideSelectionObject.activeInHierarchy)
+                if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
-                    StartCoroutine(currentController.cursorPage.DelayResetBool());
-                    currentController.cursorPage.characterAmplify.UpdateInfoUp();
+                    if (!SideSelectionObject.activeInHierarchy)
+                    {
+                        StartCoroutine(currentController.cursorPage.DelayResetBool());
+                        currentController.cursorPage.characterAmplify.UpdateInfoUp();
+                    }
                 }
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Left"))
             {
-                if (!SideSelectionObject.activeInHierarchy)
+                if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
-                    StartCoroutine(currentController.cursorPage.DelayResetBool());
-                    currentController.cursorPage.characterAmplify.UpdateInfoDown();
+                    if (!SideSelectionObject.activeInHierarchy)
+                    {
+                        StartCoroutine(currentController.cursorPage.DelayResetBool());
+                        currentController.cursorPage.characterAmplify.UpdateInfoDown();
+                    }
                 }
             }
             if (currentController.profile == null)
@@ -575,16 +588,16 @@ public class CharacterSelect_Setup : MonoBehaviour
                         {
                             if (!stageSelectCooldown)
                             {
-                                _stageSelecter.UpdateInfoUp();
-                                StartCoroutine(DelayResetStageBool());
+                                _stageSelecter.ToggleUp();
+                                    StartCoroutine(DelayResetStageBool());
                             }
                         }
                         else if (currentController.xVal == -1)
                         {
                             if (!stageSelectCooldown)
                             {
-                                _stageSelecter.UpdateInfoDown();
-                                StartCoroutine(DelayResetStageBool());
+                                _stageSelecter.ToggleDown();
+                                    StartCoroutine(DelayResetStageBool());
                             }
                         }
                         else
@@ -600,7 +613,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     IEnumerator DelayResetStageBool() 
     {
         stageSelectCooldown = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.65f);
         stageSelectCooldown = false;
     }
     bool HitHeightBound(Transform cursorTransform) 
@@ -654,7 +667,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     void ActivateStageSelector()
     {
         characterSelect_Assets[1].SetActive(true);
-        _stageSelecter.ActivateStateSeector(currentSet.gameMode);
+        _stageSelecter.ActivateRoundSelector(currentSet.gameMode);
         _stageSelecter.SetArrowsLitState(_activeStages);
     }
     #region Return Character Select Information

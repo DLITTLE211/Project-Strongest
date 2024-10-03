@@ -21,19 +21,30 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     List<Stage_StageAsset> totalStages;
     private int _currentStage;
     public bool allowStageSelect;
-    public void ActivateStateSeector(GameMode _curGameMode)
+    public bool allowRoundSelect;
+    public void ActivateRoundSelector(GameMode _curGameMode)
     {
-        _mainHolder.SetActive(true);
         if (_curGameMode == GameMode.Training)
         {
+            allowRoundSelect = false;
             _roundSettingsObject.SetActive(false);
+            _mainHolder.SetActive(true);
         }
-        else if (_curGameMode != GameMode.Title) 
+        else if (_curGameMode != GameMode.Title)
         {
+            allowRoundSelect = true;
+            _mainHolder.SetActive(false);
             _roundSettingsObject.SetActive(true);
             winningRoundCount = 2;
             SetRoundCount();
         }
+    }
+    public void ActivateStageSelectObject()
+    {
+        allowRoundSelect = false;
+        _roundSettingsObject.SetActive(false);
+        _mainHolder.SetActive(true);
+        allowStageSelect = true;
     }
     public void SetRoundCount() 
     {
@@ -56,12 +67,13 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         stageSelectActive = true;
         _currentStage = 0;
         SetActiveStage(totalStages[_currentStage]);
-        allowStageSelect = true;
+        allowRoundSelect = true;
     }
     public void ClearStageSelect()
     {
-        allowStageSelect = false;
+        allowRoundSelect = false;
         _stageAsset = null;
+        _roundSettingsObject.SetActive(false);
         _mainHolder.SetActive(false);
         stageSelectActive = false;
     }
@@ -70,25 +82,56 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         _mainHolder.SetActive(state);
         stageSelectActive = state;
     }
-    public void UpdateRoundCountDown()
+    public void ToggleUp() 
     {
-        if (winningRoundCount < 1)
+        if (allowRoundSelect) 
+        {
+            UpdateRoundCountUp();
+        }
+        if (allowStageSelect) 
+        {
+            UpdateInfoUp();
+        }
+    }
+    public void ToggleDown()
+    {
+        if (allowRoundSelect)
+        {
+            UpdateRoundCountDown();
+        }
+        if (allowStageSelect)
+        {
+            UpdateInfoDown();
+        }
+    }
+
+    #region Update Info Functions
+    void UpdateRoundCountDown()
+    {
+        if (winningRoundCount <= 1)
         {
             winningRoundCount = 1;
         }
-        else { winningRoundCount--; }
+        else 
+        { 
+            winningRoundCount--; 
+        }
         SetRoundCount();
     }
-    public void UpdateRoundCountUp()
+
+    void UpdateRoundCountUp()
     {
-        if (winningRoundCount > 5)
+        if (winningRoundCount >= 5)
         {
             winningRoundCount = 5;
         }
-        else { winningRoundCount++; }
+        else 
+        { 
+            winningRoundCount++; 
+        }
         SetRoundCount();
     }
-    public void UpdateInfoDown()
+    void UpdateInfoDown()
     {
         if (_currentStage <= 0)
         {
@@ -97,7 +140,7 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         else { _currentStage--; }
         SetActiveStage(totalStages[_currentStage]);
     }
-    public void UpdateInfoUp()
+    void UpdateInfoUp()
     {
         if (_currentStage >= totalStages.Count - 1)
         {
@@ -112,4 +155,5 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         _stageImageSlot.sprite = chosenStage.stageImage;
         _stageNameText.text = $"{chosenStage.stageName}"; 
     }
+    #endregion
 }

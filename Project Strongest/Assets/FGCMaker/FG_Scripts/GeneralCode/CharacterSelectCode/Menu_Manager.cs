@@ -21,7 +21,6 @@ public class Menu_Manager : MonoBehaviour
     private int _mainMenuPlayerID;
     public Character_AvailableID players;
     [SerializeField] private MenuButtonHolder FirstMenuButtonLayer;
-    [SerializeField] private MenuButtonHolder SecondMenuButtonLayer;
     [Space(15)]
     [SerializeField] private Image _backgroundImage,whiteFillerImage;
     [SerializeField] private TMP_Text _titleText,_versionText;
@@ -98,7 +97,6 @@ public class Menu_Manager : MonoBehaviour
     public void SetButtonHolderImages()
     {
         FirstMenuButtonLayer.SetImageObject(_backgroundImage);
-        SecondMenuButtonLayer.SetImageObject(_backgroundImage);
         FirstMenuButtonLayer.EnableButtons();
         FirstMenuButtonLayer.EnableButtons();
     }
