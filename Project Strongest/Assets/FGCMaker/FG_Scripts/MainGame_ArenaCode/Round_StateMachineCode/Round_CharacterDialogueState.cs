@@ -8,7 +8,7 @@ using System;
 public class Round_CharacterDialogueState : Round_BaseState
 {
     public Round_CharacterDialogueState(MainGame_RoundSystemController rSystem) : base(rSystem){}
-
+    
     public override void OnEnter()
     {
         _rSystem.p1_Signifiers.DisableRoundObjects();
@@ -16,7 +16,6 @@ public class Round_CharacterDialogueState : Round_BaseState
         _rSystem.p1_Signifiers.SetRoundSignifier(CharacterSelect_LoadArena._roundInfo.winningRoundCount);
         _rSystem.p2_Signifiers.SetRoundSignifier(CharacterSelect_LoadArena._roundInfo.winningRoundCount);
         TriggerDialogue();
-        Debug.LogError($"Enter_Round_CharacterDialogueState");
     }
     public async void TriggerDialogue(/*DialogueSet dialogueSet*/)
     {
@@ -33,9 +32,10 @@ public class Round_CharacterDialogueState : Round_BaseState
          *      await Task.Delay(dialogueSet[i].AudioLength);
          * }
          */
+        _rSystem.StateMachine.CallInitialTimerState();
     }
     public override void OnExit()
     {
-        Debug.LogError($"Exit_Round_CharacterDialogueState");
+        
     }
 }

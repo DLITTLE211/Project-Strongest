@@ -8,11 +8,21 @@ using System;
 public class Round_ActiveMatchState : Round_BaseState
 {
     public MainGame_Timer _gameTimer;
+    bool checkTimer;
     public Round_ActiveMatchState(MainGame_RoundSystemController rSystem) : base(rSystem) { }
     public override void OnEnter()
     {
+        checkTimer = true;
         GameManager.instance.settingsController.SetTeleportPositions();
         _gameTimer.tickDownStopWatch = true;
+    }
+    public override void Update() 
+    {
+        if (checkTimer && _gameTimer.ReturnTimerOver()) 
+        {
+            checkTimer = false;
+            _rSystem.StateMachine.CallResultState();
+        }
     }
     public override void OnGamePause(bool state) 
     {

@@ -34,6 +34,8 @@ public class Round_InitialCountdownState : Round_BaseState
         countDownText.text = $"FIGHT!!";
         countDownText.transform.DOScale(0f, 0f);
         countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
+
+        _rSystem.StateMachine.CallActiveGameState();
     }
     public override void OnExit()
     {

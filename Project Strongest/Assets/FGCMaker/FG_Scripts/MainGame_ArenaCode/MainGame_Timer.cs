@@ -25,6 +25,10 @@ public class MainGame_Timer : MonoBehaviour
         stopwatchTime -= Time.deltaTime;
         stopwatchText.text = $"Timer \n {stopwatchTime.ToString("n0")}";
     }
+    public bool ReturnTimerOver() 
+    {
+        return (int)stopwatchTime == 0;
+    }
     private void Update()
     {
         if (tickDownStopWatch && (stopwatchTime > -(1 / 60f) && stopwatchTime != Mathf.Infinity)) 
