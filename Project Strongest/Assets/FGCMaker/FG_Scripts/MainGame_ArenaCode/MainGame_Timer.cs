@@ -11,13 +11,13 @@ public class MainGame_Timer : MonoBehaviour
     public void SetStartTimerValues(float startingTime = Mathf.Infinity) 
     {
         stopwatchTime = startingTime;
-        if (startingTime == Mathf.Infinity) 
+        if (startingTime == Mathf.Infinity)
         {
+            tickDownStopWatch = true;
             stopwatchText.text = "Timer \n \u221E";
             tickDownStopWatch = false;
             return;
         }
-        tickDownStopWatch = true;
         stopwatchText.text = $"Timer \n {startingTime.ToString()}";
     }
     void UpdateTimer() 

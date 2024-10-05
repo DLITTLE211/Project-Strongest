@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public MainGame_SettingsController settingsController { get { return _settingsController; } }
 
     [SerializeField] private MainGame_RoundSystemController _RoundSystemController;
+    public MainGame_RoundSystemController RoundSystemController { get { return _RoundSystemController; } }
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
     [SerializeField] private MainGame_Timer stopWatchController;
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
@@ -150,10 +151,14 @@ public class GameManager : MonoBehaviour
                 _settingsController.SetPlayerData(players.totalPlayers[i]);
             }
         }
-        _settingsController.SetTeleportPositions(_eventSystem);
+        _settingsController.SetEventSystem(_eventSystem);
+        if (_gameModeSet.gameMode == GameMode.Training)
+        {
+            _settingsController.SetTeleportPositions();
+        }
         if (_RoundSystemController.enabled) 
         {
-            _RoundSystemController.Initialize(CharacterSelect_LoadArena._roundInfo);
+            _RoundSystemController.Initialize();
         }
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)

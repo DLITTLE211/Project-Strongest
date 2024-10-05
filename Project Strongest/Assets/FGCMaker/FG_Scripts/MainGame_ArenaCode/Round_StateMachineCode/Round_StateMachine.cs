@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class Round_StateMachine : MonoBehaviour
 {
-    [SerializeField] private Round_CharacterDialogueState _cDState;
-    [SerializeField] private Round_InitialCountdownState _iCState;
-    [SerializeField] private Round_ActiveMatchState _aMState;
-    [SerializeField] private Round_ResultMatchState _rMState;
-    [SerializeField] private Round_EndScreenState _eSState;
+    public Round_CharacterDialogueState _cDState;
+    public Round_InitialCountdownState _iCState;
+    public Round_ActiveMatchState _aMState;
+    public Round_ResultMatchState _rMState;
+    public Round_EndScreenState _eSState;
 
     [SerializeField] private Round_BaseState _curState;
-    public void DefineStates() 
-    {
-        _cDState = new Round_CharacterDialogueState();
-        _iCState = new Round_InitialCountdownState();
-        _aMState = new Round_ActiveMatchState();
-        _rMState = new Round_ResultMatchState();
-        _eSState = new Round_EndScreenState();
-    }
     public Round_BaseState GetCurrentState() 
     {
         return _curState;
@@ -28,5 +20,26 @@ public class Round_StateMachine : MonoBehaviour
         _curState?.OnExit();
         _curState = newState;
         _cDState?.OnEnter();
+    }
+
+    public void CallCharacterDialogueState() 
+    {
+        SetCurrentState(_cDState);
+    }
+    public void CallInitialTimerState()
+    {
+        SetCurrentState(_iCState);
+    }
+    public void CallActiveGameState()
+    {
+        SetCurrentState(_aMState);
+    }
+    public void CallResultState()
+    {
+        SetCurrentState(_rMState);
+    }
+    public void CallEndScreenState()
+    {
+        SetCurrentState(_eSState);
     }
 }

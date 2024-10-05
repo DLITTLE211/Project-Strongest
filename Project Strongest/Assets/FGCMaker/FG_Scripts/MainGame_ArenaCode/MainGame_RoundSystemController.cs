@@ -10,12 +10,11 @@ public class MainGame_RoundSystemController : MonoBehaviour
     public Player_Round_Signifier p1_Signifiers;
     public Player_Round_Signifier p2_Signifiers;
     [SerializeField] private Round_StateMachine _StateMachine;
-    public void Initialize(Round_Info currentRoundInfo)
+    public Round_StateMachine StateMachine { get { return _StateMachine; } }
+
+    public void Initialize()
     {
-        p1_Signifiers.DisableRoundObjects();
-        p2_Signifiers.DisableRoundObjects();
-        p1_Signifiers.SetRoundSignifier(currentRoundInfo.winningRoundCount);
-        p2_Signifiers.SetRoundSignifier(currentRoundInfo.winningRoundCount);
+        _StateMachine.CallCharacterDialogueState();
     }
     public void AwardWin(int side) 
     {
@@ -24,14 +23,14 @@ public class MainGame_RoundSystemController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) 
+        /*if (Input.GetKeyDown(KeyCode.G)) 
         {
             AwardWin(0);
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
             AwardWin(1);
-        }
+        }*/
     }
 }
 [Serializable]

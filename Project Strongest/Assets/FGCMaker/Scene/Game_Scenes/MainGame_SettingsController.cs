@@ -6,8 +6,13 @@ public class MainGame_SettingsController : MonoBehaviour
     protected EventSystem _eventSystem;
     protected Character_Base mainPlayer, secondaryPlayer;
     public GameObject _pauseMenu;
-    public bool _isPause = false;
-    public virtual void SetTeleportPositions(EventSystem eventSystem)
+    public bool _isPause = false; 
+    
+    public virtual void SetEventSystem(EventSystem eventSystem)
+    {
+        _eventSystem = eventSystem;
+    }
+    public virtual void SetTeleportPositions()
     {
         //Nothing TODO
     }
@@ -63,6 +68,7 @@ public class MainGame_SettingsController : MonoBehaviour
         secondaryPlayer.LockPlayerInPause();
         _pauseMenu.SetActive(true);
         _isPause = true;
+        
         return;
     }
 }

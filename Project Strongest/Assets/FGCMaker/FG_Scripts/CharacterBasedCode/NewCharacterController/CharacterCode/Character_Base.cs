@@ -46,12 +46,13 @@ public class Character_Base : MonoBehaviour
 
     #region Rewired Controls
     [Header("__________REWIRED CONTROLS__________")]
-    public int playerID;
     IList<InputAction> _actions;
+    public int playerID;
     Dictionary<int, int> newActions;
     ActionElementMap[] newElements;
     ControllerMap _map;
     public Player player;
+    public int _side;
     [Space(20)]
     #endregion
 
@@ -149,6 +150,7 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
+        _side = hitboxSideDetection;
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
         _cHitboxManager.SetupHitboxes(hitboxSideDetection + 1);
