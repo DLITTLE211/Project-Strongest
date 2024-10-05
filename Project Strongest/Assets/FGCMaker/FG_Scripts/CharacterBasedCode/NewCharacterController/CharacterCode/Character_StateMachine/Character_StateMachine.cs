@@ -8,7 +8,7 @@ public class Character_StateMachine : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] public string curState;
     public Character_ComboCounter opponentComboCounter;
-    [HideInInspector]public State_Idle idleStateRef;
+    [HideInInspector] public State_Idle idleStateRef;
     [HideInInspector] public State_Crouch crouchStateRef;
     [HideInInspector] public State_Move moveStateRef;
     [HideInInspector] public State_Dash dashStateRef;

@@ -115,6 +115,7 @@ public class Menu_Manager : MonoBehaviour
         _characterSelect.SetUpCharacterSelectScreen(players, currentMode);
     }
     #endregion
+
     #region Versus Button Response
     public async void VersusSelected()
     {
@@ -130,12 +131,14 @@ public class Menu_Manager : MonoBehaviour
         _characterSelect.SetUpCharacterSelectScreen(players, currentMode);
     }
     #endregion
+
     #region Options Button Response
     public void OptionsSelected()
     {
         ToggleMainMenuState(false);
     }
     #endregion
+
     public async void ExitSelected()
     {
         Task[] tasks = new Task[]

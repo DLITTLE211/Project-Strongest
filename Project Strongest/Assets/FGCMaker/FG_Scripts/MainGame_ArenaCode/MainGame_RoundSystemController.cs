@@ -9,6 +9,7 @@ public class MainGame_RoundSystemController : MonoBehaviour
 {
     public Player_Round_Signifier p1_Signifiers;
     public Player_Round_Signifier p2_Signifiers;
+    [SerializeField] private Round_StateMachine _StateMachine;
     public void Initialize(Round_Info currentRoundInfo)
     {
         p1_Signifiers.DisableRoundObjects();
