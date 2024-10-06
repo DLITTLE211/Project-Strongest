@@ -25,6 +25,11 @@ public class Round_CharacterDialogueState : Round_BaseState
     public async Task SayCharacterDialogue(/*DialogueSet dialogueSet*/) 
     {
         await Task.Delay(1000);
+        for (int i = 0; i < 3; i++) 
+        {
+            Debug.Log($"Test Dialogue Sentence {i+1}");
+            await Task.Delay(1500);
+        }
         //TODO Character Dialogue Function
         /*
          * for(int i = 0; i < dialogueSet.Count; i++)

@@ -14,6 +14,11 @@ public class Round_ActiveMatchState : Round_BaseState
     {
         checkTimer = true;
         _gameTimer.tickDownStopWatch = true;
+        for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++) 
+        {
+            GameManager.instance.players.totalPlayers[i].Activate();
+        }
+        
     }
     public override void Update() 
     {

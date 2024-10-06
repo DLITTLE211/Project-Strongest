@@ -53,6 +53,7 @@ public class Character_Base : MonoBehaviour
     ControllerMap _map;
     public Player player;
     public int _side;
+    bool activated;
     [Space(20)]
     #endregion
 
@@ -150,6 +151,7 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
+        activated = false;
         _side = hitboxSideDetection;
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
@@ -442,9 +444,13 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
+    public void Activate() 
+    {
+        activated = true;
+    }
     private void Update()
     {
-        if (!ReturnIfPaused())
+        if (!ReturnIfPaused() && activated)
         {
             _cADetection.CheckButtonPressed();
             _cADetection.CallReturnButton();
@@ -464,7 +470,7 @@ public class Character_Base : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!ReturnIfPaused())
+        if (!ReturnIfPaused() && activated)
         {
             _cInput.ReceiveInput();
         }
@@ -479,6 +485,10 @@ public class Character_Base : MonoBehaviour
         {
             return -1;
         }
+        if (!activated)
+        {
+            return 5;
+        }
 
         moveAxes[0].Button_State.directionalInput = value;
         _cComboDetection.CheckPossibleCombos(moveAxes[0]);
@@ -492,7 +502,15 @@ public class Character_Base : MonoBehaviour
     {
         if (_subState != Character_SubStates.Controlled) 
         { 
-            return null; 
+            return null;
+        }
+        if (ReturnIfPaused())
+        {
+            moveAxes[0].Button_State.directionalInput = 5;
+        }
+        if (!activated)
+        {
+            moveAxes[0].Button_State.directionalInput = 5;
         }
         return moveAxes[0];
     }
@@ -505,6 +523,10 @@ public class Character_Base : MonoBehaviour
         if (_subState != Character_SubStates.Controlled)
         { 
             return null; 
+        }
+        if (!activated)
+        {
+            return null;
         }
         return attackButtons[7];
     }
