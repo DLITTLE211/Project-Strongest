@@ -10,7 +10,14 @@ public class Round_ResultMatchState : Round_BaseState
     public Round_ResultMatchState(MainGame_RoundSystemController rSystem) : base(rSystem) { }
     public override void OnEnter()
     {
-        
+        if (GameManager.instance.winningCharacter != null)
+        {
+            CallAward(GameManager.instance.winningCharacter);
+        }
+        else 
+        {
+            CallAward(GameManager.instance.CallPlayerDeathOnTimerEnd());
+        }
     }
     public async void CallAward(Character_Base _Base) 
     {

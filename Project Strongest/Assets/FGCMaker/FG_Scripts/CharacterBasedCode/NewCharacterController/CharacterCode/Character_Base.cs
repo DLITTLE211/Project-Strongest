@@ -448,6 +448,10 @@ public class Character_Base : MonoBehaviour
     {
         activated = true;
     }
+    public void Deactivate()
+    {
+        activated = false;
+    }
     private void Update()
     {
         if (!ReturnIfPaused() && activated)

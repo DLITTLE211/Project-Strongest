@@ -21,16 +21,10 @@ public class MainGame_RoundSystemController : MonoBehaviour
         Callback AwardWin = side == 0 ? p1_Signifiers.AwardRoundWin : p2_Signifiers.AwardRoundWin;
         AwardWin();
     }
-    private void Update()
+    public void AwardTieWin()
     {
-        /*if (Input.GetKeyDown(KeyCode.G)) 
-        {
-            AwardWin(0);
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            AwardWin(1);
-        }*/
+        p1_Signifiers.AwardRoundWin();
+        p2_Signifiers.AwardRoundWin();
     }
 }
 [Serializable]

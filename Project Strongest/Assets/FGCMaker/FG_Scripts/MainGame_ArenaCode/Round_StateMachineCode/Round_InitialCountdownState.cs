@@ -18,6 +18,14 @@ public class Round_InitialCountdownState : Round_BaseState
     {
         GameManager.instance.settingsController.SetTeleportPositions();
         await Task.Delay(WaitingTime * 100);
+        GameManager.instance.stopWatchController.SetStartTimerValues();
+        for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
+        {
+            GameManager.instance.players.totalPlayers[i]._cHealth.SetStartingHealthValues(); 
+            GameManager.instance.players.totalPlayers[i]._cHealth.stunController.SetStartStunValues();
+            GameManager.instance.players.totalPlayers[i]._cSuperMeter.SetStartValue();
+        }
+        GameManager.instance.stopWatchController.tickDownStopWatch = false;
         countDownText.gameObject.SetActive(true);
         countDownText.text = "";
         countDownText.DOFade(1f,0f);

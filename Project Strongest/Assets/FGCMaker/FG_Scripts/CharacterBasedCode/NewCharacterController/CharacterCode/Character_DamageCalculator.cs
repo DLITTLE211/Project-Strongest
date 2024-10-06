@@ -43,9 +43,16 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
-        _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-        _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
+        if (!_healtController.TestIfDeadDamage(calculatedDamage))
+        {
+            _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
+            _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+            _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
+        }
+        else
+        {
+            GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+        }
     }
     public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked, bool armoredAttack = false)
     {
@@ -89,13 +96,20 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
-        _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-        if (!armoredAttack)
+        if (!_healtController.TestIfDeadDamage(calculatedDamage))
         {
-            _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.hitstunValue, calculatedScaling, false);
+            _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
+            _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+            if (!armoredAttack)
+            {
+                _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.hitstunValue, calculatedScaling, false);
+            }
+            ApplyScalingForNextAttack(currentAttack);
         }
-        ApplyScalingForNextAttack(currentAttack);
+        else
+        {
+            GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+        }
     }
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
     {
@@ -113,9 +127,16 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
-        _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-        _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
+        if (!_healtController.TestIfDeadDamage(calculatedDamage))
+        {
+            _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
+            _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+            _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
+        }
+        else 
+        {
+            GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+        }
     }
     #endregion
 

@@ -19,11 +19,14 @@ public class StunMeterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetStartStunValues();
+    }
+    public void SetStartStunValues() 
+    {
         stunMeter.currentValue = 0;
         stunMeter.maxValue = maxStun;
         stunMeter.SetCurrentMeterValue(stunMeter.currentValue);
         checkStunGradiet();
-        
     }
     private void Update()
     {

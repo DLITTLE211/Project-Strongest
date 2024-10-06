@@ -12,27 +12,29 @@ public class Character_Health : MonoBehaviour
     public StunMeterController stunController;
     public float recoverHealthRate;
     public Affliction currentAffliction;
-    [Range(75f,200f)]public float defenseValue;
+    [Range(75f, 200f)] public float defenseValue;
     public bool canRecover;
-
-    // Start is called before the first frame update
-
-    void Start()
+    private Character_Profile curProfile;
+    public void SetHealthInformation(Character_Profile profile)
     {
-    }
-
-    public void SetHealthInformation(Character_Profile profile) 
-    {
-        health_Main.SetStartMeterValues(profile.MaxHealth);
-        health_Recov.SetStartMeterValues(profile.MaxHealth);
-        recoverHealthRate = profile.HealthRegenRate;
+        curProfile = profile;
         _chosenCharacterProfileImage.sprite = profile.CharacterProfileImage;
+        SetStartingHealthValues();
+    }
+    public void SetStartingHealthValues() 
+    {
+        health_Main.SetStartMeterValues(curProfile.MaxHealth);
+        health_Recov.SetStartMeterValues(curProfile.MaxHealth);
+        recoverHealthRate = curProfile.HealthRegenRate;
     }
     public void ApplyAffliction(Affliction curAffliction)
     {
         currentAffliction = curAffliction;
     }
-
+    public bool TestIfDeadDamage(float damage) 
+    {
+        return (health_Main.currentValue - damage) <= 0;
+    }
     public void ApplyMainHealthDamage(float damageValue)
     {
         StopCoroutine(RecoverHealthWaitTime());
@@ -40,7 +42,7 @@ public class Character_Health : MonoBehaviour
         DOTween.Kill(health_Main.meterSlider);
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
-        stunController.ApplyStun(4 * 0.01f);
+        stunController.ApplyStun(damageValue * 0.01f);
         stunController.currentAffliction = currentAffliction;
         StartCoroutine(RecoverHealthWaitTime());
     }

@@ -22,6 +22,13 @@ public class Round_StateMachine : MonoBehaviour
         newState.OnEnter();
         _curState = newState;
     }
+    private void Update()
+    {
+        if (_curState != null)
+        {
+            _curState.Update();
+        }
+    }
 
     public void CallCharacterDialogueState() 
     {

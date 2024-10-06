@@ -39,7 +39,7 @@ public class Character_SuperMeter : MonoBehaviour
             IncreaseMeterValue(120);
         }
     }
-    void SetStartValue()
+    public void SetStartValue()
     {
         meterTier = 0;
         SetMeterTierText();

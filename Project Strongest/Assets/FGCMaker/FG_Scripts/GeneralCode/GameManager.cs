@@ -12,25 +12,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Transform pauseMenuHolder;
     [SerializeField] private GameObject trainingStageMenu, versusStageMenu;
+
     [SerializeField] private MainGame_SettingsController _settingsController;
     public MainGame_SettingsController settingsController { get { return _settingsController; } }
 
     [SerializeField] private MainGame_RoundSystemController _RoundSystemController;
     public MainGame_RoundSystemController RoundSystemController { get { return _RoundSystemController; } }
+
+
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
-    [SerializeField] private MainGame_Timer stopWatchController;
+    [SerializeField] private MainGame_Timer _stopWatchController;
+    public MainGame_Timer stopWatchController { get { return _stopWatchController; } }
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
     public GameModeSet _gameModeSet;
+    internal Character_Base winningCharacter;
     public static GameManager instance;
     void Start()
     {
         GameObject systemInScene = GameObject.Find("EventSystem");
         _eventSystem = systemInScene.GetComponent<EventSystem>();
         instance = this;
-        stopWatchController = GetComponent<MainGame_Timer>();
+        _stopWatchController = GetComponent<MainGame_Timer>();
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
@@ -48,7 +53,7 @@ public class GameManager : MonoBehaviour
         if (_gameModeSet.gameMode == GameMode.Training)
         {
             _RoundSystemController.enabled = false;
-            _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues());
+            _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(Mathf.Infinity));
             gameObject.AddComponent<MainGame_TrainingSC>();
             GameObject trainingMenu = Instantiate(trainingStageMenu, pauseMenuHolder);
             _settingsController = gameObject.GetComponent<MainGame_TrainingSC>();
@@ -59,7 +64,6 @@ public class GameManager : MonoBehaviour
         else
         {
             _RoundSystemController.enabled = true;
-            _gameModeSet.startupFunctions.Add(() => stopWatchController.SetStartTimerValues(99));
             gameObject.AddComponent<MainGame_VersusSC>();
             GameObject versusMenu = Instantiate(versusStageMenu, pauseMenuHolder);
             _settingsController = gameObject.GetComponent<MainGame_VersusSC>();
@@ -160,6 +164,28 @@ public class GameManager : MonoBehaviour
         {
             _RoundSystemController.Initialize();
         }
+    }
+    public void CallPlayerDeath(Character_Base winningCharacter) 
+    {
+        _RoundSystemController.StateMachine.CallResultState();
+    }
+    public Character_Base CallPlayerDeathOnTimerEnd()
+    {
+        if (players.totalPlayers[0]._cHealth.health_Main.currentValue > players.totalPlayers[1]._cHealth.health_Main.currentValue)
+        {
+            winningCharacter = players.totalPlayers[0];
+            return winningCharacter;
+        }
+        if (players.totalPlayers[1]._cHealth.health_Main.currentValue > players.totalPlayers[0]._cHealth.health_Main.currentValue)
+        {
+            winningCharacter = players.totalPlayers[1];
+            return winningCharacter;
+        }
+        if (players.totalPlayers[0]._cHealth.health_Main.currentValue == players.totalPlayers[1]._cHealth.health_Main.currentValue)
+        {
+            _RoundSystemController.AwardTieWin();
+        }
+        return null;
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)
     {
