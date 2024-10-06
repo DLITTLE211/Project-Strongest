@@ -11,6 +11,7 @@ public class Round_CharacterDialogueState : Round_BaseState
     
     public override void OnEnter()
     {
+        GameManager.instance.settingsController._pauseMenu.SetActive(false);
         _rSystem.p1_Signifiers.DisableRoundObjects();
         _rSystem.p2_Signifiers.DisableRoundObjects();
         _rSystem.p1_Signifiers.SetRoundSignifier(CharacterSelect_LoadArena._roundInfo.winningRoundCount);

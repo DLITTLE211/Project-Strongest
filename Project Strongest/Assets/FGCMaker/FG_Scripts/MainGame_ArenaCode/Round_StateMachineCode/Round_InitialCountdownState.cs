@@ -16,11 +16,14 @@ public class Round_InitialCountdownState : Round_BaseState
     private int threeSecondCountDown;
     public async override void OnEnter()
     {
+        GameManager.instance.settingsController.SetTeleportPositions();
+        await Task.Delay(WaitingTime * 100);
         countDownText.gameObject.SetActive(true);
         countDownText.text = "";
         countDownText.DOFade(1f,0f);
         await CountDownTask();
     }
+    
     public async Task CountDownTask() 
     {
         for (int i = 3; i > 0; i--) 
@@ -35,6 +38,7 @@ public class Round_InitialCountdownState : Round_BaseState
         countDownText.text = $"FIGHT!!";
         countDownText.transform.DOScale(0f, 0f);
         countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
+        await Task.Delay(WaitingTime * 100);
 
         _rSystem.StateMachine.CallActiveGameState();
     }

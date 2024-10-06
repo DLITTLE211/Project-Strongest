@@ -13,7 +13,6 @@ public class Round_ActiveMatchState : Round_BaseState
     public override void OnEnter()
     {
         checkTimer = true;
-        GameManager.instance.settingsController.SetTeleportPositions();
         _gameTimer.tickDownStopWatch = true;
     }
     public override void Update() 

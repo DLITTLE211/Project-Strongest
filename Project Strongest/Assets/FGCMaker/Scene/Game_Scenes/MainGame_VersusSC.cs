@@ -27,7 +27,7 @@ public class MainGame_VersusSC : MainGame_SettingsController
         yield return new WaitForSeconds(3 / 60f);
         centerPos = new TeleportPoint();
         centerPos.SetPositionPos("Center_TP");
-        _trainingCoverImage = GameObject.Find("Training_ImageCover").GetComponent<Image>();
+        _trainingCoverImage = GameObject.Find("Versus_ImageCover").GetComponent<Image>();
         StartCoroutine(TeleportTweenController(centerPos._leftSidePos, centerPos._rightSidePos));
     }
     IEnumerator TeleportTweenController(Vector3 pos1, Vector3 pos2)

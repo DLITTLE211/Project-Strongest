@@ -12,7 +12,11 @@ public class Round_ResultMatchState : Round_BaseState
     {
         
     }
-    public void OnWin_AwardPoint(Character_Base _Base)
+    public async void CallAward(Character_Base _Base) 
+    {
+        await OnWin_AwardPoint(_Base);
+    }
+    public async Task OnWin_AwardPoint(Character_Base _Base)
     {
         _rSystem.AwardWin(_Base._side);
         if (_rSystem.p1_Signifiers.hasWon)
@@ -25,6 +29,7 @@ public class Round_ResultMatchState : Round_BaseState
         }
         else 
         {
+            await Task.Delay(1000);
             _rSystem.StateMachine.CallInitialTimerState();
         }
     }
