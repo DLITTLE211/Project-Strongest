@@ -17,6 +17,7 @@ public class Round_InitialCountdownState : Round_BaseState
     public async override void OnEnter()
     {
         countDownText.gameObject.SetActive(true);
+        countDownText.text = "";
         countDownText.DOFade(1f,0f);
         await CountDownTask();
     }

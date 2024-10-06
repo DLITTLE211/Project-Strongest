@@ -18,8 +18,8 @@ public class MainGame_RoundSystemController : MonoBehaviour
     }
     public void AwardWin(int side) 
     {
-        Callback awardWin = side == 0 ? p1_Signifiers.AwardRoundWin : p2_Signifiers.AwardRoundWin;
-        awardWin();
+        Callback AwardWin = side == 0 ? p1_Signifiers.AwardRoundWin : p2_Signifiers.AwardRoundWin;
+        AwardWin();
     }
     private void Update()
     {
@@ -39,8 +39,10 @@ public class Player_Round_Signifier
     public List<Round_Signifier> win_Signifiers;
     int roundWinCount = -1;
     int maxRoundCount;
+    public bool hasWon;
     public void DisableRoundObjects()
     {
+        hasWon = false;
         for (int i = 0; i < 5; i++)
         {
             win_Signifiers[i]._roundImage.gameObject.SetActive(false);
@@ -59,8 +61,9 @@ public class Player_Round_Signifier
         roundWinCount++;
         if (roundWinCount >= maxRoundCount-1)
         {
-            win_Signifiers[roundWinCount].WinRound();
+            hasWon = true;
             Debug.Log("Player Has Reached Victory");
+            win_Signifiers[roundWinCount].WinRound();
             return;
         }
         win_Signifiers[roundWinCount].WinRound();
