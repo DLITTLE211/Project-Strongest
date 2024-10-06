@@ -12,8 +12,7 @@ public class Round_EndScreenState : Round_BaseState
 {
     public Round_EndScreenState(MainGame_RoundSystemController rSystem) : base(rSystem) { }
     [SerializeField] private TMP_Text countDownText;
-    [SerializeField] private GameObject endingScreen;
-    [SerializeField] private GameObject topButton;
+    [SerializeField] private EndScreen_Controller endingScreen;
     public override void OnEnter()
     {
         countDownText.gameObject.SetActive(true); 
@@ -21,9 +20,18 @@ public class Round_EndScreenState : Round_BaseState
         {
             GameManager.instance.players.totalPlayers[i].Deactivate();
         }
-        if (GameManager.instance.winningCharacter != null) 
+        countDownText.DOFade(1f, 0f);
+        countDownText.gameObject.SetActive(true);
+        countDownText.transform.DOScale(0f, 0f);
+        countDownText.transform.DOScale(1f, 0.3f);
+        countDownText.transform.DOScale(0.75f, 0.3f);
+        if (GameManager.instance.winningCharacter != null)
         {
-            countDownText.text = $"Player {GameManager.instance.winningCharacter.playerID +1} Wins!!";
+            countDownText.text = $"Player {GameManager.instance.winningCharacter.playerID + 1} Wins!!";
+        }
+        else 
+        {
+            countDownText.text = $"Tie Game...";
         }
         CallEndScreen();
     }
@@ -33,12 +41,15 @@ public class Round_EndScreenState : Round_BaseState
     }
     public async Task ActivateEndScreen()
     {
-        await Task.Delay(1000);
-        endingScreen.SetActive(true);
-        GameManager.instance.settingsController.SetActiveButton(topButton);
+        await Task.Delay(2500);
+        endingScreen.gameObject.SetActive(true);
+        countDownText.text = "";
+        countDownText.gameObject.SetActive(false);
+        GameManager.instance.SetupEndScreen(endingScreen.SetupEndScreenButtons);
+        GameManager.instance.settingsController.SetActiveButton(endingScreen.ReturnTopButton().gameObject);
     }
     public override void OnExit()
     {
-        endingScreen.SetActive(false);
+        endingScreen.gameObject.SetActive(false);
     }
 }

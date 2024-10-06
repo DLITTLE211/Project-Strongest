@@ -217,7 +217,10 @@ public class GameManager : MonoBehaviour
     {
         _settingsController.SetPlayersPosition();
     }
-
+    public void SetupEndScreen(Callback<EventSystem> func) 
+    {
+        func(_eventSystem);
+    }
     private void OnApplicationQuit()
     {
         ReInput.ControllerConnectedEvent -= SetupPlayers;
@@ -305,6 +308,7 @@ public class Character_AvailableID
         usedStrings = UsedID.Item2;
     }
 }
+
 [System.Serializable]
 public enum Character_SubStates
 { 

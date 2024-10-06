@@ -28,16 +28,21 @@ public class Round_ResultMatchState : Round_BaseState
         _rSystem.AwardWin(_Base._side);
         if (_rSystem.p1_Signifiers.hasWon)
         {
-
+            await Task.Delay(1000);
+            _rSystem.StateMachine.CallEndScreenState();
+            return;
         }
         else if (_rSystem.p2_Signifiers.hasWon)
         {
-
+            await Task.Delay(1000);
+            _rSystem.StateMachine.CallEndScreenState();
+            return;
         }
         else 
         {
             await Task.Delay(1000);
             _rSystem.StateMachine.CallInitialTimerState();
+            return;
         }
     }
     public override void OnExit()
