@@ -10,16 +10,23 @@ public class MainGame_RoundSystemController : MonoBehaviour
     public Player_Round_Signifier p1_Signifiers;
     public Player_Round_Signifier p2_Signifiers;
     [SerializeField] private Round_StateMachine _StateMachine;
+    public int currentRound;
     public Round_StateMachine StateMachine { get { return _StateMachine; } }
 
     public void Initialize()
     {
+        currentRound = 1;
         _StateMachine.CallCharacterDialogueState();
+    }
+    public bool FinalRound() 
+    {
+        return currentRound >= CharacterSelect_LoadArena._roundInfo.winningRoundCount;
     }
     public void AwardWin(int side) 
     {
         Callback AwardWin = side == 0 ? p1_Signifiers.AwardRoundWin : p2_Signifiers.AwardRoundWin;
         AwardWin();
+        currentRound++;
     }
     public void AwardTieWin()
     {

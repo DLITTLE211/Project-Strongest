@@ -14,34 +14,46 @@ public class Round_InitialCountdownState : Round_BaseState
     [Range(1,10),SerializeField] private int WaitingTime;
     [SerializeField] private TMP_Text countDownText;
     private int threeSecondCountDown;
+    
     public async override void OnEnter()
     {
+        for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
+        {
+            GameManager.instance.players.totalPlayers[i]._cSuperMeter.SetStartValue();
+            GameManager.instance.players.totalPlayers[i]._cHealth.SetStartingHealthValues();
+            GameManager.instance.players.totalPlayers[i]._cHealth.stunController.SetStartStunValues();
+            GameManager.instance.players.totalPlayers[i].Deactivate();
+        }
         GameManager.instance.settingsController.SetTeleportPositions();
         await Task.Delay(WaitingTime * 100);
         GameManager.instance.stopWatchController.SetStartTimerValues();
-        for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
-        {
-            GameManager.instance.players.totalPlayers[i]._cHealth.SetStartingHealthValues(); 
-            GameManager.instance.players.totalPlayers[i]._cHealth.stunController.SetStartStunValues();
-            GameManager.instance.players.totalPlayers[i]._cSuperMeter.SetStartValue();
-        }
+        countDownText.DOFade(1f, 0f);
         GameManager.instance.stopWatchController.tickDownStopWatch = false;
-        countDownText.gameObject.SetActive(true);
         countDownText.text = "";
-        countDownText.DOFade(1f,0f);
+        countDownText.gameObject.SetActive(true);
         await CountDownTask();
     }
     
-    public async Task CountDownTask() 
+    public async Task CountDownTask()
     {
+        if (_rSystem.FinalRound())
+        {
+            countDownText.text = $"Final Round!!";
+        }
+        else
+        {
+            countDownText.text = $"Round {_rSystem.currentRound}!!";
+        }
+        countDownText.transform.DOScale(0f, 0f);
+        countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
+        await Task.Delay(WaitingTime * 100);
         for (int i = 3; i > 0; i--) 
         {
             threeSecondCountDown = i;
             countDownText.text = $"{threeSecondCountDown}";
             countDownText.transform.DOScale(0f, 0f);
             countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
-            countDownText.transform.DOScale(0.75f, 0.3f);
-            await Task.Delay(WaitingTime * 100);
+            await Task.Delay(7 * 100);
         }
         countDownText.text = $"FIGHT!!";
         countDownText.transform.DOScale(0f, 0f);
