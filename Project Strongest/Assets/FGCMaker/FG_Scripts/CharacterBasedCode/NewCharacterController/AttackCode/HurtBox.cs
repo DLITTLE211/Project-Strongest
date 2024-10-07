@@ -270,6 +270,7 @@ public class HurtBox : CollisionDetection
             //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
             currentHitbox.DestroyHitbox(currentHitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         }
+
         endingFunction();
         endingFunction = null;
     }
@@ -302,7 +303,7 @@ public class HurtBox : CollisionDetection
         }
         else 
         {
-            hitCount = currentHitbox.hitboxProperties.AttackAnims._hitCount;
+            hitCount = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties.AttackAnims._hitCount;
         }
         int curHit = 0;
         if (Base_Target._cHitController.Recovering) 

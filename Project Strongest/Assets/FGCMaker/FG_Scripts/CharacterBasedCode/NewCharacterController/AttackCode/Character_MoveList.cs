@@ -70,7 +70,6 @@ public class Character_MoveList : MonoBehaviour
     }
     public void ClearAttackData()
     {
-        Debug.LogError("Cleared attack data");
         currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
         followUp = null;
     }

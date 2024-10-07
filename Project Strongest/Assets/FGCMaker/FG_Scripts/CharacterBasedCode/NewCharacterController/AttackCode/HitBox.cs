@@ -50,9 +50,9 @@ public class HitBox : CollisionDetection
                 Transform target = c.transform.root;
                 if (HBType != HitBoxType.nullified)
                 {
+                    hitboxProperties.hitLanded = true;
                     SendHitStateAndHurtBox(this, c.GetComponentInParent<HurtBox>(),target, () => ClearAdditionalHit(this));
                     allowHitCheck = false;
-                    DestroySelf();
                 }
 
                 DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);

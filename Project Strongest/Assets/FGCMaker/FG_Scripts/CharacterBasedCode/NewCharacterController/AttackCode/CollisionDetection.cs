@@ -235,13 +235,10 @@ public class CollisionDetection : MonoBehaviour
     public void ActivateHitbox(HitBox _hitbox, HurtBox hurtbox,string attackName, HitCount _hitCount, Attack_BaseProperties property)
     {
         hurtbox.gameObject.SetActive(true);
-        _hitbox.hitboxProperties = property;
         allowHitCheck = true;
-       // CheckForCollision();
     }
     public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox = null)
     {
-        allowHitCheck = false;
         _hitbox.SetHitColliderType(_hitbox, HitBoxType.nullified);
         if (hurtbox != null)
         {
@@ -249,8 +246,9 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    public void ClearAdditionalHit(HitBox _hitbox) 
+    public void ClearAdditionalHit(HitBox _hitbox)
     {
+        _hitbox.hitboxProperties.hitLanded = false;
         DestroyHitbox(_hitbox);
     }
 }

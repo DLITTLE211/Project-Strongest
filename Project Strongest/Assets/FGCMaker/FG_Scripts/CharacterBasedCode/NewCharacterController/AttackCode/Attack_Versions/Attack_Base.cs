@@ -44,6 +44,7 @@ public class Attack_BaseProperties
     public Attack_CancelInfo cancelProperty;
     public MoveType _moveType;
     public AttackHandler_Attack AttackAnims;
+    public bool hitLanded;
     public bool hitConnected;
     #endregion
 

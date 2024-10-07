@@ -9,6 +9,7 @@ public class Character_HitboxManager : MonoBehaviour
     public Transform hitBoxHolder;
     public int hitBoxCount;
     [SerializeField] private int hitBoxIndex;
+     public HitBox currentActiveHitbox;
     public void SetupHitboxes(int playerID) 
     {
         totalHitBoxes = new List<HitBox>();
@@ -33,18 +34,19 @@ public class Character_HitboxManager : MonoBehaviour
         }
         hitBoxIndex = 0;
     }
-    public void IterateHitBox() 
+    public void IterateHitBox()
     {
         hitBoxIndex++;
-    }
-    public HitBox GetActiveHitBox() 
-    {
         if (hitBoxIndex >= totalHitBoxes.Count)
         {
             hitBoxIndex = 0;
         }
+    }
+    public HitBox GetActiveHitBox() 
+    {
         HitBox currentHitbox = totalHitBoxes[hitBoxIndex];
-        return currentHitbox;
+        currentActiveHitbox = currentHitbox;
+        return currentActiveHitbox;
     }
     public void DisableCurrentHitbox() 
     {

@@ -74,6 +74,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public void GetPlacementLocation(Character_Base curBase)
     {
+        character._cHitboxManager.IterateHitBox();
         HitBox newHitBox = curBase._cHitboxManager.GetActiveHitBox();
 
         if (HitBox != null)
@@ -112,7 +113,6 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             HitBox.SetHitBoxProperties(newAttackProperties);
         }
-        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
         _playerCAnimator.SetCanTransitionIdle(false);
         _playerCAnimator._base._aManager.SetStartNextAttack(false);
     }
@@ -130,17 +130,14 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
 
         }
-        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
     }
     public override void OnStay(Character_Base curBase)
     {
-        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered stay");
     }
     public override void OnActive(Character_Base curBase)
     {
         active = true;
         HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount,_playerCAnimator.lastAttack);
-        //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered active");
     }
     public override void OnRecov(Character_Base curBase)
     {
@@ -254,7 +251,6 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
-        character._cHitboxManager.IterateHitBox();
         if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
@@ -303,7 +299,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 }
                 catch (Exception e)
                 {
-                    HitBox.DestroySelf();
+                    //HitBox.DestroySelf();
                     Debug.LogError(e.ToString());
                     frameCount = lastAttack.AttackAnims.animLength + 1f;
                     Debug.Log("Null Check");
@@ -349,7 +345,6 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
-        character._cHitboxManager.IterateHitBox();
         frameCount = 0;
         if (!_playerCAnimator.canTick)
         {
@@ -401,7 +396,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 }
                 catch (Exception e)
                 {
-                    HitBox.DestroySelf();
+                    //HitBox.DestroySelf();
                     Debug.LogError(e.ToString());
                     frameCount = customProp.animLength + 1f;
                     Debug.Log("Null Check");
