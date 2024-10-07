@@ -18,7 +18,8 @@ public class Attack_Manager : MonoBehaviour
     [SerializeField] private MoveType curTypeHierarchy;
     // Start is called before the first frame update
     internal int normalGatlingCount;
-    public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } } 
+    public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } }
+    IEnumerator RechargeRoutine;
     void Start()
     {
         Combo = new List<Attack_BaseProperties>();
@@ -363,5 +364,21 @@ public class Attack_Manager : MonoBehaviour
             normalGatlingCount--;
         }
         _cAnimator.SetNextAttackStartVariables(attack);
+        ClearRoutine();
+        RechargeRoutine = RechargeGatlings();
+        StartCoroutine(RechargeRoutine);
+    }
+    void ClearRoutine() 
+    {
+        if(RechargeRoutine!= null) 
+        {
+            StopCoroutine(RechargeRoutine);
+            RechargeRoutine = null;
+        }
+    }
+    IEnumerator RechargeGatlings() 
+    {
+        yield return new WaitForSeconds(2f);
+        normalGatlingCount = 3;
     }
 }

@@ -109,32 +109,41 @@ public class Character_ComboDetection : MonoBehaviour
             if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
             {
                 int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
-                if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.String_Normal)
+                MoveType currentFollowupMoveType = ActiveFollowUpAttackCheck.Value.GetAttackMoveType();
+                try
                 {
-                    if (followUpAttackIndex > -1)
+                    if (currentFollowupMoveType == MoveType.String_Normal)
                     {
-                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                        if (followUpAttackIndex > -1)
+                        {
+                            ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                        }
+                        else
+                        {
+                            FullMovelistCheck();
+                        }
                     }
-                    else
+                    if (currentFollowupMoveType == MoveType.Rekka)
                     {
-                        FullMovelistCheck();
+                        IAttackFunctionality newInputtedSpecial = SpecialMoveOnlyCheck();
+                        if (newInputtedSpecial != null)
+                        {
+                            return;
+                        }
+                        if (followUpAttackIndex > -1)
+                        {
+                            ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                        }
+                        else
+                        {
+                            FullMovelistCheck();
+                        }
                     }
                 }
-                if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Rekka)
+                catch (NullReferenceException) 
                 {
-                    IAttackFunctionality newInputtedSpecial = SpecialMoveOnlyCheck();
-                    if (newInputtedSpecial != null)
-                    {
-                        return;
-                    }
-                    if (followUpAttackIndex > -1)
-                    {
-                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
-                    }
-                    else
-                    {
-                        FullMovelistCheck();
-                    }
+                    Debug.LogError("Null Ref Caught. Check Line");
+                    return;
                 }
             }
         }
