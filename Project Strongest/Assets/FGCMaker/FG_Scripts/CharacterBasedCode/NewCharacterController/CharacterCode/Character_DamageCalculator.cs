@@ -39,6 +39,7 @@ public class Character_DamageCalculator : MonoBehaviour
         calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
+        _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         if (calculatedRecovDamage <= 0)
         {
             calculatedRecovDamage = 0;

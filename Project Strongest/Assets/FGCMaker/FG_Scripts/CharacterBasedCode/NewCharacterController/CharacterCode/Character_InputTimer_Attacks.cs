@@ -65,7 +65,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
         }
     }
-    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.35f) 
+    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.4f) 
     {
         if (newType != TimerType.Normal)
         {

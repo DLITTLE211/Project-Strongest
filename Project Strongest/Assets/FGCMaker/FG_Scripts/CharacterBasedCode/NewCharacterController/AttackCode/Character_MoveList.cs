@@ -68,8 +68,12 @@ public class Character_MoveList : MonoBehaviour
     {
         SetFollowAttack(null);
     }
-    public void ClearAttackData()
+    public void ClearAttackData(IState state, IState attacking)
     {
+        if(state == attacking) 
+        {
+            return;
+        }
         currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
         followUp = null;
     }
@@ -403,8 +407,8 @@ public class Character_MoveList : MonoBehaviour
                 }
                 else
                 {
-                    attacker._cComboCounter.OnHit_CountUp();
-                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack,followUp, armoredHit);
+                    //attacker._cComboCounter.OnHit_CountUp();
+                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack, followUp, armoredHit);
                     //Call interface function for dealing damage w/ block;
                 }
             }
@@ -417,11 +421,16 @@ public class Character_MoveList : MonoBehaviour
                 }
                 else
                 {
-                    attacker._cComboCounter.OnHit_CountUp();
-                    currentAttack.Value.HandleDamageDealing(attacker, target,blockedAttack, attack,null ,armoredHit);
+                    //attacker._cComboCounter.OnHit_CountUp();
+                    currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack, null, armoredHit);
                     //Call interface function for dealing damage w/ block;
                 }
             }
+        }
+        else 
+        {
+            Debug.Break();
+            Debug.LogError("Current Attack Value is Null");
         }
     }
 

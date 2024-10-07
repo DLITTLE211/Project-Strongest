@@ -51,7 +51,9 @@ public class Attack_Manager : MonoBehaviour
             _cAnimator.inRekkaState = false;
             if (_base.comboList3_0 != null)
             {
-                _base.comboList3_0.ClearAttackData();
+                IState currentState = _base._cStateMachine._playerState.GetCurrentState();
+                IState attackingState = _base._cStateMachine.attackingStateRef;
+                _base.comboList3_0.ClearAttackData(currentState, attackingState);
             }
         }
     }

@@ -264,6 +264,7 @@ public class HurtBox : CollisionDetection
         {
             Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
             currentAttack.hitConnected = true;
+            Base_Attacker._cComboCounter.OnHit_CountUp();
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
             //await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
             Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.attackMainStunValues.hitstunValue);
@@ -319,20 +320,25 @@ public class HurtBox : CollisionDetection
             }
             Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
         }
-
+        if (Base_Attacker._cAttackTimer.FrameCountTimer <= 0.4f) 
+        {
+            Base_Attacker._cAttackTimer.SetTimerType();
+        }
         while (curHit < hitCount._count)
         {
             try
             {
                 currentHitProperties.hitConnected = true;
                 Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
-                Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
                 if (BlockedAttack)
                 {
+                    Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
                     Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
                 }
                 else
                 {
+                    Base_Attacker._cComboCounter.OnHit_CountUp();
+                    Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
                     Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, Base_Target, applyForceAfterStop);
                     Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.attackMainStunValues.hitstunValue);
                 }

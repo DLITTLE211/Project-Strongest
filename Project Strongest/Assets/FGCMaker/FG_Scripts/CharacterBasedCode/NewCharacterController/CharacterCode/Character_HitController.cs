@@ -432,7 +432,8 @@ public class Character_HitController : MonoBehaviour
                 {
                     if (blockTypes.Contains(entry.Key))
                     {
-                        entry.Value(currentProperty);
+                        entry.Value(currentProperty); 
+                        break;
                     }
                     continue;
                 }
@@ -442,6 +443,7 @@ public class Character_HitController : MonoBehaviour
                     {
                         _base._cHealth.ClearRegenRoutine();
                         entry.Value(currentProperty);
+                        break;
                     }
                     continue;
                 }
