@@ -43,6 +43,11 @@ public class Character_State
         nextState = current.State;
     }
 
+    public IState GetCurrentState()
+    {
+        return current.State;
+    }
+
     public void SetState(IState state) 
     {
         current = nodes[state.GetType()];

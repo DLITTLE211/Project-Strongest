@@ -8234,6 +8234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f5a212f30fe4090ea66dbf5ea326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 993311525}
   _chosenCharacterProfileImage: {fileID: 1447069828}
   health_Main:
     meterSlider: {fileID: 2001293386}
@@ -9421,6 +9422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f5a212f30fe4090ea66dbf5ea326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 94923329}
   _chosenCharacterProfileImage: {fileID: 808710508}
   health_Main:
     meterSlider: {fileID: 44666232}
@@ -21075,6 +21077,7 @@ MonoBehaviour:
     - _roundImage: {fileID: 467936323}
     hasWon: 0
   _StateMachine: {fileID: 1444571188}
+  currentRound: 0
 --- !u!1001 &1362609699
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,15 +22,17 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     private int _currentStage;
     public bool allowStageSelect;
     public bool allowRoundSelect;
+    GameMode _mode;
     public void ActivateRoundSelector(GameMode _curGameMode)
     {
-        if (_curGameMode == GameMode.Training)
+        _mode = _curGameMode;
+        if (_mode == GameMode.Training)
         {
             allowRoundSelect = false;
             _roundSettingsObject.SetActive(false);
             _mainHolder.SetActive(true);
         }
-        else if (_curGameMode != GameMode.Title)
+        else if (_mode == GameMode.Versus)
         {
             allowRoundSelect = true;
             _mainHolder.SetActive(false);
@@ -67,7 +69,14 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         stageSelectActive = true;
         _currentStage = 0;
         SetActiveStage(totalStages[_currentStage]);
-        allowRoundSelect = true;
+        if (_mode == GameMode.Versus)
+        {
+            allowRoundSelect = true;
+        }
+        else 
+        {
+            allowStageSelect = true;
+        }
     }
     public void ClearStageSelect()
     {

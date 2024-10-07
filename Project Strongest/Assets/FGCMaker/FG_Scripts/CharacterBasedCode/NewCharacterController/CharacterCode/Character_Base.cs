@@ -165,6 +165,10 @@ public class Character_Base : MonoBehaviour
         _cComboCounter.SetStartComboCounter();
         _cAnimator.canTransitionIdle = true;
         awaitCondition = true;
+        if (GameManager.instance._gameModeSet.gameMode == GameMode.Training)
+        {
+            Activate();
+        }
     }
     void SetAwaitEnums()
     {

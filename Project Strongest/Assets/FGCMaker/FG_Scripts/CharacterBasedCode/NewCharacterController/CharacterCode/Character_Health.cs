@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Character_Health : MonoBehaviour
 {
+    [SerializeField] private Character_Base _base;
     [SerializeField] private Image _chosenCharacterProfileImage;
     public MainMeterController health_Main;
     public MainMeterController health_Recov;
@@ -15,6 +16,19 @@ public class Character_Health : MonoBehaviour
     [Range(75f, 200f)] public float defenseValue;
     public bool canRecover;
     private Character_Profile curProfile;
+    IEnumerator healthRegenRoutine;
+    public void ClearRegenRoutine() 
+    {
+        if (healthRegenRoutine != null) 
+        {
+            StopCoroutine(healthRegenRoutine);
+            healthRegenRoutine = null;
+        }
+    }
+    public bool TestIfDeadDamage(float damage)
+    {
+        return (health_Main.currentValue - damage) <= 0;
+    }
     public void SetHealthInformation(Character_Profile profile)
     {
         curProfile = profile;
@@ -27,24 +41,19 @@ public class Character_Health : MonoBehaviour
         health_Recov.SetStartMeterValues(curProfile.MaxHealth);
         recoverHealthRate = curProfile.HealthRegenRate;
     }
-    public void ApplyAffliction(Affliction curAffliction)
-    {
-        currentAffliction = curAffliction;
-    }
-    public bool TestIfDeadDamage(float damage) 
-    {
-        return (health_Main.currentValue - damage) <= 0;
-    }
     public void ApplyMainHealthDamage(float damageValue)
     {
-        StopCoroutine(RecoverHealthWaitTime());
         canRecover = false;
         DOTween.Kill(health_Main.meterSlider);
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
         stunController.ApplyStun(damageValue * 0.01f);
         stunController.currentAffliction = currentAffliction;
-        StartCoroutine(RecoverHealthWaitTime());
+    }
+    public void StartHealthRegen()
+    {
+        healthRegenRoutine = RecoverHealthWaitTime();
+        StartCoroutine(healthRegenRoutine);
     }
     public void ApplyRecoveryHealthDamage(float damageValue)
     {
@@ -53,7 +62,11 @@ public class Character_Health : MonoBehaviour
     }
     IEnumerator RecoverHealthWaitTime()
     {
-        yield return new WaitForSeconds(1.25f);
+        IState hitState = _base._cStateMachine.hitStateRef;
+        while (_base._cStateMachine._playerState.GetCurrentState() == hitState) 
+        {
+            yield return new WaitForEndOfFrame();
+        }
         recoverHealth();
     }
     void CheckMeterValue()

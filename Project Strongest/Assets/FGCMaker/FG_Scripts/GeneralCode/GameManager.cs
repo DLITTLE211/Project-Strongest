@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
                 if (playerProfiles[i].ChosenPlayerSide != -1 && playerProfiles[i].subState == Character_SubStates.Controlled)
                 {
                     players.totalPlayers[playerProfiles[i].ChosenPlayerSide].characterProfile = playerProfiles[i].chosenCharacter;
+                   
                     players.totalPlayers[playerProfiles[i].ChosenPlayerSide].Initialize(Character_SubStates.Controlled, playerProfiles[i].ChosenPlayerSide, playerProfiles[i].chosenAmplifier, players.availableIds[i]);
                     players.AddUsedID(players.joystickNames[i]);
                 }
