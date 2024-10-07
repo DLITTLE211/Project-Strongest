@@ -112,7 +112,12 @@ public class State_Idle : BaseState
         }
         if (inIdle)
         {
+            while (_base.isLockedPause)
+            {
+                await Task.Yield();
+            }
             _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+
         }
         ResetTime();
     }
