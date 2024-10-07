@@ -429,7 +429,7 @@ public class Character_MoveList : MonoBehaviour
         }
         else 
         {
-            Debug.Break();
+            //Debug.Break();
             Debug.LogError("Current Attack Value is Null");
         }
     }
