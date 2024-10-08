@@ -248,12 +248,16 @@ public class Character_ComboDetection : MonoBehaviour
                                 return entry;
                             }
                         }
+                        continue;
                     }
+                    continue;
                 }
+                continue;
             }
             else
             {
-                if ((int)_base.comboList3_0.GetCurrentActiveMoveType() <=3) {
+                if ((int)entry.Value.GetAttackMoveType() <= 3)
+                {
                     if (entry.Key.normalAirAttackInfo == key.keyGroundCheck)
                     {
                         if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
@@ -266,7 +270,9 @@ public class Character_ComboDetection : MonoBehaviour
                             Debug.Log(entry.Value);
                             return entry;
                         }
+                        continue;
                     }
+                    continue;
                 }
             }
             continue;

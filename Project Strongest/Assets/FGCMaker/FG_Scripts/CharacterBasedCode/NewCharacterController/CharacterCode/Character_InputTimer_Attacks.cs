@@ -123,6 +123,14 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         SetTimerType(TimerType.Normal);
         FrameCountTimer = -1 / 60f;
         CountDownTimer();
+        if (superLanded) 
+        {
+            superLanded = false;
+        }
+        if (throwLanded)
+        {
+            throwLanded = false;
+        }
     }
 
     void SetStartStanceTimerValues(float time) 

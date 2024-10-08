@@ -327,12 +327,20 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
-        ClearRecoveryRoutine();
         float hitStunInFrames = curField.animLength + (currentHitstun * Base_FrameCode.ONE_FRAME);
-        SetStunMeterValue(hitStunInFrames);
-        _base._cAnimator.PlayNextAnimation(curField.animHash,0,true);
-        _base._cAnimator.SetCanRecover(true);
-        _base._cHitstun.CallHitStun(hitStunInFrames);
+        try
+        {
+            ClearRecoveryRoutine();
+            SetStunMeterValue(hitStunInFrames);
+            _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
+            _base._cAnimator.SetCanRecover(true);
+            _base._cHitstun.CallHitStun(hitStunInFrames);
+        }
+        catch (StackOverflowException) 
+        {
+            Debug.LogError("Stack Overflow Hit");
+        }
+        Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
         while (hitStunInFrames > 0)
         {
             if (_base.ReturnIfPaused())
@@ -341,9 +349,9 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
-                if (currentProperty != null)
+                if (currentKnockBack != null)
                 {
-                    if (currentProperty.verticalKBP.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
+                    if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
                     {
                         yield return new WaitForSeconds(0.45f);
                         while (!_base._cHurtBox.IsGrounded())
@@ -355,21 +363,9 @@ public class Character_HitController : MonoBehaviour
                         hitStunInFrames = 0;
                         ClearMeterValue();
                     }
-                }
-                if (currentCustomDamageField != null)
-                {
-                    if (currentCustomDamageField.verticalKBP.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
-                    {
-                        yield return new WaitForSeconds(0.45f);
-                        while (!_base._cHurtBox.IsGrounded())
-                        {
-                            hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                            UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                        }
-                        hitStunInFrames = 0;
-                        ClearMeterValue();
-                    }
+                    hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                    yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
                 else
                 {
@@ -420,6 +416,21 @@ public class Character_HitController : MonoBehaviour
             currentCustomDamageField = null;
             currentProperty = null;
         }
+    }
+    public Vertical_KnockBack GetActiveVerticalKnockback() 
+    {
+        if(currentCustomDamageField != null) 
+        {
+            return currentCustomDamageField.verticalKBP;
+        }
+        else 
+        {
+            if (currentProperty != null)
+            {
+                return currentProperty.verticalKBP;
+            }
+        }
+        return null;
     }
     #region Successful Hit Code
     void SetRecoverable()
