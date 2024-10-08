@@ -20,18 +20,14 @@ public class Round_EndScreenState : Round_BaseState
         {
             GameManager.instance.players.totalPlayers[i].Deactivate();
         }
-        countDownText.DOFade(1f, 0f);
-        countDownText.gameObject.SetActive(true);
-        countDownText.transform.DOScale(0f, 0f);
-        countDownText.transform.DOScale(1f, 0.3f);
-        countDownText.transform.DOScale(0.75f, 0.3f);
+
         if (GameManager.instance.winningCharacter != null)
         {
-            countDownText.text = $"Player {GameManager.instance.winningCharacter.playerID + 1} Wins!!";
+            PulseAndSetText(countDownText, $"Player {GameManager.instance.winningCharacter.playerID + 1} Wins!!");
         }
-        else 
+        else
         {
-            countDownText.text = $"Tie Game...";
+            PulseAndSetText(countDownText, $"Tie Game...");
         }
         CallEndScreen();
     }

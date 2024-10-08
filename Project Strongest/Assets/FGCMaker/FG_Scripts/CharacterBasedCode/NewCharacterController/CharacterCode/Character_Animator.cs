@@ -347,6 +347,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(SuperAttackRoutine);
             SuperAttackRoutine = null;
         }
+        _base._cHitboxManager.IterateHitBox();
     }
     public void NullifyMobilityOption()
     {

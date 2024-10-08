@@ -35,7 +35,7 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitCalculation = (curRawDamage * counterHitMult) - curRawDamage;
         float counterHitValue = counterHitCalculation <= 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
-
+        _base._cForce.SendKnockBackOnHit(callback.customDamage);
         calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
@@ -52,6 +52,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
+            _healtController.ClearHealthValues();
             GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
         }
     }
@@ -109,6 +110,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
+            _healtController.ClearHealthValues();
             GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
         }
     }
@@ -134,8 +136,9 @@ public class Character_DamageCalculator : MonoBehaviour
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
             _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
         }
-        else 
+        else
         {
+            _healtController.ClearHealthValues();
             GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
         }
     }

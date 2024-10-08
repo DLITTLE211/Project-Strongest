@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using Rewired;
+using System.Linq;
 using System.Threading.Tasks;
 public class Character_Base : MonoBehaviour
 {
@@ -256,7 +257,7 @@ public class Character_Base : MonoBehaviour
     }
     public void CollectCharacterMovelist() 
     {
-        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser);
+        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser,this);
         _cAttackTimer.SetTimerType();
     }
     void InitButtons(Character_SubStates setSubState, int NewID)

@@ -74,7 +74,6 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public void GetPlacementLocation(Character_Base curBase)
     {
-        character._cHitboxManager.IterateHitBox();
         HitBox newHitBox = curBase._cHitboxManager.GetActiveHitBox();
 
         if (HitBox != null)
@@ -318,13 +317,18 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.ClearAttackLanded();
         }
-        if (character._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
+        else if (character._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
         {
             character._cAttackTimer.ClearSuperLanded();
         }
-        if (character._cAttackTimer._type == TimerType.Throw && lastAttack._moveType == MoveType.Throw)
+        else if (character._cAttackTimer._type == TimerType.Throw && lastAttack._moveType == MoveType.Throw)
         {
             character._cAttackTimer.ClearThrowLanded();
+        }
+        else
+        {
+            character._cAttackTimer.ClearAttackLanded();
+            _playerCAnimator.SetCanTransitionIdle(true);
         }
         if (requiredHitboxCallBacks.Count == 1)
         {
@@ -409,19 +413,24 @@ public class AttackHandler_Attack : AttackHandler_Base
                 yield return new WaitForSeconds(waitTime);
             }
         }
-        Attack_BaseProperties thisAttack = character._cHitboxManager.GetActiveHitBox().hitboxProperties;
+        Attack_BaseProperties thisAttack = HitBox.hitboxProperties;
         if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
         {
             character._cAttackTimer.ClearThrowLanded();
             _playerCAnimator.SetCanTransitionIdle(true);
         }
-        if (thisAttack._moveType == MoveType.Super)
+        else if (thisAttack._moveType == MoveType.Super)
         {
             if (curAnim >= animCount)
             {
                 character._cAttackTimer.ClearSuperLanded();
                 _playerCAnimator.SetCanTransitionIdle(true);
             }
+        }
+        else
+        {
+            character._cAttackTimer.ClearAttackLanded();
+            _playerCAnimator.SetCanTransitionIdle(true);
         }
         if (requiredHitboxCallBacks.Count == 1)
         {

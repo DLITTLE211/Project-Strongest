@@ -341,17 +341,35 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
-                if (currentProperty.verticalKBP.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
+                if (currentProperty != null)
                 {
-                    yield return new WaitForSeconds(0.45f);
-                    while (!_base._cHurtBox.IsGrounded())
+                    if (currentProperty.verticalKBP.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
                     {
-                        hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                        UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                        yield return new WaitForSeconds(0.45f);
+                        while (!_base._cHurtBox.IsGrounded())
+                        {
+                            hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                            UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                        }
+                        hitStunInFrames = 0;
+                        ClearMeterValue();
                     }
-                    hitStunInFrames = 0;
-                    ClearMeterValue();
+                }
+                if (currentCustomDamageField != null)
+                {
+                    if (currentCustomDamageField.verticalKBP.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
+                    {
+                        yield return new WaitForSeconds(0.45f);
+                        while (!_base._cHurtBox.IsGrounded())
+                        {
+                            hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                            UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                        }
+                        hitStunInFrames = 0;
+                        ClearMeterValue();
+                    }
                 }
                 else
                 {
@@ -365,7 +383,14 @@ public class Character_HitController : MonoBehaviour
         {
             ClearRecoveryRoutine();
             _isRecovering = true;
-             recoverRoutine = DoRecovery(currentProperty.KnockDown, curField);
+            if (currentProperty != null)
+            {
+                recoverRoutine = DoRecovery(currentProperty.KnockDown, curField);
+            }
+            else if(currentCustomDamageField != null) 
+            {
+                recoverRoutine = DoRecovery(currentCustomDamageField.KnockDown, curField);
+            }
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
             StartCoroutine(recoverRoutine);
         }
@@ -392,6 +417,8 @@ public class Character_HitController : MonoBehaviour
             }
             SetRecoverable();
             _base._cHurtBox.SetHurboxState();
+            currentCustomDamageField = null;
+            currentProperty = null;
         }
     }
     #region Successful Hit Code
@@ -414,6 +441,7 @@ public class Character_HitController : MonoBehaviour
     }
     public void ForceCustomLockAnim(CustomDamageField currentAttack, bool finalAttack)
     {
+        _cAnimator.isHit = true;
         LockHitDetect(currentAttack, finalAttack);
     }
     void SearchHitResponseDictionary(Attack_BaseProperties attackHitLevel,bool blockedAttack)
@@ -496,10 +524,14 @@ public class Character_HitController : MonoBehaviour
     {
         if (playGroundedAnim.hitLevel != HitLevel.Crumple)
         {
-            yield return new WaitForEndOfFrame();
-            if (CheckNextAttackCatchPostLanding())
+            if (currentCustomDamageField == null)
             {
-                yield break;
+                yield return new WaitForEndOfFrame();
+                if (CheckNextAttackCatchPostLanding())
+                {
+
+                    yield break;
+                }
             }
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
@@ -513,10 +545,15 @@ public class Character_HitController : MonoBehaviour
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
         yield return new WaitForEndOfFrame();
-        if (CheckNextAttackCatchPostLanding())
+        if (currentCustomDamageField == null)
         {
-            _base._cHealth.StartHealthRegen();
-            yield break;
+            if (CheckNextAttackCatchPostLanding())
+            {
+                _base._cHealth.StartHealthRegen();
+                currentCustomDamageField = null;
+                currentProperty = null;
+                yield break;
+            }
         }
         _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
         yield return new WaitForSeconds(recoveryAnim.animLength);
@@ -529,6 +566,8 @@ public class Character_HitController : MonoBehaviour
         _base._cHealth.StartHealthRegen();
         SetRecoverable();
         _base._cHurtBox.SetHurboxState();
+        currentCustomDamageField = null;
+        currentProperty = null;
     }
     #endregion
     void SetStunMeterValue(float TopValue)

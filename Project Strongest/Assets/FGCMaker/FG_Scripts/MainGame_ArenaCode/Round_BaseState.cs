@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
+using TMPro;
 
 public class Round_BaseState 
 {
@@ -17,5 +19,19 @@ public class Round_BaseState
     public Round_BaseState(MainGame_RoundSystemController rSystem)
     {
         _rSystem = rSystem;
+    }
+
+    public void PulseAndSetText(TMP_Text textObject, string message) 
+    {
+        textObject.DOFade(0f, 0f);
+        textObject.transform.DOScale(0f, 0f).OnComplete(() =>
+        {
+            textObject.DOFade(1f, 0.3f);
+            textObject.text = message;
+            textObject.transform.DOScale(1.15f, 0.3f).OnComplete(() =>
+            {
+                textObject.transform.DOScale(1f, 0.3f);
+            });
+        });
     }
 }

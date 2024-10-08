@@ -2369,8 +2369,8 @@ MonoBehaviour:
                 lateralKBP: 3
                 Value: 6
               verticalKBP:
-                verticalKBP: 2
-                Value: 4
+                verticalKBP: 0
+                Value: 0
               KnockDown: 4
             attackInputState:
               _state: 0
@@ -2691,8 +2691,8 @@ MonoBehaviour:
                 lateralKBP: 3
                 Value: 6
               verticalKBP:
-                verticalKBP: 2
-                Value: 4
+                verticalKBP: 0
+                Value: 0
               KnockDown: 4
             attackInputState:
               _state: 0
@@ -4776,7 +4776,7 @@ MonoBehaviour:
       _correctInput:
       - _correctSequence: 2D
         correctAttack: 0
-        correctInput: 0
+        correctInput: 105
         moveInput: 0
         attackInput: 0
         property:
@@ -5484,11 +5484,11 @@ MonoBehaviour:
             isFinalAttack: 1
             lateralKBP:
               lateralKBP: 3
-              Value: 5
+              Value: 7
             verticalKBP:
-              verticalKBP: 1
-              Value: 2
-            KnockDown: 0
+              verticalKBP: 2
+              Value: 5
+            KnockDown: 4
       _hitCount:
         _count: 0
         _startCount: 0
@@ -5708,11 +5708,11 @@ MonoBehaviour:
             isFinalAttack: 1
             lateralKBP:
               lateralKBP: 3
-              Value: 5
+              Value: 7
             verticalKBP:
               verticalKBP: 1
-              Value: 2
-            KnockDown: 0
+              Value: 4
+            KnockDown: 4
       _hitCount:
         _count: 0
         _startCount: 0
@@ -5783,3 +5783,4 @@ MonoBehaviour:
       verticalKBP: 0
       Value: 0
     KnockDown: 0
+  _base: {fileID: 0}

@@ -43,6 +43,8 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> currentAttack;
     [SerializeField] private Attack_BaseProperties followUp;
 
+    [SerializeField] private Character_Base _base;
+    List<IState> nonClearStates = new List<IState>();
     public void SetCurrentAttack(KeyValuePair<AttackInputTypes, IAttackFunctionality> newAttack)
     {
         Debug.LogError("Re-Assigned Attack Value in setcurrentattack");
@@ -70,7 +72,8 @@ public class Character_MoveList : MonoBehaviour
     }
     public void ClearAttackData(IState state, IState attacking)
     {
-        if(state == attacking) 
+       
+        if(nonClearStates.Contains(state)) 
         {
             return;
         }
@@ -218,8 +221,9 @@ public class Character_MoveList : MonoBehaviour
     }
     #endregion
 
-    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary, string characterName, List<AttackInputTypes> _types) 
+    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary, string characterName, List<AttackInputTypes> _types,Character_Base Base)
     {
+        _base = Base;
         string errorMessage = "";
         try
         {
@@ -292,7 +296,7 @@ public class Character_MoveList : MonoBehaviour
             for (int i = 0; i < rekkaSpecials.Count; i++)
             {
                 List<string> totalSubInputs = new List<string>();
-                for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++) 
+                for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++)
                 {
                     for (int k = 0; k < rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput.Count; k++)
                     {
@@ -312,7 +316,7 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Basic Attack Addition";
             for (int i = 0; i < special_Simple.Count; i++)
             {
-                for (int j = 0; j < special_Simple[i].attackInput.Count; j++) 
+                for (int j = 0; j < special_Simple[i].attackInput.Count; j++)
                 {
                     AttackInputTypes superInputType = new AttackInputTypes(special_Simple[i].attackInput[j], null, special_Simple[i].property._moveType);
                     totalAttackDictionary.Add(superInputType, special_Simple[i]);
@@ -355,7 +359,7 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Normal Attack Addition";
             for (int i = 0; i < simpleAttacks.Count; i++)
             {
-                List<string> totalSubInputs = new List<string>(); 
+                List<string> totalSubInputs = new List<string>();
                 for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
                 {
                     totalSubInputs.Add(simpleAttacks[i]._attackInput._correctInput[j]._correctSequence);
@@ -384,8 +388,15 @@ public class Character_MoveList : MonoBehaviour
             ////////////////////////////////////////////////////////////
             Debug.Log($"All Attacks Added to Dictionary. Have a \"Fight\"-Tastic Day, {characterName}!! ");
             Debug.Log($"Dictionary TotalCount is... {totalAttackDictionary.Count}.");
+            nonClearStates = new List<IState>()
+            {
+                _base._cStateMachine.attackingStateRef,
+                _base._cStateMachine.throwState,
+                _base._cStateMachine.counterState,
+                _base._cStateMachine.superState,
+            };
         }
-        catch (Exception) 
+        catch (Exception)
         {
             Debug.LogError($"Failed to Add All Attacks to Dictionary. Stopping at \"{errorMessage}\". ");
             Debug.LogError($"Dictionary TotalCount is... {totalAttackDictionary.Count}.");

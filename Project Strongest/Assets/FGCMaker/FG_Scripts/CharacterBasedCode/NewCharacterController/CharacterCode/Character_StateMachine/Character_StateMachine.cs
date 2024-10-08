@@ -15,7 +15,12 @@ public class Character_StateMachine : MonoBehaviour
     [HideInInspector] public State_Jump jumpRef;
     [HideInInspector] public State_Block standBlockRef;
     [HideInInspector] public State_CrouchBlock crouchBlockRef;
+
     [HideInInspector] public State_Attacking attackingStateRef;
+    [HideInInspector] public State_Throw throwState;
+    [HideInInspector] public State_Counter counterState;
+    [HideInInspector] public State_CustomSuper superState;
+
     [HideInInspector] public State_Hit hitStateRef;
     // Start is called before the first frame update
     private void Awake()
@@ -34,6 +39,7 @@ public class Character_StateMachine : MonoBehaviour
         var AttackState = new State_Attacking(_base);
         attackingStateRef = AttackState;
         var ThrowState = new State_Throw(_base);
+        throwState = ThrowState;
         var DashState = new State_Dash(_base);
         dashStateRef = DashState;
         var Hitstate = new State_Hit(_base);
@@ -46,7 +52,9 @@ public class Character_StateMachine : MonoBehaviour
         crouchBlockRef = C_BlockState;
         var BlockReact = new State_BlockReact(_base); // C = Crouch 
         var CounterState = new State_Counter(_base); // C = Crouch 
+        counterState = CounterState;
         var CustomSuperState = new State_CustomSuper(_base); // C = Crouch 
+        superState = CustomSuperState;
         #endregion
 
         #region Define Transitions

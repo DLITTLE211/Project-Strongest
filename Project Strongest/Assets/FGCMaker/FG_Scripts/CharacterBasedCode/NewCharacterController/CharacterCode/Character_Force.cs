@@ -431,6 +431,26 @@ public class Character_Force : MonoBehaviour
             }
         }
     }
+    public void SendKnockBackOnHit(CustomDamageField property)
+    {
+        float H_KnockBack = property.lateralKBP.Value;
+        float V_KnockDown = property.verticalKBP.Value - _base._cDamageCalculator.GetCurrentScaling();
+        if (property.verticalKBP.verticalKBP.ToString().Contains("_KD"))
+        {
+            V_KnockDown = -property.verticalKBP.Value;
+        }
+
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            _myRB.AddForce(transform.right * H_KnockBack, ForceMode.VelocityChange);
+            _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+        }
+        else
+        {
+            _myRB.AddForce(transform.right * (-H_KnockBack), ForceMode.VelocityChange);
+            _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+        }
+    }
 
     public float EvaluateAndReturnJumpValue() 
     {

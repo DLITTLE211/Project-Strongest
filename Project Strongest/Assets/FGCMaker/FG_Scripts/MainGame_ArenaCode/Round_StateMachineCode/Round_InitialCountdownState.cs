@@ -38,28 +38,21 @@ public class Round_InitialCountdownState : Round_BaseState
     {
         if (_rSystem.FinalRound())
         {
-            countDownText.text = $"Final Round!!";
+            PulseAndSetText(countDownText, $"Final Round!!");
         }
         else
         {
-            countDownText.text = $"Round {_rSystem.currentRound}!!";
+            PulseAndSetText(countDownText, $"Round {_rSystem.currentRound}!!");
         }
-        countDownText.transform.DOScale(0f, 0f);
-        countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
         await Task.Delay(WaitingTime * 100);
         for (int i = 3; i > 0; i--) 
         {
             threeSecondCountDown = i;
-            countDownText.text = $"{threeSecondCountDown}";
-            countDownText.transform.DOScale(0f, 0f);
-            countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
+            PulseAndSetText(countDownText, $"{threeSecondCountDown}");
             await Task.Delay(7 * 100);
         }
-        countDownText.text = $"FIGHT!!";
-        countDownText.transform.DOScale(0f, 0f);
-        countDownText.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutBounce);
+        PulseAndSetText(countDownText, $"FIGHT!!");
         await Task.Delay(WaitingTime * 100);
-
         _rSystem.StateMachine.CallActiveGameState();
     }
     public override void OnExit()

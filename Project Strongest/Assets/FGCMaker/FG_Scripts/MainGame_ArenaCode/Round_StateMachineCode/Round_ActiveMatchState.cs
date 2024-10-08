@@ -18,7 +18,6 @@ public class Round_ActiveMatchState : Round_BaseState
         {
             GameManager.instance.players.totalPlayers[i].Activate();
         }
-        
     }
     public override void Update() 
     {

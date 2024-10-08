@@ -27,7 +27,15 @@ public class Character_Health : MonoBehaviour
     }
     public bool TestIfDeadDamage(float damage)
     {
-        return (health_Main.currentValue - damage) <= 0;
+        bool mainHealthIsZero = (health_Main.currentValue - damage) <= 0;
+        float tenP = health_Main.maxValue * 0.1f;
+        bool recoveryHealthIsTenP = health_Recov.currentValue <= (tenP);
+        return mainHealthIsZero && recoveryHealthIsTenP;
+    }
+    public void ClearHealthValues()
+    {
+        health_Main.currentValue = 0;
+        health_Recov.currentValue = 0;
     }
     public void SetHealthInformation(Character_Profile profile)
     {

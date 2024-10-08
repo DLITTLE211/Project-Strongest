@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using System;
+using TMPro;
+using DG.Tweening;
 
 [Serializable]
 public class Round_ResultMatchState : Round_BaseState
 {
+    [SerializeField] private TMP_Text KO_Text;
     public Round_ResultMatchState(MainGame_RoundSystemController rSystem) : base(rSystem) { }
     public override void OnEnter()
     {
         if (GameManager.instance.winningCharacter != null)
         {
+            PulseAndSetText(KO_Text, "KO!!");
             CallAward(GameManager.instance.winningCharacter);
         }
-        else 
+        else
         {
+            PulseAndSetText(KO_Text, "TIME'S UP!!");
             CallAward(GameManager.instance.CallPlayerDeathOnTimerEnd());
         }
     }

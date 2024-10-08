@@ -142,7 +142,8 @@ public class Character_ComboDetection : MonoBehaviour
                 }
                 catch (NullReferenceException) 
                 {
-                    Debug.LogError("Null Ref Caught. Check Line");
+                    Debug.LogError("Null Ref Caught. Check Line"); 
+                    ResetCombos();
                     return;
                 }
             }
