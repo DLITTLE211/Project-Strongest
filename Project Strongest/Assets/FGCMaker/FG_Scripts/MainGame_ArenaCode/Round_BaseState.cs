@@ -23,6 +23,7 @@ public class Round_BaseState
 
     public void PulseAndSetText(TMP_Text textObject, string message) 
     {
+        textObject.gameObject.SetActive(true);
         textObject.DOFade(0f, 0f);
         textObject.transform.DOScale(0f, 0f).OnComplete(() =>
         {

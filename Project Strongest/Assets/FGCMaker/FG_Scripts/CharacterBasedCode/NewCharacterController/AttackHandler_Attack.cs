@@ -414,20 +414,28 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
         }
         Attack_BaseProperties thisAttack = HitBox.hitboxProperties;
-        if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
+        if (thisAttack != null)
         {
-            character._cAttackTimer.ClearThrowLanded();
-            _playerCAnimator.SetCanTransitionIdle(true);
-        }
-        else if (thisAttack._moveType == MoveType.Super)
-        {
-            if (curAnim >= animCount)
+            if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
             {
-                character._cAttackTimer.ClearSuperLanded();
+                character._cAttackTimer.ClearThrowLanded();
+                _playerCAnimator.SetCanTransitionIdle(true);
+            }
+            else if (thisAttack._moveType == MoveType.Super)
+            {
+                if (curAnim >= animCount)
+                {
+                    character._cAttackTimer.ClearSuperLanded();
+                    _playerCAnimator.SetCanTransitionIdle(true);
+                }
+            }
+            else
+            {
+                character._cAttackTimer.ClearAttackLanded();
                 _playerCAnimator.SetCanTransitionIdle(true);
             }
         }
-        else
+        else 
         {
             character._cAttackTimer.ClearAttackLanded();
             _playerCAnimator.SetCanTransitionIdle(true);

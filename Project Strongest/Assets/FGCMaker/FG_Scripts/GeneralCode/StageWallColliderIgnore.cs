@@ -23,6 +23,11 @@ public class StageWallColliderIgnore : MonoBehaviour
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
         }
+        if (collision.gameObject.tag == "CollisionBox" || collision.gameObject.tag == "PCharacter")
+        {
+            playerHitEndWall = true;
+            // collision.gameObject.GetComponentInParent<Character_Base>()._cForce.AddLateralForceOnCommand(2);
+        }
     }
     private void OnCollisionExit(Collision collision)
     {

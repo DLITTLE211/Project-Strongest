@@ -362,8 +362,11 @@ public class HurtBox : CollisionDetection
         }
         hitCount.ResetRefresh();
         hitCount.ResetHitCount();
-        endingFunction();
-        endingFunction = null;
+        if (endingFunction != null)
+        {
+            endingFunction();
+            endingFunction = null;
+        }
         currentHitbox.DestroyHitbox(currentHitbox);
     }
 
