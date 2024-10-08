@@ -13,6 +13,10 @@ public class Round_ResultMatchState : Round_BaseState
     public Round_ResultMatchState(MainGame_RoundSystemController rSystem) : base(rSystem) { }
     public override void OnEnter()
     {
+        for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
+        {
+            GameManager.instance.players.totalPlayers[i].Deactivate();
+        }
         if (GameManager.instance.winningCharacter != null)
         {
             PulseAndSetText(KO_Text, "KO!!");

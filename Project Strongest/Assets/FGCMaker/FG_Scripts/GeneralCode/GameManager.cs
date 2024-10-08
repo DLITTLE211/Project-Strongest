@@ -168,8 +168,11 @@ public class GameManager : MonoBehaviour
     }
     public void CallPlayerDeath(Character_Base _winningCharacter) 
     {
-        winningCharacter = _winningCharacter;
-        _RoundSystemController.StateMachine.CallResultState();
+        if (winningCharacter == null)
+        {
+            winningCharacter = _winningCharacter;
+            _RoundSystemController.StateMachine.CallResultState();
+        }
     }
     public Character_Base CallPlayerDeathOnTimerEnd()
     {

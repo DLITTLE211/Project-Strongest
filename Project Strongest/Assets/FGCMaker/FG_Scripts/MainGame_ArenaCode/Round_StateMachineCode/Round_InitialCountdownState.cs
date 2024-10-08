@@ -19,6 +19,7 @@ public class Round_InitialCountdownState : Round_BaseState
     {
         for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
         {
+            GameManager.instance.players.totalPlayers[i]._cDamageCalculator.SetVictoryHitState(false);
             GameManager.instance.players.totalPlayers[i]._cSuperMeter.SetStartValue();
             GameManager.instance.players.totalPlayers[i]._cHealth.SetStartingHealthValues();
             GameManager.instance.players.totalPlayers[i]._cHealth.stunController.SetStartStunValues();

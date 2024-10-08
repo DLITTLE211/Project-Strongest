@@ -20,7 +20,12 @@ public class Character_DamageCalculator : MonoBehaviour
 
     [SerializeField] private TMP_Text _damageText;
     float damageTextAmount;
+    bool victoryHit;
     #region Damage Functions
+    private void Start()
+    {
+        victoryHit = false;
+    }
     public void TakeCustomDamage(CustomCallback callback = null)
     {
         try
@@ -46,7 +51,7 @@ public class Character_DamageCalculator : MonoBehaviour
             {
                 calculatedRecovDamage = 0;
             }
-            if (!_healtController.TestIfDeadDamage(calculatedDamage))
+            if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
             {
                 _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
                 _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
@@ -54,6 +59,7 @@ public class Character_DamageCalculator : MonoBehaviour
             }
             else
             {
+                SetVictoryHitState(true);
                 _healtController.ClearHealthValues();
                 GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
             }
@@ -62,6 +68,10 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             Debug.Log("StackOverflow in Custom Damage");
         }
+    }
+    public void SetVictoryHitState(bool state) 
+    {
+        victoryHit = state;
     }
     public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked, bool armoredAttack = false)
     {
@@ -105,7 +115,7 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        if (!_healtController.TestIfDeadDamage(calculatedDamage))
+        if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
         {
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
@@ -117,6 +127,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
+            SetVictoryHitState(true);
             _healtController.ClearHealthValues();
             GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
         }
@@ -137,7 +148,7 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        if (!_healtController.TestIfDeadDamage(calculatedDamage))
+        if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
         {
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
@@ -145,6 +156,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
+            SetVictoryHitState(true);
             _healtController.ClearHealthValues();
             GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
         }
