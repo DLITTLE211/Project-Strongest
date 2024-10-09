@@ -42,6 +42,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     bool inactive;
     bool lastFrame;
     bool isFollowUpAttack;
+    Character_Face_Direction currentFacingDirection;
     public void SetIsFollowUpAttack(bool state) 
     {
         isFollowUpAttack = state;
@@ -84,23 +85,26 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
         }
         HitBox = newHitBox;
-
+    }
+    float ReturnBiasOnHitbox() 
+    {
+        currentFacingDirection = character.pSide.thisPosition._directionFacing;
         if (character.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {
-            bias = 0;
+           return bias = 0;
         }
         else
         {
-            bias = (hb_placement.x * 2);
+            return bias = (hb_placement.x * 2);
         }
     }
     Vector3 ReturnHITPosToVector3()
     {
-        return new Vector3(hb_placement.x - bias, hb_placement.y, hb_placement.z);
+        return new Vector3(hb_placement.x - ReturnBiasOnHitbox(), hb_placement.y, hb_placement.z);
     }
     Vector3 ReturnHURTPosToVector3()
     {
-        return new Vector3(hu_placement.x - bias, hu_placement.y, hu_placement.z);
+        return new Vector3(hu_placement.x - ReturnBiasOnHitbox(), hu_placement.y, hu_placement.z);
     }
 
     public override void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
@@ -121,14 +125,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         extendedHitBox.ActivateHurtbox(extendedHitBox);
         extendedHitBox.SetHurtboxState(extendedHitBox.huBType);
         character._cHurtBox.SetHurboxState(extendedHitBox.huBType);
-        try
-        {
-            HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
-        }
-        catch (Exception) 
-        {
-
-        }
+        HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
     }
     public override void OnStay(Character_Base curBase)
     {
@@ -136,6 +133,11 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnActive(Character_Base curBase)
     {
         active = true;
+        if (currentFacingDirection != character.pSide.thisPosition._directionFacing)
+        {
+            HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
+            HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
+        }
         HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount,_playerCAnimator.lastAttack);
     }
     public override void OnRecov(Character_Base curBase)

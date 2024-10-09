@@ -16,8 +16,7 @@ public class Attack_Manager : MonoBehaviour
     Queue<Attack_BaseProperties> _AttackAnimQueue;
     private List<Cancel_State> stringCancelStates;
     [SerializeField] private MoveType curTypeHierarchy;
-    // Start is called before the first frame update
-    internal int normalGatlingCount;
+    [SerializeField] internal int normalGatlingCount;
     public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } }
     IEnumerator RechargeRoutine;
     void Start()

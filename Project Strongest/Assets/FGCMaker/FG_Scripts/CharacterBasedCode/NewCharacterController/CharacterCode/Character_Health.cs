@@ -10,7 +10,7 @@ public class Character_Health : MonoBehaviour
     [SerializeField] private Image _chosenCharacterProfileImage;
     public MainMeterController health_Main;
     public MainMeterController health_Recov;
-    public StunMeterController stunController;
+    public Character_StunController stunController;
     public float recoverHealthRate;
     public Affliction currentAffliction;
     [Range(75f, 200f)] public float defenseValue;
@@ -56,7 +56,6 @@ public class Character_Health : MonoBehaviour
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
         stunController.ApplyStun(damageValue * 0.01f);
-        stunController.currentAffliction = currentAffliction;
     }
     public void StartHealthRegen()
     {

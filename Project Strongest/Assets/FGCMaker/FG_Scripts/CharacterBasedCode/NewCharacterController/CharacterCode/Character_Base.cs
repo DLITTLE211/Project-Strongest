@@ -401,6 +401,20 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
+    public void InitialReset()
+    {
+        _cDamageCalculator.SetVictoryHitState(false);
+        _cSuperMeter.SetStartValue();
+        _cHealth.SetStartingHealthValues();
+        _cHealth.stunController.SetStartStunValues();
+        Deactivate();
+        _cAttackTimer.ClearAttackLanded();
+        if (!awaitCondition) 
+        {
+            awaitCondition = true;
+        }
+    }
+
     public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
     {
         if(callback.customCall == HitPointCall.AwaitSequenceSignifier) 

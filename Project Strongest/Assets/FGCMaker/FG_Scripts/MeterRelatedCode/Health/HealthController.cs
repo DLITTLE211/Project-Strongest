@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour
 {
     public MainMeterController health_Main;
     public MainMeterController health_Recov;
-    public StunMeterController stunController;
+    public Character_StunController stunController;
     public float recoverHealthRate;
     public Affliction currentAffliction;
     public float defenseValue;
@@ -34,7 +34,6 @@ public class HealthController : MonoBehaviour
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
         stunController.ApplyStun(4 * 0.01f);
-        stunController.currentAffliction = currentAffliction;
         StartCoroutine(RecoverHealthWaitTime());
     }
     public void ApplyRecoveryHealthDamage(float damageValue)

@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class StunMeterController : MonoBehaviour
+public class Character_StunController : MonoBehaviour
 {
     public MainMeterController stunMeter;
     public HealthController healthController;
-    public Affliction currentAffliction;
 
     public Gradient stunMeterColor;
     public Image stunMeterImage;

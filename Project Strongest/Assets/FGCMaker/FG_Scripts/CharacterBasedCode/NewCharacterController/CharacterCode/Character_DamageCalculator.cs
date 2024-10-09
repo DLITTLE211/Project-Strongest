@@ -59,9 +59,7 @@ public class Character_DamageCalculator : MonoBehaviour
             }
             else
             {
-                SetVictoryHitState(true);
-                _healtController.ClearHealthValues();
-                GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+                DeathCheck();
             }
         }
         catch (StackOverflowException) 
@@ -72,6 +70,15 @@ public class Character_DamageCalculator : MonoBehaviour
     public void SetVictoryHitState(bool state) 
     {
         victoryHit = state;
+    }
+    void DeathCheck() 
+    {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            SetVictoryHitState(true);
+            _healtController.ClearHealthValues();
+            GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+        }
     }
     public void ReceiveDamage(Attack_BaseProperties currentAttack, bool blocked, bool armoredAttack = false)
     {
@@ -127,9 +134,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
-            SetVictoryHitState(true);
-            _healtController.ClearHealthValues();
-            GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+            DeathCheck();
         }
     }
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
@@ -156,9 +161,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
-            SetVictoryHitState(true);
-            _healtController.ClearHealthValues();
-            GameManager.instance.CallPlayerDeath(_base.opponentPlayer);
+            DeathCheck();
         }
     }
     #endregion

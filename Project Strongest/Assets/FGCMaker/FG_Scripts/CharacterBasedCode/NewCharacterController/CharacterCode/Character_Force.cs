@@ -365,6 +365,8 @@ public class Character_Force : MonoBehaviour
                 acceptableStates.Add(_base._cStateMachine.jumpRef);
                 acceptableStates.Add(_base._cStateMachine.crouchStateRef);
                 acceptableStates.Add(_base._cStateMachine.idleStateRef);
+                acceptableStates.Add(_base._cStateMachine.attackingStateRef);
+                acceptableStates.Add(_base._cStateMachine.superState);
                 if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
                 {
                     acceptableStates.Clear();
