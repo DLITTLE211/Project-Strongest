@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1e80011d282984cae526985a9b9a5f, type: 3}
+  m_Name: TeenBaki_HitReactions
+  m_EditorClassIdentifier: Assembly-CSharp::HitAnimations
+  ground_hitAnims:
+  - animClip: {fileID: -389730627734710113, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Light_Hit_High
+    animLength: 0.33333334
+    actionableHitPoint: 16000000
+    actionableHitPointInFrames:
+    - 0.36666667
+    timeDifference:
+    - -0.033333324
+    reaction: 0
+  - animClip: {fileID: 5778651045872708591, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Light_Hit_Low
+    animLength: 0.33333334
+    actionableHitPoint: 2c000000
+    actionableHitPointInFrames:
+    - 0.73333335
+    timeDifference:
+    - -0.39999998
+    reaction: 0
+  - animClip: {fileID: 4924918340411067150, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Medium_Hit
+    animLength: 0.48333335
+    actionableHitPoint: 31000000
+    actionableHitPointInFrames:
+    - 0.81666666
+    timeDifference:
+    - -0.3333333
+    reaction: 0
+  - animClip: {fileID: 7237084685499626062, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Heavy_Hit
+    animLength: 0.8166667
+    actionableHitPoint: 68000000
+    actionableHitPointInFrames:
+    - 1.7333333
+    timeDifference:
+    - -0.9166666
+    reaction: 1
+  - animClip: {fileID: 2207197074920698395, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Hit_Crumple
+    animLength: 1.3166667
+    actionableHitPoint: 27000000
+    actionableHitPointInFrames:
+    - 0.65
+    timeDifference:
+    - 0.66666675
+    reaction: 1
+  - animClip: {fileID: -7835788572680383352, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Hit_Spiral
+    animLength: 0.8166667
+    actionableHitPoint: 27000000
+    actionableHitPointInFrames:
+    - 0.65
+    timeDifference:
+    - 0.16666672
+    reaction: 1
+  getUp_Anims:
+  - animClip: {fileID: 5532375748658717885, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Recovery_Quick
+    animLength: 0.5666667
+    actionableHitPoint: 17000000
+    actionableHitPointInFrames:
+    - 0.38333333
+    timeDifference:
+    - 0.18333338
+    reaction: 4
+  - animClip: {fileID: 2896725252375600880, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Recovery_Slow
+    animLength: 1.2333333
+    actionableHitPoint: 50000000
+    actionableHitPointInFrames:
+    - 1.3333334
+    timeDifference:
+    - -0.09999999
+    reaction: 5
+  air_HitAnims:
+  - animClip: {fileID: -3977307983880513915, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Light_AirHit
+    animLength: 0.3166667
+    actionableHitPoint: 0d000000
+    actionableHitPointInFrames:
+    - 0.21666667
+    timeDifference:
+    - 0.100000024
+    reaction: 1
+  - animClip: {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Medium_AirHit
+    animLength: 0.40000004
+    actionableHitPoint: 13000000
+    actionableHitPointInFrames:
+    - 0.31666666
+    timeDifference:
+    - 0.083333366
+    reaction: 1
+  air_RecoverAnims:
+  - animClip: {fileID: -8144785306977315781, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Recovery_AirHit
+    animLength: 0.40000004
+    actionableHitPoint: 1b000000
+    actionableHitPointInFrames:
+    - 0.45
+    timeDifference:
+    - -0.049999963
+    reaction: 4
+  standingblock_Anims:
+  - animClip: {fileID: -1131065339644128694, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Standing_Block_Light
+    animLength: 0.15
+    actionableHitPoint: 11000000
+    actionableHitPointInFrames:
+    - 0.28333333
+    timeDifference:
+    - -0.13333333
+    reaction: 2
+  - animClip: {fileID: 6069034043394549626, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Standing_Block_GB
+    animLength: 0.23333335
+    actionableHitPoint: 17000000
+    actionableHitPointInFrames:
+    - 0.38333333
+    timeDifference:
+    - -0.14999999
+    reaction: 3
+  crouchingblock_Anims:
+  - animClip: {fileID: 1004197965378419970, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Crouching_Block_Light
+    animLength: 0.15
+    actionableHitPoint: 07000000
+    actionableHitPointInFrames:
+    - 0.11666667
+    timeDifference:
+    - 0.03333334
+    reaction: 2
+  - animClip: {fileID: 4796337506762950774, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animName: Crouching_Block_GB
+    animLength: 0.23333335
+    actionableHitPoint: 0c000000
+    actionableHitPointInFrames:
+    - 0.2
+    timeDifference:
+    - 0.03333335
+    reaction: 3

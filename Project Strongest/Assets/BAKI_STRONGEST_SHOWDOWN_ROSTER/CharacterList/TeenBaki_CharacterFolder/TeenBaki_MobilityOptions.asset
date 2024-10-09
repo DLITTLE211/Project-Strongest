@@ -40,8 +40,11 @@ MonoBehaviour:
         lastFrame: 25
         _extraPoints:
         - hitFramePoints: 4
-          call: 512
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -53,6 +56,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -61,8 +65,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 20
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -74,6 +81,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -111,8 +119,11 @@ MonoBehaviour:
         lastFrame: 25
         _extraPoints:
         - hitFramePoints: 4
-          call: 512
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -124,6 +135,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -132,8 +144,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 20
-          call: 1024
-          hitFrameBool: 0
+          call: 512
+          hitFrameBool: 1
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -145,6 +160,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -182,8 +198,11 @@ MonoBehaviour:
         lastFrame: 25
         _extraPoints:
         - hitFramePoints: 4
-          call: 512
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -195,6 +214,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -203,8 +223,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 20
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -216,6 +239,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -252,9 +276,12 @@ MonoBehaviour:
         recovery: 25
         lastFrame: 25
         _extraPoints:
-        - hitFramePoints: 4
-          call: 512
+        - hitFramePoints: 1
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -266,6 +293,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -274,8 +302,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 20
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -287,6 +318,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -323,9 +355,12 @@ MonoBehaviour:
         recovery: 25
         lastFrame: 25
         _extraPoints:
-        - hitFramePoints: 4
-          call: 512
+        - hitFramePoints: 1
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -337,6 +372,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -345,8 +381,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 20
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -358,6 +397,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -394,9 +434,12 @@ MonoBehaviour:
         recovery: 25
         lastFrame: 25
         _extraPoints:
-        - hitFramePoints: 4
-          call: 512
+        - hitFramePoints: 1
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -408,6 +451,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -416,8 +460,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 20
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -429,6 +476,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -465,8 +513,11 @@ MonoBehaviour:
         lastFrame: 25
         _extraPoints:
         - hitFramePoints: 2
-          call: 512
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -478,6 +529,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -486,8 +538,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 15
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -499,6 +554,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -535,8 +591,11 @@ MonoBehaviour:
         lastFrame: 25
         _extraPoints:
         - hitFramePoints: 2
-          call: 512
+          call: 256
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -548,6 +607,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
@@ -556,8 +616,11 @@ MonoBehaviour:
               Value: 0
             KnockDown: 0
         - hitFramePoints: 13
-          call: 1024
+          call: 512
           hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
           Force: 0
           projectileSpeed: 0
           camPos: {x: 0, y: 0, z: 0}
@@ -569,6 +632,7 @@ MonoBehaviour:
             hitstopValue: 0
             hitstunValue: 0
             hitLevel: 0
+            isFinalAttack: 0
             lateralKBP:
               lateralKBP: 0
               Value: 0
