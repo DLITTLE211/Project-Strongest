@@ -16,7 +16,7 @@ public class Attack_Manager : MonoBehaviour
     Queue<Attack_BaseProperties> _AttackAnimQueue;
     private List<Cancel_State> stringCancelStates;
     [SerializeField] private MoveType curTypeHierarchy;
-    [SerializeField] internal int normalGatlingCount;
+    //[SerializeField] internal int normalGatlingCount;
     public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } }
     IEnumerator RechargeRoutine;
     void Start()
@@ -25,7 +25,7 @@ public class Attack_Manager : MonoBehaviour
         _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
         CanTransitionAnimation = true;
         SetStringCancelCheck();
-        normalGatlingCount = 3;
+     //   normalGatlingCount = 3;
     }
     void SetStringCancelCheck() 
     {
@@ -61,7 +61,7 @@ public class Attack_Manager : MonoBehaviour
     public void ResetMoveHierarchy()
     {
         curTypeHierarchy = MoveType.Normal;
-        normalGatlingCount = 3;
+  //      normalGatlingCount = 3;
     }
     public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess)
     {
@@ -184,11 +184,11 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
-            if (StateComparison(lastState.cancelTo, newAttackCancelInfo.cancelFrom, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
+            if (StateComparison(lastState, newAttackCancelInfo, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
             {
                 return true;
             }
-            if (StateComparison(lastState.cancelTo, newAttackCancelInfo.cancelFrom, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
+            if (StateComparison(lastState, newAttackCancelInfo, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
             {
                 return true;
             }
@@ -223,9 +223,11 @@ public class Attack_Manager : MonoBehaviour
             }
         }
     }
-    bool StateComparison(Cancel_State lastState, Cancel_State newState, Cancel_State desiredLastState, Cancel_State desiredNextState) 
+    bool StateComparison(Attack_CancelInfo lastState, Attack_CancelInfo newState, Cancel_State desiredLastState, Cancel_State desiredNextState) 
     {
-        return lastState == desiredNextState && (newState == desiredLastState || newState == desiredNextState);
+        bool FirstCheck = (lastState.cancelTo == desiredNextState || lastState.CurrentLevel == desiredNextState);
+        bool SecondCheck = (newState.cancelFrom == desiredLastState || newState.cancelFrom == desiredNextState);
+        return FirstCheck && SecondCheck;
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {
@@ -360,12 +362,12 @@ public class Attack_Manager : MonoBehaviour
     {
         if (attack._moveType == MoveType.Normal)
         {
-            normalGatlingCount--;
+     //       normalGatlingCount--;
         }
         _cAnimator.SetNextAttackStartVariables(attack);
-        ClearRoutine();
-        RechargeRoutine = RechargeGatlings();
-        StartCoroutine(RechargeRoutine);
+   //     ClearRoutine();
+    //    RechargeRoutine = RechargeGatlings();
+   //     StartCoroutine(RechargeRoutine);
     }
     void ClearRoutine() 
     {
@@ -378,6 +380,6 @@ public class Attack_Manager : MonoBehaviour
     IEnumerator RechargeGatlings() 
     {
         yield return new WaitForSeconds(2f);
-        normalGatlingCount = 3;
+ //       normalGatlingCount = 3;
     }
 }
