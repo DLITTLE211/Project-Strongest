@@ -133,8 +133,8 @@ public class Character_ComboCounter : MonoBehaviour
     {
         ResetComboCounter();
         fadeTextOut = DOTween.Sequence();
-        fadeTextOut.Append(_counterText.DOFade(0, .75f));
-        _QualityText.DOFade(0, .45f);
+        fadeTextOut.Append(_counterText.DOFade(0, .45f));
+        _QualityText.DOFade(0, .25f);
         fadeTextOut.OnComplete(() =>
         {
             SetStartComboCounter();
@@ -176,7 +176,7 @@ public class Character_ComboCounter : MonoBehaviour
             }
             continue;
         }
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.25f);
         FadeOutText();
         #endregion
     }
