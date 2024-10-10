@@ -2034,7 +2034,37 @@ MonoBehaviour:
             inactive: 16
             recovery: 0
             lastFrame: 0
-            _extraPoints: []
+            _extraPoints:
+            - hitFramePoints: 3
+              call: 2
+              hitFrameBool: 0
+              awaitEnum:
+                keyRef: 0
+                awaitingCheck: 0
+              Force: 2
+              projectileSpeed: 0
+              camPos: {x: 0, y: 0, z: 0}
+              camRotation: {x: 0, y: 0, z: 0}
+              snapMovement: 0
+              customDamage:
+                rawAttackDamage: 0
+                counterHitDamageMult: 0
+                customDamageFieldStunValues:
+                  hitstunValue: 0
+                  blockStunValue: 0
+                  hitstopValue: 0
+                  blockStopValue: 0
+                hitstopValue: 0
+                hitstunValue: 0
+                hitLevel: 0
+                isFinalAttack: 0
+                lateralKBP:
+                  lateralKBP: 0
+                  Value: 0
+                verticalKBP:
+                  verticalKBP: 0
+                  Value: 0
+                KnockDown: 0
           _hitCount:
             _count: 0
             _startCount: 0
@@ -2048,7 +2078,7 @@ MonoBehaviour:
         verticalKBP:
           verticalKBP: 3
           Value: 8
-        KnockDown: 6
+        KnockDown: 4
       mainAttackInputState:
         _state: 0
         directionalInput: 0
@@ -2106,7 +2136,37 @@ MonoBehaviour:
                   inactive: 21
                   recovery: 0
                   lastFrame: 0
-                  _extraPoints: []
+                  _extraPoints:
+                  - hitFramePoints: 4
+                    call: 2
+                    hitFrameBool: 0
+                    awaitEnum:
+                      keyRef: 0
+                      awaitingCheck: 0
+                    Force: 3
+                    projectileSpeed: 0
+                    camPos: {x: 0, y: 0, z: 0}
+                    camRotation: {x: 0, y: 0, z: 0}
+                    snapMovement: 0
+                    customDamage:
+                      rawAttackDamage: 0
+                      counterHitDamageMult: 0
+                      customDamageFieldStunValues:
+                        hitstunValue: 0
+                        blockStunValue: 0
+                        hitstopValue: 0
+                        blockStopValue: 0
+                      hitstopValue: 0
+                      hitstunValue: 0
+                      hitLevel: 0
+                      isFinalAttack: 0
+                      lateralKBP:
+                        lateralKBP: 0
+                        Value: 0
+                      verticalKBP:
+                        verticalKBP: 0
+                        Value: 0
+                      KnockDown: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2177,7 +2237,37 @@ MonoBehaviour:
                   inactive: 18
                   recovery: 0
                   lastFrame: 0
-                  _extraPoints: []
+                  _extraPoints:
+                  - hitFramePoints: 3
+                    call: 2
+                    hitFrameBool: 0
+                    awaitEnum:
+                      keyRef: 0
+                      awaitingCheck: 0
+                    Force: 2
+                    projectileSpeed: 0
+                    camPos: {x: 0, y: 0, z: 0}
+                    camRotation: {x: 0, y: 0, z: 0}
+                    snapMovement: 0
+                    customDamage:
+                      rawAttackDamage: 0
+                      counterHitDamageMult: 0
+                      customDamageFieldStunValues:
+                        hitstunValue: 0
+                        blockStunValue: 0
+                        hitstopValue: 0
+                        blockStopValue: 0
+                      hitstopValue: 0
+                      hitstunValue: 0
+                      hitLevel: 0
+                      isFinalAttack: 0
+                      lateralKBP:
+                        lateralKBP: 0
+                        Value: 0
+                      verticalKBP:
+                        verticalKBP: 0
+                        Value: 0
+                      KnockDown: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2965,7 +3055,37 @@ MonoBehaviour:
           inactive: 25
           recovery: 0
           lastFrame: 0
-          _extraPoints: []
+          _extraPoints:
+          - hitFramePoints: 4
+            call: 2
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 3
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              lateralKBP:
+                lateralKBP: 0
+                Value: 0
+              verticalKBP:
+                verticalKBP: 0
+                Value: 0
+              KnockDown: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -3036,7 +3156,37 @@ MonoBehaviour:
           inactive: 25
           recovery: 0
           lastFrame: 0
-          _extraPoints: []
+          _extraPoints:
+          - hitFramePoints: 2
+            call: 2
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 2
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              lateralKBP:
+                lateralKBP: 0
+                Value: 0
+              verticalKBP:
+                verticalKBP: 0
+                Value: 0
+              KnockDown: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -3355,9 +3505,9 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 2
+            verticalKBP: 0
             Value: 8
-          KnockDown: 6
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -3462,7 +3612,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            cancelFrom: 4
+            cancelFrom: 5
             CurrentLevel: 5
             cancelTo: 5
           _moveType: 3
@@ -3488,7 +3638,37 @@ MonoBehaviour:
               inactive: 18
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 3
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 2
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3557,7 +3737,37 @@ MonoBehaviour:
               inactive: 17
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 1
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 3.85
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3569,7 +3779,7 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 2
+            verticalKBP: 0
             Value: 7
           KnockDown: 2
         attackInputState:
@@ -3633,7 +3843,37 @@ MonoBehaviour:
               inactive: 15
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 2
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 2
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3702,7 +3942,37 @@ MonoBehaviour:
               inactive: 16
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 2
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 2
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3715,7 +3985,7 @@ MonoBehaviour:
             Value: 1
           verticalKBP:
             verticalKBP: 2
-            Value: 6
+            Value: 4
           KnockDown: 4
         attackInputState:
           _state: 0
@@ -3771,7 +4041,37 @@ MonoBehaviour:
               inactive: 18
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 3
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 3
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3783,9 +4083,9 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 2
           verticalKBP:
-            verticalKBP: 2
+            verticalKBP: 0
             Value: 6
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -3916,7 +4216,37 @@ MonoBehaviour:
               inactive: 22
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 5
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 3
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3985,7 +4315,37 @@ MonoBehaviour:
               inactive: 31
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 5
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 4
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3997,9 +4357,9 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 4
           verticalKBP:
-            verticalKBP: 7
+            verticalKBP: 0
             Value: 8
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -4061,7 +4421,37 @@ MonoBehaviour:
               inactive: 16
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 1
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 1.75
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4130,7 +4520,37 @@ MonoBehaviour:
               inactive: 37
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 3
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 5
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 3
@@ -4186,12 +4606,12 @@ MonoBehaviour:
             attackType: 3
             hb_placement: {x: 0.65, y: 1.45, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0.5, y: 1.5}
+            hb_size: {x: 0.85, y: 1.5}
             extendedHitBox: {fileID: 0}
             hurtType: 0
             hu_placement: {x: 0.65, y: 1.45, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0.55, y: 1.5}
+            hu_size: {x: 1, y: 1.5}
             _frameData:
               init: 0
               startup: 12
@@ -4199,7 +4619,37 @@ MonoBehaviour:
               inactive: 19
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 2
+                call: 2
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: 5
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitstopValue: 0
+                  hitstunValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  lateralKBP:
+                    lateralKBP: 0
+                    Value: 0
+                  verticalKBP:
+                    verticalKBP: 0
+                    Value: 0
+                  KnockDown: 0
             _hitCount:
               _count: 0
               _startCount: 0
