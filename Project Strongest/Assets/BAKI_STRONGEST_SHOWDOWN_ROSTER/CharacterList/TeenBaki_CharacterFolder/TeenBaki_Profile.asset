@@ -32,7 +32,7 @@ MonoBehaviour:
   MoveVelocity: 1.75
   JumpForce: 325
   InAirMoveForce: 100
-  dashSpeed: 2.5
+  dashSpeed: 3.15
   MaxHealth: 100
   MaxStunValue: 80
   DefenseValue: 30
@@ -188,8 +188,8 @@ MonoBehaviour:
     knockdownAnimType: 6
   - anim: {fileID: 5208742648357843553, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.23333335
-    animName: Teen_Baki_Hanma|Baki_Standing_Block_GB
-    animHash: -491625579
+    animName: Teen_Baki_Hanma|Baki_Hit_Scorpion
+    animHash: -617306112
     hitReactionType: 0
     hitLevel: 256
     isGroundedReaction: 1
@@ -197,8 +197,8 @@ MonoBehaviour:
     knockdownAnimType: 6
   - anim: {fileID: 5208742648357843553, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.23333335
-    animName: Teen_Baki_Hanma|Baki_Standing_Block_GB
-    animHash: -491625579
+    animName: Teen_Baki_Hanma|Baki_Hit_Scorpion
+    animHash: -617306112
     hitReactionType: 0
     hitLevel: 256
     isGroundedReaction: 0

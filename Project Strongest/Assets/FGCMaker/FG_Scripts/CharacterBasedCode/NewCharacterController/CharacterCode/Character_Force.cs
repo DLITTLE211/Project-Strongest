@@ -298,6 +298,7 @@ public class Character_Force : MonoBehaviour
         sendingForce = true;
         yield return new WaitForSeconds(2 / 60f);
 
+        _base._aManager.ClearAttacks();
         switch (_mInput.type)
         {
             case MovementType.BackJump:
@@ -335,10 +336,12 @@ public class Character_Force : MonoBehaviour
                 break;
             case MovementType.ForwardDash:
                 // Forward Dash;
+                _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * _base.DashForce * 2f));
                 break;
             case MovementType.BackDash:
                 // Back Dash;
+                _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
                 break;
         }
@@ -385,7 +388,9 @@ public class Character_Force : MonoBehaviour
     IEnumerator OnDelayDash(float speed)
     {
         yield return new WaitForSeconds(2 / 60f);
-        _myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);
+        _myRB.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
+        _myRB.AddForce(transform.right * speed, ForceMode.VelocityChange);
+        //_myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);
     }
     #region Function Summary
     /// <summary>

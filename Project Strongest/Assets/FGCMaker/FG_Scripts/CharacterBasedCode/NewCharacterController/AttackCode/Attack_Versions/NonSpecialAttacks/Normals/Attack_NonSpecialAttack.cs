@@ -89,11 +89,11 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             }
             if (_attackInput._correctInput[0].property._moveType == MoveType.Normal)
             {
-               // if (_curBase._aManager.normalGatlingCount <= 0)
-               // {
-               //     Debug.LogError("Gatling Limit Reached. Returning...");
-               //     return;
-               // }
+                if (_curBase._aManager.MoveTypeHierarchy >= MoveType.String_Normal)
+                {
+                    Debug.LogError("Attack Level Normal Lower than string normal & Higher. Returning...");
+                    return;
+                }
             }
             _curBase.comboList3_0.ClearFollowUpAttack();
             _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
