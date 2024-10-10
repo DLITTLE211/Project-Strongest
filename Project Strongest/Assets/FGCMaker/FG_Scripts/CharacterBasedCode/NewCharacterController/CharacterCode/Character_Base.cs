@@ -377,6 +377,8 @@ public class Character_Base : MonoBehaviour
         mainCallbackDictionary.Add(HitPointCall.Force_Up, _cForce.AddVerticalForceOnCommand);
         mainCallbackDictionary.Add(HitPointCall.TeleportForward, _cForce.TeleportOnCommand);
         mainCallbackDictionary.Add(HitPointCall.TeleportBackward, _cForce.TeleportOnCommand);
+        mainCallbackDictionary.Add(HitPointCall.LockPos, LockPos);
+        mainCallbackDictionary.Add(HitPointCall.UnlockPos, UnlockPos);
 
         //mainCallbackDictionary.Add(HitPointCall.KillStance, null);
 
@@ -447,6 +449,12 @@ public class Character_Base : MonoBehaviour
     }
     public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob = null)
     {
+        /*Callback<CustomCallback> dictionaryFunc = null;
+        if (mainCallbackDictionary.TryGetValue(callback.customCall, out dictionaryFunc))
+        {
+            dictionaryFunc(callback);
+            return;
+        }*/
         if (activationCall.HasFlag(callback.customCall))
         {
             switch (callback.customCall)
@@ -641,13 +649,29 @@ public class Character_Base : MonoBehaviour
         _cAnimator._lastAttackState = lastAttackState.nullified;
         await Task.Delay(50);
     }
-    public void LockPlayerInPause() 
+    public void LockPos(CustomCallback callback = null)
     {
         storedXVelocity = myRb.velocity.x;
         storedYVelocity = myRb.velocity.y;
-        myRb.velocity = new Vector3(0f,0f,0f);
+        myRb.drag = 100000;
+        myRb.velocity = new Vector3(0f, 0f, 0f);
         myRb.useGravity = false;
-        myRb.isKinematic = true; 
+        myRb.isKinematic = true;
+        myRb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+    public void UnlockPos(CustomCallback callback = null)
+    {
+        myRb.isKinematic = false;
+        myRb.drag = 1;
+        myRb.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
+        myRb.velocity = new Vector3(storedXVelocity, storedYVelocity, 0f);
+        storedXVelocity = 0f;
+        storedYVelocity = 0f;
+        myRb.useGravity = true;
+    }
+    public void LockPlayerInPause()
+    {
+        LockPos();
         isLockedPause = true;
         myRb.constraints = RigidbodyConstraints.FreezeAll;
         _cHitstun.HandleAnimatorFreeze(true, 0f);
@@ -656,12 +680,7 @@ public class Character_Base : MonoBehaviour
     public float factor;
     public void UnlockPlayerInPause()
     {
-        myRb.isKinematic = false;
-        myRb.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
-        myRb.velocity = new Vector3(storedXVelocity, storedYVelocity, 0f);
-        storedXVelocity = 0f; 
-        storedYVelocity = 0f;
-        myRb.useGravity = true;
+        UnlockPos();
         isLockedPause = false;
         _cHitstun.HandleAnimatorFreeze(false);
     }

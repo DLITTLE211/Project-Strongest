@@ -64,7 +64,10 @@ public class Character_SuperMeter : MonoBehaviour
         {
             if (checkPossibleTier(calcValue))
             {
-                meterTier += 1;
+                for (int i = 0; i < calcValue; i += 30)
+                {
+                    meterTier += 1;
+                }
                 SetMeterTierText();
                 superMeter.currentValue = 0;
                 superMeter.SetCurrentMeterValue(superMeter.currentValue);

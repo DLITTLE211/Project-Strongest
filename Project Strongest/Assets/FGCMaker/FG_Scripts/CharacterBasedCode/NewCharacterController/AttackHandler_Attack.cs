@@ -584,4 +584,6 @@ public enum HitPointCall
     DealCustomDamage = 1 << 18,
     ForceSideSwitch = 1 << 19,
     AwaitSequenceSignifier = 1 << 20,
+    LockPos = 1 << 21,
+    UnlockPos = 1 << 22,
 }

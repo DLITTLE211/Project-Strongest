@@ -48,7 +48,10 @@ public class MeterController : MonoBehaviour
         {
             if (checkPossibleTier(calcValue))
             {
-                meterTier += 1;
+                for(int i = 0; i < calcValue; i+= 30) 
+                {
+                    meterTier += 1;
+                }
                 SetMeterTierText();
                 superMeter.currentValue = 0;
                 superMeter.SetCurrentMeterValue(superMeter.currentValue);
@@ -63,7 +66,7 @@ public class MeterController : MonoBehaviour
         }
         else
         {
-            meterTier = 3;
+            meterTier = 4;
             SetMeterTierText();
             superMeter.currentValue = meterMaxThreshold;
             fullMeterLevel = maxMeterLevel;

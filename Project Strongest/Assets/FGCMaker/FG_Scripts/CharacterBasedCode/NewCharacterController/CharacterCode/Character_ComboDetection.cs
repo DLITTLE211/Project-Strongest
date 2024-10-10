@@ -126,7 +126,7 @@ public class Character_ComboDetection : MonoBehaviour
                     if (currentFollowupMoveType == MoveType.Rekka)
                     {
                         IAttackFunctionality newInputtedSpecial = SpecialMoveOnlyCheck();
-                        if (newInputtedSpecial != null)
+                        if (newInputtedSpecial != null && newInputtedSpecial != ActiveFollowUpAttackCheck.Value)
                         {
                             return;
                         }
@@ -165,14 +165,17 @@ public class Character_ComboDetection : MonoBehaviour
                 }
                 else
                 {
-                    refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
-                    if (followUpInputMoveTypes.Contains(refAttackType.Value.GetAttackMoveType()))
+                    if (refAttackType.Value != ActiveFollowUpAttackCheck.Value)
                     {
-                        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
-                    }
-                    else
-                    {
-                        ResetCombos();
+                        refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                        if (followUpInputMoveTypes.Contains(refAttackType.Value.GetAttackMoveType()))
+                        {
+                            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
+                        }
+                        else
+                        {
+                            ResetCombos();
+                        }
                     }
                     Debug.Log("attack found");
                     return refAttackType.Value;
