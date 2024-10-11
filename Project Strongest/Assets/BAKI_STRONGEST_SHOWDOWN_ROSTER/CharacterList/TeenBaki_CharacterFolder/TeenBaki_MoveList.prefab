@@ -602,8 +602,8 @@ MonoBehaviour:
               lateralKBP: 4
               Value: 9
             verticalKBP:
-              verticalKBP: 2
-              Value: 5
+              verticalKBP: 0
+              Value: 0
             KnockDown: 0
         - hitFramePoints: 65
           call: 2
@@ -3279,7 +3279,7 @@ MonoBehaviour:
       verticalKBP:
         verticalKBP: 7
         Value: 6
-      KnockDown: 2
+      KnockDown: 6
     attackInput:
     - attackString: 214A
       attackStringArray: 

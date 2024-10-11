@@ -41,13 +41,17 @@ public class Character_HitStun : MonoBehaviour
     {
         animSpeed = 1;
     }
-    void ActivateHitStun(float hitstunValue) 
+    public void KillStunRoutine() 
     {
-        if(hitStunRoutine != null) 
+        if (hitStunRoutine != null)
         {
             StopCoroutine(hitStunRoutine);
             hitStunRoutine = null;
         }
+    }
+    void ActivateHitStun(float hitstunValue) 
+    {
+        KillStunRoutine();
         hitStunRoutine = ApplyHitstun(hitstunValue);
         StartCoroutine(hitStunRoutine);
     }
@@ -57,7 +61,7 @@ public class Character_HitStun : MonoBehaviour
     }
     IEnumerator ApplyHitstun(float hitStunValue)
     {
-        animSpeed = 0.05f;
+        animSpeed = 0.45f;
         float stunTime = 0;
         _cAnimator.SetCanRecover(true);
         while (stunTime < hitStunValue)
@@ -74,6 +78,11 @@ public class Character_HitStun : MonoBehaviour
         }
         animSpeed = 1f;
         Messenger.Broadcast<int, string>(Events.SendReturnTime, 0, _cAnimator._base.gameObject.name);
+    }
+    public void EndHitStun() 
+    {
+        KillStunRoutine(); 
+        animSpeed = 1f;
     }
 
     private void Update()

@@ -540,16 +540,17 @@ public class Character_HitController : MonoBehaviour
                 yield return new WaitForEndOfFrame();
                 if (CheckNextAttackCatchPostLanding())
                 {
-
                     yield break;
                 }
             }
+            _base._cHitstun.EndHitStun();
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
             yield return new WaitForSeconds(0.4f);
         }
         else
         {
+            _base._cHitstun.EndHitStun();
             yield return new WaitForSeconds(0.25f);
         }
 
