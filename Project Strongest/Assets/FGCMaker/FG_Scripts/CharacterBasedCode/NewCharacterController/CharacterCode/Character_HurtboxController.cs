@@ -7,11 +7,13 @@ using TMPro;
 
 public class Character_HurtboxController : MonoBehaviour
 {
+    public int _angleZ;
     [SerializeField] private Character_Base _base;
     [SerializeField] private TMP_Text _hurtboxStateText;
     [SerializeField] HurtBoxSize curSize;
     [SerializeField] HurtBoxType newHurtboxType;
     [SerializeField] bool groundCheck;
+    [SerializeField] private HeightPositionMarkerSet h_Markers;
 
     private List<Vector3> hurtBoxesSizes = new List<Vector3>();
     private List<Vector3> hurtBoxRotations = new List<Vector3>();
@@ -27,6 +29,10 @@ public class Character_HurtboxController : MonoBehaviour
     public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing) 
     {
         collisionBox.SetBaseCollider(0.5f, _base.characterProfile.Height / 100f, HurtBoxSizing, ColliderType.Collision);
+    }
+    public void SetMarkers(HeightPositionMarkerSet _hMarkers)
+    {
+        h_Markers = _hMarkers;
     }
     public void SetTriggerHurtboxStartSize(Character_HurtBoxSizing HurtBoxSizing)
     {
@@ -44,6 +50,7 @@ public class Character_HurtboxController : MonoBehaviour
     private void Update()
     {
         triggerBox.transform.rotation = _base.gameObject.transform.rotation;
+        SetHitboxSize();
     }
     #region Ground Check
     public bool IsGrounded() 
@@ -84,42 +91,63 @@ public class Character_HurtboxController : MonoBehaviour
     }
     #endregion
 
-   
-    #region HurtBox Size Manipulation
-    public void SetHitboxSize(HurtBoxSize newSize) 
+    public void SetHitboxSize()
     {
-        if (newSize != curSize)
+        #region Height Of HitBox
+        float height = Vector3.Distance(h_Markers.topPoint.transform.position, h_Markers.basePoint.transform.position);
+        triggerBox.transform.localScale = new Vector3(1f, height, 1f);
+        #endregion
+
+        #region CenterPoint of Hitbox
+        Bounds centerPoint = new Bounds(h_Markers.centerPoint.transform.localPosition, Vector3.zero);
+        centerPoint.SetMinMax(h_Markers.basePoint.transform.position, h_Markers.topPoint.transform.position);
+        if (!limitCheck(centerPoint.center.y, h_Markers.topPoint.transform.localPosition.y, h_Markers.basePoint.transform.position.y))
         {
-            //DOTween.Complete(triggerBox.transform);
-            switch (newSize)
-            {
-                case HurtBoxSize.Standing:
-                    triggerBox.transform.DOScale(hurtBoxesSizes[0], (2 * (1 / 60f)));
-                    triggerBox.transform.DOLocalMoveY(hurtBoxesPositions[0], (2 * (1 / 60f)));
-                   // collisionBox.transform.DOLocalRotate(hurtBoxRotations[0], (2 * (1 / 60f)));
-                    break;
-                case HurtBoxSize.Crouching:
-                    triggerBox.transform.DOScale(hurtBoxesSizes[1], (2 * (1 / 60f)));
-                    triggerBox.transform.DOLocalMoveY(hurtBoxesPositions[1], (2 * (1 / 60f)));
-                   // collisionBox.transform.DOLocalRotate(hurtBoxRotations[0], (2 * (1 / 60f)));
-                    break;
-                case HurtBoxSize.Downed:
-                    triggerBox.transform.DOScale(hurtBoxesSizes[2], (2 * (1 / 60f)));
-                    triggerBox.transform.DOLocalMoveY(hurtBoxesPositions[1], (2 * (1 / 60f)));
-                   // collisionBox.transform.DOLocalRotate(hurtBoxRotations[1], (2 * (1 / 60f)));
-                    break;
-            }
-            curSize = newSize;
+            triggerBox.transform.localPosition = new Vector3(triggerBox.transform.localPosition.x, centerPoint.center.y, triggerBox.transform.localPosition.z);
         }
+        #endregion
+
+        #region Rotation of Hitbox
+        float yPoint = h_Markers.topPoint.transform.position.y - h_Markers.basePoint.transform.position.y;
+        float xPoint = h_Markers.topPoint.transform.position.x - h_Markers.basePoint.transform.position.x;
+        float angle = Mathf.Atan2(yPoint, xPoint);
+        if (angle < 0f)
+        {
+            angle += Mathf.PI * 2f;
+        }
+
+        _angleZ = (int)(angle * (180f / Mathf.PI) - 90f);
+        _angleZ = _angleZ / 10;
+        _angleZ = _angleZ * 10;
+        triggerBox.transform.localEulerAngles = new Vector3(0f, 0f, ClampAngle(_angleZ));
+        #endregion
     }
-    public void ChangeHeightOnDowned()
+    int ClampAngle(int angle) 
     {
-        collisionBox.transform.DOLocalMoveY(-0.15f, (2 * (1 / 60f)));
+        if((90 - angle) <= 10) 
+        {
+            return 90;
+        }
+        if ((90 - angle) >= 70)
+        {
+            return 0;
+        }
+        return 0;
     }
-    public void ChangeHeightOnStanding(float time)
+    bool limitCheck(float centerY, float topY, float bottomY) 
     {
-        collisionBox.transform.DOLocalMoveY(0.35f, time);
+        if(centerY >= topY)
+        {
+            return true;
+        }
+        if (centerY <= bottomY)
+        {
+            return true;
+        }
+        return false;
+        
     }
+    #region HurtBox Size Manipulation
 
     public void SetupVectorInfo(Character_HurtBoxSizing HurtBoxSizing) 
     {

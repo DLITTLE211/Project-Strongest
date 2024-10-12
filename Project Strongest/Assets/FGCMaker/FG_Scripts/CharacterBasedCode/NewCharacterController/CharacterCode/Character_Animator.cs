@@ -10,7 +10,8 @@ public class Character_Animator : MonoBehaviour
     #region HitAnimNums
     public bool isHit;
     #endregion
-
+    [SerializeField] private HeightPositionMarkerSet heightMarkerObjects;
+    [Space(15)]
     [SerializeField] public Animator myAnim;
     [SerializeField] public Animator shadowAnim;
     [SerializeField] public Character_Base _base;
@@ -47,6 +48,10 @@ public class Character_Animator : MonoBehaviour
         startPos = _model.localPosition;
         inRekkaState = false;
         inStanceState = false;
+    }
+    public HeightPositionMarkerSet ReturnMarkers() 
+    {
+        return heightMarkerObjects;
     }
     public bool RoutineActive() 
     {
@@ -395,4 +400,19 @@ public enum lastMovementState
 { 
     nullified, 
     populated 
+}
+[Serializable]
+public class HeightPositionMarkerSet 
+{
+    public Transform topPoint;
+    public Transform centerPoint;
+    public Transform basePoint;
+}
+[Serializable]
+public class WidthPositionMarkerSet
+{
+    public Transform leftFootPoint;
+    public Transform leftHandPoint;
+    public Transform rightFootPoint;
+    public Transform rightHandPoint;
 }

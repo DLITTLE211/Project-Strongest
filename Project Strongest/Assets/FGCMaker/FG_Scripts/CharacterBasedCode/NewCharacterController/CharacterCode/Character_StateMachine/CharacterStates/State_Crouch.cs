@@ -13,7 +13,6 @@ public class State_Crouch : BaseState
     {
         canDoSecondaryCrouch = false;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter CrouchState");
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
         await WaitToChargeSuperMobility();
         inCrouch = true;
@@ -93,7 +92,6 @@ public class State_Crouch : BaseState
     public override void OnExit()
     {
         inCrouch = false;
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         canDoSecondaryCrouch = false;
         base.OnExit();
     }

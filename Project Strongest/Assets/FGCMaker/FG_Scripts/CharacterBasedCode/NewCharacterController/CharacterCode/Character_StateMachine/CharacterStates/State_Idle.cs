@@ -13,7 +13,6 @@ public class State_Idle : BaseState
     public override async void OnEnter()
     {
         canDoSecondaryIdle = false;
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         if (_base._subState == Character_SubStates.Controlled)
         {
             Task[] tasks = new Task[]

@@ -212,6 +212,7 @@ public class Character_Base : MonoBehaviour
         _cComboDetection.SetAnimator(chosenAnimator);
         _cHitstun.SetAnimator(chosenAnimator);
         _cAnimator.enabled = true;
+        _cHurtBox.SetMarkers(_cAnimator.ReturnMarkers());
         _cHitController.SetHitReactions(chosenAnimator);
         _cAnimator.myAnim.enabled = true;
         _cStateMachine.DefineState();

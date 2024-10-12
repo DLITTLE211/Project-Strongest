@@ -11,7 +11,6 @@ public class State_CrouchBlock : BaseState
     public override async void OnEnter()
     {
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         if (_base._cStateMachine._CheckBlockButton())
         {
             _cAnim.PlayNextAnimation(cblockHash, _crossFade);
@@ -67,7 +66,6 @@ public class State_CrouchBlock : BaseState
     public override void OnExit()
     {
         _base._cHurtBox.SetHurboxState();
-        _base._cHurtBox.SetHitboxSize(HurtBoxSize.Crouching);
         base.OnExit();
     }
 }
