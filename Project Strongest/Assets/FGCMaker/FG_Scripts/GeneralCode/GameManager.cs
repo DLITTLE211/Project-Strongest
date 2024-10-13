@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Transform pauseMenuHolder;
     [SerializeField] private GameObject trainingStageMenu, versusStageMenu;
-
     [SerializeField] private MainGame_SettingsController _settingsController;
     public MainGame_SettingsController settingsController { get { return _settingsController; } }
 
@@ -30,8 +29,10 @@ public class GameManager : MonoBehaviour
     public GameModeSet _gameModeSet;
     internal Character_Base winningCharacter;
     public static GameManager instance;
+    public Player_SideManager sideManager;
     void Start()
     {
+        sideManager = GetComponent<Player_SideManager>();
         GameObject systemInScene = GameObject.Find("EventSystem");
         _eventSystem = systemInScene.GetComponent<EventSystem>();
         instance = this;

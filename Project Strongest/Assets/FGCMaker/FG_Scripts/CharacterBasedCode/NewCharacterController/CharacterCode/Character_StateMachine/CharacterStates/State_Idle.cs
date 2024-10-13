@@ -127,7 +127,7 @@ public class State_Idle : BaseState
     }
     void PlayerCPUIdleCheck()
     {
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._cHurtBox.SetHurboxState();
         _cAnim.ClearLastAttack();
         if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
         {

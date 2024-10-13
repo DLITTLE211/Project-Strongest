@@ -20,9 +20,9 @@ public class HurtBox : CollisionDetection
     private Transform target;
     Callback endingFunction;
     HitboxTypeList refList;
-    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing)
+    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing,bool hurtboxType)
     {
-        SetHurtBoxSize(0, 0, false, ColliderType.Trigger, hu_Sizing);
+        SetHurtBoxSize(0, 0, hurtboxType, ColliderType.Trigger, hu_Sizing);
         SetHurtboxState(huBType);
         SetupHitResponseDicitonary();
     }

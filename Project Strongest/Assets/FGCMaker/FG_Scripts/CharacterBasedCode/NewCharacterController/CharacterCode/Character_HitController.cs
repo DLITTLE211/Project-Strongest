@@ -381,10 +381,14 @@ public class Character_HitController : MonoBehaviour
             _isRecovering = true;
             if (currentProperty != null)
             {
+                HurtBoxType landingBoxType = currentProperty.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
+                _base._cHurtBox.SetHurboxState(landingBoxType);
                 recoverRoutine = DoRecovery(currentProperty.KnockDown, curField);
             }
-            else if(currentCustomDamageField != null) 
+            else if(currentCustomDamageField != null)
             {
+                HurtBoxType landingBoxType = currentCustomDamageField.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
+                _base._cHurtBox.SetHurboxState(landingBoxType);
                 recoverRoutine = DoRecovery(currentCustomDamageField.KnockDown, curField);
             }
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
@@ -412,7 +416,6 @@ public class Character_HitController : MonoBehaviour
                 airRecoverPossible = false;
             }
             SetRecoverable();
-            _base._cHurtBox.SetHurboxState();
             currentCustomDamageField = null;
             currentProperty = null;
         }
@@ -557,6 +560,7 @@ public class Character_HitController : MonoBehaviour
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
         yield return new WaitForEndOfFrame();
+        _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
         if (currentCustomDamageField == null)
         {
             if (CheckNextAttackCatchPostLanding())
@@ -577,7 +581,6 @@ public class Character_HitController : MonoBehaviour
         _isRecovering = false;
         _base._cHealth.StartHealthRegen();
         SetRecoverable();
-        _base._cHurtBox.SetHurboxState();
         currentCustomDamageField = null;
         currentProperty = null;
     }

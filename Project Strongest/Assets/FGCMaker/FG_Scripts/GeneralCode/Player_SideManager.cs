@@ -24,9 +24,9 @@ public class Player_SideManager : MonoBehaviour
     }
     private void Update()
     {
-        CheckPlayerPositions();
+       // CheckPlayerPositions();
     }
-    void CheckPlayerPositions() 
+    public void CheckPlayerPositions() 
     {
         if (_p1Position != null && _p2Position != null)
         {
@@ -53,7 +53,7 @@ public class Player_SideManager : MonoBehaviour
     {
         if (state)
         {
-            if (_p1Position.thisPosition._directionFacing != Character_Face_Direction.FacingRight)
+            if (!CorrectLeftPlayerFacing(state))
             {
                 _p1Position.thisPosition.SetFacingState(Character_Face_Direction.FacingRight);
                 _p2Position.thisPosition.SetFacingState(Character_Face_Direction.FacingLeft);
@@ -61,7 +61,7 @@ public class Player_SideManager : MonoBehaviour
         }
         else
         {
-            if (_p1Position.thisPosition._directionFacing != Character_Face_Direction.FacingLeft)
+            if (!CorrectLeftPlayerFacing(state))
             {
                 _p1Position.thisPosition.SetFacingState(Character_Face_Direction.FacingLeft);
                 _p2Position.thisPosition.SetFacingState(Character_Face_Direction.FacingRight);
@@ -87,6 +87,31 @@ public class Player_SideManager : MonoBehaviour
     bool ReturnPlayerRightDistance()
     {
         return _p1Position.thisPosition.RW_Distance > _p2Position.thisPosition.RW_Distance;
+    }
+    bool CorrectLeftPlayerFacing(bool state)
+    {
+        if (_p1Position.thisPosition._directionFacing == _p2Position.thisPosition._directionFacing) 
+        {
+            return false;
+        }
+        else 
+        {
+            if (state)
+            {
+                if (_p1Position.thisPosition._directionFacing == Character_Face_Direction.FacingLeft && _p2Position.thisPosition._directionFacing != Character_Face_Direction.FacingLeft)
+                {
+                    return false;
+                }
+            }
+            else 
+            {
+                if (_p1Position.thisPosition._directionFacing == Character_Face_Direction.FacingRight && _p2Position.thisPosition._directionFacing != Character_Face_Direction.FacingRight)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     #endregion
 }

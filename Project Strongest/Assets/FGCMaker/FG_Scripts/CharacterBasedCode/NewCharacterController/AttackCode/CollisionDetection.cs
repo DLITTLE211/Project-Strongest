@@ -102,7 +102,7 @@ public class CollisionDetection : MonoBehaviour
         if (hurtboxColor.ContainsKey(_hurtProperty))
         {
             SetRendererColor(hurtboxColor[_hurtProperty]);
-            SetText($"Current HitboxType: {_hurtProperty}");
+            SetText($"Current HurtboxType: {_hurtProperty}");
             return;
         }
         //DebugMessageHandler.instance.DisplayErrorMessage(1, $"Invalid HitboxType Detected.");

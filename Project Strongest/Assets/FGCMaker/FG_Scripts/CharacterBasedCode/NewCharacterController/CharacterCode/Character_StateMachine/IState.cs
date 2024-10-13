@@ -51,6 +51,9 @@ public abstract class BaseState : IState
     public virtual void OnStay() {}
     public virtual void OnRecov() {}
     public virtual void OnExit() {}
-    public virtual void OnUpdate() {}
+    public virtual void OnUpdate() 
+    {
+        GameManager.instance.sideManager.CheckPlayerPositions();
+    }
     public virtual void OnFixedUpdate() {}
 }

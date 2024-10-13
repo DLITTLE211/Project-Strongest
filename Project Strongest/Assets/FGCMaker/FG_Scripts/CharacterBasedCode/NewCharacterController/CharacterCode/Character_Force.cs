@@ -193,21 +193,33 @@ public class Character_Force : MonoBehaviour
     public void TeleportOnCommand(CustomCallback callback = null)
     {
         Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
-        Vector3 newPos = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ?
-            new Vector3(_myRB.transform.position.x + -callback.forceFloat, _myRB.transform.position.y, _myRB.transform.position.z) :
-            new Vector3(_myRB.transform.position.x + callback.forceFloat, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos = Vector3.zero;
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            newPos = new Vector3(_myRB.transform.position.x + -callback.forceFloat, _myRB.transform.position.y, _myRB.transform.position.z);
+        }
+        else if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+        {
+            newPos = new Vector3(_myRB.transform.position.x + callback.forceFloat, _myRB.transform.position.y, _myRB.transform.position.z);
+        }
+
         if (!GameManager.instance.CheckWallGreaterPos(ref newPos))
         {
             float opponentX = _base.opponentPlayer._cForce._myRB.transform.localPosition.x;
             float bias;
             if (GetBiasForTeleportPos(newPos.x, opponentX, out bias))
             {
-                if (bias != 0)
+               /* if (bias != 0)
                 {
-                    newPos = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ?
-                       new Vector3(opponentX + bias, _myRB.transform.position.y, _myRB.transform.position.z) :
-                       new Vector3(opponentX - bias, _myRB.transform.position.y, _myRB.transform.position.z);
-                }
+                    if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+                    {
+                        newPos = new Vector3(_myRB.transform.position.x + bias, _myRB.transform.position.y, _myRB.transform.position.z);
+                    }
+                    else if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                    {
+                        newPos = new Vector3(_myRB.transform.position.x - bias, _myRB.transform.position.y, _myRB.transform.position.z);
+                    }
+                }*/
             }
         }
         _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
@@ -233,21 +245,33 @@ public class Character_Force : MonoBehaviour
     public void TeleportOnCommand(float value)
     {
         Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
-        Vector3 newPos =  _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ?
-            new Vector3(_myRB.transform.position.x + -value, _myRB.transform.position.y, _myRB.transform.position.z) : 
-            new Vector3(_myRB.transform.position.x + value, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos = Vector3.zero;
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            newPos = new Vector3(_myRB.transform.position.x + -value, _myRB.transform.position.y, _myRB.transform.position.z);
+        }
+        else if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingRight) 
+        {
+            newPos = new Vector3(_myRB.transform.position.x + value, _myRB.transform.position.y, _myRB.transform.position.z);
+        }
+
         if (!GameManager.instance.CheckWallGreaterPos(ref newPos)) 
         {
             float opponentX = _base.opponentPlayer._cForce._myRB.transform.localPosition.x;
             float bias;
             if (GetBiasForTeleportPos(newPos.x, opponentX,out bias))
             {
-                if (bias != 0)
+               /* if (bias != 0)
                 {
-                    newPos = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ?
-                       new Vector3(opponentX + bias, _myRB.transform.position.y, _myRB.transform.position.z) :
-                       new Vector3(opponentX - bias, _myRB.transform.position.y, _myRB.transform.position.z);
-                }
+                    if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+                    {
+                        newPos = new Vector3(_myRB.transform.position.x + bias, _myRB.transform.position.y, _myRB.transform.position.z);
+                    }
+                    else if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+                    {
+                        newPos = new Vector3(_myRB.transform.position.x - bias, _myRB.transform.position.y, _myRB.transform.position.z);
+                    }
+                }*/
             }
         }
         _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
@@ -269,7 +293,7 @@ public class Character_Force : MonoBehaviour
             bias = 0.5f;
             return true;
         }
-        if (subtractValue > 1.25f)
+        if (subtractValue >= 1f)
         {
             bias = 0f;
             return true;

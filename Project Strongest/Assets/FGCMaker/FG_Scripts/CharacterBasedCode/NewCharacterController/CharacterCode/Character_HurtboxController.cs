@@ -36,20 +36,20 @@ public class Character_HurtboxController : MonoBehaviour
     }
     public void SetTriggerHurtboxStartSize(Character_HurtBoxSizing HurtBoxSizing)
     {
-        triggerBox.SetHurtboxSizing(HurtBoxSizing);
-        SetupVectorInfo(HurtBoxSizing);
+        triggerBox.SetHurtboxSizing(HurtBoxSizing,true);
+        //SetupVectorInfo(HurtBoxSizing);
     }
     private void FixedUpdate()
     {
         IsGrounded();
-        if (triggerBox.huBType != newHurtboxType) 
-        {
-            triggerBox.huBType = newHurtboxType;
-        }
     }
     private void Update()
     {
         triggerBox.transform.rotation = _base.gameObject.transform.rotation;
+        if (triggerBox.huBType != newHurtboxType)
+        {
+            triggerBox.huBType = newHurtboxType;
+        }
         SetHitboxSize();
     }
     #region Ground Check
@@ -166,11 +166,8 @@ public class Character_HurtboxController : MonoBehaviour
     public void SetHurboxState(HurtBoxType newType = HurtBoxType.NoBlock)
     {
         newHurtboxType = newType;
-        UpdateHurtboxStateText(newHurtboxType);
-    }
-    public void UpdateHurtboxStateText(HurtBoxType newType)
-    {
-        _hurtboxStateText.text = $"HurtboxState: {newType.ToString()}";
+        triggerBox.huBType = newHurtboxType;
+        triggerBox.SetHurtboxState(triggerBox.huBType);
     }
     #endregion
 }

@@ -2620,8 +2620,8 @@ MonoBehaviour:
                 lateralKBP: 3
                 Value: 5
               verticalKBP:
-                verticalKBP: 1
-                Value: 3
+                verticalKBP: 2
+                Value: 6
               KnockDown: 6
             attackInputState:
               _state: 0
@@ -3002,8 +3002,8 @@ MonoBehaviour:
                 lateralKBP: 3
                 Value: 5
               verticalKBP:
-                verticalKBP: 1
-                Value: 3
+                verticalKBP: 2
+                Value: 6
               KnockDown: 4
             attackInputState:
               _state: 0
@@ -3378,8 +3378,8 @@ MonoBehaviour:
         lateralKBP: 3
         Value: 5
       verticalKBP:
-        verticalKBP: 2
-        Value: 3
+        verticalKBP: 0
+        Value: 0
       KnockDown: 4
     attackInput:
     - attackString: 214B
@@ -5550,9 +5550,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0035
           attackMainStunValues:
-            hitstunValue: 8
+            hitstunValue: 4
             blockStunValue: 2
-            hitstopValue: 3
+            hitstopValue: 2
             blockStopValue: 0
           hitLevel: 66
           attackHashes: 0
