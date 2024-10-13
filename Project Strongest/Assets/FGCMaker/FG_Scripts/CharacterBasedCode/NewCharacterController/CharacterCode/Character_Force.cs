@@ -209,7 +209,7 @@ public class Character_Force : MonoBehaviour
             float bias;
             if (GetBiasForTeleportPos(newPos.x, opponentX, out bias))
             {
-               /* if (bias != 0)
+                if (bias != 0)
                 {
                     if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
                     {
@@ -219,7 +219,7 @@ public class Character_Force : MonoBehaviour
                     {
                         newPos = new Vector3(_myRB.transform.position.x - bias, _myRB.transform.position.y, _myRB.transform.position.z);
                     }
-                }*/
+                }
             }
         }
         _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
@@ -261,7 +261,7 @@ public class Character_Force : MonoBehaviour
             float bias;
             if (GetBiasForTeleportPos(newPos.x, opponentX,out bias))
             {
-               /* if (bias != 0)
+                if (bias != 0)
                 {
                     if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
                     {
@@ -271,7 +271,7 @@ public class Character_Force : MonoBehaviour
                     {
                         newPos = new Vector3(_myRB.transform.position.x - bias, _myRB.transform.position.y, _myRB.transform.position.z);
                     }
-                }*/
+                }
             }
         }
         _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
@@ -279,26 +279,50 @@ public class Character_Force : MonoBehaviour
 
     bool GetBiasForTeleportPos(float teleportPoint, float opponentPos, out float bias)
     {
-        float subtractValue = 0;
-        if (teleportPoint < opponentPos)
+        float minDistance = 0f;
+        bias = 0f;
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
-            subtractValue = Mathf.Abs(teleportPoint) - Mathf.Abs(opponentPos);
+            if (teleportPoint > opponentPos)
+            {
+                return true;
+            }
+            else
+            {
+                minDistance = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ? Mathf.Abs(teleportPoint) + Mathf.Abs(opponentPos) : Mathf.Abs(teleportPoint) - Mathf.Abs(opponentPos);
+                if (minDistance > 0.5f)
+                {
+                    bias = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ? bias = opponentPos - 0.5f : bias = opponentPos + 0.5f;
+                    return true;
+                }
+                else
+                {
+                    bias = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ? bias = 0.5f : bias = -0.5f;
+                    return true;
+                }
+            }
         }
-        else 
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {
-            subtractValue = Mathf.Abs(teleportPoint) + Mathf.Abs(opponentPos);
+            if (teleportPoint < opponentPos)
+            {
+                return true;
+            }
+            else
+            {
+                minDistance =  Mathf.Abs(teleportPoint) + Mathf.Abs(opponentPos) ;
+                if (minDistance > 0.5f)
+                {
+                    bias = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ? bias = opponentPos + 0.5f : bias = opponentPos - 0.5f;
+                    return true;
+                }
+                else
+                {
+                    bias = _side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft ? bias = 0.5f : bias = -0.5f;
+                    return true;
+                }
+            }
         }
-        if (subtractValue < 1f)
-        {
-            bias = 0.5f;
-            return true;
-        }
-        if (subtractValue >= 1f)
-        {
-            bias = 0f;
-            return true;
-        }
-        bias = -1f;
         return false;
     }
 

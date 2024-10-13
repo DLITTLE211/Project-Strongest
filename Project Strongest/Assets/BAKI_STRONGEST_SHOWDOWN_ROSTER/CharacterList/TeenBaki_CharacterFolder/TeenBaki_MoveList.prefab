@@ -2406,13 +2406,13 @@ MonoBehaviour:
             recovery: 0
             lastFrame: 0
             _extraPoints:
-            - hitFramePoints: 5
-              call: 8
+            - hitFramePoints: 3
+              call: 2
               hitFrameBool: 0
               awaitEnum:
                 keyRef: 0
                 awaitingCheck: 0
-              Force: 1.05
+              Force: 4.5
               projectileSpeed: 0
               camPos: {x: 0, y: 0, z: 0}
               camRotation: {x: 0, y: 0, z: 0}
@@ -2464,7 +2464,7 @@ MonoBehaviour:
             property:
               _attackName: (L) Flash Step (Multipunch)
               _cTimer: {fileID: 0}
-              rawAttackDamage: 20
+              rawAttackDamage: 7
               rawChipDamage: 0
               counterHitDamageMult: 1.015
               attackMainStunValues:
@@ -2788,13 +2788,13 @@ MonoBehaviour:
             recovery: 0
             lastFrame: 0
             _extraPoints:
-            - hitFramePoints: 5
-              call: 8
+            - hitFramePoints: 3
+              call: 2
               hitFrameBool: 0
               awaitEnum:
                 keyRef: 0
                 awaitingCheck: 0
-              Force: 1.85
+              Force: 8
               projectileSpeed: 0
               camPos: {x: 0, y: 0, z: 0}
               camRotation: {x: 0, y: 0, z: 0}
@@ -2846,7 +2846,7 @@ MonoBehaviour:
             property:
               _attackName: (H) Flash Step (Multipunch)
               _cTimer: {fileID: 0}
-              rawAttackDamage: 20
+              rawAttackDamage: 8.5
               rawChipDamage: 0
               counterHitDamageMult: 1.015
               attackMainStunValues:

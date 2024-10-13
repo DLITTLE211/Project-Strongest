@@ -68,9 +68,12 @@ public class Character_ComboCounter : MonoBehaviour
     }
     public void OnHit_CountUp() 
     {
-        fadeTextTween.Kill();
-        fadeTextTween = null;
-        CurrentHitCount++;
+        if(fadeTextTween != null) 
+        {
+            fadeTextTween.Kill();
+            fadeTextTween = null;
+        }
+        CurrentHitCount+= 1;
         UpdateText();
 
         DOTween.Complete(comboHolder);
