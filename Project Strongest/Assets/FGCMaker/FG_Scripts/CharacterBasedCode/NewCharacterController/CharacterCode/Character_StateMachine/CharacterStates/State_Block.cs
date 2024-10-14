@@ -46,7 +46,8 @@ public class State_Block : BaseState
 
     public override void OnExit()
     {
-        if (!_base._cHitController.ReturnCrouchBlock() && !_base._cHitController.ReturnStandBlock())
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+        if (nextTransition.To != _base._cStateMachine.blockReactRef)
         {
             _base._cHurtBox.SetHurboxState();
         }

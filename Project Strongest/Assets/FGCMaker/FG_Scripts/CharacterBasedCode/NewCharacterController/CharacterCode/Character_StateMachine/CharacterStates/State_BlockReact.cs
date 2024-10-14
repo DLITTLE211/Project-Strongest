@@ -5,7 +5,14 @@ public class State_BlockReact : BaseState
     { }
     public override void OnEnter()
     {
-        DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Block React State");
+        if (_base._cHurtBox.triggerBox.huBType == HurtBoxType.BlockHigh) 
+        {
+            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);
+        }
+        if (_base._cHurtBox.triggerBox.huBType == HurtBoxType.BlockLow)
+        {
+            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
+        }
     }
     public override void OnRecov()
     {
@@ -14,14 +21,7 @@ public class State_BlockReact : BaseState
 
     public override void OnExit()
     {
-        if (!_base._cHitController.ReturnStandBlock())
-        {
-            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);
-        }
-        if (!_base._cHitController.ReturnCrouchBlock())
-        {
-            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
-        }
+       
         base.OnExit();
     }
 }

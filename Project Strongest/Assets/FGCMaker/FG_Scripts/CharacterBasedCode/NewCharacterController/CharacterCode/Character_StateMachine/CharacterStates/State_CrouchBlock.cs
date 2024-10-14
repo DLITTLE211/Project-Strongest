@@ -61,7 +61,11 @@ public class State_CrouchBlock : BaseState
 
     public override void OnExit()
     {
-        _base._cHurtBox.SetHurboxState();
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+        if (nextTransition.To != _base._cStateMachine.blockReactRef)
+        {
+            _base._cHurtBox.SetHurboxState();
+        }
         base.OnExit();
     }
 }

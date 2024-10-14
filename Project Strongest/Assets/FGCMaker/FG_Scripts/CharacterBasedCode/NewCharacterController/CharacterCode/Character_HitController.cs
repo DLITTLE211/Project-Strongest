@@ -26,9 +26,8 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private bool smallHitRecovering;
     [SerializeField] private bool bigHitRecovering;
     [SerializeField] private bool airRecoverPossible;
-    [SerializeField] private bool crouchBlocking;
-    [SerializeField] private bool standingBlocking;
     [SerializeField] private bool _isRecovering;
+    [SerializeField] private bool blockedAttack;
     public bool Recovering { get{ return _isRecovering;  } }
 
 
@@ -157,10 +156,21 @@ public class Character_HitController : MonoBehaviour
                 prunedList.Add(refField[i]);
                 continue;
             }
-            if (currentAttack.AttackAnims.attackType != HitBoxType.Low && refField[i].isLowReaction)
+            if (currentAttack.AttackAnims.attackType != HitBoxType.Low)
             {
-                prunedList.Add(refField[i]);
-                continue;
+                if (refField[i].isLowReaction)
+                {
+                    prunedList.Add(refField[i]);
+                    continue;
+                }
+            }
+            if (currentAttack.AttackAnims.attackType == HitBoxType.Low)
+            {
+                if (!refField[i].isLowReaction)
+                {
+                    prunedList.Add(refField[i]);
+                    continue;
+                }
             }
         }
         foreach (HitAnimationField reaction in prunedList) 
@@ -246,6 +256,7 @@ public class Character_HitController : MonoBehaviour
 
     void SmallHitDetect(Attack_BaseProperties currentAttack = null)
     {
+        blockedAttack = false;
         HitAnimationField hitReaction = FindAnimationOfType(currentAttack);
         if (hitReaction == null) 
         {
@@ -256,6 +267,7 @@ public class Character_HitController : MonoBehaviour
     }
     void BigHitDetect(Attack_BaseProperties currentAttack = null)
     {
+        blockedAttack = false;
         if (lockMoveTypes.Contains(currentAttack._moveType))
         {
             if (_base.opponentPlayer.comboList3_0.GetCurrentSuperCustomAnimLength() > 0)
@@ -282,6 +294,7 @@ public class Character_HitController : MonoBehaviour
     }
     void LockHitDetect(CustomDamageField currentAttack, bool finalAttack)
     {
+        blockedAttack = false;
         currentCustomDamageField = currentAttack;
         ClearRecoveryRoutine();
         HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
@@ -299,6 +312,7 @@ public class Character_HitController : MonoBehaviour
     }
     void BlockHitDetect(Attack_BaseProperties currentAttack)
     {
+        blockedAttack = true;
         List<HitAnimationField> blockReactionList = FilterBlockReactions(currentAttack);
         int randomHitReaction = 0;
         if (blockReactionList.Count > 1)
@@ -406,6 +420,7 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
+            blockedAttack = false;
             _base._cHealth.StartHealthRegen();
             if(!_base._cHurtBox.IsGrounded())
             {
@@ -548,14 +563,6 @@ public class Character_HitController : MonoBehaviour
     {
         if (playGroundedAnim.hitLevel != HitLevel.Crumple)
         {
-            if (currentCustomDamageField == null)
-            {
-                yield return new WaitForEndOfFrame();
-                //if (CheckNextAttackCatchPostLanding())
-               // {
-                    //yield break;
-               // }
-            }
             _base._cHitstun.EndHitStun();
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
@@ -596,6 +603,7 @@ public class Character_HitController : MonoBehaviour
         SetRecoverable();
         currentCustomDamageField = null;
         currentProperty = null;
+        blockedAttack = false;
     }
     #endregion
     void SetStunMeterValue(float TopValue)
@@ -611,12 +619,8 @@ public class Character_HitController : MonoBehaviour
     {
         _hitStunSlider.value = 0;
     }
-    public bool ReturnStandBlock()
+    public bool CheckIfAttackBlocked() 
     {
-        return standingBlocking;
-    }
-    public bool ReturnCrouchBlock()
-    {
-        return crouchBlocking;
+        return blockedAttack;
     }
 }

@@ -15,6 +15,7 @@ public class Character_StateMachine : MonoBehaviour
     [HideInInspector] public State_Jump jumpRef;
     [HideInInspector] public State_Block standBlockRef;
     [HideInInspector] public State_CrouchBlock crouchBlockRef;
+    [HideInInspector] public State_BlockReact blockReactRef;
 
     [HideInInspector] public State_Attacking attackingStateRef;
     [HideInInspector] public State_Throw throwState;
@@ -51,6 +52,7 @@ public class Character_StateMachine : MonoBehaviour
         var C_BlockState = new State_CrouchBlock(_base); // C = Crouch 
         crouchBlockRef = C_BlockState;
         var BlockReact = new State_BlockReact(_base); // C = Crouch 
+        blockReactRef = BlockReact;
         var CounterState = new State_Counter(_base); // C = Crouch 
         counterState = CounterState;
         var CustomSuperState = new State_CustomSuper(_base); // C = Crouch 
@@ -183,29 +185,18 @@ public class Character_StateMachine : MonoBehaviour
     }
     bool At_2BlockReact()
     {
-        bool notRecovering = _base._cHitController.ReturnCrouchBlock() || _base._cHitController.ReturnStandBlock();
-        bool _currentInput = true;
-        bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
-
-        if (_base._subState != Character_SubStates.Controlled)
+        bool recovering = _base._cHitController.currentHitstun > 0;
+        bool attackBlocked = _base._cHitController.CheckIfAttackBlocked();
+        IState blockState = _playerState.current.State;
+        if (blockState == standBlockRef)
         {
-            _currentInput = true;
+            return attackBlocked && recovering;
         }
-        else
+        if (blockState == crouchBlockRef)
         {
-            if (_base._cHitController.ReturnCrouchBlock())
-            {
-                _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
-                return _currentInput && _isGrounded && notRecovering;
-            }
-            if (_base._cHitController.ReturnStandBlock())
-            {
-                _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput > 3 && _base.ReturnMovementInputs().Button_State.directionalInput < 7;
-                return _currentInput && _isGrounded && notRecovering && _notAttacking;
-            }
+            return attackBlocked && recovering;
         }
-        return _currentInput && _isGrounded && notRecovering;
+        return false;
     }
     bool At_2CBlock()
     {
@@ -487,9 +478,10 @@ public class Character_StateMachine : MonoBehaviour
             return fullcheck;
         }
     }
-    bool ToHitState() 
+    bool ToHitState()
     {
-        return _base._cAnimator.isHit;
+        bool notRecovering = !_base._cHitController.CheckIfAttackBlocked();
+        return _base._cAnimator.isHit && notRecovering;
     }
 
     #region Individual Boolean Checks
