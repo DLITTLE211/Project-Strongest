@@ -13,6 +13,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     public static ChosenCharacter leftPlayerChosenProfile, rightPlayerChosenProfile;
     public static Stage_StageAsset chosenStage;
     public static Round_Info _roundInfo;
+    public static Character_AvailableID curPlayerData;
     private void Awake()
     {
         _arenaLoaded = false;
@@ -26,6 +27,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
+            curPlayerData = _characterSelectSetup.players;
             _roundInfo = _characterSelectSetup.GetRoundInfomation();
             leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
             rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();

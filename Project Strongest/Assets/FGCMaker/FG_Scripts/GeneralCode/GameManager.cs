@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Character_Base leftPlayer,rightPlayer;
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Transform pauseMenuHolder;
     [SerializeField] private GameObject trainingStageMenu, versusStageMenu;
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
     public Player_SideManager sideManager;
     void Start()
     {
+        players = CharacterSelect_LoadArena.curPlayerData;
+        players.totalPlayers.Add(leftPlayer);
+        players.totalPlayers.Add(rightPlayer);
         sideManager = GetComponent<Player_SideManager>();
         GameObject systemInScene = GameObject.Find("EventSystem");
         _eventSystem = systemInScene.GetComponent<EventSystem>();
@@ -40,11 +44,11 @@ public class GameManager : MonoBehaviour
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
-        if (SceneManager.GetActiveScene().name == "MainGame_MenuScene") 
+        if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainGame_Arena"));
-        } 
-        if (SceneManager.GetActiveScene().name == "MainGame_Arena") 
+        }
+        if (SceneManager.GetActiveScene().name == "MainGame_Arena")
         {
             LoadStageAsset();
             LoadPlayerAssets();
@@ -108,10 +112,6 @@ public class GameManager : MonoBehaviour
 
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)
     {
-        if (args == null)
-        {
-            players.InitAvailableIDs();
-        }
         for (int i = 0; i < players.totalPlayers.Count; i++)
         {
             if (!players.totalPlayers[i].gameObject.activeInHierarchy)
@@ -134,12 +134,12 @@ public class GameManager : MonoBehaviour
             players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
             for (int i = 0; i < players.totalPlayers.Count; i++) 
             {
-                if (playerProfiles[i].ChosenPlayerSide != -1 && playerProfiles[i].subState == Character_SubStates.Controlled)
+                ChosenCharacter CurChosenCharacter = playerProfiles[i];
+                if (CurChosenCharacter.ChosenPlayerSide != -1 && CurChosenCharacter.subState == Character_SubStates.Controlled)
                 {
-                    players.totalPlayers[playerProfiles[i].ChosenPlayerSide].characterProfile = playerProfiles[i].chosenCharacter;
-                   
-                    players.totalPlayers[playerProfiles[i].ChosenPlayerSide].Initialize(Character_SubStates.Controlled, playerProfiles[i].ChosenPlayerSide, playerProfiles[i].chosenAmplifier, players.availableIds[i]);
-                    players.AddUsedID(players.joystickNames[i]);
+                    players.totalPlayers[CurChosenCharacter.ChosenPlayerSide].characterProfile = CurChosenCharacter.chosenCharacter;
+                    Character_Base curCharacter = players.totalPlayers[CurChosenCharacter.ChosenPlayerSide];
+                    curCharacter.Initialize(Character_SubStates.Controlled, CurChosenCharacter.ChosenPlayerSide, CurChosenCharacter.chosenAmplifier, players.UsedID.Item1[i]);
                 }
                 else 
                 {

@@ -148,17 +148,26 @@ public class Character_HitController : MonoBehaviour
     }
     List<HitAnimationField> FilterBlockReactions(Attack_BaseProperties currentAttack)
     {
-        List<HitAnimationField> refField = characterTotalHitReactions.hitReactions;
-        for (int i = 0; i < refField.Count; i++)
+        List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.blockReactions);
+        List<HitAnimationField> prunedList = new List<HitAnimationField>();
+        for (int i = refField.Count-1; i >= 0; i--)
         {
             if (!(currentAttack.hitLevel.HasFlag(refField[i].hitLevel)))
             {
-                refField.Remove(refField[i]);
+                prunedList.Add(refField[i]);
                 continue;
             }
-            if(currentAttack.AttackAnims.attackType != HitBoxType.Low && refField[i].isLowReaction) 
+            if (currentAttack.AttackAnims.attackType != HitBoxType.Low && refField[i].isLowReaction)
             {
-                refField.Remove(refField[i]);
+                prunedList.Add(refField[i]);
+                continue;
+            }
+        }
+        foreach (HitAnimationField reaction in prunedList) 
+        {
+            if (refField.Contains(reaction)) 
+            {
+                refField.Remove(reaction);
             }
         }
         return refField;

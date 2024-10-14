@@ -204,12 +204,13 @@ public class CharacterSelect_Setup : MonoBehaviour
             player2.InitSideIterator();
             advidoryMessage.gameObject.SetActive(false);
             SideSelectionObject.SetActive(true);
+            AddControllerCounter();
+            CheckPlayerCount();
             if (players.UsedID.Item1.Count == 0)
             {
                 advidoryMessage.gameObject.SetActive(true);
                 player1.SetImageCPU();
                 player2.SetImageCPU();
-                CheckPlayerCount();
             }
             if (players.UsedID.Item1.Count == 1)
             {
