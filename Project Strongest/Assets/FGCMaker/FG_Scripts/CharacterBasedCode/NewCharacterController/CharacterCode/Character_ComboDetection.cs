@@ -16,7 +16,6 @@ public class Character_ComboDetection : MonoBehaviour
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
-
     private void Start()
     {
         canCheckMovement = false;
@@ -83,6 +82,10 @@ public class Character_ComboDetection : MonoBehaviour
     }
     void CompleteMoveListVerifier()
     {
+        if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.standBlockRef || _base._cStateMachine._playerState.current.State == _base._cStateMachine.crouchBlockRef)
+        {
+            return;
+        }
         if (ActiveFollowUpAttackCheck.Value != null)
         {
             ActiveContinuedMoveCheck();

@@ -375,6 +375,7 @@ public class Character_HitController : MonoBehaviour
                 }
             }
         }
+        _base._cComboCounter.SetComboStateFalse();
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             ClearRecoveryRoutine();
@@ -541,10 +542,10 @@ public class Character_HitController : MonoBehaviour
             if (currentCustomDamageField == null)
             {
                 yield return new WaitForEndOfFrame();
-                if (CheckNextAttackCatchPostLanding())
-                {
-                    yield break;
-                }
+                //if (CheckNextAttackCatchPostLanding())
+               // {
+                    //yield break;
+               // }
             }
             _base._cHitstun.EndHitStun();
             int animHash = Animator.StringToHash("Landing_After_AirHit");
@@ -557,10 +558,13 @@ public class Character_HitController : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
         }
 
+        #region Choosing Recov Anim
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
         yield return new WaitForEndOfFrame();
         _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
+        #endregion
+
         if (currentCustomDamageField == null)
         {
             if (CheckNextAttackCatchPostLanding())

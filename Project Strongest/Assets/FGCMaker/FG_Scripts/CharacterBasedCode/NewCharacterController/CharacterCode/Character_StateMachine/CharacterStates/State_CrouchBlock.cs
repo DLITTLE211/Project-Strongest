@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using FightingGame_FrameData;
 
 public class State_CrouchBlock : BaseState
 {
@@ -13,33 +14,28 @@ public class State_CrouchBlock : BaseState
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
         if (_base._cStateMachine._CheckBlockButton())
         {
-            _cAnim.PlayNextAnimation(cblockHash, _crossFade);
-           // _baseAnim.CrossFade(cblockHash, _crossFade, 0, 0); 
+            _cAnim.PlayNextAnimation(cblockHash, 0);
             await DeployBlock();
             await WaitToChargeSuperMobility();
         }
     }
     async Task WaitToChargeSuperMobility()
     {
-        float OneFrame = 1 / 60f;
-        float waitTime = 10 * OneFrame;
-        int timeInMS = (int)(waitTime * 1000f);
-        await Task.Delay(timeInMS);
+        int FourFrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 4);
+        await Task.Delay(FourFrameDelay);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
             _base._cComboDetection.superMobilityOption = true;
         }
         else
         {
-            _base._cAnimator.NullifyMobilityOption();
+            _base._cAnimator.NullifyMobilityOption(); 
         }
     }
     async Task DeployBlock()
     {
-        while (!_base._cAnimator.canBlock)
-        {
-            await Task.Yield();
-        }
+        int FourFrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 4);
+        await Task.Delay(FourFrameDelay);
         if (_base._cStateMachine._CheckBlockButton())
         {
             _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
@@ -48,13 +44,13 @@ public class State_CrouchBlock : BaseState
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (_base._cAnimator.canBlock && !_base._cStateMachine._CheckBlockButton())
+        if (_base._cStateMachine._CheckBlockButton() && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+        {
+            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
+        }
+        else
         {
             _base._cAnimator.canBlock = false;
-        }
-        if (_base._cAnimator._lastMovementState != lastMovementState.nullified)
-        {
-           // _base._cAnimator.NullifyMobilityOption();
         }
 
     }

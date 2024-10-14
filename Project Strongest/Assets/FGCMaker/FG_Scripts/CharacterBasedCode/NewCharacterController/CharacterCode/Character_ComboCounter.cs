@@ -15,6 +15,10 @@ public class Character_ComboCounter : MonoBehaviour
     Tween fadeTextTween;
     Sequence fadeTextOut;
     IEnumerator fadeTextRoutine;
+    [SerializeField] bool currentComboState;
+    [SerializeField] Color32 redColor = new Color32((byte)255f, (byte)69f, (byte)69f, (byte)255f);
+    [SerializeField] Color32 blueColor = new Color32((byte)69f, (byte)158f, (byte)255f, (byte)255f);
+
     public int CurrentHitCount
     {
         get { return _currentComboCount; }
@@ -26,6 +30,7 @@ public class Character_ComboCounter : MonoBehaviour
     }
     private void Start()
     {
+        currentComboState = true;
         SetComboProficiencyDictionary();
     }
     void SetComboProficiencyDictionary() 
@@ -56,11 +61,15 @@ public class Character_ComboCounter : MonoBehaviour
         fadeTextOut = null;
         fadeTextRoutine = null;
     }
+    public void SetComboStateFalse() 
+    {
+        currentComboState = false;
+    }
 
     public void SetStartComboCounter()
     {
         UpdateQualityText();
-        UpdateText();
+        UpdateText(Color.white);
     }
     public void ResetComboCounter()
     {
@@ -73,8 +82,17 @@ public class Character_ComboCounter : MonoBehaviour
             fadeTextTween.Kill();
             fadeTextTween = null;
         }
-        CurrentHitCount+= 1;
-        UpdateText();
+        Color32 textColor = Color.white;
+        if (currentComboState) 
+        {
+            textColor = redColor;
+        }
+        else
+        {
+            textColor = blueColor;
+        }
+        CurrentHitCount += 1;
+        UpdateText(textColor);
 
         DOTween.Complete(comboHolder);
         comboHolder.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -82,9 +100,10 @@ public class Character_ComboCounter : MonoBehaviour
     }
 
     #region UpdateComboCounter
-    void UpdateText() 
+    void UpdateText(Color32 comboColor) 
     {
         StopFadeRoutine();
+        _counterText.color = comboColor;
         string hitCount = CurrentHitCount <= 1 ? "HIT" : "HITS";
         if (CurrentHitCount == 0)
         {
@@ -142,6 +161,7 @@ public class Character_ComboCounter : MonoBehaviour
         {
             SetStartComboCounter();
             fadeTextRoutine = null;
+            currentComboState = true;
         });
     }
     public void StopFadeRoutine() 

@@ -62,6 +62,7 @@ public class Character_Base : MonoBehaviour
     [Header("________INPUT VARIABLES________")]
     public List<Character_ButtonInput> moveAxes;
     public List<Character_ButtonInput> attackButtons;
+    public Character_ButtonInput blockButton;
     [Space(20)]
 
     #endregion
@@ -359,7 +360,14 @@ public class Character_Base : MonoBehaviour
                 {
                     if (!_cSystemButtons._systemButtons.Contains(newButton))
                     {
-                        attackButtons.Add(newButton);
+                        if (newButton.Button_Name == "G")
+                        {
+                            blockButton = newButton;
+                        }
+                        else
+                        {
+                            attackButtons.Add(newButton);
+                        }
                     }
                 }
                 else
@@ -484,7 +492,7 @@ public class Character_Base : MonoBehaviour
     {
         if (!ReturnIfPaused() && activated)
         {
-            _cADetection.CheckButtonPressed();
+            _cADetection.CheckButtonPressed(attackButtons);
             _cADetection.CallReturnButton();
             _timer.TimerCountDown();
         }
@@ -560,7 +568,7 @@ public class Character_Base : MonoBehaviour
         {
             return null;
         }
-        return attackButtons[7];
+        return blockButton;
     }
     public Character_ButtonInput ReturnTechButton()
     {

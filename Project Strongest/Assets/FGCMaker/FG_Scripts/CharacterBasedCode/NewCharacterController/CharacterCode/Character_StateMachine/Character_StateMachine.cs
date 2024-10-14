@@ -66,6 +66,8 @@ public class Character_StateMachine : MonoBehaviour
         At(DashState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
+        At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
+        At(C_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
         At(AttackState, MoveState, new Predicate(() => At_2Move()));
 
@@ -472,6 +474,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _canRecover = _base._cAnimator._canRecover;
         bool isHit;
         bool lastAttackValue;
+        bool inBlockState = _playerState.current.State == standBlockRef || _playerState.current.State == crouchBlockRef;
         isHit = _base._cAnimator.isHit;
         lastAttackValue =checkAttackValue(lastAttackState.populated);
         if (_base._subState != Character_SubStates.Controlled)
@@ -480,7 +483,7 @@ public class Character_StateMachine : MonoBehaviour
         }
         else 
         {
-            bool fullcheck = !isHit && lastAttackValue && !_canRecover && notRecovering;
+            bool fullcheck = !isHit && lastAttackValue && !_canRecover && notRecovering && !inBlockState;
             return fullcheck;
         }
     }

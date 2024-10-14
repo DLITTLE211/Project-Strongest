@@ -1772,6 +1772,24 @@ MonoBehaviour:
   _side: 0
   moveAxes: []
   attackButtons: []
+  blockButton:
+    Button_Element:
+      _actionCategoryId: 0
+      _actionId: -1
+      _elementType: 0
+      _elementIdentifierId: -1
+      _axisRange: 0
+      _invert: 0
+      _axisContribution: 0
+      _keyboardKeyCode: 0
+      _modifierKey1: 0
+      _modifierKey2: 0
+      _modifierKey3: 0
+    Button_State:
+      _state: 0
+      directionalInput: 0
+    actionID: 0
+    Button_Name: 
   _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
   _extraMoveControls: []
   activationCall: 768
@@ -3784,7 +3802,6 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 0
   healthController: {fileID: 0}
-  currentAffliction: {fileID: 0}
   stunMeterColor:
     serializedVersion: 2
     key0: {r: 0.18507296, g: 0.9501373, b: 0.8394866, a: 1}
@@ -10955,7 +10972,6 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 0
   healthController: {fileID: 0}
-  currentAffliction: {fileID: 0}
   stunMeterColor:
     serializedVersion: 2
     key0: {r: 0.18507296, g: 0.9501373, b: 0.8394866, a: 1}
@@ -14172,11 +14188,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e07f7fdeb5cfb47aba5ef10f10fa54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _angleZ: 0
   _base: {fileID: 94923329}
   _hurtboxStateText: {fileID: 1160530143}
   curSize: 0
   newHurtboxType: 0
   groundCheck: 0
+  h_Markers:
+    topPoint: {fileID: 0}
+    centerPoint: {fileID: 0}
+    basePoint: {fileID: 0}
   hurtBoxesPositions: []
   collisionBox: {fileID: 953094821}
   reference: {fileID: 0}
@@ -15194,6 +15215,24 @@ MonoBehaviour:
   _side: 0
   moveAxes: []
   attackButtons: []
+  blockButton:
+    Button_Element:
+      _actionCategoryId: 0
+      _actionId: -1
+      _elementType: 0
+      _elementIdentifierId: -1
+      _axisRange: 0
+      _invert: 0
+      _axisContribution: 0
+      _keyboardKeyCode: 0
+      _modifierKey1: 0
+      _modifierKey2: 0
+      _modifierKey3: 0
+    Button_State:
+      _state: 0
+      directionalInput: 0
+    actionID: 0
+    Button_Name: 
   _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
   _extraMoveControls: []
   activationCall: 768
@@ -18187,6 +18226,13 @@ MonoBehaviour:
   _QualityText: {fileID: 918945923}
   comboHolder: {fileID: 1118025207}
   _comboProficiencyList: []
+  currentComboState: 0
+  redColor:
+    serializedVersion: 2
+    rgba: 4282729983
+  blueColor:
+    serializedVersion: 2
+    rgba: 4294942277
 --- !u!1 &1192763485
 GameObject:
   m_ObjectHideFlags: 0
@@ -18236,6 +18282,13 @@ MonoBehaviour:
   _QualityText: {fileID: 360568982}
   comboHolder: {fileID: 58170352}
   _comboProficiencyList: []
+  currentComboState: 0
+  redColor:
+    serializedVersion: 2
+    rgba: 4282729983
+  blueColor:
+    serializedVersion: 2
+    rgba: 4294942277
 --- !u!1 &1193655371
 GameObject:
   m_ObjectHideFlags: 0
@@ -20500,11 +20553,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e07f7fdeb5cfb47aba5ef10f10fa54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _angleZ: 0
   _base: {fileID: 993311525}
   _hurtboxStateText: {fileID: 714376321}
   curSize: 0
   newHurtboxType: 0
   groundCheck: 0
+  h_Markers:
+    topPoint: {fileID: 0}
+    centerPoint: {fileID: 0}
+    basePoint: {fileID: 0}
   hurtBoxesPositions: []
   collisionBox: {fileID: 1592021134}
   reference: {fileID: 0}
@@ -21006,6 +21064,7 @@ MonoBehaviour:
     usedStrings: []
   _gameModeSet:
     gameMode: 0
+  sideManager: {fileID: 0}
 --- !u!4 &1359521222
 Transform:
   m_ObjectHideFlags: 0
