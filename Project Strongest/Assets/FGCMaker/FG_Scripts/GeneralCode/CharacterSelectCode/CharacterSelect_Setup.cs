@@ -50,6 +50,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     public Transform upBound,downBound,leftBound,rightBound;
     GameModeSet currentSet;
     [SerializeField] private bool stageSelectCooldown;
+    Sequence DisplayMessageSequence;
     // Start is called before the first frame update
     void Start()
     {
@@ -558,7 +559,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                 {
                     if (SideSelectionObject.activeInHierarchy)
                     {
-                        sideController.UpdateControllerSide(currentController.ID == 0 ? player1 : player2, (int)currentController.xVal); 
+                        ChooseSide_Object curObject = currentController.ID == 0 ? player1 : player2;
+                        sideController.UpdateControllerSide(curObject, (int)currentController.xVal, DisplayObjectlapMessage); 
                     }
                     else
                     {
@@ -610,6 +612,25 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
             }
         }
+    }
+    public void DisplayObjectlapMessage()
+    {
+        advidoryMessage.gameObject.SetActive(true);
+        if (DisplayMessageSequence != null) 
+        {
+            DOTween.Kill(DisplayMessageSequence);
+            DisplayMessageSequence = null;
+        }
+        string message = "Players cannot choose same side";
+        advidoryMessage.text = $"<size=95>{message}";
+        DisplayMessageSequence = DOTween.Sequence();
+        DisplayMessageSequence.Append(advidoryMessage.DOFade(1f, 0f));
+        DisplayMessageSequence.Append(advidoryMessage.DOFade(0.99f, 2f));
+        DisplayMessageSequence.Append(advidoryMessage.DOFade(0f, 1.35f));
+        DisplayMessageSequence.OnComplete(() =>
+        {
+            advidoryMessage.gameObject.SetActive(false);
+        });
     }
     IEnumerator DelayResetStageBool() 
     {

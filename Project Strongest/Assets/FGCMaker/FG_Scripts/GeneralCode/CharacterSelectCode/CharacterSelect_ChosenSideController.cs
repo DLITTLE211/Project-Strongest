@@ -13,7 +13,7 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
     {
         canSwitch = true;
     }
-    public void UpdateControllerSide(ChooseSide_Object objectMoving, int direction) 
+    public void UpdateControllerSide(ChooseSide_Object objectMoving, int direction, Callback failFunc) 
     {
         if (canSwitch)
         {
@@ -39,6 +39,15 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
                     objectMoving.sideIterator--;
                 }
             }
+            if (objectMoving.sideIterator == 0 || objectMoving.sideIterator == 2)
+            {
+                if (sides[objectMoving.sideIterator].transform.childCount > 0)
+                {
+                    objectMoving.sideIterator = 1;
+                    failFunc();
+                    return;
+                }
+            }
             switch (objectMoving.sideIterator) 
             {
                 case 0:
@@ -58,6 +67,7 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
     }
     public void CloseChooseSideMenu(Callback func) 
     {
+
         chooseCharacterSelectObject.SetActive(false);
         func();
     }
