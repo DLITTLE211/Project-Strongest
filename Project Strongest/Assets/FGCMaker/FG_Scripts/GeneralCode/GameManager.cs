@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         players = CharacterSelect_LoadArena.curPlayerData;
+        players.totalPlayers.Clear();
         players.totalPlayers.Add(leftPlayer);
         players.totalPlayers.Add(rightPlayer);
         sideManager = GetComponent<Player_SideManager>();
