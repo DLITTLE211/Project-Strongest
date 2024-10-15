@@ -307,18 +307,23 @@ public class HurtBox : CollisionDetection
             hitCount = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties.AttackAnims._hitCount;
         }
         int curHit = 0;
-        if (Base_Target._cHitController.Recovering) 
+        if (!BlockedAttack)
         {
-            Base_Target._cHitController.ClearRecoveryRoutine();
-        }
-        if (currentHitProperties._moveType == MoveType.Super)
-        {
-            Base_Target._cHitController.ClearHitResponseRoutine();
             if (Base_Target._cHitController.Recovering)
             {
                 Base_Target._cHitController.ClearRecoveryRoutine();
             }
-            Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
+            if (currentHitProperties._moveType == MoveType.Super)
+            {
+
+                Base_Target._cHitController.ClearHitResponseRoutine();
+                if (Base_Target._cHitController.Recovering)
+                {
+                    Base_Target._cHitController.ClearRecoveryRoutine();
+                }
+                Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
+
+            }
         }
         if (Base_Attacker._cAttackTimer.FrameCountTimer <= 0.4f) 
         {

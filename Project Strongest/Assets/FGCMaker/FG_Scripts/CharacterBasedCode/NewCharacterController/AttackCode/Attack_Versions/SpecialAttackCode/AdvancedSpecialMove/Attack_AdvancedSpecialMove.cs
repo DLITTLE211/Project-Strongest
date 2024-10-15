@@ -122,7 +122,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
         if (property._moveType == MoveType.Super)
         {
-            HandleSuperMultipleAnimAttackInfo();
+            if (!blockedAttack)
+            {
+                HandleSuperMultipleAnimAttackInfo();
+            }
         }
         else
         {

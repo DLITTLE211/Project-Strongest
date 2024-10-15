@@ -28,43 +28,40 @@ public class Character_DamageCalculator : MonoBehaviour
     }
     public void TakeCustomDamage(CustomCallback callback = null)
     {
-        try
+        if (callback.customDamage.rawAttackDamage <= 0)
         {
-            _base.opponentPlayer._cComboCounter.OnHit_CountUp();
-            curRawDamage = callback.customDamage.rawAttackDamage;
-            /*if (CheckAfflictionState())
-            {
-                afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-            }*/
-            if (!CheckCounterHitState())
-            {
-                counterHitMult = 1;
-            }
-            float counterHitCalculation = (curRawDamage * counterHitMult) - curRawDamage;
-            float counterHitValue = counterHitCalculation <= 0 ? 1 : counterHitCalculation;
-            float defenseValue = _healtController.defenseValue / 100;
-            _base._cForce.SendKnockBackOnHit(callback.customDamage);
-            calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
-            calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
-            UpdateDamageText(calculatedDamage);
-            if (calculatedRecovDamage <= 0)
-            {
-                calculatedRecovDamage = 0;
-            }
-            if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
-            {
-                _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
-                _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-                _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
-            }
-            else
-            {
-                DeathCheck();
-            }
+            return;
         }
-        catch (StackOverflowException) 
+        _base.opponentPlayer._cComboCounter.OnHit_CountUp();
+        curRawDamage = callback.customDamage.rawAttackDamage;
+        /*if (CheckAfflictionState())
         {
-            Debug.Log("StackOverflow in Custom Damage");
+            afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
+        }*/
+        if (!CheckCounterHitState())
+        {
+            counterHitMult = 1;
+        }
+        float counterHitCalculation = (curRawDamage * counterHitMult) - curRawDamage;
+        float counterHitValue = counterHitCalculation <= 0 ? 1 : counterHitCalculation;
+        float defenseValue = _healtController.defenseValue / 100;
+        _base._cForce.SendKnockBackOnHit(callback.customDamage);
+        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
+        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
+        UpdateDamageText(calculatedDamage);
+        if (calculatedRecovDamage <= 0)
+        {
+            calculatedRecovDamage = 0;
+        }
+        if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
+        {
+            _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
+            _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+            _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
+        }
+        else
+        {
+            DeathCheck();
         }
     }
     public void SetVictoryHitState(bool state) 

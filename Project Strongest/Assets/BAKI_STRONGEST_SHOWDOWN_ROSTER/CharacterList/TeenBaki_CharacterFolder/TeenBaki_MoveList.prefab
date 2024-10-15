@@ -697,7 +697,7 @@ MonoBehaviour:
         blockStunValue: 8
         hitstopValue: 7
         blockStopValue: 2
-      hitLevel: 80
+      hitLevel: 144
       attackHashes: 0
       _meterRequirement: 3
       _meterAwardedOnHit: 0
@@ -3222,12 +3222,12 @@ MonoBehaviour:
         attackType: 2
         hb_placement: {x: 1.35, y: 0.6, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0.95, y: 0.55}
+        hb_size: {x: 0.95, y: 0.75}
         extendedHitBox: {fileID: 0}
         hurtType: 0
         hu_placement: {x: 1.35, y: 0.6, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 1.15, y: 0.6}
+        hu_size: {x: 1.15, y: 0.85}
         _frameData:
           init: 0
           startup: 17
