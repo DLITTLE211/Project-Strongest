@@ -27,7 +27,7 @@ public class Character_Health : MonoBehaviour
     }
     public bool TestIfDeadDamage(float damage)
     {
-        bool mainHealthIsZero = (health_Main.currentValue - damage) <= 0;
+           bool mainHealthIsZero = (health_Main.currentValue - damage) <= 0;
         float tenP = health_Main.maxValue * 0.1f;
         bool recoveryHealthIsTenP = health_Recov.currentValue <= (tenP);
         return mainHealthIsZero && recoveryHealthIsTenP;

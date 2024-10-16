@@ -27,7 +27,7 @@ public class Editor_BuildGameScript : MonoBehaviour
         {
             scenes = scenePaths,
             locationPathName = Path.Combine(buildFolder, $"{Application.productName}.exe"),
-            target =  BuildTarget.StandaloneWindows64,
+            target =  BuildTarget.StandaloneWindows,
             options = BuildOptions.CompressWithLz4HC
         };
 

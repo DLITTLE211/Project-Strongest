@@ -4311,7 +4311,7 @@ MonoBehaviour:
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
-            attackType: 1
+            attackType: 2
             hb_placement: {x: 1.5, y: 0.55, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
             hb_size: {x: 0.65, y: 0.75}
@@ -4537,9 +4537,9 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 4
           verticalKBP:
-            verticalKBP: 0
+            verticalKBP: 7
             Value: 8
-          KnockDown: 2
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0

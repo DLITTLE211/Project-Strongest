@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class Character_DamageCalculator : MonoBehaviour
 {
@@ -21,10 +22,12 @@ public class Character_DamageCalculator : MonoBehaviour
     [SerializeField] private TMP_Text _damageText;
     float damageTextAmount;
     bool victoryHit;
+    bool allowDeathCheck;
     #region Damage Functions
     private void Start()
     {
         victoryHit = false;
+        allowDeathCheck = GameManager.instance._gameModeSet.gameMode != GameMode.Training;
     }
     public void TakeCustomDamage(CustomCallback callback = null)
     {
@@ -53,15 +56,16 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
+        bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
+        if (isDeadOnHit && allowDeathCheck && !victoryHit)
+        {
+            DeathCheck();
+        }
+        else
         {
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
             _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
-        }
-        else
-        {
-            DeathCheck();
         }
     }
     public void SetVictoryHitState(bool state) 
@@ -119,7 +123,12 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
+        bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
+        if (isDeadOnHit && allowDeathCheck && !victoryHit )
+        {
+            DeathCheck();
+        }
+        else
         {
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
@@ -128,10 +137,6 @@ public class Character_DamageCalculator : MonoBehaviour
                 _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.hitstunValue, calculatedScaling, false);
             }
             ApplyScalingForNextAttack(currentAttack);
-        }
-        else
-        {
-            DeathCheck();
         }
     }
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
@@ -150,15 +155,16 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = 0;
         }
-        if (!_healtController.TestIfDeadDamage(calculatedDamage) && !victoryHit)
+        bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
+        if (isDeadOnHit && allowDeathCheck && !victoryHit)
+        {
+            DeathCheck();
+        }
+        else
         {
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
             _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
-        }
-        else
-        {
-            DeathCheck();
         }
     }
     #endregion
