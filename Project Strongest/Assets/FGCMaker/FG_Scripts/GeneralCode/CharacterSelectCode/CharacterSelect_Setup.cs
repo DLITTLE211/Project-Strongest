@@ -64,6 +64,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         CursorController(_player1_Cursor);
         CursorController(_player2_Cursor);
     }
+    
     public void SetListeners() 
     {
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
@@ -188,6 +189,10 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
 
     }
+    void SetCursorStartPosition(Transform cursor, float xPos) 
+    {
+        cursor.localPosition = new Vector3(xPos, cursor.transform.localPosition.y, cursor.localPosition.z);
+    }
     public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers, GameModeSet set)
     {
         SetListeners();
@@ -197,6 +202,8 @@ public class CharacterSelect_Setup : MonoBehaviour
         players = _characterSelectplayers;
         currentSet = set;
         _stageSelecter.ResetValues();
+        SetCursorStartPosition(_player1_Cursor.transform, -270f);
+        SetCursorStartPosition(_player2_Cursor.transform, 470f);
         if (set.gameMode == GameMode.Versus)
         {
             _player1_Cursor.UnlockCharacterChoice();
@@ -565,8 +572,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                     else
                     {
-                        float xVal = currentController.xVal * 3;
-                        float yVal = currentController.yVal * 3;
+                        float xVal = currentController.xVal * 10;
+                        float yVal = currentController.yVal * 10;
                         currentController.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
                         if (HitHeightBound(currentController.cursorObject.transform))
                         {

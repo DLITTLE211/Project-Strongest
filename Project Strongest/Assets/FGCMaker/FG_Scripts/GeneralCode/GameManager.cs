@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         _stopWatchController = GetComponent<MainGame_Timer>();
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
-        SetTargetFrameRate();
         if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainGame_Arena"));
@@ -94,10 +93,6 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
-    }
-    public void SetTargetFrameRate(int frameRate = 60) 
-    {
-        Application.targetFrameRate = frameRate;
     }
     public void LoadStageAsset()
     {

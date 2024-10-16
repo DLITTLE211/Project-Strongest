@@ -32,6 +32,7 @@ public class Menu_Manager : MonoBehaviour
     [SerializeField] private GameObject exitObject;
     private void Start()
     {
+        Application.targetFrameRate = 60;
         DontDestroyOnLoad(this);
         instance = this;
         SetTitlePage();
