@@ -6657,6 +6657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9daf91e02a3150d4fa753ccc5a58d568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 993311525}
   thisPosition:
     CollisionDetectionTransform: {fileID: 475772376}
     modelTransform: {fileID: 475772376}
@@ -8813,9 +8814,8 @@ MonoBehaviour:
   smallHitRecovering: 0
   bigHitRecovering: 0
   airRecoverPossible: 0
-  crouchBlocking: 0
-  standingBlocking: 0
   _isRecovering: 0
+  blockedAttack: 0
 --- !u!1 &615901882
 GameObject:
   m_ObjectHideFlags: 0
@@ -15693,9 +15693,8 @@ MonoBehaviour:
   smallHitRecovering: 0
   bigHitRecovering: 0
   airRecoverPossible: 0
-  crouchBlocking: 0
-  standingBlocking: 0
   _isRecovering: 0
+  blockedAttack: 0
 --- !u!1 &1016043899
 GameObject:
   m_ObjectHideFlags: 0
@@ -18446,6 +18445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9daf91e02a3150d4fa753ccc5a58d568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 94923329}
   thisPosition:
     CollisionDetectionTransform: {fileID: 405498831}
     modelTransform: {fileID: 0}

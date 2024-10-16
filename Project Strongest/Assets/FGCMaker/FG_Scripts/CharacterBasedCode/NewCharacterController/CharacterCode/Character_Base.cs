@@ -145,6 +145,7 @@ public class Character_Base : MonoBehaviour
 
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
     private Dictionary<HitPointCall, Callback<CustomCallback>> mainCallbackDictionary = new Dictionary<HitPointCall, Callback<CustomCallback>>();
+    public bool callSource;
     public bool awaitCondition;
 
     [SerializeField]
@@ -442,7 +443,9 @@ public class Character_Base : MonoBehaviour
             Callback<CustomCallback> dictionaryFunc = null;
             if (mainCallbackDictionary.TryGetValue(callback.customCall , out dictionaryFunc)) 
             {
+                callSource = true;
                 dictionaryFunc(callback);
+                callSource = false;
                 return;
             }
         }
@@ -451,7 +454,9 @@ public class Character_Base : MonoBehaviour
             Callback<CustomCallback> dictionaryFunc = null;
             if (mainCallbackDictionary.TryGetValue(waitingCheck.awaitingCheck, out dictionaryFunc))
             {
+                callSource = true;
                 dictionaryFunc(callback);
+                callSource = false;
                 return;
             }
         }

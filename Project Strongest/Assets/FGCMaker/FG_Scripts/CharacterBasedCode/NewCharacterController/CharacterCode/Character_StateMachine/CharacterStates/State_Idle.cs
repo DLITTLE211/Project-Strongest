@@ -129,7 +129,7 @@ public class State_Idle : BaseState
     {
         _base._cHurtBox.SetHurboxState();
         _cAnim.ClearLastAttack();
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5 && _base._cAnimator.lastAttack == null)
         {
             _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
             _base._aManager.ResetMoveHierarchy();

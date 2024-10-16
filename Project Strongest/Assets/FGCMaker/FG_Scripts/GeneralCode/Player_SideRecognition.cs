@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class Player_SideRecognition : MonoBehaviour
 {
+    public Character_Base _base;
     public Character_Position thisPosition;
     private void Update()
     {

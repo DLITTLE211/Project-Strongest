@@ -8,6 +8,7 @@ public class Player_SideManager : MonoBehaviour
     public Player_SideRecognition _p1Position;
     public Player_SideRecognition _p2Position;
     public HitPointCall sideCall;
+
     private void Start()
     {
         StartCoroutine(OnStartSideSwitch());
@@ -18,13 +19,37 @@ public class Player_SideManager : MonoBehaviour
         yield return new WaitUntil(() => _p2Position.thisPosition.ModelTransform != null);
         SetStartingFaceState();
     }
-    public void ForceSideSwitch(CustomCallback callback = null) 
+    public void ForceSideSwitch(CustomCallback callback = null)
     {
-        SetStartingFaceState();
+        if (_p1Position._base.callSource) 
+        {
+            SwapPlayerSide(_p2Position._base);
+        }
+        else if (_p2Position._base.callSource)
+        {
+            SwapPlayerSide(_p1Position._base);
+        }
+        CheckPositionState();
+    }
+    void SwapPlayerSide(Character_Base target)
+    {
+        float newXPos = 0;
+        if (target.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            newXPos = target.opponentPlayer.myRb.position.x - 1f;
+        }
+        else 
+        {
+            newXPos = target.opponentPlayer.myRb.position.x + 1f;
+        }
+        target.myRb.position = new Vector3(newXPos, target.myRb.position.y, target.myRb.position.z);
     }
     private void Update()
     {
-       // CheckPlayerPositions();
+        if (Input.GetKeyDown(KeyCode.T)) 
+        {
+            ForceSideSwitch();
+        }
     }
     public void CheckPlayerPositions() 
     {
