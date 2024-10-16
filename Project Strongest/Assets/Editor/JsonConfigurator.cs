@@ -54,41 +54,17 @@ public static class JsonConfigurator
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
-            sb.Append("\"displayName\": \"");
+            sb.Append("\"ConfigGameName\": \"");
             sb.Append(displayName);
             sb.Append("\",");
             sb.Append("\"executable\": \"");
             sb.Append(displayName);
             sb.Append(".exe\",");
-            sb.Append("\"configurations\": {");
-
-            if (hasVerticalScreen)
-            {
-                sb.Append("\"verticalScreen\": [\"");
-                sb.Append(verticalScreenParameters);
-                sb.Append("\"]");
-            }
-            if (hasVerticalScreen && hasMobile2x3)
-            {
-                sb.Append(",");
-            }
-            if (hasMobile2x3)
-            {
-                sb.Append("\"mobile2x3\": [\"");
-                sb.Append(hasMobile2x3Parameters);
-                sb.Append("\"]");
-            }
-            sb.Append("},");
 
             if (is32BitBuild)
             {
                 sb.Append("\"is32BitBuild\": " + is32BitBuild.ToString().ToLower() + ",");
             }
-
-            sb.Append("\"juristiction\": \"");
-            sb.Append(juristiction);
-            sb.Append("\", ");
-            sb.Append($"\"gameType\": \"{gameType}\"");
             sb.Append("}");
 
             File.WriteAllText(configRootPath, sb.ToString());

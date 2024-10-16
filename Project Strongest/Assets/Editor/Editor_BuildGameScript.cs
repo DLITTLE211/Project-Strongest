@@ -5,30 +5,29 @@ using UnityEditor;
 using System;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 #if UNITY_EDITOR
 public class Editor_BuildGameScript : MonoBehaviour
 {
-    [MenuItem("Build/Make New Game Build")]
+    [MenuItem("Build/Generate Game Build")]
     public static void PerformBuild()
     {
         PlayerSettings.SplashScreen.show = false;
         /* Get Build Folder Path */
         var rootFolder = $"{Application.dataPath}/../";
         DateTime currentTimeOfGeneration = DateTime.Now;
-        string date = $"{currentTimeOfGeneration.Month}_{currentTimeOfGeneration.Day}_{currentTimeOfGeneration.Year}";
-        var buildFolder = Path.Combine(rootFolder, $"BAKI_TESTBUILD_{date}");
+        string date = $"{currentTimeOfGeneration.Month}_{currentTimeOfGeneration.Day}";
+        var buildFolder = Path.Combine(rootFolder, $"BAKI_SS_TESTBUILD_{date}");
         /* Delete existing Build Folder if it exists */
         FileUtil.DeleteFileOrDirectory(buildFolder);
 
         var scenePaths = EditorBuildSettings.scenes.Select(scene => scene.path).ToArray();
+
         var buildPlayerOptions = new BuildPlayerOptions
         {
             scenes = scenePaths,
             locationPathName = Path.Combine(buildFolder, $"{Application.productName}.exe"),
-            target = JsonConfigurator.Is32BitBuild() ? BuildTarget.StandaloneWindows : BuildTarget.StandaloneWindows64,
+            target =  BuildTarget.StandaloneWindows64,
             options = BuildOptions.CompressWithLz4HC
         };
 
@@ -45,16 +44,6 @@ public class Editor_BuildGameScript : MonoBehaviour
             Debug.Log("Build Failed.");
             throw new Exception($"Build Failed. Errors: {summary.totalErrors} Warnings: {summary.totalWarnings}");
         }
-
-       /* string configRootPath = JsonConfigurator.GetConfigRootPath();
-
-        if (!File.Exists(configRootPath))
-        {
-            //JsonConfigurator.CreateJsonConfig();
-        }*/
-
-        //FileUtil.CopyFileOrDirectory(configRootPath, Path.Combine(buildFolder, JsonConfigurator.configJson));
-        //BuildAndCopyAssetBundles(rootFolder, buildFolder);
     }
 }
 #endif
