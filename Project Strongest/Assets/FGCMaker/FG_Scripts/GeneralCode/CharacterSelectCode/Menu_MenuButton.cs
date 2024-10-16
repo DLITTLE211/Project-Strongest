@@ -45,6 +45,7 @@ public class Menu_MenuButton : Button
         buttonNameText.DOFade(valuePoint, _time);
     }
 }
+#if UNITY_EDITOR
 [CustomEditor(typeof(Menu_MenuButton))]
 public class UIButtonEditor : Editor
 {
@@ -53,6 +54,7 @@ public class UIButtonEditor : Editor
         base.OnInspectorGUI();
     }
 }
+#endif
 [Serializable]
 public class MenuButtonHolder
 {

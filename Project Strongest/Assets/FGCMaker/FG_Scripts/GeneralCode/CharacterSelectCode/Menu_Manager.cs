@@ -29,6 +29,7 @@ public class Menu_Manager : MonoBehaviour
     Transform _titleTextTransform;
     public static Menu_Manager instance;
     public static bool subsequentLoad;
+    [SerializeField] private GameObject exitObject;
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -48,10 +49,32 @@ public class Menu_Manager : MonoBehaviour
         {
             if (menuGameState == OutOfMatchGameState.Title)
             {
-                if (_mainMenuPlayer.GetAnyButton())
-                {
-                    ActivateMainMenuPage();
-                }
+                TitleButtonFunction();
+            }
+        }
+    }
+    void TitleButtonFunction() 
+    {
+        if (_mainMenuPlayer.GetButtonDown("Select"))
+        {
+            if (exitObject.activeInHierarchy)
+            {
+                Application.Quit();
+            }
+            else
+            {
+                ActivateMainMenuPage();
+            }
+        }
+        if (_mainMenuPlayer.GetButtonDown("Cancel"))
+        {
+            if (exitObject.activeInHierarchy)
+            {
+                exitObject.SetActive(false);
+            }
+            else
+            {
+                exitObject.SetActive(true);
             }
         }
     }
