@@ -196,6 +196,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         CharacterSelectObject.SetActive(false);
         players = _characterSelectplayers;
         currentSet = set;
+        _stageSelecter.ResetValues();
         if (set.gameMode == GameMode.Versus)
         {
             _player1_Cursor.UnlockCharacterChoice();

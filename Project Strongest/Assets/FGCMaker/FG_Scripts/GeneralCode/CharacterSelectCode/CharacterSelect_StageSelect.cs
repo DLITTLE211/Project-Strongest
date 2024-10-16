@@ -23,6 +23,11 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     public bool allowStageSelect;
     public bool allowRoundSelect;
     GameMode _mode;
+    public void ResetValues() 
+    {
+        allowStageSelect = false;
+        allowRoundSelect = false;
+    }
     public void ActivateRoundSelector(GameMode _curGameMode)
     {
         _mode = _curGameMode;
