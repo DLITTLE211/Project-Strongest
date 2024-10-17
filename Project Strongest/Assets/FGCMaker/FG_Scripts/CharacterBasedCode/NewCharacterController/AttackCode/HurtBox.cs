@@ -259,21 +259,21 @@ public class HurtBox : CollisionDetection
         {
             CounterMoveProperty = Base_Attacker._cAnimator.lastAttack;
         }
-
         if (currentHitbox.HBType != HitBoxType.nullified)
         {
             Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
             currentAttack.hitConnected = true;
-            Base_Attacker._cComboCounter.OnHit_CountUp();
             Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
             //await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
             Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.attackMainStunValues.hitstunValue);
             //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
             currentHitbox.DestroyHitbox(currentHitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         }
-
         endingFunction();
         endingFunction = null;
+        Base_Target._cHitboxManager.DisableCurrentHitbox();
+        Base_Target._cAnimator.ClearLastAttack();
+        Base_Target._cAnimator.SetCanTransitionIdle(true);
     }
     void ReceiveParryData() 
     {

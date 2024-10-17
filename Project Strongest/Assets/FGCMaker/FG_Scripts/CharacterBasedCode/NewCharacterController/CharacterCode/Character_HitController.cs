@@ -428,17 +428,17 @@ public class Character_HitController : MonoBehaviour
         {
             ClearRecoveryRoutine();
             _isRecovering = true;
-            if (currentProperty != null)
+            if (currentCustomDamageField != null)
+            {
+                HurtBoxType landingBoxType = currentCustomDamageField.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
+                _base._cHurtBox.SetHurboxState(landingBoxType);
+                recoverRoutine = DoRecovery(currentCustomDamageField.KnockDown, curField, false);
+            }
+            else if (currentProperty != null)
             {
                 HurtBoxType landingBoxType = currentProperty.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
                 _base._cHurtBox.SetHurboxState(landingBoxType);
                 recoverRoutine = DoRecovery(currentProperty.KnockDown, curField,false);
-            }
-            else if(currentCustomDamageField != null)
-            {
-                HurtBoxType landingBoxType = currentCustomDamageField.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
-                _base._cHurtBox.SetHurboxState(landingBoxType);
-                recoverRoutine = DoRecovery(currentCustomDamageField.KnockDown, curField,false);
             }
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
             StartCoroutine(recoverRoutine);

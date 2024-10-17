@@ -462,7 +462,7 @@ public class Character_StateMachine : MonoBehaviour
     bool ToAttackState()
     {
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
-        bool _canRecover = _base._cAnimator._canRecover;
+        bool _canRecover = !_base._cAnimator._canRecover;
         bool isHit;
         bool lastAttackValue;
         bool inBlockState = _playerState.current.State == standBlockRef || _playerState.current.State == crouchBlockRef;
@@ -474,7 +474,7 @@ public class Character_StateMachine : MonoBehaviour
         }
         else 
         {
-            bool fullcheck = !isHit && lastAttackValue && !_canRecover && notRecovering && !inBlockState;
+            bool fullcheck = !isHit && lastAttackValue && _canRecover && notRecovering && !inBlockState;
             return fullcheck;
         }
     }
