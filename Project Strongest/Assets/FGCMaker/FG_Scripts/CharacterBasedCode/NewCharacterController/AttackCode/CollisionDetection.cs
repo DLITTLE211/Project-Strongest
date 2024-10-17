@@ -244,6 +244,7 @@ public class CollisionDetection : MonoBehaviour
         {
             hurtbox.SetHurtBoxSize(0, 0, true);
         }
+        _hitbox.hitboxProperties.hitLanded = false;
     }
 
     public void ClearAdditionalHit(HitBox _hitbox)

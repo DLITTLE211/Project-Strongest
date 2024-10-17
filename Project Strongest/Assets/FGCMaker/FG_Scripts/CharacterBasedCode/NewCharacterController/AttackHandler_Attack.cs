@@ -75,6 +75,11 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public void GetPlacementLocation(Character_Base curBase)
     {
+        if (curBase._cHitboxManager.GetActiveHitBox().hitboxProperties?.InputTimer != null)
+        {
+            curBase._cHitboxManager.DisableCurrentHitbox();
+               character._cHitboxManager.IterateHitBox();
+        }
         HitBox newHitBox = curBase._cHitboxManager.GetActiveHitBox();
 
         if (HitBox != null)

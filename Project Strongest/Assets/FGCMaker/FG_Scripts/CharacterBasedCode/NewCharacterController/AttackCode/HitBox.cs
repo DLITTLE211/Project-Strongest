@@ -51,8 +51,9 @@ public class HitBox : CollisionDetection
                 if (HBType != HitBoxType.nullified)
                 {
                     hitboxProperties.hitLanded = true;
-                    SendHitStateAndHurtBox(this, c.GetComponentInParent<HurtBox>(),target, () => ClearAdditionalHit(this));
                     allowHitCheck = false;
+                    SendHitStateAndHurtBox(this, c.GetComponentInParent<HurtBox>(),target, () => ClearAdditionalHit(this));
+                    
                 }
 
                 DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);

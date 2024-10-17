@@ -2262,7 +2262,7 @@ MonoBehaviour:
                 blockStunValue: 8
                 hitstopValue: 6
                 blockStopValue: 1
-              hitLevel: 68
+              hitLevel: 72
               attackHashes: 0
               _meterRequirement: 0
               _meterAwardedOnHit: 5
@@ -2304,7 +2304,7 @@ MonoBehaviour:
                     awaitEnum:
                       keyRef: 0
                       awaitingCheck: 0
-                    Force: 2
+                    Force: 1.25
                     projectileSpeed: 0
                     camPos: {x: 0, y: 0, z: 0}
                     camRotation: {x: 0, y: 0, z: 0}
@@ -2337,7 +2337,7 @@ MonoBehaviour:
               hitConnected: 0
               lateralKBP:
                 lateralKBP: 3
-                Value: 4
+                Value: 6
               verticalKBP:
                 verticalKBP: 1
                 Value: 2
@@ -3959,7 +3959,7 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 0
+            verticalKBP: 2
             Value: 7
           KnockDown: 2
         attackInputState:
@@ -5660,7 +5660,7 @@ MonoBehaviour:
             blockStunValue: 5
             hitstopValue: 6
             blockStopValue: 3
-          hitLevel: 68
+          hitLevel: 72
           attackHashes: 0
           _meterRequirement: 0
           _meterAwardedOnHit: 7

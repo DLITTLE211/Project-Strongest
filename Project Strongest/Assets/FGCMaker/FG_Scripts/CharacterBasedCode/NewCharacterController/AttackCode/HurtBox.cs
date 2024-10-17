@@ -239,7 +239,7 @@ public class HurtBox : CollisionDetection
     }
     #endregion
 
-    public void ReceieveHitBox(HitBox _hitbox, Transform _target,Callback endFunc)
+    public void ReceieveHitBox(HitBox _hitbox, Transform _target, Callback endFunc)
     {
         currentHitbox = _hitbox;
         currentHitProperties = currentHitbox.hitboxProperties;
