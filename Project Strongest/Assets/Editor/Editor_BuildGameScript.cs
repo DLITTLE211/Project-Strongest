@@ -46,11 +46,5 @@ public class Editor_BuildGameScript : MonoBehaviour
             throw new Exception($"Build Failed. Errors: {summary.totalErrors} Warnings: {summary.totalWarnings}");
         }
     }
-    [MenuItem("Build/TestFolderPath")]
-    public static void TestFolderPath()
-    {
-        string FolderDestination = "D:/GameDev/BAKI_StrongestShowdown_Builds";
-        Debug.Log($"{FolderDestination}/../");
-    }
 }
 #endif

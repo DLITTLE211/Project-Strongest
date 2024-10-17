@@ -55,6 +55,7 @@ public class Character_Base : MonoBehaviour
     public Player player;
     public int _side;
     bool activated;
+    public bool ACTIVATED { get { return activated; } }
     [Space(20)]
     #endregion
 

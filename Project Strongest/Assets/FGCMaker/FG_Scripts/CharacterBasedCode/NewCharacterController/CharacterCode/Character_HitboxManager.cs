@@ -49,8 +49,12 @@ public class Character_HitboxManager : MonoBehaviour
         return currentActiveHitbox;
     }
     public void DisableCurrentHitbox()
-    {
-        totalHitBoxes[hitBoxIndex].hitboxProperties.AttackAnims.extendedHitBox.SetHurtBoxSize(0f, 0f, true);
+    { 
+        Attack_BaseProperties baseProperty = totalHitBoxes[hitBoxIndex].hitboxProperties;
+        if (baseProperty != null) 
+        {
+            baseProperty.AttackAnims?.extendedHitBox?.SetHurtBoxSize(0f, 0f, true);
+        }
         totalHitBoxes[hitBoxIndex].DestroyHitbox(totalHitBoxes[hitBoxIndex]);
     }
 }

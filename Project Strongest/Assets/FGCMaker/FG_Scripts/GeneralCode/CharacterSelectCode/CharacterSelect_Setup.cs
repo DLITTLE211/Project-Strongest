@@ -203,7 +203,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         currentSet = set;
         _stageSelecter.ResetValues();
         SetCursorStartPosition(_player1_Cursor.transform, -270f);
-        SetCursorStartPosition(_player2_Cursor.transform, 365f);
+        SetCursorStartPosition(_player2_Cursor.transform, 335f);
         if (set.gameMode == GameMode.Versus)
         {
             _player1_Cursor.UnlockCharacterChoice();
