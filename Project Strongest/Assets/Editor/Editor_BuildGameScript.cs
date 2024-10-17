@@ -12,9 +12,10 @@ public class Editor_BuildGameScript : MonoBehaviour
     [MenuItem("Build/Generate Game Build")]
     public static void PerformBuild()
     {
+        string FolderDestination = "D:/GameDev/BAKI_StrongestShowdown_Builds";
         PlayerSettings.SplashScreen.show = false;
         /* Get Build Folder Path */
-        var rootFolder = $"{Application.dataPath}/../";
+        var rootFolder = $"{FolderDestination}/";
         DateTime currentTimeOfGeneration = DateTime.Now;
         string date = $"{currentTimeOfGeneration.Month}_{currentTimeOfGeneration.Day}";
         var buildFolder = Path.Combine(rootFolder, $"BAKI_SS_TESTBUILD_{date}");
@@ -44,6 +45,12 @@ public class Editor_BuildGameScript : MonoBehaviour
             Debug.Log("Build Failed.");
             throw new Exception($"Build Failed. Errors: {summary.totalErrors} Warnings: {summary.totalWarnings}");
         }
+    }
+    [MenuItem("Build/TestFolderPath")]
+    public static void TestFolderPath()
+    {
+        string FolderDestination = "D:/GameDev/BAKI_StrongestShowdown_Builds";
+        Debug.Log($"{FolderDestination}/../");
     }
 }
 #endif
