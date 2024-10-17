@@ -400,6 +400,11 @@ public class AttackHandler_Attack : AttackHandler_Base
                             {
                                 Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
                                 character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
+                                if (customHitboxCallBacks[0].awaitEnum.keyRef != WaitingEnumKey.NA) 
+                                {
+                                    customHitboxCallBacks.RemoveAt(0);
+                                    yield break;
+                                }
                                 customHitboxCallBacks.RemoveAt(0);
                             }
                         }
