@@ -605,7 +605,7 @@ MonoBehaviour:
               verticalKBP: 0
               Value: 0
             KnockDown: 0
-        - hitFramePoints: 65
+        - hitFramePoints: 72
           call: 2
           hitFrameBool: 0
           awaitEnum:
@@ -635,7 +635,7 @@ MonoBehaviour:
               verticalKBP: 2
               Value: 5
             KnockDown: 0
-        - hitFramePoints: 65
+        - hitFramePoints: 72
           call: 4
           hitFrameBool: 0
           awaitEnum:
@@ -3325,7 +3325,7 @@ MonoBehaviour:
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 0.85, y: 0.75}
         extendedHitBox: {fileID: 0}
-        hurtType: 7
+        hurtType: 0
         hu_placement: {x: 1.35, y: -0.55, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
         hu_size: {x: 0.95, y: 0.85}

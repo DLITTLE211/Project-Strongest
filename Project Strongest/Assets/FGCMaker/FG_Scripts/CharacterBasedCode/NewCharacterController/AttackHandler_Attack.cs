@@ -425,8 +425,8 @@ public class AttackHandler_Attack : AttackHandler_Base
                 yield return new WaitForSeconds(waitTime);
             }
         }
-        Attack_BaseProperties thisAttack = HitBox.hitboxProperties;
-        if (thisAttack.InputTimer == null) 
+        Attack_BaseProperties thisAttack = HitBox?.hitboxProperties;
+        if (thisAttack?.InputTimer == null) 
         {
             thisAttack = character._cAnimator.lastAttack;
         }
