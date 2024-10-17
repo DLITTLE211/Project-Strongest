@@ -421,7 +421,11 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
         }
         Attack_BaseProperties thisAttack = HitBox.hitboxProperties;
-        if (thisAttack != null)
+        if (thisAttack.InputTimer == null) 
+        {
+            thisAttack = character._cAnimator.lastAttack;
+        }
+        if (thisAttack.InputTimer != null)
         {
             if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
             {
