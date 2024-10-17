@@ -61,10 +61,10 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedRecovDamage = 0;
         }
         bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
-        isDead = isDeadOnHit;
         if (isDeadOnHit && allowDeathCheck && !victoryHit && callback.customDamage.isFinalAttack)
         {
-            
+
+            isDead = isDeadOnHit;
             DeathCheck();
             _base._cHitController.DeathHitDetect(null,callback.customDamage);
         }
@@ -131,9 +131,9 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedRecovDamage = 0;
         }
         bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
-        isDead = isDeadOnHit;
         if (isDeadOnHit && allowDeathCheck && !victoryHit )
         {
+            isDead = isDeadOnHit;
             DeathCheck();
             _base._cHitController.DeathHitDetect(currentAttack, null);
         }
@@ -165,9 +165,9 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedRecovDamage = 0;
         }
         bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
-        isDead = isDeadOnHit;
         if (isDeadOnHit && allowDeathCheck && !victoryHit)
         {
+            isDead = isDeadOnHit;
             DeathCheck();
             _base._cHitController.DeathHitDetect(currentAttack, null);
         }
