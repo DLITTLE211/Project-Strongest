@@ -47,6 +47,10 @@ public abstract class BaseState : IState
             allAnimationNames.Add(_base.characterProfile.AllCharacterAnimations[i].name);
         }
     }
+    public void ForceIdleAnimPlay()
+    {
+        _cAnim.PlayNextAnimation(groundIdleHash,0);
+    }
     public virtual void OnEnter() {}
     public virtual void OnStay() {}
     public virtual void OnRecov() {}

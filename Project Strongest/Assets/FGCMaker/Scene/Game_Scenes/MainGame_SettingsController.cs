@@ -14,9 +14,9 @@ public class MainGame_SettingsController : MonoBehaviour
     }
     public void SetActiveButton(GameObject _object) 
     {
-        if (_eventSystem) 
+        if (_eventSystem)
         {
-                _eventSystem.SetSelectedGameObject(_object);
+            _eventSystem.SetSelectedGameObject(_object);
         }
     }
     public virtual void SetTeleportPositions()

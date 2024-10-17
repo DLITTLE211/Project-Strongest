@@ -122,14 +122,14 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
         if (property._moveType == MoveType.Super)
         {
-            if (!blockedAttack)
+            if (!blockedAttack && !_curBase.opponentPlayer._cDamageCalculator.isDead)
             {
                 HandleSuperMultipleAnimAttackInfo();
             }
         }
         else
         {
-            if (property._moveType == MoveType.Counter ^ property._moveType == MoveType.CommandGrab)
+            if (property._moveType == MoveType.Counter ^ property._moveType == MoveType.CommandGrab && !_curBase.opponentPlayer._cDamageCalculator.isDead)
             {
                 HandleSubAnimAttackInfo();
             }

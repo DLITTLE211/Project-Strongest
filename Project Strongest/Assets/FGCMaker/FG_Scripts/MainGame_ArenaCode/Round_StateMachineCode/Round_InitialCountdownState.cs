@@ -17,15 +17,17 @@ public class Round_InitialCountdownState : Round_BaseState
     
     public async override void OnEnter()
     {
+        GameManager.instance.stopWatchController.tickDownStopWatch = false;
+        GameManager.instance.stopWatchController.SetStartTimerValues();
+        GameManager.instance.settingsController.SetTeleportPositions();
+        await Task.Delay(WaitingTime * 75);
         for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
         {
             GameManager.instance.players.totalPlayers[i].InitialReset();
         }
-        GameManager.instance.settingsController.SetTeleportPositions();
+        GameManager.instance.winningCharacter = null;
         await Task.Delay(WaitingTime * 100);
-        GameManager.instance.stopWatchController.SetStartTimerValues();
         countDownText.DOFade(1f, 0f);
-        GameManager.instance.stopWatchController.tickDownStopWatch = false;
         countDownText.text = "";
         countDownText.gameObject.SetActive(true);
         await CountDownTask();

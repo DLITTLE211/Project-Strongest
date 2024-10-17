@@ -214,6 +214,7 @@ public class Character_Base : MonoBehaviour
         _cComboDetection.SetAnimator(chosenAnimator);
         _cHitstun.SetAnimator(chosenAnimator);
         _cAnimator.enabled = true;
+        _cDamageCalculator.SetAllowDeathCheck();
         _cHurtBox.SetMarkers(_cAnimator.ReturnMarkers());
         _cHitController.SetHitReactions(chosenAnimator);
         _cAnimator.myAnim.enabled = true;
@@ -413,8 +414,9 @@ public class Character_Base : MonoBehaviour
     }
     #endregion
 
-    public void InitialReset()
+    public async void InitialReset()
     {
+        await ResetPlayerOnTeleport();
         _cDamageCalculator.SetVictoryHitState(false);
         _cSuperMeter.SetStartValue();
         _cHealth.SetStartingHealthValues();
@@ -425,6 +427,7 @@ public class Character_Base : MonoBehaviour
         {
             awaitCondition = true;
         }
+        _cAnimator.PlayNextAnimation(Animator.StringToHash("Idle"), 0);
     }
 
     public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
@@ -653,6 +656,7 @@ public class Character_Base : MonoBehaviour
     public async Task ResetPlayerOnTeleport() 
     {
         awaitCondition = true;
+        _cComboCounter.OnEndCombo();
         _cComboDetection.ResetCombos();
         _aManager.ResetMoveHierarchy();
         _cAttackTimer.SetTimerType();

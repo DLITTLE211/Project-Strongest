@@ -23,10 +23,14 @@ public class Character_DamageCalculator : MonoBehaviour
     float damageTextAmount;
     bool victoryHit;
     bool allowDeathCheck;
+    public bool isDead;
     #region Damage Functions
     private void Start()
     {
         victoryHit = false;
+   }
+    public void SetAllowDeathCheck() 
+    {
         allowDeathCheck = GameManager.instance._gameModeSet.gameMode != GameMode.Training;
     }
     public void TakeCustomDamage(CustomCallback callback = null)
@@ -57,9 +61,12 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedRecovDamage = 0;
         }
         bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
-        if (isDeadOnHit && allowDeathCheck && !victoryHit)
+        isDead = isDeadOnHit;
+        if (isDeadOnHit && allowDeathCheck && !victoryHit && callback.customDamage.isFinalAttack)
         {
+            
             DeathCheck();
+            _base._cHitController.DeathHitDetect(null,callback.customDamage);
         }
         else
         {
@@ -124,9 +131,11 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedRecovDamage = 0;
         }
         bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
+        isDead = isDeadOnHit;
         if (isDeadOnHit && allowDeathCheck && !victoryHit )
         {
             DeathCheck();
+            _base._cHitController.DeathHitDetect(currentAttack, null);
         }
         else
         {
@@ -156,9 +165,11 @@ public class Character_DamageCalculator : MonoBehaviour
             calculatedRecovDamage = 0;
         }
         bool isDeadOnHit = _healtController.TestIfDeadDamage(calculatedDamage);
+        isDead = isDeadOnHit;
         if (isDeadOnHit && allowDeathCheck && !victoryHit)
         {
             DeathCheck();
+            _base._cHitController.DeathHitDetect(currentAttack, null);
         }
         else
         {
