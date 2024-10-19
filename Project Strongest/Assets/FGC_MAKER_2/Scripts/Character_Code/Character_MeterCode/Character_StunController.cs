@@ -7,7 +7,6 @@ using DG.Tweening;
 public class Character_StunController : MonoBehaviour
 {
     public MainMeterController stunMeter;
-    public HealthController healthController;
 
     public Gradient stunMeterColor;
     public Image stunMeterImage;

@@ -1816,6 +1816,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 1211425607}
   opponentPlayer: {fileID: 993311525}
+  callSource: 0
   awaitCondition: 0
   newField: 0
   factor: 0
@@ -2331,6 +2332,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
   _damageText: {fileID: 752586224}
+  isDead: 0
 --- !u!1 &132508870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3801,7 +3803,6 @@ MonoBehaviour:
     startValue: 0
     currentValue: 0
     maxValue: 0
-  healthController: {fileID: 0}
   stunMeterColor:
     serializedVersion: 2
     key0: {r: 0.18507296, g: 0.9501373, b: 0.8394866, a: 1}
@@ -10356,6 +10357,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
   _damageText: {fileID: 1216137438}
+  isDead: 0
 --- !u!1 &761506510
 GameObject:
   m_ObjectHideFlags: 0
@@ -10971,7 +10973,6 @@ MonoBehaviour:
     startValue: 0
     currentValue: 0
     maxValue: 0
-  healthController: {fileID: 0}
   stunMeterColor:
     serializedVersion: 2
     key0: {r: 0.18507296, g: 0.9501373, b: 0.8394866, a: 1}
@@ -15259,6 +15260,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 434338341}
   opponentPlayer: {fileID: 94923329}
+  callSource: 0
   awaitCondition: 0
   newField: 0
   factor: 0
