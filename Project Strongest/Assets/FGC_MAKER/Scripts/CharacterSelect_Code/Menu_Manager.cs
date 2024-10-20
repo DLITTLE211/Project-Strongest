@@ -124,19 +124,10 @@ public class Menu_Manager : MonoBehaviour
         FirstMenuButtonLayer.EnableButtons();
     }
     #region Training Button Response
-    public async void TrainingSelected()
+    public void TrainingSelected()
     {
-        /*Task[] tasks = new Task[]
-        {
-            //CloseMainMenuScreen(),
-        };
-        await Task.WhenAll(tasks);
-        await Task.Delay(750);
-        ToggleMainMenuState(false);
-        await Task.Delay(200);*/
         currentMode = new GameModeSet(GameMode.Training);
-        _menuStateMachine.CallCharacterSelectState();
-        //_characterSelect.SetUpCharacterSelectScreen(players, currentMode);
+        _menuStateMachine.CallPlayerSideState();
     }
     #endregion
 

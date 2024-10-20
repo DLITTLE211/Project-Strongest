@@ -7512,7 +7512,7 @@ MonoBehaviour:
   - {fileID: 1735383070}
   - {fileID: 1838552049}
   characterSelectBackgroundImage: {fileID: 1370398434}
-  advidoryMessage: {fileID: 2005574724}
+  advisoryMessage: {fileID: 2005574724}
   sideController: {fileID: 1107754686}
   _activeProfiles:
   - {fileID: 11400000, guid: 0cf4e6787272b2b448ab5d372f552710, type: 2}
@@ -7557,6 +7557,8 @@ MonoBehaviour:
   downBound: {fileID: 1536072149}
   leftBound: {fileID: 1735383072}
   rightBound: {fileID: 1838552051}
+  currentSet:
+    gameMode: 0
   stageSelectCooldown: 0
 --- !u!114 &1107754685
 MonoBehaviour:
@@ -9810,6 +9812,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96c60058fa3d1745b332f2047944326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSelect: {fileID: 1107754684}
+  _stageSelecter: {fileID: 251012960}
+  mainObjectHolder: {fileID: 184170190}
+  SideSelectionObject: {fileID: 925046485}
+  advisoryMessage: {fileID: 2005574724}
+  sideController: {fileID: 1107754686}
+  player1:
+    sideIterator: 0
+    _object: {fileID: 2116554835}
+    _coloredControllerImage: {fileID: 538079214}
+    objectText: {fileID: 1127269905}
+  player2:
+    sideIterator: 0
+    _object: {fileID: 1826259320}
+    _coloredControllerImage: {fileID: 1551697519}
+    objectText: {fileID: 833554650}
+  _player1_PlayerPage: {fileID: 1120126771}
+  _player2_PlayerPage: {fileID: 2070314386}
+  _player1_Cursor: {fileID: 1368814061}
+  _player2_Cursor: {fileID: 1062440636}
 --- !u!1 &1400035182
 GameObject:
   m_ObjectHideFlags: 0
@@ -10029,6 +10051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806fc6a26f439ac41b10fd7c51c43362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSelect: {fileID: 1107754684}
 --- !u!1 &1469419607
 GameObject:
   m_ObjectHideFlags: 0

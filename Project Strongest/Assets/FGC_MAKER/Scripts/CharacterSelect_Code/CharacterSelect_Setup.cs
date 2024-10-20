@@ -23,7 +23,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [Space(15)]
 
     [Header("____Character Side Information____")]
-    [SerializeField] private TMP_Text advidoryMessage;
+    [SerializeField] private TMP_Text advisoryMessage;
     [SerializeField] private CharacterSelect_ChosenSideController sideController;
     [Space(15)]
 
@@ -48,7 +48,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [Header("____Rewired Players____")]
     public Character_AvailableID players;
     public Transform upBound,downBound,leftBound,rightBound;
-    GameModeSet currentSet;
+    public GameModeSet currentSet;
     [SerializeField] private bool stageSelectCooldown;
     Sequence DisplayMessageSequence;
     // Start is called before the first frame update
@@ -102,12 +102,12 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         if (players.UsedID.Item1.Count == 0)
         {
-            advidoryMessage.text = "Please Plug in a controller to continue";
-            advidoryMessage.gameObject.SetActive(true);
+            advisoryMessage.text = "Please Plug in a controller to continue";
+            advisoryMessage.gameObject.SetActive(true);
             player1.SetImageCPU();
             player2.SetImageCPU();
         }
-        advidoryMessage.gameObject.SetActive(false);
+        advisoryMessage.gameObject.SetActive(false);
         if (players.UsedID.Item1.Count == 1)
         {
             players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
@@ -189,69 +189,37 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
 
     }
-    void SetCursorStartPosition(Transform cursor, float xPos) 
-    {
-        cursor.localPosition = new Vector3(xPos, cursor.transform.localPosition.y, cursor.localPosition.z);
-    }
-    public async void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers, GameModeSet set)
+    public void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers, GameModeSet set)
     {
         SetListeners();
-        SideSelectionObject.SetActive(false);
-        mainObjectHolder.SetActive(true);
-        CharacterSelectObject.SetActive(false);
         players = _characterSelectplayers;
         currentSet = set;
-        _stageSelecter.ResetValues();
-        SetCursorStartPosition(_player1_Cursor.transform, -270f);
-        SetCursorStartPosition(_player2_Cursor.transform, 335f);
-        if (set.gameMode == GameMode.Versus)
+        //SideSelectionObject.SetActive(false);
+        //mainObjectHolder.SetActive(true);
+        //CharacterSelectObject.SetActive(false);
+        //_stageSelecter.ResetValues();
+        //SetCursorStartPosition(_player1_Cursor.transform, -270f);
+        //SetCursorStartPosition(_player2_Cursor.transform, 335f);
+        /*if (set.gameMode == GameMode.Versus)
         {
-            _player1_Cursor.UnlockCharacterChoice();
-            _player1_PlayerPage.ClearInfo();
-            _player2_Cursor.UnlockCharacterChoice();
-            player1.InitSideIterator();
-            player2.InitSideIterator();
-            advidoryMessage.gameObject.SetActive(false);
-            SideSelectionObject.SetActive(true);
-            AddControllerCounter();
-            CheckPlayerCount();
-            if (players.UsedID.Item1.Count == 0)
-            {
-                advidoryMessage.gameObject.SetActive(true);
-                player1.SetImageCPU();
-                player2.SetImageCPU();
-            }
-            if (players.UsedID.Item1.Count == 1)
-            {
-                player1.SetImageP1();
-                player2.SetImageCPU();
-            }
-            else
-            {
-                player1.SetImageP1();
-                player2.SetImageP2();
-            }
+            //_player1_Cursor.UnlockCharacterChoice();
+            //_player1_PlayerPage.ClearInfo();
+            //_player2_Cursor.UnlockCharacterChoice();
+            //player1.InitSideIterator();
+            //player2.InitSideIterator();
+            //advisoryMessage.gameObject.SetActive(false);
+            //SideSelectionObject.SetActive(true);
+            //AddControllerCounter();
+            //CheckPlayerCount();
+            *//**//*
         }
         if (set.gameMode == GameMode.Training)
         {
-            CharacterSelectObject.SetActive(true);
-            Task[] tasks = new Task[]
-            {
-            ToggleStageSelectState(true),
-            ToggleCharacterSelectInfo(true,255f),
-            TogglePlayerInfo(255f),
-            };
-            await Task.WhenAll(tasks);
-            for (int i = 0; i < characterSelect_Assets.Count; i++)
-            {
-                if (i == 1)
-                {
-                    characterSelect_Assets[i].SetActive(false);
-                    continue;
-                }
-                characterSelect_Assets[i].SetActive(true);
-            }
-        }
+            
+        }*/
+    }
+    public void SetCharacterSelectObjects() 
+    {
         if (activeCharacterSelectButtons != null)
         {
             if (activeCharacterSelectButtons.Count > 0)
@@ -264,6 +232,49 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
         }
         AddCharacterSelectButtons();
+    }
+    public async void CallCharacterSelectObject()
+    {
+        await OpenCharacterSelectObject();
+    }
+    public async Task OpenCharacterSelectObject() 
+    {
+        CharacterSelectObject.SetActive(true);
+        Task[] tasks = new Task[]
+        {
+            ToggleStageSelectState(true),
+            ToggleCharacterSelectInfo(true,255f),
+            TogglePlayerInfo(255f),
+        };
+        await Task.WhenAll(tasks);
+        for (int i = 0; i < characterSelect_Assets.Count; i++)
+        {
+            if (i == 1)
+            {
+                characterSelect_Assets[i].SetActive(false);
+                continue;
+            }
+            characterSelect_Assets[i].SetActive(true);
+        }
+    }
+    public void CheckControllerState() 
+    {
+        if (players.UsedID.Item1.Count == 0)
+        {
+            advisoryMessage.gameObject.SetActive(true);
+            player1.SetImageCPU();
+            player2.SetImageCPU();
+        }
+        if (players.UsedID.Item1.Count == 1)
+        {
+            player1.SetImageP1();
+            player2.SetImageCPU();
+        }
+        else
+        {
+            player1.SetImageP1();
+            player2.SetImageP2();
+        }
     }
     public async void ActivateMenuAssets() 
     {
@@ -623,21 +634,21 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public void DisplayObjectlapMessage()
     {
-        advidoryMessage.gameObject.SetActive(true);
+        advisoryMessage.gameObject.SetActive(true);
         if (DisplayMessageSequence != null) 
         {
             DOTween.Kill(DisplayMessageSequence);
             DisplayMessageSequence = null;
         }
         string message = "Players cannot choose same side";
-        advidoryMessage.text = $"<size=95>{message}";
+        advisoryMessage.text = $"<size=95>{message}";
         DisplayMessageSequence = DOTween.Sequence();
-        DisplayMessageSequence.Append(advidoryMessage.DOFade(1f, 0f));
-        DisplayMessageSequence.Append(advidoryMessage.DOFade(0.99f, 2f));
-        DisplayMessageSequence.Append(advidoryMessage.DOFade(0f, 1.35f));
+        DisplayMessageSequence.Append(advisoryMessage.DOFade(1f, 0f));
+        DisplayMessageSequence.Append(advisoryMessage.DOFade(0.99f, 2f));
+        DisplayMessageSequence.Append(advisoryMessage.DOFade(0f, 1.35f));
         DisplayMessageSequence.OnComplete(() =>
         {
-            advidoryMessage.gameObject.SetActive(false);
+            advisoryMessage.gameObject.SetActive(false);
         });
     }
     IEnumerator DelayResetStageBool() 
