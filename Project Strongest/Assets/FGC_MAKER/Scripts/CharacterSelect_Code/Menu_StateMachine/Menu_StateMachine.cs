@@ -19,10 +19,13 @@ public class Menu_StateMachine : MonoBehaviour
     }
     public void SetCurrentState(Menu_BaseState newState)
     {
-        _curState?.OnExit();
-        _curState = null;
-         newState.OnEnter();
-        _curState = newState;
+        if (_curState != newState)
+        {
+            _curState?.OnExit();
+            _curState = null;
+            newState.OnEnter();
+            _curState = newState;
+        }
     }
     private void Update()
     {

@@ -206,6 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a381c2e853351b43ade58227ac981bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSelect: {fileID: 1107754684}
+  _player1_Cursor: {fileID: 1368814061}
+  _player2_Cursor: {fileID: 1062440636}
 --- !u!1 &50689777
 GameObject:
   m_ObjectHideFlags: 0
@@ -7498,6 +7501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f233efdd21fcef34f98639a2e3d41afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _menuStateMachine: {fileID: 641516431}
   SideSelectionObject: {fileID: 925046485}
   mainObjectHolder: {fileID: 184170190}
   CharacterSelectObject: {fileID: 995452090}
@@ -8608,6 +8612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db64fc831eb94d4e8e44e13a02785a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSelect: {fileID: 1107754684}
+  _player1_Cursor: {fileID: 1368814061}
+  _player2_Cursor: {fileID: 1062440636}
 --- !u!1 &1205699862
 GameObject:
   m_ObjectHideFlags: 0
@@ -10052,6 +10059,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterSelect: {fileID: 1107754684}
+  _player1_PlayerPage: {fileID: 1120126771}
+  _player2_PlayerPage: {fileID: 2070314386}
+  _player1_Cursor: {fileID: 1368814061}
+  _player2_Cursor: {fileID: 1062440636}
 --- !u!1 &1469419607
 GameObject:
   m_ObjectHideFlags: 0

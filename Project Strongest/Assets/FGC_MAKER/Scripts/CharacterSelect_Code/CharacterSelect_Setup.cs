@@ -11,6 +11,7 @@ using TMPro;
 
 public class CharacterSelect_Setup : MonoBehaviour
 {
+    public Menu_StateMachine _menuStateMachine;
     [Header("____CharacterSelect Assets____")]
     [SerializeField] private GameObject SideSelectionObject;
     [SerializeField] private GameObject mainObjectHolder;
@@ -61,8 +62,8 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     private void Update()
     {
-        CursorController(_player1_Cursor);
-        CursorController(_player2_Cursor);
+        //CursorController(_player1_Cursor);
+        //CursorController(_player2_Cursor);
     }
     
     public void SetListeners() 
@@ -194,29 +195,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         SetListeners();
         players = _characterSelectplayers;
         currentSet = set;
-        //SideSelectionObject.SetActive(false);
-        //mainObjectHolder.SetActive(true);
-        //CharacterSelectObject.SetActive(false);
-        //_stageSelecter.ResetValues();
-        //SetCursorStartPosition(_player1_Cursor.transform, -270f);
-        //SetCursorStartPosition(_player2_Cursor.transform, 335f);
-        /*if (set.gameMode == GameMode.Versus)
-        {
-            //_player1_Cursor.UnlockCharacterChoice();
-            //_player1_PlayerPage.ClearInfo();
-            //_player2_Cursor.UnlockCharacterChoice();
-            //player1.InitSideIterator();
-            //player2.InitSideIterator();
-            //advisoryMessage.gameObject.SetActive(false);
-            //SideSelectionObject.SetActive(true);
-            //AddControllerCounter();
-            //CheckPlayerCount();
-            *//**//*
-        }
-        if (set.gameMode == GameMode.Training)
-        {
-            
-        }*/
     }
     public void SetCharacterSelectObjects() 
     {
@@ -276,16 +254,6 @@ public class CharacterSelect_Setup : MonoBehaviour
             player2.SetImageP2();
         }
     }
-    public async void ActivateMenuAssets() 
-    {
-        Task[] tasks = new Task[]
-        {
-            ToggleStageSelectState(true),
-            ToggleCharacterSelectInfo(true,255f),
-            TogglePlayerInfo(255f),
-        };
-        await Task.WhenAll(tasks);
-    }
     public void AddCharacterSelectButtons()
     {
         for (int i = 0; i < _activeProfiles.Count; i++)
@@ -315,10 +283,10 @@ public class CharacterSelect_Setup : MonoBehaviour
             activeCharacterSelectButtons[i].transform.DOScale(Vector3.one, 0.15f);
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
         }
-        SetPlayerControllers();
+        //SetPlayerControllers();
     }
 
-    void SetPlayerControllers()
+    public void SetPlayerControllers()
     {
         _stageSelecter.ClearStageSelect();
         if (ReInput.controllers.GetJoystickNames().Length <= 0)
@@ -482,6 +450,18 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
             }
         }
+        CheckGameModeSet();
+    }
+    void CheckGameModeSet() 
+    {
+        if (currentSet.gameMode == GameMode.Training)
+        {
+            _menuStateMachine.CallStageSelectState();
+        }
+        if (currentSet.gameMode == GameMode.Versus)
+        {
+            _menuStateMachine.CallRoundSelectState();
+        }
     }
     public void ClearListeners() 
     {
@@ -491,8 +471,12 @@ public class CharacterSelect_Setup : MonoBehaviour
         Messenger.RemoveListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
     }
+    public void CallStageSelected() 
+    {
+        _arenaLoader.OnCharactersAndStageSelected();
+    }
     #region CursorController
-    void CursorController(CharacterSelect_Cursor currentController) 
+    public void CursorController(CharacterSelect_Cursor currentController) 
     {
         if (currentController.isConnected)
         {
@@ -500,66 +484,73 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 if (SideSelectionObject.activeInHierarchy)
                 {
+                    _menuStateMachine.CallCharacterSelectState();
                     sideController.CloseChooseSideMenu(SetPlayerInformation_OnCharacterSelect);
                 }
                 else
                 {
-                    if (currentController.profile == null)
+                    _menuStateMachine.GetCurrentState().Select(currentController);
+                    /*if (currentController.profile == null)
                     {
                         Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, currentController);
                     }
                     else
                     {
+                        _menuStateMachine.GetCurrentState().Select();
                         if (_stageSelecter.allowRoundSelect)
                         {
-                            _stageSelecter.ActivateStageSelectObject();
+                            //_stageSelecter.ActivateStageSelectObject();
                         }
                         else
                         {
                             if (currentController.canChooseStage && _stageSelecter.allowStageSelect)
                             {
-                                _chosenStage = _stageSelecter._stageAsset;
-                                _arenaLoader.OnCharactersAndStageSelected();
+                                //_chosenStage = _stageSelecter._stageAsset;
+                                //_arenaLoader.OnCharactersAndStageSelected();
                             }
                         }
-                    }
+                    }*/
                 }
             }
             if (currentController.curPlayer.GetButton(18))
             {
-                if (currentController.profile != null)
+                _menuStateMachine.GetCurrentState().Cancel(currentController);
+                /*if (currentController.profile != null)
                 {
                     currentController.UnlockCharacterChoice();
                 }
                 else
                 {
+                    _menuStateMachine.GetCurrentState().Cancel();
                     if (_stageSelecter.MainHolder.activeInHierarchy)
                     {
-                        _stageSelecter.ClearStageSelect();
-                        currentController.UnlockCharacterChoice();
+                        //_stageSelecter.ClearStageSelect();
+                        //currentController.UnlockCharacterChoice();
                     }
-                }
+                }*/
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
                 if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
-                    if (!SideSelectionObject.activeInHierarchy)
-                    {
+                    //if (!SideSelectionObject.activeInHierarchy)
+                    //{
                         StartCoroutine(currentController.cursorPage.DelayResetBool());
-                        currentController.cursorPage.characterAmplify.UpdateInfoUp();
-                    }
+                        _menuStateMachine.GetCurrentState().CycleRight(currentController);
+                        //currentController.cursorPage.characterAmplify.UpdateInfoUp();
+                    //}
                 }
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Left"))
             {
                 if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
-                    if (!SideSelectionObject.activeInHierarchy)
-                    {
+                   // if (!SideSelectionObject.activeInHierarchy)
+                    //{
                         StartCoroutine(currentController.cursorPage.DelayResetBool());
-                        currentController.cursorPage.characterAmplify.UpdateInfoDown();
-                    }
+                        _menuStateMachine.GetCurrentState().CycleLeft(currentController);
+                        //currentController.cursorPage.characterAmplify.UpdateInfoDown();
+                   // }
                 }
             }
             if (currentController.profile == null)

@@ -47,7 +47,7 @@ public class Menu_PlayerSideState : Menu_BaseState
         _player2_PlayerPage.ClearInfo();
         _characterSelect.AddControllerCounter();
         _characterSelect.CheckControllerState();
-
+        _characterSelect.SetPlayerControllers();
     }
     void SetCharacterSelectEnterInfo()
     {
@@ -64,6 +64,11 @@ public class Menu_PlayerSideState : Menu_BaseState
     }
     public override void OnUpdate()
     {
-
+        _characterSelect.CursorController(_player1_Cursor);
+        _characterSelect.CursorController(_player2_Cursor);
     }
+    public override void Select(CharacterSelect_Cursor _currentCursor) { }
+    public override void Cancel(CharacterSelect_Cursor _currentCursor) { }
+    public override void CycleLeft(CharacterSelect_Cursor _currentCursor) { }
+    public override void CycleRight(CharacterSelect_Cursor _currentCursor) { }
 }
