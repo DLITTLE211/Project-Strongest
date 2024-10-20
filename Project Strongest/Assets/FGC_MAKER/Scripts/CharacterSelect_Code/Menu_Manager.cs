@@ -12,6 +12,7 @@ using UnityEngine.EventSystems;
 
 public class Menu_Manager : MonoBehaviour
 {
+    [SerializeField] private Menu_StateMachine _menuStateMachine;
     [SerializeField] private CharacterSelect_Setup _characterSelect;
     [SerializeField] private GameObject _mainMenuHolder;
     [SerializeField] private GameObject _titleScreenHolder;
@@ -32,15 +33,16 @@ public class Menu_Manager : MonoBehaviour
     [SerializeField] private GameObject exitObject;
     private void Start()
     {
+        _mainCamera.SetActive(true);
         Application.targetFrameRate = 60;
         DontDestroyOnLoad(this);
         instance = this;
         SetTitlePage();
-        _mainCamera.SetActive(true);
     }
-    public void SetTitlePage() 
+    public async void SetTitlePage()
     {
-        ToggleTitleState(true);
+        _menuStateMachine.CallTitleState();
+        //ToggleTitleState(true);
         SetPlayerControllers();
         menuGameState = OutOfMatchGameState.Title;
     }
@@ -81,9 +83,7 @@ public class Menu_Manager : MonoBehaviour
     }
     public async void ActivateMainMenuPage()
     {
-        ToggleTitleState(false);
-        ToggleMainMenuState(true);
-        await OpenMainMenuScreen();
+        _menuStateMachine.CallMainMenuState();
         menuGameState = OutOfMatchGameState.Menu;
     }
     public void DelayChosenPage(Callback func) 
@@ -122,21 +122,21 @@ public class Menu_Manager : MonoBehaviour
     {
         FirstMenuButtonLayer.SetImageObject(_backgroundImage);
         FirstMenuButtonLayer.EnableButtons();
-        FirstMenuButtonLayer.EnableButtons();
     }
     #region Training Button Response
     public async void TrainingSelected()
     {
-        Task[] tasks = new Task[]
+        /*Task[] tasks = new Task[]
         {
-            CloseMainMenuScreen(),
+            //CloseMainMenuScreen(),
         };
         await Task.WhenAll(tasks);
         await Task.Delay(750);
         ToggleMainMenuState(false);
-        await Task.Delay(200);
+        await Task.Delay(200);*/
         currentMode = new GameModeSet(GameMode.Training);
-        _characterSelect.SetUpCharacterSelectScreen(players, currentMode);
+        _menuStateMachine.CallCharacterSelectState();
+        //_characterSelect.SetUpCharacterSelectScreen(players, currentMode);
     }
     #endregion
 
@@ -159,7 +159,7 @@ public class Menu_Manager : MonoBehaviour
     #region Options Button Response
     public void OptionsSelected()
     {
-        ToggleMainMenuState(false);
+        //ToggleMainMenuState(false);
     }
     #endregion
 

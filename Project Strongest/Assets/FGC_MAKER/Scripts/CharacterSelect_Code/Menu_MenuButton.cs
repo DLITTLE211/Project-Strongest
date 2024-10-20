@@ -64,7 +64,11 @@ public class MenuButtonHolder
     {
         for (int i = 0; i < buttonList.Count; i++) 
         {
-            buttonList[i].backgroundImage = _image;
+            if (buttonList[i].backgroundImage == null)
+            {
+                buttonList[i].backgroundImage = _image;
+            }
+            continue;
         }
     }
     public void SlideHolderOut() 
