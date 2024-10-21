@@ -60,11 +60,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         player1.sideIterator = 1;
         player2.sideIterator = 1;
     }
-    private void Update()
-    {
-        //CursorController(_player1_Cursor);
-        //CursorController(_player2_Cursor);
-    }
     
     public void SetListeners() 
     {
@@ -217,6 +212,10 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public async Task OpenCharacterSelectObject() 
     {
+        if (CharacterSelectObject.activeInHierarchy) 
+        {
+            return;
+        }
         CharacterSelectObject.SetActive(true);
         Task[] tasks = new Task[]
         {
@@ -283,7 +282,6 @@ public class CharacterSelect_Setup : MonoBehaviour
             activeCharacterSelectButtons[i].transform.DOScale(Vector3.one, 0.15f);
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
         }
-        //SetPlayerControllers();
     }
 
     public void SetPlayerControllers()
@@ -413,15 +411,18 @@ public class CharacterSelect_Setup : MonoBehaviour
                 else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
                 {
                     _player2_Cursor.canChooseStage = true;
+                    CheckGameModeSet();
                     ActivateStageSelector();
                 }
                 else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && _player2_Cursor.canChooseStage)
                 {
                     ActivateStageSelector();
+                    CheckGameModeSet();
                 }
                 else
                 {
                     _player1_Cursor.canChooseStage = true;
+                    CheckGameModeSet();
                     ActivateStageSelector();
                 }
             }
@@ -437,20 +438,23 @@ public class CharacterSelect_Setup : MonoBehaviour
                 else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
                 {
                     _player1_Cursor.canChooseStage = true;
+                    CheckGameModeSet();
                     ActivateStageSelector();
                 }
                 else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && _player1_Cursor.canChooseStage)
                 {
                     ActivateStageSelector();
+                    CheckGameModeSet();
                 }
                 else
                 {
                     _player2_Cursor.canChooseStage = true;
+                    CheckGameModeSet();
                     ActivateStageSelector();
                 }
             }
         }
-        CheckGameModeSet();
+        
     }
     void CheckGameModeSet() 
     {
@@ -490,67 +494,26 @@ public class CharacterSelect_Setup : MonoBehaviour
                 else
                 {
                     _menuStateMachine.GetCurrentState().Select(currentController);
-                    /*if (currentController.profile == null)
-                    {
-                        Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, currentController);
-                    }
-                    else
-                    {
-                        _menuStateMachine.GetCurrentState().Select();
-                        if (_stageSelecter.allowRoundSelect)
-                        {
-                            //_stageSelecter.ActivateStageSelectObject();
-                        }
-                        else
-                        {
-                            if (currentController.canChooseStage && _stageSelecter.allowStageSelect)
-                            {
-                                //_chosenStage = _stageSelecter._stageAsset;
-                                //_arenaLoader.OnCharactersAndStageSelected();
-                            }
-                        }
-                    }*/
                 }
             }
             if (currentController.curPlayer.GetButton(18))
             {
                 _menuStateMachine.GetCurrentState().Cancel(currentController);
-                /*if (currentController.profile != null)
-                {
-                    currentController.UnlockCharacterChoice();
-                }
-                else
-                {
-                    _menuStateMachine.GetCurrentState().Cancel();
-                    if (_stageSelecter.MainHolder.activeInHierarchy)
-                    {
-                        //_stageSelecter.ClearStageSelect();
-                        //currentController.UnlockCharacterChoice();
-                    }
-                }*/
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
                 if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
-                    //if (!SideSelectionObject.activeInHierarchy)
-                    //{
-                        StartCoroutine(currentController.cursorPage.DelayResetBool());
-                        _menuStateMachine.GetCurrentState().CycleRight(currentController);
-                        //currentController.cursorPage.characterAmplify.UpdateInfoUp();
-                    //}
+                    StartCoroutine(currentController.cursorPage.DelayResetBool());
+                    _menuStateMachine.GetCurrentState().CycleRight(currentController);
                 }
             }
             if (currentController.curPlayer.GetButtonDown("Shift_Left"))
             {
                 if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
-                   // if (!SideSelectionObject.activeInHierarchy)
-                    //{
-                        StartCoroutine(currentController.cursorPage.DelayResetBool());
-                        _menuStateMachine.GetCurrentState().CycleLeft(currentController);
-                        //currentController.cursorPage.characterAmplify.UpdateInfoDown();
-                   // }
+                    StartCoroutine(currentController.cursorPage.DelayResetBool());
+                    _menuStateMachine.GetCurrentState().CycleLeft(currentController);
                 }
             }
             if (currentController.profile == null)
@@ -599,19 +562,11 @@ public class CharacterSelect_Setup : MonoBehaviour
                         currentController.xVal = (currentController.xVal >= currentController.xYield) ? 1 : ((currentController.xVal <= -currentController.xYield) ? -1 : 0);
                         if (currentController.xVal == 1)
                         {
-                            if (!stageSelectCooldown)
-                            {
-                                _stageSelecter.ToggleUp();
-                                    StartCoroutine(DelayResetStageBool());
-                            }
+                            _menuStateMachine.GetCurrentState().CycleRight(currentController);
                         }
                         else if (currentController.xVal == -1)
                         {
-                            if (!stageSelectCooldown)
-                            {
-                                _stageSelecter.ToggleDown();
-                                    StartCoroutine(DelayResetStageBool());
-                            }
+                            _menuStateMachine.GetCurrentState().CycleLeft(currentController);
                         }
                         else
                         {
@@ -699,7 +654,6 @@ public class CharacterSelect_Setup : MonoBehaviour
     void ActivateStageSelector()
     {
         characterSelect_Assets[1].SetActive(true);
-        _stageSelecter.ActivateRoundSelector(currentSet.gameMode);
         _stageSelecter.SetArrowsLitState(_activeStages);
     }
     #region Return Character Select Information

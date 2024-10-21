@@ -132,18 +132,10 @@ public class Menu_Manager : MonoBehaviour
     #endregion
 
     #region Versus Button Response
-    public async void VersusSelected()
+    public void VersusSelected()
     {
-        Task[] tasks = new Task[]
-        {
-            CloseMainMenuScreen(),
-        };
-        await Task.WhenAll(tasks);
-        await Task.Delay(750);
-        ToggleMainMenuState(false);
-        await Task.Delay(200);
         currentMode = new GameModeSet(GameMode.Versus);
-        _characterSelect.SetUpCharacterSelectScreen(players, currentMode);
+        _menuStateMachine.CallPlayerSideState();
     }
     #endregion
 

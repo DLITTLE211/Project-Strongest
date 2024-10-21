@@ -18,6 +18,8 @@ public class Menu_PlayerSideState : Menu_BaseState
     IEnumerator activateRoutine;
     public override void OnEnter()
     {
+        _stageSelecter.ClearStageSelect();
+        _stageSelecter.DisableRoundSelectorObject();
         if (activateRoutine != null)
         {
             StopCoroutine(activateRoutine);
@@ -41,10 +43,6 @@ public class Menu_PlayerSideState : Menu_BaseState
 
         _stageSelecter.ResetValues();
 
-        _player1_Cursor.UnlockCharacterChoice();
-        _player1_PlayerPage.ClearInfo();
-        _player2_Cursor.UnlockCharacterChoice();
-        _player2_PlayerPage.ClearInfo();
         _characterSelect.AddControllerCounter();
         _characterSelect.CheckControllerState();
         _characterSelect.SetPlayerControllers();
