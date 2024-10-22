@@ -22,6 +22,11 @@ public class Character_MobilityOption : IMobilityOption
         _curBase = _base;
         SetMobilityTimer();
         _animInformation.SetAnimInformation();
+        mobilityInput.turnStringToArray();
+        if (movementPriority == 0) 
+        {
+            movementPriority = 1;
+        }
     }
     public void SetMobilityTimer()
     {

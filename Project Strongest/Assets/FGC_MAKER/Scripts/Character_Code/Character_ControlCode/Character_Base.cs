@@ -70,6 +70,8 @@ public class Character_Base : MonoBehaviour
 
     #region Directional Input Detection
     [Header("______DIRECTIONAL INPUT DETECTION________")]
+    public Character_MobilityOptions _mobilitySource;
+    public Character_MobilityOptions character_MobilityOptions;
     public Character_MobilityAsset _extraMoveAsset;
     public List<Character_Mobility> _extraMoveControls;
     public HitPointCall activationCall;
@@ -245,7 +247,10 @@ public class Character_Base : MonoBehaviour
     void InitCombos()
     {
         _characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>();
-        _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
+        _mobilitySource = characterProfile._NewCharacterMobility;
+        Character_MobilityOptions newMobilityOptions = Instantiate(_mobilitySource, comboInstantiatedSpot.transform);
+        character_MobilityOptions = newMobilityOptions;
+        //_extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         inputVisualiser = new List<AttackInputTypes>();
         _cComboDetection.PrimeCombos();

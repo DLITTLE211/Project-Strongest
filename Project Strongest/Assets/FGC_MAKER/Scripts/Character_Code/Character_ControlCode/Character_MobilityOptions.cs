@@ -8,6 +8,7 @@ using FightingGame_FrameData;
 public class Character_MobilityOptions : MonoBehaviour 
 {
     [SerializeField] private List<Character_MobilityOption> _mobilityOptions;
+    public List<Character_MobilityOption> Mobility { get { return _mobilityOptions; } }
     bool animRunning;
     float frameCount;
     IEnumerator MobilityRoutine;

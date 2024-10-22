@@ -386,9 +386,14 @@ public class Character_ComboDetection : MonoBehaviour
         PrimeMobility();
         _base.CollectCharacterMovelist();
     }
-    void PrimeMobility() 
+    void PrimeMobility()
     {
-        for (int i = 0; i < _base._extraMoveAsset.MobilityOptions.Count; i++)
+        for (int i = 0; i < _base.character_MobilityOptions.Mobility.Count; i++)
+        {
+            Character_MobilityOption curMobility = _base.character_MobilityOptions.Mobility[i];
+            curMobility.SetStarterInformation(_base);
+        }
+        /*for (int i = 0; i < _base._extraMoveAsset.MobilityOptions.Count; i++)
         {
             _base._extraMoveControls[i].cTimer = _base._cMobiltyTimer;
             _base._extraMoveControls[i].baseCharacter = _base;
@@ -398,7 +403,7 @@ public class Character_ComboDetection : MonoBehaviour
             _base._extraMoveControls[i].TurnInputsToString(_base);
             _base._extraMoveControls[i].ResetCurrentInput();
             _base._extraMoveControls[i].SetAnims(_base._cAnimator);
-        }
+        }*/
         canCheckMovement = true;
     }
 
