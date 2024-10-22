@@ -115,6 +115,12 @@ public class AttackInputTypes
         int switchValue = move;
         switch (move)
         {
+            case 9:
+                switchValue = 7;
+                break;
+            case 7:
+                switchValue = 9;
+                break;
             case 6:
                 switchValue = 4;
                 break;

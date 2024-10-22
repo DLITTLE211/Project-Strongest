@@ -83,7 +83,7 @@ public class Character_MobilityOptions : MonoBehaviour
 }
 interface IMobilityOption
 {
-    void PerformMobilityAction(Callback SendOnSucess);
+    void PerformMobilityAction();
     void SetStarterInformation(Character_Base _base);
     MovementType GetMovementType();
     void SetMobilityTimer();

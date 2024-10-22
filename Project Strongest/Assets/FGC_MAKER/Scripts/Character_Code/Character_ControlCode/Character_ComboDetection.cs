@@ -82,7 +82,7 @@ public class Character_ComboDetection : MonoBehaviour
         }
         currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
         currentMobilityInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
-        ExtraMovementVerifier(currentMobilityInput);
+        CompleteMobilityVerifier();
     }
     void CompleteMoveListVerifier()
     {
@@ -385,6 +385,53 @@ public class Character_ComboDetection : MonoBehaviour
 
     #endregion
 
+    #region Mobility Verification Code
+    void CompleteMobilityVerifier()
+    {
+        if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.standBlockRef || _base._cStateMachine._playerState.current.State == _base._cStateMachine.crouchBlockRef)
+        {
+            return;
+        }
+        Character_MobilityOption curMobility = ExtraMovementVerifier(currentMobilityInput);
+        if (curMobility != null)
+        {
+            curMobility.PerformMobilityAction();
+            Debug.Log("Mobility found");
+        }
+        Debug.Log("Mobility not found");
+    }
+
+    Character_MobilityOption ExtraMovementVerifier(AttackInputTypes mobilityInput)
+    {
+        _base._cMobiltyTimer.CheckForInput = true;
+        for (int i = 0; i < _base.character_MobilityOptions.Mobility.Count; i++)
+        {
+            Character_MobilityOption entry = _base.character_MobilityOptions.Mobility[i];
+            string moveInDict = entry.mobilityInput.attackString;
+            string keyRef = mobilityInput.specialMoveTypeInput.attackString;
+            if (keyRef.Contains(moveInDict))
+            {
+                if (entry._requiresCharge && superMobilityOption == entry._requiresCharge)
+                {
+                    mobilityInput.specialMoveTypeInput.attackString = "";
+                    return entry;
+                }
+                else if (!entry._requiresCharge)
+                {
+                    mobilityInput.specialMoveTypeInput.attackString = "";
+                    return entry;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            continue;
+        }
+        return null;
+    }
+    #endregion
+
     public void PrimeCombos()
     {
         PrimeMobility();
@@ -398,11 +445,6 @@ public class Character_ComboDetection : MonoBehaviour
             curMobility.SetStarterInformation(_base);
         }
         canCheckMovement = true;
-    }
-
-    void ExtraMovementVerifier(AttackInputTypes mobilityInput)
-    {
-        _base._cMobiltyTimer.CheckForInput = true;
     }
     public void ResetCombos()
     {

@@ -11,7 +11,7 @@ public class Character_MobilityOption : IMobilityOption
     private Character_Base _curBase;
     public Character_Base CurBase { get { return _curBase; } }
     public int movementPriority;
-    [SerializeField] private bool _requiresCharge;
+    public bool _requiresCharge;
     [SerializeField] private Character_InputTimer_Mobility _mobTimer;
     [SerializeField] private MovementType _movementType;
     public FrameData frameData;
@@ -32,7 +32,7 @@ public class Character_MobilityOption : IMobilityOption
     {
         _mobTimer = _curBase._cMobiltyTimer;
     }
-    public void PerformMobilityAction(Callback SendOnSucess)
+    public void PerformMobilityAction()
     {
         if (_curBase._cHurtBox.IsGrounded() == true && _curBase._cForce.CanSendForce())
         {
@@ -47,6 +47,7 @@ public class Character_MobilityOption : IMobilityOption
     {
         return _movementType;
     }
+
 }
 [Serializable]
 public class MobilityOption_Anim 
