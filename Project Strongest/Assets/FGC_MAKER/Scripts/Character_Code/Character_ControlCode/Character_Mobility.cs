@@ -175,7 +175,7 @@ public class Character_Mobility : IMobility
                     mobilityAnim.ReAddCustomCallbacks();
                 }
                 curBase._aManager.ResetMoveHierarchy();
-                curBase._cAnimator.SetActivatedInput(_mobilityAnim);
+                //curBase._cAnimator.SetActivatedInput(_mobilityAnim);
             }
         }
     }

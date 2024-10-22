@@ -72,8 +72,6 @@ public class Character_Base : MonoBehaviour
     [Header("______DIRECTIONAL INPUT DETECTION________")]
     public Character_MobilityOptions _mobilitySource;
     public Character_MobilityOptions character_MobilityOptions;
-    public Character_MobilityAsset _extraMoveAsset;
-    public List<Character_Mobility> _extraMoveControls;
     public HitPointCall activationCall;
     [SerializeField] public float xVal, yVal;
     public ControllerYield controllerYield;
@@ -208,7 +206,7 @@ public class Character_Base : MonoBehaviour
         _jumpForce = characterProfile.JumpForce;
         _jumpDirForce = characterProfile.InAirMoveForce;
 
-
+        _cMobiltyTimer.SetStartingValues();
         _cAnimator = chosenAnimator;
         _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
         _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing);
@@ -224,7 +222,6 @@ public class Character_Base : MonoBehaviour
         _cMobiltyTimer.ResetTimer();
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();
-        _extraMoveAsset = characterProfile._CharacterMobility;
         SetMainCustomCallbackDictionary();
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier)
@@ -250,7 +247,6 @@ public class Character_Base : MonoBehaviour
         _mobilitySource = characterProfile._NewCharacterMobility;
         Character_MobilityOptions newMobilityOptions = Instantiate(_mobilitySource, comboInstantiatedSpot.transform);
         character_MobilityOptions = newMobilityOptions;
-        //_extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         inputVisualiser = new List<AttackInputTypes>();
         _cComboDetection.PrimeCombos();
@@ -468,27 +464,17 @@ public class Character_Base : MonoBehaviour
             }
         }
     }
-    public void ApplyForceOnCustomCallback(CustomCallback callback, Character_Mobility _mob = null)
+    public void ApplyForceOnCustomCallback(CustomCallback callback, Character_MobilityOption _mob = null)
     {
-        /*Callback<CustomCallback> dictionaryFunc = null;
-        if (mainCallbackDictionary.TryGetValue(callback.customCall, out dictionaryFunc))
-        {
-            dictionaryFunc(callback);
-            return;
-        }*/
         if (activationCall.HasFlag(callback.customCall))
         {
-            switch (callback.customCall)
+            if (callback.customCall == HitPointCall.ActivateMobilityAction)
             {
-                case HitPointCall.ActivateMobilityAction:
-                    _extraMoveAsset.CallMobilityAction(_mob);
-                    break;
+                character_MobilityOptions.CallMobilityAction(_mob);
             }
-            switch (callback.customCall)
+            else if (callback.customCall == HitPointCall.ClearMobility) 
             {
-                case HitPointCall.ClearMobility:
-                    _cAnimator.ClearLastActivatedInput();
-                    break;
+                _cAnimator.ClearLastActivatedInput();
             }
         }
     }

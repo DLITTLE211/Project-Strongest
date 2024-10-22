@@ -61,7 +61,7 @@ public class AttackInputTypes
     }
     public void ClearFirstIndex() 
     {
-        if (specialMoveTypeInput.attackString.Length >= 10)
+        if (specialMoveTypeInput.attackString.Length >= 25)
         {
             specialMoveTypeInput.attackString = specialMoveTypeInput.attackString.Remove(0, 1);
         }

@@ -1505,6 +1505,7 @@ MonoBehaviour:
   _frameCountTimer: 0
   _startFrameCountTimer: 0
   _checkForInput: 0
+  _base: {fileID: 993311525}
 --- !u!114 &88445607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,7 +1574,17 @@ MonoBehaviour:
   inRekka: 0
   inSuper: 0
   superMobilityOption: 0
-  currentInput:
+  currentAttackInput:
+    AttackName: 
+    specialMoveTypeInput:
+      attackString: 
+      attackStringArray: 
+    normalTypeInput: []
+    currentAttackInput: 
+    moveType: 0
+    normalAirAttackInfo: 0
+    keyGroundCheck: 0
+  currentMobilityInput:
     AttackName: 
     specialMoveTypeInput:
       attackString: 
@@ -1790,8 +1801,8 @@ MonoBehaviour:
       directionalInput: 0
     actionID: 0
     Button_Name: 
-  _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
-  _extraMoveControls: []
+  _mobilitySource: {fileID: 0}
+  character_MobilityOptions: {fileID: 0}
   activationCall: 768
   xVal: 0
   yVal: 0
@@ -1818,7 +1829,6 @@ MonoBehaviour:
   opponentPlayer: {fileID: 993311525}
   callSource: 0
   awaitCondition: 0
-  newField: 0
   factor: 0
 --- !u!54 &94923330
 Rigidbody:
@@ -8421,7 +8431,17 @@ MonoBehaviour:
   inRekka: 0
   inSuper: 0
   superMobilityOption: 0
-  currentInput:
+  currentAttackInput:
+    AttackName: 
+    specialMoveTypeInput:
+      attackString: 
+      attackStringArray: 
+    normalTypeInput: []
+    currentAttackInput: 
+    moveType: 0
+    normalAirAttackInfo: 0
+    keyGroundCheck: 0
+  currentMobilityInput:
     AttackName: 
     specialMoveTypeInput:
       attackString: 
@@ -15234,8 +15254,8 @@ MonoBehaviour:
       directionalInput: 0
     actionID: 0
     Button_Name: 
-  _extraMoveAsset: {fileID: 11400000, guid: 08a85f961e7b03a43a3d062349219c9c, type: 2}
-  _extraMoveControls: []
+  _mobilitySource: {fileID: 0}
+  character_MobilityOptions: {fileID: 0}
   activationCall: 768
   xVal: 0
   yVal: 0
@@ -15262,7 +15282,6 @@ MonoBehaviour:
   opponentPlayer: {fileID: 94923329}
   callSource: 0
   awaitCondition: 0
-  newField: 0
   factor: 0
 --- !u!1 &996888123
 GameObject:
@@ -21307,6 +21326,7 @@ MonoBehaviour:
   _frameCountTimer: 0
   _startFrameCountTimer: 0
   _checkForInput: 0
+  _base: {fileID: 94923329}
 --- !u!114 &1371640602
 MonoBehaviour:
   m_ObjectHideFlags: 0

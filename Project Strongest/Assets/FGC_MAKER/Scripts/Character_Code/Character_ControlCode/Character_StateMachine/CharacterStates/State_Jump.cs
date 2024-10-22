@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class State_Jump : BaseState
 {
-    private Character_Mobility _lastMobilityAction;
-    public Character_Mobility LastMobilityAction { get { return _lastMobilityAction; } }
+    private Character_MobilityOption _lastMobilityAction;
+    public Character_MobilityOption LastMobilityAction { get { return _lastMobilityAction; } }
     public State_Jump(Character_Base playerBase) : base(playerBase)
     {
 

@@ -23,7 +23,7 @@ public class Character_Animator : MonoBehaviour
     public lastAttackState _lastAttackState;
     #endregion
 
-    [SerializeField] public Character_Mobility activatedInput;
+    [SerializeField] public Character_MobilityOption activatedInput;
     [SerializeField] public Attack_BaseProperties lastAttack;
 
     public Transform _model;
@@ -135,7 +135,7 @@ public class Character_Animator : MonoBehaviour
     }
     public bool CheckAttackAndMobility()
     {
-        bool activatedInputCheck = (activatedInput == null || (activatedInput.movementPriority == 0 && (activatedInput.movementName == null || activatedInput.movementName == "")));
+        bool activatedInputCheck = (activatedInput == null || (activatedInput.movementPriority == 0 && (activatedInput.mobilityOptionName == null || activatedInput.mobilityOptionName == "")));
         bool lastAttackCheck = (lastAttack == null || (lastAttack.InputTimer == null && (lastAttack._attackName == null || lastAttack._attackName == "")));
 
         if (activatedInputCheck && lastAttackCheck) 
@@ -179,38 +179,6 @@ public class Character_Animator : MonoBehaviour
     #endregion
     public void SetActivatedInput(Character_MobilityOption inputToActivate)
     {
-       /* if (!hitNewAnim)
-        {
-            if (lastAttack != null)
-            {
-                if ((CheckAttackState(lastAttack.dashCancelable) && inputToActivate.movementPriority == 2))
-                {
-                    hitNewAnim = true;
-                    activatedInput = inputToActivate;
-                    _lastMovementState = lastMovementState.populated;
-                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
-                }
-                else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
-                {
-                    hitNewAnim = true;
-                    activatedInput = inputToActivate;
-                    SetSelfUnfreeze();
-                    _base._cForce.CallLockKinematic();
-                    _lastMovementState = lastMovementState.populated;
-                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
-                }
-            }
-            else
-            {
-                hitNewAnim = true;
-                activatedInput = inputToActivate;
-                _lastMovementState = lastMovementState.populated;
-                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
-            }
-        }*/
-    }
-    public void SetActivatedInput(Character_Mobility inputToActivate)
-    {
         if (!hitNewAnim)
         {
             if (lastAttack != null)
@@ -220,7 +188,7 @@ public class Character_Animator : MonoBehaviour
                     hitNewAnim = true;
                     activatedInput = inputToActivate;
                     _lastMovementState = lastMovementState.populated;
-                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
+                    _base.character_MobilityOptions.ActivateMobilityOption(inputToActivate);
                 }
                 else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
                 {
@@ -229,7 +197,7 @@ public class Character_Animator : MonoBehaviour
                     SetSelfUnfreeze();
                     _base._cForce.CallLockKinematic();
                     _lastMovementState = lastMovementState.populated;
-                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
+                    _base.character_MobilityOptions.ActivateMobilityOption(inputToActivate);
                 }
             }
             else
@@ -237,7 +205,7 @@ public class Character_Animator : MonoBehaviour
                 hitNewAnim = true;
                 activatedInput = inputToActivate;
                 _lastMovementState = lastMovementState.populated;
-                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
+                _base.character_MobilityOptions.ActivateMobilityOption(inputToActivate);
             }
         }
     }
@@ -389,7 +357,6 @@ public class Character_Animator : MonoBehaviour
     {
         _base._cForce.ResetPriority();
         hitNewAnim = false;
-        activatedInput.activeMove = false;
         activatedInput = null;
         _lastMovementState = lastMovementState.nullified;
     }

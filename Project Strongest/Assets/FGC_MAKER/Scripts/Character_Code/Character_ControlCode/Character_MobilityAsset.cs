@@ -20,7 +20,7 @@ public class Character_MobilityAsset : ScriptableObject
 
     public void CallMobilityAction(Character_Mobility _mobOption)
     {
-        _mobOption.baseCharacter._cForce.HandleExtraMovement(_mobOption);
+        //_mobOption.baseCharacter._cForce.HandleExtraMovement(_mobOption);
     }
     public bool ReturnActiveMove() 
     {
@@ -65,7 +65,7 @@ public class Character_MobilityAsset : ScriptableObject
                     {
                         newHitPoint.hitFrameBool = true;
                         callback.funcBool = true;
-                        inputToActivate.baseCharacter.ApplyForceOnCustomCallback(inputToActivate.mobilityAnim._customMobilityCallBacks[0], inputToActivate);
+                        //inputToActivate.baseCharacter.ApplyForceOnCustomCallback(inputToActivate.mobilityAnim._customMobilityCallBacks[0], inputToActivate);
                         inputToActivate.mobilityAnim._customMobilityCallBacks.RemoveAt(0);
                     }
                 }

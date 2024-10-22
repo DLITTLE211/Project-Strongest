@@ -15,14 +15,14 @@ public class Character_MobilityOptions : MonoBehaviour
     List<CustomCallback> callbackList;
     public void CallMobilityAction(Character_MobilityOption _mobOption)
     {
-        //_mobOption.CurBase._cForce.HandleExtraMovement(_mobOption);
+        _mobOption.CurBase._cForce.HandleExtraMovement(_mobOption);
     }
     public void ActivateMobilityOption(Character_MobilityOption _currentAction) 
     {
         KillCurrentRoutine();
         animRunning = true;
         SetCustomCallbacks(_currentAction);
-         //_currentAction.CurBase._cAnimator.PlayNextAnimation(Animator.StringToHash(_currentAction.mobilityAnim.animName[0]), 0.25f, true);
+         _currentAction.CurBase._cAnimator.PlayNextAnimation(_currentAction._animInformation._animHash, 0.25f, true);
          MobilityRoutine = PlayAnimSequence(_currentAction);
         StartCoroutine(MobilityRoutine);
     }
@@ -41,7 +41,7 @@ public class Character_MobilityOptions : MonoBehaviour
                 {
                     newHitPoint.hitFrameBool = true;
                     callback.funcBool = true;
-                    //_currentAction.CurBase.ApplyForceOnCustomCallback(callbackList[0], _currentAction);
+                    _currentAction.CurBase.ApplyForceOnCustomCallback(callbackList[0], _currentAction);
                     callbackList.RemoveAt(0);
                 }
             }

@@ -513,7 +513,8 @@ public class Character_StateMachine : MonoBehaviour
         {
             return false;
         }
-        return _base._cAnimator.activatedInput.type == MovementType.ForwardDash ^ _base._cAnimator.activatedInput.type == MovementType.BackDash;
+        MovementType _movementType = _base._cAnimator.activatedInput.GetMovementType();
+        return _movementType == MovementType.ForwardDash ^ _movementType == MovementType.BackDash;
     }
 
     bool IdleReturnBool() 

@@ -10,7 +10,8 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private int lastInput;
     public bool inStance, inRekka, inSuper, superMobilityOption;
     private bool canCheckMovement;
-    [SerializeField] private AttackInputTypes currentInput;
+    [SerializeField] private AttackInputTypes currentAttackInput;
+    [SerializeField] private AttackInputTypes currentMobilityInput;
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
     private string curString;
     private char[] curStringArray;
@@ -21,7 +22,8 @@ public class Character_ComboDetection : MonoBehaviour
         canCheckMovement = false;
         lastInput = 5;
         curString = "";
-        currentInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
+        currentAttackInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
+        currentMobilityInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         SetFollowUpAttackTypes();
     }
     void SetFollowUpAttackTypes()
@@ -66,19 +68,21 @@ public class Character_ComboDetection : MonoBehaviour
                 lastInput = input.Button_State.directionalInput;
                 AddToCurrentInput(lastInput);
             }
-            ExtraMovementVerifier(input);
         }
     }
     void AddToCurrentInput(int direction, Character_ButtonInput attack = null)
     {
-        currentInput.ClearFirstIndex();
+        currentAttackInput.ClearFirstIndex();
+        currentMobilityInput.ClearFirstIndex();
         if (attack != null)
         {
-            currentInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing, attack, _base._cHurtBox.IsGrounded());
+            currentAttackInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing, attack, _base._cHurtBox.IsGrounded());
             CompleteMoveListVerifier();
             return;
         }
-        currentInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        currentMobilityInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        ExtraMovementVerifier(currentMobilityInput);
     }
     void CompleteMoveListVerifier()
     {
@@ -101,7 +105,7 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (ActiveFollowUpAttackCheck.Value.GetAttackMoveType() == MoveType.Stance)
         {
-            int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
+            int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentAttackInput);
             if (followUpAttackIndex >= 0)
             {
                 ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(lastAddedinput,followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
@@ -111,7 +115,7 @@ public class Character_ComboDetection : MonoBehaviour
         {
             if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
             {
-                int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentInput);
+                int followUpAttackIndex = FindFollowUpEntry(ActiveFollowUpAttackCheck.Key, currentAttackInput);
                 MoveType currentFollowupMoveType = ActiveFollowUpAttackCheck.Value.GetAttackMoveType();
                 try
                 {
@@ -156,8 +160,8 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
         {
-            KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
-            refAttackType = SpecialMovePreliminaryCheck(currentInput);
+            KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
+            refAttackType = SpecialMovePreliminaryCheck(currentAttackInput);
             if (refAttackType.Value != null && refAttackType.Value != _base.comboList3_0.ReturnCurrentAttack())
             {
                 MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
@@ -194,8 +198,8 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
         {
-            KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
-            refAttackType = FindStringEntry(currentInput);
+            KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
+            refAttackType = FindStringEntry(currentAttackInput);
             if (refAttackType.Value != null)
             {
                 MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
@@ -393,37 +397,25 @@ public class Character_ComboDetection : MonoBehaviour
             Character_MobilityOption curMobility = _base.character_MobilityOptions.Mobility[i];
             curMobility.SetStarterInformation(_base);
         }
-        /*for (int i = 0; i < _base._extraMoveAsset.MobilityOptions.Count; i++)
-        {
-            _base._extraMoveControls[i].cTimer = _base._cMobiltyTimer;
-            _base._extraMoveControls[i].baseCharacter = _base;
-            MobilityAnimation mobilityAnim = _base._extraMoveControls[i].mobilityAnim;
-            _base._extraMoveControls[i].mobilityAnim = new MobilityAnimation(_animator.myAnim, mobilityAnim.animClip, mobilityAnim.animName, mobilityAnim.totalWaitTime, mobilityAnim.animLength, mobilityAnim.frameData);
-
-            _base._extraMoveControls[i].TurnInputsToString(_base);
-            _base._extraMoveControls[i].ResetCurrentInput();
-            _base._extraMoveControls[i].SetAnims(_base._cAnimator);
-        }*/
         canCheckMovement = true;
     }
 
-    void ExtraMovementVerifier(Character_ButtonInput input)
+    void ExtraMovementVerifier(AttackInputTypes mobilityInput)
     {
-        for (int i = 0; i < _base._extraMoveControls.Count; i++)
-        {
-            Character_Mobility c = _base._extraMoveControls[i];
-            c.ContinueCombo(input, _base, superMobilityOption);
-        }
+        _base._cMobiltyTimer.CheckForInput = true;
     }
     public void ResetCombos()
     {
-        currentInput.ResetComboInfo();
+        currentAttackInput.ResetComboInfo();
         if (ActiveFollowUpAttackCheck.Value != null)
         {
             ActiveFollowUpAttackCheck.Value.ResetAttackData();
-            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentInput, null);
+            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
         }
-
+    }
+    public void ResetMobilityString()
+    {
+        currentMobilityInput.ResetComboInfo();
     }
 
 }

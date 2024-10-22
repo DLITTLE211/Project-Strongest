@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character_InputTimer_Mobility : Character_InputTimer
 {
-
+    [SerializeField] private Character_Base _base;
     #region Function Summary
     /// <summary>
     /// Sets timer to starting value and sends broadcast to reset mobility based input checks
@@ -15,7 +15,7 @@ public class Character_InputTimer_Mobility : Character_InputTimer
     {
         FrameCountTimer = StartFrameCountTimer;
         CheckForInput = false;
-        //Messenger.Broadcast(Events.ResetMoveOnTimer);
+        _base._cComboDetection.ResetMobilityString();
     }
     #region Function Summary
     /// <summary>
@@ -25,7 +25,7 @@ public class Character_InputTimer_Mobility : Character_InputTimer
     #endregion
     public void SetStartingValues()
     {
-        StartFrameCountTimer = 0.133333f;
+        StartFrameCountTimer = 0.25f;
         FrameCountTimer = StartFrameCountTimer;
         CheckForInput = false;
     }
@@ -40,7 +40,7 @@ public class Character_InputTimer_Mobility : Character_InputTimer
         FrameCountTimer = StartFrameCountTimer;
     }
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         TimerTickDown();
     }
@@ -66,14 +66,13 @@ public class Character_InputTimer_Mobility : Character_InputTimer
     #endregion
     public void CountDownTimer()
     {
-        if (FrameCountTimer >= 0)
+        if (FrameCountTimer <= -1 / 60f)
         {
-            _frameCountTimer -= 0.016667f;
-            FrameCountTimer = _frameCountTimer;
+            ResetTimer();
         }
         else
         {
-            ResetTimer();
+            FrameCountTimer -= 1 / 60f;
         }
     }
 }

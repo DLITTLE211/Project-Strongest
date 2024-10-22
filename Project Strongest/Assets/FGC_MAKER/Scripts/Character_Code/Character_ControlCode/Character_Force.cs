@@ -332,7 +332,7 @@ public class Character_Force : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     #endregion
-    IEnumerator DoForceOnDelay(Character_Mobility _mInput)
+    IEnumerator DoForceOnDelay(Character_MobilityOption _mInput)
     {
         int forwardMult = 0;
         if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
@@ -347,7 +347,7 @@ public class Character_Force : MonoBehaviour
         yield return new WaitForSeconds(2 / 60f);
 
         _base._aManager.ClearAttacks();
-        switch (_mInput.type)
+        switch (_mInput.GetMovementType())
         {
             case MovementType.BackJump:
                 // Back Jump;
@@ -396,7 +396,7 @@ public class Character_Force : MonoBehaviour
         yield return new WaitForSeconds(2 / 60f);
         sendingForce = false;
     }
-    public void HandleExtraMovement(Character_Mobility _mInput)
+    public void HandleExtraMovement(Character_MobilityOption _mInput)
     {
         List<IState> acceptableStates = new List<IState>();
         if (_base._cHurtBox.IsGrounded())
@@ -429,7 +429,7 @@ public class Character_Force : MonoBehaviour
             if (sendingForce == false)
             {
                 StartCoroutine(DoForceOnDelay(_mInput));
-                DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.type} has been performed");
+                DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.GetMovementType()} has been performed");
             }
         }
     }
