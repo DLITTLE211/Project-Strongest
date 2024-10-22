@@ -40,7 +40,7 @@ public class Character_MobilityOptions : MonoBehaviour
                 {
                     newHitPoint.hitFrameBool = true;
                     callback.funcBool = true;
-                    //_currentAction.CurBase.ApplyForceOnCustomCallback(_currentAction.customMobilityCallbacks[0], _currentAction);
+                    //_currentAction.CurBase.ApplyForceOnCustomCallback(callbackList[0], _currentAction);
                     callbackList.RemoveAt(0);
                 }
             }

@@ -10,16 +10,18 @@ public class Character_MobilityOption : IMobilityOption
     [SerializeField] private string mobilityOptionName;
     private Character_Base _curBase;
     public Character_Base CurBase { get { return _curBase; } }
-
+    [SerializeField] private int movementPriority;
     [SerializeField] private bool _requiresCharge;
     [SerializeField] private Character_InputTimer_Mobility _mobTimer;
-    MovementType _movementType;
+    [SerializeField] private MovementType _movementType;
     public FrameData frameData;
     public MobilityOption_Anim _animInformation;
-
+    public Attack_Input mobilityInput;
     public void SetStarterInformation(Character_Base _base)
     {
-        throw new NotImplementedException();
+        _curBase = _base;
+        SetMobilityTimer();
+        _animInformation.SetAnimInformation();
     }
     public void SetMobilityTimer()
     {
@@ -45,5 +47,11 @@ public class Character_MobilityOption : IMobilityOption
 public class MobilityOption_Anim 
 {
     public AnimationClip _animationClip;
+    public string _animName;
     public float _animLength;
+    public void SetAnimInformation() 
+    {
+        _animName = _animationClip.name;
+        _animLength = _animationClip.length;
+    }
 }
