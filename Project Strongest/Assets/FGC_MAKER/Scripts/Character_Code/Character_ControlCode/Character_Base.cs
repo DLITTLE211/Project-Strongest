@@ -149,8 +149,6 @@ public class Character_Base : MonoBehaviour
     public bool callSource;
     public bool awaitCondition;
 
-    [SerializeField]
-    public int newField;
 
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)

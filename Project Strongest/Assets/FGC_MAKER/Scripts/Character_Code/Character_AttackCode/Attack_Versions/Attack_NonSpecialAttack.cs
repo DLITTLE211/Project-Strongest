@@ -5,8 +5,6 @@ using UnityEngine;
 public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctionality 
 {
     [SerializeField] private int curInput,curAttack;
-    [SerializeField] private int lastDirection;
-    public (MoveInput, AttackInput) _newinput;
     private Character_Base _curBase;
     public int leewayTime;
 

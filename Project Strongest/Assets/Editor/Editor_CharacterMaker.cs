@@ -197,7 +197,7 @@ public class Editor_CharacterMaker : EditorWindow
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        _newProfile.moveListCount = (int)EditorGUILayout.IntField("Total MoveList(s):", _newProfile.moveListCount);
+        _newProfile.moveListCount = (int)EditorGUILayout.Slider("Total MoveList(s):", _newProfile.moveListCount, 0,3);
         EditorGUILayout.EndHorizontal();
         #endregion
 
@@ -341,7 +341,7 @@ public class Editor_CharacterMaker : EditorWindow
         AssetDatabase.Refresh();
         string newCharacterPath = newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder/";
         string SO_RefOnePath = "Assets/BAKI_STRONGEST_SHOWDOWN_ROSTER/CharacterList/Character_Resources/";
-        string SO_RefTwoPath = "Assets/Prefabs/Template_MobilityOptions.asset";
+        string SO_RefTwoPath = "Assets/Prefabs/Template_Mobility.prefab";
         string prefab_RefPath = "Assets/Prefabs/Template_Movelist.prefab";
 
         /*Inside Newly Created CharacterProfile:
@@ -386,7 +386,7 @@ public class Editor_CharacterMaker : EditorWindow
             #endregion
 
             #region Character Mobility Creation
-            if (AssetDatabase.CopyAsset(SO_RefTwoPath, newCharacterPath + $"{CurrentProfile.CharacterName}_MobilityOptions.asset"))
+            if (AssetDatabase.CopyAsset(SO_RefTwoPath, newCharacterPath + $"{CurrentProfile.CharacterName}_MobilityPrefab.prefab"))
             {
                 Debug.Log("Character Movelist Path Success");
                 Debug.Log("All Criteria Met. Creating New Character Data!");

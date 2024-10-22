@@ -177,7 +177,38 @@ public class Character_Animator : MonoBehaviour
         canBlock = true;
     }
     #endregion
-
+    public void SetActivatedInput(Character_MobilityOption inputToActivate)
+    {
+       /* if (!hitNewAnim)
+        {
+            if (lastAttack != null)
+            {
+                if ((CheckAttackState(lastAttack.dashCancelable) && inputToActivate.movementPriority == 2))
+                {
+                    hitNewAnim = true;
+                    activatedInput = inputToActivate;
+                    _lastMovementState = lastMovementState.populated;
+                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
+                }
+                else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
+                {
+                    hitNewAnim = true;
+                    activatedInput = inputToActivate;
+                    SetSelfUnfreeze();
+                    _base._cForce.CallLockKinematic();
+                    _lastMovementState = lastMovementState.populated;
+                    StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
+                }
+            }
+            else
+            {
+                hitNewAnim = true;
+                activatedInput = inputToActivate;
+                _lastMovementState = lastMovementState.populated;
+                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate));
+            }
+        }*/
+    }
     public void SetActivatedInput(Character_Mobility inputToActivate)
     {
         if (!hitNewAnim)
