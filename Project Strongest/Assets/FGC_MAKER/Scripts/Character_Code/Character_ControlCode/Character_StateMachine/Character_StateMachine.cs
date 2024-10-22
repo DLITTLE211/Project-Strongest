@@ -8,6 +8,7 @@ public class Character_StateMachine : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] public string curState;
     public Character_ComboCounter opponentComboCounter;
+    [HideInInspector] public State_SecondIdle secondIdleState;
     [HideInInspector] public State_Idle idleStateRef;
     [HideInInspector] public State_Crouch crouchStateRef;
     [HideInInspector] public State_Move moveStateRef;
@@ -33,6 +34,8 @@ public class Character_StateMachine : MonoBehaviour
         #region Define States
         var IdleState = new State_Idle(_base);
         idleStateRef = IdleState;
+        var SecondIdle = new State_SecondIdle(_base);
+        secondIdleState = SecondIdle;
         var MoveState = new State_Move(_base);
         moveStateRef = MoveState;
         var JumpState = new State_Jump(_base);
@@ -64,6 +67,8 @@ public class Character_StateMachine : MonoBehaviour
         At(S_BlockState, IdleState, new Predicate(() => At_2Idle()));
         At(BlockReact, IdleState, new Predicate(() => At_2Idle()));
         At(Hitstate, IdleState, new Predicate(() => At_2Idle()));
+        At(IdleState, SecondIdle, new Predicate(() => At_2Idle() && _base.allowSecondIdleAnim));
+        At(CrouchState, SecondIdle, new Predicate(() => At_2Crouch() && _base.allowSecondIdleAnim));
 
         At(DashState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
@@ -86,13 +91,13 @@ public class Character_StateMachine : MonoBehaviour
 
         At(MoveState, DashState, new Predicate(() => ToDashState()));
 
-        At(IdleState, CrouchState, new Predicate(() => At_2Crouch()));
-        At(JumpState, CrouchState, new Predicate(() => At_2Crouch()));
-        At(MoveState, CrouchState, new Predicate(() => At_2Crouch()));
-        At(C_BlockState, CrouchState, new Predicate(() => At_2Crouch()));
-        At(S_BlockState, CrouchState, new Predicate(() => At_2Crouch()));
-        At(Hitstate, CrouchState, new Predicate(() => At_2Crouch()));
-        At(DashState, CrouchState, new Predicate(() => At_2Crouch()));
+        At(IdleState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(JumpState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(MoveState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(C_BlockState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(S_BlockState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(Hitstate, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(DashState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
 
         At(AttackState, Hitstate, new Predicate(() => checkAttackValue(lastAttackState.nullified) && At_2Crouch()));
         At(IdleState, Hitstate, new Predicate(() => ToHitState()));
@@ -122,7 +127,7 @@ public class Character_StateMachine : MonoBehaviour
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
         Any(DashState, new Predicate(() => ToDashState()));
-        Any(IdleState, new Predicate(() => At_2Idle()));
+        Any(IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         Any(Hitstate, new Predicate(() => ToHitState()));
         #endregion
 

@@ -22,7 +22,7 @@ public class Character_MobilityOptions : MonoBehaviour
         KillCurrentRoutine();
         animRunning = true;
         SetCustomCallbacks(_currentAction);
-         _currentAction.CurBase._cAnimator.PlayNextAnimation(_currentAction._animInformation._animHash, 0.25f, true);
+         _currentAction.CurBase._cAnimator.PlayNextAnimation(_currentAction._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
          MobilityRoutine = PlayAnimSequence(_currentAction);
         StartCoroutine(MobilityRoutine);
     }

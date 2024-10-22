@@ -12,6 +12,7 @@ public class State_Idle : BaseState
     public State_Idle(Character_Base playerBase) : base(playerBase){ }
     public override async void OnEnter()
     {
+        _base.allowSecondIdleAnim = false;
         canDoSecondaryIdle = false;
         if (_base._subState == Character_SubStates.Controlled)
         {
@@ -78,46 +79,28 @@ public class State_Idle : BaseState
         _base._cComboDetection.superMobilityOption = false;
     }
 
-    public async override void OnUpdate()
+    public override void OnUpdate()
     {
         if (!_base.isLockedPause)
         {
             if (canDoSecondaryIdle)
             {
-                if (timeTillSecondaryIdle >= 0)
+                if (timeTillSecondaryIdle <= -(1 / 60f))
                 {
-                    timeTillSecondaryIdle -= (1 / 60f);
+                    CallSecondaryIdleAnim();
                 }
                 else
                 {
-                    await PlaySecondaryAnim();
+                    timeTillSecondaryIdle -= (1 / 60f);
                 }
             }
         }
         base.OnUpdate();
     }
-    async Task PlaySecondaryAnim() 
+    public void CallSecondaryIdleAnim() 
     {
-        float startTime = 0;
         canDoSecondaryIdle = false;
-        _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
-        await Task.Delay(100);
-        int secondaryAnimDelayTime = (int)(_cAnim.myAnim.GetCurrentAnimatorStateInfo(0).length * 1000);
-
-        while (startTime < secondaryAnimDelayTime) 
-        {
-            startTime += 16;
-            await Task.Yield();
-        }
-        if (inIdle)
-        {
-            while (_base.isLockedPause)
-            {
-                await Task.Yield();
-            }
-            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
-
-        }
+        _base.TriggerSecondaryIdleAnim();
         ResetTime();
     }
     void ResetTime() 

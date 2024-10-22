@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 public class Character_Base : MonoBehaviour
 {
-    public float animfloat;
+    public bool allowSecondIdleAnim;
     #region Character Profile Data
     [Header("__________Character Profile Data__________")]
     public Character_Profile characterProfile;
@@ -622,6 +622,19 @@ public class Character_Base : MonoBehaviour
             _cAnimator.PlayNextAnimation(Animator.StringToHash("Crouch"), 0, true);
             func();
         }
+    }
+    public void TriggerSecondaryIdleAnim() 
+    {
+        allowSecondIdleAnim = true;
+    }
+    public void CallWaitAnimFinish(float time)
+    {
+        StartCoroutine(AwaitAnimFinish(time));
+    }
+    IEnumerator AwaitAnimFinish(float time) 
+    {
+        yield return new WaitForSeconds(time);
+        allowSecondIdleAnim = false;
     }
     async Task AwaitCustomCall(CustomCallback customBoolAwait, Callback superIteratorCallback) 
     {

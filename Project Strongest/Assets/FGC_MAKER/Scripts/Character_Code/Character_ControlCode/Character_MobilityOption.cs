@@ -50,6 +50,19 @@ public class Character_MobilityOption : IMobilityOption
 
 }
 [Serializable]
+public enum MovementType
+{
+    Jump,
+    BackJump,
+    ForwardJump,
+    NeutralSuperJump,
+    BackSuperJump,
+    ForwardSuperJump,
+    ForwardDash,
+    BackDash,
+    Empty,
+}
+[Serializable]
 public class MobilityOption_Anim 
 {
     public AnimationClip _animationClip;

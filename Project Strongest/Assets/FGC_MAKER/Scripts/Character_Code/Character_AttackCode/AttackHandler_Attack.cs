@@ -314,7 +314,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                     Debug.Log($"Inactive bool state: {inactive}");
                     Debug.Break();
                 }
-                character.animfloat = frameCount;
                 frameCount += frameIterator;
                 yield return new WaitForSeconds(waitTime);
             }

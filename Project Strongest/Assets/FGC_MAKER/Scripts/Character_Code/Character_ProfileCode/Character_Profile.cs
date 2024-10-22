@@ -60,7 +60,6 @@ public class Character_Profile : ScriptableObject
     public Character_MoveList _characterMoveList;
     public int moveListCount;
     public List<GameObject> CharacterMoveListPrefab;
-    public Character_MobilityAsset _CharacterMobility;
     public Character_MobilityOptions _NewCharacterMobility;
     #endregion
 
