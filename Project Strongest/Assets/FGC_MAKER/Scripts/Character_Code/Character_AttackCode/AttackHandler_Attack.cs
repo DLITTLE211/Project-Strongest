@@ -489,12 +489,14 @@ public class HitCount
 public class FrameData
 {
     public int init, startup, active, inactive, recoveryEnd;
+    [Range(1, 100)] public int recoveryAmount;
     public int totalRecovery;
     public List<ExtraFrameHitPoints> _extraPoints;
     public void SetRecoveryFrames(float sampleRate, float animLength)
     {
         int totalFrames = (int)(Mathf.Ceil(animLength / (1 / sampleRate)));
         totalRecovery = Mathf.Abs(recoveryEnd - inactive);
+        recoveryEnd = inactive + recoveryAmount;
         if (_extraPoints.Count > 0)
         {
             for (int i = 0; i < _extraPoints.Count; i++)
