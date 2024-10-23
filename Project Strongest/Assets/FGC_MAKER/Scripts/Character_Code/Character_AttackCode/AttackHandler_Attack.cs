@@ -267,7 +267,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        while (frameCount <= lastAttack.AttackAnims.animLength)
+        float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
+        while (frameCount <= totalFrameTime)
         {
             if (character.ReturnIfPaused())
             {
@@ -369,7 +370,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             character._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        while (frameCount <= customProp.animLength)
+        float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
+        while (frameCount <= totalFrameTime)
         {
             if (character.ReturnIfPaused())
             {
@@ -492,7 +494,7 @@ public class FrameData
     public void SetRecoveryFrames(float sampleRate, float animLength)
     {
         int totalFrames = (int)(Mathf.Ceil(animLength / (1 / sampleRate)));
-        totalRecovery = (int)(recoveryEnd - inactive);
+        totalRecovery = Mathf.Abs(recoveryEnd - inactive);
         if (_extraPoints.Count > 0)
         {
             for (int i = 0; i < _extraPoints.Count; i++)
