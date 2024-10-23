@@ -27,7 +27,7 @@ public class Menu_MenuButton : Button
     }
     public void Raise()
     {
-        float moveToPos = NavigationButton.transform.localPosition.x + 50f;
+        float moveToPos = NavigationButton.transform.localPosition.x + 95f;
         NavigationButton.DOMoveX(moveToPos, 0.35f);
         NavigationButton.DOScale(1.1f, 0.35f);
         backgroundImage.DOColor(backgroundHighligtedColor, 0.35f);
