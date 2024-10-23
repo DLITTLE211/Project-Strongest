@@ -17,7 +17,9 @@ public class CharacterSelect_Button : MonoBehaviour
     public enum hoverState {none,left,right,both }
     public hoverState _hoverState;
     public Vector3 buttonSize;
-
+    public float widthFloat;
+    public float heightFloatTop;
+    public float heightFloatBottom;
     bool leftHover,rightHover;
     public void Start()
     {
@@ -155,7 +157,7 @@ public class CharacterSelect_Button : MonoBehaviour
         float cursorXPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.x;
         float cursorYPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.y;
 
-        if (cursorXPos <= buttonSize.x + 60 && cursorXPos > buttonSize.x - 60 && cursorYPos < buttonSize.y + 60 && cursorYPos > buttonSize.y - 110)
+        if (cursorXPos <= buttonSize.x + widthFloat && cursorXPos > buttonSize.x - widthFloat && cursorYPos < buttonSize.y + heightFloatTop && cursorYPos > buttonSize.y - heightFloatBottom)
         {
             return true;
         }

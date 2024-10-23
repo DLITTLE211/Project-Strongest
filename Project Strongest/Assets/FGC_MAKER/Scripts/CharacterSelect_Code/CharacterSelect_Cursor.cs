@@ -27,7 +27,7 @@ public class CharacterSelect_Cursor : MonoBehaviour
         
         cursorPage.characterFrame.color = cursorImage.color;
         cursorPage.LockInfo(profile);
-        cursorObject.transform.DOScale(0.85f, 0.15f);
+        cursorObject.transform.DOScale(0.5f, 0.15f);
     }
     public void UnlockCharacterChoice()
     {
@@ -38,7 +38,7 @@ public class CharacterSelect_Cursor : MonoBehaviour
         }
         cursorPage.characterFrame.color = Color.white;
         cursorPage.characterName.text = "Choose Your Character";
-        cursorObject.transform.DOScale(1f, 0.15f);
+        cursorObject.transform.DOScale(0.65f, 0.15f);
     }
 
     public void DesyncController()

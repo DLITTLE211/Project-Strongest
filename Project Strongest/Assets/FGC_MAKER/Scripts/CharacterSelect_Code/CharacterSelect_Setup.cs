@@ -260,7 +260,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             GameObject selectButton = Instantiate(characterSelectButtonPrefab, characterSelectHolder.transform);
             selectButton.gameObject.transform.localPosition = new Vector3(1, 1, 1);
             selectButton.gameObject.transform.localRotation = Quaternion.identity;
-            selectButton.gameObject.transform.localScale = Vector3.one;
+            selectButton.gameObject.transform.localScale = new Vector3(0.85f, 0.85f, 0.85f);
             selectButton.GetComponentInChildren<Button>().image.sprite = _activeProfiles[i].CharacterProfileImage;
             selectButton.GetComponentInChildren<Button>().interactable = true;
             GameObject _selectButtonInfo = selectButton;
@@ -279,7 +279,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             Vector3 selectButtonFirstSize = new Vector3(1.15f, 1.15f, 1.15f);
             activeCharacterSelectButtons[i].transform.DOScale(selectButtonFirstSize, 0.15f);
             yield return new WaitForSeconds(0.025f);
-            activeCharacterSelectButtons[i].transform.DOScale(Vector3.one, 0.15f);
+            activeCharacterSelectButtons[i].transform.DOScale(new Vector3(0.85f, 0.85f, 0.85f), 0.15f);
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
         }
     }
