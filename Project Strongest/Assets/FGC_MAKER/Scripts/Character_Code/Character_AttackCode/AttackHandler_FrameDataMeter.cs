@@ -29,6 +29,7 @@ public class FrameDate_Meter
     public TMP_Text frameNumberText;
     public MeterType _meterType;
     public Image _meterFillImage;
+    public int meterTopValue;
     public void SetImageColor() 
     {
         switch (_meterType) 
@@ -51,9 +52,9 @@ public class FrameDate_Meter
     {
         _frameMeter.maxValue = maxValue;
         _frameMeter.value = 0;
-        _frameMeter.DOValue(value, 0.5f).OnComplete(() => 
+        _frameMeter.DOValue(value, 0.5f).SetEase(Ease.Linear).OnComplete(() => 
         {
-            frameNumberText.text = $"{_meterType}: {value}";;
+            frameNumberText.text = $"{value}";
         });
     }
 }

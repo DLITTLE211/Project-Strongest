@@ -115,7 +115,6 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
     {
         init = true;
-        character._aFrameDataMeter.SetSliderInformation(HitBox.hitboxProperties.AttackAnims._frameData);
         GetPlacementLocation(curBase);
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
         if (newAttackProperties != null)
@@ -124,6 +123,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         _playerCAnimator.SetCanTransitionIdle(false);
         _playerCAnimator._base._aManager.SetStartNextAttack(false);
+        character._aFrameDataMeter.SetSliderInformation(HitBox.hitboxProperties.AttackAnims._frameData);
     }
     public override void OnStartup(Character_Base curBase)
     {
