@@ -40,6 +40,7 @@ public class Character_Base : MonoBehaviour
     public Character_SystemButtons _cSystemButtons;
     [SerializeField] private Player_SideManager _sideManager;
     public Character_HitboxManager _cHitboxManager;
+    public AttackHandler_FrameDataMeter _aFrameDataMeter;
     [Space(10)]
     public Character_Timer _timer;
     [Space(20)]
@@ -153,7 +154,8 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
-        activated = false;
+        _aFrameDataMeter.gameObject.SetActive(false);
+           activated = false;
         _side = hitboxSideDetection;
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
@@ -270,6 +272,7 @@ public class Character_Base : MonoBehaviour
         {
             case Character_SubStates.Controlled:
                 playerID = NewID;
+                _aFrameDataMeter.gameObject.SetActive(true);
                 DesyncVariables();
                 HandleButtonInitialization();
                 _subState = setSubState;

@@ -100,8 +100,8 @@ MonoBehaviour:
           startup: 22
           active: 23
           inactive: 35
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 15
             call: 2
@@ -238,8 +238,8 @@ MonoBehaviour:
           startup: 7
           active: 8
           inactive: 65
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 25
             call: 2
@@ -335,8 +335,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 18
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 0
           call: 262144
@@ -422,8 +422,8 @@ MonoBehaviour:
         startup: 28
         active: 29
         inactive: 185
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 0
           call: 2097152
@@ -730,8 +730,8 @@ MonoBehaviour:
           startup: 15
           active: 35
           inactive: 55
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 20
             call: 2
@@ -797,8 +797,8 @@ MonoBehaviour:
         startup: 0
         active: 1
         inactive: 265
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 0
           call: 262144
@@ -1045,8 +1045,8 @@ MonoBehaviour:
           startup: 0
           active: 1
           inactive: 145
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints: []
         _hitCount:
           _count: 0
@@ -1122,8 +1122,8 @@ MonoBehaviour:
           startup: 5
           active: 19
           inactive: 28
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 5
             call: 4
@@ -1219,8 +1219,8 @@ MonoBehaviour:
         startup: 1
         active: 2
         inactive: 95
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 5
           call: 262144
@@ -1466,8 +1466,8 @@ MonoBehaviour:
           startup: 1
           active: 5
           inactive: 17
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints: []
         _hitCount:
           _count: 0
@@ -1503,8 +1503,8 @@ MonoBehaviour:
         startup: 2
         active: 3
         inactive: 123
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 10
           call: 262144
@@ -1689,8 +1689,8 @@ MonoBehaviour:
           startup: 1
           active: 3
           inactive: 12
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints: []
         _hitCount:
           _count: 0
@@ -1726,8 +1726,8 @@ MonoBehaviour:
         startup: 2
         active: 3
         inactive: 123
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 10
           call: 262144
@@ -1905,8 +1905,8 @@ MonoBehaviour:
           startup: 0
           active: 1
           inactive: 40
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 0
             call: 1048576
@@ -2013,8 +2013,8 @@ MonoBehaviour:
                   startup: 2
                   active: 3
                   inactive: 9
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
                   _count: 0
@@ -2092,8 +2092,8 @@ MonoBehaviour:
             startup: 8
             active: 10
             inactive: 16
-            recovery: 0
-            lastFrame: 0
+            recoveryEnd: 0
+            totalRecovery: 0
             _extraPoints:
             - hitFramePoints: 3
               call: 2
@@ -2194,8 +2194,8 @@ MonoBehaviour:
                   startup: 15
                   active: 16
                   inactive: 21
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 4
                     call: 2
@@ -2295,8 +2295,8 @@ MonoBehaviour:
                   startup: 10
                   active: 11
                   inactive: 18
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 3
                     call: 2
@@ -2403,8 +2403,8 @@ MonoBehaviour:
             startup: 9
             active: 10
             inactive: 30
-            recovery: 0
-            lastFrame: 0
+            recoveryEnd: 0
+            totalRecovery: 0
             _extraPoints:
             - hitFramePoints: 3
               call: 2
@@ -2505,8 +2505,8 @@ MonoBehaviour:
                   startup: 28
                   active: 29
                   inactive: 41
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
                   _count: 0
@@ -2576,8 +2576,8 @@ MonoBehaviour:
                   startup: 10
                   active: 11
                   inactive: 18
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 3
                     call: 2
@@ -2677,8 +2677,8 @@ MonoBehaviour:
                   startup: 8
                   active: 9
                   inactive: 15
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 3
                     call: 2
@@ -2785,8 +2785,8 @@ MonoBehaviour:
             startup: 9
             active: 10
             inactive: 30
-            recovery: 0
-            lastFrame: 0
+            recoveryEnd: 0
+            totalRecovery: 0
             _extraPoints:
             - hitFramePoints: 3
               call: 2
@@ -2887,8 +2887,8 @@ MonoBehaviour:
                   startup: 28
                   active: 29
                   inactive: 41
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
                   _count: 0
@@ -2958,8 +2958,8 @@ MonoBehaviour:
                   startup: 10
                   active: 11
                   inactive: 18
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 3
                     call: 2
@@ -3059,8 +3059,8 @@ MonoBehaviour:
                   startup: 8
                   active: 9
                   inactive: 15
-                  recovery: 0
-                  lastFrame: 0
+                  recoveryEnd: 0
+                  totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 3
                     call: 2
@@ -3162,8 +3162,8 @@ MonoBehaviour:
           startup: 3
           active: 4
           inactive: 9
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints: []
         _hitCount:
           _count: 0
@@ -3233,8 +3233,8 @@ MonoBehaviour:
           startup: 17
           active: 18
           inactive: 25
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 4
             call: 2
@@ -3334,8 +3334,8 @@ MonoBehaviour:
           startup: 18
           active: 19
           inactive: 25
-          recovery: 0
-          lastFrame: 0
+          recoveryEnd: 0
+          totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 2
             call: 2
@@ -3443,8 +3443,8 @@ MonoBehaviour:
               startup: 14
               active: 15
               inactive: 22
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 2
                 call: 2
@@ -3542,8 +3542,8 @@ MonoBehaviour:
               startup: 13
               active: 15
               inactive: 20
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 4
                 call: 2
@@ -3641,8 +3641,8 @@ MonoBehaviour:
               startup: 16
               active: 17
               inactive: 24
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -3693,7 +3693,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Standing Light Punch
     _attackInput:
@@ -3747,8 +3746,8 @@ MonoBehaviour:
               startup: 5
               active: 6
               inactive: 10
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -3816,8 +3815,8 @@ MonoBehaviour:
               startup: 3
               active: 12
               inactive: 18
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -3915,8 +3914,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 17
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 1
                 call: 2
@@ -3967,7 +3966,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Standing Heavy Punch
     _attackInput:
@@ -4021,8 +4019,8 @@ MonoBehaviour:
               startup: 8
               active: 10
               inactive: 15
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 2
                 call: 2
@@ -4120,8 +4118,8 @@ MonoBehaviour:
               startup: 10
               active: 11
               inactive: 16
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 2
                 call: 2
@@ -4219,8 +4217,8 @@ MonoBehaviour:
               startup: 12
               active: 13
               inactive: 18
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -4271,7 +4269,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Standing Light Kick
     _attackInput:
@@ -4325,8 +4322,8 @@ MonoBehaviour:
               startup: 8
               active: 9
               inactive: 13
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -4394,8 +4391,8 @@ MonoBehaviour:
               startup: 16
               active: 17
               inactive: 22
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 5
                 call: 2
@@ -4493,8 +4490,8 @@ MonoBehaviour:
               startup: 23
               active: 25
               inactive: 31
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 5
                 call: 2
@@ -4545,7 +4542,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Standing Heavy Kick
     _attackInput:
@@ -4599,8 +4595,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 16
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 1
                 call: 2
@@ -4698,8 +4694,8 @@ MonoBehaviour:
               startup: 13
               active: 15
               inactive: 37
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -4797,8 +4793,8 @@ MonoBehaviour:
               startup: 12
               active: 13
               inactive: 19
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 2
                 call: 2
@@ -4849,7 +4845,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   commandNormalAttacks:
   - SpecialAttackName: Jumping Jaw Strike
@@ -4904,8 +4899,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 18
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -4956,7 +4951,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Oi Zuki
     _attackInput:
@@ -5010,8 +5004,8 @@ MonoBehaviour:
               startup: 13
               active: 15
               inactive: 22
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 5
                 call: 2
@@ -5062,7 +5056,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: High Kick
     _attackInput:
@@ -5116,8 +5109,8 @@ MonoBehaviour:
               startup: 12
               active: 13
               inactive: 18
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 2
                 call: 2
@@ -5168,7 +5161,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Flying Knee
     _attackInput:
@@ -5222,8 +5214,8 @@ MonoBehaviour:
               startup: 5
               active: 6
               inactive: 10
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -5244,7 +5236,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: DiveKick
     _attackInput:
@@ -5298,8 +5289,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 23
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 6
                 call: 4
@@ -5350,7 +5341,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   simpleAttacks:
   - SpecialAttackName: Crouching Light Punch
@@ -5405,8 +5395,8 @@ MonoBehaviour:
               startup: 5
               active: 6
               inactive: 10
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -5427,7 +5417,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Crouching Heavy Punch
     _attackInput:
@@ -5481,8 +5470,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 18
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -5533,7 +5522,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Crouching Light Kick
     _attackInput:
@@ -5587,8 +5575,8 @@ MonoBehaviour:
               startup: 4
               active: 5
               inactive: 9
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 2
                 call: 2
@@ -5639,7 +5627,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Crouching Heavy Kick
     _attackInput:
@@ -5693,8 +5680,8 @@ MonoBehaviour:
               startup: 13
               active: 15
               inactive: 21
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
                 call: 2
@@ -5745,7 +5732,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Air Light Punch
     _attackInput:
@@ -5799,8 +5785,8 @@ MonoBehaviour:
               startup: 4
               active: 5
               inactive: 10
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -5821,7 +5807,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Air Heavy Punch
     _attackInput:
@@ -5875,8 +5860,8 @@ MonoBehaviour:
               startup: 10
               active: 11
               inactive: 19
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -5897,7 +5882,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Air Light Kick
     _attackInput:
@@ -5951,8 +5935,8 @@ MonoBehaviour:
               startup: 4
               active: 5
               inactive: 10
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -5973,7 +5957,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Air Heavy Kick
     _attackInput:
@@ -6027,8 +6010,8 @@ MonoBehaviour:
               startup: 10
               active: 11
               inactive: 18
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -6049,7 +6032,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: High Parry
     _attackInput:
@@ -6103,8 +6085,8 @@ MonoBehaviour:
               startup: 1
               active: 3
               inactive: 8
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -6125,7 +6107,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   - SpecialAttackName: Low Parry
     _attackInput:
@@ -6179,8 +6160,8 @@ MonoBehaviour:
               startup: 1
               active: 3
               inactive: 8
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 0
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -6201,7 +6182,6 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    lastDirection: 0
     leewayTime: 0
   BasicThrows:
   - ThrowName: Forward Throw
@@ -6256,8 +6236,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 16
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 27
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -6296,8 +6276,8 @@ MonoBehaviour:
         startup: 0
         active: 3
         inactive: 110
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 5
           call: 262144
@@ -6450,8 +6430,8 @@ MonoBehaviour:
               startup: 11
               active: 12
               inactive: 16
-              recovery: 0
-              lastFrame: 0
+              recoveryEnd: 27
+              totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
@@ -6490,8 +6470,8 @@ MonoBehaviour:
         startup: 0
         active: 2
         inactive: 110
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 1
           call: 524288
@@ -6726,8 +6706,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recoveryEnd: 0
+        totalRecovery: 0
         _extraPoints: []
       _hitCount:
         _count: 0

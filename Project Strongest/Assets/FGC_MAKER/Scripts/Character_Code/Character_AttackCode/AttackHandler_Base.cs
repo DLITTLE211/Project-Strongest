@@ -16,7 +16,7 @@ public abstract class AttackHandler_Base
     public abstract void OnActive(Character_Base curBase);
     public abstract void OnStay(Character_Base curBase);
     public abstract void OnRecov(Character_Base curBase);
-    public abstract void OnExit();
+    public abstract void OnRecovEnd();
 }
 [Serializable]
 public class ResponseAnim_Base

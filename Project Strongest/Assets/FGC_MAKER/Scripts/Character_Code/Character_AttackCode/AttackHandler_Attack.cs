@@ -115,6 +115,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
     {
         init = true;
+        character._aFrameDataMeter.SetSliderInformation(HitBox.hitboxProperties.AttackAnims._frameData);
         GetPlacementLocation(curBase);
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
         if (newAttackProperties != null)
@@ -168,7 +169,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
         }
     }
-    public override void OnExit()
+    public override void OnRecovEnd()
     {
         lastFrame = true;
         if (HitBox.gameObject.activeInHierarchy)
@@ -210,7 +211,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnStartup(curBase), _frameData.startup, startup));
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.active, active));
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.inactive, inactive));
-        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnExit(), _frameData.lastFrame, lastFrame));
+        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecovEnd(), _frameData.recoveryEnd, lastFrame));
     }
     public void AddCustomCallbacks(AttackHandler_Attack throwAttackCallbacks = null)
     {
@@ -345,12 +346,12 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             if (!lastAttack.hitConnected)
             {
-                _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
+                _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.totalRecovery);
             }
         }
         else
         {
-            _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
+            _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.totalRecovery);
         }
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
@@ -460,7 +461,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        _playerCAnimator.CountUpNegativeFrames(customProp._frameData.recovery);
+        _playerCAnimator.CountUpNegativeFrames(customProp._frameData.totalRecovery);
     }
 }
 
@@ -485,13 +486,13 @@ public class HitCount
 [Serializable]
 public class FrameData
 {
-    public int init, startup, active, inactive, recovery, lastFrame;
+    public int init, startup, active, inactive, recoveryEnd;
+    public int totalRecovery;
     public List<ExtraFrameHitPoints> _extraPoints;
     public void SetRecoveryFrames(float sampleRate, float animLength)
     {
         int totalFrames = (int)(Mathf.Ceil(animLength / (1 / sampleRate)));
-        lastFrame = totalFrames;
-        recovery = (int)(totalFrames - inactive);
+        totalRecovery = (int)(recoveryEnd - inactive);
         if (_extraPoints.Count > 0)
         {
             for (int i = 0; i < _extraPoints.Count; i++)
