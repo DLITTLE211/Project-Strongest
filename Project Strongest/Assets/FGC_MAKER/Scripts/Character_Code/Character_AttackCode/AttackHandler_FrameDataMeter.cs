@@ -8,28 +8,52 @@ using TMPro;
 
 public class AttackHandler_FrameDataMeter : MonoBehaviour
 {
-    [SerializeField] private FrameDate_Meter _startUpSlider;
-    [SerializeField] private FrameDate_Meter _activeSlider;
-    [SerializeField] private FrameDate_Meter _inactiveSlider;
-    [SerializeField] private FrameDate_Meter _recoverySlider;
+    [SerializeField] private FrameMeterHolder _frameMeterHolder;
     // Start is called before the first frame update
 
     public void SetSliderInformation(FrameData _frameData) 
     {
-        _startUpSlider.SetFrameMeter(_frameData.recoveryEnd, _frameData.startup);
-        _activeSlider.SetFrameMeter(_frameData.recoveryEnd, _frameData.active);
-        _inactiveSlider.SetFrameMeter(_frameData.recoveryEnd, _frameData.inactive);
-        _recoverySlider.SetFrameMeter(_frameData.recoveryEnd, _frameData.recoveryEnd);
+        _frameMeterHolder.ActivateFrameDisplay(_frameData);
     }
 }
 [Serializable]
-public class FrameDate_Meter 
+public class FrameMeterHolder 
+{
+    public List<FrameData_Meter> FrameDataMeter;
+    public TMP_Text frameText;
+    FrameData _frameData;
+    public void ActivateFrameDisplay(FrameData frameData)
+    {
+        _frameData = frameData;
+        Sequence meterDataSequence = DOTween.Sequence();
+        FrameDataMeter[0].SetMeterInformation(_frameData.recoveryEnd, _frameData.startup);
+        FrameDataMeter[1].SetMeterInformation(_frameData.recoveryEnd, _frameData.active);
+        FrameDataMeter[2].SetMeterInformation(_frameData.recoveryEnd, _frameData.inactive);
+        FrameDataMeter[3].SetMeterInformation(_frameData.recoveryEnd, _frameData.recoveryEnd);
+        for (int i = 0; i < FrameDataMeter.Count;i++) 
+        {
+            if (i == FrameDataMeter.Count - 1)
+            {
+                FrameDataMeter[i].RunTween(SetText);
+            }
+            else 
+            {
+                FrameDataMeter[i].RunTween();
+            }
+        }
+    }
+    public void SetText() 
+    {
+        frameText.text = $"Startup Frames: {_frameData.startup}/ Active Frames: {_frameData.active}/ Recovery Frames: -{_frameData.totalRecovery}/ Total Frames: {_frameData.recoveryEnd}";
+    }
+}
+[Serializable]
+public class FrameData_Meter 
 {
     public Slider _frameMeter;
-    public TMP_Text frameNumberText;
     public MeterType _meterType;
     public Image _meterFillImage;
-    public int meterTopValue;
+    int topValue;
     public void SetImageColor() 
     {
         switch (_meterType) 
@@ -48,14 +72,16 @@ public class FrameDate_Meter
                 break;
         }
     }
-    public void SetFrameMeter(int maxValue, int value) 
+    public void SetMeterInformation(int maxValue, int setValue)
     {
         _frameMeter.maxValue = maxValue;
+        topValue = setValue;
         _frameMeter.value = 0;
-        _frameMeter.DOValue(value, 0.5f).SetEase(Ease.Linear).OnComplete(() => 
-        {
-            frameNumberText.text = $"{value}";
-        });
+    }
+    public void RunTween(Callback func = null)
+    {
+        _frameMeter.DOValue(topValue,0.5f);
+        if(func != null) { func(); }
     }
 }
 public enum MeterType 
