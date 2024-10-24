@@ -10,7 +10,10 @@ public class AttackHandler_FrameDataMeter : MonoBehaviour
 {
     [SerializeField] private FrameMeterHolder _frameMeterHolder;
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        _frameMeterHolder.SetFrameImageColor();
+    }
     public void SetSliderInformation(FrameData _frameData) 
     {
         _frameMeterHolder.ActivateFrameDisplay(_frameData);
@@ -22,6 +25,13 @@ public class FrameMeterHolder
     public List<FrameData_Meter> FrameDataMeter;
     public TMP_Text frameText;
     FrameData _frameData;
+    public void SetFrameImageColor()
+    {
+        for (int i = 0; i < FrameDataMeter.Count; i++)
+        {
+            FrameDataMeter[i].SetImageColor();
+        }
+    }
     public void ActivateFrameDisplay(FrameData frameData)
     {
         _frameData = frameData;
@@ -54,6 +64,7 @@ public class FrameData_Meter
     public MeterType _meterType;
     public Image _meterFillImage;
     int topValue;
+    Tween activeTween;
     public void SetImageColor() 
     {
         switch (_meterType) 
@@ -74,14 +85,20 @@ public class FrameData_Meter
     }
     public void SetMeterInformation(int maxValue, int setValue)
     {
+        if(activeTween != null) 
+        {
+            activeTween.Kill();
+            activeTween = null;
+        }
         _frameMeter.maxValue = maxValue;
         topValue = setValue;
         _frameMeter.value = 0;
     }
     public void RunTween(Callback func = null)
     {
-        _frameMeter.DOValue(topValue,0.5f);
-        if(func != null) { func(); }
+        activeTween = _frameMeter.DOValue(topValue, 0.5f);
+        activeTween.Play();
+        if (func != null) { func(); }
     }
 }
 public enum MeterType 

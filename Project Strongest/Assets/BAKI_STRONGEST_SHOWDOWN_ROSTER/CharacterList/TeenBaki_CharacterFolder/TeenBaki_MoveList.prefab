@@ -4906,10 +4906,10 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1
           attackMainStunValues:
-            hitstunValue: 11
-            blockStunValue: 5
-            hitstopValue: 6
-            blockStopValue: 2
+            hitstunValue: 4
+            blockStunValue: 1
+            hitstopValue: 3
+            blockStopValue: 0
           hitLevel: 66
           attackHashes: 0
           _meterRequirement: 0
@@ -4944,7 +4944,7 @@ MonoBehaviour:
               active: 12
               inactive: 18
               recoveryEnd: 29
-              recoveryAmount: 11
+              recoveryAmount: 25
               totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
@@ -4986,7 +4986,7 @@ MonoBehaviour:
           hitConnected: 0
           lateralKBP:
             lateralKBP: 2
-            Value: 2
+            Value: 4
           verticalKBP:
             verticalKBP: 0
             Value: 0

@@ -320,7 +320,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                 yield return new WaitForSeconds(waitTime);
             }
         }
-        _playerCAnimator.SetCanTransitionIdle(true);
         if (character._cAttackTimer._type == TimerType.Special) 
         {
             character._cAttackTimer.ClearAttackLanded();
@@ -348,11 +347,13 @@ public class AttackHandler_Attack : AttackHandler_Base
             if (!lastAttack.hitConnected)
             {
                 _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.totalRecovery);
+                _playerCAnimator.SetCanTransitionIdle(true);
             }
         }
         else
         {
             _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.totalRecovery);
+            _playerCAnimator.SetCanTransitionIdle(true);
         }
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
@@ -437,26 +438,22 @@ public class AttackHandler_Attack : AttackHandler_Base
             if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
             {
                 character._cAttackTimer.ClearThrowLanded();
-                _playerCAnimator.SetCanTransitionIdle(true);
             }
             else if (thisAttack._moveType == MoveType.Super)
             {
                 if (curAnim >= animCount)
                 {
                     character._cAttackTimer.ClearSuperLanded();
-                    _playerCAnimator.SetCanTransitionIdle(true);
                 }
             }
             else
             {
                 character._cAttackTimer.ClearAttackLanded();
-                _playerCAnimator.SetCanTransitionIdle(true);
             }
         }
         else 
         {
             character._cAttackTimer.ClearAttackLanded();
-            _playerCAnimator.SetCanTransitionIdle(true);
         }
         if (requiredHitboxCallBacks.Count == 1)
         {
@@ -464,6 +461,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks.RemoveAt(0);
         }
         _playerCAnimator.CountUpNegativeFrames(customProp._frameData.totalRecovery);
+        _playerCAnimator.SetCanTransitionIdle(true);
     }
 }
 
