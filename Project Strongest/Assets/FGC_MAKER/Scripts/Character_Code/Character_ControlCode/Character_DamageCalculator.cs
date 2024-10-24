@@ -41,10 +41,6 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = callback.customDamage.rawAttackDamage;
-        /*if (CheckAfflictionState())
-        {
-            afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-        }*/
         if (!CheckCounterHitState())
         {
             counterHitMult = 1;
@@ -54,7 +50,14 @@ public class Character_DamageCalculator : MonoBehaviour
         float defenseValue = _healtController.defenseValue / 100;
         _base._cForce.SendKnockBackOnHit(callback.customDamage);
         calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
-        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
+        if (callback.customDamage.isScaling)
+        {
+            calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.35f);
+        }
+        else 
+        {
+            calculatedRecovDamage = calculatedDamage;
+        }
         UpdateDamageText(calculatedDamage);
         if (calculatedRecovDamage <= 0)
         {
@@ -117,7 +120,7 @@ public class Character_DamageCalculator : MonoBehaviour
         float defenseValue = _healtController.defenseValue / 100;
 
         calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
-        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
+        calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.575f);
 
         if (currentAttack._meterRequirement <= 0)
         {

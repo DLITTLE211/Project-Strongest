@@ -91,6 +91,7 @@ public class CustomDamageField
     [Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
     public bool isFinalAttack;
+    public bool isScaling;
     public Horizontal_KnockBack lateralKBP; // Lateral KnockBack Properties
     public Vertical_KnockBack verticalKBP; // Vertical KnockBack Properties
     public Attack_KnockDown KnockDown; // Vertical KnockBack Properties
