@@ -119,14 +119,17 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling + defenseValue);
+        calculatedDamage = (counterHitValue + curRawDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.575f);
 
         if (currentAttack._meterRequirement <= 0)
         {
-            calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : currentAttack._meterAwardedOnHit / (currentComboHitCount * 0.5f);
-            float scaledMeterValue = Mathf.Abs((currentAttack._meterAwardedOnHit - calculatedMeterScaling));
-            _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
+            calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : ((currentAttack._meterAwardedOnHit * 0.05f)* calculatedScaling);
+            float scaledMeterValue = currentAttack._meterAwardedOnHit - calculatedMeterScaling;
+            if (scaledMeterValue > 0)
+            {
+                _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
+            }
         }
         UpdateDamageText(calculatedDamage);
         if (calculatedRecovDamage <= 0)
