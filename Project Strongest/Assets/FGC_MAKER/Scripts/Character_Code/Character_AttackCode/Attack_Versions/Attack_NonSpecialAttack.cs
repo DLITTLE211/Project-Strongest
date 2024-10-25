@@ -103,6 +103,18 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             return;
         }
     }
+    public bool CheckAttackContains(Attack_BaseProperties newAttack) 
+    {
+        for(int i = 0; i < _attackInput._correctInput.Count; i++) 
+        {
+            if (_attackInput._correctInput[i].property == newAttack) 
+            {
+                return true;
+            }
+            continue;
+        }
+        return false;
+    }
 
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties attack)
     {

@@ -7580,7 +7580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d452ebc67568344ab50fddd54cb83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camController: {fileID: 550802477}
+  camController: {fileID: 0}
   _base: {fileID: 993311525}
   xVal: 0
   yVal: 0
@@ -8831,7 +8831,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550802476}
-  - component: {fileID: 550802477}
   - component: {fileID: 550802478}
   m_Layer: 0
   m_Name: CameraHolder
@@ -8859,7 +8858,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &550802477
+--- !u!114 &550802478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8868,7 +8867,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 550802475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5359e5b960eb6ab4593be404230a12f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b5cd62cf3826ad344a659e6236d1a19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTime: 0
@@ -8883,20 +8882,8 @@ MonoBehaviour:
   - {fileID: 993311515}
   - {fileID: 94923331}
   offset: {x: -0.53, y: -0.008, z: -0.3}
-  cameraControlCalls: 917504
+  cameraControlCalls: 491520
   isTracking: 1
---- !u!114 &550802478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550802475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5cd62cf3826ad344a659e6236d1a19c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &566836024
 GameObject:
   m_ObjectHideFlags: 0
@@ -16894,7 +16881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d452ebc67568344ab50fddd54cb83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camController: {fileID: 550802477}
+  camController: {fileID: 0}
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
@@ -21532,7 +21519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911741f06d7577348836cd09197c0522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraController: {fileID: 550802477}
+  _cameraController: {fileID: 550802478}
   p1: {fileID: 0}
   p2: {fileID: 0}
 --- !u!114 &1359521219

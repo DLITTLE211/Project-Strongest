@@ -33,6 +33,10 @@ public class Character_ComboDetection : MonoBehaviour
         followUpInputMoveTypes.Add(MoveType.Stance);
         followUpInputMoveTypes.Add(MoveType.Rekka);
     }
+    public IAttackFunctionality ReturnActiveFollowUp() 
+    {
+        return ActiveFollowUpAttackCheck.Value;
+    }
     public void SetAnimator(Character_Animator myAnim)
     {
         _animator = myAnim;

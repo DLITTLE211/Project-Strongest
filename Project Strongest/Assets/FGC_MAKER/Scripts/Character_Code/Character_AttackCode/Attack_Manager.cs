@@ -157,6 +157,10 @@ public class Attack_Manager : MonoBehaviour
                         return false;
                     }
                 }
+                if(!_base._cComboDetection.ReturnActiveFollowUp().CheckAttackContains(newAttack)) 
+                {
+                    return false;
+                }
                 break;
             case MoveType.Command_Normal:
                 if (!CheckStringPriority(lastBase.cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
