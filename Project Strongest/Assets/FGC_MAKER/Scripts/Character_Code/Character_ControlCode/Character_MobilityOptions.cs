@@ -28,6 +28,7 @@ public class Character_MobilityOptions : MonoBehaviour
     }
     IEnumerator PlayAnimSequence(Character_MobilityOption _currentAction)
     {
+        _currentAction.CurBase._cAnimator.SetCanTransitionIdle(false);
         float waitTime = Base_FrameCode.ONE_FRAME;
         float endingFrame = _currentAction.frameData.recoveryAmount + _currentAction.frameData._extraPoints[_currentAction.frameData._extraPoints.Count - 1].hitFramePoints;
         float endingPoint = endingFrame * waitTime;
@@ -51,6 +52,7 @@ public class Character_MobilityOptions : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             #endregion
         }
+        _currentAction.CurBase._cAnimator.SetCanTransitionIdle(true);
     }
     void SetCustomCallbacks(Character_MobilityOption _currentAction)
     {

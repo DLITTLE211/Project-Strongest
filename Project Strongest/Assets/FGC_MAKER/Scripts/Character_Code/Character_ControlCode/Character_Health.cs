@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Character_Health : MonoBehaviour
 {
+    [SerializeField] private MainGame_HealthDisparityChecker _disparityChecker;
     [SerializeField] private Character_Base _base;
     [SerializeField] private Image _chosenCharacterProfileImage;
     public MainMeterController health_Main;
@@ -51,6 +52,7 @@ public class Character_Health : MonoBehaviour
     }
     public void ApplyMainHealthDamage(float damageValue)
     {
+        _disparityChecker.UpdateMeterOnDamage();
         canRecover = false;
         DOTween.Kill(health_Main.meterSlider);
         health_Main.currentValue -= damageValue;
@@ -82,6 +84,7 @@ public class Character_Health : MonoBehaviour
         {
             health_Main.currentValue = health_Main.meterSlider.value;
         }
+        _disparityChecker.UpdateMeterOnDamage();
     }
     public void recoverHealth()
     {
