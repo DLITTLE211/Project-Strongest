@@ -16,7 +16,7 @@ public class State_CrouchBlock : BaseState
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
         if (_base._cStateMachine._CheckBlockButton() && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            _cAnim.PlayNextAnimation(cblockHash, 0);
+           // _cAnim.PlayNextAnimation(cblockHash, 0);
             await DeployBlock();
             await WaitToChargeSuperMobility();
         }
@@ -55,9 +55,9 @@ public class State_CrouchBlock : BaseState
             try
             {
                 int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-                if (currentAnimClipName == cblockHash)
+              //  if (currentAnimClipName == cblockHash)
                 {
-                    _cAnim.PlayNextAnimation(cblockHash, 0);
+               //     _cAnim.PlayNextAnimation(cblockHash, 0);
                 }
             }
             catch (IndexOutOfRangeException){}

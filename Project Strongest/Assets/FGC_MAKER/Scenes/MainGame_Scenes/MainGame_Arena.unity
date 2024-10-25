@@ -1750,6 +1750,7 @@ MonoBehaviour:
   _sideManager: {fileID: 1359521219}
   _cHitboxManager: {fileID: 1661697129}
   _aFrameDataMeter: {fileID: 538836763}
+  _cBlockHandler: {fileID: 666069067}
   _timer:
     inputLogger:
       textObject:
@@ -4285,6 +4286,80 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &282541414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 282541415}
+  - component: {fileID: 282541416}
+  m_Layer: 7
+  m_Name: ______BlockHandler_______
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &282541415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282541414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1684261299}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &282541416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282541414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41c38c94e64d224a9f0371386692e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StandBlock:
+    frameData:
+      init: 0
+      startup: 0
+      active: 0
+      inactive: 0
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
+      _extraPoints: []
+    _animInformation:
+      _animationClip: {fileID: 0}
+      _animName: 
+      _animHash: 0
+      _animLength: 0
+  CrouchBlock:
+    frameData:
+      init: 0
+      startup: 0
+      active: 0
+      inactive: 0
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
+      _extraPoints: []
+    _animInformation:
+      _animationClip: {fileID: 0}
+      _animName: 
+      _animHash: 0
+      _animLength: 0
 --- !u!1 &285658157
 GameObject:
   m_ObjectHideFlags: 0
@@ -10097,6 +10172,80 @@ MonoBehaviour:
   currentAffliction: {fileID: 0}
   defenseValue: 100
   canRecover: 0
+--- !u!1 &666069065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666069066}
+  - component: {fileID: 666069067}
+  m_Layer: 7
+  m_Name: ______BlockHandler_______
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &666069066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666069065}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1663233169}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &666069067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666069065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41c38c94e64d224a9f0371386692e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StandBlock:
+    frameData:
+      init: 0
+      startup: 0
+      active: 0
+      inactive: 0
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
+      _extraPoints: []
+    _animInformation:
+      _animationClip: {fileID: 0}
+      _animName: 
+      _animHash: 0
+      _animLength: 0
+  CrouchBlock:
+    frameData:
+      init: 0
+      startup: 0
+      active: 0
+      inactive: 0
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
+      _extraPoints: []
+    _animInformation:
+      _animationClip: {fileID: 0}
+      _animName: 
+      _animHash: 0
+      _animLength: 0
 --- !u!1 &676886974
 GameObject:
   m_ObjectHideFlags: 0
@@ -16018,6 +16167,7 @@ MonoBehaviour:
   _sideManager: {fileID: 1359521219}
   _cHitboxManager: {fileID: 615901884}
   _aFrameDataMeter: {fileID: 1335039980396521004}
+  _cBlockHandler: {fileID: 282541416}
   _timer:
     inputLogger:
       textObject:
@@ -25996,6 +26146,7 @@ Transform:
   - {fileID: 1509354413}
   - {fileID: 285658158}
   - {fileID: 1309202296}
+  - {fileID: 666069066}
   - {fileID: 1183931822}
   - {fileID: 566836025}
   - {fileID: 131915388}
@@ -26236,6 +26387,7 @@ Transform:
   - {fileID: 1952859374}
   - {fileID: 1502884058}
   - {fileID: 132508871}
+  - {fileID: 282541415}
   - {fileID: 1192763486}
   - {fileID: 89504892}
   - {fileID: 757446777}

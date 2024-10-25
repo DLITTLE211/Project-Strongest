@@ -69,10 +69,19 @@ public class MobilityOption_Anim
     public string _animName;
     public int _animHash;
     public float _animLength;
-    public void SetAnimInformation() 
+    public void SetAnimInformation(AnimationClip curAnim = null) 
     {
-        _animName = _animationClip.name;
-        _animLength = _animationClip.length;
-        _animHash = Animator.StringToHash(_animName);
+        if (curAnim != null)
+        {
+            _animName = curAnim.name;
+            _animLength = curAnim.length;
+            _animHash = Animator.StringToHash(curAnim.name);
+        }
+        else
+        {
+            _animName = _animationClip.name;
+            _animLength = _animationClip.length;
+            _animHash = Animator.StringToHash(_animName);
+        }
     }
 }

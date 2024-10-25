@@ -53,6 +53,8 @@ public class Character_Profile : ScriptableObject
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public GameObject CharacterModel;
     public List<HitAnimationField> properHitResponseAnimations;
+    public AnimationClip StandBlockAnim;
+    public AnimationClip CrouchBlockAnim;
     #endregion
 
     #region Character MoveList Info

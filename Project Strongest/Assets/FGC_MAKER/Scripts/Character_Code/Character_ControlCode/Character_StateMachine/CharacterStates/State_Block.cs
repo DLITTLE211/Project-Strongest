@@ -15,7 +15,7 @@ public class State_Block : BaseState
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Block State");
         if (_base._cStateMachine._CheckBlockButton())
         {
-            _cAnim.PlayNextAnimation(sblockHash, 0);
+            //_cAnim.PlayNextAnimation(sblockHash, 0);
             await DeployBlock();
         }
     }
@@ -37,9 +37,9 @@ public class State_Block : BaseState
             try
             {
                 int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-                if (currentAnimClipName == sblockHash)
+                //if (currentAnimClipName == sblockHash)
                 {
-                    _cAnim.PlayNextAnimation(sblockHash, 0);
+                //    _cAnim.PlayNextAnimation(sblockHash, 0);
                 }
             }
             catch (IndexOutOfRangeException) { }

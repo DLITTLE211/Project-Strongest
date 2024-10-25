@@ -41,6 +41,7 @@ public class Character_Base : MonoBehaviour
     [SerializeField] private Player_SideManager _sideManager;
     public Character_HitboxManager _cHitboxManager;
     public AttackHandler_FrameDataMeter _aFrameDataMeter;
+    public Character_BlockHandler _cBlockHandler;
     [Space(10)]
     public Character_Timer _timer;
     [Space(20)]
@@ -198,6 +199,7 @@ public class Character_Base : MonoBehaviour
     void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
         characterProfile.SetCharacterAnimator(chosenAnimator);
+        _cBlockHandler.SetBlockAnimationData(this);
         chosenAnimator._base = this;
         _aManager.C_Animator = chosenAnimator;
         if (_chosenAmplifier != null) 
