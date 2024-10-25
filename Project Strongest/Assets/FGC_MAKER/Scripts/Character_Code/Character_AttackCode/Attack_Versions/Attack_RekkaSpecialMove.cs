@@ -58,9 +58,16 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
 
     public override void ResetCombo()
     {
-        inRekkaState = false; 
+        inRekkaState = false;
         curRekkaInput = 0;
         usedRekkas = new List<Attack_BaseProperties>();
+        for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
+        {
+            for (int j = 0; j < rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput.Count; j++)
+            {
+                rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput[j].ResetGatlingCount();
+            }
+        }
     }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {

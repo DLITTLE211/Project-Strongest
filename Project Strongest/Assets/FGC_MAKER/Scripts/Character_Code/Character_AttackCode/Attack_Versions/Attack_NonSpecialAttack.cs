@@ -37,6 +37,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
         {
             _attackInput._correctInput[i].property.hitConnected = false;
+            _attackInput._correctInput[i].ResetGatlingCount();
         }
     }
     
@@ -50,7 +51,10 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     {
         ResetCombo();
     }
-
+    public void DecreaseGatlingCount(Attack_BaseInput currentInput) 
+    {
+        currentInput.GatlingCount--;
+    }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
         if (curAttack > _attackInput._correctInput.Count)
@@ -74,11 +78,20 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         SendAttackOnSucess();
         _curBase.comboList3_0.SetFollowAttack(newProperty);
     }
+    public bool GatlingDecreaseCheck(Attack_BaseInput currentAttack) 
+    {
+        bool lessThanZewro = currentAttack.GatlingCount <= 0;
+        bool isNotInfinity = currentAttack.GatlingMax != Mathf.Infinity;
+        return lessThanZewro && isNotInfinity;
+    }
+    
     public void PreformAttack(Callback SendAttackOnSucess)
     {
-
         Attack_BaseProperties newNormalAttack = _attackInput._correctInput[0].property;
-        ResetCombo();
+        if (_attackInput._correctInput.Count > 1)
+        {
+            ResetCombo();
+        }
         try
         {
             if (_attackInput._correctInput.Count > 1)
@@ -93,8 +106,13 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
                     return;
                 }
             }
+            if (GatlingDecreaseCheck(_attackInput._correctInput[0])) 
+            {
+                Debug.LogError("Attack Has no more available gatlings. Returning...");
+                return;
+            }
             _curBase.comboList3_0.ClearFollowUpAttack();
-            _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess);
+            _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess,() => DecreaseGatlingCount(_attackInput._correctInput[0]), ResetCombo);
             curAttack++;
         }
         catch (ArgumentOutOfRangeException)

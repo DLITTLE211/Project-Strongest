@@ -62,6 +62,25 @@ public class Character_MoveList : MonoBehaviour
         }
         return (MoveType)0;
     }
+    public void ReserveAllAttackGatlingReset() 
+    {
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            simpleAttacks[i].ResetAttackData();
+        }
+        for (int i = 0; i < stringNormalAttacks.Count; i++)
+        {
+            stringNormalAttacks[i].ResetAttackData();
+        }
+        for (int i = 0; i < rekkaSpecials.Count; i++)
+        {
+            rekkaSpecials[i].ResetAttackData();
+        }
+        for (int i = 0; i < stanceSpecials.Count; i++)
+        {
+            stanceSpecials[i].ResetAttackData();
+        }
+    }
     public void SetFollowAttack(Attack_BaseProperties _followUp)
     {
         followUp = _followUp;
@@ -72,13 +91,14 @@ public class Character_MoveList : MonoBehaviour
     }
     public void ClearAttackData(IState state, IState attacking)
     {
-       
         if(nonClearStates.Contains(state)) 
         {
             return;
         }
+        currentAttack.Value.ResetAttackData();
         currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
         followUp = null;
+        ReserveAllAttackGatlingReset();
     }
 
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)

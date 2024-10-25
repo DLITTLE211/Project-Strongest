@@ -63,24 +63,24 @@ public class Attack_Manager : MonoBehaviour
         curTypeHierarchy = MoveType.Normal;
   //      normalGatlingCount = 3;
     }
-    public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess)
+    public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
     {
-        GetAttackCriteriaifNotNull(attack, SetAttackOnSuccess); 
+        GetAttackCriteriaifNotNull(attack, SetAttackOnSuccess, decreaseGatlingCount, resetGatlingCount); 
     }
-    public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack, Callback SetAttackOnSuccess)
+    public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
     {
         if (Combo.Count == 0 && currentCount == 0)
         {
             Combo.Add(newAttack);
-            ChecFirstAttackCriteria(newAttack,true, SetAttackOnSuccess);
+            ChecFirstAttackCriteria(newAttack,true, SetAttackOnSuccess, decreaseGatlingCount);
         }
         else
         {
             Combo.Add(newAttack);
-            CheckNextAttackCriteria(newAttack, false, Combo.Count-1, SetAttackOnSuccess);
+            CheckNextAttackCriteria(newAttack, false, Combo.Count-1, SetAttackOnSuccess, decreaseGatlingCount, resetGatlingCount);
         }
     }
-    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, Callback SetAttackOnSuccess)
+    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null)
     {
         if (!CheckStringPriority(Combo[0].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
         {
@@ -97,10 +97,14 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(0);
             return;
         }
+        if (decreaseGatlingCount != null)
+        {
+            decreaseGatlingCount();
+        }
         SetAttackOnSuccess();
         DoAttack(newAttack);
     }
-    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index, Callback SetAttackOnSuccess)
+    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
     {
         int newAttackHierarchy = (int)newAttack._moveType;
         int lastAttackHierachy = (int)curTypeHierarchy;
@@ -109,7 +113,7 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(index);
             return;
         }
-        if (!CheckMoveType(newAttack, false, index)) 
+        if (!CheckMoveType(newAttack, false, index, resetGatlingCount)) 
         {
             Combo.RemoveAt(index);
             return;
@@ -132,10 +136,14 @@ public class Attack_Manager : MonoBehaviour
         {
             _cAnimator.SetStanceBool(false);
         }
+        if (decreaseGatlingCount != null) 
+        {
+            decreaseGatlingCount();
+        }
         SetAttackOnSuccess();
         DoAttack(newAttack);
     }
-    bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
+    bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0,Callback resetGatlingCount = null)
     {
         Attack_BaseProperties lastBase = Combo[index - 1];
         switch (newAttack._moveType) 
@@ -146,6 +154,13 @@ public class Attack_Manager : MonoBehaviour
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
                         return false;
+                    }
+                }
+                if(lastBase != newAttack) 
+                {
+                    if (resetGatlingCount != null)
+                    {
+                        resetGatlingCount();
                     }
                 }
                 break;
@@ -160,6 +175,13 @@ public class Attack_Manager : MonoBehaviour
                 if(!_base._cComboDetection.ReturnActiveFollowUp().CheckAttackContains(newAttack)) 
                 {
                     return false;
+                }
+                if (lastBase != newAttack)
+                {
+                    if (resetGatlingCount != null)
+                    {
+                        resetGatlingCount();
+                    }
                 }
                 break;
             case MoveType.Command_Normal:

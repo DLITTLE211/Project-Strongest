@@ -134,6 +134,14 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
         _curBase._cAnimator._lastAttackState = lastAttackState.nullified;
          inStanceState = false;
+        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[i].ResetGatlingCount();
+        }
+        for (int i = 0; i < stanceInput.stanceKill._stanceButtonInput._correctInput.Count; i++)
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[i].ResetGatlingCount();
+        }
     }
 
 

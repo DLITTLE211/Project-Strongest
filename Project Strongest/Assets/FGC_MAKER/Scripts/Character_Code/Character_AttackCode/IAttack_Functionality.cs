@@ -22,7 +22,7 @@ public interface IAttackFunctionality
     virtual void SetFollowUpAttackInt() {}
     virtual void ResetAttackData() { }
     virtual MoveListAttackInfo CreateMoveListData() { return null; }
-
+    virtual void DecreaseGatlingCount() { }
     virtual bool CheckAttackContains(Attack_BaseProperties newAttack) { return false; }
     #endregion
 }

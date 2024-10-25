@@ -115,13 +115,13 @@ public class Attack_Input
 public class Vertical_KnockBack
 {
     public Attack_KnockBack_Vertical verticalKBP;
-    [Range(0f, 50f)] public int Value;
+    [Range(0f, 50f)] public float Value;
 }
 [Serializable]
 public class Horizontal_KnockBack
 {
     public Attack_KnockBack_Lateral lateralKBP;
-    [Range(0f, 50f)] public int Value;
+    [Range(0f, 50f)] public float Value;
 }
 [Serializable]
 public enum Attack_KnockBack_Lateral
