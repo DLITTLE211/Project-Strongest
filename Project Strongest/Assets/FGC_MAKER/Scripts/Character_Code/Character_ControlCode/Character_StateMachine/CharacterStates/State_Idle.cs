@@ -113,7 +113,7 @@ public class State_Idle : BaseState
     {
         _base._cHurtBox.SetHurboxState();
         _cAnim.ClearLastAttack();
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5 && _base._cAnimator.lastAttack == null && _base._cAnimator.activatedInput == null)
+        if (CanTransitionToIdle())
         {
             _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
             _base._aManager.ResetMoveHierarchy();
@@ -121,6 +121,24 @@ public class State_Idle : BaseState
         canDoSecondaryIdle = true;
         inIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
+    }
+    public bool CanTransitionToIdle() 
+    {
+        bool neutralInput = _base.ReturnMovementInputs().Button_State.directionalInput == 5;
+        bool notPressingButtons = true;
+        for(int i = 0; i < _base.attackButtons.Count; i++) 
+        {
+            if(_base.attackButtons[i].Button_State._state != ButtonStateMachine.InputState.released) 
+            {
+                notPressingButtons = false;
+                break;
+            }
+            continue;
+        }
+        bool lastAttackNull = _base._cAnimator.lastAttack == null;
+        bool lastMobilityNull = _base._cAnimator.activatedInput == null;
+        bool canTransitionIdle = _cAnim.canTransitionIdle == true;
+        return neutralInput && notPressingButtons && lastAttackNull && lastMobilityNull && canTransitionIdle;
     }
     
     void DummyIdleCheck()
