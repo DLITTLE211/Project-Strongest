@@ -24,6 +24,7 @@ public class Character_HurtboxController : MonoBehaviour
 
     public Transform reference;
     public HurtBox triggerBox;
+    [SerializeField] private HurtBox _extendedHurtbox;
     public float check;
 
     public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing) 
@@ -51,6 +52,10 @@ public class Character_HurtboxController : MonoBehaviour
             triggerBox.huBType = newHurtboxType;
         }
         SetHitboxSize();
+    }
+    public void ResetExtendedHurtbox() 
+    {
+        _extendedHurtbox.SetHurtBoxSize(0, 0, true);
     }
     #region Ground Check
     public bool IsGrounded() 

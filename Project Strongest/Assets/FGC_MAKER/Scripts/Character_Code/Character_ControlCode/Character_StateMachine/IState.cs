@@ -39,7 +39,11 @@ public abstract class BaseState : IState
         _baseForce = playerBase._cForce;
         _baseForce.gameObject.SetActive(true);
     }
-    public virtual void OnEnter() { _base.KillRoutine(); }
+    public virtual void OnEnter() 
+    { 
+        _base.KillRoutine();
+        _base._cHurtBox.ResetExtendedHurtbox(); 
+    }
     public virtual void OnStay() {}
     public virtual void OnRecov() {}
     public virtual void OnExit() { _base.KillRoutine(); }
