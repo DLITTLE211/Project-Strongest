@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using FightingGame_FrameData;
+using System;
 
 public class State_CrouchBlock : BaseState
 {
@@ -13,7 +14,7 @@ public class State_CrouchBlock : BaseState
     {
         base.OnEnter();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
-        if (_base._cStateMachine._CheckBlockButton())
+        if (_base._cStateMachine._CheckBlockButton() && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
             _cAnim.PlayNextAnimation(cblockHash, 0);
             await DeployBlock();
@@ -45,9 +46,21 @@ public class State_CrouchBlock : BaseState
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (_base._cStateMachine._CheckBlockButton() && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+        if (_base._cStateMachine._CheckBlockButton())
         {
-            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
+            if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+            {
+                _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
+            }
+            try
+            {
+                int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+                if (currentAnimClipName == cblockHash)
+                {
+                    _cAnim.PlayNextAnimation(cblockHash, 0);
+                }
+            }
+            catch (IndexOutOfRangeException){}
         }
         else
         {
@@ -60,13 +73,19 @@ public class State_CrouchBlock : BaseState
         base.OnRecov();
     }
 
-    public override void OnExit()
+    public override async void OnExit()
     {
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To != _base._cStateMachine.blockReactRef)
         {
             _base._cHurtBox.SetHurboxState();
+            await DelayStopBlock();
         }
         base.OnExit();
+    }
+    async Task DelayStopBlock()
+    {
+        int FrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 15);
+        await Task.Delay(FrameDelay);
     }
 }

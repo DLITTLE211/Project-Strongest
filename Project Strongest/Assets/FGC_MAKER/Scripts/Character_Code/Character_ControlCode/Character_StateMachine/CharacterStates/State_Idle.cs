@@ -119,7 +119,6 @@ public class State_Idle : BaseState
             _base._aManager.ResetMoveHierarchy();
         }
         canDoSecondaryIdle = true;
-        inIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
     }
     public bool CanTransitionToIdle() 
@@ -129,6 +128,11 @@ public class State_Idle : BaseState
         for(int i = 0; i < _base.attackButtons.Count; i++) 
         {
             if(_base.attackButtons[i].Button_State._state != ButtonStateMachine.InputState.released) 
+            {
+                notPressingButtons = false;
+                break;
+            }
+            if (_base.blockButton.Button_State._state != ButtonStateMachine.InputState.released)
             {
                 notPressingButtons = false;
                 break;
@@ -146,13 +150,11 @@ public class State_Idle : BaseState
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
         canDoSecondaryIdle = true;
-        inIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
     }
     public override void OnExit()
     {
         base.OnExit();
-        inIdle = false;
         canDoSecondaryIdle = false;
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To == _base._cStateMachine.moveStateRef)

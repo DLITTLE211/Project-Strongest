@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using FightingGame_FrameData;
-
+using System;
 
 public class State_Block : BaseState
 {
@@ -34,6 +34,15 @@ public class State_Block : BaseState
         if (_base._cStateMachine._CheckBlockButton())
         {
             _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);
+            try
+            {
+                int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+                if (currentAnimClipName == sblockHash)
+                {
+                    _cAnim.PlayNextAnimation(sblockHash, 0);
+                }
+            }
+            catch (IndexOutOfRangeException) { }
         }
         else
         {
@@ -45,13 +54,19 @@ public class State_Block : BaseState
         base.OnRecov();
     }
 
-    public override void OnExit()
+    public override async void OnExit()
     {
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To != _base._cStateMachine.blockReactRef)
         {
             _base._cHurtBox.SetHurboxState();
+            await DelayStopBlock();
         }
         base.OnExit();
+    }
+    async Task DelayStopBlock()
+    {
+        int FrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 15);
+        await Task.Delay(FrameDelay);
     }
 }
