@@ -39,22 +39,10 @@ public abstract class BaseState : IState
         _baseForce = playerBase._cForce;
         _baseForce.gameObject.SetActive(true);
     }
-    void SetAnimationNames() 
-    {
-        allAnimationNames = new List<string>();
-        for (int i = 0; i < _base.characterProfile.AllCharacterAnimations.Count; i++) 
-        {
-            allAnimationNames.Add(_base.characterProfile.AllCharacterAnimations[i].name);
-        }
-    }
-    public void ForceIdleAnimPlay()
-    {
-        _cAnim.PlayNextAnimation(groundIdleHash,0);
-    }
-    public virtual void OnEnter() {}
+    public virtual void OnEnter() { _base.KillRoutine(); }
     public virtual void OnStay() {}
     public virtual void OnRecov() {}
-    public virtual void OnExit() {}
+    public virtual void OnExit() { _base.KillRoutine(); }
     public virtual void OnUpdate() 
     {
         GameManager.instance.sideManager.CheckPlayerPositions();

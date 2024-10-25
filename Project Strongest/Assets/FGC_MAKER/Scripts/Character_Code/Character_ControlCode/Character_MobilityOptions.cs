@@ -29,7 +29,9 @@ public class Character_MobilityOptions : MonoBehaviour
     IEnumerator PlayAnimSequence(Character_MobilityOption _currentAction)
     {
         float waitTime = Base_FrameCode.ONE_FRAME;
-        while (frameCount <= _currentAction._animInformation._animLength)
+        float endingFrame = _currentAction.frameData.recoveryAmount + _currentAction.frameData._extraPoints[_currentAction.frameData._extraPoints.Count - 1].hitFramePoints;
+        float endingPoint = endingFrame * waitTime;
+        while (frameCount <= endingPoint)
         {
             #region Mobility Anim Checks
             if (callbackList.Count > 0)

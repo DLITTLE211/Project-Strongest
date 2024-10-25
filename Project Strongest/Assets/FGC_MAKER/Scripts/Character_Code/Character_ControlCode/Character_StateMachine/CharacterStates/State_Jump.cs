@@ -8,7 +8,7 @@ public class State_Jump : BaseState
     public Character_MobilityOption LastMobilityAction { get { return _lastMobilityAction; } }
     public State_Jump(Character_Base playerBase) : base(playerBase)
     {
-
+        base.OnEnter();
     }
     public override void OnEnter()
     {

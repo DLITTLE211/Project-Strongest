@@ -10,6 +10,7 @@ public class State_Counter : BaseState
     }
     public override void OnEnter()
     {
+        base.OnEnter();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter ThrowState");
     }
     public override void OnUpdate()

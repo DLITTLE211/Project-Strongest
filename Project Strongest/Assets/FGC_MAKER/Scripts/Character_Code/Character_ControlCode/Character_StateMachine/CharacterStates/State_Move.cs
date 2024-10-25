@@ -8,10 +8,10 @@ public class State_Move : BaseState
     bool onBack, onForward;
     public State_Move(Character_Base playerBase) : base(playerBase)
     {
-
     }
     public override async void OnEnter()
     {
+        base.OnEnter();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");
         if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {

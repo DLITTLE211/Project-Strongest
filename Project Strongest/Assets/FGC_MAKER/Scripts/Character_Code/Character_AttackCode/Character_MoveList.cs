@@ -95,7 +95,10 @@ public class Character_MoveList : MonoBehaviour
         {
             return;
         }
-        currentAttack.Value.ResetAttackData();
+        if (currentAttack.Value != null)
+        {
+            currentAttack.Value.ResetAttackData();
+        }
         currentAttack = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(null, null);
         followUp = null;
         ReserveAllAttackGatlingReset();

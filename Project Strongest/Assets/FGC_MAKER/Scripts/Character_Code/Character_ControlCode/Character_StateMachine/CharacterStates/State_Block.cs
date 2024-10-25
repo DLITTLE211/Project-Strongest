@@ -11,6 +11,7 @@ public class State_Block : BaseState
     { }
     public override async void OnEnter()
     {
+        base.OnEnter();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Block State");
         if (_base._cStateMachine._CheckBlockButton())
         {

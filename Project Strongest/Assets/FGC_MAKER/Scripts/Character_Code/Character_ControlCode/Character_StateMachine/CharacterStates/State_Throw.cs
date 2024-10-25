@@ -10,7 +10,7 @@ public class State_Throw : BaseState
     }
     public override void OnEnter()
     {
-        DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter ThrowState");
+        base.OnEnter();
     }
     public override void OnUpdate()
     {

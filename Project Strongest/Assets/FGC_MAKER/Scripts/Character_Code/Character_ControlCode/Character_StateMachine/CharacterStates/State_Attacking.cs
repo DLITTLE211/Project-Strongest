@@ -12,18 +12,17 @@ public class State_Attacking : BaseState
     { }
     public override void OnEnter()
     {
+        base.OnEnter();
         Attack_BaseProperties hitboxProperty = _base._cHitboxManager.GetActiveHitBox().hitboxProperties;
         switch (hitboxProperty._moveType)
         {
             case MoveType.Rekka:
                 SetRekka();
                 _base._cComboDetection.inRekka = true;
-               // _base._cAttackTimer.SetTimerType(TimerType.InRekka, newRekkaAttack.leewayTime);
                 break;
             case MoveType.Stance:
                 SetStance();
                 _base._cComboDetection.inStance = true;
-               // _base._cAttackTimer.SetTimerType(TimerType.InStance,newStanceAttack.stanceHeldTime * (1 / 60f));
                 break;
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter IdleState");
@@ -54,27 +53,14 @@ public class State_Attacking : BaseState
 
         if (nextTransition.To == _base._cStateMachine.idleStateRef)
         {
-            /* Debug.Log("Back To Idle");
-             if (_base._cAnimator.lastAttack != null)
-             {
-                 _base._cAnimator.ClearLastAttack();
-                 _cAnim.PlayNextAnimation(groundIdleHash, 0, false);
-             }*/
             _base.AwaitCanTransitionIdle(() => base.OnExit());
             return;
         }
         if (nextTransition.To == _base._cStateMachine.crouchStateRef)
         {
-            /*Debug.Log("Back To Crouch"); 
-            if (_base._cAnimator.lastAttack != null)
-            {
-                _base._cAnimator.ClearLastAttack();
-                _cAnim.PlayNextAnimation(I2CHash, 0, false);
-            }*/
             _base.AwaitCanTransitionIdle(() => base.OnExit());
             return;
         }
-
         if (nextTransition.To == _base._cStateMachine.jumpRef)
         {
             Debug.Log("Back To Jump");

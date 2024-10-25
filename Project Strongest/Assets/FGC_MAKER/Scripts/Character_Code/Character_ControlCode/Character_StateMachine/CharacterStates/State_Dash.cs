@@ -11,6 +11,7 @@ public class State_Dash : BaseState
     }
     public override async void OnEnter()
     {
+        base.OnEnter();
         hitSuperChargeCheck = false;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter JumpState");
         if (_base._cAnimator.activatedInput != null)

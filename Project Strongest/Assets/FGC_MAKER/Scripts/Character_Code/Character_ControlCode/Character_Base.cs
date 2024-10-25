@@ -142,14 +142,16 @@ public class Character_Base : MonoBehaviour
     [Space(20)]
     #endregion
 
+    #region Misc. Variables
     private float storedXVelocity, storedYVelocity;
     internal bool isLockedPause;
+    IEnumerator ResetIdleRoutine;
 
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
     private Dictionary<HitPointCall, Callback<CustomCallback>> mainCallbackDictionary = new Dictionary<HitPointCall, Callback<CustomCallback>>();
     public bool callSource;
     public bool awaitCondition;
-
+    #endregion
 
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
@@ -630,9 +632,18 @@ public class Character_Base : MonoBehaviour
     {
         allowSecondIdleAnim = true;
     }
+    public void KillRoutine() 
+    {
+        if(ResetIdleRoutine != null) 
+        {
+            StopCoroutine(ResetIdleRoutine);
+            ResetIdleRoutine = null;
+        }
+    }
     public void CallWaitAnimFinish(float time)
     {
-        StartCoroutine(AwaitAnimFinish(time));
+        ResetIdleRoutine = AwaitAnimFinish(time);
+        StartCoroutine(ResetIdleRoutine);
     }
     IEnumerator AwaitAnimFinish(float time) 
     {

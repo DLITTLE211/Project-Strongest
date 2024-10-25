@@ -12,6 +12,7 @@ public class State_Idle : BaseState
     public State_Idle(Character_Base playerBase) : base(playerBase){ }
     public override async void OnEnter()
     {
+        base.OnEnter();
         _base.allowSecondIdleAnim = false;
         canDoSecondaryIdle = false;
         if (_base._subState == Character_SubStates.Controlled)
@@ -112,7 +113,7 @@ public class State_Idle : BaseState
     {
         _base._cHurtBox.SetHurboxState();
         _cAnim.ClearLastAttack();
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5 && _base._cAnimator.lastAttack == null)
+        if (_base.ReturnMovementInputs().Button_State.directionalInput == 5 && _base._cAnimator.lastAttack == null && _base._cAnimator.activatedInput == null)
         {
             _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
             _base._aManager.ResetMoveHierarchy();

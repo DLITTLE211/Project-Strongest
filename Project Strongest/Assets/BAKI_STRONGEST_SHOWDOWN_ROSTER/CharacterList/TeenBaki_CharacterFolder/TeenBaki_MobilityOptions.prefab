@@ -55,8 +55,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -81,6 +82,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -111,6 +113,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -121,6 +124,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 8
@@ -135,8 +139,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -161,6 +166,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -191,6 +197,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -201,6 +208,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 7
@@ -215,8 +223,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -241,6 +250,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -271,6 +281,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -281,6 +292,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 9
@@ -295,8 +307,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -321,6 +334,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -351,6 +365,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -361,6 +376,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 9
@@ -375,8 +391,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -401,6 +418,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -431,6 +449,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -441,6 +460,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 8
@@ -455,8 +475,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 0
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -481,6 +502,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -511,6 +533,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -521,6 +544,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 7
@@ -535,8 +559,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 5
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -561,6 +586,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -591,6 +617,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -601,6 +628,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: -478295745125350043, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 656
@@ -615,8 +643,9 @@ MonoBehaviour:
       startup: 0
       active: 0
       inactive: 0
-      recovery: 25
-      lastFrame: 25
+      recoveryEnd: 0
+      recoveryAmount: 5
+      totalRecovery: 0
       _extraPoints:
       - hitFramePoints: 2
         call: 256
@@ -641,6 +670,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -671,6 +701,7 @@ MonoBehaviour:
           hitstunValue: 0
           hitLevel: 0
           isFinalAttack: 0
+          isScaling: 0
           lateralKBP:
             lateralKBP: 0
             Value: 0
@@ -681,6 +712,7 @@ MonoBehaviour:
     _animInformation:
       _animationClip: {fileID: 5713790909594089297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
+      _animHash: 0
       _animLength: 0
     mobilityInput:
       attackString: 454
