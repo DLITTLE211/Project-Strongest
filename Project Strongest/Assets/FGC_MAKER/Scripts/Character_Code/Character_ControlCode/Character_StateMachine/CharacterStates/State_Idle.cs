@@ -109,17 +109,22 @@ public class State_Idle : BaseState
         timeTillSecondaryIdle = startSecondaryIdle;
         canDoSecondaryIdle = true;
     }
-    void PlayerCPUIdleCheck()
+    async void PlayerCPUIdleCheck()
     {
         _base._cHurtBox.SetHurboxState();
         _cAnim.ClearLastAttack();
-        if (CanTransitionToIdle())
+        while (!CanTransitionToIdle())
         {
-            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
-            _base._aManager.ResetMoveHierarchy();
+            await DelayFrame();
         }
+        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        _base._aManager.ResetMoveHierarchy();
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
+    }
+    async Task DelayFrame() 
+    {
+        await Task.Yield();
     }
     public bool CanTransitionToIdle() 
     {

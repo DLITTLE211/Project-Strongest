@@ -66,7 +66,7 @@ public class Character_Animator : MonoBehaviour
         inRekkaState = state;
     }
 
-    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false)
+    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false, bool inReverse = false)
     {
         if (myAnim == null) 
         {
@@ -91,8 +91,16 @@ public class Character_Animator : MonoBehaviour
             }
             else
             {
-                myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
-                shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+                if (inReverse)
+                {
+                    myAnim.CrossFade(animHash, crossFadeTime, 0, -1);
+                    shadowAnim.CrossFade(animHash, crossFadeTime, 0, -1);
+                }
+                else
+                {
+                    myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+                    shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+                }
             }
         }
     }
@@ -170,11 +178,6 @@ public class Character_Animator : MonoBehaviour
             }
         }
         return true;
-    }
-    IEnumerator SetCanBlock()
-    {
-        yield return new WaitForSeconds(0.067f);
-        canBlock = true;
     }
     #endregion
     public void SetActivatedInput(Character_MobilityOption inputToActivate)

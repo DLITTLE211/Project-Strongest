@@ -24,7 +24,7 @@ public class Character_State
     #endregion
     [SerializeField] private Character_Base _base;
     [SerializeField] Dictionary<Type, StateNode> nodes = new Dictionary<Type, StateNode>(); 
-    HashSet<ITransition> anyTransition = new HashSet<ITransition>();
+    List<ITransition> anyTransition = new List<ITransition>();
     public StateNode current;
     public IState nextState;
     public string CurrentStateString;

@@ -4331,30 +4331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StandBlock:
-    frameData:
-      init: 0
-      startup: 0
-      active: 0
-      inactive: 0
-      recoveryEnd: 0
-      recoveryAmount: 0
-      totalRecovery: 0
-      _extraPoints: []
+    activationPoint: 4
+    recoveryAmount: 10
+    activated: 0
     _animInformation:
       _animationClip: {fileID: 0}
       _animName: 
       _animHash: 0
       _animLength: 0
   CrouchBlock:
-    frameData:
-      init: 0
-      startup: 0
-      active: 0
-      inactive: 0
-      recoveryEnd: 0
-      recoveryAmount: 0
-      totalRecovery: 0
-      _extraPoints: []
+    activationPoint: 4
+    recoveryAmount: 10
+    activated: 0
     _animInformation:
       _animationClip: {fileID: 0}
       _animName: 
@@ -8719,7 +8707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5590968921086766435, guid: 6453656e8a901fe49bc0b98eb9ef49d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 131.5
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 5590968921086766435, guid: 6453656e8a901fe49bc0b98eb9ef49d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10217,30 +10205,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StandBlock:
-    frameData:
-      init: 0
-      startup: 0
-      active: 0
-      inactive: 0
-      recoveryEnd: 0
-      recoveryAmount: 0
-      totalRecovery: 0
-      _extraPoints: []
+    activationPoint: 4
+    recoveryAmount: 10
+    activated: 0
     _animInformation:
       _animationClip: {fileID: 0}
       _animName: 
       _animHash: 0
       _animLength: 0
   CrouchBlock:
-    frameData:
-      init: 0
-      startup: 0
-      active: 0
-      inactive: 0
-      recoveryEnd: 0
-      recoveryAmount: 0
-      totalRecovery: 0
-      _extraPoints: []
+    activationPoint: 4
+    recoveryAmount: 10
+    activated: 0
     _animInformation:
       _animationClip: {fileID: 0}
       _animName: 
@@ -32194,7 +32170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5590968921086766435, guid: 6453656e8a901fe49bc0b98eb9ef49d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 225
+      value: 224
       objectReference: {fileID: 0}
     - target: {fileID: 5590968921086766435, guid: 6453656e8a901fe49bc0b98eb9ef49d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

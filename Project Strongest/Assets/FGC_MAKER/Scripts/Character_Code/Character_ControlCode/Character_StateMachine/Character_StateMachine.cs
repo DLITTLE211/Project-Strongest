@@ -89,6 +89,9 @@ public class Character_StateMachine : MonoBehaviour
         At(CrouchState, JumpState, new Predicate(() => At_2Jump()));
 
 
+        At(IdleState, DashState, new Predicate(() => ToDashState()));
+        At(SecondIdle, DashState, new Predicate(() => ToDashState()));
+        At(AttackState, DashState, new Predicate(() => ToDashState()));
         At(MoveState, DashState, new Predicate(() => ToDashState()));
 
         At(IdleState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
@@ -121,12 +124,12 @@ public class Character_StateMachine : MonoBehaviour
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
+        //Any(DashState, new Predicate(() => ToDashState()));
         Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(CustomSuperState, new Predicate(() => At_2CustomSuper()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
-        Any(DashState, new Predicate(() => ToDashState()));
         Any(IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         Any(Hitstate, new Predicate(() => ToHitState()));
         #endregion
@@ -185,8 +188,8 @@ public class Character_StateMachine : MonoBehaviour
             _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput > 3;
             _isBlocking = _CheckBlockButton();
         }
-
-        return !_isHit && _currentInput && _isBlocking && _isGrounded && !_canRecover && notRecovering && _notAttacking;
+        bool fullCheck = !_isHit && _currentInput && _isBlocking && _isGrounded && !_canRecover && notRecovering && _notAttacking;
+        return fullCheck;
     }
     bool At_2BlockReact()
     {
@@ -452,15 +455,24 @@ public class Character_StateMachine : MonoBehaviour
         bool inputtedDash;
         bool populatedMove;
         isHit = _base._cAnimator.isHit;
+        bool attackDashAllowance;
         inputtedDash = CheckLastMovementValue();
         populatedMove = _base._cAnimator._lastMovementState == lastMovementState.populated;
+        if (_base._cAnimator.lastAttack == null)
+        {
+            attackDashAllowance = true;
+        }
+        else 
+        {
+            attackDashAllowance = _base._cAnimator.lastAttack.dashCancelable == true ? true : false;
+        } 
         if (_base._subState != Character_SubStates.Controlled)
         {
             return false;
         }
         else 
         {
-            return !isHit && inputtedDash && populatedMove && !_canRecover && notRecovering;
+            return !isHit && inputtedDash && populatedMove && !_canRecover && notRecovering && attackDashAllowance;
         }
 
     }

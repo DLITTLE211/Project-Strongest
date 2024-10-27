@@ -16,8 +16,8 @@ public class State_CrouchBlock : BaseState
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
         if (_base._cStateMachine._CheckBlockButton() && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-           // _cAnim.PlayNextAnimation(cblockHash, 0);
-            await DeployBlock();
+            _base._cBlockHandler.ToggleBlockAnim(false, true);
+            //await DeployBlock();
             await WaitToChargeSuperMobility();
         }
     }
@@ -55,10 +55,6 @@ public class State_CrouchBlock : BaseState
             try
             {
                 int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-              //  if (currentAnimClipName == cblockHash)
-                {
-               //     _cAnim.PlayNextAnimation(cblockHash, 0);
-                }
             }
             catch (IndexOutOfRangeException){}
         }
@@ -78,8 +74,9 @@ public class State_CrouchBlock : BaseState
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To != _base._cStateMachine.blockReactRef)
         {
-            _base._cHurtBox.SetHurboxState();
-            await DelayStopBlock();
+            _base._cBlockHandler.ToggleBlockAnim(false, false);
+            //_base._cHurtBox.SetHurboxState();
+            //await DelayStopBlock();
         }
         base.OnExit();
     }
