@@ -423,7 +423,6 @@ public class Character_HitController : MonoBehaviour
                 }
             }
         }
-        _base._cComboCounter.SetComboStateFalse();
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             ClearRecoveryRoutine();
@@ -476,7 +475,6 @@ public class Character_HitController : MonoBehaviour
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
         yield return new WaitForSeconds(curField.animLength);
 
-        _base._cComboCounter.SetComboStateFalse();
 
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {

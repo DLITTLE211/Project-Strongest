@@ -34,6 +34,7 @@ public class Character_Force : MonoBehaviour
     public float xSpeed;
     bool sendingForce;
     public bool beingPushed, stillnessCheck;
+    List<IState> acceptableStates = new List<IState>();
     public void Start()
     {
         isFrozen = false; 
@@ -42,6 +43,11 @@ public class Character_Force : MonoBehaviour
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
 
+        acceptableStates.Add(_base._cStateMachine.jumpRef);
+        acceptableStates.Add(_base._cStateMachine.crouchStateRef);
+        acceptableStates.Add(_base._cStateMachine.idleStateRef);
+        acceptableStates.Add(_base._cStateMachine.attackingStateRef);
+        acceptableStates.Add(_base._cStateMachine.superState);
     }
     public bool CanSendForce()
     {
@@ -56,7 +62,7 @@ public class Character_Force : MonoBehaviour
         xSpeed = _myRB.velocity.x;
         ForceStillPlayer();
     }
-    void ForceStillPlayer() 
+    public void ForceStillPlayer() 
     {
         if (!beingPushed)
         {
@@ -398,13 +404,13 @@ public class Character_Force : MonoBehaviour
     }
     public void HandleExtraMovement(Character_MobilityOption _mInput)
     {
-        List<IState> acceptableStates = new List<IState>();
+        acceptableStates.Clear();
         if (_base._cHurtBox.IsGrounded())
         {
             if (_mInput.movementPriority == 2)
             {
                 acceptableStates.Add(_base._cStateMachine.dashStateRef);
-                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
+                if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
                 {
                     acceptableStates.Clear();
                     sendingForce = false;
@@ -413,11 +419,6 @@ public class Character_Force : MonoBehaviour
             }
             else
             {
-                acceptableStates.Add(_base._cStateMachine.jumpRef);
-                acceptableStates.Add(_base._cStateMachine.crouchStateRef);
-                acceptableStates.Add(_base._cStateMachine.idleStateRef);
-                acceptableStates.Add(_base._cStateMachine.attackingStateRef);
-                acceptableStates.Add(_base._cStateMachine.superState);
                 if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
                 {
                     acceptableStates.Clear();

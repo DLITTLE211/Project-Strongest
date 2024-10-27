@@ -12,6 +12,7 @@ public class State_Attacking : BaseState
     { }
     public override void OnEnter()
     {
+        _base.myRb.drag = 100000;
         base.OnEnter();
         Attack_BaseProperties hitboxProperty = _base._cHitboxManager.GetActiveHitBox().hitboxProperties;
         switch (hitboxProperty._moveType)
