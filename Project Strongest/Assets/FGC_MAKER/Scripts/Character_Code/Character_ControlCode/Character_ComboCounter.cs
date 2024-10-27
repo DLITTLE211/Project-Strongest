@@ -151,7 +151,7 @@ public class Character_ComboCounter : MonoBehaviour
     {
         if (fadeTextOut != null) 
         {
-            fadeTextOut.Kill();
+            fadeTextOut.Complete();
             fadeTextOut = null;
         }
         if (fadeTextRoutine != null)
