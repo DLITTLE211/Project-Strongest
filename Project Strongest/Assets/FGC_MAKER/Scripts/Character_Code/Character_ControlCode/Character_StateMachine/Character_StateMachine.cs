@@ -484,14 +484,15 @@ public class Character_StateMachine : MonoBehaviour
         bool lastAttackValue;
         bool inBlockState = _playerState.current.State == standBlockRef || _playerState.current.State == crouchBlockRef;
         isHit = _base._cAnimator.isHit;
-        lastAttackValue =checkAttackValue(lastAttackState.populated);
+        lastAttackValue = checkAttackValue(lastAttackState.populated);
+        bool currentStateNotHit = _playerState.current.State != hitStateRef;
         if (_base._subState != Character_SubStates.Controlled)
         {
             return false;
         }
         else 
         {
-            bool fullcheck = !isHit && lastAttackValue && _canRecover && notRecovering && !inBlockState;
+            bool fullcheck = currentStateNotHit && !isHit && lastAttackValue && _canRecover && notRecovering && !inBlockState;
             return fullcheck;
         }
     }

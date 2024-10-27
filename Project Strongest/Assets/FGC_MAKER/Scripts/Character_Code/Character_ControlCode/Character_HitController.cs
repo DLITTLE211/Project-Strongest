@@ -381,6 +381,7 @@ public class Character_HitController : MonoBehaviour
         float hitStunInFrames = curField.animLength + (currentHitstun * Base_FrameCode.ONE_FRAME);
         try
         {
+            _base.Deactivate();
             ClearRecoveryRoutine(true);
             SetStunMeterValue(hitStunInFrames);
             _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
@@ -447,6 +448,7 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
+            _base.Activate();
             blockedAttack = false;
             _base._cHealth.StartHealthRegen();
             if(!_base._cHurtBox.IsGrounded())
@@ -629,8 +631,8 @@ public class Character_HitController : MonoBehaviour
         #endregion
         if (!isDead)
         {
+            _base.Activate();
             _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
-
             if (currentCustomDamageField == null)
             {
                 if (CheckNextAttackCatchPostLanding())
