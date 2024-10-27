@@ -259,7 +259,7 @@ public class Character_HitController : MonoBehaviour
     }
     public void DeathHitDetect(Attack_BaseProperties currentAttack = null, CustomDamageField currentDamageField = null)
     {
-        ClearRecoveryRoutine();
+        ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = null;
         if (currentAttack != null) 
         {
@@ -297,13 +297,13 @@ public class Character_HitController : MonoBehaviour
         {
             if (_base.opponentPlayer.comboList3_0.GetCurrentSuperCustomAnimLength() > 0)
             {
-                ClearRecoveryRoutine();
+                ClearRecoveryRoutine(true);
                 CallLockedHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
                 return;
             }
             else
             {
-                ClearRecoveryRoutine();
+                ClearRecoveryRoutine(true);
                 CheckAndStartHitResponse(FilterGroundLockReactions(currentAttack.hitLevel));
                 return;
             }
@@ -321,7 +321,7 @@ public class Character_HitController : MonoBehaviour
     {
         blockedAttack = false;
         currentCustomDamageField = currentAttack;
-        ClearRecoveryRoutine();
+        ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
         if (hitReaction != null)
         {
@@ -364,21 +364,24 @@ public class Character_HitController : MonoBehaviour
             StopCoroutine(activeHitResponseRoutine);
         }
     }
-    public void ClearRecoveryRoutine()
+    public void ClearRecoveryRoutine(bool stopFade)
     {
         if (recoverRoutine != null)
         {
             StopCoroutine(recoverRoutine);
             _isRecovering = false;
         }
-        _base._cComboCounter.StopFadeRoutine();
+        if (stopFade)
+        {
+            _base._cComboCounter.StopFadeRoutine();
+        }
     }
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
         float hitStunInFrames = curField.animLength + (currentHitstun * Base_FrameCode.ONE_FRAME);
         try
         {
-            ClearRecoveryRoutine();
+            ClearRecoveryRoutine(true);
             SetStunMeterValue(hitStunInFrames);
             _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
             _base._cAnimator.SetCanRecover(true);
@@ -425,7 +428,7 @@ public class Character_HitController : MonoBehaviour
         }
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
-            ClearRecoveryRoutine();
+            ClearRecoveryRoutine(true);
             _isRecovering = true;
             if (currentCustomDamageField != null)
             {
@@ -478,7 +481,7 @@ public class Character_HitController : MonoBehaviour
 
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
-            ClearRecoveryRoutine();
+            ClearRecoveryRoutine(true);
             _isRecovering = true;
             recoverRoutine = DoRecovery(Attack_KnockDown.HKD, curField,true);
             StartCoroutine(recoverRoutine);

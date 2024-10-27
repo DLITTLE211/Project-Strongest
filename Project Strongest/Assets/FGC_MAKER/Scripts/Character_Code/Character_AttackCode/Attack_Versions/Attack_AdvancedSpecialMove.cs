@@ -93,7 +93,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         if (currentCustomAnim <= _customAnimation.Count-1)
         {
             _curBase.opponentPlayer._cHitController.ClearHitResponseRoutine();
-            _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine();
+            _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine(true);
             _curBase.opponentPlayer._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
             _customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
             _customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);

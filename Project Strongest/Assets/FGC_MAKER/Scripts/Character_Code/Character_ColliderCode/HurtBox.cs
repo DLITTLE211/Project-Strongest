@@ -253,7 +253,7 @@ public class HurtBox : CollisionDetection
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
         if (Base_Target._cHitController.Recovering)
         {
-            Base_Target._cHitController.ClearRecoveryRoutine();
+            Base_Target._cHitController.ClearRecoveryRoutine(true);
         }
         if (Base_Attacker._cAnimator.lastAttack != null)
         {
@@ -282,7 +282,7 @@ public class HurtBox : CollisionDetection
 
         if (Base_Target._cHitController.Recovering)
         {
-            Base_Target._cHitController.ClearRecoveryRoutine();
+            Base_Target._cHitController.ClearRecoveryRoutine(true);
         }
         Base_Attacker._aManager.ClearAttacks();
         Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, Base_Target,null);
@@ -311,7 +311,7 @@ public class HurtBox : CollisionDetection
         {
             if (Base_Target._cHitController.Recovering)
             {
-                Base_Target._cHitController.ClearRecoveryRoutine();
+                Base_Target._cHitController.ClearRecoveryRoutine(true);
             }
             if (currentHitProperties._moveType == MoveType.Super)
             {
@@ -319,7 +319,7 @@ public class HurtBox : CollisionDetection
                 Base_Target._cHitController.ClearHitResponseRoutine();
                 if (Base_Target._cHitController.Recovering)
                 {
-                    Base_Target._cHitController.ClearRecoveryRoutine();
+                    Base_Target._cHitController.ClearRecoveryRoutine(true);
                 }
                 Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
 
