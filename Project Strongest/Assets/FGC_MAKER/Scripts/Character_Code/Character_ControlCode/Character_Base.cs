@@ -40,7 +40,7 @@ public class Character_Base : MonoBehaviour
     public Character_SystemButtons _cSystemButtons;
     [SerializeField] private Player_SideManager _sideManager;
     public Character_HitboxManager _cHitboxManager;
-    public AttackHandler_FrameDataMeter _aFrameDataMeter;
+    public AttackHandler_NewFrameDataMeter _aFrameDataMeter;
     public Character_BlockHandler _cBlockHandler;
     [Space(10)]
     public Character_Timer _timer;

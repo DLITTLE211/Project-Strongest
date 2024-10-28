@@ -123,7 +123,6 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         _playerCAnimator.SetCanTransitionIdle(false);
         _playerCAnimator._base._aManager.SetStartNextAttack(false);
-        character._aFrameDataMeter.SetSliderInformation(HitBox.hitboxProperties.AttackAnims._frameData);
     }
     public override void OnStartup(Character_Base curBase)
     {
@@ -258,6 +257,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
+        character._aFrameDataMeter.ResetMessage();
         if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
@@ -284,6 +284,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 }
                 try
                 {
+                    character._aFrameDataMeter.UpdateFrame(init,startup,active, inactive,lastFrame);
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
@@ -341,6 +342,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
+            character._aFrameDataMeter.UpdateFrame(init, startup, active, inactive, lastFrame);
         }
         if (lastAttack._moveType == MoveType.Throw)
         {
@@ -358,6 +360,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
+        character._aFrameDataMeter.ResetMessage();
         frameCount = 0;
         if (!_playerCAnimator.canTick)
         {
@@ -385,6 +388,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 frameCount = frameCount * character._cHitstun.animSpeed;
                 try
                 {
+                    character._aFrameDataMeter.UpdateFrame(init, startup, active, inactive, lastFrame);
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
@@ -459,6 +463,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
+            character._aFrameDataMeter.UpdateFrame(init, startup, active, inactive, lastFrame);
         }
         _playerCAnimator.CountUpNegativeFrames(customProp._frameData.totalRecovery);
         _playerCAnimator.SetCanTransitionIdle(true);

@@ -17,6 +17,7 @@ public class State_Crouch : BaseState
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
         await WaitToChargeSuperMobility();
         inCrouch = true;
+        _base._aFrameDataMeter.ResetMeterData();
     }
     async Task WaitToChargeSuperMobility()
     {

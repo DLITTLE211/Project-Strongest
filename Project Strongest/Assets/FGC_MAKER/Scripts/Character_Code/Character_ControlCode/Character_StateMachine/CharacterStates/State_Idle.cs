@@ -117,6 +117,7 @@ public class State_Idle : BaseState
         {
             await DelayFrame();
         }
+        _base._aFrameDataMeter.ResetMeterData();
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
         _base._aManager.ResetMoveHierarchy();
         canDoSecondaryIdle = true;
