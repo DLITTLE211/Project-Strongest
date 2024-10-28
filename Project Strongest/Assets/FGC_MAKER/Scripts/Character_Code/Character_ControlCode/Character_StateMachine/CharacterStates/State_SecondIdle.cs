@@ -8,6 +8,7 @@ public class State_SecondIdle : BaseState
     int lastInput;
     public override void OnEnter()
     {
+        _base._cHurtBox.ResetExtendedHurtbox();
         if (_base._subState == Character_SubStates.Controlled)
         {
             lastInput = _base.ReturnMovementInputs().Button_State.directionalInput;

@@ -12,6 +12,7 @@ public class State_Block : BaseState
     public override void OnEnter()
     {
         base.OnEnter();
+        _base._cHurtBox.ResetExtendedHurtbox();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Block State");
         if (_base._cStateMachine._CheckBlockButton())
         {

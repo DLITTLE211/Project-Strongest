@@ -61,7 +61,8 @@ public class Character_HitStun : MonoBehaviour
     }
     IEnumerator ApplyHitstun(float hitStunValue)
     {
-        animSpeed = 0.45f;
+        //animSpeed = 0.45f;
+        animSpeed = 1f;
         float stunTime = 0;
         _cAnimator.SetCanRecover(true);
         while (stunTime < hitStunValue)

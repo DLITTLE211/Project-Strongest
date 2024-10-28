@@ -40,7 +40,6 @@ public abstract class BaseState : IState
     public virtual void OnEnter() 
     { 
         _base.KillRoutine();
-        _base._cHurtBox.ResetExtendedHurtbox(); 
     }
     public virtual void OnStay() {}
     public virtual void OnRecov() {}

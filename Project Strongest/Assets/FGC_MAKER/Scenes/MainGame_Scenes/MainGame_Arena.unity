@@ -20673,9 +20673,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3eb3654772a1cc4b8045d42351ef2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 993311525}
   _refSingularFrame: {fileID: 5503627501153093805, guid: 11562d7cf87fb64429c7ccbd30c9a45d, type: 3}
   _refSingularFrameList: []
   frameDataInformationText: {fileID: 270329067}
+  _isHitRecovering: 0
 --- !u!222 &1307536444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23447,9 +23449,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3eb3654772a1cc4b8045d42351ef2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 94923329}
   _refSingularFrame: {fileID: 5503627501153093805, guid: 11562d7cf87fb64429c7ccbd30c9a45d, type: 3}
   _refSingularFrameList: []
   frameDataInformationText: {fileID: 321287347}
+  _isHitRecovering: 0
 --- !u!114 &1444441660
 MonoBehaviour:
   m_ObjectHideFlags: 0

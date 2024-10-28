@@ -12,6 +12,7 @@ public class State_Jump : BaseState
     }
     public override void OnEnter()
     {
+        _base._cHurtBox.ResetExtendedHurtbox();
         _lastMobilityAction = _base._cAnimator.activatedInput;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter JumpState");
         //_cAnim.PlayNextAnimation(jumpHash, _crossFade);

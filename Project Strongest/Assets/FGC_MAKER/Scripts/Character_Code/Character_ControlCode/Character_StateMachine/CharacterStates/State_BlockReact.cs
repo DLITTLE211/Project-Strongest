@@ -6,6 +6,7 @@ public class State_BlockReact : BaseState
     public override void OnEnter()
     {
         base.OnEnter();
+        _base._cHurtBox.ResetExtendedHurtbox();
         if (_base._cHurtBox.triggerBox.huBType == HurtBoxType.BlockHigh) 
         {
             _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);

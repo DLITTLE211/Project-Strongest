@@ -157,8 +157,7 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
-        _aFrameDataMeter.gameObject.SetActive(false);
-           activated = false;
+        activated = false;
         _side = hitboxSideDetection;
         AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);

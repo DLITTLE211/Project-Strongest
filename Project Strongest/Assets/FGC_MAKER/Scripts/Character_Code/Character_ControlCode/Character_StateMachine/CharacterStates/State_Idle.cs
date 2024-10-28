@@ -13,6 +13,7 @@ public class State_Idle : BaseState
     public override async void OnEnter()
     {
         base.OnEnter();
+        _base._cHurtBox.ResetExtendedHurtbox();
         _base.allowSecondIdleAnim = false;
         canDoSecondaryIdle = false;
         if (_base._subState == Character_SubStates.Controlled)
@@ -154,6 +155,7 @@ public class State_Idle : BaseState
     void DummyIdleCheck()
     {
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._aFrameDataMeter.ResetMeterData();
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;

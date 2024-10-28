@@ -378,9 +378,10 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
-        float hitStunInFrames = curField.animLength + (currentHitstun * Base_FrameCode.ONE_FRAME);
+        float hitStunInFrames = (currentHitstun * Base_FrameCode.ONE_FRAME);
         try
         {
+            _base._aFrameDataMeter.SetHitRecoveringState(true);
             _base.Deactivate();
             ClearRecoveryRoutine(true);
             SetStunMeterValue(hitStunInFrames);
@@ -401,6 +402,7 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
+                _base._aFrameDataMeter.UpdateFrameOnHit();
                 if (currentKnockBack != null)
                 {
                     if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
@@ -449,6 +451,7 @@ public class Character_HitController : MonoBehaviour
         else
         {
             _base.Activate();
+            _base._aFrameDataMeter.SetHitRecoveringState(false);
             blockedAttack = false;
             _base._cHealth.StartHealthRegen();
             if(!_base._cHurtBox.IsGrounded())
@@ -649,6 +652,7 @@ public class Character_HitController : MonoBehaviour
             {
                 bigHitRecovering = false;
             }
+            _base._aFrameDataMeter.SetHitRecoveringState(false);
             recoverRoutine = null;
             _isRecovering = false;
             _base._cHealth.StartHealthRegen();

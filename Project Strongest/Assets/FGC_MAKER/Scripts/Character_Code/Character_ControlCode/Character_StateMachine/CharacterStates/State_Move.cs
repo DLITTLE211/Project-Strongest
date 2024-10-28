@@ -12,6 +12,7 @@ public class State_Move : BaseState
     public override async void OnEnter()
     {
         base.OnEnter();
+        _base._cHurtBox.ResetExtendedHurtbox();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");
         if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {

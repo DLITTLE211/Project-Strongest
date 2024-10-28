@@ -11,6 +11,7 @@ public class State_Dash : BaseState
     }
     public override async void OnEnter()
     {
+        _base._cHurtBox.ResetExtendedHurtbox();
         base.OnEnter();
         hitSuperChargeCheck = false;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter JumpState");

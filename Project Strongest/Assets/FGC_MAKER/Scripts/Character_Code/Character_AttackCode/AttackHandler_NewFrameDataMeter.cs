@@ -8,12 +8,15 @@ using FightingGame_FrameData;
 
 public class AttackHandler_NewFrameDataMeter : MonoBehaviour
 {
+    [SerializeField] private Character_Base _base;
     [SerializeField] private GameObject _refSingularFrame;
     [SerializeField] private List<AttackHandler_SingularFrame> _refSingularFrameList;
     [SerializeField] private TMP_Text frameDataInformationText;
     FrameType lastFrameDataType;
     string message;
     int currentFrame;
+    [SerializeField] private bool _isHitRecovering;
+    public bool HitRecovering { get { return _isHitRecovering; } }
     void Start()
     {
         InitializeMeter();
@@ -38,6 +41,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     }
     public void ResetMeterData() 
     {
+        if (_isHitRecovering) 
+        {
+            _isHitRecovering = false;
+        }
         for (int i = 0; i < _refSingularFrameList.Count; i++)
         {
             _refSingularFrameList[i].InitFrame();
@@ -46,6 +53,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         lastFrameDataType = FrameType.Init;
         message = "";
     }
+    #region Update Frame On Attack
     public void UpdateFrame(bool initHit, bool startUpHit, bool ActiveHit, bool recoveryHit, bool lastFrame)
     {
         if(currentFrame >= _refSingularFrameList.Count - 1) 
@@ -61,7 +69,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
                 _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType, currentFrame+1);
                 if (currentFrameDataType == FrameType.Reset)
                 {
-                    string advantageAmount = false ? "${0}" :"--";
+                    string advantageAmount = _base.opponentPlayer._aFrameDataMeter.HitRecovering ? "${0}" :"--";
                     message += $"Advantage: {advantageAmount}";
                 }
                 else
@@ -99,5 +107,22 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             return FrameType.Startup;
         }
         return FrameType.Init;
+    }
+    #endregion
+    public void SetHitRecoveringState(bool state) 
+    {
+        _isHitRecovering = state;
+    }
+    public void UpdateFrameOnHit()
+    {
+        if (_isHitRecovering)
+        {
+            if (currentFrame >= _refSingularFrameList.Count - 1)
+            {
+                currentFrame = 0;
+            }
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Recovery);
+            currentFrame++;
+        }
     }
 }
