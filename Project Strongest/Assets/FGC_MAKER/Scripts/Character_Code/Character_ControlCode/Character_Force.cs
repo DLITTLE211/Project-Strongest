@@ -43,6 +43,9 @@ public class Character_Force : MonoBehaviour
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
 
+    }
+    public void AddAcceptableStates() 
+    {
         acceptableStates.Add(_base._cStateMachine.jumpRef);
         acceptableStates.Add(_base._cStateMachine.crouchStateRef);
         acceptableStates.Add(_base._cStateMachine.idleStateRef);
@@ -404,11 +407,11 @@ public class Character_Force : MonoBehaviour
     }
     public void HandleExtraMovement(Character_MobilityOption _mInput)
     {
-        acceptableStates.Clear();
         if (_base._cHurtBox.IsGrounded())
         {
             if (_mInput.movementPriority == 2)
             {
+                acceptableStates.Clear();
                 acceptableStates.Add(_base._cStateMachine.dashStateRef);
                 if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
                 {
@@ -419,6 +422,8 @@ public class Character_Force : MonoBehaviour
             }
             else
             {
+                acceptableStates.Clear();
+                AddAcceptableStates();
                 if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
                 {
                     acceptableStates.Clear();

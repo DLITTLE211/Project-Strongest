@@ -402,7 +402,6 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
-                _base._aFrameDataMeter.UpdateFrameOnHit();
                 if (currentKnockBack != null)
                 {
                     if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
@@ -450,8 +449,8 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
-            _base.Activate();
             _base._aFrameDataMeter.SetHitRecoveringState(false);
+            _base.Activate();
             blockedAttack = false;
             _base._cHealth.StartHealthRegen();
             if(!_base._cHurtBox.IsGrounded())
@@ -529,6 +528,7 @@ public class Character_HitController : MonoBehaviour
         currentProperty = currentAttack;
         Callback<Attack_BaseProperties> funcCall = null;
         currentHitstun = StunValue;
+
         hitStunScaling = calculatedScaling;
         SearchHitResponseDictionary(currentAttack, blockedAttack);
     }
@@ -672,6 +672,10 @@ public class Character_HitController : MonoBehaviour
     }
     void UpdateMeterValue(float subtractValue)
     {
+        if (_hitStunSlider.value > 0)
+        {
+            _base._aFrameDataMeter.UpdateFrameOnHit();
+        }
         _hitStunSlider.value -= subtractValue;
     }
     void ClearMeterValue()

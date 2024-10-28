@@ -25,7 +25,6 @@ public class State_Move : BaseState
         float fourFrameWaitTime = 4 * (1 / 60f);
         int fourtimeInMS = (int)(fourFrameWaitTime * 1000f);
         await Task.Delay(fourtimeInMS);
-        _base._aFrameDataMeter.ResetMeterData();
         _baseForce.SetWalkForce(_base.ReturnMovementInputs());
 
     }

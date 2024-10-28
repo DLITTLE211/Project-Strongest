@@ -12,6 +12,7 @@ public class State_Attacking : BaseState
     { }
     public override void OnEnter()
     {
+        _base._aFrameDataMeter.ResetMeterData();
         _base.myRb.drag = 100000; 
         _base._cHitController.ClearRecoveryRoutine(false);
         base.OnEnter();

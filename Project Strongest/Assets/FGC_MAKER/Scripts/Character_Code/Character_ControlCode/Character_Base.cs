@@ -224,6 +224,7 @@ public class Character_Base : MonoBehaviour
         _cAnimator.myAnim.enabled = true;
         _cStateMachine.DefineState();
         _cAttackTimer.ResetTimer();
+        _cForce.AddAcceptableStates();
         _cMobiltyTimer.ResetTimer();
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();

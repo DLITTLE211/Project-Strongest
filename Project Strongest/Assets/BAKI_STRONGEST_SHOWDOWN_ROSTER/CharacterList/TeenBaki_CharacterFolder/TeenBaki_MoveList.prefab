@@ -689,7 +689,7 @@ MonoBehaviour:
         _refreshRate: 0
         _startRefreshRate: 0
     movementPortionLength: 0
-    finalAttackButton: 0
+    finalAttackButton: 256
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
@@ -5533,8 +5533,8 @@ MonoBehaviour:
           attackMainStunValues:
             hitstunValue: 8
             blockStunValue: 2
-            hitstopValue: 3
-            blockStopValue: 1
+            hitstopValue: 0
+            blockStopValue: 0
           hitLevel: 66
           attackHashes: 0
           _meterRequirement: 0
@@ -5718,7 +5718,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0035
           attackMainStunValues:
-            hitstunValue: 4
+            hitstunValue: 9
             blockStunValue: 2
             hitstopValue: 2
             blockStopValue: 0

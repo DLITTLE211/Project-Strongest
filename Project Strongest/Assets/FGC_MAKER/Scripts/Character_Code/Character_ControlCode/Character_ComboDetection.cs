@@ -401,10 +401,10 @@ public class Character_ComboDetection : MonoBehaviour
         {
             curMobility.PerformMobilityAction();
             Debug.Log("Mobility found");
+            return;
         }
         Debug.Log("Mobility not found");
     }
-
     Character_MobilityOption ExtraMovementVerifier(AttackInputTypes mobilityInput)
     {
         _base._cMobiltyTimer.CheckForInput = true;

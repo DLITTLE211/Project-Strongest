@@ -118,7 +118,6 @@ public class State_Idle : BaseState
         {
             await DelayFrame();
         }
-        _base._aFrameDataMeter.ResetMeterData();
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
         _base._aManager.ResetMoveHierarchy();
         canDoSecondaryIdle = true;
@@ -155,7 +154,6 @@ public class State_Idle : BaseState
     void DummyIdleCheck()
     {
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        _base._aFrameDataMeter.ResetMeterData();
         _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;

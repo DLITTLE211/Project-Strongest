@@ -14,7 +14,8 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     [SerializeField] private TMP_Text frameDataInformationText;
     FrameType lastFrameDataType;
     string message;
-    int currentFrame;
+    [SerializeField] private int currentFrame;
+    public int FrameIndex { get { return currentFrame; } }
     [SerializeField] private bool _isHitRecovering;
     public bool HitRecovering { get { return _isHitRecovering; } }
     void Start()
@@ -39,27 +40,24 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             _refSingularFrameList.Add(singularFrameData);
         }
     }
-    public void ResetMeterData() 
+
+    public void ResetMeterData()
     {
-        if (_isHitRecovering)
+        if (_base.opponentPlayer._aFrameDataMeter.HitRecovering)
         {
-            _isHitRecovering = false;
+            frameDataInformationText.text = message;
             message = "";
         }
-        else 
-        {
-            if (_base.opponentPlayer._aFrameDataMeter.HitRecovering) 
-            {
-                frameDataInformationText.text = message;
-                message = "";
-            }
-        }
+        ResetFrames();
+        lastFrameDataType = FrameType.Init;
+    }
+    public void ResetFrames()
+    {
+        currentFrame = 0;
         for (int i = 0; i < _refSingularFrameList.Count; i++)
         {
             _refSingularFrameList[i].InitFrame();
         }
-        currentFrame = 0;
-        lastFrameDataType = FrameType.Init;
     }
     #region Update Frame On Attack
     public void UpdateFrame(bool initHit, bool startUpHit, bool ActiveHit, bool recoveryHit, bool lastFrame)
@@ -81,6 +79,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
                     string frameDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
                     string advantageAmount = frameDifference;
                     message += $"Advantage: {advantageAmount}";
+                    frameDataInformationText.text = message;
                 }
                 else
                 {
@@ -122,6 +121,11 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     public void SetHitRecoveringState(bool state) 
     {
         _isHitRecovering = state;
+        if (state)
+        {
+            ResetFrames();
+            currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex-1;
+        }
     }
     public void UpdateFrameOnHit()
     {
