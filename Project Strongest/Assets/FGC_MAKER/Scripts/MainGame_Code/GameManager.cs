@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MainGame_Timer _stopWatchController;
     public MainGame_Timer stopWatchController { get { return _stopWatchController; } }
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
+    public General_FrameAdvantageCalculator _frameDataCalculator;
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;

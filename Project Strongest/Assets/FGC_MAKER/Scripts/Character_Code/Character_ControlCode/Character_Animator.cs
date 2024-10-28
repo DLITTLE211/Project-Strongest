@@ -25,6 +25,7 @@ public class Character_Animator : MonoBehaviour
 
     [SerializeField] public Character_MobilityOption activatedInput;
     [SerializeField] public Attack_BaseProperties lastAttack;
+     public AttackHandler_Attack _lastAnim;
 
     public Transform _model;
     public bool inRekkaState,inStanceState;
@@ -254,6 +255,8 @@ public class Character_Animator : MonoBehaviour
             BasicAttackRoutine = null;
         }
         lastAttack.AttackAnims.SetIsFollowUpAttack(false);
+
+        _lastAnim = lastAttack.AttackAnims;
         PlayNextAnimation(lastAttack.attackHashes, 2 * (1f / lastAttack.AttackAnims.animClip.frameRate),true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
@@ -265,6 +268,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(BasicAttackRoutine);
             BasicAttackRoutine = null;
         }
+        _lastAnim = throwCustom;
         lastAttack = throwProperty;
         throwCustom.SetIsFollowUpAttack(true);
         PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
@@ -281,6 +285,8 @@ public class Character_Animator : MonoBehaviour
         lastAttack = superProperty;
         customSuperHit = true;
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
+
+        _lastAnim = superCustom;
         PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate),true);
         superCustom.SetIsFollowUpAttack(true);
         if (SuperAttackRoutine != null) 

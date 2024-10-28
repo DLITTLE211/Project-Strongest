@@ -41,9 +41,18 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     }
     public void ResetMeterData() 
     {
-        if (_isHitRecovering) 
+        if (_isHitRecovering)
         {
             _isHitRecovering = false;
+            message = "";
+        }
+        else 
+        {
+            if (_base.opponentPlayer._aFrameDataMeter.HitRecovering) 
+            {
+                frameDataInformationText.text = message;
+                message = "";
+            }
         }
         for (int i = 0; i < _refSingularFrameList.Count; i++)
         {
@@ -51,7 +60,6 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         }
         currentFrame = 0;
         lastFrameDataType = FrameType.Init;
-        message = "";
     }
     #region Update Frame On Attack
     public void UpdateFrame(bool initHit, bool startUpHit, bool ActiveHit, bool recoveryHit, bool lastFrame)
@@ -69,7 +77,9 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
                 _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType, currentFrame+1);
                 if (currentFrameDataType == FrameType.Reset)
                 {
-                    string advantageAmount = _base.opponentPlayer._aFrameDataMeter.HitRecovering ? "${0}" :"--";
+                    float frameValue = GameManager.instance._frameDataCalculator.ReturnFrameDifference(_base.opponentPlayer);
+                    string frameDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
+                    string advantageAmount = frameDifference;
                     message += $"Advantage: {advantageAmount}";
                 }
                 else

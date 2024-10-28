@@ -475,6 +475,7 @@ public class Character_HitController : MonoBehaviour
             SetRecoverable();
             currentCustomDamageField = null;
             currentProperty = null;
+            currentHitstun = 0;
         }
     }
 
@@ -660,6 +661,7 @@ public class Character_HitController : MonoBehaviour
             currentCustomDamageField = null;
             currentProperty = null;
             blockedAttack = false;
+            currentHitstun = 0;
         }
     }
     #endregion

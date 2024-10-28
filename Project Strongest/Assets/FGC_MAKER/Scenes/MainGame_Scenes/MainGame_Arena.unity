@@ -21866,18 +21866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012680874c85ef14fbc7108332febcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1:
-    character: {fileID: 0}
-    characterName: 
-    isTimeSet: 0
-    idleReturnTime: 0
-    _frameDataText: {fileID: 0}
-  player2:
-    character: {fileID: 0}
-    characterName: 
-    isTimeSet: 0
-    idleReturnTime: 0
-    _frameDataText: {fileID: 0}
 --- !u!114 &1359521218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21953,6 +21941,7 @@ MonoBehaviour:
   p2UIManager: {fileID: 740525645}
   _stopWatchController: {fileID: 0}
   stageLoader: {fileID: 1359521223}
+  _frameDataCalculator: {fileID: 1359521217}
   players:
     availableIds: 
     totalPlayers:
