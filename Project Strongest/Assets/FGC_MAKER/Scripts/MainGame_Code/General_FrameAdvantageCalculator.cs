@@ -3,14 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Threading.Tasks;
 
 public class General_FrameAdvantageCalculator : MonoBehaviour
 {
-    public float ReturnFrameDifference(Character_Base _hitPlayer)
+    IEnumerator WaitingRoutine;
+    float frameDifference;
+    public float FrameDifference { get { return frameDifference; } }
+    public void ReturnFrameDifference(Character_Base _hitPlayer, FrameData _frameData)
     {
-        float attackingPlayerRecovery = _hitPlayer.opponentPlayer._cAnimator._lastAnim._frameData.recoveryAmount;
-        float hitPlayerHitstun = _hitPlayer._cHitController.currentHitstun;
-        float frameDifference = -(attackingPlayerRecovery - hitPlayerHitstun);
-        return frameDifference;
+        frameDifference = 0;
+        if (WaitingRoutine != null) 
+        {
+            StopCoroutine(WaitingRoutine);
+            WaitingRoutine = null;
+        }
+        WaitingRoutine = WaitForPlayersIdle(_hitPlayer, _frameData);
+        StartCoroutine(WaitingRoutine);
+    }
+    IEnumerator WaitForPlayersIdle(Character_Base _hitPlayer, FrameData _frameData) 
+    {
+        List<IState> acceptableState = new List<IState>() 
+        {
+            _hitPlayer._cStateMachine.idleStateRef,
+            _hitPlayer._cStateMachine.secondIdleState,
+            _hitPlayer._cStateMachine.moveStateRef,
+            _hitPlayer._cStateMachine.crouchStateRef,
+        };
+        while ((!acceptableState.Contains(_hitPlayer._cStateMachine._playerState.current.State)) && (!acceptableState.Contains(_hitPlayer.opponentPlayer._cStateMachine._playerState.current.State))) 
+        {
+            yield return null;
+        }
+        frameDifference = -(_hitPlayer.opponentPlayer._aFrameDataMeter.FrameIndex - _hitPlayer._aFrameDataMeter.FrameIndex);
+        _hitPlayer.opponentPlayer._aFrameDataMeter.SetFrameInformation(_frameData);
     }
 }

@@ -14,7 +14,6 @@ public abstract class AttackHandler_Base
     public abstract void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null);
     public abstract void OnStartup(Character_Base curBase);
     public abstract void OnActive(Character_Base curBase);
-    public abstract void OnStay(Character_Base curBase);
     public abstract void OnRecov(Character_Base curBase);
     public abstract void OnRecovEnd();
 }

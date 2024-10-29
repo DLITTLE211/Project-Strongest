@@ -36,6 +36,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     List<RequiredCallback> requiredHitboxCallBacks;
     List<CustomCallback> customHitboxCallBacks;
 
+    FrameType _curFrameType;
     bool init;
     bool startup;
     bool active;
@@ -115,6 +116,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
     {
         init = true;
+        _curFrameType = FrameType.Startup;
         GetPlacementLocation(curBase);
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
         if (newAttackProperties != null)
@@ -127,13 +129,11 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnStartup(Character_Base curBase)
     {
         startup = true;
+        _curFrameType = FrameType.Active;
         extendedHitBox.ActivateHurtbox(extendedHitBox);
         extendedHitBox.SetHurtboxState(extendedHitBox.huBType);
         character._cHurtBox.SetHurboxState(extendedHitBox.huBType);
         HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
-    }
-    public override void OnStay(Character_Base curBase)
-    {
     }
     public override void OnActive(Character_Base curBase)
     {
@@ -148,6 +148,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnRecov(Character_Base curBase)
     {
         inactive = true;
+        _curFrameType = FrameType.Recovery; 
         if (HitBox != null)
         {
             HitBox.DestroyHitbox(HitBox, extendedHitBox);
@@ -171,6 +172,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnRecovEnd()
     {
         lastFrame = true;
+        _curFrameType = FrameType.Recovery;
         if (HitBox.gameObject.activeInHierarchy)
         {
             HitBox.DestroyHitbox(HitBox, extendedHitBox);
@@ -284,7 +286,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                 }
                 try
                 {
-                    character._aFrameDataMeter.UpdateFrame(init,startup,active, inactive,lastFrame);
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
@@ -305,6 +306,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                             }
                         }
                     }
+                    character._aFrameDataMeter.UpdateFrame(_curFrameType);
                 }
                 catch (Exception e)
                 {
@@ -321,6 +323,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 yield return new WaitForSeconds(waitTime);
             }
         }
+        _curFrameType = FrameType.Reset;
         if (character._cAttackTimer._type == TimerType.Special) 
         {
             character._cAttackTimer.ClearAttackLanded();
@@ -342,8 +345,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
-            character._aFrameDataMeter.UpdateFrame(init, startup, active, inactive, lastFrame);
         }
+        character._aFrameDataMeter.GetAdvantageValue(_frameData);
         if (lastAttack._moveType == MoveType.Throw)
         {
             if (!lastAttack.hitConnected)
@@ -388,7 +391,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                 frameCount = frameCount * character._cHitstun.animSpeed;
                 try
                 {
-                    character._aFrameDataMeter.UpdateFrame(init, startup, active, inactive, lastFrame);
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
@@ -416,6 +418,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                             }
                         }
                     }
+                    character._aFrameDataMeter.UpdateFrame(_curFrameType);
                 }
                 catch (Exception e)
                 {
@@ -432,6 +435,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 yield return new WaitForSeconds(waitTime);
             }
         }
+        _curFrameType = FrameType.Reset;
         Attack_BaseProperties thisAttack = HitBox?.hitboxProperties;
         if (thisAttack?.InputTimer == null) 
         {
@@ -463,7 +467,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
-            character._aFrameDataMeter.UpdateFrame(init, startup, active, inactive, lastFrame);
+            character._aFrameDataMeter.GetAdvantageValue(_frameData);
         }
         _playerCAnimator.CountUpNegativeFrames(customProp._frameData.totalRecovery);
         _playerCAnimator.SetCanTransitionIdle(true);
@@ -498,8 +502,8 @@ public class FrameData
     public void SetRecoveryFrames(float sampleRate, float animLength)
     {
         int totalFrames = (int)(Mathf.Ceil(animLength / (1 / sampleRate)));
-        totalRecovery = Mathf.Abs(recoveryEnd - inactive);
         recoveryEnd = inactive + recoveryAmount;
+        totalRecovery = Mathf.Abs(recoveryEnd - inactive);
         if (_extraPoints.Count > 0)
         {
             for (int i = 0; i < _extraPoints.Count; i++)

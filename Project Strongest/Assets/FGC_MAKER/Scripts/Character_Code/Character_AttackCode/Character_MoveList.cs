@@ -47,7 +47,6 @@ public class Character_MoveList : MonoBehaviour
     List<IState> nonClearStates = new List<IState>();
     public void SetCurrentAttack(KeyValuePair<AttackInputTypes, IAttackFunctionality> newAttack)
     {
-        Debug.LogError("Re-Assigned Attack Value in setcurrentattack");
         currentAttack = newAttack;
     }
     public IAttackFunctionality ReturnCurrentAttack() 

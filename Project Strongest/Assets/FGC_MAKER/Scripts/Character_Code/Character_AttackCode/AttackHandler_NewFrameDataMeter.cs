@@ -22,7 +22,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     {
         InitializeMeter();
         currentFrame = 0;
-        lastFrameDataType = FrameType.Init;
+        lastFrameDataType = FrameType.Startup;
         message = "";
     }
     public void ResetMessage() 
@@ -46,10 +46,11 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         if (_base.opponentPlayer._aFrameDataMeter.HitRecovering)
         {
             frameDataInformationText.text = message;
-            message = "";
+            ResetMessage();
         }
         ResetFrames();
-        lastFrameDataType = FrameType.Init;
+        _base.opponentPlayer._aFrameDataMeter.ResetFrames();
+        lastFrameDataType = FrameType.Startup;
     }
     public void ResetFrames()
     {
@@ -60,72 +61,46 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         }
     }
     #region Update Frame On Attack
-    public void UpdateFrame(bool initHit, bool startUpHit, bool ActiveHit, bool recoveryHit, bool lastFrame)
+    public void UpdateFrame(FrameType type)
     {
-        if(currentFrame >= _refSingularFrameList.Count - 1) 
+        if (currentFrame >= _refSingularFrameList.Count - 1)
         {
             currentFrame = 0;
         }
-        if (!lastFrame)
+        if (lastFrameDataType != type)
         {
-            FrameType currentFrameDataType = GetCurrentFrameType(initHit, startUpHit, ActiveHit, recoveryHit);
-            if (lastFrameDataType != currentFrameDataType) 
-            {
-                lastFrameDataType = currentFrameDataType;
-                _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType, currentFrame+1);
-                if (currentFrameDataType == FrameType.Reset)
-                {
-                    float frameValue = GameManager.instance._frameDataCalculator.ReturnFrameDifference(_base.opponentPlayer);
-                    string frameDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
-                    string advantageAmount = frameDifference;
-                    message += $"Advantage: {advantageAmount}";
-                    frameDataInformationText.text = message;
-                }
-                else
-                {
-                    message += $"{currentFrameDataType.ToString()}: {currentFrame + 1}/";
-                }
-            }
-            else
-            {
-                _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
-            }
-            currentFrame++;
+            lastFrameDataType = type;
+            message += $"{lastFrameDataType.ToString()}: {currentFrame}/";
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType, currentFrame+1);
         }
         else
         {
-            frameDataInformationText.text = message;
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
         }
+        currentFrame++;
     }
-    public FrameType GetCurrentFrameType(bool initHit, bool startUpHit, bool ActiveHit, bool recoveryHit) 
+    public void GetAdvantageValue(FrameData _frameData) 
     {
-        if (recoveryHit) 
-        {
-            return FrameType.Reset;
-        }
-        if (ActiveHit)
-        {
-            return FrameType.Recovery;
-        }
-        if (startUpHit)
-        {
-            return FrameType.Active;
-        }
-        if (initHit)
-        {
-            return FrameType.Startup;
-        }
-        return FrameType.Init;
+        GameManager.instance._frameDataCalculator.ReturnFrameDifference(_base.opponentPlayer, _frameData);
+    }
+    public void SetFrameInformation(FrameData _frameData)
+    {
+        float frameValue = GameManager.instance._frameDataCalculator.FrameDifference;
+        message = $"Startup: {_frameData.startup}/ TotalFrames: {_frameData.recoveryEnd}/";
+        string frameDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
+        string advantageAmount = frameDifference;
+        message += $"Advantage: {advantageAmount}";
+        frameDataInformationText.text = message;
     }
     #endregion
-    public void SetHitRecoveringState(bool state) 
+    public void SetHitRecoveringState(bool state)
     {
-        _isHitRecovering = state;
-        if (state)
+        if (state && !_isHitRecovering)
         {
             ResetFrames();
-            currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex-1;
+            currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex - 1;
         }
+        _isHitRecovering = state;
     }
     public void UpdateFrameOnHit()
     {
