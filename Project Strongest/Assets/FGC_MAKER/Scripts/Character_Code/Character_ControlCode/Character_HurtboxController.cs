@@ -43,6 +43,7 @@ public class Character_HurtboxController : MonoBehaviour
     private void FixedUpdate()
     {
         IsGrounded();
+        collisionBox.SetSlipMat(!groundCheck);
     }
     private void Update()
     {

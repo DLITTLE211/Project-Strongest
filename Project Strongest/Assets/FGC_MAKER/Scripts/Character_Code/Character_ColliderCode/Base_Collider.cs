@@ -39,4 +39,15 @@ public class Base_Collider : CollisionDetection
         ySize = sizeY;
         this.transform.localScale = new Vector2(xSize, ySize);
     }
+    public void SetSlipMat(bool state) 
+    {
+        if (state) 
+        {
+            currentCollider.GetComponent<CapsuleCollider>().material = physicsMat;
+        }
+        else 
+        {
+            currentCollider.GetComponent<CapsuleCollider>().material = null;
+        }
+    }
 }

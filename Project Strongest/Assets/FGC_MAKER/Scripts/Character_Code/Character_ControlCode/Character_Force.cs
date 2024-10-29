@@ -402,6 +402,10 @@ public class Character_Force : MonoBehaviour
                 StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
                 break;
         }
+        if (_mInput.movementPriority != 2)
+        {
+            _base.character_MobilityOptions.ReserveAnimationCall(_mInput);
+        }
         yield return new WaitForSeconds(2 / 60f);
         sendingForce = false;
     }

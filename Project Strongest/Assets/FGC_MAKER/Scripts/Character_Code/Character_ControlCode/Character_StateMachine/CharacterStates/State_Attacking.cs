@@ -14,7 +14,10 @@ public class State_Attacking : BaseState
     {
         _base._aFrameDataMeter.ResetMeterData();
 
-        _base.myRb.drag = 100000; 
+        if (_base._cHurtBox.IsGrounded())
+        {
+            _base.myRb.drag = 100000;
+        }
         _base._cHitController.ClearRecoveryRoutine(false);
         base.OnEnter();
         Attack_BaseProperties hitboxProperty = _base._cHitboxManager.GetActiveHitBox().hitboxProperties;

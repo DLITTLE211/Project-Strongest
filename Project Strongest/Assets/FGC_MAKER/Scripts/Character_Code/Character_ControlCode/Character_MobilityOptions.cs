@@ -17,6 +17,14 @@ public class Character_MobilityOptions : MonoBehaviour
     {
         _mobOption.CurBase._cForce.HandleExtraMovement(_mobOption);
     }
+    public void ReserveAnimationCall(Character_MobilityOption _mobOption) 
+    {
+        AnimationClip currentAnimation = _mobOption.CurBase._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip;
+        if (currentAnimation != _mobOption._animInformation._animationClip)
+        {
+            _mobOption.CurBase._cAnimator.PlayNextAnimation(_mobOption._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
+        }
+    }
     public void ActivateMobilityOption(Character_MobilityOption _currentAction) 
     {
         KillCurrentRoutine();

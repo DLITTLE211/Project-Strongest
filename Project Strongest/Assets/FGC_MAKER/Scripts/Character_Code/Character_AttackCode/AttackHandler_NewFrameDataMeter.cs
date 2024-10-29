@@ -63,7 +63,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     #region Update Frame On Attack
     public void UpdateFrame(FrameType type)
     {
-        if (currentFrame >= _refSingularFrameList.Count - 1)
+        if (currentFrame >= _refSingularFrameList.Count)
         {
             currentFrame = 0;
         }
