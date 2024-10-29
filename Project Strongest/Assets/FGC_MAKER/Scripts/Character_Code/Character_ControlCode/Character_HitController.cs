@@ -404,7 +404,7 @@ public class Character_HitController : MonoBehaviour
             {
                 if (currentKnockBack != null)
                 {
-                    if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
+                    /*if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
                     {
                         yield return new WaitForSeconds(0.45f);
                         while (!_base._cHurtBox.IsGrounded())
@@ -415,7 +415,7 @@ public class Character_HitController : MonoBehaviour
                         }
                         hitStunInFrames = 0;
                         ClearMeterValue();
-                    }
+                    }*/
                     hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                     UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
@@ -670,6 +670,7 @@ public class Character_HitController : MonoBehaviour
         _hitStunSlider.maxValue = TopValue;
         _hitStunSlider.value = _hitStunSlider.maxValue;
     }
+    
     void UpdateMeterValue(float subtractValue)
     {
         if (_hitStunSlider.value > 0)
