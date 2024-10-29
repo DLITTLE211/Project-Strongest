@@ -30,11 +30,11 @@ public class General_FrameAdvantageCalculator : MonoBehaviour
             _hitPlayer._cStateMachine.moveStateRef,
             _hitPlayer._cStateMachine.crouchStateRef,
         };
-        while ((!acceptableState.Contains(_hitPlayer._cStateMachine._playerState.current.State)) && (!acceptableState.Contains(_hitPlayer.opponentPlayer._cStateMachine._playerState.current.State))) 
+        while ((!acceptableState.Contains(_hitPlayer._cStateMachine._playerState.current.State)) && (!acceptableState.Contains(_hitPlayer.opponentPlayer._cStateMachine._playerState.current.State)))
         {
             yield return null;
         }
-        frameDifference = -(_hitPlayer.opponentPlayer._aFrameDataMeter.FrameIndex - _hitPlayer._aFrameDataMeter.FrameIndex);
+        frameDifference = -(_hitPlayer.opponentPlayer._aFrameDataMeter.TrueFrameCount - _hitPlayer._aFrameDataMeter.TrueFrameCount);
         _hitPlayer.opponentPlayer._aFrameDataMeter.SetFrameInformation(_frameData);
     }
 }

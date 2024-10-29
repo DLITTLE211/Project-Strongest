@@ -16,6 +16,8 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     string message;
     [SerializeField] private int currentFrame;
     public int FrameIndex { get { return currentFrame; } }
+    [SerializeField] private int frameCount;
+    public int TrueFrameCount { get { return frameCount; } }
     [SerializeField] private bool _isHitRecovering;
     public bool HitRecovering { get { return _isHitRecovering; } }
     void Start()
@@ -36,7 +38,9 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             GameObject newFrame = Instantiate(_refSingularFrame, this.transform);
             newFrame.name = $"SingleFrame_{i + 1}";
             AttackHandler_SingularFrame singularFrameData = newFrame.GetComponent<AttackHandler_SingularFrame>();
+            singularFrameData.InitColors();
             singularFrameData.InitFrame();
+
             _refSingularFrameList.Add(singularFrameData);
         }
     }
@@ -55,6 +59,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     public void ResetFrames()
     {
         currentFrame = 0;
+        frameCount = 0;
         for (int i = 0; i < _refSingularFrameList.Count; i++)
         {
             _refSingularFrameList[i].InitFrame();
@@ -78,6 +83,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
         }
         currentFrame++;
+        frameCount++;
     }
     public void GetAdvantageValue(FrameData _frameData) 
     {
@@ -99,6 +105,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         {
             ResetFrames();
             currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex - 1;
+            frameCount = currentFrame;
         }
         _isHitRecovering = state;
     }
@@ -106,12 +113,16 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     {
         if (_isHitRecovering)
         {
-            if (currentFrame >= _refSingularFrameList.Count - 1)
+            if (currentFrame >= _refSingularFrameList.Count)
             {
                 currentFrame = 0;
             }
-            _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Recovery);
+            int nextFrame = currentFrame+1;
+            nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
+            _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.Reset);
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Stun);
             currentFrame++;
+            frameCount++;
         }
     }
 }

@@ -6,47 +6,46 @@ using TMPro;
 
 public class AttackHandler_SingularFrame : MonoBehaviour
 {
-    [SerializeField] private List<Color> sf_Colors = new List<Color>()
-    {
-        Color.white,
-        Color.blue,
-        Color.green,
-        Color.red,
-        Color.black,
-    };
+    [SerializeField] private List<Color> sf_Colors = new List<Color>();
     [SerializeField] private FrameType _curFrameType;
     [SerializeField] private Image sf_FrameImage;
     [SerializeField] private TMP_Text _frameText;
-    public void InitFrame() 
+    public void InitColors() 
+    {
+        Color32 purpleStun = new Color32((byte)254f, (byte)66f, (byte)213f, (byte)255f);
+        sf_Colors = new List<Color>(){Color.black,  Color.cyan, Color.green, Color.red, purpleStun };
+    }
+    public void InitFrame()
     {
         _curFrameType = FrameType.Reset;
         _frameText.text = "";
         SetColor();
     }
-    public void SetFrame_FrameType(FrameType newFrameType,int endingFrame = -1) 
+    public void SetFrame_FrameType(FrameType newFrameType, int endingFrame = -1)
     {
         _curFrameType = newFrameType;
         SetColor();
-        if (endingFrame != -1) 
+        if (endingFrame != -1)
         {
             SetText(endingFrame);
         }
     }
-    public void SetColor() 
+    public void SetColor()
     {
         int frameColorIndex = (int)_curFrameType;
-        sf_FrameImage.color = sf_Colors[frameColorIndex];
+        Color curFrameColor = sf_Colors[frameColorIndex];
+        sf_FrameImage.color = curFrameColor;
     }
     public void SetText(int endingFrame)
     {
         _frameText.text = $"{endingFrame}";
     }
 }
-public enum FrameType 
+public enum FrameType
 {
-    Init = 0,
+    Reset = 0,
     Startup = 1,
     Active = 2,
     Recovery = 3,
-    Reset = 4,
+    Stun = 4,
 }

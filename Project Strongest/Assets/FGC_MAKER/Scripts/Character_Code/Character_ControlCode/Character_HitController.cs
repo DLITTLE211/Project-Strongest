@@ -20,6 +20,7 @@ public class Character_HitController : MonoBehaviour
     Attack_BaseProperties currentProperty;
     CustomDamageField currentCustomDamageField;
     IEnumerator activeHitResponseRoutine, recoverRoutine;
+    IEnumerator DownedFrameTickRoutine;
     public float currentHitstun;
     public float hitStunScaling;
 
@@ -376,6 +377,14 @@ public class Character_HitController : MonoBehaviour
             _base._cComboCounter.StopFadeRoutine();
         }
     }
+    public void ClearFrameTickRoutine()
+    {
+        if (DownedFrameTickRoutine != null)
+        {
+            StopCoroutine(DownedFrameTickRoutine);
+            DownedFrameTickRoutine = null;
+        }
+    }
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
         float hitStunInFrames = (currentHitstun * Base_FrameCode.ONE_FRAME);
@@ -394,7 +403,7 @@ public class Character_HitController : MonoBehaviour
             Debug.LogError("Stack Overflow Hit");
         }
         Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
-        while (hitStunInFrames > 0)
+        while (hitStunInFrames >= 0)
         {
             if (_base.ReturnIfPaused())
             {
@@ -430,7 +439,9 @@ public class Character_HitController : MonoBehaviour
         }
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
+            ClearFrameTickRoutine();
             ClearRecoveryRoutine(true);
+            DownedFrameTickRoutine = UpdateFrameWhileDowned();
             _isRecovering = true;
             if (currentCustomDamageField != null)
             {
@@ -446,6 +457,7 @@ public class Character_HitController : MonoBehaviour
             }
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
             StartCoroutine(recoverRoutine);
+            StartCoroutine(DownedFrameTickRoutine);
         }
         else
         {
@@ -673,11 +685,16 @@ public class Character_HitController : MonoBehaviour
     
     void UpdateMeterValue(float subtractValue)
     {
-        if (_hitStunSlider.value > 0)
+        _base._aFrameDataMeter.UpdateFrameOnHit();
+        _hitStunSlider.value -= subtractValue;
+    }
+    IEnumerator UpdateFrameWhileDowned() 
+    {
+        while (_cAnimator.isHit) 
         {
             _base._aFrameDataMeter.UpdateFrameOnHit();
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
-        _hitStunSlider.value -= subtractValue;
     }
     void ClearMeterValue()
     {
