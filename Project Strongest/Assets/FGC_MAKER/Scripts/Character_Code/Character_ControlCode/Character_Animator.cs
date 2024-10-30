@@ -50,6 +50,10 @@ public class Character_Animator : MonoBehaviour
         inRekkaState = false;
         inStanceState = false;
     }
+    public void SetModelColors(MaterialSet _set) 
+    {
+
+    }
     public HeightPositionMarkerSet ReturnMarkers() 
     {
         return heightMarkerObjects;

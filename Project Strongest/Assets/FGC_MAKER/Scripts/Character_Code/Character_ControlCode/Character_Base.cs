@@ -230,7 +230,7 @@ public class Character_Base : MonoBehaviour
         _cAnimator.NullifyMobilityOption();
         SetMainCustomCallbackDictionary();
     }
-    void AddCharacterModel(Amplifiers _chosenAmplifier)
+    void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
     {
         GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
         _chosenCharacter.transform.localPosition = new Vector3(0f, -1f, 0f);
@@ -239,6 +239,8 @@ public class Character_Base : MonoBehaviour
         _chosenCharacter.SetActive(true);
         Character_Animator _chosenCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
+
+        _chosenCharacter_Animator.SetModelColors(characterProfile._characterSkins.ColorSets[skinIndex]);
         SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier);
     }
 

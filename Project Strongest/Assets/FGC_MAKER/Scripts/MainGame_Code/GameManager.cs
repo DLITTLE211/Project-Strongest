@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < players.totalPlayers.Count; i++)
             {
-                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,i,null,-1);
+                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,i,0,null,-1);
                 _settingsController.SetPlayerData(players.totalPlayers[i]);
             }
         }
@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
                 {
                     players.totalPlayers[CurChosenCharacter.ChosenPlayerSide].characterProfile = CurChosenCharacter.chosenCharacter;
                     Character_Base curCharacter = players.totalPlayers[CurChosenCharacter.ChosenPlayerSide];
-                    curCharacter.Initialize(Character_SubStates.Controlled, CurChosenCharacter.ChosenPlayerSide, CurChosenCharacter.chosenAmplifier, players.UsedID.Item1[i]);
+                    curCharacter.Initialize(Character_SubStates.Controlled, CurChosenCharacter.ChosenPlayerSide, CurChosenCharacter.ColorChoice, CurChosenCharacter.chosenAmplifier, players.UsedID.Item1[i]);
                 }
                 else 
                 {
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
                         playerProfiles[i].ChosenPlayerSide = 0;
                     }
                     players.totalPlayers[playerProfiles[i].ChosenPlayerSide].characterProfile = playerProfiles[i].chosenCharacter;
-                    players.totalPlayers[playerProfiles[i].ChosenPlayerSide].Initialize(Character_SubStates.Dummy,i, null, -1);
+                    players.totalPlayers[playerProfiles[i].ChosenPlayerSide].Initialize(Character_SubStates.Dummy,i, CurChosenCharacter.ColorChoice, null, -1);
                 }
                 _settingsController.SetPlayerData(players.totalPlayers[i]);
             }
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
         {
             if (!players.UsedID.Item1.Contains(players.totalPlayers[i].playerID)) 
             {
-                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,i, null, -1);
+                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,i, 0, null, -1);
             }
         }
     }
