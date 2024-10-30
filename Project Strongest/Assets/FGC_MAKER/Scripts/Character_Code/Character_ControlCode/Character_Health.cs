@@ -25,6 +25,7 @@ public class Character_Health : MonoBehaviour
             StopCoroutine(healthRegenRoutine);
             healthRegenRoutine = null;
         }
+        DOTween.Kill(health_Main.meterSlider);
     }
     public bool TestIfDeadDamage(float damage)
     {
@@ -48,16 +49,30 @@ public class Character_Health : MonoBehaviour
     {
         health_Main.SetStartMeterValues(curProfile.MaxHealth);
         health_Recov.SetStartMeterValues(curProfile.MaxHealth);
+        stunController.stunMeter.SetStartMeterValues(curProfile.MaxStunValue);
         recoverHealthRate = curProfile.HealthRegenRate;
+    }
+    public void SetHealthAndStunOnSceneReset(float currentHealthPercent, float currentStunValue) 
+    {
+        ClearRegenRoutine();
+        stunController.KillRegenTween();
+        float healthAmount = health_Main.maxValue * (currentHealthPercent / 100f);
+        float stunAmount = stunController.stunMeter.maxValue * (currentStunValue / 100f);
+
+        health_Recov.SetCurrentMeterValue(healthAmount);
+        health_Main.SetCurrentMeterValue(healthAmount);
+        CheckMeterValue();
+        stunController.stunMeter.SetCurrentMeterValue(stunAmount);
+        stunController.stunMeter.currentValue = stunAmount;
     }
     public void ApplyMainHealthDamage(float damageValue)
     {
+        ClearRegenRoutine();
         _disparityChecker.UpdateMeterOnDamage();
         canRecover = false;
-        DOTween.Kill(health_Main.meterSlider);
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
-        stunController.ApplyStun(damageValue * 0.01f);
+        stunController.ApplyStun(damageValue * 0.1f);
     }
     public void StartHealthRegen()
     {

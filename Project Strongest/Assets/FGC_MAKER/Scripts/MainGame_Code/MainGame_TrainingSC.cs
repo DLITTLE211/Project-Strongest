@@ -54,7 +54,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
             _eventSystem.firstSelectedGameObject = null;
         }
     }
-    public override void SetPlayersPosition() 
+    public override void SetPlayersPosition()
     {
         Callback teleportFunction = null;
         if (!teleporting)
@@ -64,6 +64,13 @@ public class MainGame_TrainingSC : MainGame_SettingsController
                 teleportFunction();
             }
         }
+        List<float> stunHealhList = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnHealthValues();
+
+        Character_Base firstCharacter = GameManager.instance.players.totalPlayers[0];
+        firstCharacter._cHealth.SetHealthAndStunOnSceneReset(stunHealhList[0], stunHealhList[1]);
+
+        Character_Base secondCharacter = GameManager.instance.players.totalPlayers[1];
+        secondCharacter._cHealth.SetHealthAndStunOnSceneReset(stunHealhList[2], stunHealhList[3]);
     }
     private async Task LandingCheck() 
     {
@@ -93,6 +100,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
 
         yield return new WaitUntil(() => teleported);
         yield return new WaitForSeconds(0.25f);
+
         _trainingCoverImage.DOFade(0f, 0.15f);
         teleporting = false;
     }

@@ -152,13 +152,14 @@ public class TrainingMenu_Controller : MonoBehaviour
     }
 
     #region Return ToggledHealthValues
-    public void ReturnHealthValues() 
+    public List<float> ReturnHealthValues() 
     {
         List<float> returnValues = new List<float>();
         returnValues.Add(healthReturnValues.ReturnP1HealthValue());
-        returnValues.Add(healthReturnValues.ReturnP2HealthValue());
         returnValues.Add(healthReturnValues.ReturnP1StunValue());
+        returnValues.Add(healthReturnValues.ReturnP2HealthValue());
         returnValues.Add(healthReturnValues.ReturnP2StunValue());
+        return returnValues;
     }
     #endregion
 

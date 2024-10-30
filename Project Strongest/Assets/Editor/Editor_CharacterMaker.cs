@@ -211,7 +211,7 @@ public class Editor_CharacterMaker : EditorWindow
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        _newProfile.MaxStunValue = (float)EditorGUILayout.Slider("Max Stun:", _newProfile.MaxStunValue, 0f, 80f);
+        _newProfile.MaxStunValue = (float)EditorGUILayout.Slider("Max Stun:", _newProfile.MaxStunValue, 0f, 50f);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();

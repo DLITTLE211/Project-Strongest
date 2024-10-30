@@ -87,7 +87,7 @@ public class UI_HealthSettings_SubMenu : UI_SubMenuBase
     }
     public float ReturnP1StunValue()
     {
-        return P1StunSlider._elementSlider.value;
+        return P1StunSlider._elementSlider.value/10f;
     }
     public float ReturnP2HealthValue()
     {
@@ -95,7 +95,7 @@ public class UI_HealthSettings_SubMenu : UI_SubMenuBase
     }
     public float ReturnP2StunValue()
     {
-        return P2StunSlider._elementSlider.value;
+        return P2StunSlider._elementSlider.value/10f;
     }
 }
 public enum MeterRecoveryType 

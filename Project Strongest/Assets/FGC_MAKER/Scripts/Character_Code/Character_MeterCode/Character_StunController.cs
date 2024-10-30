@@ -7,7 +7,7 @@ using DG.Tweening;
 public class Character_StunController : MonoBehaviour
 {
     public MainMeterController stunMeter;
-
+    IEnumerator RecoveryRoutine;
     public Gradient stunMeterColor;
     public Image stunMeterImage;
     public const float maxStun = 1;
@@ -33,15 +33,23 @@ public class Character_StunController : MonoBehaviour
             checkStunGradiet();
         }
     }
+    public void KillRegenTween() 
+    {
+        if(RecoveryRoutine != null) 
+        {
+            StopCoroutine(RecoveryRoutine);
+            RecoveryRoutine = null;
+        }
+        DOTween.Kill(stunMeter.meterSlider);
+    }
     public void ApplyStun(float stunAmount) 
     {
-        StopCoroutine(RecoverStunWaitTime());
-        canRecover = false;
-        DOTween.Kill(stunMeter.meterSlider);
+        KillRegenTween();
         stunMeter.currentValue += stunAmount;
         checkStunGradiet();
         stunMeter.SetCurrentMeterValue(stunMeter.currentValue);
-        StartCoroutine(RecoverStunWaitTime());
+        RecoveryRoutine = RecoverStunWaitTime();
+        StartCoroutine(RecoveryRoutine);
     }
     void checkStunGradiet() 
     {

@@ -38,7 +38,7 @@ public class Character_Profile : ScriptableObject
     //Minimum 100f
     [SerializeField, Range(0f, 250f)] public float MaxHealth;
     //Minimum 30f
-    [SerializeField, Range(0f, 80f)] public float MaxStunValue;
+    [SerializeField, Range(0f, 50f)] public float MaxStunValue;
     //Minimum 25f
     [SerializeField, Range(0f, 150f)] public float DefenseValue;
     //Minimum 3f
