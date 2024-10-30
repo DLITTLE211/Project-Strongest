@@ -42,7 +42,7 @@ public class Menu_PlayerSideState : Menu_BaseState
         SetCursorStartPosition(_player2_Cursor.transform, 335f);
 
         _stageSelecter.ResetValues();
-
+        _characterSelect.ResetCharacterSide();
         _characterSelect.AddControllerCounter();
         _characterSelect.CheckControllerState();
         _characterSelect.SetPlayerControllers();

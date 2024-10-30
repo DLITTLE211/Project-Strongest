@@ -13,6 +13,11 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
     {
         canSwitch = true;
     }
+    public void SetStartParent(ChooseSide_Object objectMoving)
+    {
+        objectMoving._object.transform.parent = sides[0];
+        objectMoving._object.transform.parent = sides[1];
+    }
     public void UpdateControllerSide(ChooseSide_Object objectMoving, int direction, Callback failFunc) 
     {
         if (canSwitch)

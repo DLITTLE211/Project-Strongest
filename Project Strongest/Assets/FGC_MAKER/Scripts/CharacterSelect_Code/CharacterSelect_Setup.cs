@@ -479,6 +479,11 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         _arenaLoader.OnCharactersAndStageSelected();
     }
+    public void ResetCharacterSide() 
+    {
+        sideController.SetStartParent(player1);
+        sideController.SetStartParent(player2);
+    }
     #region CursorController
     public void CursorController(CharacterSelect_Cursor currentController) 
     {
