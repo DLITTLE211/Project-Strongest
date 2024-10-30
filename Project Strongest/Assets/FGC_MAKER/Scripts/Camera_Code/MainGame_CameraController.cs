@@ -20,9 +20,11 @@ public class MainGame_CameraController : MonoBehaviour
     [SerializeField] Transform[] playerCharacters;
     [SerializeField] Vector3 offset;
     Vector3 startPos;
+    [SerializeField] private GameObject camera_LeftWall,camera_RightWall;
     [SerializeField] private HitPointCall cameraControlCalls;
     [SerializeField] private bool isTracking;
     IEnumerator ShakeRoutine;
+    
     private void Start()
     {
         InitCameraInformation();
@@ -64,6 +66,11 @@ public class MainGame_CameraController : MonoBehaviour
         ShakeRoutine = ShakeCamera(duration, intensity);
         StartCoroutine(ShakeRoutine);
 
+    }
+    public void ToggleWallState(bool state) 
+    {
+        camera_LeftWall.SetActive(state);
+        camera_RightWall.SetActive(state);
     }
     IEnumerator ShakeCamera(float duration, int intensity)
     {

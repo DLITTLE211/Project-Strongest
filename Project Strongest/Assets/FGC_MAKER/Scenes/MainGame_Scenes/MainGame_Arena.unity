@@ -8862,6 +8862,8 @@ MonoBehaviour:
   - {fileID: 993311515}
   - {fileID: 94923331}
   offset: {x: -0.53, y: -0.008, z: -0.3}
+  camera_LeftWall: {fileID: 1971111047}
+  camera_RightWall: {fileID: 971839217}
   cameraControlCalls: 491520
   isTracking: 1
 --- !u!1 &566836024
@@ -21945,6 +21947,7 @@ MonoBehaviour:
   p2UIManager: {fileID: 740525645}
   _stopWatchController: {fileID: 0}
   stageLoader: {fileID: 1359521223}
+  _hitstopController: {fileID: 1359521218}
   _frameDataCalculator: {fileID: 1359521217}
   players:
     availableIds: 

@@ -32,6 +32,7 @@ public class MainGame_VersusSC : MainGame_SettingsController
     }
     IEnumerator TeleportTweenController(Vector3 pos1, Vector3 pos2)
     {
+        GameManager.instance._hitstopController.CameraController.ToggleWallState(false);
         bool teleported = false;
         if (coverTweenSequence != null)
         {
@@ -52,6 +53,7 @@ public class MainGame_VersusSC : MainGame_SettingsController
         yield return new WaitForSeconds(0.25f);
         _trainingCoverImage.DOFade(0f, 0.15f);
         teleporting = false;
+        GameManager.instance._hitstopController.CameraController.ToggleWallState(true);
     }
     public override void TogglePauseMenu()
     {

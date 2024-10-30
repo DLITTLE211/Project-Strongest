@@ -9,29 +9,36 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+
     [SerializeField] private Character_Base leftPlayer,rightPlayer;
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Transform pauseMenuHolder;
     [SerializeField] private GameObject trainingStageMenu, versusStageMenu;
     [SerializeField] private MainGame_SettingsController _settingsController;
-    public MainGame_SettingsController settingsController { get { return _settingsController; } }
 
     [SerializeField] private MainGame_RoundSystemController _RoundSystemController;
-    public MainGame_RoundSystemController RoundSystemController { get { return _RoundSystemController; } }
 
 
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
     [SerializeField] private MainGame_Timer _stopWatchController;
-    public MainGame_Timer stopWatchController { get { return _stopWatchController; } }
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
-    public General_FrameAdvantageCalculator _frameDataCalculator;
+
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
+
+    public Character_Hitstop _hitstopController;
+    public General_FrameAdvantageCalculator _frameDataCalculator;
     public Character_AvailableID players;
     public GameModeSet _gameModeSet;
-    internal Character_Base winningCharacter;
-    public static GameManager instance;
     public Player_SideManager sideManager;
+
+    internal Character_Base winningCharacter;
+
+    public MainGame_Timer stopWatchController { get { return _stopWatchController; } }
+    public MainGame_SettingsController settingsController { get { return _settingsController; } }
+    public MainGame_RoundSystemController RoundSystemController { get { return _RoundSystemController; } }
     void Start()
     {
         players = CharacterSelect_LoadArena.curPlayerData;

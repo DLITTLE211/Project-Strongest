@@ -10,6 +10,8 @@ public class Character_Hitstop : MonoBehaviour
 {
     [SerializeField] private MainGame_CameraController _cameraController;
     [SerializeField] private Character_Animator p1, p2;
+    public MainGame_CameraController CameraController { get { return _cameraController; } }
+
     IEnumerator hitStopSequence;
     private void Start()
     {
