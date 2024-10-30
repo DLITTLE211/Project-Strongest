@@ -17,6 +17,7 @@ public class Menu_RoundSelectState : Menu_BaseState
     public override void OnExit()
     {
         allowUpdate = false;
+        _stageSelect.DisableStageSelectObject();
     }
     public override void OnUpdate()
     {

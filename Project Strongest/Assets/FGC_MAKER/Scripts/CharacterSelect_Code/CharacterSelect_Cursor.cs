@@ -21,6 +21,7 @@ public class CharacterSelect_Cursor : MonoBehaviour
     [SerializeField, Range(0f, 1f)] public float xYield, yYield;
 
     public bool canChooseStage;
+    public bool colorChosen;
     public void LockinCharacterChoice(Character_Profile chosenProfile)
     {
         profile = chosenProfile;
@@ -28,6 +29,10 @@ public class CharacterSelect_Cursor : MonoBehaviour
         cursorPage.characterFrame.color = cursorImage.color;
         cursorPage.LockInfo(profile);
         cursorObject.transform.DOScale(0.5f, 0.15f);
+    }
+    public void SetColorLockState(bool state) 
+    {
+        colorChosen = state;
     }
     public void UnlockCharacterChoice()
     {

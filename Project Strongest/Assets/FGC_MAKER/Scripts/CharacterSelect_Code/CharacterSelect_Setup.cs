@@ -399,72 +399,82 @@ public class CharacterSelect_Setup : MonoBehaviour
 
     void CheckIfBothPlayersLockedIn(CharacterSelect_Cursor cursor)
     {
-
         if (cursor == _player1_Cursor)
         {
-            if (cursor.cursorPage.lockedIn == true)
+            if (_player2_Cursor.cursorObject.activeInHierarchy && !_player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
             {
-                if (_player2_Cursor.cursorObject.activeInHierarchy && !_player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
-                {
-                    _player1_Cursor.canChooseStage = true;
-                }
-                else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
-                {
-                    _player2_Cursor.canChooseStage = true;
-                    CheckGameModeSet();
-                    ActivateStageSelector();
-                }
-                else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && _player2_Cursor.canChooseStage)
-                {
-                    ActivateStageSelector();
-                    CheckGameModeSet();
-                }
-                else
-                {
-                    _player1_Cursor.canChooseStage = true;
-                    CheckGameModeSet();
-                    ActivateStageSelector();
-                }
+                _player1_Cursor.canChooseStage = true;
             }
+            else if (_player2_Cursor.cursorObject.activeInHierarchy && _player2_Cursor.cursorPage.lockedIn && !_player2_Cursor.canChooseStage)
+            {
+                _player2_Cursor.canChooseStage = true;
+            }
+            else
+            {
+                _player1_Cursor.canChooseStage = true;
+            }
+            MoveToColorSelectState(_player2_Cursor);
         }
-        else if (cursor == _player2_Cursor) 
+        else if (cursor == _player2_Cursor)
         {
-            if (cursor.cursorPage.lockedIn == true)
+            if (_player1_Cursor.cursorObject.activeInHierarchy && !_player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
             {
-                if (_player1_Cursor.cursorObject.activeInHierarchy && !_player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
-                {
-                    _player2_Cursor.canChooseStage = true;
-                }
-                else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
-                {
-                    _player1_Cursor.canChooseStage = true;
-                    CheckGameModeSet();
-                    ActivateStageSelector();
-                }
-                else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && _player1_Cursor.canChooseStage)
-                {
-                    ActivateStageSelector();
-                    CheckGameModeSet();
-                }
-                else
-                {
-                    _player2_Cursor.canChooseStage = true;
-                    CheckGameModeSet();
-                    ActivateStageSelector();
-                }
+                _player2_Cursor.canChooseStage = true;
             }
+            else if (_player1_Cursor.cursorObject.activeInHierarchy && _player1_Cursor.cursorPage.lockedIn && !_player1_Cursor.canChooseStage)
+            {
+                _player1_Cursor.canChooseStage = true;
+            }
+            else
+            {
+                _player2_Cursor.canChooseStage = true;
+            }
+            MoveToColorSelectState(_player1_Cursor);
         }
-        
     }
-    void CheckGameModeSet() 
+    public void MoveToColorSelectState(CharacterSelect_Cursor oppositeCursor) 
     {
-        if (currentSet.gameMode == GameMode.Training)
+        if (oppositeCursor.cursorObject.activeInHierarchy)
         {
-            _menuStateMachine.CallStageSelectState();
+            if (oppositeCursor.cursorPage.lockedIn)
+            {
+                _menuStateMachine.CallColorSelectState();
+            }
         }
-        if (currentSet.gameMode == GameMode.Versus)
+        else
         {
-            _menuStateMachine.CallRoundSelectState();
+            _menuStateMachine.CallColorSelectState();
+        }
+    }
+    bool CheckPlayersReady(CharacterSelect_Cursor oppositeCursor) 
+    {
+        if (oppositeCursor.cursorObject.activeInHierarchy)
+        {
+            if (oppositeCursor.colorChosen)
+            {
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public void CheckGameModeSet() 
+    {
+        if (CheckPlayersReady(_player1_Cursor) && CheckPlayersReady(_player2_Cursor))
+        {
+            if (currentSet.gameMode == GameMode.Training)
+            {
+                _menuStateMachine.CallStageSelectState();
+                ActivateStageSelector();
+            }
+            if (currentSet.gameMode == GameMode.Versus)
+            {
+                _menuStateMachine.CallRoundSelectState();
+                ActivateStageSelector();
+            }
         }
     }
     public void ClearListeners() 
@@ -561,19 +571,19 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 if (currentController.cursorPage.lockedIn)
                 {
-                    if (currentController.canChooseStage)
+                    currentController.xVal = currentController.curPlayer.GetAxis("Horizontal");
+                    currentController.xVal = (currentController.xVal >= currentController.xYield) ? 1 : ((currentController.xVal <= -currentController.xYield) ? -1 : 0);
+                    if (currentController.xVal == 1)
                     {
-                        currentController.xVal = currentController.curPlayer.GetAxis("Horizontal");
-                        currentController.xVal = (currentController.xVal >= currentController.xYield) ? 1 : ((currentController.xVal <= -currentController.xYield) ? -1 : 0);
-                        if (currentController.xVal == 1)
-                        {
-                            _menuStateMachine.GetCurrentState().CycleRight(currentController);
-                        }
-                        else if (currentController.xVal == -1)
-                        {
-                            _menuStateMachine.GetCurrentState().CycleLeft(currentController);
-                        }
-                        else
+                        _menuStateMachine.GetCurrentState().CycleRight(currentController);
+                    }
+                    else if (currentController.xVal == -1)
+                    {
+                        _menuStateMachine.GetCurrentState().CycleLeft(currentController);
+                    }
+                    else
+                    {
+                        if (currentController.canChooseStage)
                         {
                             StopCoroutine(DelayResetStageBool());
                             stageSelectCooldown = false;

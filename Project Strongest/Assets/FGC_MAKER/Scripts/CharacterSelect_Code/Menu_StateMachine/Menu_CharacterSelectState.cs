@@ -9,9 +9,13 @@ public class Menu_CharacterSelectState : Menu_BaseState
     [SerializeField] private CharacterSelect_Page _player1_PlayerPage, _player2_PlayerPage;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
     private bool allowUpdate;
+    private bool allowColorUpdate;
     public override void OnEnter()
     {
         allowUpdate = false;
+        allowColorUpdate = true;
+        _player1_Cursor.cursorPage.ClearColorText();
+        _player2_Cursor.cursorPage.ClearColorText();
         _player1_Cursor.UnlockCharacterChoice();
         _player1_PlayerPage.ClearInfo();
         _player2_Cursor.UnlockCharacterChoice();
@@ -46,7 +50,6 @@ public class Menu_CharacterSelectState : Menu_BaseState
     }
     public override void CycleRight(CharacterSelect_Cursor _currentCursor) 
     {
-
         _currentCursor.cursorPage.characterAmplify.UpdateInfoUp();
     }
     IEnumerator DelayUpdateRoutine(float time)

@@ -28,9 +28,15 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         allowStageSelect = false;
         allowRoundSelect = false;
     }
+    public void DisableStageSelectObject() 
+    {
+        _mainHolder.SetActive(false);
+        allowStageSelect = false;
+    }
     public void DisableRoundSelectorObject() 
     {
         allowRoundSelect = false;
+        allowStageSelect = false;
         _roundSettingsObject.SetActive(false);
     }
     public void ActivateRoundSelector(GameMode _curGameMode)

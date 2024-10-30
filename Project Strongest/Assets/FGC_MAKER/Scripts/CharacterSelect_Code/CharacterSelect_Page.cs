@@ -10,9 +10,11 @@ public class CharacterSelect_Page : MonoBehaviour
     public Image characterFrame,characterBackgroundImage;
     public TMP_Text characterName;
     public CharacterSelect_AmplifySelecter characterAmplify;
+    public CharacterSelect_ColorPicker colorPicker;
     public bool lockedIn;
     public Character_Profile chosenCharacter;
     public Amplifiers chosenAmplifier;
+    [Range(1, 5)] public int colorSelectSlider;
     public bool amplifySelectCooldown;
     public void UpdateInfo(Character_Profile profile)
     {
@@ -38,8 +40,41 @@ public class CharacterSelect_Page : MonoBehaviour
         characterName.text = "Choose Your Character";
         chosenAmplifier = null;
         chosenCharacter = null;
+        colorSelectSlider = 1;
     }
-
+    public void ClearColorText()
+    {
+        colorPicker.ClearText();
+    }
+    public void SetDefaultText() 
+    {
+        colorSelectSlider = 1;
+        colorPicker.UpdateColorChoice(colorSelectSlider);
+    }
+    public void UpdateColorSelectNumberDown()
+    {
+        if (colorSelectSlider <= 1)
+        {
+            colorSelectSlider = 1;
+        }
+        else
+        {
+            colorSelectSlider--;
+        }
+        colorPicker.UpdateColorChoice(colorSelectSlider);
+    }
+    public void UpdateColorSelectNumberUp()
+    {
+        if (colorSelectSlider >= 5)
+        {
+            colorSelectSlider = 5;
+        }
+        else
+        {
+            colorSelectSlider++;
+        }
+        colorPicker.UpdateColorChoice(colorSelectSlider);
+    }
     public void SetPlayerInfo(float value)
     {
         characterBackgroundImage.DOFade(value, 1.5f);

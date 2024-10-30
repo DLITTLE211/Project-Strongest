@@ -9,6 +9,7 @@ public class Menu_StateMachine : MonoBehaviour
     public Menu_MainMenuState _mMMState;
     public Menu_PlayerSideState _mPState;
     public Menu_CharacterSelectState _mCState;
+    public Menu_CharacterColorSelectState _mCSState;
     public Menu_RoundSelectState _mRState;
     public Menu_StageSelectState _mSState;
 
@@ -58,5 +59,9 @@ public class Menu_StateMachine : MonoBehaviour
     public void CallStageSelectState()
     {
         SetCurrentState(_mSState);
+    }
+    public void CallColorSelectState()
+    {
+        SetCurrentState(_mCSState);
     }
 }
