@@ -155,11 +155,11 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Initialization Code
-    public void Initialize(Character_SubStates setSubState, int hitboxSideDetection, Amplifiers choseAmplifiers = null, int NewID = -1)
+    public void Initialize(Character_SubStates setSubState, int hitboxSideDetection,int skinIndex ,Amplifiers choseAmplifiers = null, int NewID = -1)
     {
         activated = false;
         _side = hitboxSideDetection;
-        AddCharacterModel(choseAmplifiers);
+        AddCharacterModel(choseAmplifiers,skinIndex);
         InitButtons(setSubState, NewID);
         _cHitboxManager.SetupHitboxes(hitboxSideDetection + 1);
         //_cHitstop.SetCharacterAnimator(playerID, _cAnimator);

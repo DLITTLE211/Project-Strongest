@@ -7,6 +7,9 @@ using DG.Tweening;
 
 public class Character_Animator : MonoBehaviour
 {
+    [SerializeField] private List<SkinnedMeshRenderer> _baseModel;
+    [SerializeField] private SkinnedMeshRenderer _hairModel;
+    [SerializeField] private SkinnedMeshRenderer _clothingModel;
     #region HitAnimNums
     public bool isHit;
     #endregion
@@ -52,7 +55,10 @@ public class Character_Animator : MonoBehaviour
     }
     public void SetModelColors(MaterialSet _set) 
     {
-
+        for(int i = 0; i < _baseModel.Count; i++) 
+        {
+            _baseModel[i].material = _set._matSet[i];
+        }
     }
     public HeightPositionMarkerSet ReturnMarkers() 
     {
