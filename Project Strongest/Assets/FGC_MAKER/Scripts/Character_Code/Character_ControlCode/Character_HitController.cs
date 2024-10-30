@@ -22,6 +22,7 @@ public class Character_HitController : MonoBehaviour
     IEnumerator activeHitResponseRoutine, recoverRoutine;
     IEnumerator DownedFrameTickRoutine;
     public float currentHitstun;
+    public float hitStunAmount;
     public float hitStunScaling;
 
     [SerializeField] private bool smallHitRecovering;
@@ -387,23 +388,23 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
-        float hitStunInFrames = (currentHitstun * Base_FrameCode.ONE_FRAME);
+        hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
         try
         {
             _base._aFrameDataMeter.SetHitRecoveringState(true);
             _base.Deactivate();
             ClearRecoveryRoutine(true);
-            SetStunMeterValue(hitStunInFrames);
+            SetStunMeterValue(hitStunAmount);
             _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
             _base._cAnimator.SetCanRecover(true);
-            _base._cHitstun.CallHitStun(hitStunInFrames);
+            _base._cHitstun.CallHitStun(hitStunAmount);
         }
         catch (StackOverflowException) 
         {
             Debug.LogError("Stack Overflow Hit");
         }
         Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
-        while (hitStunInFrames >= 0)
+        while (hitStunAmount >= 0)
         {
             if (_base.ReturnIfPaused())
             {
@@ -425,18 +426,19 @@ public class Character_HitController : MonoBehaviour
                         hitStunInFrames = 0;
                         ClearMeterValue();
                     }*/
-                    hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                     UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
                 else
                 {
-                    hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                     UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
             }
         }
+        hitStunAmount = 0;
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             ClearFrameTickRoutine();

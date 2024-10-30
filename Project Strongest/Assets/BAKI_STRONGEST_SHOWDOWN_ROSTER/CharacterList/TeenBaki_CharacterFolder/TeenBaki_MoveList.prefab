@@ -3889,8 +3889,8 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.95
           attackMainStunValues:
-            hitstunValue: 11
-            blockStunValue: 7
+            hitstunValue: 15
+            blockStunValue: 6
             hitstopValue: 4
             blockStopValue: 1
           hitLevel: 68
@@ -4426,7 +4426,7 @@ MonoBehaviour:
           _meterAwardedOnHit: 5
           attackScalingPercent: 18
           dashCancelable: 0
-          JumpCancelable: 1
+          JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
             cancelFrom: 1
@@ -4450,9 +4450,9 @@ MonoBehaviour:
             hu_size: {x: 0.8, y: 1.65}
             _frameData:
               init: 0
-              startup: 8
-              active: 9
-              inactive: 13
+              startup: 10
+              active: 11
+              inactive: 14
               recoveryEnd: 0
               recoveryAmount: 6
               totalRecovery: 0

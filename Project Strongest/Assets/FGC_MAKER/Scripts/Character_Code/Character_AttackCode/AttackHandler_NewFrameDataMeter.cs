@@ -85,8 +85,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         currentFrame++;
         frameCount++;
     }
-    public void GetAdvantageValue(FrameData _frameData) 
+    public void GetAdvantageValue(FrameData _frameData)
     {
+        int lastFrame = currentFrame == 0 ? 0 : currentFrame-1;
+        _refSingularFrameList[lastFrame].SetFrame_FrameType(lastFrameDataType, currentFrame );
         GameManager.instance._frameDataCalculator.ReturnFrameDifference(_base.opponentPlayer, _frameData);
     }
     public void SetFrameInformation(FrameData _frameData)
@@ -101,6 +103,12 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     #endregion
     public void SetHitRecoveringState(bool state)
     {
+        if (!state) 
+        {
+            int nextFrame = currentFrame + 1;
+            nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
+            _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext, nextFrame);
+        }
         if (state && !_isHitRecovering)
         {
             ResetFrames();
@@ -119,7 +127,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             }
             int nextFrame = currentFrame+1;
             nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
-            _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.Reset);
+            _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext);
             _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Stun);
             currentFrame++;
             frameCount++;
