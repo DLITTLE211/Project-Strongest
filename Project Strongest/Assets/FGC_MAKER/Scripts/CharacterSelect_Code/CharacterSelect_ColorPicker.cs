@@ -8,7 +8,7 @@ public class CharacterSelect_ColorPicker : MonoBehaviour
     [SerializeField] private TMP_Text _colorText;
     public void UpdateColorChoice(int colorChoice) 
     {
-        _colorText.text = $"Color {colorChoice}";
+        _colorText.text = $"Color {colorChoice+1}";
     }
     public void ClearText()
     {

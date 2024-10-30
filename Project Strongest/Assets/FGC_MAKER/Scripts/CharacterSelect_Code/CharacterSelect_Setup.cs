@@ -676,16 +676,27 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         if (_player1_Cursor.cursorPage.chosenCharacter != null)
         {
-            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(_player1_Cursor.cursorPage.chosenCharacter, _player1_Cursor.cursorPage.chosenAmplifier, _player1_Cursor.ChosenPlayerSide,Character_SubStates.Controlled);
+            int colorIndex = _player1_Cursor.cursorPage.colorSelectIndex;
+            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(_player1_Cursor.cursorPage.chosenCharacter, _player1_Cursor.cursorPage.chosenAmplifier, _player1_Cursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
+
             return leftPlayerCharacter;
         }
         return RandomizeChoice(player1, _player1_Cursor);
     }
     public ChosenCharacter GetRightPlayerProfile()
     {
-        if(_player2_Cursor.cursorPage.chosenCharacter != null)
+        int colorIndex = _player2_Cursor.cursorPage.colorSelectIndex;
+        if (_player1_Cursor.cursorPage.chosenCharacter == _player2_Cursor.cursorPage.chosenCharacter)
         {
-            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_player2_Cursor.cursorPage.chosenCharacter, _player2_Cursor.cursorPage.chosenAmplifier, _player2_Cursor.ChosenPlayerSide, Character_SubStates.Controlled);
+            colorIndex = _player2_Cursor.cursorPage.colorSelectIndex != _player1_Cursor.cursorPage.colorSelectIndex ? _player2_Cursor.cursorPage.colorSelectIndex : _player2_Cursor.cursorPage.colorSelectIndex + 1;
+            if (colorIndex >= _player2_Cursor.cursorPage.chosenCharacter._characterSkins.ColorSets.Count - 1)
+            {
+                colorIndex = 0;
+            }
+        }
+        if (_player2_Cursor.cursorPage.chosenCharacter != null)
+        {
+            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_player2_Cursor.cursorPage.chosenCharacter, _player2_Cursor.cursorPage.chosenAmplifier, _player2_Cursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
             return rightPlayerCharacter;
         }
         return RandomizeChoice(player2, _player2_Cursor);
@@ -698,14 +709,23 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);
         int randomAmplifier = UnityEngine.Random.Range(0, _activeAmplifiers.Count - 1);
+        int colorIndex = _player2_Cursor.cursorPage.colorSelectIndex;
+        if (_player1_Cursor.cursorPage.chosenCharacter == _activeProfiles[randomProfile])
+        {
+            colorIndex = cursorObject.cursorPage.colorSelectIndex != _player1_Cursor.cursorPage.colorSelectIndex ? cursorObject.cursorPage.colorSelectIndex : cursorObject.cursorPage.colorSelectIndex + 1;
+            if (colorIndex >= _activeProfiles[randomProfile]._characterSkins.ColorSets.Count - 1)
+            {
+                colorIndex = 0;
+            }
+        }
         if (chosenSide.sideIterator == 1)
         {
-            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], -1);
+            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], -1 , colorIndex);
             return _randomizedCharacter;
         }
         else 
         {
-            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], cursorObject.ChosenPlayerSide, Character_SubStates.Controlled);
+            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], cursorObject.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
             return _randomizedCharacter;
         }
     }
@@ -735,12 +755,14 @@ public class ChosenCharacter
     public Character_Profile chosenCharacter;
     public Amplifiers chosenAmplifier;
     public int ChosenPlayerSide;
+    public int ColorChoice;
     public Character_SubStates subState;
-    public ChosenCharacter(Character_Profile _chosenCharacter, Amplifiers _chosenAmplifier,int _chosenSide, Character_SubStates _subState = Character_SubStates.Dummy) 
+    public ChosenCharacter(Character_Profile _chosenCharacter, Amplifiers _chosenAmplifier,int _chosenSide,int _colorChoice ,Character_SubStates _subState = Character_SubStates.Dummy) 
     {
         chosenCharacter = _chosenCharacter;
         chosenAmplifier = _chosenAmplifier;
         ChosenPlayerSide = _chosenSide;
+        ColorChoice = _colorChoice;
         subState = _subState;
     }
 }

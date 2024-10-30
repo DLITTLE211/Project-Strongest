@@ -14,7 +14,7 @@ public class CharacterSelect_Page : MonoBehaviour
     public bool lockedIn;
     public Character_Profile chosenCharacter;
     public Amplifiers chosenAmplifier;
-    [Range(1, 5)] public int colorSelectSlider;
+    [Range(0, 4)] public int colorSelectIndex;
     public bool amplifySelectCooldown;
     public void UpdateInfo(Character_Profile profile)
     {
@@ -40,7 +40,7 @@ public class CharacterSelect_Page : MonoBehaviour
         characterName.text = "Choose Your Character";
         chosenAmplifier = null;
         chosenCharacter = null;
-        colorSelectSlider = 1;
+        colorSelectIndex = 0;
     }
     public void ClearColorText()
     {
@@ -48,32 +48,32 @@ public class CharacterSelect_Page : MonoBehaviour
     }
     public void SetDefaultText() 
     {
-        colorSelectSlider = 1;
-        colorPicker.UpdateColorChoice(colorSelectSlider);
+        colorSelectIndex = 0;
+        colorPicker.UpdateColorChoice(colorSelectIndex);
     }
     public void UpdateColorSelectNumberDown()
     {
-        if (colorSelectSlider <= 1)
+        if (colorSelectIndex <= 0)
         {
-            colorSelectSlider = 1;
+            colorSelectIndex = 0;
         }
         else
         {
-            colorSelectSlider--;
+            colorSelectIndex--;
         }
-        colorPicker.UpdateColorChoice(colorSelectSlider);
+        colorPicker.UpdateColorChoice(colorSelectIndex);
     }
     public void UpdateColorSelectNumberUp()
     {
-        if (colorSelectSlider >= 5)
+        if (colorSelectIndex >= 4)
         {
-            colorSelectSlider = 5;
+            colorSelectIndex = 4;
         }
         else
         {
-            colorSelectSlider++;
+            colorSelectIndex++;
         }
-        colorPicker.UpdateColorChoice(colorSelectSlider);
+        colorPicker.UpdateColorChoice(colorSelectIndex);
     }
     public void SetPlayerInfo(float value)
     {

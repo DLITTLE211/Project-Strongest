@@ -45,6 +45,9 @@ public class Character_Profile : ScriptableObject
     [SerializeField,Range(0f,8f)] public float HealthRegenRate;
     #endregion
 
+    #region Character ColorData
+    public Character_ColorData _characterSkins;
+    #endregion
     #region Character Animator Info
     [Header("Character Animator Information")]
     public GameObject characterModel;
@@ -79,7 +82,16 @@ public class Character_Profile : ScriptableObject
      
     }
 }
-
+[Serializable]
+public class Character_ColorData
+{
+    public List<MaterialSet> ColorSets;
+}
+[Serializable]
+public class MaterialSet
+{
+    public List<Material> _matSet;
+}
 [Serializable]
 public class Character_HurtBoxSizing 
 {
