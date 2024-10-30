@@ -108,6 +108,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             int nextFrame = currentFrame + 1;
             nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
             _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext, nextFrame);
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
         }
         if (state && !_isHitRecovering)
         {
@@ -117,7 +118,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         }
         _isHitRecovering = state;
     }
-    public void UpdateFrameOnHit()
+    public void UpdateFrameOnHit(FrameType _type)
     {
         if (_isHitRecovering)
         {
@@ -125,10 +126,11 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             {
                 currentFrame = 0;
             }
+            lastFrameDataType = _type;
             int nextFrame = currentFrame+1;
             nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
             _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext);
-            _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Stun);
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(_type);
             currentFrame++;
             frameCount++;
         }

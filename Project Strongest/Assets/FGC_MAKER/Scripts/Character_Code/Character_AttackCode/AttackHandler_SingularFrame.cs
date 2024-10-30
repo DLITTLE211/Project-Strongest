@@ -14,7 +14,7 @@ public class AttackHandler_SingularFrame : MonoBehaviour
     {
         Color32 purpleStun = new Color32((byte)254f, (byte)66f, (byte)213f, (byte)255f);
         Color32 darkPurpleStun = new Color32((byte)204f, (byte)36f, (byte)153f, (byte)205f);
-        sf_Colors = new List<Color>(){Color.black,  Color.cyan, Color.green, Color.red, purpleStun, darkPurpleStun };
+        sf_Colors = new List<Color>(){Color.black,  Color.cyan, Color.green, Color.red, purpleStun, darkPurpleStun, Color.grey, Color.yellow,};
     }
     public void InitFrame()
     {
@@ -50,4 +50,6 @@ public enum FrameType
     Recovery = 3,
     Stun = 4,
     StunNext = 5,
+    Grounded = 6,
+    HitStop = 7,
 }

@@ -149,7 +149,7 @@ public class Character_DamageCalculator : MonoBehaviour
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
             if (!armoredAttack)
             {
-                _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.hitstunValue, calculatedScaling, false);
+                _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.hitstopValue, currentAttack.attackMainStunValues.hitstunValue, calculatedScaling, false);
             }
             ApplyScalingForNextAttack(currentAttack);
         }
@@ -181,7 +181,7 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
-            _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
+            _base._cHitController.HandleHitState(currentAttack, currentAttack.attackMainStunValues.blockStopValue, currentAttack.attackMainStunValues.blockStunValue, calculatedScaling, true);
         }
     }
     #endregion

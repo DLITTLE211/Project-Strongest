@@ -22,6 +22,7 @@ public class Character_HitController : MonoBehaviour
     IEnumerator activeHitResponseRoutine, recoverRoutine;
     IEnumerator DownedFrameTickRoutine;
     public float currentHitstun;
+    public float currentHitstop;
     public float hitStunAmount;
     public float hitStunScaling;
 
@@ -50,6 +51,7 @@ public class Character_HitController : MonoBehaviour
     {
         hitStunScaling = 0;
         currentHitstun = 0;
+        currentHitstop = 0;
         recoveryTime = 0;
     }
     public bool ReturnNotRecovering()
@@ -353,6 +355,10 @@ public class Character_HitController : MonoBehaviour
     {
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true,0.4f,true);
     }
+    async void CallHitStopHitResponse(HitAnimationField curField)
+    {
+        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 3 * Base_FrameCode.ONE_FRAME, true);
+    }
     void CheckAndStartHitResponse(HitAnimationField curField)
     {
         ClearHitResponseRoutine();
@@ -389,20 +395,21 @@ public class Character_HitController : MonoBehaviour
     IEnumerator DoHitResponse(HitAnimationField curField)
     {
         hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
-        try
+        _base._aFrameDataMeter.SetHitRecoveringState(true);
+        _base.Deactivate();
+        ClearRecoveryRoutine(true);
+        SetStunMeterValue(hitStunAmount);
+        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
+        _base._cAnimator.SetCanRecover(true);
+        _base._cHitstun.CallHitStun(hitStunAmount);
+        CallHitStopHitResponse(curField);
+        while (currentHitstop >= 0)
         {
-            _base._aFrameDataMeter.SetHitRecoveringState(true);
-            _base.Deactivate();
-            ClearRecoveryRoutine(true);
-            SetStunMeterValue(hitStunAmount);
-            _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
-            _base._cAnimator.SetCanRecover(true);
-            _base._cHitstun.CallHitStun(hitStunAmount);
+            currentHitstop -= Base_FrameCode.ONE_FRAME;
+            _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.HitStop);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
-        catch (StackOverflowException) 
-        {
-            Debug.LogError("Stack Overflow Hit");
-        }
+        currentHitstop = 0;
         Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
         while (hitStunAmount >= 0)
         {
@@ -455,7 +462,7 @@ public class Character_HitController : MonoBehaviour
             {
                 HurtBoxType landingBoxType = currentProperty.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
                 _base._cHurtBox.SetHurboxState(landingBoxType);
-                recoverRoutine = DoRecovery(currentProperty.KnockDown, curField,false);
+                recoverRoutine = DoRecovery(currentProperty.KnockDown, curField, false);
             }
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
             StartCoroutine(recoverRoutine);
@@ -467,7 +474,7 @@ public class Character_HitController : MonoBehaviour
             _base.Activate();
             blockedAttack = false;
             _base._cHealth.StartHealthRegen();
-            if(!_base._cHurtBox.IsGrounded())
+            if (!_base._cHurtBox.IsGrounded())
             {
                 HitAnimationField recoveryAnim = CheckRecoveryAnim(Attack_KnockDown.NONE);
                 _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
@@ -533,7 +540,7 @@ public class Character_HitController : MonoBehaviour
         _cAnimator.isHit = false; 
         _base._cAnimator.SetCanRecover(false);
     }
-    public void HandleHitState(Attack_BaseProperties currentAttack, float StunValue, float calculatedScaling, bool blockedAttack)
+    public void HandleHitState(Attack_BaseProperties currentAttack, float StopValue, float StunValue,float calculatedScaling, bool blockedAttack)
     {
         smallHitRecovering = false;
         bigHitRecovering = false;
@@ -542,7 +549,7 @@ public class Character_HitController : MonoBehaviour
         currentProperty = currentAttack;
         Callback<Attack_BaseProperties> funcCall = null;
         currentHitstun = StunValue;
-
+        currentHitstop = StopValue * Base_FrameCode.ONE_FRAME;
         hitStunScaling = calculatedScaling;
         SearchHitResponseDictionary(currentAttack, blockedAttack);
     }
@@ -687,14 +694,14 @@ public class Character_HitController : MonoBehaviour
     
     void UpdateMeterValue(float subtractValue)
     {
-        _base._aFrameDataMeter.UpdateFrameOnHit();
+        _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.Stun);
         _hitStunSlider.value -= subtractValue;
     }
     IEnumerator UpdateFrameWhileDowned() 
     {
         while (_cAnimator.isHit) 
         {
-            _base._aFrameDataMeter.UpdateFrameOnHit();
+            _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.Stun);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
     }
