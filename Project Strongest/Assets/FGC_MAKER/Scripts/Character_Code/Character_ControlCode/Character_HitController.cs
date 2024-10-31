@@ -21,6 +21,7 @@ public class Character_HitController : MonoBehaviour
     CustomDamageField currentCustomDamageField;
     IEnumerator activeHitResponseRoutine, recoverRoutine;
     IEnumerator DownedFrameTickRoutine;
+    IEnumerator DelayGetupRoutine;
     public float currentHitstun;
     public float currentHitstop;
     public float hitStunAmount;
@@ -396,7 +397,7 @@ public class Character_HitController : MonoBehaviour
     {
         hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
         _base._aFrameDataMeter.SetHitRecoveringState(true);
-        _base.Deactivate();
+        //_base.Deactivate();
         ClearRecoveryRoutine(true);
         SetStunMeterValue(hitStunAmount);
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
@@ -421,18 +422,18 @@ public class Character_HitController : MonoBehaviour
             {
                 if (currentKnockBack != null)
                 {
-                    /*if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
+                    if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
                     {
                         yield return new WaitForSeconds(0.45f);
                         while (!_base._cHurtBox.IsGrounded())
                         {
-                            hitStunInFrames -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                            hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                             UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                         }
-                        hitStunInFrames = 0;
+                        hitStunAmount = 0;
                         ClearMeterValue();
-                    }*/
+                    }
                     hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                     UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
@@ -641,11 +642,13 @@ public class Character_HitController : MonoBehaviour
             _base._cHitstun.EndHitStun();
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
+            _base.Activate();
             yield return new WaitForSeconds(0.4f);
         }
         else
         {
             _base._cHitstun.EndHitStun();
+            _base.Activate();
             yield return new WaitForSeconds(0.25f);
         }
 
@@ -656,34 +659,73 @@ public class Character_HitController : MonoBehaviour
         #endregion
         if (!isDead)
         {
-            _base.Activate();
-            _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
-            if (currentCustomDamageField == null)
+            CallDelayGetup(recoveryAnim);
+        }
+    }
+    public void CallDelayGetup(HitAnimationField recoveryAnim) 
+    {
+        if(DelayGetupRoutine != null) 
+        {
+            StopCoroutine(DelayGetupRoutine);
+            DelayGetupRoutine = null;
+        }
+        DelayGetupRoutine = HandleDelayGetupRoutine(recoveryAnim);
+        StartCoroutine(DelayGetupRoutine);
+    }
+    IEnumerator HandleDelayGetupRoutine(HitAnimationField recoveryAnim) 
+    {
+        _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
+        if (currentCustomDamageField == null)
+        {
+            if (CheckNextAttackCatchPostLanding())
             {
-                if (CheckNextAttackCatchPostLanding())
+                _base._cHealth.StartHealthRegen();
+                currentCustomDamageField = null;
+                currentProperty = null;
+                yield break;
+            }
+        }
+        float startDelayGetupTime = 0;
+        int maxHoldTime = 40;
+        float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
+        if (HoldingAway())
+        {
+            _base._cForce.InstantForceAway(-1.45f);
+        }
+        else 
+        {
+            if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+            {
+                while (startDelayGetupTime <= holdInputTimeInFrames && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
                 {
-                    _base._cHealth.StartHealthRegen();
-                    currentCustomDamageField = null;
-                    currentProperty = null;
-                    yield break;
+                    yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
             }
-            _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
-            yield return new WaitForSeconds(recoveryAnim.animLength);
-            if (bigHitRecovering)
-            {
-                bigHitRecovering = false;
-            }
-            _base._aFrameDataMeter.SetHitRecoveringState(false);
-            recoverRoutine = null;
-            _isRecovering = false;
-            _base._cHealth.StartHealthRegen();
-            SetRecoverable();
-            currentCustomDamageField = null;
-            currentProperty = null;
-            blockedAttack = false;
-            currentHitstun = 0;
         }
+        _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
+        yield return new WaitForSeconds(recoveryAnim.animLength);
+        if (bigHitRecovering)
+        {
+            bigHitRecovering = false;
+        }
+        _base._aFrameDataMeter.SetHitRecoveringState(false);
+        recoverRoutine = null;
+        _isRecovering = false;
+        _base._cHealth.StartHealthRegen();
+        SetRecoverable();
+        currentCustomDamageField = null;
+        currentProperty = null;
+        blockedAttack = false;
+        currentHitstun = 0;
+    }
+
+    public bool HoldingAway() 
+    {
+        List<int> holdingSixList = new List<int>() {6,9};
+        List<int> holdingFourList = new List<int>() {4,7};
+        bool holdingFour = holdingFourList.Contains(_base.ReturnMovementInputs().Button_State.directionalInput) && _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight;
+        bool holdingSix = holdingSixList.Contains(_base.ReturnMovementInputs().Button_State.directionalInput) && _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft;
+        return holdingSix ^ holdingFour;
     }
     #endregion
     void SetStunMeterValue(float TopValue)

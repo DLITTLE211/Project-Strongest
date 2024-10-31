@@ -73,6 +73,7 @@ public class Character_StateMachine : MonoBehaviour
         At(DashState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
+        At(SecondIdle, MoveState, new Predicate(() => At_2Move()));
         At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(C_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
@@ -85,6 +86,7 @@ public class Character_StateMachine : MonoBehaviour
 
         At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
+        At(SecondIdle, JumpState, new Predicate(() => At_2Jump()));
         At(MoveState, JumpState, new Predicate(() => At_2Jump()));
         At(CrouchState, JumpState, new Predicate(() => At_2Jump()));
 
@@ -95,6 +97,7 @@ public class Character_StateMachine : MonoBehaviour
         At(MoveState, DashState, new Predicate(() => ToDashState()));
 
         At(IdleState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(SecondIdle, CrouchState, new Predicate(() => At_2Crouch()));
         At(JumpState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(MoveState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(C_BlockState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
@@ -104,6 +107,7 @@ public class Character_StateMachine : MonoBehaviour
 
         At(AttackState, Hitstate, new Predicate(() => checkAttackValue(lastAttackState.nullified) && At_2Crouch()));
         At(IdleState, Hitstate, new Predicate(() => ToHitState()));
+        At(SecondIdle, Hitstate, new Predicate(() => ToHitState()));
         At(JumpState, Hitstate, new Predicate(() => ToHitState()));
         At(MoveState, Hitstate, new Predicate(() => ToHitState()));
         At(CrouchState, Hitstate, new Predicate(() => ToHitState()));
@@ -359,6 +363,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput;
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
+        bool _notUsingMobility = _base._cAnimator.activatedInput == null && checkMovementValue(lastMovementState.nullified);
         bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
         try
         {
@@ -373,7 +378,7 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput == 4 || _base.ReturnMovementInputs().Button_State.directionalInput == 6;
             }
-            bool canMove = !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && _notAttacking;
+            bool canMove = !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && _notUsingMobility && _notAttacking;
             return canMove;
         }
         catch (ArgumentOutOfRangeException)

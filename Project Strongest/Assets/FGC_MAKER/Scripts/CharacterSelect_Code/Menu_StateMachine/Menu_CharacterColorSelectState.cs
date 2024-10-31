@@ -32,6 +32,7 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
     public override void Select(CharacterSelect_Cursor _currentCursor)
     {
         _currentCursor.SetColorLockState(true);
+        _currentCursor.cursorPage.LockInColorState();
         _characterSelect.CheckGameModeSet();
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor)

@@ -51,6 +51,10 @@ public class CharacterSelect_Page : MonoBehaviour
         colorSelectIndex = 0;
         colorPicker.UpdateColorChoice(colorSelectIndex);
     }
+    public void LockInColorState() 
+    {
+        colorPicker.LockInColorChoice();
+    }
     public void UpdateColorSelectNumberDown()
     {
         if (colorSelectIndex <= 0)

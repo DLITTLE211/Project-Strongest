@@ -6,9 +6,15 @@ using TMPro;
 public class CharacterSelect_ColorPicker : MonoBehaviour
 {
     [SerializeField] private TMP_Text _colorText;
+    int lastInt;
     public void UpdateColorChoice(int colorChoice) 
     {
-        _colorText.text = $"Color {colorChoice+1}";
+        lastInt = colorChoice;
+        _colorText.text = $"Color {lastInt + 1}";
+    }
+    public void LockInColorChoice()
+    {
+        _colorText.text = $"Color {lastInt + 1} Selected";
     }
     public void ClearText()
     {

@@ -263,10 +263,7 @@ public class Character_Animator : MonoBehaviour
 
     public void ClearLastActivatedInput()
     {
-        if (activatedInput != null)
-        {
-            NullifyMobilityOption();
-        }
+        NullifyMobilityOption();
     }
     public void SetNextAttackStartVariables(Attack_BaseProperties nextattack)
     {
