@@ -7,9 +7,7 @@ using DG.Tweening;
 
 public class Character_Animator : MonoBehaviour
 {
-    [SerializeField] private List<SkinnedMeshRenderer> _baseModel;
-    [SerializeField] private SkinnedMeshRenderer _hairModel;
-    [SerializeField] private SkinnedMeshRenderer _clothingModel;
+    public List<SkinnedMeshRenderer> _modelMeshCount;
     #region HitAnimNums
     public bool isHit;
     #endregion
@@ -45,6 +43,7 @@ public class Character_Animator : MonoBehaviour
     bool hitNewAnim;
     public bool customSuperHit;
     public IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
+    int matCount;
     private void Start()
     {
         customSuperHit = false;
@@ -53,12 +52,35 @@ public class Character_Animator : MonoBehaviour
         inRekkaState = false;
         inStanceState = false;
     }
-    public void SetModelColors(MaterialSet _set) 
+    public void SetModelColors(Character_ColorData _colorData, int skinIndex) 
     {
-        for(int i = 0; i < _baseModel.Count; i++) 
+        matCount = 0;
+        List<Material> _matList = new List<Material>();
+        for(int i = 0; i < _colorData._modelMaterials.Count; i++) 
         {
-            _baseModel[i].material = _set._matSet[i];
+            Material _curMat = new Material(_colorData._modelMaterials[i]);
+            _curMat.SetTexture("_Base_Color_Mat", _colorData.ColorSets[skinIndex]._imageSet[i]);
+            _curMat.name = $"{_colorData._modelMaterials[i].name}_Color_{skinIndex+1}";
+            _matList.Add(_curMat);
         }
+        for (int i = 0; i < _modelMeshCount.Count; i++) 
+        {
+            int meshMatCount = _modelMeshCount[i].materials.Length;
+            _modelMeshCount[i].materials = GetNewColorSet(_matList,meshMatCount);
+        }
+        _matList = null;
+    }
+    public Material[] GetNewColorSet(List<Material> _matList, int meshCount) 
+    {
+        Material[] newMaterialMat = new Material[meshCount];
+        List<Material> matList = new List<Material>();
+        for (int j = 0; j < meshCount; j++)
+        {
+            matList.Add(_matList[matCount]);
+            matCount++;
+        }
+        newMaterialMat = matList.ToArray();
+        return newMaterialMat;
     }
     public HeightPositionMarkerSet ReturnMarkers() 
     {

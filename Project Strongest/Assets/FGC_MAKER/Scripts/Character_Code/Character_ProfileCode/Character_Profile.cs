@@ -85,12 +85,13 @@ public class Character_Profile : ScriptableObject
 [Serializable]
 public class Character_ColorData
 {
+    public List<Material> _modelMaterials;
     public List<MaterialSet> ColorSets;
 }
 [Serializable]
 public class MaterialSet
 {
-    public List<Material> _matSet;
+    public List<Texture2D> _imageSet;
 }
 [Serializable]
 public class Character_HurtBoxSizing 

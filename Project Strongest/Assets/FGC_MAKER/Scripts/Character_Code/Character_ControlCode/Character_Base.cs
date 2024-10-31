@@ -195,7 +195,7 @@ public class Character_Base : MonoBehaviour
         AwaitCheck timerCheck = new AwaitCheck(TimerEndDelegate);
         awaitEnums.Add(WaitingEnumKey.TimerEnd, timerCheck);
     }
-    void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
+    void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier, int skinIndex)
     {
         characterProfile.SetCharacterAnimator(chosenAnimator);
         _cBlockHandler.SetBlockAnimationData(this);
@@ -228,6 +228,7 @@ public class Character_Base : MonoBehaviour
         _cMobiltyTimer.ResetTimer();
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();
+        _cAnimator.SetModelColors(characterProfile._characterSkins, skinIndex);
         SetMainCustomCallbackDictionary();
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
@@ -240,8 +241,7 @@ public class Character_Base : MonoBehaviour
         Character_Animator _chosenCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
 
-        _chosenCharacter_Animator.SetModelColors(characterProfile._characterSkins.ColorSets[skinIndex]);
-        SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier);
+        SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier,skinIndex);
     }
 
     void ResetInputLog()
