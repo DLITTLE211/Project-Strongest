@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using FightingGame_FrameData;
 
 public class Character_Force : MonoBehaviour
 {
@@ -415,9 +416,7 @@ public class Character_Force : MonoBehaviour
         {
             if (_mInput.movementPriority == 2)
             {
-                acceptableStates.Clear();
-                acceptableStates.Add(_base._cStateMachine.dashStateRef);
-                if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.dashStateRef)
+                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.dashStateRef)
                 {
                     acceptableStates.Clear();
                     sendingForce = false;
@@ -445,7 +444,7 @@ public class Character_Force : MonoBehaviour
     }
     IEnumerator OnDelayDash(float speed)
     {
-        yield return new WaitForSeconds(2 / 60f);
+        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         _myRB.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
         _myRB.AddForce(transform.right * speed, ForceMode.VelocityChange);
         //_myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);

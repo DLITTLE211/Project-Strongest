@@ -12,10 +12,14 @@ public class State_Dash : BaseState
     public override async void OnEnter()
     {
         _base._cHurtBox.ResetExtendedHurtbox();
+        if (_base._cHurtBox.IsGrounded())
+        {
+            _base.myRb.drag = 100000;
+        }
         base.OnEnter();
         hitSuperChargeCheck = false;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter JumpState");
-        if (_base._cAnimator.activatedInput != null)
+        /*if (_base._cAnimator.activatedInput != null)
         {
             if (_base.myRb.velocity.x < _base.DashForce && _base._cAnimator.activatedInput.GetMovementType() == MovementType.ForwardDash)
             {
@@ -25,7 +29,7 @@ public class State_Dash : BaseState
             {
                 _base.myRb.velocity = new Vector3(-_base.DashForce, _base.myRb.velocity.y);
             }
-        }
+        }*/
         await WaitToChargeSuperMobility();
     }
     async Task WaitToChargeSuperMobility()
@@ -38,7 +42,8 @@ public class State_Dash : BaseState
     {
         float waitTime = 2 * OneFrame;
         int timeInMS = (int)(waitTime * 1000f);
-        await Task.Delay(timeInMS);
+        await Task.Delay(timeInMS); 
+        _base.myRb.drag = 1;
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
             _base._cComboDetection.superMobilityOption = true;
