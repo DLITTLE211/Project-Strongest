@@ -38,12 +38,14 @@ public class Character_Force : MonoBehaviour
     List<IState> acceptableStates = new List<IState>();
     public void Start()
     {
-        isFrozen = false; 
+    }
+    public void Force_InitFunctions()
+    {
+        isFrozen = false;
         sendingForce = false;
-         canToggleKinematic = true;
+        canToggleKinematic = true;
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
-
     }
     public void AddAcceptableStates() 
     {
@@ -159,6 +161,10 @@ public class Character_Force : MonoBehaviour
                     break;
             }
         }
+    }
+    public float GetXSpeed() 
+    {
+        return _myRB.velocity.x;
     }
     public void AddVerticalForceOnCommand(float value)
     {
@@ -395,12 +401,12 @@ public class Character_Force : MonoBehaviour
             case MovementType.ForwardDash:
                 // Forward Dash;
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
-                StartCoroutine(OnDelayDash(forwardMult * _base.DashForce * 2f));
+                StartCoroutine(OnDelayDash(forwardMult * _base.DashForce));
                 break;
             case MovementType.BackDash:
                 // Back Dash;
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
-                StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce * 2f));
+                StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce));
                 break;
         }
         if (_mInput.movementPriority != 2)
@@ -447,7 +453,6 @@ public class Character_Force : MonoBehaviour
         yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         _myRB.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
         _myRB.AddForce(transform.right * speed, ForceMode.VelocityChange);
-        //_myRB.velocity = new Vector3(Mathf.RoundToInt(speed), _myRB.velocity.y);
     }
     #region Function Summary
     /// <summary>
