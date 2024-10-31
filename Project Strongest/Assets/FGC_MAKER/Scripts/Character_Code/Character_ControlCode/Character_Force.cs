@@ -25,17 +25,18 @@ public class Character_Force : MonoBehaviour
     [SerializeField] private InGameCameraController camController;
     [SerializeField] private Character_Base _base;
     [SerializeField] private float xVal, yVal;
+    [SerializeField] bool isFrozen;
     [SerializeField] private Rigidbody _myRB => _base.myRb;
     [SerializeField] private Player_SideRecognition _side => _base.pSide;
 
     private float jumpSpeed;
     private float forwardSpeed;
-    [SerializeField] bool isFrozen;
     private bool canToggleKinematic;
     public float xSpeed;
-    bool sendingForce;
     public bool beingPushed, stillnessCheck;
+    bool sendingForce;
     List<IState> acceptableStates = new List<IState>();
+    Dictionary<MovementType, Vector2> movementTypeVectors = new Dictionary<MovementType, Vector2>();
     public void Start()
     {
     }
@@ -46,6 +47,22 @@ public class Character_Force : MonoBehaviour
         canToggleKinematic = true;
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
+
+        #region Movement Dictionary Setup
+        float neutralSuperJumpYVal = (_myRB.velocity.y + EvaluateAndReturnJumpValue()) + (_myRB.velocity.y + EvaluateAndReturnJumpValue() / 4.5f);
+        float superJumpYVal = (_myRB.velocity.y + EvaluateAndReturnJumpValue()) - (_myRB.velocity.y + EvaluateAndReturnJumpValue()/8f);
+        float superJumpXVal = Mathf.Abs((_myRB.velocity.x + EvaluateAndReturnForwardValue()) + (_myRB.velocity.x + EvaluateAndReturnForwardValue() / 1.15f));
+
+
+        movementTypeVectors.Add(MovementType.NeutralSuperJump,new Vector2(0, neutralSuperJumpYVal));
+        movementTypeVectors.Add(MovementType.Jump, new Vector2(0, _myRB.velocity.y + EvaluateAndReturnJumpValue()));
+        movementTypeVectors.Add(MovementType.ForwardSuperJump, new Vector2(superJumpXVal, superJumpYVal));
+        movementTypeVectors.Add(MovementType.BackSuperJump, new Vector2(-superJumpXVal, superJumpYVal));
+        movementTypeVectors.Add(MovementType.ForwardJump, new Vector2(_myRB.velocity.x + (-EvaluateAndReturnForwardValue()), _myRB.velocity.y + EvaluateAndReturnJumpValue()));
+        movementTypeVectors.Add(MovementType.BackJump, new Vector2(_myRB.velocity.x + EvaluateAndReturnForwardValue(), _myRB.velocity.y + EvaluateAndReturnJumpValue())); 
+        movementTypeVectors.Add(MovementType.BackDash, new Vector2());
+        movementTypeVectors.Add(MovementType.ForwardDash, new Vector2());
+        #endregion
     }
     public void AddAcceptableStates() 
     {
@@ -361,60 +378,37 @@ public class Character_Force : MonoBehaviour
         }
         sendingForce = true;
         yield return new WaitForSeconds(2 / 60f);
-
         _base._aManager.ClearAttacks();
-        switch (_mInput.GetMovementType())
+        Vector2 moveVectors = new Vector2();
+        if (movementTypeVectors.TryGetValue(_mInput.GetMovementType(), out moveVectors))
         {
-            case MovementType.BackJump:
-                // Back Jump;
-                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue();
-                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-                break;
-            case MovementType.Jump:
-                // Neutral Jump;
-                _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue());
-                break;
-            case MovementType.ForwardJump:
-                // Forward Jump;
-                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue();
-                xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue());
-                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-                break;
-            case MovementType.NeutralSuperJump:
-                // Neutral Super Jump;
-                _myRB.velocity = new Vector3(forwardMult * _myRB.velocity.x, _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f);
-                break;
-            case MovementType.ForwardSuperJump:
-                // Forward Super Jump;
-                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                xVal = _myRB.velocity.x + EvaluateAndReturnForwardValue() + 7;
-                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-
-                break;
-            case MovementType.BackSuperJump:
-                // Back Super Jump;
-                yVal = _myRB.velocity.y + EvaluateAndReturnJumpValue() + 0.5f;
-                xVal = _myRB.velocity.x + -(EvaluateAndReturnForwardValue() + 7);
-                _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
-                break;
-            case MovementType.ForwardDash:
-                // Forward Dash;
+            if ( _mInput.GetMovementType() == MovementType.ForwardDash)
+            {
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * _base.DashForce));
-                break;
-            case MovementType.BackDash:
-                // Back Dash;
+                yield return new WaitForSeconds(2 / 60f);
+                sendingForce = false;
+                yield break;
+            }
+            if (_mInput.GetMovementType() == MovementType.BackDash)
+            {
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce));
-                break;
-        }
-        if (_mInput.movementPriority != 2)
-        {
+                yield return new WaitForSeconds(2 / 60f);
+                sendingForce = false;
+                yield break;
+            }
             _base.character_MobilityOptions.ReserveAnimationCall(_mInput);
+            xVal = moveVectors.x;
+            yVal = moveVectors.y;
+            _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
+            if (_mInput._requiresCharge) 
+            {
+                _base._cComboDetection.superMobilityOption = false;
+            }
+            yield return new WaitForSeconds(2 / 60f);
+            sendingForce = false;
         }
-        yield return new WaitForSeconds(2 / 60f);
-        sendingForce = false;
     }
     public void HandleExtraMovement(Character_MobilityOption _mInput)
     {
@@ -523,7 +517,7 @@ public class Character_Force : MonoBehaviour
 
     public float EvaluateAndReturnJumpValue() 
     {
-        jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
+        jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -10f)) / _myRB.mass);
         return jumpSpeed;
     }
     public float EvaluateAndReturnForwardValue()

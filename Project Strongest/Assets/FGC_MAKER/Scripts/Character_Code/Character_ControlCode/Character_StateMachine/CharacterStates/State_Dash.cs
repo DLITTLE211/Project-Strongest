@@ -69,15 +69,17 @@ public class State_Dash : BaseState
     {
         float dashSpeed = _base.characterProfile.dashSpeed;
         dashSpeed = _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight ? dashSpeed : -dashSpeed;
-        if (_base._cAnimator.activatedInput.GetMovementType() == MovementType.ForwardDash) 
+        if (_base._cAnimator.activatedInput != null)
         {
-            _base.myRb.velocity = new Vector3(dashSpeed, _base.myRb.velocity.y, _base.myRb.velocity.z);
+            if (_base._cAnimator.activatedInput.GetMovementType() == MovementType.ForwardDash)
+            {
+                _base.myRb.velocity = new Vector3(dashSpeed, _base.myRb.velocity.y, _base.myRb.velocity.z);
+            }
+            if (_base._cAnimator.activatedInput.GetMovementType() == MovementType.BackDash)
+            {
+                _base.myRb.velocity = new Vector3(-dashSpeed, _base.myRb.velocity.y, _base.myRb.velocity.z);
+            }
         }
-        if (_base._cAnimator.activatedInput.GetMovementType() == MovementType.BackDash)
-        {
-            _base.myRb.velocity = new Vector3(-dashSpeed, _base.myRb.velocity.y, _base.myRb.velocity.z);
-        }
-
     }
     public override void OnRecov()
     {

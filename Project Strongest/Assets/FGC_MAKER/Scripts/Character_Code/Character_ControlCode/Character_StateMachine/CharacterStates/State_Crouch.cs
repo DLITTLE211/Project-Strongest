@@ -15,7 +15,8 @@ public class State_Crouch : BaseState
         _base._cHurtBox.ResetExtendedHurtbox();
         canDoSecondaryCrouch = false;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter CrouchState");
-        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
+        _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock); 
+        _base._cComboDetection.superMobilityOption = true;
         if (_base._subState == Character_SubStates.Controlled)
         {
             await WaitToChargeSuperMobility();
@@ -25,7 +26,6 @@ public class State_Crouch : BaseState
     async Task WaitToChargeSuperMobility()
     {
         float OneFrame = 1 / 60f;
-        await ActivateSuperMobility(OneFrame);
         float TenwaitTime = 2 * OneFrame;
         int TentimeInMS = (int)(TenwaitTime * 1000f);
         await Task.Delay(TentimeInMS);
@@ -38,21 +38,12 @@ public class State_Crouch : BaseState
             }
         }
     }
-    async Task ActivateSuperMobility(float OneFrame) 
-    {
-        float waitTime = 2 * OneFrame;
-        int timeInMS = (int)(waitTime * 1000f);
-        await Task.Delay(timeInMS);
-        if (_base._subState == Character_SubStates.Controlled)
-        {
-            if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
-            {
-                _base._cComboDetection.superMobilityOption = true;
-            }
-        }
-    }
     public async override void OnUpdate()
     {
+        if (!_base._cComboDetection.superMobilityOption) 
+        {
+            _base._cComboDetection.superMobilityOption = true;
+        }
         if (!_base.isLockedPause)
         {
             if (canDoSecondaryCrouch)

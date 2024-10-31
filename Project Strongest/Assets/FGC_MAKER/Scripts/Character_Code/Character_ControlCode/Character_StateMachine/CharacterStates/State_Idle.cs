@@ -75,7 +75,7 @@ public class State_Idle : BaseState
     async Task WaitToEndSuperMobility()
     {
         float OneFrame = 1 / 60f;
-        float waitTime = 10 * OneFrame;
+        float waitTime = 20 * OneFrame;
         int timeInMS = (int)(waitTime * 1000f);
         await Task.Delay(timeInMS);
         _base._cComboDetection.superMobilityOption = false;
