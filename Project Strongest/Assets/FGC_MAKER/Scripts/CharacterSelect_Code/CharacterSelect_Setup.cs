@@ -187,7 +187,6 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public void SetUpCharacterSelectScreen(Character_AvailableID _characterSelectplayers, GameModeSet set)
     {
-        SetListeners();
         players = _characterSelectplayers;
         currentSet = set;
     }

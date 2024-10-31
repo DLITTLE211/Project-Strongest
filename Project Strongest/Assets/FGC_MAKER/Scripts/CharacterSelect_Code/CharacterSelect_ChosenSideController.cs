@@ -24,7 +24,7 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
         {
             if (direction == 1)
             {
-                if ((objectMoving.sideIterator > sides.Count-1))
+                if ((objectMoving.sideIterator >= sides.Count-1))
                 {
                     objectMoving.sideIterator = sides.Count - 1;
                 }
@@ -35,7 +35,7 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
             }
             if (direction == -1)
             {
-                if ((objectMoving.sideIterator < 0))
+                if ((objectMoving.sideIterator <= 0))
                 {
                     objectMoving.sideIterator = 0;
                 }

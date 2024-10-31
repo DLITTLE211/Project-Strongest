@@ -35,8 +35,6 @@ public class Menu_PlayerSideState : Menu_BaseState
         SideSelectionObject.SetActive(true);
         advisoryMessage.gameObject.SetActive(false);
 
-        player1.InitSideIterator();
-        player2.InitSideIterator();
 
         SetCursorStartPosition(_player1_Cursor.transform, -270f);
         SetCursorStartPosition(_player2_Cursor.transform, 335f);
@@ -46,6 +44,10 @@ public class Menu_PlayerSideState : Menu_BaseState
         _characterSelect.AddControllerCounter();
         _characterSelect.CheckControllerState();
         _characterSelect.SetPlayerControllers();
+        _characterSelect.SetListeners();
+        yield return new WaitForSeconds(0.25f);
+        player1.InitSideIterator();
+        player2.InitSideIterator();
     }
     void SetCharacterSelectEnterInfo()
     {
