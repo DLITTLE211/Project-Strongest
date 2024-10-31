@@ -688,20 +688,34 @@ public class Character_HitController : MonoBehaviour
         float startDelayGetupTime = 0;
         int maxHoldTime = 40;
         float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
+        bool isTeching;
         if (HoldingAway())
         {
-            _base._cForce.InstantForceAway(-1.45f);
+            _base._cForce.InstantForceAway(-0.85f);
         }
         else 
         {
+            isTeching = false;
             if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
             {
-                while (startDelayGetupTime <= holdInputTimeInFrames && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+                while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
                 {
+                    startDelayGetupTime += Base_FrameCode.ONE_FRAME; 
+                    if (HoldingAway())
+                    {
+                        _base._cForce.InstantForceAway(-0.85f);
+                        isTeching = true;
+                    }
+                    else if (!(_base.ReturnMovementInputs().Button_State.directionalInput <= 3))
+                    {
+                        isTeching = true;
+                    }
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
             }
         }
+        isTeching = false;
+        startDelayGetupTime = holdInputTimeInFrames;
         _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
         yield return new WaitForSeconds(recoveryAnim.animLength);
         if (bigHitRecovering)
