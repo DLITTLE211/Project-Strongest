@@ -97,7 +97,7 @@ public class Character_StateMachine : MonoBehaviour
         At(AttackState, DashState, new Predicate(() => ToDashState()));
         At(MoveState, DashState, new Predicate(() => ToDashState()));
 
-        At(IdleState, CrouchState, new Predicate(() => At_2Crouch()));
+        At(IdleState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(SecondIdle, CrouchState, new Predicate(() => At_2Crouch()));
         At(JumpState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(MoveState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
@@ -308,7 +308,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _inRekkaOrStance = _base._cAnimator.inStanceState || _base._cAnimator.inRekkaState;
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
+        bool _notAttacking = !_base._cAnimator.CheckAttackState() && checkAttackValue(lastAttackState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -321,13 +321,13 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
             }
-            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && _notAttacking && !_base.allowSecondIdleAnim;
+            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && _notAttacking;
         }
         catch (ArgumentOutOfRangeException)
         {
             _currentInput = false;
             _isBlocking = false;
-            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && !_base.allowSecondIdleAnim;
+            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance;
         }
 
     }

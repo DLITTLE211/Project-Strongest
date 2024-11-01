@@ -328,11 +328,13 @@ public class Character_HitController : MonoBehaviour
         currentCustomDamageField = currentAttack;
         ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
+        currentHitstun += (currentAttack.customDamageFieldStunValues.hitstunValue * Base_FrameCode.ONE_FRAME);
+        currentHitstop = currentAttack.customDamageFieldStunValues.hitstopValue * Base_FrameCode.ONE_FRAME;
         if (hitReaction != null)
         {
             if (finalAttack) 
             {
-                CheckAndStartHitResponse(hitReaction);
+                CheckAndStartHitResponse(hitReaction, currentHitstun);
             }
             else 
             {
@@ -360,10 +362,10 @@ public class Character_HitController : MonoBehaviour
     {
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 3 * Base_FrameCode.ONE_FRAME, true);
     }
-    void CheckAndStartHitResponse(HitAnimationField curField)
+    void CheckAndStartHitResponse(HitAnimationField curField, float hitStunOverride = -1f)
     {
         ClearHitResponseRoutine();
-        activeHitResponseRoutine = DoHitResponse(curField);
+        activeHitResponseRoutine = DoHitResponse(curField, hitStunOverride);
         StartCoroutine(activeHitResponseRoutine);
     }
     public void ClearHitResponseRoutine() 
@@ -393,9 +395,16 @@ public class Character_HitController : MonoBehaviour
             DownedFrameTickRoutine = null;
         }
     }
-    IEnumerator DoHitResponse(HitAnimationField curField)
+    IEnumerator DoHitResponse(HitAnimationField curField, float overrideStunAmount = -1f)
     {
-        hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
+        if (overrideStunAmount != -1f)
+        {
+            hitStunAmount = overrideStunAmount;
+        }
+        else
+        {
+            hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
+        }
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         //_base.Deactivate();
         ClearRecoveryRoutine(true);
@@ -420,7 +429,7 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
-                if (currentKnockBack != null)
+                /*if (currentKnockBack != null)
                 {
                     if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
                     {
@@ -437,13 +446,13 @@ public class Character_HitController : MonoBehaviour
                     hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                     UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                }
-                else
-                {
+                }*/
+                //else
+                //{
                     hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
                     UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                }
+                //}
             }
         }
         hitStunAmount = 0;

@@ -430,9 +430,9 @@ MonoBehaviour:
         init: 0
         startup: 28
         active: 29
-        inactive: 185
+        inactive: 110
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
             rawAttackDamage: 10
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 17
+              hitstunValue: 135
               blockStunValue: 0
               hitstopValue: 6
               blockStopValue: 0
