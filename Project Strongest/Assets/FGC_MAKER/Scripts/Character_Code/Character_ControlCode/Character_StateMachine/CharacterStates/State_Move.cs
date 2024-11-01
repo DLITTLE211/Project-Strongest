@@ -13,6 +13,7 @@ public class State_Move : BaseState
     {
         base.OnEnter();
         _base._cHurtBox.ResetExtendedHurtbox();
+        _base._cHitboxManager.DisableAllHitboxes();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");
         if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {

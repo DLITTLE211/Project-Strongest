@@ -53,6 +53,7 @@ public class State_Attacking : BaseState
 
     public override void OnExit()
     {
+        _base._cHurtBox.SetHurboxState();
         _base._cComboDetection.inRekka = false;
         _base._cComboDetection.inStance = false;
         _base._cAttackTimer.SetTimerType(TimerType.Normal);

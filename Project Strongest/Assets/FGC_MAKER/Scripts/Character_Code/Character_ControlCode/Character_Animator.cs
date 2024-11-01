@@ -27,7 +27,6 @@ public class Character_Animator : MonoBehaviour
     [SerializeField] public Character_MobilityOption activatedInput;
     [SerializeField] public Attack_BaseProperties lastAttack;
      public AttackHandler_Attack _lastAnim;
-
     public Transform _model;
     public bool inRekkaState,inStanceState;
     public bool canBlock;
@@ -35,8 +34,6 @@ public class Character_Animator : MonoBehaviour
     public bool inputWindowOpen;
     public bool _canRecover;
     public bool canTransitionIdle;
-
-    internal int negativeFrameCount;
     Vector3 startPos;
     public Cancel_State currentAttackLevel;
 
@@ -192,6 +189,22 @@ public class Character_Animator : MonoBehaviour
         bool lastAttackCheck = (lastAttack == null || (lastAttack.InputTimer == null && (lastAttack._attackName == null || lastAttack._attackName == "")));
 
         if (activatedInputCheck && lastAttackCheck) 
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool CheckMobilityStateState()
+    {
+        if (activatedInput == null)
+        {
+            return true;
+        }
+        if (activatedInput.movementPriority == 0)
+        {
+            return true;
+        }
+        if (activatedInput.mobilityOptionName == null || activatedInput.mobilityOptionName == "")
         {
             return true;
         }
@@ -383,9 +396,8 @@ public class Character_Animator : MonoBehaviour
 
 
     #region End Of Animation Clean-Up
-    public void CountUpNegativeFrames(int lastNegativeFrames)
+    public void CountUpNegativeFrames()
     {
-        negativeFrameCount += lastNegativeFrames;
         if (BasicAttackRoutine != null) 
         {
             StopCoroutine(BasicAttackRoutine);
@@ -416,12 +428,15 @@ public class Character_Animator : MonoBehaviour
         {
             customSuperHit= false;
         }
-        lastAttack = null; 
         _base._cForce.CallUnlockKinematic();
-        _lastAttackState = lastAttackState.nullified;
         inputWindowOpen = true;
         _base._cForce.ResetPriority();
         currentAttackLevel = Cancel_State.NotCancellable;
+    }
+    public void KillAttackOnRoutineEnd()
+    {
+        _lastAttackState = lastAttackState.nullified;
+        lastAttack = null;
     }
     public void EndAnim()
     {

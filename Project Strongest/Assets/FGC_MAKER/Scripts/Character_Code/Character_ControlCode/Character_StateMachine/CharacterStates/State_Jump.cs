@@ -12,8 +12,8 @@ public class State_Jump : BaseState
     }
     public override void OnEnter()
     {
-        _base._cHurtBox.ResetExtendedHurtbox();
-        if(_cAnim.lastAttack != null) 
+        BaseClearData();
+        if (_cAnim.lastAttack != null) 
         {
             AirAttackInfo currentAirInfo = _cAnim.lastAttack._airInfo;
             if (currentAirInfo == AirAttackInfo.GroundOnly) 

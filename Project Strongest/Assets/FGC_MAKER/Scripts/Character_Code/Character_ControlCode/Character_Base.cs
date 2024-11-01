@@ -684,7 +684,7 @@ public class Character_Base : MonoBehaviour
         _aManager.ResetMoveHierarchy();
         _cAttackTimer.SetTimerType();
         _aManager.ClearAttacks();
-        _cAnimator.CountUpNegativeFrames(0);
+        _cAnimator.CountUpNegativeFrames();
         _cAnimator.lastAttack = null;
         _cAnimator.canTransitionIdle = true;
         _cAnimator._lastAttackState = lastAttackState.nullified;

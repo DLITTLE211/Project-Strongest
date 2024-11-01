@@ -49,4 +49,11 @@ public abstract class BaseState : IState
         GameManager.instance.sideManager.CheckPlayerPositions();
     }
     public virtual void OnFixedUpdate() {}
+    public void BaseClearData() 
+    {
+        _base._cHurtBox.ResetExtendedHurtbox();
+        _cAnim.CountUpNegativeFrames();
+        _base._cHitboxManager.DisableCurrentHitbox();
+        _base._cHurtBox.SetHurboxState();
+    }
 }

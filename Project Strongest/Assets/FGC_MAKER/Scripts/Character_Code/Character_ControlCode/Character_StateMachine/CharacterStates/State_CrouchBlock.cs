@@ -13,7 +13,7 @@ public class State_CrouchBlock : BaseState
     public override async void OnEnter()
     {
         base.OnEnter();
-        _base._cHurtBox.ResetExtendedHurtbox();
+        BaseClearData();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
         if (_base._subState == Character_SubStates.Controlled)
         {

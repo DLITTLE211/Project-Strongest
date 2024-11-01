@@ -351,15 +351,18 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             if (!lastAttack.hitConnected)
             {
-                _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.totalRecovery);
+                _playerCAnimator.CountUpNegativeFrames();
                 _playerCAnimator.SetCanTransitionIdle(true);
             }
         }
         else
         {
-            _playerCAnimator.CountUpNegativeFrames(lastAttack.AttackAnims._frameData.totalRecovery);
+            _playerCAnimator.CountUpNegativeFrames();
             _playerCAnimator.SetCanTransitionIdle(true);
         }
+
+        _playerCAnimator.KillAttackOnRoutineEnd();
+        _playerCAnimator.EndAnim();
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
@@ -467,9 +470,11 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
-            character._aFrameDataMeter.GetAdvantageValue(_frameData);
         }
-        _playerCAnimator.CountUpNegativeFrames(customProp._frameData.totalRecovery);
+        character._aFrameDataMeter.GetAdvantageValue(_frameData);
+        _playerCAnimator.EndAnim();
+        _playerCAnimator.KillAttackOnRoutineEnd();
+        _playerCAnimator.CountUpNegativeFrames();
         _playerCAnimator.SetCanTransitionIdle(true);
     }
 }

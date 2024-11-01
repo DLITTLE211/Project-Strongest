@@ -43,10 +43,8 @@ public class Attack_Manager : MonoBehaviour
         {
             _AttackAnimQueue.Clear();
             _cAnimator.inputWindowOpen = true;
-            _cAnimator.EndAnim();
             Combo.Clear();
             currentCount = Combo.Count;
-            _cAnimator.negativeFrameCount = 0;
             _cAnimator.inStanceState = false;
             _cAnimator.inRekkaState = false;
             if (_base.comboList3_0 != null)

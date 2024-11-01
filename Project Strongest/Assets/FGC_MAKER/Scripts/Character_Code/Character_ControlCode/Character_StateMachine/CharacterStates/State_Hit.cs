@@ -8,7 +8,7 @@ public class State_Hit : BaseState
     public override void OnEnter()
     {
         base.OnEnter();
-        _base._cHurtBox.ResetExtendedHurtbox();
+        BaseClearData();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter HitState");
     }
     public override async void OnUpdate()

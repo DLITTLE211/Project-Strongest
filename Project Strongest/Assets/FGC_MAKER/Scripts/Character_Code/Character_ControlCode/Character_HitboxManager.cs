@@ -57,4 +57,11 @@ public class Character_HitboxManager : MonoBehaviour
         }
         totalHitBoxes[hitBoxIndex].DestroyHitbox(totalHitBoxes[hitBoxIndex]);
     }
+    public void DisableAllHitboxes() 
+    {
+        for (int i = 0; i < totalHitBoxes.Count; i++)
+        {
+            totalHitBoxes[i].DestroyHitbox(totalHitBoxes[i]);
+        }
+    }
 }

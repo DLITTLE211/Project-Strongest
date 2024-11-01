@@ -12,7 +12,11 @@ public class State_Crouch : BaseState
     public override async void OnEnter()
     {
         base.OnEnter();
+
+        _base._cHurtBox.SetHurboxState();
         _base._cHurtBox.ResetExtendedHurtbox();
+        _base._cHitboxManager.DisableAllHitboxes();
+
         canDoSecondaryCrouch = false;
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter CrouchState");
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock); 

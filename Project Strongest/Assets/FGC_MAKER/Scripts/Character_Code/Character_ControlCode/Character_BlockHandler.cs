@@ -76,6 +76,10 @@ public class Character_BlockHandler : MonoBehaviour
                         () => _currentAction.CurBase._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh) :
                         () => _currentAction.CurBase._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
                     SetBlockStyle();
+                    if (_currentAction.CurBase._cHurtBox.IsGrounded())
+                    {
+                        _currentAction.CurBase.myRb.drag = 100000;
+                    }
                 }
             }
             frameCount += waitTime;
