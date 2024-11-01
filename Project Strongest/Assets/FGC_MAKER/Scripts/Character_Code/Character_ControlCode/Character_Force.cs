@@ -67,6 +67,7 @@ public class Character_Force : MonoBehaviour
     public void AddAcceptableStates() 
     {
         acceptableStates.Add(_base._cStateMachine.jumpRef);
+        acceptableStates.Add(_base._cStateMachine.dashStateRef);
         acceptableStates.Add(_base._cStateMachine.crouchStateRef);
         acceptableStates.Add(_base._cStateMachine.idleStateRef);
         acceptableStates.Add(_base._cStateMachine.attackingStateRef);

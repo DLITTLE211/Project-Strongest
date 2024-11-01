@@ -10,7 +10,8 @@ public class Character_ComboDetection : MonoBehaviour
     public bool inStance, inRekka, inSuper, superMobilityOption;
     private bool canCheckMovement;
     [SerializeField] private AttackInputTypes currentAttackInput;
-    [SerializeField] private AttackInputTypes currentMobilityInput;
+    [SerializeField] private AttackInputTypes _cMAnyChangeInputLog;
+    [SerializeField] private AttackInputTypes _cMOnChangeInputLog;
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
     private string curString;
     private char[] curStringArray;
@@ -23,7 +24,8 @@ public class Character_ComboDetection : MonoBehaviour
         lastInput = 5;
         curString = "";
         currentAttackInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
-        currentMobilityInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
+        _cMAnyChangeInputLog = new AttackInputTypes(new Attack_Input(curString, curStringArray));
+        _cMOnChangeInputLog = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         SetFollowUpAttackTypes();
     }
     void SetFollowUpAttackTypes()
@@ -78,18 +80,21 @@ public class Character_ComboDetection : MonoBehaviour
     void AddToAttackCurrentInput(int direction, Character_ButtonInput attack = null)
     {
         currentAttackInput.ClearFirstIndex();
+        _cMOnChangeInputLog.ClearFirstIndex();
         if (attack != null)
         {
             currentAttackInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing, attack, _base._cHurtBox.IsGrounded());
             CompleteMoveListVerifier();
             return;
         }
+        _cMOnChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
         currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        CompleteMobilityVerifier(2);
     }
     void AddToMobilityCurrentInput(int direction)
     {
-        currentMobilityInput.ClearFirstIndex();
-        currentMobilityInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        _cMAnyChangeInputLog.ClearFirstIndex();
+        _cMAnyChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
         CompleteMobilityVerifier();
     }
     void CompleteMoveListVerifier()
@@ -394,13 +399,13 @@ public class Character_ComboDetection : MonoBehaviour
     #endregion
 
     #region Mobility Verification Code
-    void CompleteMobilityVerifier()
+    void CompleteMobilityVerifier(int mobilityCheckList = -1)
     {
         if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.standBlockRef || _base._cStateMachine._playerState.current.State == _base._cStateMachine.crouchBlockRef)
         {
             return;
         }
-        Character_MobilityOption curMobility = ExtraMovementVerifier(currentMobilityInput);
+        Character_MobilityOption curMobility = ExtraMovementVerifier(mobilityCheckList);
         if (curMobility != null)
         {
             curMobility.PerformMobilityAction();
@@ -409,25 +414,26 @@ public class Character_ComboDetection : MonoBehaviour
         }
         Debug.Log("Mobility not found");
     }
-    Character_MobilityOption ExtraMovementVerifier(AttackInputTypes mobilityInput)
+    Character_MobilityOption ExtraMovementVerifier(int mobilityChecker/*,AttackInputTypes mobilityInputMulti, AttackInputTypes mobilityInputSingle*/)
     {
         _base._cMobiltyTimer.CheckForInput = true;
         for (int i = 0; i < _base.character_MobilityOptions.Mobility.Count; i++)
         {
             Character_MobilityOption entry = _base.character_MobilityOptions.Mobility[i];
             string moveInDict = entry.mobilityInput.attackString;
-            string keyRef = entry.movementPriority != 2 ? mobilityInput.specialMoveTypeInput.attackString : currentAttackInput.specialMoveTypeInput.attackString;
+            AttackInputTypes usedInputString = mobilityChecker != 2 ? _cMAnyChangeInputLog : _cMOnChangeInputLog;
+            string keyRef = usedInputString.specialMoveTypeInput.attackString;
            
             if (keyRef.Contains(moveInDict))
             {
                 if (entry._requiresCharge && superMobilityOption == entry._requiresCharge)
                 {
-                    mobilityInput.specialMoveTypeInput.attackString = "";
+                    usedInputString.specialMoveTypeInput.attackString = "";
                     return entry;
                 }
                 else if (!entry._requiresCharge)
                 {
-                    mobilityInput.specialMoveTypeInput.attackString = "";
+                    usedInputString.specialMoveTypeInput.attackString = "";
                     return entry;
                 }
                 else
@@ -463,10 +469,11 @@ public class Character_ComboDetection : MonoBehaviour
             ActiveFollowUpAttackCheck.Value.ResetAttackData();
             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
         }
+        _cMOnChangeInputLog.ResetComboInfo();
     }
     public void ResetMobilityString()
     {
-        currentMobilityInput.ResetComboInfo();
+        _cMAnyChangeInputLog.ResetComboInfo();
     }
 
 }
