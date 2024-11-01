@@ -14,6 +14,7 @@ public class State_Attacking : BaseState
     {
         _base._aFrameDataMeter.ResetMeterData();
 
+        _base._cComboDetection.superMobilityOption = false;
         if (_base._cHurtBox.IsGrounded())
         {
             _base.myRb.drag = 100000;

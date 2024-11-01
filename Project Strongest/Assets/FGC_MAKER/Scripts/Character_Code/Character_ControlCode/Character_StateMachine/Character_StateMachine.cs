@@ -68,7 +68,7 @@ public class Character_StateMachine : MonoBehaviour
         At(BlockReact, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         At(Hitstate, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         At(IdleState, SecondIdle, new Predicate(() => At_2Idle() && _base.allowSecondIdleAnim));
-        At(CrouchState, SecondIdle, new Predicate(() => At_2Crouch()));
+        At(CrouchState, SecondIdle, new Predicate(() => At_2Crouch() && _base.allowSecondIdleAnim));
 
         At(DashState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
@@ -96,7 +96,7 @@ public class Character_StateMachine : MonoBehaviour
         At(AttackState, DashState, new Predicate(() => ToDashState()));
         At(MoveState, DashState, new Predicate(() => ToDashState()));
 
-        At(IdleState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(IdleState, CrouchState, new Predicate(() => At_2Crouch()));
         At(SecondIdle, CrouchState, new Predicate(() => At_2Crouch()));
         At(JumpState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(MoveState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
@@ -390,7 +390,7 @@ public class Character_StateMachine : MonoBehaviour
     }
     bool At_2Jump()
     {
-        bool attackNull = _base._cAnimator.lastAttack == null;
+        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
         bool _isHit = _base._cAnimator.isHit; 
         bool _currentInput;
@@ -401,14 +401,14 @@ public class Character_StateMachine : MonoBehaviour
             {
                 _currentInput = false;
                 _isBlocking = false;
-                attackNull = true;
+                _notAttacking = true;
             }
             else
             {
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base._cHurtBox.IsGrounded() == true ?_base.ReturnMovementInputs().Button_State.directionalInput >= 7 : true;
             }
-            bool fullCheck = !_isHit && !_isBlocking && _currentInput && attackNull && notRecovering;
+            bool fullCheck = !_isHit && !_isBlocking && _currentInput && _notAttacking && notRecovering;
             return fullCheck;
         }
         catch (ArgumentOutOfRangeException)

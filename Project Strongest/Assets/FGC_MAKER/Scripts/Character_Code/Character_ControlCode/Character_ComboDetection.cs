@@ -57,7 +57,7 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 _base._cAttackTimer.CheckForInput = true;
                 lastAddedinput = input;
-                AddToCurrentInput(lastInput, input);
+                AddToAttackCurrentInput(lastInput, input);
             }
         }
         else
@@ -70,14 +70,14 @@ public class Character_ComboDetection : MonoBehaviour
                     _base._cAttackTimer.ResetTimerSuccess();
                 }
                 lastInput = input.Button_State.directionalInput;
-                AddToCurrentInput(lastInput);
+                AddToAttackCurrentInput(lastInput);
             }
+            AddToMobilityCurrentInput(input.Button_State.directionalInput);
         }
     }
-    void AddToCurrentInput(int direction, Character_ButtonInput attack = null)
+    void AddToAttackCurrentInput(int direction, Character_ButtonInput attack = null)
     {
         currentAttackInput.ClearFirstIndex();
-        currentMobilityInput.ClearFirstIndex();
         if (attack != null)
         {
             currentAttackInput.AddAttackInput(direction, _base.pSide.thisPosition._directionFacing, attack, _base._cHurtBox.IsGrounded());
@@ -85,6 +85,10 @@ public class Character_ComboDetection : MonoBehaviour
             return;
         }
         currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+    }
+    void AddToMobilityCurrentInput(int direction)
+    {
+        currentMobilityInput.ClearFirstIndex();
         currentMobilityInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
         CompleteMobilityVerifier();
     }

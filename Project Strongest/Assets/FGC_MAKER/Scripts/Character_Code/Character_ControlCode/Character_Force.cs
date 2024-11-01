@@ -377,7 +377,7 @@ public class Character_Force : MonoBehaviour
             forwardMult = -1;
         }
         sendingForce = true;
-        yield return new WaitForSeconds(2 / 60f);
+        yield return new WaitForSeconds(0f);
         _base._aManager.ClearAttacks();
         Vector2 moveVectors = new Vector2();
         if (movementTypeVectors.TryGetValue(_mInput.GetMovementType(), out moveVectors))
@@ -386,16 +386,14 @@ public class Character_Force : MonoBehaviour
             {
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * _base.DashForce));
-                yield return new WaitForSeconds(2 / 60f);
-                sendingForce = false;
+                yield return new WaitForSeconds(0f);
                 yield break;
             }
             if (_mInput.GetMovementType() == MovementType.BackDash)
             {
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce));
-                yield return new WaitForSeconds(2 / 60f);
-                sendingForce = false;
+                yield return new WaitForSeconds(0f);
                 yield break;
             }
             _base.character_MobilityOptions.ReserveAnimationCall(_mInput);
@@ -447,6 +445,7 @@ public class Character_Force : MonoBehaviour
         yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         _myRB.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
         _myRB.AddForce(transform.right * speed, ForceMode.VelocityChange);
+        sendingForce = false;
     }
     #region Function Summary
     /// <summary>

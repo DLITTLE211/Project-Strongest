@@ -12,7 +12,8 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
     public override void OnEnter()
     {
         allowUpdate = false;
-        allowColorUpdate = true;
+        allowColorUpdate = false;
+        StartCoroutine(DelayColorUpdateRoutine(0.275f));
         StartCoroutine(DelayUpdateRoutine(0.45f));
         _player1_Cursor.cursorPage.SetDefaultText();
         _player2_Cursor.cursorPage.SetDefaultText();
