@@ -64,11 +64,11 @@ public class Character_StateMachine : MonoBehaviour
 
         #region Define Transitions
         #region At States (Can move from State A -> State B upon Bool Check being Met)
-        At(S_BlockState, IdleState, new Predicate(() => At_2Idle()));
-        At(BlockReact, IdleState, new Predicate(() => At_2Idle()));
-        At(Hitstate, IdleState, new Predicate(() => At_2Idle()));
+        At(S_BlockState, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
+        At(BlockReact, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
+        At(Hitstate, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         At(IdleState, SecondIdle, new Predicate(() => At_2Idle() && _base.allowSecondIdleAnim));
-        At(CrouchState, SecondIdle, new Predicate(() => At_2Crouch() && _base.allowSecondIdleAnim));
+        At(CrouchState, SecondIdle, new Predicate(() => At_2Crouch()));
 
         At(DashState, MoveState, new Predicate(() => At_2Move()));
         At(CrouchState, MoveState, new Predicate(() => At_2Move()));
@@ -128,13 +128,12 @@ public class Character_StateMachine : MonoBehaviour
         #endregion
 
         #region Any States (Can Move to this state upon Bool Check Being Met)
-        //Any(DashState, new Predicate(() => ToDashState()));
+        Any(IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(CustomSuperState, new Predicate(() => At_2CustomSuper()));
         Any(S_BlockState, new Predicate(() => At_2SBlock()));
         Any(C_BlockState, new Predicate(() => At_2CBlock()));
-        Any(IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         Any(Hitstate, new Predicate(() => ToHitState()));
         #endregion
 
@@ -309,13 +308,13 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
             }
-            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && _notAttacking;
+            return !_isHit && !_isBlocking &&_currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && _notAttacking && !_base.allowSecondIdleAnim;
         }
         catch (ArgumentOutOfRangeException)
         {
             _currentInput = false;
             _isBlocking = false;
-            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance;
+            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && !_inRekkaOrStance && !_base.allowSecondIdleAnim;
         }
 
     }

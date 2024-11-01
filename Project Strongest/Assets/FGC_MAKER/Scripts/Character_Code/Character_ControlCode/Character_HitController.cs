@@ -696,21 +696,24 @@ public class Character_HitController : MonoBehaviour
         else 
         {
             isTeching = false;
-            if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+            if (_base._subState == Character_SubStates.Controlled)
             {
-                while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
+                if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
                 {
-                    startDelayGetupTime += Base_FrameCode.ONE_FRAME; 
-                    if (HoldingAway())
+                    while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
                     {
-                        _base._cForce.InstantForceAway(-0.85f);
-                        isTeching = true;
+                        startDelayGetupTime += Base_FrameCode.ONE_FRAME;
+                        if (HoldingAway())
+                        {
+                            _base._cForce.InstantForceAway(-0.85f);
+                            isTeching = true;
+                        }
+                        else if (!(_base.ReturnMovementInputs().Button_State.directionalInput <= 3))
+                        {
+                            isTeching = true;
+                        }
+                        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                     }
-                    else if (!(_base.ReturnMovementInputs().Button_State.directionalInput <= 3))
-                    {
-                        isTeching = true;
-                    }
-                    yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
             }
         }
@@ -735,11 +738,15 @@ public class Character_HitController : MonoBehaviour
 
     public bool HoldingAway() 
     {
-        List<int> holdingSixList = new List<int>() {6,9};
-        List<int> holdingFourList = new List<int>() {4,7};
-        bool holdingFour = holdingFourList.Contains(_base.ReturnMovementInputs().Button_State.directionalInput) && _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight;
-        bool holdingSix = holdingSixList.Contains(_base.ReturnMovementInputs().Button_State.directionalInput) && _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft;
-        return holdingSix ^ holdingFour;
+        if (_base._subState == Character_SubStates.Controlled)
+        {
+            List<int> holdingSixList = new List<int>() { 6, 9 };
+            List<int> holdingFourList = new List<int>() { 4, 7 };
+            bool holdingFour = holdingFourList.Contains(_base.ReturnMovementInputs().Button_State.directionalInput) && _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight;
+            bool holdingSix = holdingSixList.Contains(_base.ReturnMovementInputs().Button_State.directionalInput) && _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft;
+            return holdingSix ^ holdingFour;
+        }
+        return false;
     }
     #endregion
     void SetStunMeterValue(float TopValue)

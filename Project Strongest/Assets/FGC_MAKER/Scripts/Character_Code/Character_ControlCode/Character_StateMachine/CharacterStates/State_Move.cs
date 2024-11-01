@@ -79,13 +79,13 @@ public class State_Move : BaseState
     {
         onForward = true;
         onBack = false;
-        _cAnim.PlayNextAnimation(moveFHash, 0.05f);
+        _cAnim.PlayNextAnimation(moveFHash, 2 * (1 / 60f));
     }
     void HandleBackwardAnimation()
     {
         onBack = true;
         onForward = false;
-        _cAnim.PlayNextAnimation(moveBHash, 0.05f);
+        _cAnim.PlayNextAnimation(moveBHash, 2 * (1 / 60f));
     }
     public override void OnRecov()
     {
@@ -96,6 +96,22 @@ public class State_Move : BaseState
     {
         onForward = false;
         onBack = false;
+
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+        if (nextTransition.To == _base._cStateMachine.idleStateRef)
+        {
+            if (_base._subState == Character_SubStates.Controlled)
+            {
+                if (_base.ReturnMovementInputs().Button_State.directionalInput == 5)
+                {
+                    _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+                }
+            }
+            else 
+            {
+                _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+            }
+        }
         base.OnExit();
     }
 }

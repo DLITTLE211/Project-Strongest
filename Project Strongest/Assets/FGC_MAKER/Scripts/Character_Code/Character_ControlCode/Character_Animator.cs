@@ -44,6 +44,7 @@ public class Character_Animator : MonoBehaviour
     public bool customSuperHit;
     public IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
     int matCount;
+    int lastHashPlayed;
     private void Start()
     {
         customSuperHit = false;
@@ -101,6 +102,17 @@ public class Character_Animator : MonoBehaviour
 
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false, bool inReverse = false)
     {
+        if(lastHashPlayed != animHash) 
+        {
+            lastHashPlayed = animHash;
+        }
+        else 
+        {
+            if (!attackOverride)
+            {
+                return;
+            }
+        }
         if (myAnim == null) 
         {
             return;

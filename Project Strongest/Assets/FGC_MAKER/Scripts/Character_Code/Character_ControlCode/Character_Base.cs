@@ -639,10 +639,11 @@ public class Character_Base : MonoBehaviour
     }
     public void KillRoutine() 
     {
-        if(ResetIdleRoutine != null) 
+        if (ResetIdleRoutine != null) 
         {
             StopCoroutine(ResetIdleRoutine);
             ResetIdleRoutine = null;
+            allowSecondIdleAnim = false;
         }
     }
     public void CallWaitAnimFinish(float time)

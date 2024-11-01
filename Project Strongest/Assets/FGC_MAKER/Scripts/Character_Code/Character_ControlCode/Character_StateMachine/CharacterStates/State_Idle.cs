@@ -118,7 +118,11 @@ public class State_Idle : BaseState
         {
             await DelayFrame();
         }
-        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        AnimationClip currentAnimation = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip;
+        if (Animator.StringToHash(currentAnimation.name) != groundIdleHash)
+        {
+            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        }
         _base._aManager.ResetMoveHierarchy();
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
@@ -127,13 +131,13 @@ public class State_Idle : BaseState
     {
         await Task.Yield();
     }
-    public bool CanTransitionToIdle() 
+    public bool CanTransitionToIdle()
     {
         bool neutralInput = _base.ReturnMovementInputs().Button_State.directionalInput == 5;
         bool notPressingButtons = true;
-        for(int i = 0; i < _base.attackButtons.Count; i++) 
+        for (int i = 0; i < _base.attackButtons.Count; i++)
         {
-            if(_base.attackButtons[i].Button_State._state != ButtonStateMachine.InputState.released) 
+            if (_base.attackButtons[i].Button_State._state != ButtonStateMachine.InputState.released)
             {
                 notPressingButtons = false;
                 break;
@@ -145,8 +149,24 @@ public class State_Idle : BaseState
             }
             continue;
         }
-        bool lastAttackNull = _base._cAnimator.lastAttack == null;
-        bool lastMobilityNull = _base._cAnimator.activatedInput == null;
+        bool lastAttackNull = true;
+        if (_base._cAnimator.lastAttack != null)
+        {
+            lastAttackNull = _base._cAnimator.lastAttack.InputTimer == null && _cAnim._lastAttackState == lastAttackState.nullified;
+        }
+        else
+        {
+            lastAttackNull = _base._cAnimator.lastAttack == null && _cAnim._lastAttackState == lastAttackState.nullified;
+        }
+        bool lastMobilityNull = true;
+        if (_base._cAnimator.activatedInput != null)
+        {
+            lastMobilityNull = _base._cAnimator.activatedInput._mobTimer == null && _cAnim._lastMovementState == lastMovementState.nullified;
+        }
+        else
+        {
+            lastMobilityNull = _base._cAnimator.activatedInput == null && _cAnim._lastMovementState == lastMovementState.nullified;
+        }
         bool canTransitionIdle = _cAnim.canTransitionIdle == true;
         return neutralInput && notPressingButtons && lastAttackNull && lastMobilityNull && canTransitionIdle;
     }
@@ -154,7 +174,11 @@ public class State_Idle : BaseState
     void DummyIdleCheck()
     {
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
-        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        AnimationClip currentAnimation = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip;
+        if (Animator.StringToHash(currentAnimation.name) != groundIdleHash)
+        {
+            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        }
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
     }

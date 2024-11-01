@@ -13,7 +13,7 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
     {
         allowUpdate = false;
         allowColorUpdate = true;
-        StartCoroutine(DelayUpdateRoutine(1f));
+        StartCoroutine(DelayUpdateRoutine(0.45f));
         _player1_Cursor.cursorPage.SetDefaultText();
         _player2_Cursor.cursorPage.SetDefaultText();
     }
@@ -45,7 +45,7 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
         if (allowColorUpdate)
         {
             _currentCursor.cursorPage.UpdateColorSelectNumberDown();
-            StartCoroutine(DelayColorUpdateRoutine(0.35f));
+            StartCoroutine(DelayColorUpdateRoutine(0.275f));
         }
     }
     public override void CycleRight(CharacterSelect_Cursor _currentCursor)
@@ -53,7 +53,7 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
         if (allowColorUpdate)
         {
             _currentCursor.cursorPage.UpdateColorSelectNumberUp();
-            StartCoroutine(DelayColorUpdateRoutine(0.35f));
+            StartCoroutine(DelayColorUpdateRoutine(0.275f));
         }
     }
     IEnumerator DelayColorUpdateRoutine(float time)

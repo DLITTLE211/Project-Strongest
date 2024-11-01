@@ -12,7 +12,7 @@ public class Character_MobilityOption : IMobilityOption
     public Character_Base CurBase { get { return _curBase; } }
     public int movementPriority;
     public bool _requiresCharge;
-    [SerializeField] private Character_InputTimer_Mobility _mobTimer;
+    public Character_InputTimer_Mobility _mobTimer;
     [SerializeField] private MovementType _movementType;
     public FrameData frameData;
     public MobilityOption_Anim _animInformation;

@@ -21,6 +21,10 @@ public class State_SecondIdle : BaseState
                 _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
             }
         }
+        else 
+        {
+            _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+        }
         _base.CallWaitAnimFinish(3.75f);
     }
 
