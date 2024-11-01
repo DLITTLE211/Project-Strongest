@@ -7,7 +7,6 @@ public class Character_ComboDetection : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
     [SerializeField] private Character_Animator _animator;
-    [SerializeField] private int lastInput;
     public bool inStance, inRekka, inSuper, superMobilityOption;
     private bool canCheckMovement;
     [SerializeField] private AttackInputTypes currentAttackInput;
@@ -17,6 +16,7 @@ public class Character_ComboDetection : MonoBehaviour
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
+    [HideInInspector] public int lastInput;
     private void Start()
     {
         canCheckMovement = false;
@@ -416,7 +416,8 @@ public class Character_ComboDetection : MonoBehaviour
         {
             Character_MobilityOption entry = _base.character_MobilityOptions.Mobility[i];
             string moveInDict = entry.mobilityInput.attackString;
-            string keyRef = mobilityInput.specialMoveTypeInput.attackString;
+            string keyRef = entry.movementPriority != 2 ? mobilityInput.specialMoveTypeInput.attackString : currentAttackInput.specialMoveTypeInput.attackString;
+           
             if (keyRef.Contains(moveInDict))
             {
                 if (entry._requiresCharge && superMobilityOption == entry._requiresCharge)

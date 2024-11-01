@@ -25,11 +25,6 @@ public class State_Block : BaseState
         if (_base._cStateMachine._CheckBlockButton())
         {
             _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);
-            try
-            {
-                int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-            }
-            catch (IndexOutOfRangeException) { }
         }
         else
         {
@@ -46,7 +41,16 @@ public class State_Block : BaseState
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To != _base._cStateMachine.blockReactRef)
         {
-            _base._cBlockHandler.ToggleBlockAnim(true,false);
+            if (nextTransition.To != _base._cStateMachine.crouchBlockRef)
+            {
+                _base._cBlockHandler.KillCurrentRoutine();
+                _base._cHurtBox.SetHurboxState();
+                _cAnim.SetCanTransitionIdle(true);
+            }
+            else
+            {
+                _base._cBlockHandler.ToggleBlockAnim(true, false);
+            }
         }
         base.OnExit();
     }

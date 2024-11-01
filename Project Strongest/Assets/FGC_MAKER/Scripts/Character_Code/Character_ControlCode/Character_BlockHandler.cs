@@ -55,7 +55,6 @@ public class Character_BlockHandler : MonoBehaviour
         if (!isActivating)
         {
             _currentAction.CurBase._cAnimator.SetCanTransitionIdle(false);
-            _currentAction.CurBase.Deactivate();
         }
         _currentAction.CurBase._cHurtBox.SetHurboxState();
         _currentAction.activated = false;
@@ -77,7 +76,6 @@ public class Character_BlockHandler : MonoBehaviour
                         () => _currentAction.CurBase._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh) :
                         () => _currentAction.CurBase._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
                     SetBlockStyle();
-
                 }
             }
             frameCount += waitTime;
@@ -87,7 +85,6 @@ public class Character_BlockHandler : MonoBehaviour
         if (!isActivating)
         {
             _currentAction.CurBase._cAnimator.SetCanTransitionIdle(true);
-            _currentAction.CurBase.Activate();
         }
     }
 }

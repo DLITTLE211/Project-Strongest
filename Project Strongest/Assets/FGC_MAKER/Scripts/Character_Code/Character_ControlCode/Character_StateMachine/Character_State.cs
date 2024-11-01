@@ -72,14 +72,14 @@ public class Character_State
     }
     public ITransition GetTransition()
     {
-        foreach (var transition in current.Transitions)
+        foreach (var transition in anyTransition)
         {
             if (transition.Condition.Evaluate())
             { return transition; }
         }
-        foreach (var transition in anyTransition) 
+        foreach (var transition in current.Transitions)
         {
-            if (transition.Condition.Evaluate()) 
+            if (transition.Condition.Evaluate())
             { return transition; }
         }
         return null;

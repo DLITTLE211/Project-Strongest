@@ -65,6 +65,7 @@ public class Character_StateMachine : MonoBehaviour
         #region Define Transitions
         #region At States (Can move from State A -> State B upon Bool Check being Met)
         At(S_BlockState, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
+        At(C_BlockState, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         At(BlockReact, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         At(Hitstate, IdleState, new Predicate(() => At_2Idle() && !_base.allowSecondIdleAnim));
         At(IdleState, SecondIdle, new Predicate(() => At_2Idle() && _base.allowSecondIdleAnim));
@@ -117,7 +118,18 @@ public class Character_StateMachine : MonoBehaviour
         At(S_BlockState, BlockReact, new Predicate(() => At_2BlockReact()));
         At(C_BlockState, BlockReact, new Predicate(() => At_2BlockReact()));
 
+        At(IdleState, S_BlockState, new Predicate(() => At_2SBlock()));
+        At(SecondIdle, S_BlockState, new Predicate(() => At_2SBlock()));
+        At(MoveState, S_BlockState, new Predicate(() => At_2SBlock()));
+        At(JumpState, S_BlockState, new Predicate(() => At_2SBlock()));
+        At(C_BlockState, S_BlockState, new Predicate(() => At_2SBlock()));
         At(BlockReact, S_BlockState, new Predicate(() => At_2SBlock()));
+
+        At(CrouchState, C_BlockState, new Predicate(() => At_2CBlock()));
+        At(SecondIdle, C_BlockState, new Predicate(() => At_2CBlock()));
+        At(MoveState, C_BlockState, new Predicate(() => At_2CBlock()));
+        At(JumpState, C_BlockState, new Predicate(() => At_2CBlock()));
+        At(S_BlockState, C_BlockState, new Predicate(() => At_2CBlock()));
         At(BlockReact, C_BlockState, new Predicate(() => At_2CBlock()));
 
         At(AttackState, CounterState, new Predicate(() => At_2Counter()));
@@ -132,8 +144,8 @@ public class Character_StateMachine : MonoBehaviour
         Any(AttackState, new Predicate(() => ToAttackState() && !At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(ThrowState, new Predicate(() => ToAttackState() && At_2Throw() && !At_2Counter() && !At_2CustomSuper()));
         Any(CustomSuperState, new Predicate(() => At_2CustomSuper()));
-        Any(S_BlockState, new Predicate(() => At_2SBlock()));
-        Any(C_BlockState, new Predicate(() => At_2CBlock()));
+        /*Any(S_BlockState, new Predicate(() => At_2SBlock()));
+        Any(C_BlockState, new Predicate(() => At_2CBlock()));*/
         Any(Hitstate, new Predicate(() => ToHitState()));
         #endregion
 
@@ -227,7 +239,7 @@ public class Character_StateMachine : MonoBehaviour
             }
             else
             {
-                _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 3;
+                _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput <= 2;
                 _isBlocking = _CheckBlockButton();
             }
             return !_isHit && _isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering && _notAttacking;

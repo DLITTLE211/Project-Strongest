@@ -15,33 +15,13 @@ public class State_CrouchBlock : BaseState
         base.OnEnter();
         _base._cHurtBox.ResetExtendedHurtbox();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter Crouch Block State");
-        if (_base._cStateMachine._CheckBlockButton() && _base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+        if (_base._subState == Character_SubStates.Controlled)
         {
-            _base._cBlockHandler.ToggleBlockAnim(false, true);
-            //await DeployBlock();
-            await WaitToChargeSuperMobility();
-        }
-    }
-    async Task WaitToChargeSuperMobility()
-    {
-        int FourFrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 4);
-        await Task.Delay(FourFrameDelay);
-        if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
-        {
-            _base._cComboDetection.superMobilityOption = true;
-        }
-        else
-        {
-            _base._cAnimator.NullifyMobilityOption(); 
-        }
-    }
-    async Task DeployBlock()
-    {
-        int FourFrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 4);
-        await Task.Delay(FourFrameDelay);
-        if (_base._cStateMachine._CheckBlockButton())
-        {
-            _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
+            if (_base._cStateMachine._CheckBlockButton() && _base._cComboDetection.lastInput < 3)
+            {
+                _base._cBlockHandler.ToggleBlockAnim(false, true);
+                _base._cComboDetection.superMobilityOption = true;
+            }
         }
     }
     public override void OnUpdate()
@@ -49,15 +29,10 @@ public class State_CrouchBlock : BaseState
         base.OnUpdate();
         if (_base._cStateMachine._CheckBlockButton())
         {
-            if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+            if (_base._cComboDetection.lastInput < 3)
             {
                 _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
             }
-            try
-            {
-                int currentAnimClipName = Animator.StringToHash(_cAnim.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-            }
-            catch (IndexOutOfRangeException){}
         }
         else
         {
@@ -75,15 +50,17 @@ public class State_CrouchBlock : BaseState
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
         if (nextTransition.To != _base._cStateMachine.blockReactRef)
         {
-            _base._cBlockHandler.ToggleBlockAnim(false, false);
-            //_base._cHurtBox.SetHurboxState();
-            //await DelayStopBlock();
+            if (nextTransition.To != _base._cStateMachine.crouchBlockRef)
+            {
+                _base._cBlockHandler.KillCurrentRoutine();
+                _base._cHurtBox.SetHurboxState();
+                _cAnim.SetCanTransitionIdle(true);
+            }
+            else
+            {
+                _base._cBlockHandler.ToggleBlockAnim(false, false);
+            }
         }
         base.OnExit();
-    }
-    async Task DelayStopBlock()
-    {
-        int FrameDelay = (int)((Base_FrameCode.ONE_FRAME * 1000f) * 15);
-        await Task.Delay(FrameDelay);
     }
 }
