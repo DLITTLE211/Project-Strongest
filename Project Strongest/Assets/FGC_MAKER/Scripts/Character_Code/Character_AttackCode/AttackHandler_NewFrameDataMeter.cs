@@ -108,7 +108,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             int nextFrame = currentFrame + 1;
             nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
             _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext, nextFrame);
-            _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Stun);
         }
         if (state && !_isHitRecovering)
         {

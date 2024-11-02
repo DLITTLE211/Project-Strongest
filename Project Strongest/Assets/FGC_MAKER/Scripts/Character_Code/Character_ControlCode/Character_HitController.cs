@@ -328,7 +328,7 @@ public class Character_HitController : MonoBehaviour
         currentCustomDamageField = currentAttack;
         ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
-        currentHitstun += (currentAttack.customDamageFieldStunValues.hitstunValue * Base_FrameCode.ONE_FRAME);
+        currentHitstun = (currentAttack.customDamageFieldStunValues.hitstunValue * Base_FrameCode.ONE_FRAME);
         currentHitstop = currentAttack.customDamageFieldStunValues.hitstopValue * Base_FrameCode.ONE_FRAME;
         if (hitReaction != null)
         {
