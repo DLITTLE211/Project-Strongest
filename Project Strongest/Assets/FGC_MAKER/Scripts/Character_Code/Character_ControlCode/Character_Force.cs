@@ -102,16 +102,17 @@ public class Character_Force : MonoBehaviour
     {
         List<IState> acceptableHoldStates = new List<IState>();
         acceptableHoldStates.Add(_base._cStateMachine.dashStateRef);
+        acceptableHoldStates.Add(_base._cStateMachine.secondIdleState);
         acceptableHoldStates.Add(_base._cStateMachine.idleStateRef);
         bool attackAwaitCondition = true;
-        if (_base.opponentPlayer._cAnimator.lastAttack != null)
+        if (_base._cAnimator.CheckAttackState())
         {
             if (_base.opponentPlayer._cAnimator.lastAttack._moveType == MoveType.Super) 
             {
                 attackAwaitCondition = _base.opponentPlayer.awaitCondition;
             }
         }
-        stillnessCheck = _base._cAnimator.lastAttack == null && acceptableHoldStates.Contains(curState) 
+        stillnessCheck = !_base._cAnimator.CheckAttackState() && acceptableHoldStates.Contains(curState) 
             && _base._cHurtBox.IsGrounded() && _base._cAnimator.activatedInput == null && _base.ReturnMovementInputs() != null 
             && (_base.ReturnMovementInputs().Button_State.directionalInput < 4 || _base.ReturnMovementInputs().Button_State.directionalInput == 5) && attackAwaitCondition;
         return stillnessCheck;

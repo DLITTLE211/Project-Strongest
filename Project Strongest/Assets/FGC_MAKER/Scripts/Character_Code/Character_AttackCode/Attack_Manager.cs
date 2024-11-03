@@ -170,9 +170,12 @@ public class Attack_Manager : MonoBehaviour
                         return false;
                     }
                 }
-                if(!_base._cComboDetection.ReturnActiveFollowUp().CheckAttackContains(newAttack)) 
+                if (_base._cComboDetection.ReturnActiveFollowUp() != null)
                 {
-                    return false;
+                    if (!_base._cComboDetection.ReturnActiveFollowUp().CheckAttackContains(newAttack))
+                    {
+                        return false;
+                    }
                 }
                 if (lastBase != newAttack)
                 {

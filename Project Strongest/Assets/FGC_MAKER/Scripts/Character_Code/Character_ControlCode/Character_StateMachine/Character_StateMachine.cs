@@ -476,7 +476,7 @@ public class Character_StateMachine : MonoBehaviour
         inputtedDash = CheckLastMovementValue();
         populatedMove = _base._cAnimator._lastMovementState == lastMovementState.populated;
 
-        if (_base._cAnimator.lastAttack == null)
+        if (!_base._cAnimator.CheckAttackState())
         {
             attackDashAllowance = true;
         }

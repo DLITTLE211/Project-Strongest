@@ -5827,9 +5827,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.03
           attackMainStunValues:
-            hitstunValue: 11
+            hitstunValue: 7
             blockStunValue: 5
-            hitstopValue: 6
+            hitstopValue: 4
             blockStopValue: 3
           hitLevel: 72
           attackHashes: 0
@@ -5911,7 +5911,7 @@ MonoBehaviour:
             Value: 2
           verticalKBP:
             verticalKBP: 2
-            Value: 5
+            Value: 2.85
           KnockDown: 4
         attackInputState:
           _state: 0
@@ -5974,7 +5974,7 @@ MonoBehaviour:
               active: 5
               inactive: 10
               recoveryEnd: 12
-              recoveryAmount: 2
+              recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -6052,7 +6052,7 @@ MonoBehaviour:
               active: 11
               inactive: 19
               recoveryEnd: 22
-              recoveryAmount: 3
+              recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -6092,7 +6092,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0035
           attackMainStunValues:
-            hitstunValue: 15
+            hitstunValue: 10
             blockStunValue: 3
             hitstopValue: 3
             blockStopValue: 0
@@ -6130,7 +6130,7 @@ MonoBehaviour:
               active: 5
               inactive: 10
               recoveryEnd: 14
-              recoveryAmount: 4
+              recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -6170,7 +6170,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.02
           attackMainStunValues:
-            hitstunValue: 14
+            hitstunValue: 12
             blockStunValue: 6
             hitstopValue: 6
             blockStopValue: 2
@@ -6208,7 +6208,7 @@ MonoBehaviour:
               active: 11
               inactive: 18
               recoveryEnd: 20
-              recoveryAmount: 2
+              recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
