@@ -92,6 +92,8 @@ public class Character_Base : MonoBehaviour
 
     #region Combo Structures (New)
     [SerializeField] private Dictionary<AttackInputTypes, IAttackFunctionality> _characterMoveListAttacks;
+    [SerializeField] private List<Attack_BaseProperties> _characterCompleteMovelist;
+
     public Dictionary<AttackInputTypes, IAttackFunctionality> ChosenCharacterMoveList { get { return _characterMoveListAttacks; } }
     public List<AttackInputTypes> inputVisualiser;
     public Dictionary<AttackInputTypes, IAttackFunctionality> CharacterMoveListAttacks 
@@ -146,6 +148,10 @@ public class Character_Base : MonoBehaviour
     #region Misc. Variables
     private float storedXVelocity, storedYVelocity;
     internal bool isLockedPause;
+
+    public bool verifyMoves; 
+    [Range(0,71)]public int moveListIndex;
+
     IEnumerator ResetIdleRoutine;
 
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
@@ -253,6 +259,7 @@ public class Character_Base : MonoBehaviour
     void InitCombos()
     {
         _characterMoveListAttacks = new Dictionary<AttackInputTypes, IAttackFunctionality>();
+        _characterCompleteMovelist = new List<Attack_BaseProperties>();
         _mobilitySource = characterProfile._NewCharacterMobility;
         Character_MobilityOptions newMobilityOptions = Instantiate(_mobilitySource, comboInstantiatedSpot.transform);
         character_MobilityOptions = newMobilityOptions;
@@ -270,7 +277,7 @@ public class Character_Base : MonoBehaviour
     }
     public void CollectCharacterMovelist() 
     {
-        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser,this);
+        comboList3_0.SetupCharacterTotalMoveList(_characterMoveListAttacks, characterProfile.CharacterName, inputVisualiser,this, _characterCompleteMovelist);
         _cAttackTimer.SetTimerType();
     }
     void InitButtons(Character_SubStates setSubState, int NewID)
@@ -504,7 +511,10 @@ public class Character_Base : MonoBehaviour
             _cADetection.CallReturnButton();
             _timer.TimerCountDown();
         }
-
+        if (Input.GetKeyDown(KeyCode.Space) && verifyMoves) 
+        {
+            TEST_ATTACKPROPERTY(moveListIndex);
+        }
     }
     bool SetBoolStates(bool check = false) 
     {
@@ -725,6 +735,21 @@ public class Character_Base : MonoBehaviour
         isLockedPause = false;
         _cHitstun.HandleAnimatorFreeze(false);
     }
+
+
+
+    #region TESTING PURPOSES ONLY
+    public void TEST_ATTACKPROPERTY(int _attackIndex) 
+    {
+        if(_attackIndex < 0 || _attackIndex > _characterCompleteMovelist.Count) 
+        {
+            Debug.LogError("Index out of range, retry");
+            return;
+        }
+        Attack_BaseProperties newAttack = _characterCompleteMovelist[_attackIndex];
+        _aManager.OVERRIDE_DOATTACK(newAttack);
+    }
+    #endregion
 }
 [Serializable]
 public class ButtonInput

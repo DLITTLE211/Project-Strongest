@@ -356,6 +356,11 @@ public class Attack_Manager : MonoBehaviour
     {
         CanTransitionAnimation = state;
     }
+
+    public void OVERRIDE_DOATTACK(Attack_BaseProperties _base) 
+    {
+        DoAttack(_base);
+    }
     void DoAttack(Attack_BaseProperties _newAttack)
     {
         currentCount = Combo.Count;

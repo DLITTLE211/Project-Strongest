@@ -405,7 +405,6 @@ public class Character_HitController : MonoBehaviour
         {
             hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
         }
-        _base._aFrameDataMeter.SetHitRecoveringState(true);
         //_base.Deactivate();
         ClearRecoveryRoutine(true);
         SetStunMeterValue(hitStunAmount);
@@ -413,14 +412,15 @@ public class Character_HitController : MonoBehaviour
         _base._cAnimator.SetCanRecover(true);
         _base._cHitstun.CallHitStun(hitStunAmount);
         CallHitStopHitResponse(curField);
+        _base._aFrameDataMeter.SetHitRecoveringState(true);
+        currentHitstop = 0;
+        Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
         while (currentHitstop >= 0)
         {
             currentHitstop -= Base_FrameCode.ONE_FRAME;
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.HitStop);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
-        currentHitstop = 0;
-        Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
         while (hitStunAmount >= 0)
         {
             if (_base.ReturnIfPaused())

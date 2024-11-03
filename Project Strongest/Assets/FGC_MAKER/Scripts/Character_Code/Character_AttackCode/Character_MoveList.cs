@@ -243,7 +243,7 @@ public class Character_MoveList : MonoBehaviour
     }
     #endregion
 
-    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary, string characterName, List<AttackInputTypes> _types,Character_Base Base)
+    public void SetupCharacterTotalMoveList(Dictionary<AttackInputTypes, IAttackFunctionality> totalAttackDictionary, string characterName, List<AttackInputTypes> _types,Character_Base Base, List<Attack_BaseProperties> completePropertyList)
     {
         _base = Base;
         string errorMessage = "";
@@ -258,6 +258,7 @@ public class Character_MoveList : MonoBehaviour
                     AttackInputTypes superAttackType = new AttackInputTypes(BasicSuperAttacks[i].attackInput[j], null, BasicSuperAttacks[i].property._moveType);
                     totalAttackDictionary.Add(superAttackType, BasicSuperAttacks[i]);
                     _types.Add(superAttackType);
+                    completePropertyList.Add(BasicSuperAttacks[i].property);
                 }
             }
             #endregion
@@ -271,6 +272,7 @@ public class Character_MoveList : MonoBehaviour
                     AttackInputTypes commandThrowType = new AttackInputTypes(CommandThrows[i].attackInput[j], null, CommandThrows[i].property._moveType);
                     totalAttackDictionary.Add(commandThrowType, CommandThrows[i]);
                     _types.Add(commandThrowType);
+                    completePropertyList.Add(CommandThrows[i].property);
                 }
             }
             #endregion
@@ -284,6 +286,7 @@ public class Character_MoveList : MonoBehaviour
                     AttackInputTypes counterInputType = new AttackInputTypes(CounterAttacks[i].attackInput[j], null, CounterAttacks[i].property._moveType);
                     totalAttackDictionary.Add(counterInputType, CounterAttacks[i]);
                     _types.Add(counterInputType);
+                    completePropertyList.Add(CounterAttacks[i].property);
                 }
             }
 
@@ -293,16 +296,19 @@ public class Character_MoveList : MonoBehaviour
             errorMessage = "Start Stance Attack Addition";
             for (int i = 0; i < stanceSpecials.Count; i++)
             {
+                completePropertyList.Add(stanceSpecials[i].stanceStartProperty);
                 List<string> totalSubInputs = new List<string>();
                 List<Attack_BaseInput> stanceAttacks = stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput;
                 List<Attack_BaseInput> stanceKills = stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput;
                 for (int j = 0; j < stanceAttacks.Count; j++)
                 {
                     totalSubInputs.Add(stanceAttacks[j]._correctSequence);
+                    completePropertyList.Add(stanceAttacks[j].property);
                 }
                 for (int j = 0; j < stanceKills.Count; j++)
                 {
                     totalSubInputs.Add(stanceKills[j]._correctSequence);
+                    completePropertyList.Add(stanceKills[j].property);
                 }
                 for (int j = 0; j < stanceSpecials[i].stanceInput._stanceInput.Count; j++)
                 {
@@ -323,12 +329,14 @@ public class Character_MoveList : MonoBehaviour
                     for (int k = 0; k < rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput.Count; k++)
                     {
                         totalSubInputs.Add(rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[k]._correctSequence);
+                        completePropertyList.Add(rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[k].property);
                     }
                 }
                 for (int j = 0; j < rekkaSpecials[i].rekkaInput.mainAttackInput.Count; j++)
                 {
                     AttackInputTypes rekkaInputType = new AttackInputTypes(rekkaSpecials[i].rekkaInput.mainAttackInput[j], totalSubInputs, rekkaSpecials[i].rekkaInput.mainAttackProperty._moveType);
                     totalAttackDictionary.Add(rekkaInputType, rekkaSpecials[i]);
+                    completePropertyList.Add(rekkaSpecials[i].rekkaInput.mainAttackProperty);
                     _types.Add(rekkaInputType);
                 }
             }
@@ -342,6 +350,7 @@ public class Character_MoveList : MonoBehaviour
                 {
                     AttackInputTypes superInputType = new AttackInputTypes(special_Simple[i].attackInput[j], null, special_Simple[i].property._moveType);
                     totalAttackDictionary.Add(superInputType, special_Simple[i]);
+                    completePropertyList.Add(special_Simple[i].property);
                     _types.Add(superInputType);
                 }
             }
@@ -355,6 +364,7 @@ public class Character_MoveList : MonoBehaviour
                 for (int j = 0; j < stringNormalAttacks[i]._attackInput._correctInput.Count; j++)
                 {
                     totalSubInputs.Add(stringNormalAttacks[i]._attackInput._correctInput[j]._correctSequence);
+                    completePropertyList.Add(stringNormalAttacks[i]._attackInput._correctInput[j].property);
                 }
                 AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, stringNormalAttacks[i]._attackInput._correctInput[0].property._moveType, stringNormalAttacks[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, stringNormalAttacks[i]);
@@ -370,6 +380,7 @@ public class Character_MoveList : MonoBehaviour
                 for (int j = 0; j < commandNormalAttacks[i]._attackInput._correctInput.Count; j++)
                 {
                     totalSubInputs.Add(commandNormalAttacks[i]._attackInput._correctInput[j]._correctSequence);
+                    completePropertyList.Add(commandNormalAttacks[i]._attackInput._correctInput[j].property);
                 }
                 AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, commandNormalAttacks[i]._attackInput._correctInput[0].property._moveType, commandNormalAttacks[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, commandNormalAttacks[i]);
@@ -385,6 +396,7 @@ public class Character_MoveList : MonoBehaviour
                 for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
                 {
                     totalSubInputs.Add(simpleAttacks[i]._attackInput._correctInput[j]._correctSequence);
+                    completePropertyList.Add(simpleAttacks[i]._attackInput._correctInput[j].property);
                 }
                 AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, simpleAttacks[i]._attackInput._correctInput[0].property._moveType, simpleAttacks[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, simpleAttacks[i]);
@@ -400,6 +412,7 @@ public class Character_MoveList : MonoBehaviour
                 for (int j = 0; j < BasicThrows[i]._attackInput._correctInput.Count; j++)
                 {
                     totalSubInputs.Add(BasicThrows[i]._attackInput._correctInput[j]._correctSequence);
+                    completePropertyList.Add(BasicThrows[i]._attackInput._correctInput[j].property);
                 }
                 AttackInputTypes superInputType = new AttackInputTypes(null, totalSubInputs, BasicThrows[i]._attackInput._correctInput[0].property._moveType, BasicThrows[i]._attackInput._correctInput[0].property._airInfo);
                 totalAttackDictionary.Add(superInputType, BasicThrows[i]);
