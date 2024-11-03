@@ -11,6 +11,7 @@ public class State_Throw : BaseState
     public override void OnEnter()
     {
         base.OnEnter();
+        _base._aFrameDataMeter.ResetMeterData();
     }
     public override void OnUpdate()
     {

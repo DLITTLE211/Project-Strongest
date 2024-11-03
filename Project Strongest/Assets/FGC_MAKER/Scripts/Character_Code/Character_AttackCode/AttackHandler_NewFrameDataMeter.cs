@@ -82,6 +82,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         {
             _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
         }
+        int prevFrame = currentFrame - 1;
+        prevFrame = prevFrame < 0 ? _refSingularFrameList.Count-1 : prevFrame;
+        _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
+
         currentFrame++;
         frameCount++;
     }
@@ -110,10 +114,16 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
             _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext, nextFrame+1);
             _refSingularFrameList[currentFrame].SetFrame_FrameType(FrameType.Stun);
+            int prevFrame = currentFrame - 1;
+            prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
+            _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
         }
         if (state && !_isHitRecovering)
         {
             ResetFrames();
+            int prevFrame = currentFrame - 1;
+            prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
+            _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
             currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex - 1;
             frameCount = currentFrame;
             frameCount++;
@@ -133,6 +143,9 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
             _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext);
             _refSingularFrameList[currentFrame].SetFrame_FrameType(_type);
+            int prevFrame = currentFrame - 1;
+            prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
+            _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
             currentFrame++;
             frameCount++;
         }

@@ -105,7 +105,7 @@ public class Character_Force : MonoBehaviour
         acceptableHoldStates.Add(_base._cStateMachine.secondIdleState);
         acceptableHoldStates.Add(_base._cStateMachine.idleStateRef);
         bool attackAwaitCondition = true;
-        if (_base._cAnimator.CheckAttackState())
+        if (_base.opponentPlayer._cAnimator.CheckAttackState())
         {
             if (_base.opponentPlayer._cAnimator.lastAttack._moveType == MoveType.Super) 
             {

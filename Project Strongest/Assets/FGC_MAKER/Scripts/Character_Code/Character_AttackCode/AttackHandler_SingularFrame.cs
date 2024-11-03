@@ -9,6 +9,7 @@ public class AttackHandler_SingularFrame : MonoBehaviour
     [SerializeField] private List<Color> sf_Colors = new List<Color>();
     [SerializeField] private FrameType _curFrameType;
     [SerializeField] private Image sf_FrameImage;
+    [SerializeField] private Image sf_FrameImage_Outline;
     [SerializeField] private TMP_Text _frameText;
     public void InitColors() 
     {
@@ -18,18 +19,24 @@ public class AttackHandler_SingularFrame : MonoBehaviour
     }
     public void InitFrame()
     {
+        DisablePreviousFrameHighlight();
         _curFrameType = FrameType.Reset;
         _frameText.text = "";
         SetColor();
     }
     public void SetFrame_FrameType(FrameType newFrameType, int endingFrame = -1)
     {
+        sf_FrameImage_Outline.enabled = true;
         _curFrameType = newFrameType;
         SetColor();
         if (endingFrame != -1)
         {
             SetText(endingFrame);
         }
+    }
+    public void DisablePreviousFrameHighlight() 
+    {
+        sf_FrameImage_Outline.enabled = false;
     }
     public void SetColor()
     {
