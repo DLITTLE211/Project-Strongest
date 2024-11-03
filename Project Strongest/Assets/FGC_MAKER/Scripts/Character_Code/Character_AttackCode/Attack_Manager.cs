@@ -211,7 +211,12 @@ public class Attack_Manager : MonoBehaviour
         }
         else
         {
-            if (StateComparison(lastState, newAttackCancelInfo, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
+            if (lastState.nextAvailableAttackRoute.HasFlag(newAttack.cancelProperty.CurrentLevel))
+            {
+                return true;
+            }
+            return false;
+            /*if (StateComparison(lastState, newAttackCancelInfo, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
             {
                 return true;
             }
@@ -221,13 +226,17 @@ public class Attack_Manager : MonoBehaviour
             }
             else
             {
-                if (newAttackCancelInfo.cancelFrom < _cAnimator.currentAttackLevel)
+                if (newAttackCancelInfo.CurrentLevel < _cAnimator.currentAttackLevel)
                 {
                     return false;
                 }
                 else
                 {
-                    if (lastState.cancelTo == Cancel_State.Light_Normal_Attack)
+                    if (lastState.nextAvailableAttackRoute.HasFlag(newAttack.cancelProperty.CurrentLevel)) 
+                    {
+                        return true;
+                    }
+                    *//*if (lastState.cancelTo == Cancel_State.Light_Normal_Attack)
                     {
                         List<Cancel_State> availableCancelStates = new List<Cancel_State>();
                         availableCancelStates.Add(Cancel_State.Light_Normal_Attack);
@@ -244,17 +253,17 @@ public class Attack_Manager : MonoBehaviour
                         {
                             return true;
                         }
-                    }
+                    }*//*
                 }
                 return false;
-            }
+            }*/
         }
     }
     bool StateComparison(Attack_CancelInfo lastState, Attack_CancelInfo newState, Cancel_State desiredLastState, Cancel_State desiredNextState) 
     {
-        bool FirstCheck = (lastState.cancelTo == desiredNextState || lastState.CurrentLevel == desiredNextState);
-        bool SecondCheck = (newState.cancelFrom == desiredLastState || newState.cancelFrom == desiredNextState);
-        return FirstCheck && SecondCheck;
+        //bool FirstCheck = (lastState.cancelTo == desiredNextState || lastState.CurrentLevel == desiredNextState);
+        //bool SecondCheck = (newState.cancelFrom == desiredLastState || newState.cancelFrom == desiredNextState);
+        return false; //FirstCheck && SecondCheck;
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {
@@ -304,15 +313,15 @@ public class Attack_Manager : MonoBehaviour
     }
     public bool CheckCancelCriteria(Attack_CancelInfo lastState, Attack_BaseProperties newAttack, Attack_CancelInfo newAttackCancelInfo)
     {
-        if (lastState.cancelTo == Cancel_State.NotCancellable ^ lastState.cancelTo == Cancel_State.Maximum_Attack)
+        if (lastState.nextAvailableAttackRoute == Cancel_State.NotCancellable ^ lastState.nextAvailableAttackRoute == Cancel_State.Maximum_Attack)
         {
-            string message = lastState.cancelTo == Cancel_State.NotCancellable ? "Last attack was noncacncelablle. ending..." : "You've reached the maximum Attack Level. ending...";
-            Debug.Log(message);
+            string message = lastState.nextAvailableAttackRoute == Cancel_State.NotCancellable ? "Last attack was NONCANCELLABLE. ending..." : "You've reached the MAXIMUM ATTACK Level. ending...";
+            Debug.LogWarning(message);
             return false;
         }
         else
         {
-            if (lastState.cancelTo == Cancel_State.Rekka_Input_FollowUp && newAttack.cancelProperty.cancelFrom == Cancel_State.Rekka_Input_Start)
+            if (lastState.nextAvailableAttackRoute == Cancel_State.Rekka_Input_FollowUp && newAttack.cancelProperty.nextAvailableAttackRoute == Cancel_State.Rekka_Input_Start)
             {
                 Attack_RekkaSpecialMove curRekka = _base.comboList3_0.GetRekkaRouteAttack(newAttack);
                 if (curRekka.inRekkaState)
@@ -325,7 +334,7 @@ public class Attack_Manager : MonoBehaviour
                 }
                 return false;
             }
-            if (lastState.cancelTo == Cancel_State.Super_Attack)
+            if (lastState.nextAvailableAttackRoute == Cancel_State.Super_Attack)
             {
                 int lastInputtedAttackIndex = Combo.Count - 2;
                 if(lastInputtedAttackIndex <= 0) 
@@ -340,7 +349,17 @@ public class Attack_Manager : MonoBehaviour
             }
             else
             {
-                int newAttackHierarchy = (int)newAttack.cancelProperty.CurrentLevel;
+                if (lastState.nextAvailableAttackRoute.HasFlag(newAttack.cancelProperty.CurrentLevel))
+                {
+                    Debug.Log(" New Attack is possible in this routing. Doing action");
+                    return true;
+                }
+                else 
+                {
+                    Debug.Log(" New Attack is not possible in this routing. Ending action");
+                    return false;
+                }
+                /*int newAttackHierarchy = (int)newAttack.cancelProperty.CurrentLevel;
                 int lastAttackHierachy = (int)lastState.cancelTo;
                 if (newAttackHierarchy >= lastAttackHierachy)
                 {
@@ -351,7 +370,7 @@ public class Attack_Manager : MonoBehaviour
                 {
                     Debug.Log(" new Attack is of lower value. Ending action");
                     return false;
-                }
+                }*/
             }
         }
     }

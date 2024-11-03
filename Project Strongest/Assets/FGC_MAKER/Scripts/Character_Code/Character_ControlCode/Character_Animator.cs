@@ -282,7 +282,7 @@ public class Character_Animator : MonoBehaviour
                 lastAttack.AttackAnims.HitBox.hitboxProperties = _attack;
             }
             _lastAttackState = lastAttackState.populated;
-            currentAttackLevel = lastAttack.cancelProperty.cancelFrom;
+            currentAttackLevel = lastAttack.cancelProperty.CurrentLevel;
         }
     }
 

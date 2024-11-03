@@ -92,7 +92,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         SendAttackOnSucess();
         _curBase.comboList3_0.SetFollowAttack(newProperty);
-        if (newProperty.cancelProperty.cancelTo != Cancel_State.Rekka_Input_FollowUp)
+        if (!newProperty.cancelProperty.nextAvailableAttackRoute.HasFlag(Cancel_State.Rekka_Input_FollowUp))// != Cancel_State.Rekka_Input_FollowUp)
         {
             _curBase._cAttackTimer.SetTimerType(TimerType.Special,0.7f);
             _curBase._cAttackTimer.CheckForInput = true;
