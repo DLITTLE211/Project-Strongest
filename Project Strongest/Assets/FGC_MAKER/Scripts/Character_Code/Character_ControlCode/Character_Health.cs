@@ -89,7 +89,7 @@ public class Character_Health : MonoBehaviour
     IEnumerator RecoverHealthWaitTime()
     {
         IState hitState = _base._cStateMachine.hitStateRef;
-        while (_base._cStateMachine._playerState.GetCurrentState() == hitState) 
+        while (_base._cStateMachine._playerState.current.State == hitState) 
         {
             yield return new WaitForEndOfFrame();
         }

@@ -412,7 +412,6 @@ public class Character_HitController : MonoBehaviour
         _base._cHitstun.CallHitStun(hitStunAmount);
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         CallHitStopHitResponse(curField);
-        currentHitstop = 0;
         Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
         while (currentHitstop >= 0)
         {
@@ -435,18 +434,22 @@ public class Character_HitController : MonoBehaviour
                         yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
                         while (!_base._cHurtBox.IsGrounded())
                         {
-                            SubtractFrame(hitStunAmount);
+                            hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                            UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                         }
-                        hitStunAmount = 0;
+                        currentKnockBack = null;
+                       hitStunAmount = 0;
                         ClearMeterValue();
                     }
-                    SubtractFrame(hitStunAmount);
+                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
                 else
                 {
-                    SubtractFrame(hitStunAmount);
+                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 }
             }
@@ -477,9 +480,6 @@ public class Character_HitController : MonoBehaviour
         else
         {
             _base._aFrameDataMeter.SetHitRecoveringState(false);
-            _base.Activate();
-            blockedAttack = false;
-            _base._cHealth.StartHealthRegen();
             if (!_base._cHurtBox.IsGrounded())
             {
                 HitAnimationField recoveryAnim = CheckRecoveryAnim(Attack_KnockDown.NONE);
@@ -498,16 +498,14 @@ public class Character_HitController : MonoBehaviour
             {
                 airRecoverPossible = false;
             }
-            SetRecoverable();
             currentCustomDamageField = null;
             currentProperty = null;
             currentHitstun = 0;
+            _base.Activate();
+            blockedAttack = false;
+            SetRecoverable();
+            _base._cHealth.StartHealthRegen();
         }
-    }
-    void SubtractFrame(float hitstunAmount) 
-    {
-        hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-        UpdateMeterValue(Base_FrameCode.ONE_FRAME);
     }
     IEnumerator DoDeathResponse(HitAnimationField curField)
     {
