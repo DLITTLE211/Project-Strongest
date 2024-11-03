@@ -14,7 +14,7 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] private HitAnimationHolder characterTotalHitReactions;
     Dictionary<HitLevel, Callback<Attack_BaseProperties>> reactionFunctionDictionary;
-
+    List<Attack_KnockBack_Vertical> knockUpHitTypes = new List<Attack_KnockBack_Vertical>();
     public Attack_KnockDown last_KD;
     private float recoveryTime;
     Attack_BaseProperties currentProperty;
@@ -54,6 +54,9 @@ public class Character_HitController : MonoBehaviour
         currentHitstun = 0;
         currentHitstop = 0;
         recoveryTime = 0;
+        knockUpHitTypes.Add(Attack_KnockBack_Vertical.Heavy_KU);
+        knockUpHitTypes.Add(Attack_KnockBack_Vertical.Medium_KU);
+        knockUpHitTypes.Add(Attack_KnockBack_Vertical.Slight_KU);
     }
     public bool ReturnNotRecovering()
     {
@@ -429,7 +432,7 @@ public class Character_HitController : MonoBehaviour
             {
                 if (currentKnockBack != null)
                 {
-                    if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
+                    if (knockUpHitTypes.Contains(currentKnockBack.verticalKBP))
                     {
                         yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
                         while (!_base._cHurtBox.IsGrounded())
