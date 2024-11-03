@@ -37,20 +37,20 @@ public class AttackInputTypes
     public MoveType moveType;
     public AirAttackInfo normalAirAttackInfo;
     public AirAttackInfo keyGroundCheck;
-    public AttackInputTypes(
-        Attack_Input _specialMoveTypeInput = null, 
-        List<string> _normalTypeInput = null,
-        MoveType _moveType = MoveType.Normal,
-        AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
+    int maxStringSize;
+    public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<string> _normalTypeInput = null,MoveType _moveType = MoveType.Normal, AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
         moveType = _moveType;
         normalAirAttackInfo = _normalAirAttackInfo;
     }
+    public void SetMaxStringSize(int maxSize) 
+    {
+        maxStringSize = maxSize;
+    }
     public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide)
     {
-
         if (faceSide == Character_Face_Direction.FacingLeft)
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(directionalInput);
@@ -63,7 +63,7 @@ public class AttackInputTypes
     }
     public void ClearFirstIndex() 
     {
-        if (specialMoveTypeInput.attackString.Length >= 25)
+        if (specialMoveTypeInput.attackString.Length >= maxStringSize)
         {
             specialMoveTypeInput.attackString = specialMoveTypeInput.attackString.Remove(0, 1);
         }

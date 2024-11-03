@@ -53,6 +53,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             ResetMessage();
         }
         ResetFrames();
+        if (_base.opponentPlayer._aFrameDataMeter._isHitRecovering) 
+        {
+            _base.opponentPlayer._aFrameDataMeter._isHitRecovering = false;
+        }
         _base.opponentPlayer._aFrameDataMeter.ResetFrames();
         lastFrameDataType = FrameType.Startup;
     }
@@ -118,14 +122,17 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
             prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
             _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
         }
-        if (state && !_isHitRecovering)
+        if (state)
         {
-            ResetFrames();
+            if (!_isHitRecovering)
+            {
+                ResetFrames();
+                currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex - 1;
+                frameCount = currentFrame;
+            }
             int prevFrame = currentFrame - 1;
             prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
             _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
-            currentFrame = _base.opponentPlayer._aFrameDataMeter.FrameIndex - 1;
-            frameCount = currentFrame;
             frameCount++;
         }
         _isHitRecovering = state;

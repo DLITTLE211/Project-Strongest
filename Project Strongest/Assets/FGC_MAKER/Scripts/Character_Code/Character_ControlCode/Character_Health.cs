@@ -60,7 +60,9 @@ public class Character_Health : MonoBehaviour
         float stunAmount = stunController.stunMeter.maxValue * (currentStunValue / 100f);
 
         health_Recov.SetCurrentMeterValue(healthAmount);
+        health_Recov.currentValue = healthAmount;
         health_Main.SetCurrentMeterValue(healthAmount);
+        health_Main.currentValue = healthAmount;
         CheckMeterValue();
         stunController.stunMeter.SetCurrentMeterValue(stunAmount);
         stunController.stunMeter.currentValue = stunAmount;

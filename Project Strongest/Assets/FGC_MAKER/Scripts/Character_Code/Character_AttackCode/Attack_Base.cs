@@ -102,6 +102,11 @@ public class Attack_Input
     {
         attackStringArray = attackString.ToCharArray();
     }
+    public void ResetStringInfo() 
+    {
+        attackString = "";
+        attackStringArray = attackString.ToCharArray();
+    }
     public Attack_Input(string _attackString, char[] _stringArray) 
     {
         attackString = _attackString;

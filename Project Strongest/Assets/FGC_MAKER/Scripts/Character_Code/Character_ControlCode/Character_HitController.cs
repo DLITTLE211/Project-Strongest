@@ -403,16 +403,15 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
-            hitStunAmount += (currentHitstun * Base_FrameCode.ONE_FRAME);
+            hitStunAmount = (currentHitstun * Base_FrameCode.ONE_FRAME);
         }
-        //_base.Deactivate();
         ClearRecoveryRoutine(true);
         SetStunMeterValue(hitStunAmount);
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
         _base._cAnimator.SetCanRecover(true);
         _base._cHitstun.CallHitStun(hitStunAmount);
-        CallHitStopHitResponse(curField);
         _base._aFrameDataMeter.SetHitRecoveringState(true);
+        CallHitStopHitResponse(curField);
         currentHitstop = 0;
         Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
         while (currentHitstop >= 0)
@@ -429,30 +428,27 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
-                /*if (currentKnockBack != null)
+                if (currentKnockBack != null)
                 {
                     if (currentKnockBack.verticalKBP != Attack_KnockBack_Vertical.No_KUD)
                     {
-                        yield return new WaitForSeconds(0.45f);
+                        yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
                         while (!_base._cHurtBox.IsGrounded())
                         {
-                            hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                            UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                            SubtractFrame(hitStunAmount);
                             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                         }
                         hitStunAmount = 0;
                         ClearMeterValue();
                     }
-                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                    SubtractFrame(hitStunAmount);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                }*/
-                //else
-                //{
-                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                }
+                else
+                {
+                    SubtractFrame(hitStunAmount);
                     yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                //}
+                }
             }
         }
         hitStunAmount = 0;
@@ -508,7 +504,11 @@ public class Character_HitController : MonoBehaviour
             currentHitstun = 0;
         }
     }
-
+    void SubtractFrame(float hitstunAmount) 
+    {
+        hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+        UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+    }
     IEnumerator DoDeathResponse(HitAnimationField curField)
     {
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);

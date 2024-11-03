@@ -2033,8 +2033,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 24576
-                nextAvailableAttackRoute: 0
+                CurrentLevel: 4096
+                nextAvailableAttackRoute: 24576
               _moveType: 6
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -3614,9 +3614,9 @@ MonoBehaviour:
             hu_size: {x: 0.8, y: 0.5}
             _frameData:
               init: 0
-              startup: 13
-              active: 15
-              inactive: 20
+              startup: 10
+              active: 11
+              inactive: 17
               recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
@@ -3828,7 +3828,7 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 0
-              recoveryAmount: 7
+              recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -3895,9 +3895,9 @@ MonoBehaviour:
             hu_size: {x: 1.35, y: 0.9}
             _frameData:
               init: 0
-              startup: 11
-              active: 12
-              inactive: 18
+              startup: 9
+              active: 10
+              inactive: 16
               recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
@@ -4384,7 +4384,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0035
           attackMainStunValues:
-            hitstunValue: 9
+            hitstunValue: 12
             blockStunValue: 4
             hitstopValue: 4
             blockStopValue: 0
@@ -4488,9 +4488,9 @@ MonoBehaviour:
             hu_size: {x: 0.8, y: 0.45}
             _frameData:
               init: 0
-              startup: 16
-              active: 17
-              inactive: 22
+              startup: 14
+              active: 15
+              inactive: 29
               recoveryEnd: 0
               recoveryAmount: 4
               totalRecovery: 0
@@ -4639,9 +4639,9 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 4
           verticalKBP:
-            verticalKBP: 7
+            verticalKBP: 0
             Value: 8
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0

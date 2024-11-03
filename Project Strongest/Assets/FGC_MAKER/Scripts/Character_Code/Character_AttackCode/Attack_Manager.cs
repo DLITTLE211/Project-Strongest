@@ -216,54 +216,7 @@ public class Attack_Manager : MonoBehaviour
                 return true;
             }
             return false;
-            /*if (StateComparison(lastState, newAttackCancelInfo, Cancel_State.Light_String_Normal_Start, Cancel_State.Light_String_Normal_FollowUp))
-            {
-                return true;
-            }
-            if (StateComparison(lastState, newAttackCancelInfo, Cancel_State.Heavy_String_Normal_Start, Cancel_State.Heavy_String_Normal_FollowUp))
-            {
-                return true;
-            }
-            else
-            {
-                if (newAttackCancelInfo.CurrentLevel < _cAnimator.currentAttackLevel)
-                {
-                    return false;
-                }
-                else
-                {
-                    if (lastState.nextAvailableAttackRoute.HasFlag(newAttack.cancelProperty.CurrentLevel)) 
-                    {
-                        return true;
-                    }
-                    *//*if (lastState.cancelTo == Cancel_State.Light_Normal_Attack)
-                    {
-                        List<Cancel_State> availableCancelStates = new List<Cancel_State>();
-                        availableCancelStates.Add(Cancel_State.Light_Normal_Attack);
-                        availableCancelStates.Add(Cancel_State.Heavy_Normal_Attack);
-                        availableCancelStates.Add(Cancel_State.Command_Normal_Attack);
-                        if (availableCancelStates.Contains(newAttack.cancelProperty.cancelFrom))
-                        {
-                            return true;
-                        }
-                    }
-                    if (lastState.cancelTo == Cancel_State.Heavy_Normal_Attack)
-                    {
-                        if (newAttack.cancelProperty.cancelFrom == Cancel_State.Command_Normal_Attack)
-                        {
-                            return true;
-                        }
-                    }*//*
-                }
-                return false;
-            }*/
         }
-    }
-    bool StateComparison(Attack_CancelInfo lastState, Attack_CancelInfo newState, Cancel_State desiredLastState, Cancel_State desiredNextState) 
-    {
-        //bool FirstCheck = (lastState.cancelTo == desiredNextState || lastState.CurrentLevel == desiredNextState);
-        //bool SecondCheck = (newState.cancelFrom == desiredLastState || newState.cancelFrom == desiredNextState);
-        return false; //FirstCheck && SecondCheck;
     }
     public bool CheckGroundCriteria(Attack_BaseProperties newAttack) 
     {
@@ -359,18 +312,6 @@ public class Attack_Manager : MonoBehaviour
                     Debug.Log(" New Attack is not possible in this routing. Ending action");
                     return false;
                 }
-                /*int newAttackHierarchy = (int)newAttack.cancelProperty.CurrentLevel;
-                int lastAttackHierachy = (int)lastState.cancelTo;
-                if (newAttackHierarchy >= lastAttackHierachy)
-                {
-                    Debug.Log(" new Attack is of higher or equal value. Doing action");
-                    return true;
-                }
-                else
-                {
-                    Debug.Log(" new Attack is of lower value. Ending action");
-                    return false;
-                }*/
             }
         }
     }
