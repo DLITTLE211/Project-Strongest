@@ -216,22 +216,14 @@ public class Character_ComboDetection : MonoBehaviour
             if (refAttackType.Value != null)
             {
                 MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
-                if (_base._aManager.MoveTypeHierarchy > indexMoveType)
+                refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                if (followUpInputMoveTypes.Contains(indexMoveType))
                 {
-                    Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
-                    return;
+                    ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
                 }
                 else
                 {
-                    refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
-                    if (followUpInputMoveTypes.Contains(indexMoveType))
-                    {
-                        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
-                    }
-                    else
-                    {
-                        ResetCombos();
-                    }
+                    ResetCombos();
                 }
                 Debug.Log("attack found");
             }

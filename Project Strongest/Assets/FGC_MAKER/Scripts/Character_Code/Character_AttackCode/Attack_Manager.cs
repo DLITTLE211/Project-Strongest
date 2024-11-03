@@ -313,15 +313,15 @@ public class Attack_Manager : MonoBehaviour
     }
     public bool CheckCancelCriteria(Attack_CancelInfo lastState, Attack_BaseProperties newAttack, Attack_CancelInfo newAttackCancelInfo)
     {
-        if (lastState.nextAvailableAttackRoute == Cancel_State.NotCancellable ^ lastState.nextAvailableAttackRoute == Cancel_State.Maximum_Attack)
+        if (lastState.nextAvailableAttackRoute.HasFlag(Cancel_State.NotCancellable) || lastState.CurrentLevel == Cancel_State.Maximum_Attack)
         {
-            string message = lastState.nextAvailableAttackRoute == Cancel_State.NotCancellable ? "Last attack was NONCANCELLABLE. ending..." : "You've reached the MAXIMUM ATTACK Level. ending...";
+            string message = "Last attack was NONCANCELLABLE from previous attack. ending...";
             Debug.LogWarning(message);
             return false;
         }
         else
         {
-            if (lastState.nextAvailableAttackRoute == Cancel_State.Rekka_Input_FollowUp && newAttack.cancelProperty.nextAvailableAttackRoute == Cancel_State.Rekka_Input_Start)
+            if (lastState.CurrentLevel == Cancel_State.Rekka_Input_FollowUp && newAttack.cancelProperty.CurrentLevel == Cancel_State.Rekka_Input_Start)
             {
                 Attack_RekkaSpecialMove curRekka = _base.comboList3_0.GetRekkaRouteAttack(newAttack);
                 if (curRekka.inRekkaState)
@@ -334,7 +334,7 @@ public class Attack_Manager : MonoBehaviour
                 }
                 return false;
             }
-            if (lastState.nextAvailableAttackRoute == Cancel_State.Super_Attack)
+            if (lastState.CurrentLevel == Cancel_State.Super_Attack)
             {
                 int lastInputtedAttackIndex = Combo.Count - 2;
                 if(lastInputtedAttackIndex <= 0) 
