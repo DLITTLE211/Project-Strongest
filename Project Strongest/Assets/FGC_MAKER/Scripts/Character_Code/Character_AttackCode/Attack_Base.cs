@@ -84,8 +84,6 @@ public class CustomDamageField
 
     public Attack_StunValues customDamageFieldStunValues;
     [Space(20)]
-    [Range(1, 100)] public int hitstopValue;
-    [Range(1, 200)] public int hitstunValue;
     public HitLevel hitLevel;
     public bool isFinalAttack;
     public bool isScaling;

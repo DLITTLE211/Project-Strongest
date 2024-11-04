@@ -417,7 +417,7 @@ public class Character_HitController : MonoBehaviour
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         CallHitStopHitResponse(curField);
         Attack_KnockBack_Vertical currentKnockBack = GetActiveVerticalKnockback(blockedAttack);
-        while (currentHitstop >= 0)
+        while (currentHitstop > 0)
         {
             currentHitstop -= Base_FrameCode.ONE_FRAME;
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.HitStop);

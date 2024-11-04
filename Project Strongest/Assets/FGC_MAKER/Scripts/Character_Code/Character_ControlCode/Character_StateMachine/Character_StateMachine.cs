@@ -119,6 +119,7 @@ public class Character_StateMachine : MonoBehaviour
         At(C_BlockState, BlockReact, new Predicate(() => At_2BlockReact()));
 
         At(IdleState, S_BlockState, new Predicate(() => At_2SBlock()));
+        At(Hitstate, S_BlockState, new Predicate(() => At_2SBlock()));
         At(SecondIdle, S_BlockState, new Predicate(() => At_2SBlock()));
         At(MoveState, S_BlockState, new Predicate(() => At_2SBlock()));
         At(JumpState, S_BlockState, new Predicate(() => At_2SBlock()));
@@ -127,6 +128,7 @@ public class Character_StateMachine : MonoBehaviour
         At(BlockReact, S_BlockState, new Predicate(() => At_2SBlock()));
 
         At(CrouchState, C_BlockState, new Predicate(() => At_2CBlock()));
+        At(Hitstate, C_BlockState, new Predicate(() => At_2CBlock()));
         At(SecondIdle, C_BlockState, new Predicate(() => At_2CBlock()));
         At(MoveState, C_BlockState, new Predicate(() => At_2CBlock()));
         At(JumpState, C_BlockState, new Predicate(() => At_2CBlock()));
