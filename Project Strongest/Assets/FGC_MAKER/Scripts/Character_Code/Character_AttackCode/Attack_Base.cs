@@ -48,8 +48,8 @@ public class Attack_BaseProperties
     #region KnockBack/KnockDown Variables
     [Space(20)]
     [Header("______KNOCKDOWN INFORMATION______")]
-    public Horizontal_KnockBack lateralKBP; // Lateral KnockBack Properties
-    public Vertical_KnockBack verticalKBP; // Vertical KnockBack Properties
+    public Horizontal_KnockBack LateralKB_Data; // Lateral KnockBack Properties
+    public Vertical_KnockBack VerticalKB_Data; // Vertical KnockBack Properties
     public Attack_KnockDown KnockDown; // Vertical KnockBack Properties
     #endregion
     public void SetAttackAnims(Character_Animator animator)
@@ -116,14 +116,20 @@ public class Attack_Input
 [Serializable]
 public class Vertical_KnockBack
 {
-    public Attack_KnockBack_Vertical verticalKBP;
-    [Range(0f, 50f)] public float Value;
+    public Attack_KnockBack_Vertical Hit_VKB_Level;
+    [Range(0f, 50f)] public float Hit_Value;
+
+    public Attack_KnockBack_Vertical Block_VKB_Level;
+    [Range(0f, 50f)] public float Block_Value;
 }
 [Serializable]
 public class Horizontal_KnockBack
 {
-    public Attack_KnockBack_Lateral lateralKBP;
-    [Range(0f, 50f)] public float Value;
+    public Attack_KnockBack_Lateral Hit_HKB_Level;
+    [Range(0f, 50f)] public float Hit_Value;
+
+    public Attack_KnockBack_Lateral Block_HKB_Level;
+    [Range(0f, 50f)] public float Block_Value;
 }
 [Serializable]
 public enum Attack_KnockBack_Lateral

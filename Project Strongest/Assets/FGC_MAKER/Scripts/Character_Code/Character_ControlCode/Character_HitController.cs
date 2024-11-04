@@ -413,9 +413,10 @@ public class Character_HitController : MonoBehaviour
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
         _base._cAnimator.SetCanRecover(true);
         _base._cHitstun.CallHitStun(hitStunAmount);
+        ClearFrameTickRoutine();
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         CallHitStopHitResponse(curField);
-        Vertical_KnockBack currentKnockBack = GetActiveVerticalKnockback();
+        Attack_KnockBack_Vertical currentKnockBack = GetActiveVerticalKnockback(blockedAttack);
         while (currentHitstop >= 0)
         {
             currentHitstop -= Base_FrameCode.ONE_FRAME;
@@ -430,37 +431,26 @@ public class Character_HitController : MonoBehaviour
             }
             else
             {
-                if (currentKnockBack != null)
+                if (knockUpHitTypes.Contains(currentKnockBack))
                 {
-                    if (knockUpHitTypes.Contains(currentKnockBack.verticalKBP))
+                    yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
+                    while (!_base._cHurtBox.IsGrounded())
                     {
-                        yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
-                        while (!_base._cHurtBox.IsGrounded())
-                        {
-                            hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                            UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                        }
-                        currentKnockBack = null;
-                       hitStunAmount = 0;
-                        ClearMeterValue();
+                        hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                        UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                     }
-                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                    yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                    hitStunAmount = 0;
+                    ClearMeterValue();
                 }
-                else
-                {
-                    hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                    UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                    yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                }
+                hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
         hitStunAmount = 0;
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
-            ClearFrameTickRoutine();
             ClearRecoveryRoutine(true);
             DownedFrameTickRoutine = UpdateFrameWhileDowned();
             _isRecovering = true;
@@ -483,12 +473,12 @@ public class Character_HitController : MonoBehaviour
         else
         {
             _base._aFrameDataMeter.SetHitRecoveringState(false);
-            if (!_base._cHurtBox.IsGrounded())
+            /*if (!_base._cHurtBox.IsGrounded())
             {
                 HitAnimationField recoveryAnim = CheckRecoveryAnim(Attack_KnockDown.NONE);
                 _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
                 yield return new WaitForSeconds(recoveryAnim.animLength);
-            }
+            }*/
             if (recoverRoutine != null)
             {
                 StopCoroutine(recoverRoutine);
@@ -530,20 +520,16 @@ public class Character_HitController : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
         }
     }
-    public Vertical_KnockBack GetActiveVerticalKnockback() 
+    public Attack_KnockBack_Vertical GetActiveVerticalKnockback(bool _blockedAttack) 
     {
-        if(currentCustomDamageField != null) 
+        if (currentCustomDamageField != null)
         {
-            return currentCustomDamageField.verticalKBP;
+            return _blockedAttack ? currentCustomDamageField.verticalKBP.Block_VKB_Level : currentCustomDamageField.verticalKBP.Hit_VKB_Level;
         }
-        else 
+        else
         {
-            if (currentProperty != null)
-            {
-                return currentProperty.verticalKBP;
-            }
+            return _blockedAttack ? currentProperty.VerticalKB_Data.Block_VKB_Level : currentProperty.VerticalKB_Data.Hit_VKB_Level;
         }
-        return null;
     }
     #region Successful Hit Code
     void SetRecoverable()
@@ -640,8 +626,10 @@ public class Character_HitController : MonoBehaviour
         return false;
     }
 
-    public void ForceLockHitAnim(HitLevel _level) 
+    public void ForceLockHitAnim(HitLevel _level)
     {
+        _cAnimator.isHit = true;
+        ActivateOnTickRoutine();
         CallLockedHitResponse(FilterGroundLockReactions(_level));
     }
 
@@ -744,6 +732,7 @@ public class Character_HitController : MonoBehaviour
         currentProperty = null;
         blockedAttack = false;
         currentHitstun = 0;
+        ClearFrameTickRoutine();
     }
 
     public bool HoldingAway() 
@@ -776,6 +765,15 @@ public class Character_HitController : MonoBehaviour
         {
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.Stun);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+        }
+    }
+    void ActivateOnTickRoutine() 
+    {
+        if (DownedFrameTickRoutine == null)
+        {
+            DownedFrameTickRoutine = UpdateFrameWhileDowned();
+            _base._aFrameDataMeter.SetHitRecoveringState(true);
+            StartCoroutine(DownedFrameTickRoutine);
         }
     }
     void ClearMeterValue()

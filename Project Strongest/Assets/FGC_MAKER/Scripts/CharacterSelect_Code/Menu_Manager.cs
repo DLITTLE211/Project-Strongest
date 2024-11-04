@@ -112,11 +112,14 @@ public class Menu_Manager : MonoBehaviour
     }
     void SetCharacterSelectCursorState(int ID)
     {
-        _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
-        _mainMenuPlayerID = ID;
-        _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
-        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
-            $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+        if (_mainMenuPlayer == null)
+        {
+            _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
+            _mainMenuPlayerID = ID;
+            _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
+            _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
+                $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+        }
     }
     public void SetButtonHolderImages()
     {

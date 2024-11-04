@@ -11,6 +11,7 @@ public class State_Counter : BaseState
     public override void OnEnter()
     {
         base.OnEnter();
+        _base._aFrameDataMeter.ResetMeterData();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter ThrowState");
     }
     public override void OnUpdate()

@@ -11,6 +11,7 @@ public class State_CustomSuper : BaseState
     public override void OnEnter()
     {
         base.OnEnter();
+        _base._aFrameDataMeter.ResetMeterData();
         Attack_BaseProperties hitboxProperty = _base._cHitboxManager.GetActiveHitBox().hitboxProperties;
         _base._cComboDetection.inSuper = true;
         _base._cAttackTimer.SetTimerType(TimerType.Super);

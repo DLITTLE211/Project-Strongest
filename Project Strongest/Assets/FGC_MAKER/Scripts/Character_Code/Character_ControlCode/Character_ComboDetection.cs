@@ -407,7 +407,6 @@ public class Character_ComboDetection : MonoBehaviour
             Debug.Log("Mobility found");
             return;
         }
-        Debug.Log("Mobility not found");
     }
     Character_MobilityOption ExtraMovementVerifier(int mobilityChecker/*,AttackInputTypes mobilityInputMulti, AttackInputTypes mobilityInputSingle*/)
     {

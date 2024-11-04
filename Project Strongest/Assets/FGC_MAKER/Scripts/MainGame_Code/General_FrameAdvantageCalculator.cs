@@ -29,6 +29,8 @@ public class General_FrameAdvantageCalculator : MonoBehaviour
             _hitPlayer._cStateMachine.secondIdleState,
             _hitPlayer._cStateMachine.moveStateRef,
             _hitPlayer._cStateMachine.crouchStateRef,
+            _hitPlayer._cStateMachine.standBlockRef,
+            _hitPlayer._cStateMachine.crouchBlockRef,
         };
         while ((!acceptableState.Contains(_hitPlayer._cStateMachine._playerState.current.State)) && (!acceptableState.Contains(_hitPlayer.opponentPlayer._cStateMachine._playerState.current.State)))
         {

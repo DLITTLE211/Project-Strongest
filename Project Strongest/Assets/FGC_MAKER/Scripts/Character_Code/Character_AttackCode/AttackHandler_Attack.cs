@@ -346,7 +346,6 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        character._aFrameDataMeter.GetAdvantageValue(_frameData);
         if (lastAttack._moveType == MoveType.Throw)
         {
             if (!lastAttack.hitConnected)
@@ -360,7 +359,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             _playerCAnimator.CountUpNegativeFrames();
             _playerCAnimator.SetCanTransitionIdle(true);
         }
-
+        character._aFrameDataMeter.GetAdvantageValue(_frameData);
         _playerCAnimator.KillAttackOnRoutineEnd();
         _playerCAnimator.EndAnim();
     }

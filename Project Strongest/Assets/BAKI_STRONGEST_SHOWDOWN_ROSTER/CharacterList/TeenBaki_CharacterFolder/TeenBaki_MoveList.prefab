@@ -1067,9 +1067,9 @@ MonoBehaviour:
           init: 0
           startup: 0
           active: 1
-          inactive: 145
+          inactive: 90
           recoveryEnd: 0
-          recoveryAmount: 0
+          recoveryAmount: 50
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -4979,7 +4979,7 @@ MonoBehaviour:
           counterHitDamageMult: 1
           attackMainStunValues:
             hitstunValue: 17
-            blockStunValue: 7
+            blockStunValue: 14
             hitstopValue: 5
             blockStopValue: 2
           hitLevel: 66
@@ -5087,7 +5087,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.05
           attackMainStunValues:
             hitstunValue: 18
-            blockStunValue: 11
+            blockStunValue: 18
             hitstopValue: 6
             blockStopValue: 4
           hitLevel: 72
@@ -5353,7 +5353,7 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 1
+            verticalKBP: 0
             Value: 2
           KnockDown: 2
         attackInputState:
@@ -5461,8 +5461,8 @@ MonoBehaviour:
             lateralKBP: 2
             Value: 3
           verticalKBP:
-            verticalKBP: 1
-            Value: 2
+            verticalKBP: 5
+            Value: 4
           KnockDown: 2
         attackInputState:
           _state: 0
@@ -5488,7 +5488,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0025
           attackMainStunValues:
-            hitstunValue: 5
+            hitstunValue: 8
             blockStunValue: 2
             hitstopValue: 0
             blockStopValue: 0
@@ -5524,8 +5524,8 @@ MonoBehaviour:
               startup: 5
               active: 6
               inactive: 10
-              recoveryEnd: 15
-              recoveryAmount: 5
+              recoveryEnd: 0
+              recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -5782,9 +5782,9 @@ MonoBehaviour:
           counterHitDamageMult: 1.03
           attackMainStunValues:
             hitstunValue: 7
-            blockStunValue: 5
+            blockStunValue: 2
             hitstopValue: 4
-            blockStopValue: 3
+            blockStopValue: 0
           hitLevel: 72
           attackHashes: 0
           _meterRequirement: 0
@@ -5818,7 +5818,7 @@ MonoBehaviour:
               active: 15
               inactive: 21
               recoveryEnd: 36
-              recoveryAmount: 15
+              recoveryAmount: 17
               totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 3
@@ -5890,7 +5890,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.003
           attackMainStunValues:
             hitstunValue: 9
-            blockStunValue: 4
+            blockStunValue: 5
             hitstopValue: 3
             blockStopValue: 0
           hitLevel: 66
@@ -5967,7 +5967,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.008
           attackMainStunValues:
             hitstunValue: 11
-            blockStunValue: 7
+            blockStunValue: 8
             hitstopValue: 6
             blockStopValue: 3
           hitLevel: 68
@@ -6044,7 +6044,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.0035
           attackMainStunValues:
             hitstunValue: 10
-            blockStunValue: 3
+            blockStunValue: 7
             hitstopValue: 3
             blockStopValue: 0
           hitLevel: 66
@@ -6121,7 +6121,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.02
           attackMainStunValues:
             hitstunValue: 12
-            blockStunValue: 6
+            blockStunValue: 9
             hitstopValue: 6
             blockStopValue: 2
           hitLevel: 68

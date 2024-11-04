@@ -18,6 +18,10 @@ public class State_Block : BaseState
         {
             _base._cBlockHandler.ToggleBlockAnim(true, true);
         }
+        if(_base._subState == Character_SubStates.Dummy) 
+        {
+            _base._cBlockHandler.ToggleBlockAnim(true, true);
+        }
     }
     public override void OnUpdate()
     {
@@ -50,6 +54,10 @@ public class State_Block : BaseState
             else
             {
                 _base._cBlockHandler.ToggleBlockAnim(true, false);
+                if (_base._subState == Character_SubStates.Dummy)
+                {
+                    _base._cBlockHandler.ToggleBlockAnim(true, false);
+                }
             }
         }
         base.OnExit();

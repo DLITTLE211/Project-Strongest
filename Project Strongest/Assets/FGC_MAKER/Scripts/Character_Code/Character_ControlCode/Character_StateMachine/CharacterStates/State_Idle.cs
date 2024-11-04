@@ -170,15 +170,11 @@ public class State_Idle : BaseState
         bool canTransitionIdle = _cAnim.canTransitionIdle == true;
         return neutralInput && notPressingButtons && lastAttackNull && lastMobilityNull && canTransitionIdle;
     }
-    
+
     void DummyIdleCheck()
     {
         _base._cHurtBox.SetHurboxState();
-        AnimationClip currentAnimation = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip;
-        if (Animator.StringToHash(currentAnimation.name) != groundIdleHash)
-        {
-            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
-        }
+        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
     }

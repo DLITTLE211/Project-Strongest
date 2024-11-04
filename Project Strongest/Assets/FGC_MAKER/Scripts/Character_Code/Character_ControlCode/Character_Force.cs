@@ -456,13 +456,27 @@ public class Character_Force : MonoBehaviour
     /// </summary>
     /// <param name="property"></param>
     #endregion
-    public void SendKnockBackOnHit(Attack_BaseProperties property)
+    public void SendKnockBackOnHit(Attack_BaseProperties property,bool blockedAttack)
     {
-        float H_KnockBack = property.lateralKBP.Value;
-        float V_KnockDown = property.verticalKBP.Value - _base._cDamageCalculator.GetCurrentScaling();
-        if (property.verticalKBP.verticalKBP.ToString().Contains("_KD")) 
+        float H_KnockBack = 0;
+        float V_KnockDown = 0;
+        if (blockedAttack) 
         {
-            V_KnockDown = -property.verticalKBP.Value;
+            H_KnockBack = property.LateralKB_Data.Block_Value;
+            V_KnockDown = property.VerticalKB_Data.Block_Value;
+            if (property.VerticalKB_Data.Block_VKB_Level.ToString().Contains("_KD"))
+            {
+                V_KnockDown = -property.VerticalKB_Data.Block_Value;
+            }
+        }
+        else 
+        {
+            H_KnockBack = property.LateralKB_Data.Hit_Value;
+            if (property.VerticalKB_Data.Hit_VKB_Level.ToString().Contains("_KD"))
+            {
+                V_KnockDown = -property.VerticalKB_Data.Hit_Value;
+            }
+            V_KnockDown = property.VerticalKB_Data.Hit_Value - _base._cDamageCalculator.GetCurrentScaling();
         }
 
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
@@ -502,13 +516,14 @@ public class Character_Force : MonoBehaviour
     }
     public void SendKnockBackOnHit(CustomDamageField property)
     {
-        float H_KnockBack = property.lateralKBP.Value;
-        float V_KnockDown = property.verticalKBP.Value - _base._cDamageCalculator.GetCurrentScaling();
-        if (property.verticalKBP.verticalKBP.ToString().Contains("_KD"))
-        {
-            V_KnockDown = -property.verticalKBP.Value;
-        }
+        float H_KnockBack = 0;
+        float V_KnockDown = 0;
 
+        H_KnockBack = property.lateralKBP.Hit_Value;
+        if (property.verticalKBP.Hit_VKB_Level.ToString().Contains("_KD"))
+        {
+            V_KnockDown = -property.verticalKBP.Hit_Value;
+        }
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             _myRB.AddForce(transform.right * H_KnockBack, ForceMode.VelocityChange);
@@ -534,7 +549,7 @@ public class Character_Force : MonoBehaviour
 
     public void DoGroundBounce(Attack_BaseProperties groundBouncingAttack) 
     {
-        float groundBounceValue = groundBouncingAttack.verticalKBP.Value - (groundBouncingAttack.verticalKBP.Value * 0.45f);
+        float groundBounceValue = groundBouncingAttack.VerticalKB_Data.Hit_Value - (groundBouncingAttack.VerticalKB_Data.Hit_Value * 0.45f);
         _myRB.AddForce(transform.up * groundBounceValue);
     }
     public IEnumerator DoWallLaunch()
@@ -557,7 +572,7 @@ public class Character_Force : MonoBehaviour
     
     public void DoWallStick(Attack_BaseProperties wallBouncingAttack)
     {
-        float heightLaunch = Mathf.Abs(wallBouncingAttack.verticalKBP.Value + (wallBouncingAttack.verticalKBP.Value * 1.25f));
+        float heightLaunch = Mathf.Abs(wallBouncingAttack.VerticalKB_Data.Hit_Value + (wallBouncingAttack.VerticalKB_Data.Hit_Value * 1.25f));
 
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {

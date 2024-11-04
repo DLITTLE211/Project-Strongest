@@ -20,6 +20,7 @@ public class HurtBox : CollisionDetection
     private Transform target;
     Callback endingFunction;
     HitboxTypeList refList;
+    bool _attackBlocked;
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing,bool hurtboxType)
     {
         SetHurtBoxSize(0, 0, hurtboxType, ColliderType.Trigger, hu_Sizing);
@@ -306,6 +307,7 @@ public class HurtBox : CollisionDetection
         {
             hitCount = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties.AttackAnims._hitCount;
         }
+        _attackBlocked = BlockedAttack;
         int curHit = 0;
         if (!BlockedAttack)
         {
@@ -315,14 +317,12 @@ public class HurtBox : CollisionDetection
             }
             if (currentHitProperties._moveType == MoveType.Super)
             {
-
                 Base_Target._cHitController.ClearHitResponseRoutine();
                 if (Base_Target._cHitController.Recovering)
                 {
                     Base_Target._cHitController.ClearRecoveryRoutine(true);
                 }
                 Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
-
             }
         }
         if (Base_Attacker._cAttackTimer.FrameCountTimer <= 0.4f) 
@@ -334,7 +334,7 @@ public class HurtBox : CollisionDetection
             try
             {
                 currentHitProperties.hitConnected = true;
-                Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties);
+                Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties, BlockedAttack);
                 if (BlockedAttack)
                 {
                     Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
@@ -383,10 +383,21 @@ public class HurtBox : CollisionDetection
             {
                 Character_Force thisPlayerForce = this.gameObject.transform.root.GetComponent<Character_Base>()._cForce;
                 Character_HurtboxController thisPlayerGroundedState = this.gameObject.transform.root.GetComponent<Character_Base>()._cHurtBox;
-                if (currentHitProperties.lateralKBP.lateralKBP == Attack_KnockBack_Lateral.FullForceWallBounce)
+                if (_attackBlocked)
                 {
-                    StartCoroutine(thisPlayerForce.DoWallLaunch());
-                    Debug.Log("Will Wall Bounce on Hit");
+                    if (currentHitProperties.LateralKB_Data.Block_HKB_Level == Attack_KnockBack_Lateral.FullForceWallBounce)
+                    {
+                        StartCoroutine(thisPlayerForce.DoWallLaunch());
+                        Debug.Log("Will Wall Bounce on Hit");
+                    }
+                }
+                else
+                {
+                    if (currentHitProperties.LateralKB_Data.Hit_HKB_Level == Attack_KnockBack_Lateral.FullForceWallBounce)
+                    {
+                        StartCoroutine(thisPlayerForce.DoWallLaunch());
+                        Debug.Log("Will Wall Bounce on Hit");
+                    }
                 }
             }
 
@@ -404,12 +415,26 @@ public class HurtBox : CollisionDetection
             {
                 Character_Force thisPlayerForce = this.gameObject.transform.root.GetComponent<Character_Base>()._cForce;
                 Character_HurtboxController thisPlayerGroundedState = this.gameObject.transform.root.GetComponent<Character_Base>()._cHurtBox;
-                if (currentHitProperties.verticalKBP.verticalKBP == Attack_KnockBack_Vertical.FullForceGroundBounce)
+                if (_attackBlocked)
                 {
-                    if (thisPlayerGroundedState.IsGrounded() == false)
+                    if (currentHitProperties.VerticalKB_Data.Block_VKB_Level == Attack_KnockBack_Vertical.FullForceGroundBounce)
                     {
-                        thisPlayerForce.DoGroundBounce(currentHitProperties);
-                        Debug.Log("Will Ground Bounce");
+                        if (thisPlayerGroundedState.IsGrounded() == false)
+                        {
+                            thisPlayerForce.DoGroundBounce(currentHitProperties);
+                            Debug.Log("Will Ground Bounce");
+                        }
+                    }
+                }
+                else
+                {
+                    if (currentHitProperties.VerticalKB_Data.Hit_VKB_Level == Attack_KnockBack_Vertical.FullForceGroundBounce)
+                    {
+                        if (thisPlayerGroundedState.IsGrounded() == false)
+                        {
+                            thisPlayerForce.DoGroundBounce(currentHitProperties);
+                            Debug.Log("Will Ground Bounce");
+                        }
                     }
                 }
             }

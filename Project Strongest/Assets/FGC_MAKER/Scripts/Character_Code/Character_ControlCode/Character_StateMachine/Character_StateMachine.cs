@@ -98,6 +98,7 @@ public class Character_StateMachine : MonoBehaviour
         At(MoveState, DashState, new Predicate(() => ToDashState()));
 
         At(IdleState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
+        At(AttackState, CrouchState, new Predicate(() => At_2Crouch()));
         At(SecondIdle, CrouchState, new Predicate(() => At_2Crouch()));
         At(JumpState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(MoveState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
@@ -106,7 +107,7 @@ public class Character_StateMachine : MonoBehaviour
         At(Hitstate, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
         At(DashState, CrouchState, new Predicate(() => At_2Crouch() && !_base.allowSecondIdleAnim));
 
-        At(AttackState, Hitstate, new Predicate(() => checkAttackValue(lastAttackState.nullified) && At_2Crouch()));
+        At(AttackState, Hitstate, new Predicate(() => ToHitState()));
         At(IdleState, Hitstate, new Predicate(() => ToHitState()));
         At(SecondIdle, Hitstate, new Predicate(() => ToHitState()));
         At(JumpState, Hitstate, new Predicate(() => ToHitState()));
@@ -190,8 +191,8 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking = false;
         bool _currentInput = false;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
-        bool _notUsingMobility = _base._cAnimator.activatedInput == null && checkMovementValue(lastMovementState.nullified);
+        bool _notAttacking = !_base._cAnimator.CheckAttackState()&& checkAttackValue(lastAttackState.nullified);
+        bool _notUsingMobility = _base._cAnimator.CheckMobilityStateState() && checkMovementValue(lastMovementState.nullified);
 
         if (_base._subState != Character_SubStates.Controlled)
         {
@@ -229,8 +230,8 @@ public class Character_StateMachine : MonoBehaviour
         bool _isBlocking;
         bool _currentInput;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
-        bool _notUsingMobility = _base._cAnimator.activatedInput == null && checkMovementValue(lastMovementState.nullified);
+        bool _notAttacking = !_base._cAnimator.CheckAttackState() && checkAttackValue(lastAttackState.nullified);
+        bool _notUsingMobility = _base._cAnimator.CheckMobilityStateState() && checkMovementValue(lastMovementState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
