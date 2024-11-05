@@ -68,7 +68,7 @@ public class Character_HurtboxController : MonoBehaviour
     {
         if(_base._cStateMachine._playerState.current.State == _base._cStateMachine.hitStateRef) 
         {
-            if (_base._subState != Character_SubStates.Controlled)
+            if (_base._subState != Character_SubStates.Dummy)
             {
                 if (_base.CheckThrowButton().Button_State._state != ButtonStateMachine.InputState.released)
                 {
