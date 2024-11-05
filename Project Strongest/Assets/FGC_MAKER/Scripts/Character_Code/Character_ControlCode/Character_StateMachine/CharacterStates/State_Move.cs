@@ -12,6 +12,7 @@ public class State_Move : BaseState
     public override async void OnEnter()
     {
         base.OnEnter();
+        _base._cHurtBox.SetHurboxState();
         _base._cHurtBox.ResetExtendedHurtbox();
         _base._cHitboxManager.DisableAllHitboxes();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");

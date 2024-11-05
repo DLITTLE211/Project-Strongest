@@ -134,21 +134,6 @@ public class State_Idle : BaseState
     public bool CanTransitionToIdle()
     {
         bool neutralInput = _base.ReturnMovementInputs().Button_State.directionalInput == 5;
-        bool notPressingButtons = true;
-        for (int i = 0; i < _base.attackButtons.Count; i++)
-        {
-            if (_base.attackButtons[i].Button_State._state != ButtonStateMachine.InputState.released)
-            {
-                notPressingButtons = false;
-                break;
-            }
-            if (_base.blockButton.Button_State._state != ButtonStateMachine.InputState.released)
-            {
-                notPressingButtons = false;
-                break;
-            }
-            continue;
-        }
         bool lastAttackNull = true;
         if (_base._cAnimator.lastAttack != null)
         {
@@ -168,7 +153,7 @@ public class State_Idle : BaseState
             lastMobilityNull = _base._cAnimator.activatedInput == null && _cAnim._lastMovementState == lastMovementState.nullified;
         }
         bool canTransitionIdle = _cAnim.canTransitionIdle == true;
-        return neutralInput && notPressingButtons && lastAttackNull && lastMobilityNull && canTransitionIdle;
+        return neutralInput  && lastAttackNull && lastMobilityNull && canTransitionIdle;
     }
 
     void DummyIdleCheck()
