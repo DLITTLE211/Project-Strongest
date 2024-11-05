@@ -487,6 +487,7 @@ public class Character_StateMachine : MonoBehaviour
         bool attackDashAllowance;
         inputtedDash = CheckLastMovementValue();
         populatedMove = _base._cAnimator._lastMovementState == lastMovementState.populated;
+        bool _notAttacking = !_base._cAnimator.CheckAttackState() && checkAttackValue(lastAttackState.nullified);
 
         if (!_base._cAnimator.CheckAttackState())
         {
@@ -503,7 +504,7 @@ public class Character_StateMachine : MonoBehaviour
         }
         else 
         {
-            return !isHit && inputtedDash && populatedMove && !_canRecover && notRecovering && attackDashAllowance;
+            return !isHit && inputtedDash && populatedMove && _notAttacking && !_canRecover && notRecovering && attackDashAllowance;
         }
 
     }
@@ -523,14 +524,14 @@ public class Character_StateMachine : MonoBehaviour
             return false;
         }
         else 
-        {
+        {/*
             if (_base._cAnimator.CheckAttackState()) 
             {
                 if (_base._cAnimator.lastAttack.dashCancelable) 
                 {
                     lastStateDash = false;
                 }
-            }
+            }*/
             bool fullcheck = currentStateNotHit && !isHit && !lastStateDash && lastAttackValue && _canRecover && notRecovering && !inBlockState;
             return fullcheck;
         }

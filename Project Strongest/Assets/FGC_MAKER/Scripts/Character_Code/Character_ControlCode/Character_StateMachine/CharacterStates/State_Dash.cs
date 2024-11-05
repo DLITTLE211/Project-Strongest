@@ -11,6 +11,7 @@ public class State_Dash : BaseState
     }
     public override async void OnEnter()
     {
+        _base._aFrameDataMeter.ResetMeterData();
         _base._cHurtBox.ResetExtendedHurtbox();
         _base._cHitboxManager.DisableCurrentHitbox();
         _base._cHurtBox.SetHurboxState();

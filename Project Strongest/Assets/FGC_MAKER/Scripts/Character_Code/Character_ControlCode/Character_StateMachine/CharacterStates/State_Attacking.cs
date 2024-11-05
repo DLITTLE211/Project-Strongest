@@ -17,7 +17,11 @@ public class State_Attacking : BaseState
         _base._cComboDetection.superMobilityOption = false;
         if (_base._cHurtBox.IsGrounded())
         {
-            _base.myRb.drag = 100000;
+            if (_base._cForce.xSpeed > 0)
+            {
+                _base.myRb.velocity = Vector3.zero;
+                _base.myRb.drag = 100000;
+            }
         }
         _base._cHitController.ClearRecoveryRoutine(false);
         base.OnEnter();

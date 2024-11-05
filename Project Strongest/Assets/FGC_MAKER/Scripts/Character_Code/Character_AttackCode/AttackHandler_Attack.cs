@@ -26,8 +26,8 @@ public class AttackHandler_Attack : AttackHandler_Base
     [Space(15)]
     #endregion
 
-    private Character_Base character;
-    private Character_Animator _playerCAnimator;
+    private Character_Base _base;
+    private Character_Animator _cAnimator;
     public FrameData _frameData;
     public HitCount _hitCount;
     private float bias;
@@ -50,9 +50,22 @@ public class AttackHandler_Attack : AttackHandler_Base
         isFollowUpAttack = state;
     }
 
+    void SpeedCheck()
+    {
+        if (_base._cHurtBox.IsGrounded())
+        {
+            if (_base._cForce.xSpeed > 0)
+            {
+                _base.character_MobilityOptions.KillCurrentRoutine();
+                _cAnimator.ClearLastActivatedInput();
+                _base.myRb.velocity = Vector3.zero;
+                _base.myRb.drag = 100000;
+            }
+        }
+    }
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
-        _playerCAnimator = _playerAnim;
+        _cAnimator = _playerAnim;
         playerAnim = _playerAnim.myAnim;
         animLength = animClip.length;
         _frameData.SetRecoveryFrames(animClip.frameRate, animLength);
@@ -73,14 +86,14 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             return;
         }
-        character = _playerAnim._base;
+        _base = _playerAnim._base;
     }
     public void GetPlacementLocation(Character_Base curBase)
     {
         if (curBase._cHitboxManager.GetActiveHitBox().hitboxProperties?.InputTimer != null)
         {
             curBase._cHitboxManager.DisableCurrentHitbox();
-               character._cHitboxManager.IterateHitBox();
+            curBase._cHitboxManager.IterateHitBox();
         }
         HitBox newHitBox = curBase._cHitboxManager.GetActiveHitBox();
 
@@ -95,8 +108,8 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     float ReturnBiasOnHitbox() 
     {
-        currentFacingDirection = character.pSide.thisPosition._directionFacing;
-        if (character.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+        currentFacingDirection = _base.pSide.thisPosition._directionFacing;
+        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
         {
            return bias = 0;
         }
@@ -116,6 +129,7 @@ public class AttackHandler_Attack : AttackHandler_Base
 
     public override void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
     {
+        SpeedCheck();
         init = true;
         _curFrameType = FrameType.Startup;
         GetPlacementLocation(curBase);
@@ -124,8 +138,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             HitBox.SetHitBoxProperties(newAttackProperties);
         }
-        _playerCAnimator.SetCanTransitionIdle(false);
-        _playerCAnimator._base._aManager.SetStartNextAttack(false);
+        _cAnimator.SetCanTransitionIdle(false);
+        _cAnimator._base._aManager.SetStartNextAttack(false);
     }
     public override void OnStartup(Character_Base curBase)
     {
@@ -133,18 +147,18 @@ public class AttackHandler_Attack : AttackHandler_Base
         _curFrameType = FrameType.Active;
         extendedHitBox.ActivateHurtbox(extendedHitBox);
         extendedHitBox.SetHurtboxState(extendedHitBox.huBType);
-        character._cHurtBox.SetHurboxState(extendedHitBox.huBType);
+        _base._cHurtBox.SetHurboxState(extendedHitBox.huBType);
         HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
     }
     public override void OnActive(Character_Base curBase)
     {
         active = true;
-        if (currentFacingDirection != character.pSide.thisPosition._directionFacing)
+        if (currentFacingDirection != _base.pSide.thisPosition._directionFacing)
         {
             HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
             HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
         }
-        HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount,_playerCAnimator.lastAttack);
+        HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount, _cAnimator.lastAttack);
     }
     public override void OnRecov(Character_Base curBase)
     {
@@ -156,17 +170,17 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         else 
         {
-            character._cHitboxManager.DisableCurrentHitbox();
+            _base._cHitboxManager.DisableCurrentHitbox();
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
-        _playerCAnimator._base._aManager.SetStartNextAttack(true);
+        _cAnimator._base._aManager.SetStartNextAttack(true);
 
         if (HitBox.hitboxProperties != null)
         {
             if (HitBox.hitboxProperties._moveType == MoveType.Counter)
             {
                 extendedHitBox.CounterMoveProperty = null;
-                character._cHurtBox.SetHurboxState();
+                _base._cHurtBox.SetHurboxState();
             }
         }
     }
@@ -260,30 +274,30 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
-        character._aFrameDataMeter.ResetMessage();
+        _base._aFrameDataMeter.ResetMessage();
         if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
         frameCount = 0;
-        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        if (_cAnimator.lastAttack._moveType == MoveType.Super)
         {
-            character._cAttackTimer.PauseTimerOnSuperSuccess();
+            _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
         while (frameCount <= totalFrameTime)
         {
-            if (character.ReturnIfPaused())
+            if (_base.ReturnIfPaused())
             {
                 yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                float frameIterator = Base_FrameCode.ONE_FRAME * character._cHitstun.animSpeed;
-                float waitTime = Base_FrameCode.ONE_FRAME / character._cHitstun.animSpeed;
-                if (character._cHitstun.animSpeed == 0.25f)
+                float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
+                float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
+                if (_base._cHitstun.animSpeed == 0.25f)
                 {
-                    frameCount = frameCount - (frameCount * character._cHitstun.animSpeed);
+                    frameCount = frameCount - (frameCount * _base._cHitstun.animSpeed);
                 }
                 try
                 {
@@ -302,12 +316,12 @@ public class AttackHandler_Attack : AttackHandler_Base
                         {
                             if (frameCount >= Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
-                                character.ReceiveCustomCallBack(customHitboxCallBacks[0]);
+                                _base.ReceiveCustomCallBack(customHitboxCallBacks[0]);
                                 customHitboxCallBacks.RemoveAt(0);
                             }
                         }
                     }
-                    character._aFrameDataMeter.UpdateFrame(_curFrameType);
+                    _base._aFrameDataMeter.UpdateFrame(_curFrameType);
                 }
                 catch (Exception e)
                 {
@@ -330,75 +344,37 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks[0].func();
             requiredHitboxCallBacks.RemoveAt(0);
         }
-        Attack_BaseProperties thisAttack = HitBox?.hitboxProperties != null ? HitBox?.hitboxProperties : _playerCAnimator.lastAttack ;
-        _playerCAnimator.FullBaseAttackDataClear(thisAttack, _frameData);
-        /*if (character._cAttackTimer._type == TimerType.Special) 
-        {
-            character._cAttackTimer.ClearAttackLanded();
-        }
-        else if (character._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
-        {
-            character._cAttackTimer.ClearSuperLanded();
-        }
-        else if (character._cAttackTimer._type == TimerType.Throw && lastAttack._moveType == MoveType.Throw)
-        {
-            character._cAttackTimer.ClearThrowLanded();
-        }
-        else
-        {
-            character._cAttackTimer.ClearAttackLanded();
-            _playerCAnimator.SetCanTransitionIdle(true);
-        }
-        if (requiredHitboxCallBacks.Count == 1)
-        {
-            requiredHitboxCallBacks[0].func();
-            requiredHitboxCallBacks.RemoveAt(0);
-        }
-        if (lastAttack._moveType == MoveType.Throw)
-        {
-            if (!lastAttack.hitConnected)
-            {
-                _playerCAnimator.CountUpNegativeFrames();
-                _playerCAnimator.SetCanTransitionIdle(true);
-            }
-        }
-        else
-        {
-            _playerCAnimator.CountUpNegativeFrames();
-            _playerCAnimator.SetCanTransitionIdle(true);
-        }
-        character._aFrameDataMeter.GetAdvantageValue(_frameData);
-        _playerCAnimator.KillAttackOnRoutineEnd();
-        _playerCAnimator.EndAnim();*/
+        Attack_BaseProperties thisAttack = HitBox?.hitboxProperties != null ? HitBox?.hitboxProperties : _cAnimator.lastAttack ;
+        _cAnimator.FullBaseAttackDataClear(thisAttack, _frameData);
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
-        character._aFrameDataMeter.ResetMessage();
+        _base._aFrameDataMeter.ResetMessage();
         frameCount = 0;
-        if (!_playerCAnimator.canTick)
+        if (!_cAnimator.canTick)
         {
-            _playerCAnimator.canTick = true;
+            _cAnimator.canTick = true;
         }
-        if (_playerCAnimator.lastAttack._moveType == MoveType.Throw)
+        if (_cAnimator.lastAttack._moveType == MoveType.Throw)
         {
-            character._cAttackTimer.PauseTimerOnThrowSuccess();
+            _base._cAttackTimer.PauseTimerOnThrowSuccess();
         }
-        if (_playerCAnimator.lastAttack._moveType == MoveType.Super)
+        if (_cAnimator.lastAttack._moveType == MoveType.Super)
         {
-            character._cAttackTimer.PauseTimerOnSuperSuccess();
+            _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
         while (frameCount <= totalFrameTime)
         {
-            if (character.ReturnIfPaused())
+            if (_base.ReturnIfPaused())
             {
                 yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                float frameIterator = Base_FrameCode.ONE_FRAME * character._cHitstun.animSpeed;
-                float waitTime = Base_FrameCode.ONE_FRAME / character._cHitstun.animSpeed;
-                frameCount = frameCount * character._cHitstun.animSpeed;
+                float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
+                float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
+                frameCount = frameCount * _base._cHitstun.animSpeed;
                 try
                 {
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
@@ -418,7 +394,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                             if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
                                 Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
-                                character.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
+                                _base.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
                                 if (customHitboxCallBacks[0].awaitEnum.keyRef != WaitingEnumKey.NA) 
                                 {
                                     customHitboxCallBacks.RemoveAt(0);
@@ -428,7 +404,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                             }
                         }
                     }
-                    character._aFrameDataMeter.UpdateFrame(_curFrameType);
+                    _base._aFrameDataMeter.UpdateFrame(_curFrameType);
                 }
                 catch (Exception e)
                 {
@@ -447,43 +423,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         _curFrameType = FrameType.Reset;
         Attack_BaseProperties thisAttack = HitBox?.hitboxProperties;
-        _playerCAnimator.FullCustomAttackDataClear(thisAttack,curAnim,animCount,requiredHitboxCallBacks,_frameData);
-        /*if (thisAttack?.InputTimer == null) 
-        {
-            thisAttack = character._cAnimator.lastAttack;
-        }
-        if (thisAttack.InputTimer != null)
-        {
-            if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
-            {
-                character._cAttackTimer.ClearThrowLanded();
-            }
-            else if (thisAttack._moveType == MoveType.Super)
-            {
-                if (curAnim >= animCount)
-                {
-                    character._cAttackTimer.ClearSuperLanded();
-                }
-            }
-            else
-            {
-                character._cAttackTimer.ClearAttackLanded();
-            }
-        }
-        else 
-        {
-            character._cAttackTimer.ClearAttackLanded();
-        }
-        if (requiredHitboxCallBacks.Count == 1)
-        {
-            requiredHitboxCallBacks[0].func();
-            requiredHitboxCallBacks.RemoveAt(0);
-        }
-        character._aFrameDataMeter.GetAdvantageValue(_frameData);
-        _playerCAnimator.EndAnim();
-        _playerCAnimator.KillAttackOnRoutineEnd();
-        _playerCAnimator.CountUpNegativeFrames();
-        _playerCAnimator.SetCanTransitionIdle(true);*/
+        _cAnimator.FullCustomAttackDataClear(thisAttack,curAnim,animCount,requiredHitboxCallBacks,_frameData);
     }
 }
 
