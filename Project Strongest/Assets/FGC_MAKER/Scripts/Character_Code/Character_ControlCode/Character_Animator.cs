@@ -451,6 +451,86 @@ public class Character_Animator : MonoBehaviour
         }
     }
     #endregion
+    public void FullBaseAttackDataClear(Attack_BaseProperties thisAttack, FrameData _frameData)
+    {
+        if (_base._cAttackTimer._type == TimerType.Special)
+        {
+            _base._cAttackTimer.ClearAttackLanded();
+        }
+        else if (_base._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
+        {
+            _base._cAttackTimer.ClearSuperLanded();
+        }
+        else if (_base._cAttackTimer._type == TimerType.Throw && lastAttack._moveType == MoveType.Throw)
+        {
+            _base._cAttackTimer.ClearThrowLanded();
+        }
+        else
+        {
+            _base._cAttackTimer.ClearAttackLanded();
+            SetCanTransitionIdle(true);
+        }
+        if (thisAttack._moveType == MoveType.Throw)
+        {
+            if (!thisAttack.hitConnected)
+            {
+                CountUpNegativeFrames();
+                SetCanTransitionIdle(true);
+            }
+            else if (_base.opponentPlayer._cHurtBox.throwTeched)  
+            {
+                CountUpNegativeFrames();
+                SetCanTransitionIdle(true);
+            }
+        }
+        else
+        {
+            CountUpNegativeFrames();
+            SetCanTransitionIdle(true);
+        }
+        _base._aFrameDataMeter.GetAdvantageValue(_frameData);
+        KillAttackOnRoutineEnd();
+        EndAnim();
+    }
+    public void FullCustomAttackDataClear(Attack_BaseProperties thisAttack, int curAnim, int animCount, List<RequiredCallback> requiredHitboxCallBacks, FrameData _frameData)
+    {
+        if (thisAttack?.InputTimer == null)
+        {
+            thisAttack = lastAttack;
+        }
+        if (thisAttack.InputTimer != null)
+        {
+            if (thisAttack._moveType == MoveType.Throw || thisAttack._moveType == MoveType.CommandGrab)
+            {
+                _base._cAttackTimer.ClearThrowLanded();
+            }
+            else if (thisAttack._moveType == MoveType.Super)
+            {
+                if (curAnim >= animCount)
+                {
+                    _base._cAttackTimer.ClearSuperLanded();
+                }
+            }
+            else
+            {
+                _base._cAttackTimer.ClearAttackLanded();
+            }
+        }
+        else
+        {
+            _base._cAttackTimer.ClearAttackLanded();
+        }
+        if (requiredHitboxCallBacks.Count == 1)
+        {
+            requiredHitboxCallBacks[0].func();
+            requiredHitboxCallBacks.RemoveAt(0);
+        }
+        _base._aFrameDataMeter.GetAdvantageValue(_frameData);
+        EndAnim();
+        KillAttackOnRoutineEnd();
+        CountUpNegativeFrames();
+        SetCanTransitionIdle(true);
+    }
 }
 [Serializable]
 public enum lastAttackState 

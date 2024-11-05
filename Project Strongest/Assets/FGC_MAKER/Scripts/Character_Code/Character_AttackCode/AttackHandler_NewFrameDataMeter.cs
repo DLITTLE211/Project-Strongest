@@ -141,20 +141,27 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     {
         if (_isHitRecovering)
         {
-            if (currentFrame >= _refSingularFrameList.Count)
+            if (currentFrame >= _refSingularFrameList.Count || currentFrame < 0)
             {
                 currentFrame = 0;
             }
             lastFrameDataType = _type;
-            int nextFrame = currentFrame+1;
-            nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
-            _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext);
-            _refSingularFrameList[currentFrame].SetFrame_FrameType(_type);
-            int prevFrame = currentFrame - 1;
-            prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
-            _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
-            currentFrame++;
-            frameCount++;
+            try
+            {
+                int nextFrame = currentFrame + 1;
+                nextFrame = nextFrame >= _refSingularFrameList.Count ? 0 : nextFrame;
+                _refSingularFrameList[nextFrame].SetFrame_FrameType(FrameType.StunNext);
+                _refSingularFrameList[currentFrame].SetFrame_FrameType(_type);
+                int prevFrame = currentFrame - 1;
+                prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
+                _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
+                currentFrame++;
+                frameCount++;
+            }
+            catch (ArgumentOutOfRangeException) 
+            {
+                _refSingularFrameList[currentFrame].SetFrame_FrameType(_type);
+            }
         }
     }
 }

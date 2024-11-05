@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FightingGame_FrameData;
 
 public class Character_HurtboxController : MonoBehaviour
 {
@@ -26,9 +27,14 @@ public class Character_HurtboxController : MonoBehaviour
     public HurtBox triggerBox;
     [SerializeField] private HurtBox _extendedHurtbox;
     public float check;
+    private int totalTechTime = 5;
+    public float throwTechTime;
+    public bool throwTeched;
 
-    public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing) 
+    public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing)
     {
+        throwTechTime = totalTechTime * Base_FrameCode.ONE_FRAME;
+        throwTeched = false;
         collisionBox.SetBaseCollider(0.5f, _base.characterProfile.Height / 100f, HurtBoxSizing, ColliderType.Collision);
     }
     public void SetMarkers(HeightPositionMarkerSet _hMarkers)
@@ -58,6 +64,20 @@ public class Character_HurtboxController : MonoBehaviour
     {
         _extendedHurtbox.SetHurtBoxSize(0, 0, true);
     }
+    public bool CheckIfThrowTeched() 
+    {
+        if(_base._cStateMachine._playerState.current.State == _base._cStateMachine.hitStateRef) 
+        {
+            if (_base.CheckThrowButton().Button_State._state != ButtonStateMachine.InputState.released) 
+            {
+                throwTeched = true;
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
     #region Ground Check
     public bool IsGrounded() 
     {

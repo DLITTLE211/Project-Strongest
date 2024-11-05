@@ -218,17 +218,20 @@ public class Character_ComboDetection : MonoBehaviour
             refAttackType = FindStringEntry(currentAttackInput);
             if (refAttackType.Value != null)
             {
-                MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
-                refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
-                if (followUpInputMoveTypes.Contains(indexMoveType))
+                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.hitStateRef)
                 {
-                    ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
+                    MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
+                    refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                    if (followUpInputMoveTypes.Contains(indexMoveType))
+                    {
+                        ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
+                    }
+                    else
+                    {
+                        ResetCombos();
+                    }
+                    Debug.Log("attack found");
                 }
-                else
-                {
-                    ResetCombos();
-                }
-                Debug.Log("attack found");
             }
             Debug.Log("attack not found");
         }

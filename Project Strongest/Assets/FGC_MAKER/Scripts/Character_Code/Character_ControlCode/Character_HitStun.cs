@@ -55,9 +55,12 @@ public class Character_HitStun : MonoBehaviour
         hitStunRoutine = ApplyHitstun(hitstunValue);
         StartCoroutine(hitStunRoutine);
     }
-    public void CallHitStun(float hitstunValue) 
+    public void CallHitStun(float hitstunValue)
     {
-        ActivateHitStun(hitstunValue);
+        if (hitstunValue > 0)
+        {
+            ActivateHitStun(hitstunValue);
+        }
     }
     IEnumerator ApplyHitstun(float hitStunValue)
     {

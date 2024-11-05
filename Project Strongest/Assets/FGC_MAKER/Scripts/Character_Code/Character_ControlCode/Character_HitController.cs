@@ -345,7 +345,7 @@ public class Character_HitController : MonoBehaviour
             }
         }
     }
-    void BlockHitDetect(Attack_BaseProperties currentAttack)
+    public void BlockHitDetect(Attack_BaseProperties currentAttack)
     {
         blockedAttack = true;
         List<HitAnimationField> blockReactionList = FilterBlockReactions(currentAttack);
@@ -423,7 +423,7 @@ public class Character_HitController : MonoBehaviour
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.HitStop);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
-        while (hitStunAmount >= 0)
+        while (hitStunAmount > 0)
         {
             if (_base.ReturnIfPaused())
             {
@@ -543,12 +543,16 @@ public class Character_HitController : MonoBehaviour
         bigHitRecovering = false;
         airRecoverPossible = false;
         _cAnimator.isHit = true;
-        currentProperty = currentAttack;
+        SetCurrentProperty(currentAttack, StopValue, StunValue, calculatedScaling);
         Callback<Attack_BaseProperties> funcCall = null;
+        SearchHitResponseDictionary(currentAttack, blockedAttack);
+    }
+    public void SetCurrentProperty(Attack_BaseProperties currentAttack, float StopValue, float StunValue, float calculatedScaling) 
+    {
+        currentProperty = currentAttack;
         currentHitstun = StunValue;
         currentHitstop = StopValue * Base_FrameCode.ONE_FRAME;
         hitStunScaling = calculatedScaling;
-        SearchHitResponseDictionary(currentAttack, blockedAttack);
     }
     public void ForceCustomLockAnim(CustomDamageField currentAttack, bool finalAttack)
     {

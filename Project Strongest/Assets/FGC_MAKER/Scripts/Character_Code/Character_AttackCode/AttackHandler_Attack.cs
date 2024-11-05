@@ -34,6 +34,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     private float frameCount;
 
     List<RequiredCallback> requiredHitboxCallBacks;
+    public List<RequiredCallback> RequiredCallbacks { get { return requiredHitboxCallBacks; } }
     List<CustomCallback> customHitboxCallBacks;
 
     FrameType _curFrameType;
@@ -324,7 +325,14 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
         }
         _curFrameType = FrameType.Reset;
-        if (character._cAttackTimer._type == TimerType.Special) 
+        if (requiredHitboxCallBacks.Count == 1)
+        {
+            requiredHitboxCallBacks[0].func();
+            requiredHitboxCallBacks.RemoveAt(0);
+        }
+        Attack_BaseProperties thisAttack = HitBox?.hitboxProperties != null ? HitBox?.hitboxProperties : _playerCAnimator.lastAttack ;
+        _playerCAnimator.FullBaseAttackDataClear(thisAttack, _frameData);
+        /*if (character._cAttackTimer._type == TimerType.Special) 
         {
             character._cAttackTimer.ClearAttackLanded();
         }
@@ -361,7 +369,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         character._aFrameDataMeter.GetAdvantageValue(_frameData);
         _playerCAnimator.KillAttackOnRoutineEnd();
-        _playerCAnimator.EndAnim();
+        _playerCAnimator.EndAnim();*/
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
@@ -439,7 +447,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         _curFrameType = FrameType.Reset;
         Attack_BaseProperties thisAttack = HitBox?.hitboxProperties;
-        if (thisAttack?.InputTimer == null) 
+        _playerCAnimator.FullCustomAttackDataClear(thisAttack,curAnim,animCount,requiredHitboxCallBacks,_frameData);
+        /*if (thisAttack?.InputTimer == null) 
         {
             thisAttack = character._cAnimator.lastAttack;
         }
@@ -474,7 +483,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         _playerCAnimator.EndAnim();
         _playerCAnimator.KillAttackOnRoutineEnd();
         _playerCAnimator.CountUpNegativeFrames();
-        _playerCAnimator.SetCanTransitionIdle(true);
+        _playerCAnimator.SetCanTransitionIdle(true);*/
     }
 }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 using Rewired;
 using System.Linq;
 using System.Threading.Tasks;
+using FightingGame_FrameData;
 public class Character_Base : MonoBehaviour
 {
     public bool allowSecondIdleAnim;
@@ -66,6 +67,7 @@ public class Character_Base : MonoBehaviour
     public List<Character_ButtonInput> moveAxes;
     public List<Character_ButtonInput> attackButtons;
     public Character_ButtonInput blockButton;
+    public Character_ButtonInput throwButton;
     [Space(20)]
 
     #endregion
@@ -148,7 +150,7 @@ public class Character_Base : MonoBehaviour
     #region Misc. Variables
     private float storedXVelocity, storedYVelocity;
     internal bool isLockedPause;
-
+    IEnumerator ThrowTechRoutine;
     public bool verifyMoves; 
     [Range(0,71)]public int moveListIndex;
 
@@ -385,6 +387,10 @@ public class Character_Base : MonoBehaviour
                         }
                         else
                         {
+                            if (newButton.Button_Name == "E")
+                            {
+                                throwButton = newButton;
+                            }
                             attackButtons.Add(newButton);
                         }
                     }
@@ -588,6 +594,22 @@ public class Character_Base : MonoBehaviour
         }
         return blockButton;
     }
+    public Character_ButtonInput CheckThrowButton() 
+    {
+        if (ReturnIfPaused())
+        {
+            return null;
+        }
+        if (_subState != Character_SubStates.Controlled)
+        {
+            return null;
+        }
+        if (!activated)
+        {
+            return null;
+        }
+        return throwButton;
+    }
     public Character_ButtonInput ReturnTechButton()
     {
         if (ReturnIfPaused())
@@ -728,14 +750,54 @@ public class Character_Base : MonoBehaviour
         _cHitstun.HandleAnimatorFreeze(true, 0f);
         _cHitboxManager.DisableCurrentHitbox();
     }
-    public float factor;
     public void UnlockPlayerInPause()
     {
         UnlockPos();
         isLockedPause = false;
         _cHitstun.HandleAnimatorFreeze(false);
     }
-
+    public void CheckIfThrowTeched(Attack_BaseProperties _throwAttackData, Callback throwFunc)
+    {
+        if (ThrowTechRoutine != null)
+        {
+            StopCoroutine(ThrowTechRoutine);
+            ThrowTechRoutine = null;
+        }
+        ThrowTechRoutine = HandleThrowTechCheck(_throwAttackData, throwFunc);
+        StartCoroutine(ThrowTechRoutine);
+    }
+    IEnumerator HandleThrowTechCheck(Attack_BaseProperties _throwAttackData, Callback throwFunc) 
+    {
+        float frameCount = 0;
+        _cAnimator.isHit = true;
+        _cHitController.ForceLockHitAnim(HitLevel.Crumple);
+        opponentPlayer._cHitstun.HandleAnimatorFreeze(true,0);
+        while (frameCount < _cHurtBox.throwTechTime)
+        {
+            if (_cHurtBox.CheckIfThrowTeched())
+            {
+                _throwAttackData.hitConnected = false;
+                opponentPlayer.Deactivate();
+                frameCount = _cHurtBox.throwTechTime;
+                opponentPlayer._cAnimator.isHit = true;
+                opponentPlayer._cAnimator.SetCanTransitionIdle(false);
+                _cAnimator.KillAttackOnRoutineEnd();
+                _cHitController.HandleHitState(_throwAttackData, _throwAttackData.attackMainStunValues.hitstopValue, _throwAttackData.attackMainStunValues.hitstunValue,0,true);
+                opponentPlayer._cHitController.HandleHitState(_throwAttackData, _throwAttackData.attackMainStunValues.hitstopValue, _throwAttackData.attackMainStunValues.hitstunValue, 0,true);
+                _cForce.InstantForceAway(-0.85f);
+                opponentPlayer._cForce.InstantForceAway(-0.85f);
+                yield return new WaitForSeconds(20f * Base_FrameCode.ONE_FRAME);
+                opponentPlayer._cAnimator.SetCanTransitionIdle(true);
+                opponentPlayer._cAnimator.FullBaseAttackDataClear(_throwAttackData, _throwAttackData.AttackAnims._frameData);
+                _cHurtBox.throwTeched = false;
+                opponentPlayer.Activate();
+                yield break;
+            }
+            frameCount += Base_FrameCode.ONE_FRAME;
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+        }
+        throwFunc();
+    }
 
 
     #region TESTING PURPOSES ONLY
