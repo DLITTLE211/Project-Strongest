@@ -361,7 +361,7 @@ public class Character_HitController : MonoBehaviour
     }
     async void CallHitStopHitResponse(HitAnimationField curField)
     {
-        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 3 * Base_FrameCode.ONE_FRAME, true);
+        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 4 * Base_FrameCode.ONE_FRAME, true);
     }
     void CheckAndStartHitResponse(HitAnimationField curField, float hitStunOverride = -1f)
     {
