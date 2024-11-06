@@ -80,9 +80,9 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     }
     public bool GatlingDecreaseCheck(Attack_BaseInput currentAttack) 
     {
-        bool lessThanZewro = currentAttack.GatlingCount <= 0;
+        bool lessThanZero = currentAttack.GatlingCount <= 0;
         bool isNotInfinity = currentAttack.GatlingMax != Mathf.Infinity;
-        return lessThanZewro && isNotInfinity;
+        return lessThanZero && isNotInfinity;
     }
     
     public void PreformAttack(Callback SendAttackOnSucess)
@@ -108,6 +108,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             }
             if (GatlingDecreaseCheck(_attackInput._correctInput[0])) 
             {
+                _attackInput._correctInput[0].ResetGatlingCount();
                 Debug.LogError("Attack Has no more available gatlings. Returning...");
                 return;
             }

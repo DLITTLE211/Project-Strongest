@@ -143,13 +143,9 @@ public enum Attack_KnockBack_Lateral
 public enum Attack_KnockBack_Vertical
 {
     No_KUD,
-    Slight_KU,
-    Medium_KU,
-    Heavy_KU,
-    Slight_KD,
-    Medium_KD,
-    Heavy_KD,
-    FullForceGroundBounce,
+    KnockUP,
+    KnockDOWN,
+    GroundBounce,
 }
 [Serializable, Flags]
 public enum HitLevel

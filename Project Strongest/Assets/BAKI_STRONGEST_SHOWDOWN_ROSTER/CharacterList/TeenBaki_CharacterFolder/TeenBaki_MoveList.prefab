@@ -5840,10 +5840,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 2.5
             Block_HKB_Level: 0
-            Block_Value: 0
+            Block_Value: 1.05
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -5954,10 +5954,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
+            Hit_HKB_Level: 3
+            Hit_Value: 3.15
             Block_HKB_Level: 0
-            Block_Value: 0
+            Block_Value: 1.75
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -6069,9 +6069,9 @@ MonoBehaviour:
           hitConnected: 0
           LateralKB_Data:
             Hit_HKB_Level: 0
-            Hit_Value: 0
+            Hit_Value: 2.75
             Block_HKB_Level: 0
-            Block_Value: 0
+            Block_Value: 0.85
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -6182,13 +6182,13 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
-            Block_HKB_Level: 0
-            Block_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 5.2
+            Block_HKB_Level: 2
+            Block_Value: 1.75
           VerticalKB_Data:
-            Hit_VKB_Level: 0
-            Hit_Value: 0
+            Hit_VKB_Level: 1
+            Hit_Value: 2.4
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 4
@@ -6263,10 +6263,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
-            Block_HKB_Level: 0
-            Block_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 2.4
+            Block_HKB_Level: 2
+            Block_Value: 1.7
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -6344,10 +6344,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
-            Block_HKB_Level: 0
-            Block_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 3.1
+            Block_HKB_Level: 2
+            Block_Value: 1.9
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -6425,10 +6425,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
-            Block_HKB_Level: 0
-            Block_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 2.45
+            Block_HKB_Level: 2
+            Block_Value: 1.7
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -6493,9 +6493,9 @@ MonoBehaviour:
               init: 0
               startup: 10
               active: 11
-              inactive: 18
-              recoveryEnd: 20
-              recoveryAmount: 8
+              inactive: 15
+              recoveryEnd: 0
+              recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -6506,10 +6506,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
-            Block_HKB_Level: 0
-            Block_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 2.75
+            Block_HKB_Level: 2
+            Block_Value: 1
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -6784,9 +6784,9 @@ MonoBehaviour:
         init: 0
         startup: 0
         active: 3
-        inactive: 110
+        inactive: 65
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 20
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 5
@@ -6821,7 +6821,7 @@ MonoBehaviour:
               Hit_Value: 0
               Block_VKB_Level: 0
               Block_Value: 0
-            KnockDown: 0
+            KnockDown: 4
         - hitFramePoints: 20
           call: 262144
           hitFrameBool: 0
@@ -6870,7 +6870,7 @@ MonoBehaviour:
             rawAttackDamage: 8
             counterHitDamageMult: 1
             customDamageFieldStunValues:
-              hitstunValue: 25
+              hitstunValue: 30
               blockStunValue: 0
               hitstopValue: 8
               blockStopValue: 0
@@ -6878,13 +6878,13 @@ MonoBehaviour:
             isFinalAttack: 1
             isScaling: 0
             lateralKBP:
-              Hit_HKB_Level: 0
-              Hit_Value: 0
+              Hit_HKB_Level: 3
+              Hit_Value: 5.75
               Block_HKB_Level: 0
               Block_Value: 0
             verticalKBP:
-              Hit_VKB_Level: 0
-              Hit_Value: 0
+              Hit_VKB_Level: 1
+              Hit_Value: 4.15
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
@@ -6994,9 +6994,9 @@ MonoBehaviour:
         init: 0
         startup: 0
         active: 2
-        inactive: 110
+        inactive: 60
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 25
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 1
@@ -7064,7 +7064,7 @@ MonoBehaviour:
               Hit_Value: 0
               Block_VKB_Level: 0
               Block_Value: 0
-            KnockDown: 4
+            KnockDown: 0
         - hitFramePoints: 5
           call: 262144
           hitFrameBool: 0
@@ -7179,7 +7179,7 @@ MonoBehaviour:
             rawAttackDamage: 12
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 25
+              hitstunValue: 30
               blockStunValue: 0
               hitstopValue: 8
               blockStopValue: 0
@@ -7187,13 +7187,13 @@ MonoBehaviour:
             isFinalAttack: 1
             isScaling: 0
             lateralKBP:
-              Hit_HKB_Level: 0
-              Hit_Value: 0
+              Hit_HKB_Level: 3
+              Hit_Value: 5.75
               Block_HKB_Level: 0
               Block_Value: 0
             verticalKBP:
-              Hit_VKB_Level: 0
-              Hit_Value: 0
+              Hit_VKB_Level: 1
+              Hit_Value: 4.15
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4

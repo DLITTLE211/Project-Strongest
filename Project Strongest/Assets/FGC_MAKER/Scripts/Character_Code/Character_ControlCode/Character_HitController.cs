@@ -54,9 +54,7 @@ public class Character_HitController : MonoBehaviour
         currentHitstun = 0;
         currentHitstop = 0;
         recoveryTime = 0;
-        knockUpHitTypes.Add(Attack_KnockBack_Vertical.Heavy_KU);
-        knockUpHitTypes.Add(Attack_KnockBack_Vertical.Medium_KU);
-        knockUpHitTypes.Add(Attack_KnockBack_Vertical.Slight_KU);
+        knockUpHitTypes.Add(Attack_KnockBack_Vertical.KnockUP);
     }
     public bool ReturnNotRecovering()
     {

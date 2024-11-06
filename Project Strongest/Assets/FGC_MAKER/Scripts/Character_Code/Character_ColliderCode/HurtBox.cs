@@ -441,7 +441,7 @@ public class HurtBox : CollisionDetection
                 Character_HurtboxController thisPlayerGroundedState = this.gameObject.transform.root.GetComponent<Character_Base>()._cHurtBox;
                 if (_attackBlocked)
                 {
-                    if (currentHitProperties.VerticalKB_Data.Block_VKB_Level == Attack_KnockBack_Vertical.FullForceGroundBounce)
+                    if (currentHitProperties.VerticalKB_Data.Block_VKB_Level == Attack_KnockBack_Vertical.GroundBounce)
                     {
                         if (thisPlayerGroundedState.IsGrounded() == false)
                         {
@@ -452,7 +452,7 @@ public class HurtBox : CollisionDetection
                 }
                 else
                 {
-                    if (currentHitProperties.VerticalKB_Data.Hit_VKB_Level == Attack_KnockBack_Vertical.FullForceGroundBounce)
+                    if (currentHitProperties.VerticalKB_Data.Hit_VKB_Level == Attack_KnockBack_Vertical.GroundBounce)
                     {
                         if (thisPlayerGroundedState.IsGrounded() == false)
                         {

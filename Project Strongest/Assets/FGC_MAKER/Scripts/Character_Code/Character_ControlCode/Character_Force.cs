@@ -519,11 +519,11 @@ public class Character_Force : MonoBehaviour
         float H_KnockBack = 0;
         float V_KnockDown = 0;
 
+        string V_KnockbackType = property.verticalKBP.Hit_VKB_Level.ToString();
+
         H_KnockBack = property.lateralKBP.Hit_Value;
-        if (property.verticalKBP.Hit_VKB_Level.ToString().Contains("_KD"))
-        {
-            V_KnockDown = -property.verticalKBP.Hit_Value;
-        }
+        V_KnockDown = V_KnockbackType.Contains("_KD") ? -property.verticalKBP.Hit_Value : property.verticalKBP.Hit_Value;
+
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             _myRB.AddForce(transform.right * H_KnockBack, ForceMode.VelocityChange);
