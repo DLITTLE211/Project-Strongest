@@ -471,12 +471,7 @@ public class Character_HitController : MonoBehaviour
         else
         {
             _base._aFrameDataMeter.SetHitRecoveringState(false);
-            /*if (!_base._cHurtBox.IsGrounded())
-            {
-                HitAnimationField recoveryAnim = CheckRecoveryAnim(Attack_KnockDown.NONE);
-                _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
-                yield return new WaitForSeconds(recoveryAnim.animLength);
-            }*/
+            CheckAttackActive();
             if (recoverRoutine != null)
             {
                 StopCoroutine(recoverRoutine);
@@ -516,6 +511,16 @@ public class Character_HitController : MonoBehaviour
             int animHash = Animator.StringToHash("Landing_After_AirHit");
             _base._cAnimator.PlayNextAnimation(animHash, 0, true);
             yield return new WaitForSeconds(0.4f);
+        }
+    }
+    public void CheckAttackActive() 
+    {
+        if (_base._cAnimator.CheckAttackState())
+        {
+            _base._cAnimator.KillAttackOnRoutineEnd();
+            _base._cComboDetection.ResetCombos();
+            _base._aManager.ClearAttacks();
+            _base._cAnimator.SetCanTransitionIdle(true);
         }
     }
     public Attack_KnockBack_Vertical GetActiveVerticalKnockback(bool _blockedAttack) 
@@ -734,6 +739,8 @@ public class Character_HitController : MonoBehaviour
         currentProperty = null;
         blockedAttack = false;
         currentHitstun = 0;
+
+        CheckAttackActive();
         ClearFrameTickRoutine();
     }
 

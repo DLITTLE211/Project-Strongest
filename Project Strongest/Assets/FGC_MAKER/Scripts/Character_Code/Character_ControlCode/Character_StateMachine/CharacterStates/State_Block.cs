@@ -53,6 +53,7 @@ public class State_Block : BaseState
             }
             else
             {
+                _base._cHurtBox.SetHurboxState();
                 _base._cBlockHandler.ToggleBlockAnim(true, false);
                 if (_base._subState == Character_SubStates.Dummy)
                 {

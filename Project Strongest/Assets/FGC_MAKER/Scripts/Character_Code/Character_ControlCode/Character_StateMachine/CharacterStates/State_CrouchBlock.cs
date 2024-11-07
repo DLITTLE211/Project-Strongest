@@ -58,6 +58,7 @@ public class State_CrouchBlock : BaseState
             }
             else
             {
+                _base._cHurtBox.SetHurboxState();
                 _base._cBlockHandler.ToggleBlockAnim(false, false);
             }
         }

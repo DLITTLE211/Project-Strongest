@@ -54,6 +54,7 @@ public class Character_BlockHandler : MonoBehaviour
     {
         if (!isActivating)
         {
+            _currentAction.CurBase._cHurtBox.SetHurboxState();
             _currentAction.CurBase._cAnimator.SetCanTransitionIdle(false);
         }
         _currentAction.CurBase._cHurtBox.SetHurboxState();
@@ -88,6 +89,7 @@ public class Character_BlockHandler : MonoBehaviour
         }
         if (!isActivating)
         {
+            _currentAction.CurBase._cHurtBox.SetHurboxState();
             _currentAction.CurBase._cAnimator.SetCanTransitionIdle(true);
         }
     }

@@ -212,9 +212,9 @@ MonoBehaviour:
       counterHitDamageMult: 0
       attackMainStunValues:
         hitstunValue: 12
-        blockStunValue: 9
+        blockStunValue: 6
         hitstopValue: 7
-        blockStopValue: 2
+        blockStopValue: 1
       hitLevel: 144
       attackHashes: 0
       _meterRequirement: 2
@@ -746,9 +746,9 @@ MonoBehaviour:
       counterHitDamageMult: 0
       attackMainStunValues:
         hitstunValue: 20
-        blockStunValue: 8
+        blockStunValue: 7
         hitstopValue: 7
-        blockStopValue: 2
+        blockStopValue: 1
       hitLevel: 144
       attackHashes: 0
       _meterRequirement: 3
@@ -1617,9 +1617,9 @@ MonoBehaviour:
         init: 0
         startup: 2
         active: 3
-        inactive: 123
+        inactive: 50
         recoveryEnd: 0
-        recoveryAmount: 1
+        recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 10
@@ -1703,7 +1703,7 @@ MonoBehaviour:
             rawAttackDamage: 10
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 10
+              hitstunValue: 25
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -1712,7 +1712,7 @@ MonoBehaviour:
             isScaling: 0
             lateralKBP:
               Hit_HKB_Level: 2
-              Hit_Value: 2.3
+              Hit_Value: 3.1
               Block_HKB_Level: 0
               Block_Value: 0
             verticalKBP:
@@ -1720,7 +1720,7 @@ MonoBehaviour:
               Hit_Value: 0
               Block_VKB_Level: 0
               Block_Value: 0
-            KnockDown: 2
+            KnockDown: 4
         - hitFramePoints: 48
           call: 2
           hitFrameBool: 0
@@ -1857,9 +1857,9 @@ MonoBehaviour:
         init: 0
         startup: 2
         active: 3
-        inactive: 123
+        inactive: 50
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 10
@@ -1943,7 +1943,7 @@ MonoBehaviour:
             rawAttackDamage: 14
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 10
+              hitstunValue: 25
               blockStunValue: 0
               hitstopValue: 0
               blockStopValue: 0
@@ -2514,7 +2514,7 @@ MonoBehaviour:
               hitConnected: 0
               LateralKB_Data:
                 Hit_HKB_Level: 3
-                Hit_Value: 5.95
+                Hit_Value: 3.14
                 Block_HKB_Level: 0
                 Block_Value: 1.2
               VerticalKB_Data:
@@ -2659,8 +2659,8 @@ MonoBehaviour:
               counterHitDamageMult: 1.015
               attackMainStunValues:
                 hitstunValue: 27
-                blockStunValue: 13
-                hitstopValue: 3
+                blockStunValue: 12
+                hitstopValue: 2
                 blockStopValue: 1
               hitLevel: 144
               attackHashes: 0
@@ -2736,7 +2736,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.065
               attackMainStunValues:
                 hitstunValue: 17
-                blockStunValue: 9
+                blockStunValue: 5
                 hitstopValue: 5
                 blockStopValue: 1
               hitLevel: 72
@@ -3072,8 +3072,8 @@ MonoBehaviour:
               counterHitDamageMult: 1.015
               attackMainStunValues:
                 hitstunValue: 27
-                blockStunValue: 13
-                hitstopValue: 3
+                blockStunValue: 12
+                hitstopValue: 2
                 blockStopValue: 1
               hitLevel: 144
               attackHashes: 0
@@ -3149,7 +3149,7 @@ MonoBehaviour:
               counterHitDamageMult: 1.065
               attackMainStunValues:
                 hitstunValue: 17
-                blockStunValue: 9
+                blockStunValue: 5
                 hitstopValue: 5
                 blockStopValue: 1
               hitLevel: 72
@@ -3639,11 +3639,11 @@ MonoBehaviour:
         Block_HKB_Level: 2
         Block_Value: 2.2
       VerticalKB_Data:
-        Hit_VKB_Level: 1
+        Hit_VKB_Level: 0
         Hit_Value: 0
         Block_VKB_Level: 0
         Block_Value: 0
-      KnockDown: 4
+      KnockDown: 2
     attackInput:
     - attackString: 214B
       attackStringArray: 

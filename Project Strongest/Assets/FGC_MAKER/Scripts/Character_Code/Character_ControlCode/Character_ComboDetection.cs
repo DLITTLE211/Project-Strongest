@@ -466,11 +466,14 @@ public class Character_ComboDetection : MonoBehaviour
             ActiveFollowUpAttackCheck.Value.ResetAttackData();
             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
         }
-        _cMOnChangeInputLog.ResetComboInfo();
     }
     public void ResetMobilityString()
     {
         _cMAnyChangeInputLog.ResetComboInfo();
+        if (_cMOnChangeInputLog.specialMoveTypeInput.attackString.Length > 1)
+        {
+            _cMOnChangeInputLog.ResetComboInfo();
+        }
     }
 
 }
