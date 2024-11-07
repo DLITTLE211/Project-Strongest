@@ -10,7 +10,6 @@ public class Character_StunController : MonoBehaviour
     IEnumerator RecoveryRoutine;
     public Gradient stunMeterColor;
     public Image stunMeterImage;
-    public const float maxStun = 1;
     public float clearStunTimeGate;
     public float stunRecoverTime;
     public bool canRecover;
@@ -22,16 +21,11 @@ public class Character_StunController : MonoBehaviour
     public void SetStartStunValues() 
     {
         stunMeter.currentValue = 0;
-        stunMeter.maxValue = maxStun;
         stunMeter.SetCurrentMeterValue(stunMeter.currentValue);
-        checkStunGradiet();
     }
     private void Update()
     {
-        if (canRecover) 
-        {
-            checkStunGradiet();
-        }
+        checkStunGradiet();
     }
     public void KillRegenTween() 
     {
@@ -46,14 +40,14 @@ public class Character_StunController : MonoBehaviour
     {
         KillRegenTween();
         stunMeter.currentValue += stunAmount;
-        checkStunGradiet();
         stunMeter.SetCurrentMeterValue(stunMeter.currentValue);
         RecoveryRoutine = RecoverStunWaitTime();
         StartCoroutine(RecoveryRoutine);
     }
     void checkStunGradiet() 
     {
-        stunMeterImage.color = stunMeterColor.Evaluate(stunMeter.currentValue);
+        float stunValue = stunMeter.currentValue / stunMeter.maxValue;
+        stunMeterImage.color = stunMeterColor.Evaluate(stunValue);
     }
     void CheckMeterValue() 
     {
@@ -77,7 +71,6 @@ public class Character_StunController : MonoBehaviour
         else
         {
             canRecover = true;
-            checkStunGradiet();
             stunMeter.meterSlider.DOValue(0, stunRecoverTime).OnUpdate(CheckMeterValue).OnComplete(() =>
             {
                 SetFinalStunValue();
@@ -88,7 +81,6 @@ public class Character_StunController : MonoBehaviour
     {
         stunMeter.currentValue = 0;
         stunMeter.SetCurrentMeterValue(0);
-        checkStunGradiet();
         canRecover = false;
     }
 }

@@ -1569,7 +1569,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 993311525}
   _animator: {fileID: 0}
-  lastInput: 0
   inStance: 0
   inRekka: 0
   inSuper: 0
@@ -1584,7 +1583,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
-  currentMobilityInput:
+  _cMAnyChangeInputLog:
     AttackName: 
     specialMoveTypeInput:
       attackString: 
@@ -1594,6 +1593,17 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+  _cMOnChangeInputLog:
+    AttackName: 
+    specialMoveTypeInput:
+      attackString: 
+      attackStringArray: 
+    normalTypeInput: []
+    currentAttackInput: 
+    moveType: 0
+    normalAirAttackInfo: 0
+    keyGroundCheck: 0
+  lastInput: 0
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1813,24 @@ MonoBehaviour:
       directionalInput: 0
     actionID: 0
     Button_Name: 
+  throwButton:
+    Button_Element:
+      _actionCategoryId: 0
+      _actionId: -1
+      _elementType: 0
+      _elementIdentifierId: -1
+      _axisRange: 0
+      _invert: 0
+      _axisContribution: 0
+      _keyboardKeyCode: 0
+      _modifierKey1: 0
+      _modifierKey2: 0
+      _modifierKey3: 0
+    Button_State:
+      _state: 0
+      directionalInput: 0
+    actionID: 0
+    Button_Name: 
   _mobilitySource: {fileID: 0}
   character_MobilityOptions: {fileID: 0}
   activationCall: 768
@@ -1819,6 +1847,7 @@ MonoBehaviour:
   sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   amplifier: {fileID: 0}
   comboList3_0: {fileID: 0}
+  _characterCompleteMovelist: []
   inputVisualiser: []
   myRb: {fileID: 94923330}
   _jumpForce: 250
@@ -1829,9 +1858,10 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 1211425607}
   opponentPlayer: {fileID: 993311525}
+  verifyMoves: 0
+  moveListIndex: 0
   callSource: 0
   awaitCondition: 0
-  factor: 0
 --- !u!54 &94923330
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3864,8 +3894,8 @@ MonoBehaviour:
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 49151
-    ctime2: 65535
+    ctime1: 32768
+    ctime2: 49151
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -4198,9 +4228,8 @@ MonoBehaviour:
     JumpCancelable: 0
     _airInfo: 0
     cancelProperty:
-      cancelFrom: 0
       CurrentLevel: 0
-      cancelTo: 0
+      nextAvailableAttackRoute: 0
     _moveType: 0
     AttackAnims:
       playerAnim: {fileID: 0}
@@ -4233,12 +4262,16 @@ MonoBehaviour:
         _startRefreshRate: 0
     hitLanded: 0
     hitConnected: 0
-    lateralKBP:
-      lateralKBP: 0
-      Value: 0
-    verticalKBP:
-      verticalKBP: 0
-      Value: 0
+    LateralKB_Data:
+      Hit_HKB_Level: 0
+      Hit_Value: 0
+      Block_HKB_Level: 0
+      Block_Value: 0
+    VerticalKB_Data:
+      Hit_VKB_Level: 0
+      Hit_Value: 0
+      Block_VKB_Level: 0
+      Block_Value: 0
     KnockDown: 0
 --- !u!1 &270329065
 GameObject:
@@ -8912,7 +8945,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 94923329}
   _animator: {fileID: 0}
-  lastInput: 0
   inStance: 0
   inRekka: 0
   inSuper: 0
@@ -8927,7 +8959,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
-  currentMobilityInput:
+  _cMAnyChangeInputLog:
     AttackName: 
     specialMoveTypeInput:
       attackString: 
@@ -8937,6 +8969,17 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+  _cMOnChangeInputLog:
+    AttackName: 
+    specialMoveTypeInput:
+      attackString: 
+      attackStringArray: 
+    normalTypeInput: []
+    currentAttackInput: 
+    moveType: 0
+    normalAirAttackInfo: 0
+    keyGroundCheck: 0
+  lastInput: 0
 --- !u!1 &580190454
 GameObject:
   m_ObjectHideFlags: 0
@@ -9223,9 +9266,8 @@ MonoBehaviour:
     JumpCancelable: 0
     _airInfo: 0
     cancelProperty:
-      cancelFrom: 0
       CurrentLevel: 0
-      cancelTo: 0
+      nextAvailableAttackRoute: 0
     _moveType: 0
     AttackAnims:
       playerAnim: {fileID: 0}
@@ -9258,12 +9300,16 @@ MonoBehaviour:
         _startRefreshRate: 0
     hitLanded: 0
     hitConnected: 0
-    lateralKBP:
-      lateralKBP: 0
-      Value: 0
-    verticalKBP:
-      verticalKBP: 0
-      Value: 0
+    LateralKB_Data:
+      Hit_HKB_Level: 0
+      Hit_Value: 0
+      Block_HKB_Level: 0
+      Block_Value: 0
+    VerticalKB_Data:
+      Hit_VKB_Level: 0
+      Hit_Value: 0
+      Block_VKB_Level: 0
+      Block_Value: 0
     KnockDown: 0
 --- !u!1 &607290435
 GameObject:
@@ -9318,6 +9364,7 @@ MonoBehaviour:
     getUpReactions: []
   last_KD: 0
   currentHitstun: 0
+  currentHitstop: 0
   hitStunAmount: 0
   hitStunScaling: 0
   smallHitRecovering: 0
@@ -11752,8 +11799,8 @@ MonoBehaviour:
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 49151
-    ctime2: 65535
+    ctime1: 32768
+    ctime2: 49151
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -14973,6 +15020,8 @@ MonoBehaviour:
   triggerBox: {fileID: 1994870303}
   _extendedHurtbox: {fileID: 599738360}
   check: 0
+  throwTechTime: 0
+  throwTeched: 0
 --- !u!1 &960065523
 GameObject:
   m_ObjectHideFlags: 0
@@ -16005,6 +16054,24 @@ MonoBehaviour:
       directionalInput: 0
     actionID: 0
     Button_Name: 
+  throwButton:
+    Button_Element:
+      _actionCategoryId: 0
+      _actionId: -1
+      _elementType: 0
+      _elementIdentifierId: -1
+      _axisRange: 0
+      _invert: 0
+      _axisContribution: 0
+      _keyboardKeyCode: 0
+      _modifierKey1: 0
+      _modifierKey2: 0
+      _modifierKey3: 0
+    Button_State:
+      _state: 0
+      directionalInput: 0
+    actionID: 0
+    Button_Name: 
   _mobilitySource: {fileID: 0}
   character_MobilityOptions: {fileID: 0}
   activationCall: 768
@@ -16021,6 +16088,7 @@ MonoBehaviour:
   sourceComboList3_0: {fileID: 5820526187208421704, guid: 8189dc80b783612448fdf75b961aaf0d, type: 3}
   amplifier: {fileID: 0}
   comboList3_0: {fileID: 0}
+  _characterCompleteMovelist: []
   inputVisualiser: []
   myRb: {fileID: 993311522}
   _jumpForce: 250
@@ -16031,9 +16099,10 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 434338341}
   opponentPlayer: {fileID: 94923329}
+  verifyMoves: 0
+  moveListIndex: 0
   callSource: 0
   awaitCondition: 0
-  factor: 0
 --- !u!1 &996888123
 GameObject:
   m_ObjectHideFlags: 0
@@ -16461,6 +16530,7 @@ MonoBehaviour:
     getUpReactions: []
   last_KD: 0
   currentHitstun: 0
+  currentHitstop: 0
   hitStunAmount: 0
   hitStunScaling: 0
   smallHitRecovering: 0
@@ -21472,6 +21542,8 @@ MonoBehaviour:
   triggerBox: {fileID: 269102569}
   _extendedHurtbox: {fileID: 2067993362}
   check: 0
+  throwTechTime: 0
+  throwTeched: 0
 --- !u!1 &1336032131
 GameObject:
   m_ObjectHideFlags: 0
@@ -30436,9 +30508,8 @@ MonoBehaviour:
     JumpCancelable: 0
     _airInfo: 0
     cancelProperty:
-      cancelFrom: 0
       CurrentLevel: 0
-      cancelTo: 0
+      nextAvailableAttackRoute: 0
     _moveType: 0
     AttackAnims:
       playerAnim: {fileID: 0}
@@ -30471,12 +30542,16 @@ MonoBehaviour:
         _startRefreshRate: 0
     hitLanded: 0
     hitConnected: 0
-    lateralKBP:
-      lateralKBP: 0
-      Value: 0
-    verticalKBP:
-      verticalKBP: 0
-      Value: 0
+    LateralKB_Data:
+      Hit_HKB_Level: 0
+      Hit_Value: 0
+      Block_HKB_Level: 0
+      Block_Value: 0
+    VerticalKB_Data:
+      Hit_VKB_Level: 0
+      Hit_Value: 0
+      Block_VKB_Level: 0
+      Block_Value: 0
     KnockDown: 0
 --- !u!1 &1999147359
 GameObject:
@@ -31154,9 +31229,8 @@ MonoBehaviour:
     JumpCancelable: 0
     _airInfo: 0
     cancelProperty:
-      cancelFrom: 0
       CurrentLevel: 0
-      cancelTo: 0
+      nextAvailableAttackRoute: 0
     _moveType: 0
     AttackAnims:
       playerAnim: {fileID: 0}
@@ -31189,12 +31263,16 @@ MonoBehaviour:
         _startRefreshRate: 0
     hitLanded: 0
     hitConnected: 0
-    lateralKBP:
-      lateralKBP: 0
-      Value: 0
-    verticalKBP:
-      verticalKBP: 0
-      Value: 0
+    LateralKB_Data:
+      Hit_HKB_Level: 0
+      Hit_Value: 0
+      Block_HKB_Level: 0
+      Block_Value: 0
+    VerticalKB_Data:
+      Hit_VKB_Level: 0
+      Hit_Value: 0
+      Block_VKB_Level: 0
+      Block_Value: 0
     KnockDown: 0
 --- !u!1 &2071144932
 GameObject:

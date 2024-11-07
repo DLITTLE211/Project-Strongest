@@ -471,7 +471,7 @@ public class Character_HitController : MonoBehaviour
         else
         {
             _base._aFrameDataMeter.SetHitRecoveringState(false);
-            CheckAttackActive();
+            _base.CheckAttackActive(false);
             if (recoverRoutine != null)
             {
                 StopCoroutine(recoverRoutine);
@@ -513,16 +513,7 @@ public class Character_HitController : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
         }
     }
-    public void CheckAttackActive() 
-    {
-        if (_base._cAnimator.CheckAttackState())
-        {
-            _base._cAnimator.KillAttackOnRoutineEnd();
-            _base._cComboDetection.ResetCombos();
-            _base._aManager.ClearAttacks();
-            _base._cAnimator.SetCanTransitionIdle(true);
-        }
-    }
+   
     public Attack_KnockBack_Vertical GetActiveVerticalKnockback(bool _blockedAttack) 
     {
         if (currentCustomDamageField != null)
@@ -740,7 +731,7 @@ public class Character_HitController : MonoBehaviour
         blockedAttack = false;
         currentHitstun = 0;
 
-        CheckAttackActive();
+        _base.CheckAttackActive(false);
         ClearFrameTickRoutine();
     }
 

@@ -781,16 +781,18 @@ public class Character_Base : MonoBehaviour
                 frameCount = _cHurtBox.throwTechTime;
                 opponentPlayer._cAnimator.isHit = true;
                 opponentPlayer._cAnimator.SetCanTransitionIdle(false);
-                _cAnimator.KillAttackOnRoutineEnd();
                 _cHitController.HandleHitState(_throwAttackData, _throwAttackData.attackMainStunValues.hitstopValue, _throwAttackData.attackMainStunValues.hitstunValue,0,true);
                 opponentPlayer._cHitController.HandleHitState(_throwAttackData, _throwAttackData.attackMainStunValues.hitstopValue, _throwAttackData.attackMainStunValues.hitstunValue, 0,true);
-                _cForce.InstantForceAway(-0.85f);
-                opponentPlayer._cForce.InstantForceAway(-0.85f);
+                _cForce.AddLateralForceOnCommand(-4f);
+                opponentPlayer._cForce.AddLateralForceOnCommand(-4f);
                 yield return new WaitForSeconds(20f * Base_FrameCode.ONE_FRAME);
                 opponentPlayer._cAnimator.SetCanTransitionIdle(true);
                 opponentPlayer._cAnimator.FullBaseAttackDataClear(_throwAttackData, _throwAttackData.AttackAnims._frameData);
                 _cHurtBox.throwTeched = false;
                 opponentPlayer.Activate();
+                CheckAttackActive();
+                opponentPlayer.CheckAttackActive();
+                
                 yield break;
             }
             frameCount += Base_FrameCode.ONE_FRAME;
@@ -798,7 +800,27 @@ public class Character_Base : MonoBehaviour
         }
         throwFunc();
     }
+    public void CheckAttackActive(bool forceClear = true)
+    {
+        if (!forceClear)
+        {
+            if (_cAnimator.CheckAttackState())
+            {
+                _cAnimator.KillAttackOnRoutineEnd();
+                _cComboDetection.ResetCombos();
+                _aManager.ClearAttacks();
+                _cAnimator.SetCanTransitionIdle(true);
+            }
+        }
+        else 
+        {
 
+            _cAnimator.KillAttackOnRoutineEnd();
+            _cComboDetection.ResetCombos();
+            _aManager.ClearAttacks();
+            _cAnimator.SetCanTransitionIdle(true);
+        }
+    }
 
     #region TESTING PURPOSES ONLY
     public void TEST_ATTACKPROPERTY(int _attackIndex) 
