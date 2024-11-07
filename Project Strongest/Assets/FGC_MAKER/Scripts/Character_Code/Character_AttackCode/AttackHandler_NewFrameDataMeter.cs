@@ -20,8 +20,12 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     public int TrueFrameCount { get { return frameCount; } }
     [SerializeField] private bool _isHitRecovering;
     public bool HitRecovering { get { return _isHitRecovering; } }
-    void Start()
+    public void SetupMeterData() 
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         InitializeMeter();
         currentFrame = 0;
         lastFrameDataType = FrameType.Startup;
@@ -33,6 +37,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     }
     public void InitializeMeter()
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         for (int i = 0; i < 60; i++)
         {
             GameObject newFrame = Instantiate(_refSingularFrame, this.transform);
@@ -47,6 +55,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
 
     public void ResetMeterData()
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         if (_base.opponentPlayer._aFrameDataMeter.HitRecovering)
         {
             frameDataInformationText.text = message;
@@ -62,6 +74,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     }
     public void ResetFrames()
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         currentFrame = 0;
         frameCount = 0;
         for (int i = 0; i < _refSingularFrameList.Count; i++)
@@ -72,6 +88,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     #region Update Frame On Attack
     public void UpdateFrame(FrameType type)
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         if (currentFrame >= _refSingularFrameList.Count)
         {
             currentFrame = 0;
@@ -95,12 +115,20 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     }
     public void GetAdvantageValue(FrameData _frameData)
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         int lastFrame = currentFrame == 0 ? 0 : currentFrame-1;
         _refSingularFrameList[lastFrame].SetFrame_FrameType(lastFrameDataType, currentFrame);
         GameManager.instance._frameDataCalculator.ReturnFrameDifference(_base.opponentPlayer, _frameData);
     }
     public void SetFrameInformation(FrameData _frameData)
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         float frameValue = GameManager.instance._frameDataCalculator.FrameDifference;
         message = $"Startup: {_frameData.startup}/ TotalFrames: {_frameData.recoveryEnd}/";
         string frameDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
@@ -111,6 +139,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     #endregion
     public void SetHitRecoveringState(bool state)
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         if (!state) 
         {
             frameCount++;
@@ -150,6 +182,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     }
     public void UpdateFrameOnHit(FrameType _type)
     {
+        if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
+        {
+            return;
+        }
         if (_isHitRecovering)
         {
             if (currentFrame >= _refSingularFrameList.Count || currentFrame < 0)

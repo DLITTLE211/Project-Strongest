@@ -239,6 +239,7 @@ public class Character_Base : MonoBehaviour
         _cAnimator.NullifyMobilityOption();
         _cAnimator.SetModelColors(characterProfile._characterSkins, skinIndex);
         SetMainCustomCallbackDictionary();
+        _aFrameDataMeter.SetupMeterData();
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
     {
