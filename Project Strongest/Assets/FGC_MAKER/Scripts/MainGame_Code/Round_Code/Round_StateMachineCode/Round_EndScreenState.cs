@@ -23,6 +23,7 @@ public class Round_EndScreenState : Round_BaseState
 
         if (GameManager.instance.winningCharacter != null)
         {
+            GameManager.instance.winningCharacter._cAnimator.PlayVictoryAnim();
             PulseAndSetText(countDownText, $"Player {GameManager.instance.winningCharacter.playerID + 1} Wins!!");
         }
         else

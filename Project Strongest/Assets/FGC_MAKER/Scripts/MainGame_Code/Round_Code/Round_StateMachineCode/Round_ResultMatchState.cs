@@ -47,9 +47,12 @@ public class Round_ResultMatchState : Round_BaseState
             _rSystem.StateMachine.CallEndScreenState();
             return;
         }
-        else 
+        else
         {
-            await Task.Delay(2500);
+            await Task.Delay(900);
+            GameManager.instance.winningCharacter._cAnimator.PlayRoundWinAnim();
+            GameManager.instance.winningCharacter.opponentPlayer._cAnimator.PlayRoundLossAnim();
+            await Task.Delay(3500);
             _rSystem.StateMachine.CallInitialTimerState();
             return;
         }

@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using System.Threading.Tasks;
 using DG.Tweening;
+using FightingGame_FrameData;
 
 public class Character_Animator : MonoBehaviour
 {
@@ -42,6 +43,9 @@ public class Character_Animator : MonoBehaviour
     public IEnumerator BasicAttackRoutine, ThrowAttackRoutine, SuperAttackRoutine;
     int matCount;
     int lastHashPlayed;
+
+    [SerializeField] private VictoryAnimation _victoryAnim;
+    [SerializeField] private GameObject soda;
     private void Start()
     {
         customSuperHit = false;
@@ -531,6 +535,62 @@ public class Character_Animator : MonoBehaviour
         CountUpNegativeFrames();
         SetCanTransitionIdle(true);
     }
+
+    #region End Of Round Animation Handler
+    protected static readonly int winPerfect = Animator.StringToHash("Win_HighHealth");
+    protected static readonly int winNormal = Animator.StringToHash("Win_LowHealth");
+    protected static readonly int lossRound = Animator.StringToHash("Loss_Normal");
+    public void PlayRoundWinAnim() 
+    {
+        float halfWayMark = _base._cHealth.health_Main.maxValue / 2f;
+        if (_base._cHealth.health_Main.currentValue >= halfWayMark) 
+        {
+            PlayNextAnimation(winPerfect,0.25f);
+        }
+        else 
+        {
+            PlayNextAnimation(winNormal, 0.25f);
+        }
+    }
+    public void PlayRoundLossAnim()
+    {
+        if (!_base._cDamageCalculator.isDead)
+        {
+            PlayNextAnimation(lossRound, 0.25f);
+        }
+    }
+    public void PlayVictoryAnim()
+    {
+        _base.Deactivate();
+        _base._cStateMachine.enabled = false;
+        _victoryAnim._animName = _victoryAnim._animationClip.name;
+        _victoryAnim.activatePointInFrames = _victoryAnim.activatePoint * Base_FrameCode.ONE_FRAME;
+        _victoryAnim._animLength = _victoryAnim._animationClip.length;
+        _victoryAnim._animHash = Animator.StringToHash(_victoryAnim._animName);
+        StartCoroutine(PlayAnimSequence(_victoryAnim));
+    }
+    IEnumerator PlayAnimSequence(VictoryAnimation _currentAction)
+    {
+        float frameCount = 0;
+        SetCanTransitionIdle(false);
+        bool pointHit = false;
+        float waitTime = Base_FrameCode.ONE_FRAME;
+        float endingFrame = _victoryAnim._animLength;
+        PlayNextAnimation(_victoryAnim._animHash, 0.25f);
+        while (frameCount <= endingFrame)
+        {
+            #region Mobility Anim Checks
+            if (frameCount > _victoryAnim.activatePointInFrames && !pointHit)
+            {
+                pointHit = true;
+                soda.gameObject.SetActive(true);
+            }
+            frameCount += waitTime;
+            yield return new WaitForSeconds(waitTime);
+            #endregion
+        }
+    }
+    #endregion
 }
 [Serializable]
 public enum lastAttackState 
@@ -558,4 +618,10 @@ public class WidthPositionMarkerSet
     public Transform leftHandPoint;
     public Transform rightFootPoint;
     public Transform rightHandPoint;
+}
+[Serializable]
+public class VictoryAnimation : MobilityOption_Anim
+{
+    public float activatePoint;
+    public float activatePointInFrames;
 }

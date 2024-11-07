@@ -178,6 +178,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-7845438970371268990
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teen_Baki_Hanma|Baki_Recovery_Quick_Backward
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 6889617363822583662, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-7607417487561755975
 AnimatorState:
   serializedVersion: 6
@@ -514,9 +540,6 @@ AnimatorStateMachine:
     m_State: {fileID: 676926573251896494}
     m_Position: {x: 150, y: 790, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 3316563519851747521}
-    m_Position: {x: 380, y: 790, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 7002830364554618216}
     m_Position: {x: -70, y: 790, z: 0}
   - serializedVersion: 1
@@ -536,13 +559,19 @@ AnimatorStateMachine:
     m_Position: {x: -450, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9075544522981977511}
-    m_Position: {x: -450, y: 260, z: 0}
+    m_Position: {x: -450, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4191157546377907479}
-    m_Position: {x: -210, y: 200, z: 0}
+    m_Position: {x: -450, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3722283696868790334}
     m_Position: {x: -670, y: 200, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -111004595082226935}
+    m_Position: {x: 390, y: 790, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7845438970371268990}
+    m_Position: {x: 390, y: 740, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1466,7 +1495,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Teen_Baki_Hanma|Baki_Win_HighHealth
+  m_Name: Win_HighHealth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1637,6 +1666,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7237084685499626062, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &-111004595082226935
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teen_Baki_Hanma|Baki_Recovery_Quick_Neutral
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -3696293777989950416, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2166,32 +2221,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &3316563519851747521
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Teen_Baki_Hanma|Baki_Recovery_Quick
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 5532375748658717885, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &3726196119662059066
 AnimatorState:
   serializedVersion: 6
@@ -2225,7 +2254,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Teen_Baki_Hanma|Baki_Lose_Animation
+  m_Name: Win_LowHealth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2819,7 +2848,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Teen_Baki_Hanma|Baki_Win_LowHealth
+  m_Name: Loss_Normal
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
