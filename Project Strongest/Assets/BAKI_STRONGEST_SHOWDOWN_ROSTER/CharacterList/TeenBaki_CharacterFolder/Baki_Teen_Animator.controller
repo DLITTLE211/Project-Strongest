@@ -556,22 +556,28 @@ AnimatorStateMachine:
     m_Position: {x: 150, y: 740, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1417250038458708961}
-    m_Position: {x: -450, y: 200, z: 0}
+    m_Position: {x: -320, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9075544522981977511}
-    m_Position: {x: -450, y: 300, z: 0}
+    m_Position: {x: -320, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4191157546377907479}
-    m_Position: {x: -450, y: 250, z: 0}
+    m_Position: {x: -320, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3722283696868790334}
-    m_Position: {x: -670, y: 200, z: 0}
+    m_Position: {x: -540, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -111004595082226935}
     m_Position: {x: 390, y: 790, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7845438970371268990}
     m_Position: {x: 390, y: 740, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -591119020982471061}
+    m_Position: {x: 840, y: 200, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 813831742736540829}
+    m_Position: {x: 840, y: 260, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1645,6 +1651,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-591119020982471061
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teen_Baki_Hanma|Baki_Intro_Animation
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 8675314445350143241, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-488106658874097456
 AnimatorState:
   serializedVersion: 6
@@ -1876,6 +1908,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -7835788572680383352, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &813831742736540829
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teen_Baki_Hanma|Baki_Mouth_Flap
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -7949485526794881692, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
