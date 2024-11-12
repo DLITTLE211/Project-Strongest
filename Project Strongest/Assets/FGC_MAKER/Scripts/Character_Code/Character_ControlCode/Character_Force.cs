@@ -49,7 +49,7 @@ public class Character_Force : MonoBehaviour
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
 
         #region Movement Dictionary Setup
-        float neutralSuperJumpYVal = (_myRB.velocity.y + EvaluateAndReturnJumpValue()) + (_myRB.velocity.y + EvaluateAndReturnJumpValue() / 4.5f);
+        float neutralSuperJumpYVal = (_myRB.velocity.y + EvaluateAndReturnJumpValue()) + (_myRB.velocity.y + EvaluateAndReturnJumpValue() / 8.75f);
         float superJumpYVal = (_myRB.velocity.y + EvaluateAndReturnJumpValue()) - (_myRB.velocity.y + EvaluateAndReturnJumpValue()/8f);
         float superJumpXVal = Mathf.Abs((_myRB.velocity.x + EvaluateAndReturnForwardValue()) + (_myRB.velocity.x + EvaluateAndReturnForwardValue() / 1.15f));
 
@@ -368,7 +368,7 @@ public class Character_Force : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     #endregion
-    IEnumerator DoForceOnDelay(Character_MobilityOption _mInput)
+    void DoForceOnDelay(Character_MobilityOption _mInput)
     {
         int forwardMult = 0;
         if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
@@ -380,7 +380,6 @@ public class Character_Force : MonoBehaviour
             forwardMult = -1;
         }
         sendingForce = true;
-        yield return new WaitForSeconds(0f);
         _base._aManager.ClearAttacks();
         Vector2 moveVectors = new Vector2();
         if (movementTypeVectors.TryGetValue(_mInput.GetMovementType(), out moveVectors))
@@ -389,17 +388,14 @@ public class Character_Force : MonoBehaviour
             {
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * _base.DashForce));
-                yield return new WaitForSeconds(0f);
-                yield break;
+                return;
             }
             if (_mInput.GetMovementType() == MovementType.BackDash)
             {
                 _myRB.constraints = RigidbodyConstraints.FreezeAll;
                 StartCoroutine(OnDelayDash(forwardMult * -_base.DashForce));
-                yield return new WaitForSeconds(0f);
-                yield break;
+                return;
             }
-            _base.character_MobilityOptions.ReserveAnimationCall(_mInput);
             xVal = moveVectors.x;
             yVal = moveVectors.y;
             _myRB.velocity = new Vector3(forwardMult * xVal, yVal);
@@ -407,7 +403,6 @@ public class Character_Force : MonoBehaviour
             {
                 _base._cComboDetection.superMobilityOption = false;
             }
-            yield return new WaitForSeconds(2 / 60f);
             sendingForce = false;
         }
     }
@@ -436,9 +431,10 @@ public class Character_Force : MonoBehaviour
                 }
             }
             _base.movementPC = _mInput.movementPriority;
+            _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
             if (sendingForce == false)
             {
-                StartCoroutine(DoForceOnDelay(_mInput));
+               DoForceOnDelay(_mInput);
                 DebugMessageHandler.instance.DisplayErrorMessage(3, $"{_mInput.GetMovementType()} has been performed");
             }
         }

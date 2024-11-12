@@ -198,7 +198,7 @@ public class Character_Animator : MonoBehaviour
         }
         return false;
     }
-    public bool CheckMobilityStateState()
+    public bool CheckMobilityState()
     {
         if (activatedInput == null)
         {
@@ -209,6 +209,10 @@ public class Character_Animator : MonoBehaviour
             return true;
         }
         if (activatedInput.mobilityOptionName == null || activatedInput.mobilityOptionName == "")
+        {
+            return true;
+        }
+        if (activatedInput.mobilityInput == null)
         {
             return true;
         }

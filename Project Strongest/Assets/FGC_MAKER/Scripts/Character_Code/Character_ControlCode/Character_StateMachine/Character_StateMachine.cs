@@ -198,7 +198,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput = false;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _notAttacking = !_base._cAnimator.CheckAttackState()&& checkAttackValue(lastAttackState.nullified);
-        bool _notUsingMobility = _base._cAnimator.CheckMobilityStateState() && checkMovementValue(lastMovementState.nullified);
+        bool _notUsingMobility = _base._cAnimator.CheckMobilityState() && checkMovementValue(lastMovementState.nullified);
 
         if (_base._subState != Character_SubStates.Controlled)
         {
@@ -237,7 +237,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
         bool _notAttacking = !_base._cAnimator.CheckAttackState() && checkAttackValue(lastAttackState.nullified);
-        bool _notUsingMobility = _base._cAnimator.CheckMobilityStateState() && checkMovementValue(lastMovementState.nullified);
+        bool _notUsingMobility = _base._cAnimator.CheckMobilityState() && checkMovementValue(lastMovementState.nullified);
         try
         {
             if (_base._subState != Character_SubStates.Controlled)
@@ -387,7 +387,7 @@ public class Character_StateMachine : MonoBehaviour
         bool _currentInput;
         bool _isBlocking;
         bool _isGrounded = _base._cHurtBox.IsGrounded();
-        bool _notUsingMobility  = _base._cAnimator.CheckMobilityStateState() && checkMovementValue(lastMovementState.nullified);
+        bool _notUsingMobility  = _base._cAnimator.CheckMobilityState() && checkMovementValue(lastMovementState.nullified);
         bool _notAttacking = !_base._cAnimator.CheckAttackState() && checkAttackValue(lastAttackState.nullified);
         try
         {
@@ -415,7 +415,7 @@ public class Character_StateMachine : MonoBehaviour
     }
     bool At_2Jump()
     {
-        bool _notAttacking = _base._cAnimator.lastAttack == null && checkAttackValue(lastAttackState.nullified);
+        bool _notAttacking = !_base._cAnimator.CheckAttackState() && checkAttackValue(lastAttackState.nullified);
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
         bool _isHit = _base._cAnimator.isHit; 
         bool _currentInput;

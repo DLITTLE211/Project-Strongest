@@ -122,7 +122,10 @@ public class State_Idle : BaseState
         {
             await DelayFrame();
         }
-        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        if (_base._cHurtBox.IsGrounded())
+        {
+            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+        }
         _base._aManager.ResetMoveHierarchy();
         canDoSecondaryIdle = true;
         timeTillSecondaryIdle = startSecondaryIdle;
@@ -133,27 +136,28 @@ public class State_Idle : BaseState
     }
     public bool CanTransitionToIdle()
     {
-        bool neutralInput = _base.ReturnMovementInputs().Button_State.directionalInput == 5;
+        bool Grounded = _base._cHurtBox.IsGrounded();
+;        bool neutralInput = _base.ReturnMovementInputs().Button_State.directionalInput == 5;
         bool lastAttackNull = true;
         if (_base._cAnimator.lastAttack != null)
         {
-            lastAttackNull = _base._cAnimator.lastAttack.InputTimer == null && _cAnim._lastAttackState == lastAttackState.nullified;
+            lastAttackNull = !_cAnim.CheckAttackState() && _cAnim._lastAttackState == lastAttackState.nullified;
         }
         else
         {
-            lastAttackNull = _base._cAnimator.lastAttack == null && _cAnim._lastAttackState == lastAttackState.nullified;
+            lastAttackNull = !_cAnim.CheckAttackState() && _cAnim._lastAttackState == lastAttackState.nullified;
         }
         bool lastMobilityNull = true;
         if (_base._cAnimator.activatedInput != null)
         {
-            lastMobilityNull = _base._cAnimator.activatedInput._mobTimer == null && _cAnim._lastMovementState == lastMovementState.nullified;
+            lastMobilityNull = _cAnim.CheckMobilityState() && _cAnim._lastMovementState == lastMovementState.nullified;
         }
         else
         {
-            lastMobilityNull = _base._cAnimator.activatedInput == null && _cAnim._lastMovementState == lastMovementState.nullified;
+            lastMobilityNull = _cAnim.CheckMobilityState() && _cAnim._lastMovementState == lastMovementState.nullified;
         }
         bool canTransitionIdle = _cAnim.canTransitionIdle == true;
-        return neutralInput  && lastAttackNull && lastMobilityNull && canTransitionIdle;
+        return Grounded && neutralInput && lastAttackNull && lastMobilityNull && canTransitionIdle;
     }
 
     void DummyIdleCheck()

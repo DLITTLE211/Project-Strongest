@@ -17,20 +17,11 @@ public class Character_MobilityOptions : MonoBehaviour
     {
         _mobOption.CurBase._cForce.HandleExtraMovement(_mobOption);
     }
-    public void ReserveAnimationCall(Character_MobilityOption _mobOption) 
-    {
-        AnimationClip currentAnimation = _mobOption.CurBase._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0].clip;
-        if (currentAnimation != _mobOption._animInformation._animationClip)
-        {
-            _mobOption.CurBase._cAnimator.PlayNextAnimation(_mobOption._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
-        }
-    }
     public void ActivateMobilityOption(Character_MobilityOption _currentAction) 
     {
         KillCurrentRoutine();
         animRunning = true;
         SetCustomCallbacks(_currentAction);
-         _currentAction.CurBase._cAnimator.PlayNextAnimation(_currentAction._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
          MobilityRoutine = PlayAnimSequence(_currentAction);
         StartCoroutine(MobilityRoutine);
     }
@@ -40,7 +31,7 @@ public class Character_MobilityOptions : MonoBehaviour
         float waitTime = Base_FrameCode.ONE_FRAME;
         float endingFrame = _currentAction.frameData.recoveryAmount + _currentAction.frameData._extraPoints[_currentAction.frameData._extraPoints.Count - 1].hitFramePoints;
         float endingPoint = endingFrame * waitTime;
-        while (frameCount <= endingPoint)
+        while (frameCount < endingPoint)
         {
             #region Mobility Anim Checks
             if (callbackList.Count > 0)
