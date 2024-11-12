@@ -454,6 +454,7 @@ public class Character_Force : MonoBehaviour
     #endregion
     public void SendKnockBackOnHit(Attack_BaseProperties property,bool blockedAttack)
     {
+        _base.UnlockPosWithoutStorage();
         float H_KnockBack = 0;
         float V_KnockDown = 0;
         if (blockedAttack) 

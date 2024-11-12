@@ -5,12 +5,13 @@ public class State_Hit : BaseState
 {
     public State_Hit(Character_Base playerBase) : base(playerBase)
     { }
-    public override void OnEnter()
+    public async override void OnEnter()
     {
         base.OnEnter();
         BaseClearData();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter HitState");
     }
+
     public override async void OnUpdate()
     {
         try

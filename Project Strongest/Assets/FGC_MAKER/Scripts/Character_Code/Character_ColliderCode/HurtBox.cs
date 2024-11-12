@@ -244,10 +244,24 @@ public class HurtBox : CollisionDetection
     public void ReceieveHitBox(HitBox _hitbox, Transform _target, Callback endFunc)
     {
         currentHitbox = _hitbox;
-        currentHitProperties = currentHitbox.hitboxProperties;
-        target = _target;
-        endingFunction = endFunc;
-        FindAttackResponse();
+        if (currentHitProperties != null)
+        {
+            currentHitProperties = currentHitbox.hitboxProperties;
+            if (currentHitProperties.hitConnected == false)
+            {
+                currentHitProperties = currentHitbox.hitboxProperties;
+                target = _target;
+                endingFunction = endFunc;
+                FindAttackResponse();
+            }
+        }
+        else 
+        {
+            currentHitProperties = currentHitbox.hitboxProperties;
+            target = _target;
+            endingFunction = endFunc;
+            FindAttackResponse();
+        }
     }
     async void ReceiveCounterData()
     {
@@ -323,7 +337,7 @@ public class HurtBox : CollisionDetection
                 {
                     Base_Target._cHitController.ClearRecoveryRoutine(true);
                 }
-                Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
+                //Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
             }
           /*  if (currentHitProperties._moveType == MoveType.Throw)
             {
@@ -357,6 +371,7 @@ public class HurtBox : CollisionDetection
         {
             try
             {
+                Base_Target.LockPos();
                 currentHitProperties.hitConnected = true;
                 Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties, BlockedAttack);
                 if (BlockedAttack)

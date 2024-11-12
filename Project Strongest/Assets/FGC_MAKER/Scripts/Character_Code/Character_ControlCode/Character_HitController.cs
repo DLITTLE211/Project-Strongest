@@ -415,6 +415,7 @@ public class Character_HitController : MonoBehaviour
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         CallHitStopHitResponse(curField);
         Attack_KnockBack_Vertical currentKnockBack = GetActiveVerticalKnockback(blockedAttack);
+        
         while (currentHitstop > 0)
         {
             currentHitstop -= Base_FrameCode.ONE_FRAME;
@@ -446,25 +447,26 @@ public class Character_HitController : MonoBehaviour
                 yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
+        currentProperty.hitConnected = false;
         hitStunAmount = 0;
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
             ClearRecoveryRoutine(true);
             DownedFrameTickRoutine = UpdateFrameWhileDowned();
             _isRecovering = true;
+            HurtBoxType landingBoxType = HurtBoxType.NoBlock;
             if (currentCustomDamageField != null)
             {
-                HurtBoxType landingBoxType = currentCustomDamageField.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
-                _base._cHurtBox.SetHurboxState(landingBoxType);
+                landingBoxType = currentCustomDamageField.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
                 recoverRoutine = DoRecovery(currentCustomDamageField.KnockDown, curField, false);
             }
             else if (currentProperty != null)
             {
-                HurtBoxType landingBoxType = currentProperty.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
-                _base._cHurtBox.SetHurboxState(landingBoxType);
+                landingBoxType = currentProperty.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
                 recoverRoutine = DoRecovery(currentProperty.KnockDown, curField, false);
             }
             yield return new WaitUntil(() => _base._cHurtBox.IsGrounded());
+            _base._cHurtBox.SetHurboxState(landingBoxType);
             StartCoroutine(recoverRoutine);
             StartCoroutine(DownedFrameTickRoutine);
         }
@@ -670,8 +672,7 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator HandleDelayGetupRoutine(HitAnimationField recoveryAnim) 
     {
-        _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
-        if (currentCustomDamageField == null)
+       /* if (currentCustomDamageField == null)
         {
             if (CheckNextAttackCatchPostLanding())
             {
@@ -680,7 +681,7 @@ public class Character_HitController : MonoBehaviour
                 currentProperty = null;
                 yield break;
             }
-        }
+        }*/
         float startDelayGetupTime = 0;
         int maxHoldTime = 40;
         float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
@@ -715,8 +716,10 @@ public class Character_HitController : MonoBehaviour
         }
         isTeching = false;
         startDelayGetupTime = holdInputTimeInFrames;
+        _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
         _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
         yield return new WaitForSeconds(recoveryAnim.animLength);
+        SetRecoverable();
         if (bigHitRecovering)
         {
             bigHitRecovering = false;
@@ -725,12 +728,11 @@ public class Character_HitController : MonoBehaviour
         recoverRoutine = null;
         _isRecovering = false;
         _base._cHealth.StartHealthRegen();
-        SetRecoverable();
         currentCustomDamageField = null;
         currentProperty = null;
         blockedAttack = false;
         currentHitstun = 0;
-
+        SetRecoverable();
         _base.CheckAttackActive(false);
         ClearFrameTickRoutine();
     }

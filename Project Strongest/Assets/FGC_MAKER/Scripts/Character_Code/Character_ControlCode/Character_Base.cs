@@ -269,7 +269,18 @@ public class Character_Base : MonoBehaviour
         GetCharacterMoveList();
         inputVisualiser = new List<AttackInputTypes>();
         _cComboDetection.PrimeCombos();
-
+    }
+    public void ResetAllProperties() 
+    {
+        for (int i = 0; i < _characterCompleteMovelist.Count; i++) 
+        {
+            Attack_BaseProperties curBaseProperty = _characterCompleteMovelist[i];
+            if (!curBaseProperty.hitConnected) 
+            {
+                continue;
+            }
+            curBaseProperty.hitConnected = false;
+        }
     }
     void GetCharacterMoveList()
     {
@@ -732,6 +743,16 @@ public class Character_Base : MonoBehaviour
         myRb.useGravity = false;
         myRb.isKinematic = true;
         myRb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+    public void UnlockPosWithoutStorage()
+    {
+        myRb.isKinematic = false;
+        myRb.drag = 1;
+        myRb.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
+        myRb.velocity = new Vector3(0, 0, 0f);
+        storedXVelocity = 0f;
+        storedYVelocity = 0f;
+        myRb.useGravity = true;
     }
     public void UnlockPos(CustomCallback callback = null)
     {

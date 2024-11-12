@@ -103,6 +103,7 @@ public class Character_MoveList : MonoBehaviour
         ReserveAllAttackGatlingReset();
     }
 
+
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {
         #region Movelist Setup

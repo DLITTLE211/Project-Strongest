@@ -118,6 +118,7 @@ public class State_Idle : BaseState
     {
         _base._cHurtBox.SetHurboxState();
         _cAnim.ClearLastAttack();
+        _base.ResetAllProperties();
         while (!CanTransitionToIdle())
         {
             await DelayFrame();
