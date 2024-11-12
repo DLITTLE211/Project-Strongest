@@ -447,7 +447,6 @@ public class Character_HitController : MonoBehaviour
                 yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
-        currentProperty.hitConnected = false;
         hitStunAmount = 0;
         if (curField.hitReactionType == HitReactionType.KnockdownHit)
         {
@@ -462,6 +461,7 @@ public class Character_HitController : MonoBehaviour
             }
             else if (currentProperty != null)
             {
+                currentProperty.hitConnected = false;
                 landingBoxType = currentProperty.KnockDown == Attack_KnockDown.HKD ? HurtBoxType.HardKnockdown : HurtBoxType.SoftKnockdown;
                 recoverRoutine = DoRecovery(currentProperty.KnockDown, curField, false);
             }
@@ -472,6 +472,10 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
+            if (currentProperty != null)
+            {
+                currentProperty.hitConnected = false;
+            }
             _base._aFrameDataMeter.SetHitRecoveringState(false);
             _base.CheckAttackActive(false);
             if (recoverRoutine != null)

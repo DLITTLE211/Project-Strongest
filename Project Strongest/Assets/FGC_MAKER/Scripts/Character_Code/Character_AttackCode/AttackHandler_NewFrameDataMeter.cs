@@ -131,8 +131,10 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         }
         float frameValue = GameManager.instance._frameDataCalculator.FrameDifference;
         message = $"Startup: {_frameData.startup}/ TotalFrames: {_frameData.recoveryEnd}/";
-        string frameDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
-        string advantageAmount = frameDifference;
+        string attackingframeDifference = frameValue < 0 ? $"-{Mathf.Abs(frameValue)}" : $"+{Mathf.Abs(frameValue)}";
+        string hitframeDifference = frameValue < 0 ? $"+{Mathf.Abs(frameValue)}" : $"-{Mathf.Abs(frameValue)}";
+        string advantageAmount = attackingframeDifference;
+        _base.opponentPlayer._aFrameDataMeter.frameDataInformationText.text = $"Disadvantage: {hitframeDifference}";
         message += $"Advantage: {advantageAmount}";
         frameDataInformationText.text = message;
     }
