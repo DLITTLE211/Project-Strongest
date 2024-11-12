@@ -14,28 +14,47 @@ public class Menu_MenuButton : Button
     public TMP_Text buttonNameText;
     public Color32 backgroundHighligtedColor;
     public Transform NavigationButton;
-    private Vector3 startingPos;
+    [SerializeField]private Vector3 startingPos;
+    public float forwardPosition;
     public Image backgroundImage;
+    Sequence SlideTween;
+    public void OnEnable()
+    {
+        forwardPosition = NavigationButton.transform.localPosition.x + 95f;
+        startingPos = NavigationButton.localPosition;
+    }
     public override void OnSelect(BaseEventData eventData)
     {
-        startingPos = NavigationButton.localPosition;
         Raise();
     }
     public override void OnDeselect(BaseEventData eventData)
     {
         Lower();
     }
+    public void CompleteActiveTween(float xPos) 
+    {
+        if (SlideTween != null)
+        {
+            Vector3 endPos = new Vector3 (xPos, startingPos.y, startingPos.z);
+            NavigationButton.localPosition = endPos;
+            SlideTween.Complete();
+            SlideTween = null;
+        }
+    }
     public void Raise()
     {
-        float moveToPos = NavigationButton.transform.localPosition.x + 95f;
-        NavigationButton.DOMoveX(moveToPos, 0.35f);
-        NavigationButton.DOScale(1.1f, 0.35f);
+        CompleteActiveTween(forwardPosition);
+        SlideTween.Append(NavigationButton.DOMoveX(forwardPosition, 0.35f));
+        SlideTween.Append(NavigationButton.DOScale(1.1f, 0.35f));
+        SlideTween.Play();
         backgroundImage.DOColor(backgroundHighligtedColor, 0.35f);
     }
     public void Lower()
     {
-        NavigationButton.DOLocalMoveX(startingPos.x, 0.35f);
-        NavigationButton.DOScale(1, 0.35f);
+        CompleteActiveTween(startingPos.x);
+        SlideTween.Append(NavigationButton.DOLocalMoveX(startingPos.x, 0.35f));
+        SlideTween.Append(NavigationButton.DOScale(1, 0.35f));
+        SlideTween.Play();
     }
     public void Fade(float valuePoint, float _time, bool _interactable) 
     {
