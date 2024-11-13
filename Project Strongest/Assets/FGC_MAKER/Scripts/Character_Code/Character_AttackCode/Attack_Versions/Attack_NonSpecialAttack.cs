@@ -37,7 +37,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         for (int i = 0; i < _attackInput._correctInput.Count; i++)
         {
             _attackInput._correctInput[i].property.hitConnected = false;
-            _attackInput._correctInput[i].ResetGatlingCount();
         }
     }
     
@@ -51,9 +50,9 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     {
         ResetCombo();
     }
-    public void DecreaseGatlingCount(Attack_BaseInput currentInput) 
+    public Attack_CancelInfo GetCancelInfoType()
     {
-        currentInput.GatlingCount--;
+        return _attackInput._correctInput[curAttack].property.cancelProperty;
     }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
@@ -78,12 +77,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         SendAttackOnSucess();
         _curBase.comboList3_0.SetFollowAttack(newProperty);
     }
-    public bool GatlingDecreaseCheck(Attack_BaseInput currentAttack) 
-    {
-        bool lessThanZero = currentAttack.GatlingCount <= 0;
-        bool isNotInfinity = currentAttack.GatlingMax != Mathf.Infinity;
-        return lessThanZero && isNotInfinity;
-    }
     
     public void PreformAttack(Callback SendAttackOnSucess)
     {
@@ -106,14 +99,8 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
                     return;
                 }
             }
-            if (GatlingDecreaseCheck(_attackInput._correctInput[0])) 
-            {
-                _attackInput._correctInput[0].ResetGatlingCount();
-                Debug.LogError("Attack Has no more available gatlings. Returning...");
-                return;
-            }
             _curBase.comboList3_0.ClearFollowUpAttack();
-            _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess,() => DecreaseGatlingCount(_attackInput._correctInput[0]), ResetCombo);
+            _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess, ResetCombo);
             curAttack++;
         }
         catch (ArgumentOutOfRangeException)

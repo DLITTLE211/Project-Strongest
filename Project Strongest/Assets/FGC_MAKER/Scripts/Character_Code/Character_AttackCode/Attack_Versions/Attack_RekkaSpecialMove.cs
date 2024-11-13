@@ -61,13 +61,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         inRekkaState = false;
         curRekkaInput = 0;
         usedRekkas = new List<Attack_BaseProperties>();
-        for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
-        {
-            for (int j = 0; j < rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput.Count; j++)
-            {
-                rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput[j].ResetGatlingCount();
-            }
-        }
     }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
@@ -86,7 +79,6 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         usedRekkas.Add(newProperty);
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, leewayTime);
         _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess));
-    
     }
     public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 
     {
@@ -106,7 +98,17 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         ResetCombo();
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,leewayTime);
         inRekkaState = true;
-
+    }
+    public Attack_CancelInfo GetCancelInfoType()
+    {
+        if(usedRekkas.Count == 0) 
+        {
+            return rekkaInput.mainAttackProperty.cancelProperty;
+        }
+        else 
+        {
+            return rekkaInput._rekkaPortion[curRekkaInput].individualRekkaAttack._correctInput[0].property.cancelProperty;
+        }
     }
     public void ResetAttackData()
     {

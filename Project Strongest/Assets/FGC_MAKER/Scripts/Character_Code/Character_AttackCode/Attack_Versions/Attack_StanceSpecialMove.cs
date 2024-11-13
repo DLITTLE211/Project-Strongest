@@ -11,7 +11,8 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     [SerializeField] internal bool inStanceState;
     [SerializeField] internal int stanceHeldTime;
     [SerializeField] private Character_Base _curBase;
-
+    enum StanceState {KillStance, AttackStance }
+    StanceState _curStanceState;
     public void SetStarterInformation(Character_Base _base)
     {
         _curBase = _base;
@@ -82,9 +83,29 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         inStanceState = true;
     }
+    public Attack_CancelInfo GetCancelInfoType()
+    {
+        if (!inStanceState)
+        {
+            return stanceStartProperty.cancelProperty;
+        }
+        else 
+        {
+            if (_curStanceState == StanceState.AttackStance) 
+            {
+                return stanceInput.stanceAttack._stanceButtonInput._correctInput[curInput].property.cancelProperty;
+            }
+            if (_curStanceState == StanceState.KillStance) 
+            {
+                return stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.cancelProperty;
+            }
+            return stanceStartProperty.cancelProperty;
+        }
+    }
     public void DoFollowUpKill(int kill)
     {
-        Attack_BaseProperties newAttack = stanceInput.stanceKill._stanceButtonInput._correctInput[kill-1].property;
+        _curStanceState = StanceState.KillStance;
+           Attack_BaseProperties newAttack = stanceInput.stanceKill._stanceButtonInput._correctInput[kill-1].property;
         newAttack.InputTimer.SetTimerType(TimerType.Normal, 1 / 60f);
         _curBase._aManager.ClearAttacks();
         _curBase._cComboDetection.ResetCombos();
@@ -99,8 +120,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
         if (!(attack > stanceInput.stanceAttack._stanceButtonInput._correctInput.Count-1))
         {
-            Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
-
+            curInput = attack;
+               Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
+            _curStanceState = StanceState.AttackStance;
             newAttack.InputTimer.SetTimerType(TimerType.InStance, (stanceHeldTime * (1 / 60f)));
             _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess));
             ResetCombo();
@@ -134,14 +156,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
         _curBase._cAnimator._lastAttackState = lastAttackState.nullified;
          inStanceState = false;
-        for (int i = 0; i < stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; i++)
-        {
-            stanceInput.stanceAttack._stanceButtonInput._correctInput[i].ResetGatlingCount();
-        }
-        for (int i = 0; i < stanceInput.stanceKill._stanceButtonInput._correctInput.Count; i++)
-        {
-            stanceInput.stanceKill._stanceButtonInput._correctInput[i].ResetGatlingCount();
-        }
     }
 
 

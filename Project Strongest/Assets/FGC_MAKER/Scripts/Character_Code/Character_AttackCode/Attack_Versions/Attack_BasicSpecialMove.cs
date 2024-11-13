@@ -27,6 +27,10 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
             DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step...");
         }
     }
+    public Attack_CancelInfo GetCancelInfoType()
+    {
+        return property.cancelProperty;
+    }
     public void SetComboTimer()
     {
         property.InputTimer = _curBase._cAttackTimer;

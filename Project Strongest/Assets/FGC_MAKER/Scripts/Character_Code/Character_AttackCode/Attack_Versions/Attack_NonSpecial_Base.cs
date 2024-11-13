@@ -36,24 +36,11 @@ public class Attack_BaseInput
     public (MoveInput, AttackInput) verifyAttackInput;
     public Attack_BaseProperties property;
     public ButtonStateMachine attackInputState;
-    public float GatlingMax = -1;
-    public float GatlingCount;
     public void SetInnerAttackAnimations(Character_Animator animController)
     {
         property.AttackAnims.SetAttackAnim(animController);
         property.SetChipDamageValue();
         property.attackHashes = Animator.StringToHash(property.AttackAnims.animName);
-        if(GatlingMax == -1) 
-        {
-            GatlingMax = Mathf.Infinity;
-        }
-    }
-    public void ResetGatlingCount() 
-    {
-        if(GatlingMax != Mathf.Infinity) 
-        {
-            GatlingCount = GatlingMax;
-        }
     }
     public MoveListAttackInfo CreateMoveListData()
     {

@@ -73,6 +73,10 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
     }
+    public Attack_CancelInfo GetCancelInfoType() 
+    {
+        return property.cancelProperty;
+    }
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {
         if (!blockedAttack)

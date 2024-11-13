@@ -16,7 +16,6 @@ public class Attack_Manager : MonoBehaviour
     Queue<Attack_BaseProperties> _AttackAnimQueue;
     private List<Cancel_State> stringCancelStates;
     [SerializeField] private MoveType curTypeHierarchy;
-    //[SerializeField] internal int normalGatlingCount;
     public MoveType MoveTypeHierarchy { get { return curTypeHierarchy; } }
     IEnumerator RechargeRoutine;
     void Start()
@@ -25,7 +24,6 @@ public class Attack_Manager : MonoBehaviour
         _AttackAnimQueue = new Queue<Attack_BaseProperties>();  
         CanTransitionAnimation = true;
         SetStringCancelCheck();
-     //   normalGatlingCount = 3;
     }
     void SetStringCancelCheck() 
     {
@@ -36,6 +34,10 @@ public class Attack_Manager : MonoBehaviour
         stringCancelStates.Add(Cancel_State.Heavy_Normal_Attack);
         stringCancelStates.Add(Cancel_State.Heavy_String_Normal_Start);
         stringCancelStates.Add(Cancel_State.Heavy_String_Normal_FollowUp);
+    }
+    public Attack_CancelInfo GetLastCancelInfo() 
+    {
+        return Combo[Combo.Count - 1].cancelProperty;
     }
     public void ClearAttacks()
     {
@@ -59,7 +61,6 @@ public class Attack_Manager : MonoBehaviour
     public void ResetMoveHierarchy()
     {
         curTypeHierarchy = MoveType.Normal;
-  //      normalGatlingCount = 3;
     }
     public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
     {

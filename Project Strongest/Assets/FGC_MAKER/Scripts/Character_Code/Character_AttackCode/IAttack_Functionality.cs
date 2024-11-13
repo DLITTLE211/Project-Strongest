@@ -11,6 +11,7 @@ public interface IAttackFunctionality
     void SetStarterInformation(Character_Base _base);
     void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null,bool armoredAttack = false);
     MoveType GetAttackMoveType();
+    Attack_CancelInfo GetCancelInfoType();
     #endregion
 
     #region Virtual Functions

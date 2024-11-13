@@ -307,6 +307,10 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
         {
             entry = _base.CharacterMoveListAttacks.ElementAt(i);
+            if (!_base._aManager.GetLastCancelInfo().nextAvailableAttackRoute.HasFlag(entry.Value.GetCancelInfoType().CurrentLevel)) 
+            {
+                continue;
+            }
             if ((int)entry.Value.GetAttackMoveType() > 3)
             {
                 if (entry.Key.specialMoveTypeInput != null)
@@ -411,7 +415,7 @@ public class Character_ComboDetection : MonoBehaviour
             return;
         }
     }
-    Character_MobilityOption ExtraMovementVerifier(int mobilityChecker/*,AttackInputTypes mobilityInputMulti, AttackInputTypes mobilityInputSingle*/)
+    Character_MobilityOption ExtraMovementVerifier(int mobilityChecker)
     {
         _base._cMobiltyTimer.CheckForInput = true;
         for (int i = 0; i < _base.character_MobilityOptions.Mobility.Count; i++)

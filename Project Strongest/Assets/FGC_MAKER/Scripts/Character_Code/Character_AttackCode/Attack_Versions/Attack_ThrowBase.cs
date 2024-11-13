@@ -48,6 +48,10 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
 
         return newMoveListAttackInfo;
     }
+    public Attack_CancelInfo GetCancelInfoType()
+    {
+        return _attackInput._correctInput[curAttack].property.cancelProperty;
+    }
     public MoveType GetAttackMoveType()
     {
         return _attackInput._correctInput[0].property._moveType;
