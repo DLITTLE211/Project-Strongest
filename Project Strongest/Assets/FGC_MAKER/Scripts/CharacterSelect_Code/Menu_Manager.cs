@@ -104,22 +104,22 @@ public class Menu_Manager : MonoBehaviour
         }
         else
         {
-            players.InitAvailableIDs();
-            players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
-            players.AddUsedID(players.joystickNames[0]);
-            SetCharacterSelectCursorState(0);
+            if (_mainMenuPlayer == null)
+            {
+                players.InitAvailableIDs();
+                players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
+                players.AddUsedID(players.joystickNames[0]);
+                SetCharacterSelectCursorState(0);
+            }
         }
     }
     void SetCharacterSelectCursorState(int ID)
     {
-        if (_mainMenuPlayer == null)
-        {
-            _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
-            _mainMenuPlayerID = ID;
-            _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
-            _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
-                $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
-        }
+        _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
+        _mainMenuPlayerID = ID;
+        _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
+        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
+            $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
     }
     public void SetButtonHolderImages()
     {
@@ -151,16 +151,11 @@ public class Menu_Manager : MonoBehaviour
 
     public async void ExitSelected()
     {
-        Task[] tasks = new Task[]
-        {
-            CloseMainMenuScreen(),
-        };
-        await Task.WhenAll(tasks);
-        await Task.Delay(750);
         ToggleMainMenuState(false);
-        await Task.Delay(200);
+        await Task.Delay(950);
         ToggleTitleState(true);
         menuGameState = OutOfMatchGameState.Title;
+        _menuStateMachine.CallTitleState();
     }
     void ToggleTitleState(bool state) 
     {
