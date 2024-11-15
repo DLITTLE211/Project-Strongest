@@ -393,6 +393,7 @@ public class Character_HitController : MonoBehaviour
         if (DownedFrameTickRoutine != null)
         {
             StopCoroutine(DownedFrameTickRoutine);
+            _base._aFrameDataMeter.SetHitRecoveringState(false);
             DownedFrameTickRoutine = null;
         }
     }
@@ -612,22 +613,6 @@ public class Character_HitController : MonoBehaviour
             }
         }
         return refField[0];
-    }
-    bool CheckNextAttackCatchPostLanding()
-    {
-        Attack_BaseProperties _opponentProperty = _base.opponentPlayer._cAnimator.lastAttack;
-        if (_opponentProperty != null)
-        {
-            if (_opponentProperty.hitConnected == true && _opponentProperty != currentProperty)
-            {
-                if (lockMoveTypes.Contains(_opponentProperty._moveType))
-                {
-                    ForceLockHitAnim(_opponentProperty.hitLevel);
-                }
-                return true;
-            }
-        }
-        return false;
     }
 
     public void ForceLockHitAnim(HitLevel _level)
