@@ -148,17 +148,30 @@ public class Character_HurtboxController : MonoBehaviour
         _angleZ = (int)(angle * (180f / Mathf.PI) - 90f);
         _angleZ = _angleZ / 10;
         _angleZ = _angleZ * 10;
-        triggerBox.transform.localEulerAngles = new Vector3(0f, 0f, ClampAngle(_angleZ));
+        Vector3 hurtboxRotation = new Vector3(0f, 0f, -ClampAngle(_angleZ));
+        triggerBox.transform.localEulerAngles = hurtboxRotation;
+        collisionBox.transform.localEulerAngles = hurtboxRotation;
+        if (curSize == HurtBoxSize.Downed)
+        {
+            Vector3 hurtboxPosition = new Vector3(0f, -0.25f, 0f);
+            collisionBox.transform.localPosition = hurtboxPosition;
+        }
+        else
+        {
+            collisionBox.transform.localPosition = new Vector3(0f, 0.35f, 0f);
+        }
         #endregion
     }
     int ClampAngle(int angle) 
     {
-        if((90 - angle) <= 10) 
+        if((90 - angle) < 45) 
         {
+            curSize = HurtBoxSize.Downed;
             return 90;
         }
         if ((90 - angle) >= 70)
         {
+            curSize = HurtBoxSize.Standing;
             return 0;
         }
         return 0;
@@ -207,6 +220,5 @@ public class Character_HurtboxController : MonoBehaviour
 public enum HurtBoxSize
 {
     Standing,
-    Crouching,
     Downed,
 }

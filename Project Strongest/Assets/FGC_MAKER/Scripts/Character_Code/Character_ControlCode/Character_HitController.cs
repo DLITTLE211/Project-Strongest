@@ -653,7 +653,6 @@ public class Character_HitController : MonoBehaviour
             _base.Activate();
             yield return new WaitForSeconds(0.25f);
         }
-
         #region Choosing Recov Anim
         HitAnimationField recoveryAnim = CheckRecoveryAnim(knockDownType);
         Debug.LogError($"Chosen Getup Animation: {recoveryAnim.animName}");
@@ -676,16 +675,6 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator HandleDelayGetupRoutine(HitAnimationField recoveryAnim) 
     {
-       /* if (currentCustomDamageField == null)
-        {
-            if (CheckNextAttackCatchPostLanding())
-            {
-                _base._cHealth.StartHealthRegen();
-                currentCustomDamageField = null;
-                currentProperty = null;
-                yield break;
-            }
-        }*/
         float startDelayGetupTime = 0;
         int maxHoldTime = 40;
         float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
