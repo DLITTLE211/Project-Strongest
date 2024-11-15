@@ -76,8 +76,8 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 8192
-        nextAvailableAttackRoute: 24576
+        CurrentLevel: 65536
+        nextAvailableAttackRoute: 131072
       _moveType: 9
       AttackAnims:
         playerAnim: {fileID: 0}
@@ -224,7 +224,7 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 8192
+        CurrentLevel: 65536
         nextAvailableAttackRoute: 1
       _moveType: 9
       AttackAnims:
@@ -758,7 +758,7 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 16384
+        CurrentLevel: 131072
         nextAvailableAttackRoute: 1
       _moveType: 9
       AttackAnims:
@@ -1099,7 +1099,7 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 16384
+        CurrentLevel: 131072
         nextAvailableAttackRoute: 1
       _moveType: 9
       AttackAnims:
@@ -1180,7 +1180,7 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 256
+        CurrentLevel: 2048
         nextAvailableAttackRoute: 1
       _moveType: 8
       AttackAnims:
@@ -1553,7 +1553,7 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 256
+        CurrentLevel: 2048
         nextAvailableAttackRoute: 1
       _moveType: 7
       AttackAnims:
@@ -1793,7 +1793,7 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 256
+        CurrentLevel: 2048
         nextAvailableAttackRoute: 1
       _moveType: 7
       AttackAnims:
@@ -2026,8 +2026,8 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 1024
-        nextAvailableAttackRoute: 4096
+        CurrentLevel: 8192
+        nextAvailableAttackRoute: 32768
       _moveType: 6
       AttackAnims:
         playerAnim: {fileID: 0}
@@ -2141,8 +2141,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 4096
-                nextAvailableAttackRoute: 24576
+                CurrentLevel: 32768
+                nextAvailableAttackRoute: 1
               _moveType: 6
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2224,8 +2224,8 @@ MonoBehaviour:
         JumpCancelable: 0
         _airInfo: 0
         cancelProperty:
-          CurrentLevel: 512
-          nextAvailableAttackRoute: 27648
+          CurrentLevel: 4096
+          nextAvailableAttackRoute: 212992
         _moveType: 5
         AttackAnims:
           playerAnim: {fileID: 0}
@@ -2333,8 +2333,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
-                nextAvailableAttackRoute: 24576
+                CurrentLevel: 16384
+                nextAvailableAttackRoute: 221184
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2441,8 +2441,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
-                nextAvailableAttackRoute: 24576
+                CurrentLevel: 16384
+                nextAvailableAttackRoute: 1
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2556,8 +2556,8 @@ MonoBehaviour:
         JumpCancelable: 0
         _airInfo: 0
         cancelProperty:
-          CurrentLevel: 512
-          nextAvailableAttackRoute: 27904
+          CurrentLevel: 4096
+          nextAvailableAttackRoute: 215040
         _moveType: 5
         AttackAnims:
           playerAnim: {fileID: 0}
@@ -2665,7 +2665,7 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
+                CurrentLevel: 16384
                 nextAvailableAttackRoute: 1
               _moveType: 5
               AttackAnims:
@@ -2740,8 +2740,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
-                nextAvailableAttackRoute: 26880
+                CurrentLevel: 16384
+                nextAvailableAttackRoute: 212992
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2848,8 +2848,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
-                nextAvailableAttackRoute: 26624
+                CurrentLevel: 16384
+                nextAvailableAttackRoute: 212992
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2963,8 +2963,8 @@ MonoBehaviour:
         JumpCancelable: 0
         _airInfo: 0
         cancelProperty:
-          CurrentLevel: 512
-          nextAvailableAttackRoute: 27904
+          CurrentLevel: 4096
+          nextAvailableAttackRoute: 223232
         _moveType: 5
         AttackAnims:
           playerAnim: {fileID: 0}
@@ -3072,7 +3072,7 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
+                CurrentLevel: 16384
                 nextAvailableAttackRoute: 1
               _moveType: 5
               AttackAnims:
@@ -3147,8 +3147,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
-                nextAvailableAttackRoute: 26880
+                CurrentLevel: 16384
+                nextAvailableAttackRoute: 212992
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -3255,8 +3255,8 @@ MonoBehaviour:
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 2048
-                nextAvailableAttackRoute: 26880
+                CurrentLevel: 16384
+                nextAvailableAttackRoute: 212992
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -3365,8 +3365,8 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 256
-        nextAvailableAttackRoute: 24576
+        CurrentLevel: 2048
+        nextAvailableAttackRoute: 1
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
@@ -3440,8 +3440,8 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 256
-        nextAvailableAttackRoute: 26368
+        CurrentLevel: 2048
+        nextAvailableAttackRoute: 208896
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
@@ -3548,8 +3548,8 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        CurrentLevel: 256
-        nextAvailableAttackRoute: 26368
+        CurrentLevel: 2048
+        nextAvailableAttackRoute: 208896
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
@@ -3664,8 +3664,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 16
-            nextAvailableAttackRoute: 26464
+            CurrentLevel: 8
+            nextAvailableAttackRoute: 212848
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3770,8 +3770,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 32
-            nextAvailableAttackRoute: 26464
+            CurrentLevel: 256
+            nextAvailableAttackRoute: 211232
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3876,8 +3876,8 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 32
-            nextAvailableAttackRoute: 26376
+            CurrentLevel: 256
+            nextAvailableAttackRoute: 210944
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -3988,8 +3988,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 16
-            nextAvailableAttackRoute: 59242
+            CurrentLevel: 128
+            nextAvailableAttackRoute: 212836
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4061,8 +4061,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 32
-            nextAvailableAttackRoute: 26464
+            CurrentLevel: 256
+            nextAvailableAttackRoute: 211232
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4167,8 +4167,8 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 32
-            nextAvailableAttackRoute: 26368
+            CurrentLevel: 256
+            nextAvailableAttackRoute: 210944
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4279,8 +4279,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 64
-            nextAvailableAttackRoute: 26504
+            CurrentLevel: 512
+            nextAvailableAttackRoute: 211968
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4385,8 +4385,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 128
-            nextAvailableAttackRoute: 26496
+            CurrentLevel: 1024
+            nextAvailableAttackRoute: 211968
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4491,8 +4491,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 128
-            nextAvailableAttackRoute: 26368
+            CurrentLevel: 1024
+            nextAvailableAttackRoute: 210976
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4603,8 +4603,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 16
-            nextAvailableAttackRoute: 26408
+            CurrentLevel: 128
+            nextAvailableAttackRoute: 211200
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4676,8 +4676,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 32
-            nextAvailableAttackRoute: 26400
+            CurrentLevel: 256
+            nextAvailableAttackRoute: 211232
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4782,7 +4782,7 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 32
+            CurrentLevel: 256
             nextAvailableAttackRoute: 1
           _moveType: 3
           AttackAnims:
@@ -4894,8 +4894,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 64
-            nextAvailableAttackRoute: 26496
+            CurrentLevel: 512
+            nextAvailableAttackRoute: 15392
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -5000,8 +5000,8 @@ MonoBehaviour:
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 128
-            nextAvailableAttackRoute: 26496
+            CurrentLevel: 1024
+            nextAvailableAttackRoute: 197632
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -5106,8 +5106,8 @@ MonoBehaviour:
           JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 128
-            nextAvailableAttackRoute: 26368
+            CurrentLevel: 1024
+            nextAvailableAttackRoute: 211968
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
