@@ -151,7 +151,7 @@ public class Character_HurtboxController : MonoBehaviour
         Vector3 hurtboxRotation = new Vector3(0f, 0f, -ClampAngle(_angleZ));
         triggerBox.transform.localEulerAngles = hurtboxRotation;
         collisionBox.transform.localEulerAngles = hurtboxRotation;
-        if (curSize == HurtBoxSize.Downed)
+        if (curSize == HurtBoxSize.Downed && _base._cAnimator.isHit)
         {
             Vector3 hurtboxPosition = new Vector3(0f, -0.25f, 0f);
             collisionBox.transform.localPosition = hurtboxPosition;
@@ -164,7 +164,7 @@ public class Character_HurtboxController : MonoBehaviour
     }
     int ClampAngle(int angle) 
     {
-        if((90 - angle) < 45) 
+        if((90 - angle) < 15) 
         {
             curSize = HurtBoxSize.Downed;
             return 90;
