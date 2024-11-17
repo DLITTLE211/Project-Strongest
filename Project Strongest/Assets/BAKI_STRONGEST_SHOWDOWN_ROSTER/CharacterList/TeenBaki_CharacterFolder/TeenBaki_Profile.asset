@@ -185,6 +185,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 0
     knockdownAnimType: 6
+    _getupType: 0
   - anim: {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.40000004
     animName: Teen_Baki_Hanma|Baki_AirHit_Medium
@@ -194,6 +195,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 0
     knockdownAnimType: 12
+    _getupType: 0
   - anim: {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.40000004
     animName: Teen_Baki_Hanma|Baki_AirHit_Medium
@@ -203,6 +205,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 1
     knockdownAnimType: 12
+    _getupType: 0
   - anim: {fileID: 6327056528149712200, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.40000004
     animName: Teen_Baki_Hanma|Baki_AirHit_Medium
@@ -212,6 +215,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 0
     knockdownAnimType: 12
+    _getupType: 0
   - anim: {fileID: -389730627734710113, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.33333334
     animName: Teen_Baki_Hanma|Baki_Hit_Light_High
@@ -221,6 +225,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 0
+    _getupType: 0
   - anim: {fileID: 5778651045872708591, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.33333334
     animName: Teen_Baki_Hanma|Baki_Hit_Light_Low
@@ -230,6 +235,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 1
     knockdownAnimType: 0
+    _getupType: 0
   - anim: {fileID: 4924918340411067150, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.48333335
     animName: Teen_Baki_Hanma|Baki_Hit_Medium
@@ -239,6 +245,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 6
+    _getupType: 0
   - anim: {fileID: 5208742648357843553, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.3166667
     animName: Teen_Baki_Hanma|Baki_Hit_Scorpion
@@ -248,6 +255,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 4
+    _getupType: 0
   - anim: {fileID: 5208742648357843553, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.3166667
     animName: Teen_Baki_Hanma|Baki_Hit_Scorpion
@@ -257,6 +265,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 0
     knockdownAnimType: 4
+    _getupType: 0
   - anim: {fileID: 4924918340411067150, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.48333335
     animName: Teen_Baki_Hanma|Baki_Hit_Medium
@@ -266,6 +275,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 1
     knockdownAnimType: 6
+    _getupType: 0
   - anim: {fileID: 7237084685499626062, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.40000004
     animName: Teen_Baki_Hanma|Baki_Hit_Heavy
@@ -275,6 +285,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 12
+    _getupType: 0
   - anim: {fileID: -7835788572680383352, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.5666667
     animName: Teen_Baki_Hanma|Baki_Hit_Spiral
@@ -284,6 +295,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 0
     knockdownAnimType: 12
+    _getupType: 0
   - anim: {fileID: 2207197074920698395, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.9833334
     animName: Teen_Baki_Hanma|Baki_Hit_Crumple
@@ -293,6 +305,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 8
+    _getupType: 0
   - anim: {fileID: -3696293777989950416, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.5666667
     animName: Teen_Baki_Hanma|Baki_Recovery_Quick_Neutral
@@ -302,6 +315,17 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: 6889617363822583662, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+    animLength: 0.5666667
+    animName: Teen_Baki_Hanma|Baki_Recovery_Quick_Backward
+    animHash: 1550494520
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 1
   - anim: {fileID: 2896725252375600880, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 1.2333333
     animName: Teen_Baki_Hanma|Baki_Recovery_Slow
@@ -311,6 +335,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 8
+    _getupType: 0
   - anim: {fileID: -8144785306977315781, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.3166667
     animName: Teen_Baki_Hanma|Baki_AirHit_Recovery
@@ -320,6 +345,7 @@ MonoBehaviour:
     isGroundedReaction: 0
     isLowReaction: 0
     knockdownAnimType: 2
+    _getupType: 0
   - anim: {fileID: 1004197965378419970, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.15
     animName: Teen_Baki_Hanma|Baki_Crouching_Block_Light
@@ -329,6 +355,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 1
     knockdownAnimType: 0
+    _getupType: 0
   - anim: {fileID: 4796337506762950774, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.23333335
     animName: Teen_Baki_Hanma|Baki_Crouching_Block_GB
@@ -338,6 +365,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 1
     knockdownAnimType: 0
+    _getupType: 0
   - anim: {fileID: -1131065339644128694, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.15
     animName: Teen_Baki_Hanma|Baki_Standing_Block_Light
@@ -347,6 +375,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 0
+    _getupType: 0
   - anim: {fileID: 6069034043394549626, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     animLength: 0.23333335
     animName: Teen_Baki_Hanma|Baki_Standing_Block_GB
@@ -356,6 +385,7 @@ MonoBehaviour:
     isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 0
+    _getupType: 0
   StandBlockAnim: {fileID: -1586074178185308347, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   CrouchBlockAnim: {fileID: -5350492469610822897, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   _characterMoveList: {fileID: -3225154758481460539, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}

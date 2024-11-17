@@ -1200,7 +1200,7 @@ MonoBehaviour:
         hu_size: {x: 1, y: 2.15}
         _frameData:
           init: 0
-          startup: 5
+          startup: 18
           active: 19
           inactive: 28
           recoveryEnd: 0
@@ -4154,7 +4154,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.65
           attackMainStunValues:
-            hitstunValue: 25
+            hitstunValue: 18
             blockStunValue: 2
             hitstopValue: 3
             blockStopValue: 0
@@ -4244,7 +4244,7 @@ MonoBehaviour:
             Hit_Value: 8
             Block_VKB_Level: 0
             Block_Value: 1.25
-          KnockDown: 2
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0

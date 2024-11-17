@@ -79,6 +79,18 @@ public class Character_HitController : MonoBehaviour
             curHitAnim.DoAnimationInfoSetup();
             if (curHitAnim.hitReactionType == HitReactionType.Getup)
             {
+                if (curHitAnim._getupType == GetupType.Neutral && curHitAnim.knockdownAnimType != Attack_KnockDown.HKD && curHitAnim.isGroundedReaction)
+                {
+                    characterTotalHitReactions.neutralGetupReaction = curHitAnim;
+                    characterTotalHitReactions.getUpReactions.Add(_base.characterProfile.properHitResponseAnimations[i]);
+                    continue;
+                }
+                if (curHitAnim._getupType == GetupType.Back && curHitAnim.knockdownAnimType != Attack_KnockDown.HKD && curHitAnim.isGroundedReaction)
+                {
+                    characterTotalHitReactions.backGetupReaction = curHitAnim;
+                    characterTotalHitReactions.getUpReactions.Add(_base.characterProfile.properHitResponseAnimations[i]);
+                    continue;
+                }
                 characterTotalHitReactions.getUpReactions.Add(_base.characterProfile.properHitResponseAnimations[i]);
                 continue;
             }
@@ -664,30 +676,44 @@ public class Character_HitController : MonoBehaviour
         int maxHoldTime = 40;
         float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
         bool isTeching;
-        if (HoldingAway())
-        {
-            _base._cForce.InstantForceAway(-0.85f);
-        }
-        else 
+        if (recoveryAnim.knockdownAnimType == Attack_KnockDown.HKD)
         {
             isTeching = false;
-            if (_base._subState == Character_SubStates.Controlled)
+            startDelayGetupTime = holdInputTimeInFrames;
+            _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
+            _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
+            yield return new WaitForSeconds(recoveryAnim.animLength);
+        }
+        else
+        {
+            if (HoldingAway())
             {
-                if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+                recoveryAnim = characterTotalHitReactions.backGetupReaction;
+                _base._cForce.InstantForceAway(-0.85f);
+            }
+            else
+            {
+                recoveryAnim = characterTotalHitReactions.neutralGetupReaction;
+                isTeching = false;
+                if (_base._subState == Character_SubStates.Controlled)
                 {
-                    while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
+                    if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
                     {
-                        startDelayGetupTime += Base_FrameCode.ONE_FRAME;
-                        if (HoldingAway())
+                        while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
                         {
-                            _base._cForce.InstantForceAway(-0.85f);
-                            isTeching = true;
+                            startDelayGetupTime += Base_FrameCode.ONE_FRAME;
+                            if (HoldingAway())
+                            {
+                                recoveryAnim = characterTotalHitReactions.backGetupReaction;
+                                _base._cForce.InstantForceAway(-0.85f);
+                                isTeching = true;
+                            }
+                            else if (!(_base.ReturnMovementInputs().Button_State.directionalInput <= 3))
+                            {
+                                isTeching = true;
+                            }
+                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                         }
-                        else if (!(_base.ReturnMovementInputs().Button_State.directionalInput <= 3))
-                        {
-                            isTeching = true;
-                        }
-                        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                     }
                 }
             }

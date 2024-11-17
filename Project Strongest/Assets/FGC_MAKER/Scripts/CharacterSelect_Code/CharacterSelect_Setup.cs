@@ -688,7 +688,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         if (_player1_Cursor.cursorPage.chosenCharacter == _player2_Cursor.cursorPage.chosenCharacter)
         {
             colorIndex = _player2_Cursor.cursorPage.colorSelectIndex != _player1_Cursor.cursorPage.colorSelectIndex ? _player2_Cursor.cursorPage.colorSelectIndex : _player2_Cursor.cursorPage.colorSelectIndex + 1;
-            if (colorIndex >= _player2_Cursor.cursorPage.chosenCharacter._characterSkins.ColorSets.Count - 1)
+            if (colorIndex > _player2_Cursor.cursorPage.chosenCharacter._characterSkins.ColorSets.Count - 1)
             {
                 colorIndex = 0;
             }

@@ -337,31 +337,14 @@ public class HurtBox : CollisionDetection
                 {
                     Base_Target._cHitController.ClearRecoveryRoutine(true);
                 }
-                //Base_Target._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
             }
-          /*  if (currentHitProperties._moveType == MoveType.Throw)
+            if (currentHitProperties._moveType == MoveType.Throw ^ currentHitProperties._moveType == MoveType.CommandGrab)
             {
-             *//*   float frameCount = 0;
-                Base_Target._cAnimator.isHit = true;
-                while (frameCount < Base_Target._cHurtBox.throwTechTime)
+                if(Base_Target._cStateMachine._playerState.current.State == Base_Target._cStateMachine.hitStateRef) 
                 {
-                    if (Base_Target._cHurtBox.CheckIfThrowTeched())
-                    {
-                        frameCount = Base_Target._cHurtBox.throwTechTime;
-                        Base_Target._cHitController. SetCurrentProperty(currentHitProperties);
-                        Base_Attacker._cHitController.SetCurrentProperty(currentHitProperties);
-
-                        Base_Target._cHitController.BlockHitDetect(currentHitProperties);
-                        Base_Attacker._cHitController.BlockHitDetect(currentHitProperties);
-
-                        Base_Target._cForce.InstantForceAway(-0.85f);
-                        Base_Attacker._cForce.InstantForceAway(-0.85f);
-                        yield break;
-                    }
-                    frameCount += Base_FrameCode.ONE_FRAME;
-                    yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-                }*//*
-            }*/
+                    yield break;
+                }
+            }
         }
         if (Base_Attacker._cAttackTimer.FrameCountTimer <= 0.4f) 
         {

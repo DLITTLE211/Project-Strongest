@@ -105,10 +105,6 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeDamage(Attack_BaseProperties currentAttack,bool armoredAttack)
     {
         curRawDamage = currentAttack.rawAttackDamage;
-        /*if (CheckAfflictionState())
-        {
-            afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-        }*/
         if (!CheckCounterHitState())
         {
             counterHitMult = 1;
@@ -206,7 +202,7 @@ public class Character_DamageCalculator : MonoBehaviour
     }
     public float GetCurrentScaling() 
     {
-        return calculatedScaling * 3;
+        return calculatedScaling * 1.75f;
     }
     public void ResetScaling() 
     {

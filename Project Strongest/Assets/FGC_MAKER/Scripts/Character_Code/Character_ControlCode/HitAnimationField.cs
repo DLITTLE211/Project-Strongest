@@ -14,7 +14,8 @@ public class HitAnimationField
     public bool isGroundedReaction;
     public bool isLowReaction;
     public Attack_KnockDown knockdownAnimType;
-    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName, HitReactionType _hitReactionType, HitLevel _hitLevel, bool _isGroundedReaction = true, bool _isLowReaction = false, Attack_KnockDown _knockdownAnimType = Attack_KnockDown.NONE)
+    public GetupType _getupType;
+    public HitAnimationField(AnimationClip _anim, float _animLength, string _animName, HitReactionType _hitReactionType, HitLevel _hitLevel, bool _isGroundedReaction = true, bool _isLowReaction = false, Attack_KnockDown _knockdownAnimType = Attack_KnockDown.NONE,GetupType getupType = GetupType.Neutral)
     {
         anim = _anim;
         animLength = _animLength;
@@ -25,6 +26,7 @@ public class HitAnimationField
         isGroundedReaction = _isGroundedReaction;
         isLowReaction = _isLowReaction;
         knockdownAnimType = _knockdownAnimType;
+        _getupType = getupType;
     }
     public void DoAnimationInfoSetup()
     {
@@ -39,6 +41,8 @@ public class HitAnimationHolder
 {
     public List<HitAnimationField> hitReactions;
     public List<HitAnimationField> blockReactions;
+    public HitAnimationField neutralGetupReaction;
+    public HitAnimationField backGetupReaction;
     public List<HitAnimationField> getUpReactions;
     public void Setup()
     {
@@ -55,4 +59,10 @@ public enum HitReactionType
     StandardBlock = 2,
     GuardBreakBlock = 3,
     Getup = 4,
+}
+[Serializable]
+public enum GetupType
+{
+    Neutral = 0,
+    Back = 1,
 }
