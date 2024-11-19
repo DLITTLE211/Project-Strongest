@@ -11,7 +11,7 @@ public class MainGame_CameraController : MonoBehaviour
     [SerializeField] private float maxWidth;
     [SerializeField] private float wallBoundBias;
 
-    private float size;
+    [SerializeField] private float size;
     private Vector3 velocity;
     [SerializeField] float zPos;
 
@@ -24,7 +24,7 @@ public class MainGame_CameraController : MonoBehaviour
     [SerializeField] private HitPointCall cameraControlCalls;
     [SerializeField] private bool isTracking;
     IEnumerator ShakeRoutine;
-    
+    Tween cameraZoomTween;
     private void Start()
     {
         InitCameraInformation();
@@ -51,7 +51,7 @@ public class MainGame_CameraController : MonoBehaviour
     {
         size = GreatestDistance();
         minWidth = 1.65f;
-        maxWidth = 1.95f;
+        maxWidth = 2.05f;
         smoothTime = 0.215f;
     }
     public void CallCameraShake(float duration, int intensity)
@@ -110,26 +110,28 @@ public class MainGame_CameraController : MonoBehaviour
     #endregion
     void ZoomCamera()
     {
-        if (GreatestDistance() >= (minWidth - 1f) && GreatestDistance() <= (maxWidth + 2f))
+        size = GreatestDistance();
+        if (size >= maxWidth) { size = maxWidth; }
+        if (size <= minWidth) { size = minWidth; }
+        if (distanceCheckMax(GreatestDistance()))
         {
-            float lastVal = ((int)(GreatestDistance() * 10) / 10f);
-            float intBound = ((int)(size * 10) / 10f);
-            if (distanceCheckMax(GreatestDistance()))
+            FadeZoom(maxWidth);
+        }
+        if (distanceCheckMin(GreatestDistance()))
+        {
+            FadeZoom(minWidth);
+        }
+    }
+    void FadeZoom(float newSize)
+    {
+        if (orthoCamera.orthographicSize != newSize && cameraZoomTween == null)
+        {
+            cameraZoomTween = orthoCamera.DOOrthoSize(newSize, 50f * Base_FrameCode.ONE_FRAME);
+            cameraZoomTween.Play();
+            cameraZoomTween.OnComplete(() =>
             {
-                if (intBound != lastVal)
-                {
-                    size = GreatestDistance();
-                    orthoCamera.DOOrthoSize(maxWidth, 2f);
-                }
-            }
-            if (distanceCheckMin(GreatestDistance()))
-            {
-                if (intBound != lastVal)
-                {
-                    size = GreatestDistance();
-                    orthoCamera.DOOrthoSize(minWidth, 2f);
-                }
-            }
+                cameraZoomTween = null;
+            });
         }
     }
     #region Function Summary
@@ -140,7 +142,7 @@ public class MainGame_CameraController : MonoBehaviour
     #endregion
     bool distanceCheckMax(float size)
     {
-        bool check = size >= 3.15f && size <= 3.75f;
+        bool check = size > 2.75f && size <= 4.75f;
         return check;
     }
 
@@ -152,7 +154,7 @@ public class MainGame_CameraController : MonoBehaviour
     #endregion
     bool distanceCheckMin(float size)
     {
-        bool check = size >= 2.55f && size <= 3.15f;
+        bool check = size >= 0.45f && size <= 1.95f;
         return check;
     }
 
