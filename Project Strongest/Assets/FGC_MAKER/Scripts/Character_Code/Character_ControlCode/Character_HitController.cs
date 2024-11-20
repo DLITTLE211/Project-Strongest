@@ -411,6 +411,7 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator DoHitResponse(HitAnimationField curField, float overrideStunAmount = -1f)
     {
+        ClearFrameTickRoutine();
         if (overrideStunAmount != -1f)
         {
             hitStunAmount = overrideStunAmount;
@@ -424,7 +425,6 @@ public class Character_HitController : MonoBehaviour
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
         _base._cAnimator.SetCanRecover(true);
         _base._cHitstun.CallHitStun(hitStunAmount);
-        ClearFrameTickRoutine();
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         CallHitStopHitResponse(curField);
         Attack_KnockBack_Vertical currentKnockBack = GetActiveVerticalKnockback(blockedAttack);

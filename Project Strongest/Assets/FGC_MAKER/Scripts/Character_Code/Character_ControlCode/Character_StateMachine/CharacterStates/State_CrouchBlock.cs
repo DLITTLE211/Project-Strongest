@@ -53,6 +53,7 @@ public class State_CrouchBlock : BaseState
             if (nextTransition.To != _base._cStateMachine.crouchBlockRef)
             {
                 _base._cBlockHandler.KillCurrentRoutine();
+                _base._cBlockHandler.isBlocking = false;
                 _base._cHurtBox.SetHurboxState();
                 _cAnim.SetCanTransitionIdle(true);
             }

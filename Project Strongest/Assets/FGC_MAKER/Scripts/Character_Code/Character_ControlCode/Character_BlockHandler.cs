@@ -10,8 +10,10 @@ public class Character_BlockHandler : MonoBehaviour
     [SerializeField] private Character_BlockOption CrouchBlock;
     IEnumerator BlockRoutine;
     float frameCount = 0;
+    public bool isBlocking;
     public void SetBlockAnimationData(Character_Base _base) 
     {
+        isBlocking = false;
         StandBlock.SetStarterInformation(_base, _base.characterProfile.StandBlockAnim);
         CrouchBlock.SetStarterInformation(_base, _base.characterProfile.CrouchBlockAnim);
     }
@@ -46,6 +48,7 @@ public class Character_BlockHandler : MonoBehaviour
     }
     public void DeactivateBlockAnim(Character_BlockOption _currentAction, bool isStandBlock, bool isActivating)
     {
+        isBlocking = false;
         KillCurrentRoutine();
        BlockRoutine = PlayAnimSequence(_currentAction, isStandBlock, isActivating);
         StartCoroutine(BlockRoutine);
@@ -72,6 +75,7 @@ public class Character_BlockHandler : MonoBehaviour
                 _currentAction.activated = true;
                 if (isActivating)
                 {
+                    isBlocking = true;
                     _currentAction.CurBase._cAnimator.canBlock = true;
                     Callback SetBlockStyle = isStandBlock == true ?
                         () => _currentAction.CurBase._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh) :

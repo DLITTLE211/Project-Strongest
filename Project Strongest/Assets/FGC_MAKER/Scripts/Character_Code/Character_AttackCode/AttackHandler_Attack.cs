@@ -285,7 +285,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
-        while (frameCount <= totalFrameTime)
+        while (frameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
@@ -364,7 +364,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
-        while (frameCount <= totalFrameTime)
+        while (frameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
