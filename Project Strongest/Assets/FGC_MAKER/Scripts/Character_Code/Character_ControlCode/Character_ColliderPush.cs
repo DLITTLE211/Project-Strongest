@@ -8,7 +8,7 @@ public class Character_ColliderPush : MonoBehaviour
     Character_Base opponentFace;
     CapsuleCollider _self;
     public Collider[] tempColliders;
-    private const float pushBackMultiplier = 0.15f;
+    private const float pushBackMultiplier = 0.35f;
     public void SetCharacterBase(Character_Base newBase) 
     {
         _base = newBase;

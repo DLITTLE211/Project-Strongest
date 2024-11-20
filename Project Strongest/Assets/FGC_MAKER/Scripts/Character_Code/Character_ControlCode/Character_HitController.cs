@@ -485,6 +485,12 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
+            if (!_base._cHurtBox.IsGrounded())
+            {
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                HitAnimationField recoveryAnim = CheckRecoveryAnim(curField.knockdownAnimType);
+                _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
+            }
             if (currentProperty != null)
             {
                 currentProperty.hitConnected = false;
@@ -609,9 +615,20 @@ public class Character_HitController : MonoBehaviour
     HitAnimationField CheckRecoveryAnim(Attack_KnockDown _knockDownType)
     {
         List<HitAnimationField> refField = new List<HitAnimationField>(characterTotalHitReactions.getUpReactions);
+        bool IsGrounded = _base._cHurtBox.IsGrounded();
         for (int i = 0; i < refField.Count; i++)
         {
             if (!refField[i].knockdownAnimType.HasFlag(_knockDownType))
+            {
+                refField[i] = null;
+                continue;
+            }
+            if(IsGrounded && !refField[i].isGroundedReaction) 
+            {
+                refField[i] = null;
+                continue;
+            }
+            if (!IsGrounded && refField[i].isGroundedReaction)
             {
                 refField[i] = null;
                 continue;
