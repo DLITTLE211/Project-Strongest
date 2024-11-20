@@ -412,23 +412,49 @@ public class Character_Force : MonoBehaviour
         {
             if (_mInput.movementPriority == 2)
             {
-                if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.dashStateRef)
+                bool attackDashCancellable = true;
+                if (_base._cAnimator.CheckAttackState()) 
+                {
+                    if (!_base._cAnimator.lastAttack.dashCancelable) 
+                    {
+                        attackDashCancellable = false;
+                    }
+                    else { attackDashCancellable = true; }
+                }
+                List<IState> validDashStates = new List<IState>() 
+                {
+                    _base._cStateMachine.dashStateRef,
+                    _base._cStateMachine.attackingStateRef
+                };
+                bool inDashAvailableState = validDashStates.Contains(_base._cStateMachine._playerState.current.State);
+                if (!inDashAvailableState || !attackDashCancellable)
                 {
                     acceptableStates.Clear();
                     sendingForce = false;
                     return;
                 }
+                _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
             }
             else
             {
+                bool attackJumpCancellable = true;
+                if (_base._cAnimator.CheckAttackState())
+                {
+                    if (!_base._cAnimator.lastAttack.JumpCancelable)
+                    {
+                        attackJumpCancellable = false;
+                    }
+                    else { attackJumpCancellable = true; }
+                }
                 acceptableStates.Clear();
                 AddAcceptableStates();
-                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State))
+                if (!acceptableStates.Contains(_base._cStateMachine._playerState.current.State) || !attackJumpCancellable)
                 {
                     acceptableStates.Clear();
                     sendingForce = false;
                     return;
                 }
+                _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
             }
             _base.movementPC = _mInput.movementPriority;
             _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
