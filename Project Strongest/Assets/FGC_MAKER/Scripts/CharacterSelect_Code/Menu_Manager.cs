@@ -44,6 +44,8 @@ public class Menu_Manager : MonoBehaviour
         _menuStateMachine.CallTitleState();
         //ToggleTitleState(true);
         SetPlayerControllers();
+        ReInput.ControllerConnectedEvent += SetPlayerControllers;
+        ReInput.ControllerDisconnectedEvent += UnsetPlayerControllers;
         menuGameState = OutOfMatchGameState.Title;
     }
     private void Update()
@@ -96,7 +98,7 @@ public class Menu_Manager : MonoBehaviour
         _eventSystem.firstSelectedGameObject = FirstMenuButtonLayer.buttonList[0].gameObject;
         FirstMenuButtonLayer.buttonList[0].Select();
     }
-    void SetPlayerControllers()
+    void SetPlayerControllers(ControllerStatusChangedEventArgs args = null)
     {
         if (ReInput.controllers.GetJoystickNames().Length <= 0)
         {
@@ -113,6 +115,16 @@ public class Menu_Manager : MonoBehaviour
             }
         }
     }
+    void UnsetPlayerControllers(ControllerStatusChangedEventArgs args = null)
+    {
+        _mainMenuPlayer.controllers.RemoveController(ControllerType.Joystick, players.UsedID.Item1[_mainMenuPlayerID]);
+        _mainMenuPlayer = null;
+        _mainMenuPlayerID = -1;
+        if (ReInput.controllers.GetJoystickNames().Length <= 0)
+        {
+            players.InitAvailableIDs();
+        }
+    }
     void SetCharacterSelectCursorState(int ID)
     {
         _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
@@ -120,6 +132,7 @@ public class Menu_Manager : MonoBehaviour
         _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
         _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
             $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+        SetActiveButton();
     }
     public void SetButtonHolderImages()
     {
