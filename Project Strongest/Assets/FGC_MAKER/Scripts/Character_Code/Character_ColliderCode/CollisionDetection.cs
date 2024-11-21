@@ -83,6 +83,8 @@ public class CollisionDetection : MonoBehaviour
         hurtboxColor.Add(HurtBoxType.Invincible, new Color32(255, 255, 255, 95));
         hurtboxColor.Add(HurtBoxType.Armor, new Color32(0, 0, 0, 95));
         hurtboxColor.Add(HurtBoxType.FullCounter, new Color32(188, 106, 106, 95));
+        hurtboxColor.Add(HurtBoxType.LowImmune, new Color32(2, 150, 90, 95));
+        hurtboxColor.Add(HurtBoxType.HighImmune, new Color32(210, 3, 45, 95));
     }
     public void SetHitboxState(HitBoxType _hitProperty)
     {

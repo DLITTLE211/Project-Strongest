@@ -69,7 +69,8 @@ public class Character_MobilityOptions : MonoBehaviour
                 _currentAction.frameData._extraPoints[i].projectileSpeed,
                 _currentAction.frameData._extraPoints[i].snapMovement,
                 _currentAction.frameData._extraPoints[i].customDamage,
-                _currentAction.frameData._extraPoints[i].awaitEnum);
+                _currentAction.frameData._extraPoints[i].awaitEnum,
+                _currentAction.frameData._extraPoints[i]._hurtboxType);
             callbackList.Add(customCallback);
         }
     }

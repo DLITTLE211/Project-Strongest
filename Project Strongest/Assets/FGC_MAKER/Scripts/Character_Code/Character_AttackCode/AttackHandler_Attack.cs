@@ -247,7 +247,8 @@ public class AttackHandler_Attack : AttackHandler_Base
                     throwAttackCallbacks._frameData._extraPoints[i].projectileSpeed, 
                     throwAttackCallbacks._frameData._extraPoints[i].snapMovement,
                     throwAttackCallbacks._frameData._extraPoints[i].customDamage, 
-                    throwAttackCallbacks._frameData._extraPoints[i].awaitEnum);
+                    throwAttackCallbacks._frameData._extraPoints[i].awaitEnum,
+                    _frameData._extraPoints[i]._hurtboxType);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -267,7 +268,8 @@ public class AttackHandler_Attack : AttackHandler_Base
                     _frameData._extraPoints[i].projectileSpeed,
                     _frameData._extraPoints[i].snapMovement,
                     _frameData._extraPoints[i].customDamage,
-                    _frameData._extraPoints[i].awaitEnum);
+                    _frameData._extraPoints[i].awaitEnum,
+                    _frameData._extraPoints[i]._hurtboxType);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -500,6 +502,7 @@ public class CustomCallback
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
     public CustomDamageField customDamage;
+    public HurtBoxType chosenType;
     public CustomCallback (HitPointCall _customCall, 
         float _timeStamp, 
         bool _funcBool, 
@@ -509,7 +512,8 @@ public class CustomCallback
         float _projectileFloat = -1, 
         bool isSnapping = false, 
         CustomDamageField _customDamage = null, 
-        AwaitClass _awaitEnum = null)
+        AwaitClass _awaitEnum = null,
+        HurtBoxType _chosenType = HurtBoxType.NoBlock)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -521,6 +525,7 @@ public class CustomCallback
         forceFloat = _forceFloat;
         projectileSpeedFloat = _projectileFloat;
         awaitEnum = _awaitEnum;
+        chosenType = _chosenType;
     }
 }
 [Serializable]
@@ -534,6 +539,7 @@ public class ExtraFrameHitPoints
     public Vector3 camPos, camRotation;
     public bool snapMovement;
     public CustomDamageField customDamage;
+    public HurtBoxType _hurtboxType;
 }
 
 [Serializable, Flags]
@@ -564,4 +570,6 @@ public enum HitPointCall
     AwaitSequenceSignifier = 1 << 20,
     LockPos = 1 << 21,
     UnlockPos = 1 << 22,
+    Magnetize = 1 << 24,
+    SetHurtboxOnCommand = 1 << 25,
 }

@@ -443,6 +443,8 @@ public class Character_Base : MonoBehaviour
         mainCallbackDictionary.Add(HitPointCall.PanPosOnTarget, null);
         mainCallbackDictionary.Add(HitPointCall.PanRotateOnTarget, null);
         mainCallbackDictionary.Add(HitPointCall.PanZoomOnTarget, null);
+        mainCallbackDictionary.Add(HitPointCall.Magnetize, null);
+        mainCallbackDictionary.Add(HitPointCall.SetHurtboxOnCommand, _cHurtBox.SetHurboxStateOnCommand);
 
         mainCallbackDictionary.Add(HitPointCall.DealCustomDamage, opponentPlayer._cDamageCalculator.TakeCustomDamage);
         mainCallbackDictionary.Add(HitPointCall.ForceSideSwitch, _sideManager.ForceSideSwitch);

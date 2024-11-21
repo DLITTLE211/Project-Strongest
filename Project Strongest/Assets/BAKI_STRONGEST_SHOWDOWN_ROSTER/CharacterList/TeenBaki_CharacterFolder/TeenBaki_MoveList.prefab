@@ -90,7 +90,7 @@ MonoBehaviour:
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 1, y: 1}
         extendedHitBox: {fileID: 0}
-        hurtType: 0
+        hurtType: 11
         hu_placement: {x: 0.5, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
         hu_size: {x: 1.35, y: 1.35}
@@ -103,6 +103,40 @@ MonoBehaviour:
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 10
+            call: 33554432
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 3
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 11
           - hitFramePoints: 15
             call: 2
             hitFrameBool: 0
@@ -136,6 +170,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
           - hitFramePoints: 15
             call: 4
             hitFrameBool: 0
@@ -169,6 +204,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -238,7 +274,7 @@ MonoBehaviour:
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 0.85, y: 2.15}
         extendedHitBox: {fileID: 0}
-        hurtType: 0
+        hurtType: 7
         hu_placement: {x: 1, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
         hu_size: {x: 0.8, y: 2.15}
@@ -251,6 +287,40 @@ MonoBehaviour:
           recoveryAmount: 20
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 10
+            call: 33554432
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 3
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 7
           - hitFramePoints: 25
             call: 2
             hitFrameBool: 0
@@ -284,6 +354,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
           - hitFramePoints: 25
             call: 4
             hitFrameBool: 0
@@ -317,6 +388,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -392,6 +464,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
         - hitFramePoints: 2
           call: 1048576
           hitFrameBool: 0
@@ -425,6 +498,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -486,6 +560,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 15
           call: 262144
           hitFrameBool: 0
@@ -519,6 +594,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 25
           call: 262144
           hitFrameBool: 0
@@ -552,6 +628,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 35
           call: 262144
           hitFrameBool: 0
@@ -585,6 +662,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 60
           call: 4194304
           hitFrameBool: 0
@@ -618,6 +696,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 65
           call: 262144
           hitFrameBool: 0
@@ -651,6 +730,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 72
           call: 2
           hitFrameBool: 0
@@ -684,6 +764,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 72
           call: 4
           hitFrameBool: 0
@@ -717,6 +798,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -772,7 +854,7 @@ MonoBehaviour:
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 1, y: 1.95}
         extendedHitBox: {fileID: 0}
-        hurtType: 0
+        hurtType: 7
         hu_placement: {x: 0.5, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
         hu_size: {x: 1.35, y: 2.15}
@@ -785,6 +867,40 @@ MonoBehaviour:
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 4
+            call: 33554432
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 9
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 7
           - hitFramePoints: 20
             call: 2
             hitFrameBool: 0
@@ -818,6 +934,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -893,6 +1010,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 2
+          _hurtboxType: 0
         - hitFramePoints: 65
           call: 262144
           hitFrameBool: 0
@@ -926,6 +1044,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 8
+          _hurtboxType: 0
         - hitFramePoints: 85
           call: 262144
           hitFrameBool: 0
@@ -959,6 +1078,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 8
+          _hurtboxType: 0
         - hitFramePoints: 115
           call: 262144
           hitFrameBool: 0
@@ -992,6 +1112,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 8
+          _hurtboxType: 0
         - hitFramePoints: 135
           call: 262144
           hitFrameBool: 0
@@ -1025,6 +1146,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 8
+          _hurtboxType: 0
         - hitFramePoints: 150
           call: 262144
           hitFrameBool: 0
@@ -1058,6 +1180,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 8
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -1125,7 +1248,41 @@ MonoBehaviour:
           recoveryEnd: 0
           recoveryAmount: 50
           totalRecovery: 0
-          _extraPoints: []
+          _extraPoints:
+          - hitFramePoints: 1
+            call: 33554432
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 7
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1240,6 +1397,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
           - hitFramePoints: 5
             call: 2
             hitFrameBool: 0
@@ -1273,6 +1431,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1348,6 +1507,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 15
           call: 262144
           hitFrameBool: 0
@@ -1381,6 +1541,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 25
           call: 262144
           hitFrameBool: 0
@@ -1414,6 +1575,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 35
           call: 262144
           hitFrameBool: 0
@@ -1447,6 +1609,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
         - hitFramePoints: 37
           call: 2
           hitFrameBool: 0
@@ -1480,6 +1643,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 37
           call: 4
           hitFrameBool: 0
@@ -1513,6 +1677,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -1655,6 +1820,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 15
           call: 262144
           hitFrameBool: 0
@@ -1688,6 +1854,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 25
           call: 262144
           hitFrameBool: 0
@@ -1721,6 +1888,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
         - hitFramePoints: 48
           call: 2
           hitFrameBool: 0
@@ -1754,6 +1922,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -1895,6 +2064,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 15
           call: 262144
           hitFrameBool: 0
@@ -1928,6 +2098,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 25
           call: 262144
           hitFrameBool: 0
@@ -1961,6 +2132,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 2
+          _hurtboxType: 0
         - hitFramePoints: 48
           call: 2
           hitFrameBool: 0
@@ -1994,6 +2166,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -2086,6 +2259,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -2284,6 +2458,7 @@ MonoBehaviour:
                   Block_VKB_Level: 0
                   Block_Value: 0
                 KnockDown: 0
+              _hurtboxType: 0
           _hitCount:
             _count: 0
             _startCount: 0
@@ -2393,6 +2568,7 @@ MonoBehaviour:
                         Block_VKB_Level: 0
                         Block_Value: 0
                       KnockDown: 0
+                    _hurtboxType: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2501,6 +2677,7 @@ MonoBehaviour:
                         Block_VKB_Level: 0
                         Block_Value: 0
                       KnockDown: 0
+                    _hurtboxType: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2616,6 +2793,7 @@ MonoBehaviour:
                   Block_VKB_Level: 0
                   Block_Value: 0
                 KnockDown: 0
+              _hurtboxType: 0
           _hitCount:
             _count: 0
             _startCount: 0
@@ -2800,6 +2978,7 @@ MonoBehaviour:
                         Block_VKB_Level: 0
                         Block_Value: 0
                       KnockDown: 0
+                    _hurtboxType: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2908,6 +3087,7 @@ MonoBehaviour:
                         Block_VKB_Level: 0
                         Block_Value: 0
                       KnockDown: 0
+                    _hurtboxType: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -3023,6 +3203,7 @@ MonoBehaviour:
                   Block_VKB_Level: 0
                   Block_Value: 0
                 KnockDown: 0
+              _hurtboxType: 0
           _hitCount:
             _count: 0
             _startCount: 0
@@ -3207,6 +3388,7 @@ MonoBehaviour:
                         Block_VKB_Level: 0
                         Block_Value: 0
                       KnockDown: 0
+                    _hurtboxType: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -3315,6 +3497,7 @@ MonoBehaviour:
                         Block_VKB_Level: 0
                         Block_Value: 0
                       KnockDown: 0
+                    _hurtboxType: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -3500,6 +3683,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -3608,6 +3792,7 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -3724,6 +3909,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3830,6 +4016,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3936,6 +4123,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4121,6 +4309,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4227,6 +4416,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4339,6 +4529,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4445,6 +4636,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4551,6 +4743,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4736,6 +4929,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4842,6 +5036,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4954,6 +5149,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5060,6 +5256,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 3
@@ -5166,6 +5363,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5279,6 +5477,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5391,6 +5590,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5503,6 +5703,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5694,6 +5895,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5886,6 +6088,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5998,6 +6201,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -6110,6 +6314,7 @@ MonoBehaviour:
                     Block_VKB_Level: 0
                     Block_Value: 0
                   KnockDown: 0
+                _hurtboxType: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -6742,6 +6947,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
         - hitFramePoints: 20
           call: 262144
           hitFrameBool: 0
@@ -6775,6 +6981,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 45
           call: 262144
           hitFrameBool: 0
@@ -6808,6 +7015,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -6950,6 +7158,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
         - hitFramePoints: 2
           call: 2097152
           hitFrameBool: 0
@@ -6983,6 +7192,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 5
           call: 262144
           hitFrameBool: 0
@@ -7016,6 +7226,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 20
           call: 262144
           hitFrameBool: 0
@@ -7049,6 +7260,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 35
           call: 4194304
           hitFrameBool: 0
@@ -7082,6 +7294,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 0
+          _hurtboxType: 0
         - hitFramePoints: 45
           call: 262144
           hitFrameBool: 0
@@ -7115,6 +7328,7 @@ MonoBehaviour:
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0

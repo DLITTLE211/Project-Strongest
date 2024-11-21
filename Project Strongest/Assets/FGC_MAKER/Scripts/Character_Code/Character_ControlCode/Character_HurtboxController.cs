@@ -214,6 +214,11 @@ public class Character_HurtboxController : MonoBehaviour
             triggerBox.SetHurtboxState(triggerBox.huBType);
         }
     }
+    public void SetHurboxStateOnCommand(CustomCallback callback)
+    {
+        triggerBox.huBType = callback.chosenType;
+        triggerBox.SetHurtboxState(triggerBox.huBType);
+    }
     #endregion
 }
 [Serializable]
