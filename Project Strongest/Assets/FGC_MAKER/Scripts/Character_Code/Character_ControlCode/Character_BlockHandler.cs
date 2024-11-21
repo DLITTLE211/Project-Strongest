@@ -112,15 +112,14 @@ public class Character_BlockOption : IBlockOption
         _curBase = _base;
         _animInformation.SetAnimInformation(blockAnimHash);
     }
-    public void PerformMobilityAction()
+    public void PerformAction()
     {
         _curBase._cAnimator.PlayNextAnimation(_animInformation._animHash, 2 * (1 / 60f));
     }
-
 }
 interface IBlockOption
 {
-    void PerformMobilityAction();
+    void PerformAction();
     void SetStarterInformation(Character_Base _base, AnimationClip blockAnim);
 }
 [Serializable]

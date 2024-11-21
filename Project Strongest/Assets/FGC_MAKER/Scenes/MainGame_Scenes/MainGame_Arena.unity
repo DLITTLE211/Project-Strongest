@@ -4554,6 +4554,7 @@ MonoBehaviour:
       _animName: 
       _animHash: 0
       _animLength: 0
+  isBlocking: 0
 --- !u!1 &285658157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4598,6 +4599,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d801fef786b7c0d4c9d554ffb14e688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _amplifyAnimation:
+    activationPoint: 0
+    recoveryAmount: 0
+    activated: 0
+    _animInformation:
+      _animationClip: {fileID: 0}
+      _animName: 
+      _animHash: 0
+      _animLength: 0
   _base: {fileID: 94923329}
   chosenAmplifier: {fileID: 0}
   _amplifySlider: {fileID: 2058276817}
@@ -8887,6 +8897,7 @@ MonoBehaviour:
   minWidth: 0
   maxWidth: 0
   wallBoundBias: 1.75
+  size: 0
   zPos: -2.5
   cameraObjectHolder: {fileID: 550802476}
   orthoCamera: {fileID: 474224558}
@@ -9361,6 +9372,28 @@ MonoBehaviour:
   characterTotalHitReactions:
     hitReactions: []
     blockReactions: []
+    neutralGetupReaction:
+      anim: {fileID: 0}
+      animLength: 0
+      animName: 
+      animHash: 0
+      hitReactionType: 0
+      hitLevel: 0
+      isGroundedReaction: 0
+      isLowReaction: 0
+      knockdownAnimType: 0
+      _getupType: 0
+    backGetupReaction:
+      anim: {fileID: 0}
+      animLength: 0
+      animName: 
+      animHash: 0
+      hitReactionType: 0
+      hitLevel: 0
+      isGroundedReaction: 0
+      isLowReaction: 0
+      knockdownAnimType: 0
+      _getupType: 0
     getUpReactions: []
   last_KD: 0
   currentHitstun: 0
@@ -10078,6 +10111,7 @@ MonoBehaviour:
       _animName: 
       _animHash: 0
       _animLength: 0
+  isBlocking: 0
 --- !u!1 &676886974
 GameObject:
   m_ObjectHideFlags: 0
@@ -16527,6 +16561,28 @@ MonoBehaviour:
   characterTotalHitReactions:
     hitReactions: []
     blockReactions: []
+    neutralGetupReaction:
+      anim: {fileID: 0}
+      animLength: 0
+      animName: 
+      animHash: 0
+      hitReactionType: 0
+      hitLevel: 0
+      isGroundedReaction: 0
+      isLowReaction: 0
+      knockdownAnimType: 0
+      _getupType: 0
+    backGetupReaction:
+      anim: {fileID: 0}
+      animLength: 0
+      animName: 
+      animHash: 0
+      hitReactionType: 0
+      hitLevel: 0
+      isGroundedReaction: 0
+      isLowReaction: 0
+      knockdownAnimType: 0
+      _getupType: 0
     getUpReactions: []
   last_KD: 0
   currentHitstun: 0
@@ -24766,6 +24822,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d801fef786b7c0d4c9d554ffb14e688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _amplifyAnimation:
+    activationPoint: 4
+    recoveryAmount: 25
+    activated: 0
+    _animInformation:
+      _animationClip: {fileID: 0}
+      _animName: 
+      _animHash: 0
+      _animLength: 0
   _base: {fileID: 993311525}
   chosenAmplifier: {fileID: 0}
   _amplifySlider: {fileID: 1172058075}
