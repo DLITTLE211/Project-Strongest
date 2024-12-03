@@ -91,14 +91,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             {
                 newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
             }
-            if (_attackInput._correctInput[0].property._moveType == MoveType.Normal)
-            {
-                if (_curBase._aManager.MoveTypeHierarchy >= MoveType.String_Normal)
-                {
-                    Debug.LogError("Attack Level Normal Lower than string normal & Higher. Returning...");
-                    return;
-                }
-            }
+            
             _curBase.comboList3_0.ClearFollowUpAttack();
             _curBase._aManager.ReceiveAttack(newNormalAttack, SendAttackOnSucess, ResetCombo);
             curAttack++;
