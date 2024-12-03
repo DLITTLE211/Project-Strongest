@@ -15,6 +15,7 @@ public class Character_AmplifyController : MonoBehaviour
     [SerializeField] private Slider _amplifySlider;
     [SerializeField] private TMP_Text _amplifyText;
     IEnumerator AmplifyRoutine;
+    Tween drainRoutine;
     float frameCount = 0;
     public bool allowFill;
     public void SetChosenAmplifier(Amplifiers _chosenAmplifier)
@@ -39,14 +40,17 @@ public class Character_AmplifyController : MonoBehaviour
         }
         frameCount = 0;
     }
-    public void ActivateAmplify() 
+    public void ActivateAmplify()
     {
-        if (allowFill)
+        if (chosenAmplifier.durationType == DurationType.Permenant)
         {
-            _base._cAnimator.FullBaseAttackDataClear(_base._cAnimator.lastAttack, _base._cAnimator.lastAttack.AttackAnims._frameData);
-            _base._cAnimator.CountUpNegativeFrames();
             return;
         }
+        if (allowFill)
+        {
+            return;
+        }
+        _base._cAnimator.CountUpNegativeFrames();
         ActivateAmplifyAnim(_amplifyAnimation);
     }
     public void ActivateAmplifyAnim(Character_AmplifyOption _currentAction)
@@ -106,7 +110,14 @@ public class Character_AmplifyController : MonoBehaviour
     {
         if (chosenAmplifier.durationType != DurationType.Permenant)
         {
-            _amplifySlider.DOValue(0f, chosenAmplifier.activeDuration);
+            if(drainRoutine != null) 
+            {
+                drainRoutine.Kill();
+                drainRoutine = null;
+            }
+            drainRoutine = _amplifySlider.DOValue(0f, chosenAmplifier.activeDuration);
+            drainRoutine.OnComplete(() => { allowFill = true; });
+            drainRoutine.Play();
         }
     }
 }
@@ -122,6 +133,7 @@ public class Character_AmplifyOption : IBlockOption
     public void SetStarterInformation(Character_Base _base, AnimationClip blockAnimHash)
     {
         _curBase = _base;
+        _animInformation._animationClip = blockAnimHash;
         _animInformation.SetAnimInformation(blockAnimHash);
     }
     public void PerformAction()

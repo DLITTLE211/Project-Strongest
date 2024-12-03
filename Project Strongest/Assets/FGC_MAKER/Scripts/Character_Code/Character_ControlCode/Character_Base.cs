@@ -67,6 +67,7 @@ public class Character_Base : MonoBehaviour
     public List<Character_ButtonInput> moveAxes;
     public List<Character_ButtonInput> attackButtons;
     public Character_ButtonInput blockButton;
+    public Character_ButtonInput amplifyButton;
     public Character_ButtonInput throwButton;
     [Space(20)]
 
@@ -403,6 +404,10 @@ public class Character_Base : MonoBehaviour
                             {
                                 throwButton = newButton;
                             }
+                            if (newButton.Button_Name == "F")
+                            {
+                                amplifyButton = newButton;
+                            }
                             attackButtons.Add(newButton);
                         }
                     }
@@ -591,6 +596,22 @@ public class Character_Base : MonoBehaviour
             moveAxes[0].Button_State.directionalInput = 5;
         }
         return moveAxes[0];
+    }
+    public Character_ButtonInput ReturnAmplifyButton()
+    {
+        if (ReturnIfPaused())
+        {
+            return null;
+        }
+        if (_subState != Character_SubStates.Controlled)
+        {
+            return null;
+        }
+        if (!activated)
+        {
+            return null;
+        }
+        return amplifyButton;
     }
     public Character_ButtonInput ReturnBlockButton()
     {

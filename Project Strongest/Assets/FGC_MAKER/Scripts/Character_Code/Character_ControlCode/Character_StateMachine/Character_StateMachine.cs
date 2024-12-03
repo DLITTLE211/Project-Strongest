@@ -22,6 +22,7 @@ public class Character_StateMachine : MonoBehaviour
     [HideInInspector] public State_Throw throwState;
     [HideInInspector] public State_Counter counterState;
     [HideInInspector] public State_CustomSuper superState;
+    [HideInInspector] public State_Amplify amplifyState;
 
     [HideInInspector] public State_Hit hitStateRef;
     // Start is called before the first frame update
@@ -60,6 +61,8 @@ public class Character_StateMachine : MonoBehaviour
         counterState = CounterState;
         var CustomSuperState = new State_CustomSuper(_base); // C = Crouch 
         superState = CustomSuperState;
+        var AmplifyState = new State_Amplify(_base); // C = Crouch 
+        amplifyState = AmplifyState;
         #endregion
 
         #region Define Transitions
@@ -94,6 +97,10 @@ public class Character_StateMachine : MonoBehaviour
         At(MoveState, JumpState, new Predicate(() => At_2Jump()));
         At(CrouchState, JumpState, new Predicate(() => At_2Jump()));
 
+        At(IdleState, AmplifyState, new Predicate(() => ToAmplifyState()));
+        At(SecondIdle, AmplifyState, new Predicate(() => ToAmplifyState()));
+        At(MoveState, AmplifyState, new Predicate(() => ToAmplifyState()));
+        At(AttackState, AmplifyState, new Predicate(() => ToAmplifyState()));
 
         At(IdleState, DashState, new Predicate(() => ToDashState()));
         At(SecondIdle, DashState, new Predicate(() => ToDashState()));
@@ -188,6 +195,14 @@ public class Character_StateMachine : MonoBehaviour
             return false; 
         }
         return _base.ReturnBlockButton().Button_State._state != ButtonStateMachine.InputState.released;
+    }
+    public bool _CheckAmplifyButton()
+    {
+        if (_base.ReturnAmplifyButton() == null)
+        {
+            return false;
+        }
+        return _base.ReturnAmplifyButton().Button_State._state != ButtonStateMachine.InputState.released;
     }
     bool At_2SBlock()
     {
@@ -343,6 +358,28 @@ public class Character_StateMachine : MonoBehaviour
         }
 
     }
+    bool ToAmplifyState() 
+    {
+        try
+        {
+            if (_base._subState != Character_SubStates.Controlled)
+            {
+                return false;
+            }
+            else
+            {
+                if(_CheckAmplifyButton()) 
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
     bool At_2Idle()
     {
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
@@ -369,7 +406,7 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = IdleReturnBool();
             }
-            bool fullCheck = !_isHit && !_isBlocking && _currentInput && _isGrounded && !inputtedDash && lastAttackValue && !_canRecover && notRecovering && _canTransitionIdle;
+            bool fullCheck = !_isHit && !_isBlocking && _currentInput&& !_CheckAmplifyButton() && _isGrounded && !inputtedDash && lastAttackValue && !_canRecover && notRecovering && _canTransitionIdle;
             return fullCheck;
         }
         catch (ArgumentOutOfRangeException)
