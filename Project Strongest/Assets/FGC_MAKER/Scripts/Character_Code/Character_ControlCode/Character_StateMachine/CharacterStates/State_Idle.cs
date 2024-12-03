@@ -124,7 +124,7 @@ public class State_Idle : BaseState
         {
             await DelayFrame();
         }
-        if (_base._cHurtBox.IsGrounded() && !_base._cBlockHandler.isBlocking)
+        if (_base._cHurtBox.IsGrounded() && !_base._cBlockHandler.isBlocking && !_cAnim.isHit)
         {
             _cAnim.PlayNextAnimation(groundIdleHash, 10 * Base_FrameCode.ONE_FRAME);
         }
