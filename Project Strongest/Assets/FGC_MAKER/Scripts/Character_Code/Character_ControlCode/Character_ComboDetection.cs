@@ -163,10 +163,17 @@ public class Character_ComboDetection : MonoBehaviour
                         }
                     }
                 }
-                catch (NullReferenceException) 
+                catch (NullReferenceException)
                 {
-                    Debug.LogError("Null Ref Caught. Check Line"); 
-                    ResetCombos();
+                    if (followUpAttackIndex > -1)
+                    {
+                        ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
+                    }
+                    else
+                    {
+                        Debug.LogError("Null Ref Caught. Check Line");
+                        ResetCombos();
+                    }
                     return;
                 }
             }
@@ -177,31 +184,35 @@ public class Character_ComboDetection : MonoBehaviour
         if (lastAddedinput.Button_State._state == ButtonStateMachine.InputState.pressed)
         {
             KeyValuePair<AttackInputTypes, IAttackFunctionality> refAttackType = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
+
             refAttackType = SpecialMovePreliminaryCheck(currentAttackInput);
-            if (refAttackType.Value != null && refAttackType.Value != _base.comboList3_0.ReturnCurrentAttack())
+            if (refAttackType.Value != null)
             {
-                MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
-                if (_base._aManager.MoveTypeHierarchy > indexMoveType)
+                if (refAttackType.Value != _base.comboList3_0.ReturnCurrentAttack())
                 {
-                    Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
-                    return null;
-                }
-                else
-                {
-                    if (refAttackType.Value != ActiveFollowUpAttackCheck.Value)
+                    MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
+                    if (_base._aManager.MoveTypeHierarchy > indexMoveType)
                     {
-                        refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
-                        if (followUpInputMoveTypes.Contains(refAttackType.Value.GetAttackMoveType()))
-                        {
-                            ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
-                        }
-                        else
-                        {
-                            ResetCombos();
-                        }
+                        Debug.LogError($"Attack level of new attack , \"{indexMoveType}\" is too low!");
+                        return null;
                     }
-                    Debug.Log("attack found");
-                    return refAttackType.Value;
+                    else
+                    {
+                        if (refAttackType.Value != ActiveFollowUpAttackCheck.Value)
+                        {
+                            refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                            if (followUpInputMoveTypes.Contains(refAttackType.Value.GetAttackMoveType()))
+                            {
+                                ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
+                            }
+                            else
+                            {
+                                ResetCombos();
+                            }
+                        }
+                        Debug.Log("attack found");
+                        return refAttackType.Value;
+                    }
                 }
             }
             Debug.Log("attack not found");
