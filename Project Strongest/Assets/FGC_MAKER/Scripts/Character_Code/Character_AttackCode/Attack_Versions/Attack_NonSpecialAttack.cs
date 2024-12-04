@@ -52,7 +52,14 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     }
     public Attack_CancelInfo GetCancelInfoType()
     {
-        return _attackInput._correctInput[curAttack].property.cancelProperty;
+        try 
+        {
+            return _attackInput._correctInput[curAttack].property.cancelProperty;
+        }
+        catch (ArgumentOutOfRangeException) 
+        {
+            return null;
+        }
     }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {

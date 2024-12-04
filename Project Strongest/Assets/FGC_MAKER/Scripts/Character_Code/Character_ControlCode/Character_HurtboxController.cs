@@ -41,9 +41,9 @@ public class Character_HurtboxController : MonoBehaviour
     {
         h_Markers = _hMarkers;
     }
-    public void SetTriggerHurtboxStartSize(Character_HurtBoxSizing HurtBoxSizing)
-    {
-        triggerBox.SetHurtboxSizing(HurtBoxSizing,true);
+    public void SetTriggerHurtboxStartSize(Character_HurtBoxSizing HurtBoxSizing, Character_Base _base)
+    { 
+        triggerBox.SetHurtboxSizing(HurtBoxSizing,true, _base);
         //SetupVectorInfo(HurtBoxSizing);
     }
     private void FixedUpdate()
@@ -150,15 +150,15 @@ public class Character_HurtboxController : MonoBehaviour
         _angleZ = _angleZ * 10;
         Vector3 hurtboxRotation = new Vector3(0f, 0f, -ClampAngle(_angleZ));
         triggerBox.transform.localEulerAngles = hurtboxRotation;
-        collisionBox.transform.localEulerAngles = hurtboxRotation;
+        //collisionBox.transform.localEulerAngles = hurtboxRotation;
         if (curSize == HurtBoxSize.Downed && _base._cAnimator.isHit)
         {
             Vector3 hurtboxPosition = new Vector3(0f, -0.25f, 0f);
-            collisionBox.transform.localPosition = hurtboxPosition;
+            //collisionBox.transform.localPosition = hurtboxPosition;
         }
         else
         {
-            collisionBox.transform.localPosition = new Vector3(0f, 0.35f, 0f);
+            //collisionBox.transform.localPosition = new Vector3(0f, 0.35f, 0f);
         }
         #endregion
     }

@@ -19,11 +19,13 @@ public class HurtBox : CollisionDetection
 
     private HitBox currentHitbox;
     private Transform target;
+    private Character_Base thisPlayer;
     Callback endingFunction;
     HitboxTypeList refList;
     bool _attackBlocked;
-    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing,bool hurtboxType)
+    public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing,bool hurtboxType, Character_Base _base)
     {
+        thisPlayer = _base;
         SetHurtBoxSize(0, 0, hurtboxType, ColliderType.Trigger, hu_Sizing);
         SetHurtboxState(huBType);
         SetupHitResponseDicitonary();
@@ -311,7 +313,6 @@ public class HurtBox : CollisionDetection
     }
     IEnumerator HandleHitResponse(bool BlockedAttack)
     {
-        Character_Base Base_Target = target.GetComponent<Character_Base>();
         Character_Base Base_Attacker = currentHitbox.GetComponentInParent<Character_Base>();
         HitCount hitCount = null;
         if (currentHitProperties != null)
@@ -326,21 +327,21 @@ public class HurtBox : CollisionDetection
         int curHit = 0;
         if (!BlockedAttack)
         {
-            if (Base_Target._cHitController.Recovering)
+            if (thisPlayer._cHitController.Recovering)
             {
-                Base_Target._cHitController.ClearRecoveryRoutine(true);
+                thisPlayer._cHitController.ClearRecoveryRoutine(true);
             }
             if (currentHitProperties._moveType == MoveType.Super)
             {
-                Base_Target._cHitController.ClearHitResponseRoutine();
-                if (Base_Target._cHitController.Recovering)
+                thisPlayer._cHitController.ClearHitResponseRoutine();
+                if (thisPlayer._cHitController.Recovering)
                 {
-                    Base_Target._cHitController.ClearRecoveryRoutine(true);
+                    thisPlayer._cHitController.ClearRecoveryRoutine(true);
                 }
             }
-            if (currentHitProperties._moveType == MoveType.Throw ^ currentHitProperties._moveType == MoveType.CommandGrab)
+            if (thisPlayer._cStateMachine._playerState.current.State == thisPlayer._cStateMachine.hitStateRef)
             {
-                if(Base_Target._cStateMachine._playerState.current.State == Base_Target._cStateMachine.hitStateRef) 
+                if (currentHitProperties._moveType == MoveType.Throw)
                 {
                     yield break;
                 }
@@ -354,20 +355,20 @@ public class HurtBox : CollisionDetection
         {
             try
             {
-                Base_Target.LockPos();
+                thisPlayer.LockPos();
                 currentHitProperties.hitConnected = true;
-                Callback applyForceAfterStop = () => Base_Target._cForce.SendKnockBackOnHit(currentHitProperties, BlockedAttack);
+                Callback applyForceAfterStop = () => thisPlayer._cForce.SendKnockBackOnHit(currentHitProperties, BlockedAttack);
                 if (BlockedAttack)
                 {
-                    Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
-                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue / 10f), Base_Attacker, Base_Target, applyForceAfterStop);
+                    Base_Attacker.comboList3_0.NewCheckAndApply(thisPlayer, Base_Attacker, BlockedAttack, currentHitProperties);
+                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue / 10f), Base_Attacker, thisPlayer, applyForceAfterStop);
                 }
                 else
                 {
                     Base_Attacker._cComboCounter.OnHit_CountUp();
-                    Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, BlockedAttack, currentHitProperties);
-                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, Base_Target, applyForceAfterStop);
-                    Base_Target._cGravity.UpdateGravityScaleOnHit(currentHitProperties.attackMainStunValues.hitstunValue);
+                    Base_Attacker.comboList3_0.NewCheckAndApply(thisPlayer, Base_Attacker, BlockedAttack, currentHitProperties);
+                    Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, thisPlayer, applyForceAfterStop);
+                    thisPlayer._cGravity.UpdateGravityScaleOnHit(currentHitProperties.attackMainStunValues.hitstunValue);
                 }
             }
             catch (Exception)

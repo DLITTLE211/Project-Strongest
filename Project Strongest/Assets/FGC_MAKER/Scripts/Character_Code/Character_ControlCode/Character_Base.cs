@@ -223,7 +223,7 @@ public class Character_Base : MonoBehaviour
         _cMobiltyTimer.SetStartingValues();
         _cAnimator = chosenAnimator;
         _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
-        _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing);
+        _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing,this);
         _cComboDetection.SetAnimator(chosenAnimator);
         _cHitstun.SetAnimator(chosenAnimator);
         _cAnimator.enabled = true;
@@ -460,6 +460,7 @@ public class Character_Base : MonoBehaviour
     {
         await ResetPlayerOnTeleport();
         _cDamageCalculator.SetVictoryHitState(false);
+        _cDamageCalculator.isDead = false;
         _cSuperMeter.SetStartValue();
         _cHealth.SetStartingHealthValues();
         _cHealth.stunController.SetStartStunValues();

@@ -29,4 +29,5 @@ public enum Cancel_State
     Stance_Input_FollowUp = 1 << 15,
     Super_Attack = 1 << 16,
     Maximum_Attack = 1 << 17,
+    Command_Throw = 1 << 18,
 }
