@@ -9,7 +9,6 @@ public class Character_ColliderPush : MonoBehaviour
     CapsuleCollider _self;
     public Collider[] tempColliders;
     private const float pushBackMultiplier = 0.35f;
-    private const float strongPushBackMultiplier = 0.535f;
     public void SetCharacterBase(Character_Base newBase) 
     {
         _base = newBase;
@@ -56,13 +55,6 @@ public class Character_ColliderPush : MonoBehaviour
     {
         opponentFace = otherPlayer.gameObject.GetComponentInParent<Character_Base>();
         opponentFace._cForce.beingPushed = true;
-        if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.hitStateRef)
-        {
-            opponentFace._cForce.InstantForceAway(-strongPushBackMultiplier);
-        }
-        else 
-        {
-            opponentFace._cForce.InstantForceAway(-pushBackMultiplier);
-        }
+        opponentFace._cForce.InstantForceAway(-pushBackMultiplier);
     }
 }
