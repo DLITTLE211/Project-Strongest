@@ -53,6 +53,17 @@ public class Character_AmplifyController : MonoBehaviour
         _base._cAnimator.CountUpNegativeFrames();
         ActivateAmplifyAnim(_amplifyAnimation);
     }
+    public void CheckAmplifyActiveCall() 
+    {
+        if (chosenAmplifier.durationType == DurationType.Permenant)
+        {
+            return;
+        }
+        if (chosenAmplifier.currentState == ActiveState.Inactive)
+        {
+            return;
+        }
+    }
     public void ActivateAmplifyAnim(Character_AmplifyOption _currentAction)
     {
         KillCurrentRoutine();
@@ -110,13 +121,18 @@ public class Character_AmplifyController : MonoBehaviour
     {
         if (chosenAmplifier.durationType != DurationType.Permenant)
         {
-            if(drainRoutine != null) 
+            chosenAmplifier.currentState = ActiveState.Active;
+            if (drainRoutine != null) 
             {
                 drainRoutine.Kill();
                 drainRoutine = null;
             }
             drainRoutine = _amplifySlider.DOValue(0f, chosenAmplifier.activeDuration);
-            drainRoutine.OnComplete(() => { allowFill = true; });
+            drainRoutine.OnComplete(() => 
+            { 
+                allowFill = true;
+                chosenAmplifier.currentState = ActiveState.Inactive;
+            });
             drainRoutine.Play();
         }
     }
@@ -142,7 +158,4 @@ public class Character_AmplifyOption : IBlockOption
     }
 }
 [Serializable]
-public class AmplifyAnim : MobilityOption_Anim
-{
-
-}
+public class AmplifyAnim : MobilityOption_Anim{}

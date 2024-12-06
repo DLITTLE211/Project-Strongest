@@ -25,9 +25,6 @@ public class Amplifiers : StatusEffect
 
     [Header("Percent Bonus Upon Activation")]
     [Range(5, 45)] public float percentBonus;
-    [Space(15)]
-    [Header("Perfectionist --ONLY-- Debuff")]
-    public int _perfectionistDebuff;
    
     public void SetFillVariables() 
     {
@@ -41,7 +38,7 @@ public class Amplifiers : StatusEffect
             fillRateInFrames = Base_FrameCode.ONE_FRAME * (1 / (float)fillRate);
         }
     }
-    public void SendEffect()
+    public virtual void ActivateEffect()
     {
     }
 }

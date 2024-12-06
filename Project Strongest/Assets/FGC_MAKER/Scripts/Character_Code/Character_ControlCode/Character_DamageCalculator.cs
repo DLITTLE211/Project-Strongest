@@ -73,6 +73,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
+            _base._amplifyController.CheckAmplifyActiveCall();
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
             _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);

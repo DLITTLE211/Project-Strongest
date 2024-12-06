@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5816330197513182354}
-  - component: {fileID: -5299378299407337814}
+  - component: {fileID: -1390091125938141684}
   m_Layer: 0
   m_Name: Iron
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5299378299407337814
+--- !u!114 &-1390091125938141684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6740254638783274981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a01d30024d889344aa0b9d4cb51afa7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c8956f489a090c4785739c47dc95ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   amplifier: 3
@@ -50,9 +50,8 @@ MonoBehaviour:
   currentState: 0
   meterColor:
     serializedVersion: 2
-    rgba: 4287861651
+    rgba: 4288651167
   fillRateInFrames: 0
   fillRate: 25
   activeDuration: 15
   percentBonus: 7
-  _perfectionistDebuff: 0

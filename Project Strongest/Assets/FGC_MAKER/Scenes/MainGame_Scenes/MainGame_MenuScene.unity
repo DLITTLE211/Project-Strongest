@@ -2191,6 +2191,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190236
   NavigationButton: {fileID: 59521422}
+  startingPos: {x: 0, y: 0, z: 0}
+  forwardPosition: 0
   backgroundImage: {fileID: 0}
 --- !u!1 &507157410
 GameObject:
@@ -7272,14 +7274,14 @@ MonoBehaviour:
   _activeProfiles:
   - {fileID: 11400000, guid: 0cf4e6787272b2b448ab5d372f552710, type: 2}
   _activeAmplifiers:
-  - {fileID: -5299378299407337814, guid: 60ca0628c9294a74b8fc994b7fbe1558, type: 3}
-  - {fileID: -5299378299407337814, guid: 5709e81a717fc1841a1540a1e2fd99a5, type: 3}
-  - {fileID: -5299378299407337814, guid: 3c15eb6fe71cc1445b7f2551d5a896d7, type: 3}
-  - {fileID: -5299378299407337814, guid: 515b6f50d610ca043ac44a7ed3274e7b, type: 3}
-  - {fileID: -5299378299407337814, guid: b27aa77c35253684e9db068a83d4da06, type: 3}
-  - {fileID: -5299378299407337814, guid: a85c1c67c5f0e5242b7cf2d5870323d2, type: 3}
-  - {fileID: -5299378299407337814, guid: 3d9559830dc5a76498dfa214a6c5f46b, type: 3}
-  - {fileID: -5299378299407337814, guid: 885fb9a40e1277548b8516c885fb8fcf, type: 3}
+  - {fileID: 7263200435602450929, guid: 5709e81a717fc1841a1540a1e2fd99a5, type: 3}
+  - {fileID: -4835800702190381636, guid: 3c15eb6fe71cc1445b7f2551d5a896d7, type: 3}
+  - {fileID: 2865351593249280547, guid: 515b6f50d610ca043ac44a7ed3274e7b, type: 3}
+  - {fileID: -584331437880248466, guid: b27aa77c35253684e9db068a83d4da06, type: 3}
+  - {fileID: -1390091125938141684, guid: a85c1c67c5f0e5242b7cf2d5870323d2, type: 3}
+  - {fileID: 3542836664472437806, guid: 3d9559830dc5a76498dfa214a6c5f46b, type: 3}
+  - {fileID: -4710546694852466841, guid: 885fb9a40e1277548b8516c885fb8fcf, type: 3}
+  - {fileID: 71040057239353706, guid: 60ca0628c9294a74b8fc994b7fbe1558, type: 3}
   activeCharacterSelectButtons: []
   _player1_PlayerPage: {fileID: 1120126771}
   _player2_PlayerPage: {fileID: 101584349}
@@ -8888,6 +8890,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4291899149
   NavigationButton: {fileID: 1290105368}
+  startingPos: {x: 0, y: 0, z: 0}
+  forwardPosition: 0
   backgroundImage: {fileID: 0}
 --- !u!1 &1368814059
 GameObject:
@@ -10110,6 +10114,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4284809164
   NavigationButton: {fileID: 529025240}
+  startingPos: {x: 0, y: 0, z: 0}
+  forwardPosition: 0
   backgroundImage: {fileID: 0}
 --- !u!1 &1632610029
 GameObject:
@@ -11487,6 +11493,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4279308561
   NavigationButton: {fileID: 1291546001}
+  startingPos: {x: 0, y: 0, z: 0}
+  forwardPosition: 0
   backgroundImage: {fileID: 0}
 --- !u!1 &1966183753
 GameObject:
