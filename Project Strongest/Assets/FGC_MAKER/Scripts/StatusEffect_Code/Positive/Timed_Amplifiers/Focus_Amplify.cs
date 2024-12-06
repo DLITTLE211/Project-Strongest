@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Focus_Amplify : Amplifiers
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateEffect(Attack_BaseProperties _currentAttack = null)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (_currentAttack != null)
+        {
+            _base._cSuperMeter.AddMeter(_currentAttack._meterAwardedOnHit * 0.35f);
+        }
     }
 }

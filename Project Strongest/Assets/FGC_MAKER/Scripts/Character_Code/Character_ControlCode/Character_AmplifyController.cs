@@ -25,6 +25,7 @@ public class Character_AmplifyController : MonoBehaviour
             _amplifyAnimation.SetStarterInformation(_base, _base.characterProfile.AmplifyAnim);
             _amplifySlider.value = 0f;
             chosenAmplifier = _chosenAmplifier;
+            chosenAmplifier._base = _base;
             _amplifyText.text = $"{_chosenAmplifier.amplifier.ToString()}";
             allowFill = true;
             _chosenAmplifier.SetFillVariables();
@@ -53,8 +54,12 @@ public class Character_AmplifyController : MonoBehaviour
         _base._cAnimator.CountUpNegativeFrames();
         ActivateAmplifyAnim(_amplifyAnimation);
     }
-    public void CheckAmplifyActiveCall() 
+    public void CheckAmplifyActiveCall(Attack_BaseProperties currentAttack = null) 
     {
+        if(chosenAmplifier.buffType == BuffType.PassiveBuff) 
+        {
+            return;
+        }
         if (chosenAmplifier.durationType == DurationType.Permenant)
         {
             return;
@@ -63,6 +68,7 @@ public class Character_AmplifyController : MonoBehaviour
         {
             return;
         }
+        chosenAmplifier.ActivateEffect(currentAttack);
     }
     public void ActivateAmplifyAnim(Character_AmplifyOption _currentAction)
     {

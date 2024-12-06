@@ -58,6 +58,7 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             calculatedRecovDamage = calculatedDamage;
         }
+        _base._amplifyController.CheckAmplifyActiveCall();
         UpdateDamageText(calculatedDamage);
         if (calculatedRecovDamage <= 0)
         {
@@ -73,7 +74,6 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         else
         {
-            _base._amplifyController.CheckAmplifyActiveCall();
             _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
             _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
             _base._cHitController.ForceCustomLockAnim(callback.customDamage, callback.customDamage.isFinalAttack);
@@ -119,6 +119,7 @@ public class Character_DamageCalculator : MonoBehaviour
         calculatedDamage = (counterHitValue + curRawDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.575f);
 
+        _base.opponentPlayer._amplifyController.CheckAmplifyActiveCall(currentAttack);
         if (currentAttack._meterRequirement <= 0)
         {
             calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : ((currentAttack._meterAwardedOnHit * 0.05f)* calculatedScaling);
@@ -163,6 +164,7 @@ public class Character_DamageCalculator : MonoBehaviour
         calculatedDamage = curChipDamage  - defenseValue;
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
+        _base.opponentPlayer._amplifyController.CheckAmplifyActiveCall(currentAttack);
         if (calculatedRecovDamage <= 0)
         {
             calculatedRecovDamage = 0;

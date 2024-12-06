@@ -8,10 +8,12 @@ using FightingGame_FrameData;
 [Serializable]
 public class Amplifiers : StatusEffect 
 {
+    public Character_Base _base;
     [Header("Amplifier Type")]
     public Effect_Amplify amplifier;
     public DurationType durationType;
     public FillType fillType;
+    public BuffType buffType;
     public ActiveState currentState = ActiveState.Inactive;
     public Color32 meterColor;
     [Space(15)]
@@ -38,7 +40,7 @@ public class Amplifiers : StatusEffect
             fillRateInFrames = Base_FrameCode.ONE_FRAME * (1 / (float)fillRate);
         }
     }
-    public virtual void ActivateEffect()
+    public virtual void ActivateEffect(Attack_BaseProperties _currentAttack = null)
     {
     }
 }
@@ -46,4 +48,9 @@ public enum FillType
 {
     Instant,
     Standard,
+}
+public enum BuffType
+{
+    AttackBuff,
+    PassiveBuff,
 }
