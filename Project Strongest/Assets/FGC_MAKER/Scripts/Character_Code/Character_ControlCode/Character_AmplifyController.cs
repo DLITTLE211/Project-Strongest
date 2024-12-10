@@ -97,6 +97,7 @@ public class Character_AmplifyController : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             #endregion
         }
+
         DrainMeter();
     }
     private void Update()
@@ -127,6 +128,11 @@ public class Character_AmplifyController : MonoBehaviour
     {
         if (chosenAmplifier.durationType != DurationType.Permenant)
         {
+            if (chosenAmplifier.buffType == BuffType.PassiveBuff)
+            {
+                chosenAmplifier.ActivatePassiveAmplify();
+            }
+
             chosenAmplifier.currentState = ActiveState.Active;
             if (drainRoutine != null) 
             {
@@ -138,6 +144,7 @@ public class Character_AmplifyController : MonoBehaviour
             { 
                 allowFill = true;
                 chosenAmplifier.currentState = ActiveState.Inactive;
+                _base.opponentPlayer._cDamageCalculator.ResetBuffs();
             });
             drainRoutine.Play();
         }

@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class HeavyHitter_Amplify : Amplifiers
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivatePassiveAmplify()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier(0.15f);
     }
 }

@@ -40,6 +40,9 @@ public class Amplifiers : StatusEffect
             fillRateInFrames = Base_FrameCode.ONE_FRAME * (1 / (float)fillRate);
         }
     }
+    public virtual void ActivatePassiveAmplify()
+    {
+    }
     public virtual void ActivateEffect(Attack_BaseProperties _currentAttack = null, bool blockedAttack = false)
     {
     }

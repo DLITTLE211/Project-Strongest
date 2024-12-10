@@ -14,6 +14,7 @@ public class Character_DamageCalculator : MonoBehaviour
     [SerializeField] private float counterHitMult; 
     [SerializeField] private float afflictionDebuffDamage;
     [SerializeField] private float currentComboHitCount;
+    [SerializeField] private float buffDamageMultiplier,chipBuffDamageMultiplier;
 
     public Character_Health _healtController;
     public Character_ComboCounter _oppCounter;
@@ -33,6 +34,19 @@ public class Character_DamageCalculator : MonoBehaviour
     {
         allowDeathCheck = GameManager.instance._gameModeSet.gameMode != GameMode.Training;
     }
+    public void ResetBuffs() 
+    {
+        SetBuffMultiplier();
+        SetChipBuffMultiplier();
+    }
+    public void SetBuffMultiplier(float value = 0f) 
+    {
+        buffDamageMultiplier = value;
+    }
+    public void SetChipBuffMultiplier(float value = 0f)
+    {
+        chipBuffDamageMultiplier = value;
+    }
     public void TakeCustomDamage(CustomCallback callback = null)
     {
         if (callback.customDamage.rawAttackDamage <= 0)
@@ -41,6 +55,10 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = callback.customDamage.rawAttackDamage;
+        if (buffDamageMultiplier > 0) 
+        {
+            curRawDamage = curRawDamage + (curRawDamage * buffDamageMultiplier);
+        }
         if (!CheckCounterHitState())
         {
             counterHitMult = 1;
@@ -105,6 +123,10 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeDamage(Attack_BaseProperties currentAttack,bool armoredAttack)
     {
         curRawDamage = currentAttack.rawAttackDamage;
+        if (buffDamageMultiplier > 0)
+        {
+            curRawDamage = curRawDamage + (curRawDamage * buffDamageMultiplier);
+        }
         if (!CheckCounterHitState())
         {
             counterHitMult = 1;
@@ -154,10 +176,14 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
     {
         curChipDamage = currentAttack.rawChipDamage;
-        /*if (CheckAfflictionState())
+        if (buffDamageMultiplier > 0)
         {
-            afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
-        }*/
+            curChipDamage = curChipDamage + (curChipDamage * buffDamageMultiplier);
+        }
+        else if(chipBuffDamageMultiplier > 0)
+        {
+            curChipDamage = curChipDamage + (curChipDamage * chipBuffDamageMultiplier);
+        }
         float defenseValue = _healtController.defenseValue / 100;
 
         calculatedDamage = curChipDamage  - defenseValue;

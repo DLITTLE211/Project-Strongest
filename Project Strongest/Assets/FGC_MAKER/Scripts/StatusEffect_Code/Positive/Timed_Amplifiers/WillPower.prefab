@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbdd029f59d0fe4ab15d2c434a31b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 0}
   amplifier: 7
   durationType: 1
   fillType: 1
+  buffType: 1
   currentState: 1
   meterColor:
     serializedVersion: 2
