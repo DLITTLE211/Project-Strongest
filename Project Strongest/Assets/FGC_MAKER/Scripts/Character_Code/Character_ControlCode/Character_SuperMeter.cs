@@ -129,6 +129,20 @@ public class Character_SuperMeter : MonoBehaviour
             superMeter.SetCurrentMeterValue(superMeter.currentValue);
         }
     }
+    public void DecreaseMeterAmount(int amount)
+    {
+        if ((superMeter.currentValue - amount <= 0) 
+            && fullMeterLevel > 0
+            && meterTier > 0)
+        {
+            meterTier -= 1;
+            SetMeterTierText();
+            superMeter.currentValue += meterMaxThreshold;
+        }
+        superMeter.currentValue -= amount;
+        fullMeterLevel -= amount;
+        superMeter.SetCurrentMeterValue(superMeter.currentValue);
+    }
     #endregion
 
     void SetMeterTierText()

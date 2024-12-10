@@ -54,7 +54,7 @@ public class Character_AmplifyController : MonoBehaviour
         _base._cAnimator.CountUpNegativeFrames();
         ActivateAmplifyAnim(_amplifyAnimation);
     }
-    public void CheckAmplifyActiveCall(Attack_BaseProperties currentAttack = null) 
+    public void CheckAmplifyActiveCall(Attack_BaseProperties currentAttack = null, bool blockedAttack = false) 
     {
         if(chosenAmplifier.buffType == BuffType.PassiveBuff) 
         {
@@ -68,7 +68,7 @@ public class Character_AmplifyController : MonoBehaviour
         {
             return;
         }
-        chosenAmplifier.ActivateEffect(currentAttack);
+        chosenAmplifier.ActivateEffect(currentAttack, blockedAttack);
     }
     public void ActivateAmplifyAnim(Character_AmplifyOption _currentAction)
     {
