@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FleetFood_Amplify : Amplifiers
+public class Sliced_Affliction : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
