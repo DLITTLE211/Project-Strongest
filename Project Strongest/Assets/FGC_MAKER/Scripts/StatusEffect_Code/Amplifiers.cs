@@ -46,6 +46,10 @@ public class Amplifiers : StatusEffect
     public virtual void ActivateEffect(Attack_BaseProperties _currentAttack = null, bool blockedAttack = false)
     {
     }
+    public virtual void ResetAmplifier() 
+    {
+
+    }
 }
 public enum FillType 
 {

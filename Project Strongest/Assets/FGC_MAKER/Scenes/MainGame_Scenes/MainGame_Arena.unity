@@ -202,7 +202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &32900328
@@ -1813,6 +1813,24 @@ MonoBehaviour:
       directionalInput: 0
     actionID: 0
     Button_Name: 
+  amplifyButton:
+    Button_Element:
+      _actionCategoryId: 0
+      _actionId: -1
+      _elementType: 0
+      _elementIdentifierId: -1
+      _axisRange: 0
+      _invert: 0
+      _axisContribution: 0
+      _keyboardKeyCode: 0
+      _modifierKey1: 0
+      _modifierKey2: 0
+      _modifierKey3: 0
+    Button_State:
+      _state: 0
+      directionalInput: 0
+    actionID: 0
+    Button_Name: 
   throwButton:
     Button_Element:
       _actionCategoryId: 0
@@ -2370,6 +2388,8 @@ MonoBehaviour:
   counterHitMult: 0
   afflictionDebuffDamage: 0
   currentComboHitCount: 0
+  buffDamageMultiplier: 0
+  chipBuffDamageMultiplier: 0
   _healtController: {fileID: 658162219}
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
@@ -11202,6 +11222,8 @@ MonoBehaviour:
   counterHitMult: 0
   afflictionDebuffDamage: 0
   currentComboHitCount: 0
+  buffDamageMultiplier: 0
+  chipBuffDamageMultiplier: 0
   _healtController: {fileID: 532720120}
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
@@ -16088,6 +16110,24 @@ MonoBehaviour:
       directionalInput: 0
     actionID: 0
     Button_Name: 
+  amplifyButton:
+    Button_Element:
+      _actionCategoryId: 0
+      _actionId: -1
+      _elementType: 0
+      _elementIdentifierId: -1
+      _axisRange: 0
+      _invert: 0
+      _axisContribution: 0
+      _keyboardKeyCode: 0
+      _modifierKey1: 0
+      _modifierKey2: 0
+      _modifierKey3: 0
+    Button_State:
+      _state: 0
+      directionalInput: 0
+    actionID: 0
+    Button_Name: 
   throwButton:
     Button_Element:
       _actionCategoryId: 0
@@ -19326,7 +19366,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19901,7 +19941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255184145
@@ -31157,7 +31197,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1207586909}
   m_FillRect: {fileID: 1207586908}
   m_HandleRect: {fileID: 0}
-  m_Direction: 0
+  m_Direction: 1
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0

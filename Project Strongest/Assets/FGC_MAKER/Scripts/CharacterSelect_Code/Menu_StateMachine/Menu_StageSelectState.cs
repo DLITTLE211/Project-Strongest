@@ -22,19 +22,28 @@ public class Menu_StageSelectState : Menu_BaseState
     }
     public override void OnUpdate()
     {
-        if (allowUpdate)
+        if (_player1_Cursor.canChooseStage)
         {
             _characterSelect.CursorController(_player1_Cursor);
+        }
+        else if(_player2_Cursor.canChooseStage)
+        {
             _characterSelect.CursorController(_player2_Cursor);
         }
     }
     public override void Select(CharacterSelect_Cursor _currentCursor)
     {
-        _characterSelect.CallStageSelected();
+        if (_currentCursor.canChooseStage)
+        {
+            _characterSelect.CallStageSelected();
+        }
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor)
     {
-        _characterSelect._menuStateMachine.CallRoundSelectState();
+        if (_currentCursor.canChooseStage)
+        {
+            _characterSelect._menuStateMachine.CallRoundSelectState();
+        }
     }
     public override void CycleLeft(CharacterSelect_Cursor _currentCursor)
     {

@@ -8,4 +8,8 @@ public class Might_Amplify : Amplifiers
     {
         _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier(0.05f);
     }
+    public override void ResetAmplifier()
+    {
+        _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier();
+    }
 }

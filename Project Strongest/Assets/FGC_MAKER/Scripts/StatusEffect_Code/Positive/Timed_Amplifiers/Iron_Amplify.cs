@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Iron_Amplify : Amplifiers
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivatePassiveAmplify()
     {
-        
+        _base._cDamageCalculator.SetDefensiveMultiplier(0.25f);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void ResetAmplifier()
     {
-        
+        _base._cDamageCalculator.SetDefensiveMultiplier();
     }
 }

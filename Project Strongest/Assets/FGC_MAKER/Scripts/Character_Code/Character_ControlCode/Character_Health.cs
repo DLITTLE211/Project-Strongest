@@ -18,6 +18,15 @@ public class Character_Health : MonoBehaviour
     public bool canRecover;
     private Character_Profile curProfile;
     IEnumerator healthRegenRoutine;
+    private float stunBuffValue;
+    public void ResetBuffs()
+    {
+        SetStunBuffValue();
+    }
+    public void SetStunBuffValue(float value = 0) 
+    {
+        stunBuffValue = value;
+    }
     public void ClearRegenRoutine() 
     {
         if (healthRegenRoutine != null) 
@@ -74,7 +83,16 @@ public class Character_Health : MonoBehaviour
         canRecover = false;
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
-        stunController.ApplyStun(damageValue * 0.1f);
+        float stunValue = (damageValue - (ReturnStunDebuffValue() * damageValue)) * 0.1f;
+        stunController.ApplyStun(stunValue);
+    }
+    float ReturnStunDebuffValue() 
+    {
+        if(stunBuffValue > 0) 
+        {
+            return stunBuffValue;
+        }
+        return 0;
     }
     public void StartHealthRegen()
     {

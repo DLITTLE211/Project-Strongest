@@ -23,18 +23,30 @@ public class Menu_RoundSelectState : Menu_BaseState
     {
         if (allowUpdate)
         {
-            _characterSelect.CursorController(_player1_Cursor);
-            _characterSelect.CursorController(_player2_Cursor);
+            if (_player1_Cursor.canChooseStage)
+            {
+                _characterSelect.CursorController(_player1_Cursor);
+            }
+            else if (_player2_Cursor.canChooseStage)
+            {
+                _characterSelect.CursorController(_player2_Cursor);
+            }
         }
     }
-    public override void Select(CharacterSelect_Cursor _currentCursor) 
+    public override void Select(CharacterSelect_Cursor _currentCursor)
     {
-        _characterSelect._menuStateMachine.CallStageSelectState();
+        if (_currentCursor.canChooseStage)
+        {
+            _characterSelect._menuStateMachine.CallStageSelectState();
+        }
     }
-    public override void Cancel(CharacterSelect_Cursor _currentCursor) 
+    public override void Cancel(CharacterSelect_Cursor _currentCursor)
     {
-        _stageSelect.DisableRoundSelectorObject();
-        _characterSelect._menuStateMachine.CallCharacterSelectState();
+        if (_currentCursor.canChooseStage)
+        {
+            _stageSelect.DisableRoundSelectorObject();
+            _characterSelect._menuStateMachine.CallCharacterSelectState();
+        }
     }
     public override void CycleLeft(CharacterSelect_Cursor _currentCursor)
     {

@@ -144,7 +144,7 @@ public class Character_AmplifyController : MonoBehaviour
             { 
                 allowFill = true;
                 chosenAmplifier.currentState = ActiveState.Inactive;
-                _base.opponentPlayer._cDamageCalculator.ResetBuffs();
+                chosenAmplifier.ResetAmplifier();
             });
             drainRoutine.Play();
         }
