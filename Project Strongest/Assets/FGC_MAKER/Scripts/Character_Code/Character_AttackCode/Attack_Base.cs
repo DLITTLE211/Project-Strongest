@@ -61,7 +61,7 @@ public class Attack_BaseProperties
     }
     public void SetChipDamageValue()
     {
-        rawChipDamage = (rawAttackDamage / 10f);
+        rawChipDamage = (rawAttackDamage / 6.5f);
     }
 
 }
