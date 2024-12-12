@@ -6,7 +6,7 @@ public class Might_Amplify : Amplifiers
 {
     public override void ActivatePassiveAmplify()
     {
-        _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier(0.05f);
+        _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier(0.35f);
     }
     public override void ResetAmplifier()
     {
