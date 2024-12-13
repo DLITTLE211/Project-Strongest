@@ -41,6 +41,46 @@ public class Character_AmplifyController : MonoBehaviour
         }
         frameCount = 0;
     }
+    public void DeactivateInstantPassiveAmplify()
+    {
+        if (chosenAmplifier == null)
+        {
+            return;
+        }
+        if (chosenAmplifier.currentState == ActiveState.Inactive)
+        {
+            return;
+        }
+        if (chosenAmplifier.durationType != DurationType.Permenant)
+        {
+            return;
+        }
+        if (chosenAmplifier.fillType != FillType.Instant)
+        {
+            return;
+        }
+        if (chosenAmplifier.amplifier != StatusEffect.Effect_Amplify.Perfectionist)
+        {
+            return;
+        }
+        chosenAmplifier.DeactivateInstantPassiveAmplify();
+    }
+    public void ActivateInstantPassiveAmplify()
+    {
+        if (chosenAmplifier == null)
+        {
+            return;
+        }
+        if (chosenAmplifier.durationType != DurationType.Permenant)
+        {
+            return;
+        }
+        if (chosenAmplifier.fillType != FillType.Instant)
+        {
+            return;
+        }
+        chosenAmplifier.ActivateInstantPassiveAmplify();
+    }
     public void ActivateAmplify()
     {
         if (chosenAmplifier.durationType == DurationType.Permenant)

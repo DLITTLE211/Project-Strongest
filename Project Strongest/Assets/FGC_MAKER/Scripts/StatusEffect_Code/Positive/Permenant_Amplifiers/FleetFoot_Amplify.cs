@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class FleetFoot_Amplify : Amplifiers
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateInstantPassiveAmplify()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _base.FleetFootAmplifyBuff(0.65f,0.75f);
+        currentState = ActiveState.Active;
     }
 }

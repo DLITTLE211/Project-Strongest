@@ -6,15 +6,18 @@ public class Perfectionist_Amplify : Amplifiers
 {
     [Header("Perfectionist --ONLY-- Debuff")]
     public int _perfectionistDebuff;
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateInstantPassiveAmplify()
     {
-        
+        _base._cHealth.SetStunBuffValue(0.25f);
+        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier(0.15f);
+        _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier(0.35f);
+        currentState = ActiveState.Active;
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void DeactivateInstantPassiveAmplify()
     {
-        
+        _base._cHealth.SetStunBuffValue();
+        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier();
+        _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier();
+        currentState = ActiveState.Inactive;
     }
 }

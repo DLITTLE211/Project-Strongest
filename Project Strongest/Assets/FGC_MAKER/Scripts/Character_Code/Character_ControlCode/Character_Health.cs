@@ -78,6 +78,10 @@ public class Character_Health : MonoBehaviour
     }
     public void ApplyMainHealthDamage(float damageValue)
     {
+        if (health_Main.currentValue >= curProfile.MaxHealth)
+        {
+            _base._amplifyController.DeactivateInstantPassiveAmplify();
+        }
         ClearRegenRoutine();
         _disparityChecker.UpdateMeterOnDamage();
         canRecover = false;

@@ -180,6 +180,7 @@ public class Character_Base : MonoBehaviour
         _cComboCounter.SetStartComboCounter();
         _cAnimator.canTransitionIdle = true;
         awaitCondition = true;
+        _amplifyController.ActivateInstantPassiveAmplify();
         if (GameManager.instance._gameModeSet.gameMode == GameMode.Training)
         {
             Activate();
@@ -220,6 +221,7 @@ public class Character_Base : MonoBehaviour
         _jumpForce = characterProfile.JumpForce;
         _jumpDirForce = characterProfile.InAirMoveForce;
 
+
         _cMobiltyTimer.SetStartingValues();
         _cAnimator = chosenAnimator;
         _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
@@ -241,6 +243,11 @@ public class Character_Base : MonoBehaviour
         _cAnimator.SetModelColors(characterProfile._characterSkins, skinIndex);
         SetMainCustomCallbackDictionary();
         _aFrameDataMeter.SetupMeterData();
+    }
+    public void FleetFootAmplifyBuff(float dashIncrease,float WalkIncrease) 
+    {
+        _moveForce += (_moveForce * WalkIncrease);
+        _dashForce += (_dashForce * dashIncrease);
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
     {

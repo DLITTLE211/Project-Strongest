@@ -39,14 +39,14 @@ public class State_Dash : BaseState
                 _base._cComboDetection.superMobilityOption = true;
             }
         }
-        if(Mathf.Abs(_base._cForce.GetXSpeed()) != _base.characterProfile.dashSpeed)
+        if(Mathf.Abs(_base._cForce.GetXSpeed()) != _base.DashForce)
         {
             ForceDashSpeed();
         }
     }
     public void ForceDashSpeed() 
     {
-        float dashSpeed = _base.characterProfile.dashSpeed;
+        float dashSpeed = _base.DashForce;
         dashSpeed = _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight ? dashSpeed : -dashSpeed;
         if (_base._cAnimator.activatedInput != null)
         {
