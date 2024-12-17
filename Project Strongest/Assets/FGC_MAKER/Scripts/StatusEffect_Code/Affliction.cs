@@ -11,6 +11,7 @@ using UnityEngine.UI;
 [Serializable]
 public class Affliction : StatusEffect
 {
+    public Character_Base _base;
     public Effect_Affliction affliction;
     public DurationType durationType;
     public ActiveState currentState;
@@ -21,18 +22,28 @@ public class Affliction : StatusEffect
     public Slider durationSlider;
     [Header("TempValues")]
     public TMP_Text textField;
+    Callback endFunc;
     public void SetTextValue() 
     {
         textField.text = $"{affliction.ToString()[0]}{affliction.ToString()[1]}";
     }
-    public void ActivateAffliction(Callback endFunc) 
+    public void ActivateAffliction(Callback _endFunc) 
     {
         if (durationType != DurationType.Permenant)
         {
+            endFunc = _endFunc;
             durationSlider.DOValue(0, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
-                endFunc();
+                CallEndFunc();
             });
+        }
+    }
+    public void CallEndFunc() 
+    {
+        if (endFunc != null)
+        {
+            endFunc();
+            endFunc = null;
         }
     }
     public void SetDurationValues() 
@@ -46,6 +57,15 @@ public class Affliction : StatusEffect
         {
             duration = activeDuration;
         }
+    }
+    public virtual void KillSingleAffliction()
+    {
+    }
+    public virtual void ActivateAffliction(float value) 
+    {
+    }
+    public virtual void ForceEndAffliction() 
+    {
     }
 }
 [Serializable]

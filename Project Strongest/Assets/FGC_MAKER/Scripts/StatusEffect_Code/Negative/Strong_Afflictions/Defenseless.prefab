@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5816330197513182354}
   - component: {fileID: -784702428216964383}
+  - component: {fileID: 1396157826923528540}
   m_Layer: 0
   m_Name: Defenseless
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3142a30d76af9440b1fa76597c1b0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 0}
   affliction: 10
   durationType: 1
   currentState: 0
@@ -59,6 +61,18 @@ MonoBehaviour:
   _isConsumed: 0
   durationSlider: {fileID: 3028651617076226834}
   textField: {fileID: 5729090445288244621}
+--- !u!114 &1396157826923528540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740254638783274981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188ad09c31aa9594e83ab9a9db1fe309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6299691564818415107
 PrefabInstance:
   m_ObjectHideFlags: 0

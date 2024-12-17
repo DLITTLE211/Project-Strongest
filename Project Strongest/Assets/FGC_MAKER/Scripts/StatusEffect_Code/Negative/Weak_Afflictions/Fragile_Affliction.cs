@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fragile_Affliction : MonoBehaviour
+public class Fragile_Affliction : Affliction
 {
     // Start is called before the first frame update
     void Start()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weakened_Affliction : MonoBehaviour
+public class Weakened_Affliction : Affliction
 {
     // Start is called before the first frame update
     void Start()

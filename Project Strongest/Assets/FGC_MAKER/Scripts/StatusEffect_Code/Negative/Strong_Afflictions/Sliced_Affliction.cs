@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sliced_Affliction : MonoBehaviour
+public class Sliced_Affliction : Affliction
 {
     // Start is called before the first frame update
     void Start()

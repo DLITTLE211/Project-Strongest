@@ -21,7 +21,7 @@ public class Character_AfflictionManager : MonoBehaviour
     {
         for(int i = 0; i < TotalAfflictions.Count; i++)
         {
-            TotalAfflictions[i].SetAffliction();
+            TotalAfflictions[i].SetAffliction(_base);
             TotalAfflictions[i]._afflictionObject.SetActive(false);
         }
         appliedAffliction.Clear();
@@ -37,6 +37,7 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     void DeactivateAffliction(Affliction_Object _appliedAffliction,int _index) 
     {
+        _appliedAffliction._afflictionBase.ForceEndAffliction();
         appliedAffliction.Remove(_appliedAffliction);
         TotalAfflictions[_index]._afflictionObject.SetActive(false);
     }
@@ -97,8 +98,9 @@ public class Affliction_Object
     public StatusEffect.Effect_Affliction _afflictionType;
     public GameObject _afflictionObject;
     public Affliction _afflictionBase;
-    public void SetAffliction() 
+    public void SetAffliction(Character_Base _base) 
     {
+        _afflictionBase._base = _base;
         _afflictionBase = _afflictionObject.GetComponent<Affliction>();
         _afflictionBase.SetTextValue();
     }
