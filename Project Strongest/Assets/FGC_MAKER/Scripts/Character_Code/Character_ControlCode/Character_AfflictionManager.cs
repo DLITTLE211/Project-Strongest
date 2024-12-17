@@ -100,8 +100,8 @@ public class Affliction_Object
     public Affliction _afflictionBase;
     public void SetAffliction(Character_Base _base) 
     {
-        _afflictionBase._base = _base;
         _afflictionBase = _afflictionObject.GetComponent<Affliction>();
         _afflictionBase.SetTextValue();
+        _afflictionBase._base = _base;
     }
 }
