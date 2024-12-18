@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Paralysis_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateAffliction(float value)
     {
-        
+        _base.character_MobilityOptions.SetParalyzed(true);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void ForceEndAffliction()
     {
-        
+        _base.character_MobilityOptions.SetParalyzed(false);
     }
 }

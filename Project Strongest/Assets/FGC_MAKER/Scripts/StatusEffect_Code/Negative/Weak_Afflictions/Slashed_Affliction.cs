@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FightingGame_FrameData;
+
 
 public class Slashed_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
+    [Range(1,25),SerializeField] private int frameBetweenDotDamage;
+    IEnumerator slashedRoutine;
+    public override void ActivateAffliction(float value)
     {
-        
+        if(slashedRoutine != null) 
+        {
+            StopCoroutine(slashedRoutine);
+            slashedRoutine = null;
+        }
+        slashedRoutine = SlashCoroutine(value);
+        StartCoroutine(slashedRoutine);
     }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator SlashCoroutine(float damageValue) 
     {
-        
+        for(int i = 0; i < 5; i++)
+        {
+            _base.opponentPlayer._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME * frameBetweenDotDamage);
+        }
     }
 }

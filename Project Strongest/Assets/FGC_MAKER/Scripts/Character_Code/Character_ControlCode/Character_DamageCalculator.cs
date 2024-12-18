@@ -233,6 +233,11 @@ public class Character_DamageCalculator : MonoBehaviour
             }
         }
     }
+    public void ReceiveCustomAfflictionDamage(float damageAmount) 
+    {
+        _healtController.ApplyMainHealthDamage(Mathf.Abs(damageAmount));
+        _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(damageAmount));
+    }
     public float GetCurrentScaling() 
     {
         return calculatedScaling * 1.75f;

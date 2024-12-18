@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FightingGame_FrameData;
 
 public class Sliced_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Range(1, 25), SerializeField] private int frameBetweenDotDamage;
+    IEnumerator slicedRoutine;
 
-    // Update is called once per frame
-    void Update()
+    public override void ActivateAffliction(float value)
     {
-        
+        if (slicedRoutine != null)
+        {
+            StopCoroutine(slicedRoutine);
+            slicedRoutine = null;
+        }
+        slicedRoutine = SlashCoroutine(value);
+        StartCoroutine(slicedRoutine);
+    }
+    IEnumerator SlashCoroutine(float damageValue)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            _base.opponentPlayer._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME * frameBetweenDotDamage);
+        }
     }
 }

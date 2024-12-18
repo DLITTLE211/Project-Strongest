@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Immobile_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateAffliction(float value)
     {
-        
+        _base.ImmobileAffliction(0.65f);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void ForceEndAffliction()
     {
-        
+        _base.ResetImmobileAffliction();
     }
 }

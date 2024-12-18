@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Fragile_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateAffliction(float value)
     {
-        
+        _base._cDamageCalculator.SetChipBuffMultiplier(0.45f);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void ForceEndAffliction()
     {
-        
+        _base._cDamageCalculator.SetChipBuffMultiplier(0.45f);
     }
 }

@@ -118,6 +118,9 @@ public class Character_Base : MonoBehaviour
     [SerializeField] private float _jumpForce;
     public float JumpForce { get { return _jumpForce; }}
 
+    [SerializeField] private float _baseMoveForce;
+    [SerializeField] private float _baseDashForce;
+
     [SerializeField] private float _moveForce;
     public float MoveForce { get { return _moveForce; } }
     [SerializeField] private float _dashForce;
@@ -218,6 +221,8 @@ public class Character_Base : MonoBehaviour
         _cHealth.SetHealthInformation(characterProfile);
         _dashForce = characterProfile.dashSpeed;
         _moveForce = characterProfile.MoveVelocity;
+        _baseMoveForce = _moveForce;
+        _baseDashForce = _dashForce;
         _jumpForce = characterProfile.JumpForce;
         _jumpDirForce = characterProfile.InAirMoveForce;
 
@@ -248,6 +253,18 @@ public class Character_Base : MonoBehaviour
     {
         _moveForce += (_moveForce * WalkIncrease);
         _dashForce += (_dashForce * dashIncrease);
+        _baseMoveForce = _moveForce;
+        _baseDashForce = _dashForce;
+    }
+    public void ImmobileAffliction(float debuffPercent)
+    {
+        _moveForce -= (_moveForce * debuffPercent);
+        _dashForce -= (_dashForce * debuffPercent);
+    }
+    public void ResetImmobileAffliction()
+    {
+        _moveForce = _baseMoveForce;
+        _dashForce = _baseDashForce;
     }
     void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
     {
