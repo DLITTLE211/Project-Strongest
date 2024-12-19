@@ -9,8 +9,9 @@ public class Dizzy_Affliction : Affliction
         _base._cHealth.SetStunBuffValue();
         CallEndFunc();
     }
-    public override void ActivateAffliction(float value)
+    public override void ActivateAffliction(float value, AfflictionType _type)
     {
+        base.ActivateAffliction(value, _type);
         _base._cHealth.SetStunBuffValue(0.35f);
     }
 }

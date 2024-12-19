@@ -137,15 +137,18 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             counterHitMult = 1;
         }
-
+        #region Calculate Damage Values
         float counterHitCalculation = (curRawDamage * counterHitMult) - curRawDamage;
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = (buffDefensiveMultiplier > 0 ? (_healtController.defenseValue + buffDefensiveMultiplier) / 100 : _healtController.defenseValue / 100);
 
         calculatedDamage = (counterHitValue + curRawDamage) - (calculatedScaling + defenseValue);
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.575f);
+        #endregion
 
         _base.opponentPlayer._amplifyController.CheckAmplifyActiveCall(currentAttack,false);
+        _base._afflictionManager.CheckAllAfflictionsApplied(calculatedDamage, AfflictionType.Damage);
+
         if (currentAttack._meterRequirement <= 0)
         {
             calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : ((currentAttack._meterAwardedOnHit * 0.05f)* calculatedScaling);
@@ -195,6 +198,7 @@ public class Character_DamageCalculator : MonoBehaviour
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
         _base.opponentPlayer._amplifyController.CheckAmplifyActiveCall(currentAttack, true);
+        _base._afflictionManager.CheckAllAfflictionsApplied(calculatedDamage, AfflictionType.Damage);
         if (calculatedRecovDamage <= 0)
         {
             calculatedRecovDamage = 0;

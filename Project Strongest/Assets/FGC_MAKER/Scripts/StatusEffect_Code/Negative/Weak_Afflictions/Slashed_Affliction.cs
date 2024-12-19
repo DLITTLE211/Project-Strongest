@@ -8,9 +8,10 @@ public class Slashed_Affliction : Affliction
 {
     [Range(1,25),SerializeField] private int frameBetweenDotDamage;
     IEnumerator slashedRoutine;
-    public override void ActivateAffliction(float value)
+    public override void ActivateAffliction(float value, AfflictionType _type)
     {
-        if(slashedRoutine != null) 
+        base.ActivateAffliction(value, _type);
+        if (slashedRoutine != null) 
         {
             StopCoroutine(slashedRoutine);
             slashedRoutine = null;
@@ -18,8 +19,13 @@ public class Slashed_Affliction : Affliction
         slashedRoutine = SlashCoroutine(value);
         StartCoroutine(slashedRoutine);
     }
+    public override void KillSingleAffliction()
+    {
+        CallEndFunc();
+    }
     IEnumerator SlashCoroutine(float damageValue) 
     {
+        KillSingleAffliction();
         for(int i = 0; i < 5; i++)
         {
             _base.opponentPlayer._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);

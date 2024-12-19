@@ -57,6 +57,16 @@ public class Character_AfflictionManager : MonoBehaviour
         ApplyAfflictionRoutine = OnDelayApplyAffliction();
         StartCoroutine(ApplyAfflictionRoutine);
     }
+    public void CheckAllAfflictionsApplied(float value, AfflictionType _type) 
+    {
+        for(int i = 0; i < appliedAffliction.Count; i++) 
+        {
+            if (appliedAffliction[i] != null) 
+            {
+                appliedAffliction[i]._afflictionBase.ActivateAffliction(value, _type);
+            }
+        }
+    }
     IEnumerator OnDelayApplyAffliction(/*AfflictionSet _afflictionSet*/) 
     {
         float waitTime = Base_FrameCode.ONE_FRAME * 10f;

@@ -23,6 +23,7 @@ public class Affliction : StatusEffect
     [Header("TempValues")]
     public TMP_Text textField;
     Callback endFunc;
+    public AfflictionType afflictionType;
     public void SetTextValue() 
     {
         textField.text = $"{affliction.ToString()[0]}{affliction.ToString()[1]}";
@@ -61,15 +62,19 @@ public class Affliction : StatusEffect
     public virtual void KillSingleAffliction()
     {
     }
-    public virtual void ActivateAffliction(float value) 
+    public virtual void ActivateAffliction(float value,AfflictionType _type = AfflictionType.Damage)
     {
+        if (_type != afflictionType) { return; }
     }
     public virtual void ForceEndAffliction() 
     {
     }
 }
 [Serializable]
-public enum AfflictionApplictionType 
+public enum AfflictionType 
 {
-
+    Damage,
+    Stun,
+    Meter,
+    Mobility,
 }

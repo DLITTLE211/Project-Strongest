@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Immobile_Affliction : Affliction
 {
-    public override void ActivateAffliction(float value)
+    public override void ActivateAffliction(float value, AfflictionType _type)
     {
+        base.ActivateAffliction(value, _type);
         _base.ImmobileAffliction(0.65f);
     }
     public override void ForceEndAffliction()
