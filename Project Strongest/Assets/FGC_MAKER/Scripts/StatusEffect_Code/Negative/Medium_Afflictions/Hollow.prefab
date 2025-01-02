@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5816330197513182354}
-  - component: {fileID: -784702428216964383}
   - component: {fileID: 955728995066669942}
   m_Layer: 0
   m_Name: Hollow
@@ -39,28 +38,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-784702428216964383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6740254638783274981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3142a30d76af9440b1fa76597c1b0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _base: {fileID: 0}
-  affliction: 5
-  durationType: 1
-  currentState: 0
-  activeDuration: 8
-  duration: 0
-  damageValue: 0
-  _isConsumed: 0
-  durationSlider: {fileID: 6305723890768008677}
-  textField: {fileID: 3604095240818654074}
 --- !u!114 &955728995066669942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +50,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f2f2566e822f540b56c6fb8c6c49e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 0}
+  affliction: 5
+  durationType: 1
+  currentState: 0
+  activeDuration: 8
+  duration: 0
+  damageValue: 0
+  _isConsumed: 0
+  durationSlider: {fileID: 6305723890768008677}
+  textField: {fileID: 3604095240818654074}
+  afflictionType: 0
 --- !u!1001 &3091862949033197812
 PrefabInstance:
   m_ObjectHideFlags: 0
