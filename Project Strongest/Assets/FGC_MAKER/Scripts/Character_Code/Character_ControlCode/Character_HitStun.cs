@@ -9,10 +9,20 @@ public class Character_HitStun : MonoBehaviour
     public float animSpeed;
     [SerializeField] bool isFrozen;
     [SerializeField] private IEnumerator hitStunRoutine;
+    private float hitstunIncreaseValue;
     void Start()
     {
         isFrozen = false;
         SetStartCharacterAnimSpeed();
+        ResetHitstunIncrease();
+    }
+    public void IncreaseHitstunOnAffliction(float increaseValue) 
+    {
+        hitstunIncreaseValue = increaseValue;
+    }
+    public void ResetHitstunIncrease()
+    {
+        hitstunIncreaseValue = 1f;
     }
     public void SetAnimator(Character_Animator myAnim)
     {
@@ -52,7 +62,8 @@ public class Character_HitStun : MonoBehaviour
     void ActivateHitStun(float hitstunValue) 
     {
         KillStunRoutine();
-        hitStunRoutine = ApplyHitstun(hitstunValue);
+        float hitstun = hitstunIncreaseValue > 1f ? hitstunValue + (hitstunValue * hitstunIncreaseValue) : hitstunValue;
+        hitStunRoutine = ApplyHitstun(hitstun);
         StartCoroutine(hitStunRoutine);
     }
     public void CallHitStun(float hitstunValue)

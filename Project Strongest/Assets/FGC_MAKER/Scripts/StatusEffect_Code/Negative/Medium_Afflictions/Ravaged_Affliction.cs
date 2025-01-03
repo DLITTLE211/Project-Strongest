@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Ravaged_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateAffliction(float value, AfflictionType _type)
     {
-        
+        base.ActivateAffliction(value, _type);
+        _base.opponentPlayer._cHitstun.IncreaseHitstunOnAffliction(0.17f);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void ForceEndAffliction()
     {
-        
+        _base.opponentPlayer._cHitstun.ResetHitstunIncrease();
     }
 }

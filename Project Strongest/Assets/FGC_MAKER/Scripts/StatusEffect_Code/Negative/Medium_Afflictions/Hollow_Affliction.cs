@@ -11,6 +11,6 @@ public class Hollow_Affliction : Affliction
     }
     public override void ForceEndAffliction()
     {
-        _base._cDamageCalculator.SetChipBuffMultiplier(0.45f);
+        _base._cDamageCalculator.SetChipBuffMultiplier();
     }
 }
