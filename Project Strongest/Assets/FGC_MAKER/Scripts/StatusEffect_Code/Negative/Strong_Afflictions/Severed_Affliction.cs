@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Severed_Affliction : Affliction
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ActivateAffliction(float value, AfflictionType _type)
     {
-        
+        base.ActivateAffliction(value, _type);
+        _base._cSuperMeter.SetMeterDebuffPercent(0f);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void ForceEndAffliction()
     {
-        
+        _base._cSuperMeter.ResetMeterDebuffPercent();
     }
 }

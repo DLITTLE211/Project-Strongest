@@ -5,6 +5,7 @@ public class Character_InputDetection : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
     private int lastNum;
+    public bool isTerrified;
     private void Start()
     {
         lastNum = 5;
@@ -20,10 +21,21 @@ public class Character_InputDetection : MonoBehaviour
         }
         catch (ArgumentOutOfRangeException) { return; }
         //Will need to be revised
+     
         _base.xVal = (_base.xVal >= _base.controllerYield.positiveXYield) ? 1 : ((_base.xVal <= -_base.controllerYield.negativeXYield) ? -1 : 0);
         _base.yVal = (_base.yVal >= _base.controllerYield.positiveYYield) ? 1 : ((_base.yVal <= -_base.controllerYield.negativeXYield) ? -1 : 0);
-        _base.numpadVector.x = _base.xVal;
-        _base.numpadVector.y = _base.yVal;
+        if (isTerrified)
+        {
+
+            _base.numpadVector.x = -_base.xVal;
+            _base.numpadVector.y = -_base.yVal;
+        }
+        else
+        {
+
+            _base.numpadVector.x = _base.xVal;
+            _base.numpadVector.y = _base.yVal;
+        }
         ConvertVector(_base.numpadVector);
     }
     async void ConvertVector(Vector2 vector)
