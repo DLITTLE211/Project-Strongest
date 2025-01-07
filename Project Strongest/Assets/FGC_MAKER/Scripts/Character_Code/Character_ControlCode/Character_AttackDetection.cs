@@ -6,11 +6,21 @@ public class Character_AttackDetection : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
     [SerializeField] private Character_ComboDetection _comboDetection;
+    public bool isErratic;
+
     public void CheckButtonPressed(List<Character_ButtonInput> buttonSet)
     {
         if (_base._subState != Character_SubStates.Controlled) { return; }
-        foreach (Character_ButtonInput action in buttonSet)
+        //foreach (Character_ButtonInput action in buttonSet)
+        for(int i = 0; i < buttonSet.Count; i++) 
         {
+            Character_ButtonInput action = buttonSet[i];
+            if (isErratic) 
+            {
+                Character_ButtonInput newRandButton = buttonSet[Random.Range(0, buttonSet.Count)];
+                newRandButton.Button_State = action.Button_State;
+                action = newRandButton;
+            }
             if (_base.player.GetButtonUp(action.Button_Element.actionId))
             {
                 action.Button_State.OnReleased();

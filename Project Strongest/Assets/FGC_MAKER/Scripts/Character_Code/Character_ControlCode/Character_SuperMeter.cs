@@ -15,10 +15,19 @@ public class Character_SuperMeter : MonoBehaviour
     public float fullMeterLevel;
     public const float maxMeterLevel = 120;
     public const float meterMaxThreshold = 30;
+    public float meterDebuffPercentage;
     // Start is called before the first frame update
     void Start()
     {
         SetStartValue();
+    }
+    public void SetMeterDebuffPercent(float percentValue) 
+    {
+        meterDebuffPercentage = percentValue;
+    }
+    public void ResetMeterDebuffPercent() 
+    {
+        meterDebuffPercentage = 1;
     }
     private void Update()
     {
@@ -60,6 +69,10 @@ public class Character_SuperMeter : MonoBehaviour
     }
     void IncreaseMeterValue(float calcValue)
     {
+        if(meterDebuffPercentage < 1) 
+        {
+            calcValue = calcValue * meterDebuffPercentage;
+        }
         if (!checkMaxTier(calcValue))
         {
             if (checkPossibleTier(calcValue))

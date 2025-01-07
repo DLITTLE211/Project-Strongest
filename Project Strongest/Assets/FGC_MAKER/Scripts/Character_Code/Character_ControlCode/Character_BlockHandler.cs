@@ -11,6 +11,7 @@ public class Character_BlockHandler : MonoBehaviour
     IEnumerator BlockRoutine;
     float frameCount = 0;
     public bool isBlocking;
+    public bool isDefenseless;
     public void SetBlockAnimationData(Character_Base _base) 
     {
         isBlocking = false;
@@ -28,6 +29,10 @@ public class Character_BlockHandler : MonoBehaviour
     }
     public void ToggleBlockAnim(bool isStandBlock, bool isActivating) 
     {
+        if (isDefenseless) 
+        {
+            return;
+        }
         if (isActivating)
         {
             Callback ActivateCurrentBlock = isStandBlock == true ? () => ActivateBlockAnim(StandBlock, isStandBlock, isActivating) : () => ActivateBlockAnim(CrouchBlock, isStandBlock, isActivating);
