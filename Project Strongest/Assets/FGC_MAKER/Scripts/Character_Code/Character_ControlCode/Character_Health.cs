@@ -87,9 +87,11 @@ public class Character_Health : MonoBehaviour
         canRecover = false;
         health_Main.currentValue -= damageValue;
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
-        float stunValue = (damageValue - (ReturnStunDebuffValue() * damageValue)) * 0.1f;
+        float debuffMultiplier = ReturnStunDebuffValue() * damageValue;
+        float stunValue = (damageValue + debuffMultiplier) * 0.1f;
         _base._afflictionManager.CheckAllAfflictionsApplied(stunValue, AfflictionType.Stun);
         stunController.ApplyStun(stunValue);
+        _base._afflictionManager.CheckSingleUseAfflictions();
     }
     float ReturnStunDebuffValue() 
     {

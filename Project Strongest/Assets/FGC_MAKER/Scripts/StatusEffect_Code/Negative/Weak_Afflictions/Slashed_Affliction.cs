@@ -25,11 +25,11 @@ public class Slashed_Affliction : Affliction
     }
     IEnumerator SlashCoroutine(float damageValue) 
     {
-        KillSingleAffliction();
         for(int i = 0; i < 5; i++)
         {
             _base.opponentPlayer._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME * frameBetweenDotDamage);
         }
+        KillSingleAffliction();
     }
 }

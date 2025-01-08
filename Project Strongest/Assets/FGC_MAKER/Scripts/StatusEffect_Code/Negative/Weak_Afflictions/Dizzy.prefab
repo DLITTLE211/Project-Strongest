@@ -58,8 +58,10 @@ MonoBehaviour:
   duration: 0
   damageValue: 0
   _isConsumed: 0
+  _isSingleUse: 1
   durationSlider: {fileID: 4563418097105176689}
   textField: {fileID: 6544499273718507246}
+  afflictionType: 0
 --- !u!1001 &4773369291274722656
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class Affliction : StatusEffect
     public float duration;
     public float damageValue;
     public bool _isConsumed;
+    public bool _isSingleUse;
     public Slider durationSlider;
     [Header("TempValues")]
     public TMP_Text textField;

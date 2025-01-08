@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 993311525}
+  isTerrified: 0
 --- !u!1 &31950405
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +214,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1847753533}
     m_Modifications:
+    - target: {fileID: -3341576388945890380, guid: 62aa8629f3b8cd44b8fcbd98aba75bb5, type: 3}
+      propertyPath: activeDuration
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5816330197513182354, guid: 62aa8629f3b8cd44b8fcbd98aba75bb5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1869,6 +1874,8 @@ MonoBehaviour:
   inputVisualiser: []
   myRb: {fileID: 94923330}
   _jumpForce: 250
+  _baseMoveForce: 0
+  _baseDashForce: 0
   _moveForce: 0.3
   _dashForce: 0
   _jumpDirForce: 100
@@ -2387,9 +2394,9 @@ MonoBehaviour:
   calculatedMeterScaling: 0
   counterHitMult: 0
   afflictionDebuffDamage: 0
-  currentComboHitCount: 0
   buffDamageMultiplier: 0
   chipBuffDamageMultiplier: 0
+  buffDefensiveMultiplier: 0
   _healtController: {fileID: 658162219}
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
@@ -4575,6 +4582,7 @@ MonoBehaviour:
       _animHash: 0
       _animLength: 0
   isBlocking: 0
+  isDefenseless: 0
 --- !u!1 &285658157
 GameObject:
   m_ObjectHideFlags: 0
@@ -8141,6 +8149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 94923329}
   _comboDetection: {fileID: 566836026}
+  isErratic: 0
 --- !u!1 &507546085
 GameObject:
   m_ObjectHideFlags: 0
@@ -8224,6 +8233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 993311525}
   _comboDetection: {fileID: 89504893}
+  isErratic: 0
 --- !u!1 &515499602
 GameObject:
   m_ObjectHideFlags: 0
@@ -10132,6 +10142,7 @@ MonoBehaviour:
       _animHash: 0
       _animLength: 0
   isBlocking: 0
+  isDefenseless: 0
 --- !u!1 &676886974
 GameObject:
   m_ObjectHideFlags: 0
@@ -11221,9 +11232,9 @@ MonoBehaviour:
   calculatedMeterScaling: 0
   counterHitMult: 0
   afflictionDebuffDamage: 0
-  currentComboHitCount: 0
   buffDamageMultiplier: 0
   chipBuffDamageMultiplier: 0
+  buffDefensiveMultiplier: 0
   _healtController: {fileID: 532720120}
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
@@ -12185,6 +12196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 94923329}
+  isTerrified: 0
 --- !u!1 &832801778
 GameObject:
   m_ObjectHideFlags: 0
@@ -16166,6 +16178,8 @@ MonoBehaviour:
   inputVisualiser: []
   myRb: {fileID: 993311522}
   _jumpForce: 250
+  _baseMoveForce: 0
+  _baseDashForce: 0
   _moveForce: 0.3
   _dashForce: 0
   _jumpDirForce: 100
@@ -24106,6 +24120,7 @@ MonoBehaviour:
   meterTierText: {fileID: 1496729537}
   meterTier: 0
   fullMeterLevel: 0
+  meterDebuffPercentage: 0
 --- !u!1001 &1468695913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25051,6 +25066,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 94923329}
   TotalAfflictions:
+  - _afflictionType: 0
+    _afflictionObject: {fileID: 891775282}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 1
+    _afflictionObject: {fileID: 1333682870}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 2
+    _afflictionObject: {fileID: 1468695915}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 3
+    _afflictionObject: {fileID: 1006367206}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 4
+    _afflictionObject: {fileID: 1362609701}
+    _afflictionBase: {fileID: 0}
   - _afflictionType: 5
     _afflictionObject: {fileID: 907753533}
     _afflictionBase: {fileID: 0}
@@ -25069,32 +25099,17 @@ MonoBehaviour:
   - _afflictionType: 10
     _afflictionObject: {fileID: 1968794777}
     _afflictionBase: {fileID: 0}
+  - _afflictionType: 11
+    _afflictionObject: {fileID: 906298162}
+    _afflictionBase: {fileID: 0}
   - _afflictionType: 12
     _afflictionObject: {fileID: 1809579617}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 14
-    _afflictionObject: {fileID: 1706784051}
     _afflictionBase: {fileID: 0}
   - _afflictionType: 13
     _afflictionObject: {fileID: 173194376}
     _afflictionBase: {fileID: 0}
-  - _afflictionType: 11
-    _afflictionObject: {fileID: 906298162}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 0
-    _afflictionObject: {fileID: 891775282}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 4
-    _afflictionObject: {fileID: 1362609701}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 1
-    _afflictionObject: {fileID: 1333682870}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 2
-    _afflictionObject: {fileID: 1468695915}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 3
-    _afflictionObject: {fileID: 1006367206}
+  - _afflictionType: 14
+    _afflictionObject: {fileID: 1706784051}
     _afflictionBase: {fileID: 0}
   appliedAffliction:
   - _afflictionType: 0
@@ -29872,6 +29887,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 993311525}
   TotalAfflictions:
+  - _afflictionType: 0
+    _afflictionObject: {fileID: 1974764701}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 1
+    _afflictionObject: {fileID: 1471095050}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 2
+    _afflictionObject: {fileID: 32900330}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 3
+    _afflictionObject: {fileID: 49534989}
+    _afflictionBase: {fileID: 0}
+  - _afflictionType: 4
+    _afflictionObject: {fileID: 1771776549}
+    _afflictionBase: {fileID: 0}
   - _afflictionType: 5
     _afflictionObject: {fileID: 623362225}
     _afflictionBase: {fileID: 0}
@@ -29890,32 +29920,17 @@ MonoBehaviour:
   - _afflictionType: 10
     _afflictionObject: {fileID: 1873431875}
     _afflictionBase: {fileID: 0}
+  - _afflictionType: 11
+    _afflictionObject: {fileID: 1154748291}
+    _afflictionBase: {fileID: 0}
   - _afflictionType: 12
     _afflictionObject: {fileID: 199685053}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 14
-    _afflictionObject: {fileID: 1512514618}
     _afflictionBase: {fileID: 0}
   - _afflictionType: 13
     _afflictionObject: {fileID: 1792917876}
     _afflictionBase: {fileID: 0}
-  - _afflictionType: 11
-    _afflictionObject: {fileID: 1154748291}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 0
-    _afflictionObject: {fileID: 1974764701}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 4
-    _afflictionObject: {fileID: 1771776549}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 1
-    _afflictionObject: {fileID: 1471095050}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 2
-    _afflictionObject: {fileID: 32900330}
-    _afflictionBase: {fileID: 0}
-  - _afflictionType: 3
-    _afflictionObject: {fileID: 49534989}
+  - _afflictionType: 14
+    _afflictionObject: {fileID: 1512514618}
     _afflictionBase: {fileID: 0}
   appliedAffliction:
   - _afflictionType: 0
@@ -31259,6 +31274,7 @@ MonoBehaviour:
   meterTierText: {fileID: 977607493}
   meterTier: 0
   fullMeterLevel: 0
+  meterDebuffPercentage: 0
 --- !u!1 &2067993360
 GameObject:
   m_ObjectHideFlags: 0

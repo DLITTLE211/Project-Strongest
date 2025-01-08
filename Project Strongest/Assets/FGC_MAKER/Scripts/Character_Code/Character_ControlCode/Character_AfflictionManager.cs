@@ -63,7 +63,25 @@ public class Character_AfflictionManager : MonoBehaviour
         {
             if (appliedAffliction[i] != null) 
             {
-                appliedAffliction[i]._afflictionBase.ActivateAffliction(value, _type);
+                if (appliedAffliction[i]._afflictionBase.currentState != ActiveState.Active)
+                {
+                    appliedAffliction[i]._afflictionBase.ActivateAffliction(value, _type);
+                }
+            }
+        }
+    }
+    public void CheckSingleUseAfflictions()
+    {
+        for (int i = 0; i < appliedAffliction.Count; i++)
+        {
+            if (appliedAffliction[i] != null)
+            {
+                if (appliedAffliction[i]._afflictionBase.currentState == ActiveState.Active 
+                    && appliedAffliction[i]._afflictionBase._isConsumed 
+                    && appliedAffliction[i]._afflictionBase._isSingleUse)
+                {
+                    appliedAffliction[i]._afflictionBase.KillSingleAffliction();
+                }
             }
         }
     }
@@ -113,5 +131,6 @@ public class Affliction_Object
         _afflictionBase = _afflictionObject.GetComponent<Affliction>();
         _afflictionBase.SetTextValue();
         _afflictionBase._base = _base;
+        _afflictionBase.currentState = ActiveState.Inactive;
     }
 }

@@ -13,5 +13,6 @@ public class Dizzy_Affliction : Affliction
     {
         base.ActivateAffliction(value, _type);
         _base._cHealth.SetStunBuffValue(0.35f);
+        _isConsumed = true;
     }
 }
