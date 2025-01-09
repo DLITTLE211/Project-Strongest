@@ -31,9 +31,9 @@ public class Affliction : StatusEffect
     }
     public void ActivateAffliction(Callback _endFunc) 
     {
+        endFunc = _endFunc;
         if (durationType != DurationType.Permenant)
         {
-            endFunc = _endFunc;
             durationSlider.DOValue(0, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 CallEndFunc();
