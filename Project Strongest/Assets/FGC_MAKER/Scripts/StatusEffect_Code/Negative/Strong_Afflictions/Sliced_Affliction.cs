@@ -16,7 +16,7 @@ public class Sliced_Affliction : Affliction
             StopCoroutine(slicedRoutine);
             slicedRoutine = null;
         }
-        slicedRoutine = SlashCoroutine(value);
+        slicedRoutine = SlashCoroutine(5.5f);
         StartCoroutine(slicedRoutine);
     }
     public override void KillSingleAffliction()
@@ -27,7 +27,7 @@ public class Sliced_Affliction : Affliction
     {
         for (int i = 0; i < 8; i++)
         {
-            _base.opponentPlayer._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
+            _base._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME * frameBetweenDotDamage);
         }
         KillSingleAffliction();

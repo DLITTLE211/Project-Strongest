@@ -9,7 +9,6 @@ public class Character_AfflictionManager : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] private List<Affliction_Object> TotalAfflictions;
     [SerializeField] private List<Affliction_Object> appliedAffliction = new List<Affliction_Object>();
-    [SerializeField] private IEnumerator ApplyAfflictionRoutine;
     public void ClearAppliedAffliction() 
     {
         if(appliedAffliction != null) 
@@ -26,7 +25,7 @@ public class Character_AfflictionManager : MonoBehaviour
         }
         appliedAffliction.Clear();
     }
-    public void ApplyAffliction(Affliction_Object _appliedAffliction,int index)
+    public void ApplyAffliction(Affliction_Object _appliedAffliction, int index)
     {
         Affliction activeAffliction = TotalAfflictions[index]._afflictionObject.GetComponent<Affliction>();
         TotalAfflictions[index]._afflictionObject.SetActive(true);
@@ -42,22 +41,6 @@ public class Character_AfflictionManager : MonoBehaviour
         appliedAffliction.Remove(_appliedAffliction);
         TotalAfflictions[_index]._afflictionObject.SetActive(false);
     }
-    public void CheckToApplyAffliction(Attack_BaseProperties _specialMoveProperty) 
-    {
-        if (appliedAffliction != null) 
-        {
-            StopCoroutine(ApplyAfflictionRoutine);
-            ApplyAfflictionRoutine = null;
-        }
-        /*
-         if(_specialMoveProperty.AfflictionSet.Total < 1)
-         {
-            return;
-         }
-         */
-        ApplyAfflictionRoutine = OnDelayApplyAffliction();
-        StartCoroutine(ApplyAfflictionRoutine);
-    }
     public void ApplyBaseAfflictions(float value = -1) 
     {
         for (int i = 0; i < appliedAffliction.Count; i++)
@@ -70,20 +53,7 @@ public class Character_AfflictionManager : MonoBehaviour
                 }
             }
         }
-    }/*
-    public void CheckAllAfflictionsApplied(float value, AfflictionType _type) 
-    {
-        for(int i = 0; i < appliedAffliction.Count; i++) 
-        {
-            if (appliedAffliction[i] != null) 
-            {
-                if (appliedAffliction[i]._afflictionBase.currentState != ActiveState.Active)
-                {
-                    appliedAffliction[i]._afflictionBase.ActivateAffliction(value, _type);
-                }
-            }
-        }
-    }*/
+    }
     public void CheckSingleUseAfflictions()
     {
         for (int i = 0; i < appliedAffliction.Count; i++)
@@ -98,17 +68,6 @@ public class Character_AfflictionManager : MonoBehaviour
                 }
             }
         }
-    }
-    IEnumerator OnDelayApplyAffliction(/*AfflictionSet _afflictionSet*/) 
-    {
-        float waitTime = Base_FrameCode.ONE_FRAME * 10f;
-        yield return new WaitForSeconds(waitTime);
-        /*
-        if(_afflictionSet) 
-        {
-            SendAfflictionToTarget(Affliction _affliction); 
-        }
-        */
     }
     public bool Activate = false;
     [Range(0, 14)] public int value;

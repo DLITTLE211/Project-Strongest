@@ -58,10 +58,11 @@ MonoBehaviour:
   duration: 0
   damageValue: 0
   _isConsumed: 0
+  _isSingleUse: 0
   durationSlider: {fileID: 6470921186724962579}
   textField: {fileID: 4344684422042898316}
   afflictionType: 0
-  frameBetweenDotDamage: 0
+  frameBetweenDotDamage: 8
 --- !u!1001 &2641284251138487298
 PrefabInstance:
   m_ObjectHideFlags: 0
