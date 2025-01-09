@@ -147,7 +147,7 @@ public class Character_DamageCalculator : MonoBehaviour
         #endregion
 
         _base.opponentPlayer._amplifyController.CheckAmplifyActiveCall(currentAttack,false);
-        _base._afflictionManager.CheckAllAfflictionsApplied(calculatedDamage, AfflictionType.Damage);
+        //_base._afflictionManager.CheckAllAfflictionsApplied(calculatedDamage, AfflictionType.Damage);
 
         if (currentAttack._meterRequirement <= 0)
         {
@@ -198,7 +198,7 @@ public class Character_DamageCalculator : MonoBehaviour
         calculatedRecovDamage = calculatedDamage - (calculatedDamage * 0.80f);
         UpdateDamageText(calculatedDamage);
         _base.opponentPlayer._amplifyController.CheckAmplifyActiveCall(currentAttack, true);
-        _base._afflictionManager.CheckAllAfflictionsApplied(calculatedDamage, AfflictionType.Damage);
+        //_base._afflictionManager.CheckAllAfflictionsApplied(calculatedDamage, AfflictionType.Damage);
         if (calculatedRecovDamage <= 0)
         {
             calculatedRecovDamage = 0;

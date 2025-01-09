@@ -34,6 +34,7 @@ public class Character_AfflictionManager : MonoBehaviour
         activeAffliction.durationSlider.value = 1;
         activeAffliction.ActivateAffliction(() => DeactivateAffliction(TotalAfflictions[index], index));
         appliedAffliction.Add(TotalAfflictions[index]);
+        ApplyBaseAfflictions();
     }
     void DeactivateAffliction(Affliction_Object _appliedAffliction,int _index) 
     {
@@ -57,6 +58,19 @@ public class Character_AfflictionManager : MonoBehaviour
         ApplyAfflictionRoutine = OnDelayApplyAffliction();
         StartCoroutine(ApplyAfflictionRoutine);
     }
+    public void ApplyBaseAfflictions(float value = -1) 
+    {
+        for (int i = 0; i < appliedAffliction.Count; i++)
+        {
+            if (appliedAffliction[i] != null)
+            {
+                if (appliedAffliction[i]._afflictionBase.currentState != ActiveState.Active)
+                {
+                    appliedAffliction[i]._afflictionBase.ActivateAffliction(value, appliedAffliction[i]._afflictionBase.afflictionType);
+                }
+            }
+        }
+    }/*
     public void CheckAllAfflictionsApplied(float value, AfflictionType _type) 
     {
         for(int i = 0; i < appliedAffliction.Count; i++) 
@@ -69,7 +83,7 @@ public class Character_AfflictionManager : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
     public void CheckSingleUseAfflictions()
     {
         for (int i = 0; i < appliedAffliction.Count; i++)

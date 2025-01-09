@@ -6,6 +6,7 @@ public class Dizzy_Affliction : Affliction
 {
     public override void KillSingleAffliction()
     {
+        currentState = ActiveState.Inactive;
         _base._cHealth.SetStunBuffValue();
         CallEndFunc();
     }
