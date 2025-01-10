@@ -62,7 +62,7 @@ public class Character_DamageCalculator : MonoBehaviour
         }
         _base.opponentPlayer._cComboCounter.OnHit_CountUp();
         curRawDamage = callback.customDamage.rawAttackDamage;
-        if (buffDamageMultiplier > 0) 
+        if (Mathf.Abs(buffDamageMultiplier) > 0) 
         {
             curRawDamage = curRawDamage + (curRawDamage * buffDamageMultiplier);
         }
@@ -130,7 +130,7 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeDamage(Attack_BaseProperties currentAttack,bool armoredAttack)
     {
         curRawDamage = currentAttack.rawAttackDamage;
-        if (buffDamageMultiplier > 0)
+        if (Mathf.Abs(buffDamageMultiplier) > 0)
         {
             curRawDamage = curRawDamage + (curRawDamage * buffDamageMultiplier);
         }
@@ -185,11 +185,11 @@ public class Character_DamageCalculator : MonoBehaviour
     private void TakeChipDamage(Attack_BaseProperties currentAttack)
     {
         curChipDamage = currentAttack.rawChipDamage;
-        if (buffDamageMultiplier > 0)
+        if (Mathf.Abs(buffDamageMultiplier) > 0)
         {
             curChipDamage = curChipDamage + (curChipDamage * buffDamageMultiplier);
         }
-        if(chipBuffDamageMultiplier > 0)
+        if(Mathf.Abs(chipBuffDamageMultiplier) > 0)
         {
             curChipDamage = curChipDamage + (curChipDamage * chipBuffDamageMultiplier);
         }
