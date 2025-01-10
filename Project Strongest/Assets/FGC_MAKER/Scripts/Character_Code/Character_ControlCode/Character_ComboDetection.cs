@@ -18,8 +18,10 @@ public class Character_ComboDetection : MonoBehaviour
     private Character_ButtonInput lastAddedinput;
     List<MoveType> followUpInputMoveTypes;
     [HideInInspector] public int lastInput;
+    bool isParalyzed;
     private void Start()
     {
+        isParalyzed = false;
         canCheckMovement = false;
         lastInput = 5;
         curString = "";
@@ -30,6 +32,10 @@ public class Character_ComboDetection : MonoBehaviour
         _cMOnChangeInputLog = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         _cMOnChangeInputLog.SetMaxStringSize(5);
         SetFollowUpAttackTypes();
+    }
+    public void SetParalyzed(bool state = false)
+    {
+        isParalyzed = state;
     }
     void SetFollowUpAttackTypes()
     {
@@ -418,7 +424,9 @@ public class Character_ComboDetection : MonoBehaviour
         {
             return;
         }
+        if (isParalyzed) { return; }
         Character_MobilityOption curMobility = ExtraMovementVerifier(mobilityCheckList);
+
         if (curMobility != null)
         {
             curMobility.PerformMobilityAction();

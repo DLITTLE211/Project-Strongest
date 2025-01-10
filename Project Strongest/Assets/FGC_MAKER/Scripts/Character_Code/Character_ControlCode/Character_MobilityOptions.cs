@@ -13,23 +13,12 @@ public class Character_MobilityOptions : MonoBehaviour
     float frameCount;
     IEnumerator MobilityRoutine;
     List<CustomCallback> callbackList;
-    bool isParalyzed;
-    private void Start()
-    {
-        isParalyzed = false;
-    }
-
-    public void SetParalyzed(bool state = false) 
-    {
-        isParalyzed = state;
-    }
     public void CallMobilityAction(Character_MobilityOption _mobOption)
     {
         _mobOption.CurBase._cForce.HandleExtraMovement(_mobOption);
     }
     public void ActivateMobilityOption(Character_MobilityOption _currentAction) 
     {
-        if (isParalyzed) {return; }
         KillCurrentRoutine();
         animRunning = true;
         SetCustomCallbacks(_currentAction);

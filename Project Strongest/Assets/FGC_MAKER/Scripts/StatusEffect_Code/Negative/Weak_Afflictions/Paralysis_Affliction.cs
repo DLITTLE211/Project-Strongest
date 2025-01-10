@@ -6,11 +6,13 @@ public class Paralysis_Affliction : Affliction
 {
     public override void ActivateAffliction(float value, AfflictionType _type)
     {
+        currentState = ActiveState.Active;
         base.ActivateAffliction(value, _type);
-        _base.character_MobilityOptions.SetParalyzed(true);
+        _base._cComboDetection.SetParalyzed(true);
     }
     public override void ForceEndAffliction()
     {
-        _base.character_MobilityOptions.SetParalyzed(false);
+        currentState = ActiveState.Inactive;
+        _base._cComboDetection.SetParalyzed(false);
     }
 }
