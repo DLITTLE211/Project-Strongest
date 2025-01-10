@@ -69,9 +69,9 @@ public class Character_SuperMeter : MonoBehaviour
     }
     void IncreaseMeterValue(float calcValue)
     {
-        if(meterDebuffPercentage < 1) 
+        if(meterDebuffPercentage > 0) 
         {
-            calcValue = calcValue * meterDebuffPercentage;
+            calcValue = Mathf.Abs(calcValue * meterDebuffPercentage);
         }
         if (!checkMaxTier(calcValue))
         {
