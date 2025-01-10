@@ -31,6 +31,7 @@ public class Character_DamageCalculator : MonoBehaviour
     private void Start()
     {
         victoryHit = false;
+        ResetBuffs();
    }
     public void SetAllowDeathCheck() 
     {
@@ -188,7 +189,7 @@ public class Character_DamageCalculator : MonoBehaviour
         {
             curChipDamage = curChipDamage + (curChipDamage * buffDamageMultiplier);
         }
-        else if(chipBuffDamageMultiplier > 0)
+        if(chipBuffDamageMultiplier > 0)
         {
             curChipDamage = curChipDamage + (curChipDamage * chipBuffDamageMultiplier);
         }
