@@ -15,14 +15,14 @@ public class Character_AttackDetection : MonoBehaviour
         for(int i = 0; i < buttonSet.Count; i++) 
         {
             Character_ButtonInput action = buttonSet[i];
-            if (isErratic) 
-            {
-                Character_ButtonInput newRandButton = buttonSet[Random.Range(0, buttonSet.Count)];
-                newRandButton.Button_State = action.Button_State;
-                action = newRandButton;
-            }
             if (_base.player.GetButtonUp(action.Button_Element.actionId))
             {
+                if (isErratic)
+                {
+                    Character_ButtonInput newRandButton = buttonSet[Random.Range(0, buttonSet.Count)];
+                    newRandButton.Button_State = action.Button_State;
+                    action = newRandButton;
+                }
                 action.Button_State.OnReleased();
                 _base._timer.AddPressedButton(action);
                 _base.widget.ValidateButtonReleaseInput(action);
@@ -30,6 +30,12 @@ public class Character_AttackDetection : MonoBehaviour
             }
             if (_base.player.GetButton(action.Button_Element.actionId))
             {
+                if (isErratic)
+                {
+                    Character_ButtonInput newRandButton = buttonSet[Random.Range(0, buttonSet.Count)];
+                    newRandButton.Button_State = action.Button_State;
+                    action = newRandButton;
+                }
                 switch (action.Button_State._state)
                 {
                     case ButtonStateMachine.InputState.released:

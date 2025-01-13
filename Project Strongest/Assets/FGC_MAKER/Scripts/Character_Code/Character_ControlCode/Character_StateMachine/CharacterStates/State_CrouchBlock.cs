@@ -29,7 +29,7 @@ public class State_CrouchBlock : BaseState
         base.OnUpdate();
         if (_base._cStateMachine._CheckBlockButton())
         {
-            if (_base._cComboDetection.lastInput < 3)
+            if (_base._cComboDetection.lastInput < 3 && !_base._cBlockHandler.isDefenseless)
             {
                 _base._cHurtBox.SetHurboxState(HurtBoxType.BlockLow);
             }

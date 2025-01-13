@@ -26,7 +26,7 @@ public class State_Block : BaseState
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (_base._cStateMachine._CheckBlockButton())
+        if (_base._cStateMachine._CheckBlockButton() && !_base._cBlockHandler.isDefenseless)
         {
             _base._cHurtBox.SetHurboxState(HurtBoxType.BlockHigh);
         }
