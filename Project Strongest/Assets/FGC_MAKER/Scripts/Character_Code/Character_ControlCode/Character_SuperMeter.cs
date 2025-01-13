@@ -20,6 +20,7 @@ public class Character_SuperMeter : MonoBehaviour
     void Start()
     {
         SetStartValue();
+        ResetMeterDebuffPercent();
     }
     public void SetMeterDebuffPercent(float percentValue) 
     {
@@ -69,7 +70,7 @@ public class Character_SuperMeter : MonoBehaviour
     }
     void IncreaseMeterValue(float calcValue)
     {
-        if(meterDebuffPercentage > 0) 
+        if(meterDebuffPercentage >= 0) 
         {
             calcValue = Mathf.Abs(calcValue * meterDebuffPercentage);
         }
