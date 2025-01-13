@@ -13,6 +13,6 @@ public class Hollow_Affliction : Affliction
     public override void ForceEndAffliction()
     {
         currentState = ActiveState.Inactive;
-        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier();
+        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier(-0.85f);
     }
 }

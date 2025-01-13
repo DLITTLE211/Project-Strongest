@@ -10,6 +10,6 @@ public class HeavyHitter_Amplify : Amplifiers
     }
     public override void ResetAmplifier()
     {
-        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier();
+        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier(-0.15f);
     }
 }

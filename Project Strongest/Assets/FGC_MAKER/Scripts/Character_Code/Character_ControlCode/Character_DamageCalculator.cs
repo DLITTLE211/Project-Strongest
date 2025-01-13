@@ -44,11 +44,11 @@ public class Character_DamageCalculator : MonoBehaviour
     }
     public void SetBuffMultiplier(float value = 0f) 
     {
-        buffDamageMultiplier = value;
+        buffDamageMultiplier += value;
     }
     public void SetChipBuffMultiplier(float value = 0f)
     {
-        chipBuffDamageMultiplier = value;
+        chipBuffDamageMultiplier -= value;
     }
     public void SetDefensiveMultiplier(float value = 0f)
     {

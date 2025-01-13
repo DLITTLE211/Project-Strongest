@@ -16,7 +16,7 @@ public class Perfectionist_Amplify : Amplifiers
     public override void DeactivateInstantPassiveAmplify()
     {
         _base._cHealth.SetStunBuffValue();
-        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier();
+        _base.opponentPlayer._cDamageCalculator.SetBuffMultiplier(-0.15f);
         _base.opponentPlayer._cDamageCalculator.SetChipBuffMultiplier();
         currentState = ActiveState.Inactive;
     }
