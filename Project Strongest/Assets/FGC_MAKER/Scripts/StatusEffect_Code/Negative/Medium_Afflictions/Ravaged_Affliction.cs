@@ -6,11 +6,13 @@ public class Ravaged_Affliction : Affliction
 {
     public override void ActivateAffliction(float value, AfflictionType _type)
     {
+        currentState = ActiveState.Active;
         base.ActivateAffliction(value, _type);
-        _base.opponentPlayer._cHitstun.IncreaseHitstunOnAffliction(0.17f);
+        _base._cHitController.IncreaseHitstunOnAffliction(0.35f);
     }
     public override void ForceEndAffliction()
     {
-        _base.opponentPlayer._cHitstun.ResetHitstunIncrease();
+        currentState = ActiveState.Inactive;
+        _base._cHitController.ResetHitstunIncrease();
     }
 }

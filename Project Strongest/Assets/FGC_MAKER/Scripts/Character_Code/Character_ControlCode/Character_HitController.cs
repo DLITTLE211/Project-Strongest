@@ -26,6 +26,7 @@ public class Character_HitController : MonoBehaviour
     public float currentHitstop;
     public float hitStunAmount;
     public float hitStunScaling;
+    public float strunAmountIncrease;
 
     [SerializeField] private bool smallHitRecovering;
     [SerializeField] private bool bigHitRecovering;
@@ -409,6 +410,14 @@ public class Character_HitController : MonoBehaviour
             DownedFrameTickRoutine = null;
         }
     }
+    public void ResetHitstunIncrease() 
+    {
+        strunAmountIncrease = 1f;
+    }
+    public void IncreaseHitstunOnAffliction(float increaseValue)
+    {
+        strunAmountIncrease = increaseValue;
+    }
     IEnumerator DoHitResponse(HitAnimationField curField, float overrideStunAmount = -1f)
     {
         ClearFrameTickRoutine();
@@ -424,6 +433,11 @@ public class Character_HitController : MonoBehaviour
         SetStunMeterValue(hitStunAmount);
         _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
         _base._cAnimator.SetCanRecover(true);
+        if (strunAmountIncrease > 0) 
+        {
+            float newHitStun = hitStunAmount + (hitStunAmount * strunAmountIncrease);
+            hitStunAmount = newHitStun;
+        }
         _base._cHitstun.CallHitStun(hitStunAmount);
         _base._aFrameDataMeter.SetHitRecoveringState(true);
         CallHitStopHitResponse(curField);

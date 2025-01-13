@@ -14,15 +14,6 @@ public class Character_HitStun : MonoBehaviour
     {
         isFrozen = false;
         SetStartCharacterAnimSpeed();
-        ResetHitstunIncrease();
-    }
-    public void IncreaseHitstunOnAffliction(float increaseValue) 
-    {
-        hitstunIncreaseValue = increaseValue;
-    }
-    public void ResetHitstunIncrease()
-    {
-        hitstunIncreaseValue = 1f;
     }
     public void SetAnimator(Character_Animator myAnim)
     {
