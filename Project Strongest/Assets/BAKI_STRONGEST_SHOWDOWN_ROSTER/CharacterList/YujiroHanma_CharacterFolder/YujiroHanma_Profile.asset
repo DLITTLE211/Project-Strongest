@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce781af4dca183f49b5c73dda845874f, type: 3}
+  m_Name: YujiroHanma_Profile
+  m_EditorClassIdentifier: 
+  CharacterName: YujiroHanma
+  CharacterID: 2
+  CharacterProfileImage: {fileID: 21300000, guid: a68580fa811fa4f4b94f642aa5eeaac2, type: 3}
+  Mass: 100
+  Height: 190
+  Weight: 120
+  hurtboxSizing:
+    radius: 0
+    hurtboxPosition: {x: 0, y: 0, z: 0}
+    hurtboxSizing: {x: 0, y: 0, z: 0}
+  collisionSizing:
+    headRadius: 0
+    headHeight: 0
+    headHurtboxPositioning: {x: 0, y: 0, z: 0}
+    bodyRadius: 0
+    bodyHeight: 0
+    bodyHurtboxPositioning: {x: 0, y: 0, z: 0}
+  MoveVelocity: 1.85
+  JumpForce: 350
+  InAirMoveForce: 115
+  dashSpeed: 4
+  MaxHealth: 120
+  MaxStunValue: 20
+  DefenseValue: 35
+  HealthRegenRate: 2.5
+  _characterSkins:
+    _modelMaterials: []
+    ColorSets: []
+  characterModel: {fileID: 0}
+  characterAnimator: {fileID: 0}
+  cAnimatorScript: {fileID: 0}
+  AllCharacterAnimations: []
+  CharacterModel: {fileID: 0}
+  properHitResponseAnimations: []
+  AmplifyAnim: {fileID: 0}
+  StandBlockAnim: {fileID: 0}
+  CrouchBlockAnim: {fileID: 0}
+  _characterMoveList: {fileID: 0}
+  moveListCount: 1
+  CharacterMoveListPrefab: []
+  _NewCharacterMobility: {fileID: 0}
+  BasicCharacterInteractions: []
+  SpecialCharacterInteractions: []
