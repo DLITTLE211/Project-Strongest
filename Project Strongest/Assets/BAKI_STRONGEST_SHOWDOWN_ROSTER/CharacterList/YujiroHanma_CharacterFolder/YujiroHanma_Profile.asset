@@ -38,20 +38,260 @@ MonoBehaviour:
   DefenseValue: 35
   HealthRegenRate: 2.5
   _characterSkins:
-    _modelMaterials: []
-    ColorSets: []
-  characterModel: {fileID: 0}
+    _modelMaterials:
+    - {fileID: 2100000, guid: e8f4e731ef7574b41bccffaaabc3c653, type: 2}
+    - {fileID: 2100000, guid: 52896a04a165dc643a6f59796ef07896, type: 2}
+    - {fileID: 2100000, guid: 582985df3f826c6498d6a2a9adf2f3c7, type: 2}
+    - {fileID: 2100000, guid: 7e1c9030b5e41584187628df16d57678, type: 2}
+    ColorSets:
+    - _imageSet:
+      - {fileID: 2800000, guid: 2b6b312f59421204cb0e7a912b29e592, type: 3}
+      - {fileID: 2800000, guid: 2f81cf39b50f9a046ab3b75e2af4ce30, type: 3}
+      - {fileID: 2800000, guid: 27688c43371e7a84fac7da13d303bcb2, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: 78417aa569cc4bb4cbcc47838fa131f5, type: 3}
+      - {fileID: 2800000, guid: 2d1bc762853e2a6498d288f2baf0afc7, type: 3}
+      - {fileID: 2800000, guid: 9ee48ef5e67c02c45a5eaa3b3b2b99e2, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: a182f8b55602fcb4bbd5d5e043875319, type: 3}
+      - {fileID: 2800000, guid: 9847d3141480468409eb9a5909b6f759, type: 3}
+      - {fileID: 2800000, guid: 5d29bb8934046c74abd99f191e4d95d2, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: fe4d97e85fd412747af1a781a1387691, type: 3}
+      - {fileID: 2800000, guid: 934a0255b4357ce4187caae6dd774180, type: 3}
+      - {fileID: 2800000, guid: 29056c2527c667748b224a52fee9d6f3, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: f3fd6956ee8b5274387c388883c25de0, type: 3}
+      - {fileID: 2800000, guid: 1bcc63139b5756844a56afbd5637eb54, type: 3}
+      - {fileID: 2800000, guid: f73a5ffc9b5d6b54fb5cc2cf1efedd09, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+  characterModel: {fileID: 2619550513160664684, guid: 926b334e5591a5d47bce2b6a9b4e51c6, type: 3}
   characterAnimator: {fileID: 0}
   cAnimatorScript: {fileID: 0}
   AllCharacterAnimations: []
-  CharacterModel: {fileID: 0}
-  properHitResponseAnimations: []
-  AmplifyAnim: {fileID: 0}
-  StandBlockAnim: {fileID: 0}
-  CrouchBlockAnim: {fileID: 0}
-  _characterMoveList: {fileID: 0}
+  CharacterModel: {fileID: 919132149155446097, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+  properHitResponseAnimations:
+  - anim: {fileID: -6766769711721395919, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 2
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 4
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 4
+    isGroundedReaction: 0
+    isLowReaction: 1
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 8
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: -7872749075628528436, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 2
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: 8854085969716297354, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 2
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: 6991049729840257660, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 4
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: 4524985264203469723, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 256
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 4
+    _getupType: 0
+  - anim: {fileID: 4524985264203469723, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 256
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 4
+    _getupType: 0
+  - anim: {fileID: 6991049729840257660, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 0
+    hitLevel: 4
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: 3411093198353683759, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 8
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: 8808309529977388113, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 32
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: -3782299768679352025, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 1
+    hitLevel: 16
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 8
+    _getupType: 0
+  - anim: {fileID: -7053362206078326854, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: -1617866586953134164, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 1
+  - anim: {fileID: -2773910506096812512, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 8
+    _getupType: 0
+  - anim: {fileID: -5235734787564728245, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 4
+    hitLevel: 2
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: -5089333823743093384, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 2
+    hitLevel: 64
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: 1683118064374378176, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 3
+    hitLevel: 128
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: 6005964115479548752, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 2
+    hitLevel: 64
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 0
+    _getupType: 0
+  - anim: {fileID: 6388789729137327533, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+    animLength: 0
+    animName: 
+    animHash: 0
+    hitReactionType: 3
+    hitLevel: 128
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 0
+    _getupType: 0
+  AmplifyAnim: {fileID: 4883245189638671926, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+  StandBlockAnim: {fileID: -389334722718135364, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+  CrouchBlockAnim: {fileID: -1015573292924380463, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
+  _characterMoveList: {fileID: -3225154758481460539, guid: 2b66029d345d3424c9480047202c28d0, type: 3}
   moveListCount: 1
-  CharacterMoveListPrefab: []
-  _NewCharacterMobility: {fileID: 0}
+  CharacterMoveListPrefab:
+  - {fileID: 3315631830582736349, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}
+  _NewCharacterMobility: {fileID: 6891314296479737942, guid: 3870259135818f64ea73830440e84d6d, type: 3}
   BasicCharacterInteractions: []
   SpecialCharacterInteractions: []
