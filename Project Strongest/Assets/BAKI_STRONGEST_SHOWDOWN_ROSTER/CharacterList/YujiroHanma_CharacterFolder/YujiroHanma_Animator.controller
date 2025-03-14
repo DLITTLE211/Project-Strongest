@@ -156,32 +156,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-8713129757055526650
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Recovery_Slow
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -2773910506096812512, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-8694441896175096973
 AnimatorState:
   serializedVersion: 6
@@ -192,7 +166,8 @@ AnimatorState:
   m_Name: YujiroHanma|Yujiro_Parry_High
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 293798716078635460}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -208,32 +183,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-8674233022013452887
-AnimatorState:
-  serializedVersion: 6
+--- !u!1101 &-8688745839427623992
+AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 873626757992951520, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: Y_Float
+    m_EventTreshold: -0.2
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -7772594683182426504}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.05
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-8580293805081382565
 AnimatorState:
   serializedVersion: 6
@@ -255,32 +229,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -3928908615117605954, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-8527307228225693038
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_Install_41236LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6929344571553695804, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -312,58 +260,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-8485536594334154338
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Dash_Backward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 383643773199702232, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-8473866914991071376
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_6HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2812597902665115300, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-8070501483393697391
 AnimatorState:
   serializedVersion: 6
@@ -385,32 +281,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 4162349555863517749, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-7894971621728250732
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_2
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2391954073041336365, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -520,33 +390,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-7680597130358562653
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Parry_High
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -7041193908283624228}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1390435406961307155, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-7587186912476501983
 AnimatorState:
   serializedVersion: 6
@@ -573,110 +416,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-7537106058703683691
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_2HK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 97011390996843672, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-7361093437895115522
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_3LK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6182894563767420043, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-7320031422043691819
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_623LP_Release
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1178540779368320124, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-7286340057519077696
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Recovery_Quick_Backward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1617866586953134164, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-7166821498503953238
 AnimatorState:
   serializedVersion: 6
@@ -687,7 +426,8 @@ AnimatorState:
   m_Name: YujiroHanma|Yujiro_Parry_Low
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -4716535710344640614}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -729,28 +469,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-7041193908283624228
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -1238207229005788678}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &-7035850214941803962
 AnimatorState:
   serializedVersion: 6
@@ -784,7 +502,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Standing_Idle_2_Base
+  m_Name: Idle_2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -829,84 +547,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-6897329537692820072
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Super_Install_236236HK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7461185382134932030, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-6699967720777937939
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Lose_Animation
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8267899419045568441, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-6688277956658512720
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Medium
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6991049729840257660, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-6674208015726955053
 AnimatorState:
   serializedVersion: 6
@@ -928,110 +568,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -4747405227424838803, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-6571154100430496681
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Recovery_Quick_Neutral
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7053362206078326854, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-6539852114766169332
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Standing_Block_GB
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6388789729137327533, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-6385873301976166606
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Crouching_Block_Light
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5089333823743093384, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-6346803567123926544
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Crouch_2
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1131430911777209909, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1063,32 +599,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-6079678400648062539
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_3HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1334272826729525742, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-5777689962727530164
 AnimatorState:
   serializedVersion: 6
@@ -1110,188 +620,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -2498285957056581948, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5759465318354408164
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Crouching_Block
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1015573292924380463, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5735089519558908018
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_2LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2551456529832318885, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5660662684929777496
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214LK<>6HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5578364919483311603, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5527685458235122738
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Throw_Whiff
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2158202335617598609, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5423868357890711644
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Super_Install_214214LK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7340567845453766806, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5204271576331349557
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Spiral
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8808309529977388113, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5047390892141932184
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_AirHit_Recovery
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5235734787564728245, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1323,6 +651,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &-4716535710344640614
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -2945277486471107082}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-4696728148561710882
 AnimatorState:
   serializedVersion: 6
@@ -1370,32 +720,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -7758564613828222737, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-4580564279967455630
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Super_236236LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -4628176772645454578, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1479,59 +803,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-4320577603832690874
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Standing_Block_Light
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6005964115479548752, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-4265794860994452972
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Jumping_Backward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -2435666648020677899}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -456909190888620806, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-4211205203253742805
 AnimatorState:
   serializedVersion: 6
@@ -1553,58 +824,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8435515308610471684, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-4187756246758666117
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214HP_Whiff
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5626957218867987484, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-4176001773156679344
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Landing
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 3750395529078810732, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1669,7 +888,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Crouch_Idle
+  m_Name: Crouch
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1683,32 +902,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 3019287286738001024, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-3862636850408350114
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Walk_Forward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -158807303974166203, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1766,136 +959,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-3490004100310099080
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5HP_Air
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 3177882160714318355, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-3363606845458736172
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214LK<>5HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -6973955647242998172, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-3358392594194852550
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_4LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 4864491806725208800, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-3254800537907894964
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Super_236236LK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5388926781681478935, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-3178251129464208037
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_236LP<>6HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1317054260479976036, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-3155526544645292905
 AnimatorState:
   serializedVersion: 6
@@ -1932,7 +995,8 @@ AnimatorState:
   m_Name: YujiroHanma|Yujiro_Jumping_Forward
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -8688745839427623992}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -1955,7 +1019,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Standing_Idle_Base
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2007,7 +1071,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Walk_Backward
+  m_Name: Walk_Backward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2021,84 +1085,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 5586251907646554288, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-2845910317687859324
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_2HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1218365010532634092, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-2787789614629461209
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_6HK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 5040380551693833875, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-2781029680520221422
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Standing_Block
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -389334722718135364, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2156,31 +1142,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-2435666648020677899
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: Y_Float
-    m_EventTreshold: -0.2
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 7775986353507929581}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.05
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &-2290949417225066139
 AnimatorState:
   serializedVersion: 6
@@ -2228,32 +1189,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 3968772691804900743, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-1947370674776246327
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Walking_Backward_Install
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6991003643021642852, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2311,58 +1246,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-1794601497476276113
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Crouching_Block_GB
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1683118064374378176, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-1783675998271249444
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214LK<>5LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1011613856416649629, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-1594483265905029998
 AnimatorState:
   serializedVersion: 6
@@ -2373,7 +1256,8 @@ AnimatorState:
   m_Name: YujiroHanma|Yujiro_Jumping_Backward
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 567624064689426695}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -2467,58 +1351,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-1238207229005788678
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Parry_High_Recovery
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 9079342195990031111, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-1124198108032589671
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_236LP<>6HK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -6102298274936493370, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1107 &-1067208824859513499
 AnimatorStateMachine:
   serializedVersion: 6
@@ -2529,551 +1361,275 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 2750270915868297681}
-    m_Position: {x: 340, y: 40, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7894971621728250732}
-    m_Position: {x: 550, y: 40, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1647889412827413774}
-    m_Position: {x: 760, y: 40, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7426285689502424363}
-    m_Position: {x: 340, y: 90, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6346803567123926544}
-    m_Position: {x: 550, y: 90, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 8153640192563485708}
-    m_Position: {x: 130, y: 140, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3862636850408350114}
-    m_Position: {x: 550, y: 140, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 6355107622895975097}
-    m_Position: {x: 340, y: 140, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3568421283787849948}
-    m_Position: {x: 760, y: 140, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8485536594334154338}
-    m_Position: {x: -80, y: 140, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -4265794860994452972}
-    m_Position: {x: 130, y: 190, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7775986353507929581}
-    m_Position: {x: 340, y: 260, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 6106382425413764985}
-    m_Position: {x: 550, y: 190, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 8820105676157423767}
-    m_Position: {x: 340, y: 190, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7680597130358562653}
-    m_Position: {x: 170, y: 360, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1238207229005788678}
-    m_Position: {x: 170, y: 430, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2837181121000517548}
-    m_Position: {x: 510, y: 360, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3228643334476714360}
-    m_Position: {x: 510, y: 430, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -2781029680520221422}
-    m_Position: {x: 170, y: 480, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6539852114766169332}
-    m_Position: {x: 170, y: 580, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -4320577603832690874}
-    m_Position: {x: 170, y: 530, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5759465318354408164}
-    m_Position: {x: 510, y: 480, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1794601497476276113}
-    m_Position: {x: 510, y: 580, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6385873301976166606}
-    m_Position: {x: 510, y: 530, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7453208580903926764}
-    m_Position: {x: 340, y: 670, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2249804931965784804}
-    m_Position: {x: 550, y: 670, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5047390892141932184}
-    m_Position: {x: 760, y: 670, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1510288814907605855}
-    m_Position: {x: 130, y: 720, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 367141248900360119}
-    m_Position: {x: 130, y: 670, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -4176001773156679344}
-    m_Position: {x: 970, y: 670, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6688277956658512720}
-    m_Position: {x: 130, y: 770, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 389530532615738408}
-    m_Position: {x: 130, y: 820, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3512291519519099551}
-    m_Position: {x: 130, y: 870, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4651939163699499467}
-    m_Position: {x: 130, y: 920, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5204271576331349557}
-    m_Position: {x: 130, y: 970, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7286340057519077696}
-    m_Position: {x: 360, y: 920, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6571154100430496681}
-    m_Position: {x: 360, y: 970, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8713129757055526650}
-    m_Position: {x: -90, y: 970, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 8160104221235395521}
-    m_Position: {x: -370, y: 360, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1357992519209711759}
-    m_Position: {x: -160, y: 410, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 6799239985817643754}
-    m_Position: {x: -160, y: 360, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6699967720777937939}
-    m_Position: {x: -160, y: 460, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7537106058703683691}
-    m_Position: {x: 350, y: 1080, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 8317666106892733493}
-    m_Position: {x: 140, y: 1080, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7190551329185634810}
-    m_Position: {x: 350, y: 1030, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5735089519558908018}
-    m_Position: {x: 140, y: 1030, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4595228065063473999}
-    m_Position: {x: -70, y: 1150, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2210337324461505922}
-    m_Position: {x: -70, y: 1200, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7483942854481357598}
-    m_Position: {x: -70, y: 1080, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4586700068922413240}
-    m_Position: {x: 770, y: 1080, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2397056910424422235}
-    m_Position: {x: -280, y: 1080, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3490004100310099080}
-    m_Position: {x: 560, y: 1080, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -74706906633405764}
-    m_Position: {x: -70, y: 1030, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3308481014652621520}
-    m_Position: {x: 770, y: 1030, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8674233022013452887}
-    m_Position: {x: -280, y: 1030, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7190880556637473520}
-    m_Position: {x: 560, y: 1030, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -2787789614629461209}
-    m_Position: {x: 140, y: 1150, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8473866914991071376}
-    m_Position: {x: -280, y: 1200, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3679875670112622514}
-    m_Position: {x: -280, y: 1150, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -2845910317687859324}
-    m_Position: {x: -280, y: 1330, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 8967392677182636415}
-    m_Position: {x: -280, y: 1280, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6079678400648062539}
-    m_Position: {x: -50, y: 1330, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7361093437895115522}
-    m_Position: {x: 430, y: 1280, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3358392594194852550}
-    m_Position: {x: -50, y: 1280, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7799849336301137996}
-    m_Position: {x: 190, y: 1280, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -583158000917268774}
-    m_Position: {x: 430, y: 1330, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 329167105445386632}
-    m_Position: {x: 190, y: 1330, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2865009668314347588}
-    m_Position: {x: -280, y: 1450, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -4187756246758666117}
-    m_Position: {x: -280, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3363606845458736172}
-    m_Position: {x: 190, y: 1500, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1783675998271249444}
-    m_Position: {x: 190, y: 1450, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5660662684929777496}
-    m_Position: {x: 190, y: 1550, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4459976493626028162}
-    m_Position: {x: 190, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2443457024127441281}
-    m_Position: {x: -510, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1977090331221523022}
-    m_Position: {x: -50, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1124198108032589671}
-    m_Position: {x: -50, y: 1500, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3178251129464208037}
-    m_Position: {x: -50, y: 1450, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7111118686829093787}
-    m_Position: {x: 650, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7320031422043691819}
-    m_Position: {x: 430, y: 1450, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4290762484876509484}
-    m_Position: {x: 430, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8527307228225693038}
-    m_Position: {x: 870, y: 1400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3254800537907894964}
-    m_Position: {x: 290, y: 1660, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -739893129443375841}
-    m_Position: {x: 290, y: 1710, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -4580564279967455630}
-    m_Position: {x: -280, y: 1660, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5423868357890711644}
-    m_Position: {x: -40, y: 1660, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -943934537616981452}
-    m_Position: {x: -40, y: 1710, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6897329537692820072}
-    m_Position: {x: 530, y: 1660, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7294742340509237985}
-    m_Position: {x: 560, y: 1200, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5527685458235122738}
-    m_Position: {x: 560, y: 1150, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -3155526544645292905}
-    m_Position: {x: 1910, y: 670, z: 0}
+    m_Position: {x: 420, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8950604803015781152}
-    m_Position: {x: 2120, y: 670, z: 0}
+    m_Position: {x: 630, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5777689962727530164}
-    m_Position: {x: 2330, y: 670, z: 0}
+    m_Position: {x: 840, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 243664809849400473}
-    m_Position: {x: 1890, y: 150, z: 0}
+    m_Position: {x: 340, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2575678691505646159}
-    m_Position: {x: 2000, y: 420, z: 0}
+    m_Position: {x: 270, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8798164944106698425}
-    m_Position: {x: 2000, y: 370, z: 0}
+    m_Position: {x: 270, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4211205203253742805}
-    m_Position: {x: 1790, y: 420, z: 0}
+    m_Position: {x: 60, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2185423955314919178}
-    m_Position: {x: 1790, y: 370, z: 0}
+    m_Position: {x: 60, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3617001996060102411}
-    m_Position: {x: 1790, y: 530, z: 0}
+    m_Position: {x: -600, y: 1260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1011673790878137748}
-    m_Position: {x: 1790, y: 580, z: 0}
+    m_Position: {x: -160, y: 1260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9130894163102509255}
-    m_Position: {x: 1580, y: 370, z: 0}
+    m_Position: {x: -150, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9088770540481124491}
-    m_Position: {x: 2440, y: 410, z: 0}
+    m_Position: {x: 690, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6969229635148009718}
-    m_Position: {x: 2440, y: 360, z: 0}
+    m_Position: {x: -360, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1572171978325794123}
-    m_Position: {x: 1860, y: 840, z: 0}
+    m_Position: {x: 690, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8385121042306442405}
-    m_Position: {x: 2030, y: 970, z: 0}
+    m_Position: {x: -150, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1335562917499174042}
-    m_Position: {x: 2054.6904, y: 874.57837, z: 0}
+    m_Position: {x: 480, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -858877426513086988}
-    m_Position: {x: 2240, y: 1060, z: 0}
+    m_Position: {x: -360, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8580293805081382565}
-    m_Position: {x: 2280, y: 1120, z: 0}
+    m_Position: {x: 480, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8140773095945729861}
-    m_Position: {x: 2710, y: 1490, z: 0}
+    m_Position: {x: 280, y: 1260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4000902541071566564}
-    m_Position: {x: 2250, y: 1180, z: 0}
+    m_Position: {x: 60, y: 1260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8668534857182308114}
-    m_Position: {x: 2890, y: 1390, z: 0}
+    m_Position: {x: -380, y: 1260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7821790467721329227}
-    m_Position: {x: 2310, y: 1520, z: 0}
+    m_Position: {x: -600, y: 1200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8487416914216240144}
-    m_Position: {x: 2560, y: 1230, z: 0}
+    m_Position: {x: -600, y: 1150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7035850214941803962}
-    m_Position: {x: 2700, y: 1620, z: 0}
+    m_Position: {x: -350, y: 1150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1023272970469995663}
-    m_Position: {x: 2780, y: 1720, z: 0}
+    m_Position: {x: -350, y: 1200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7847307878402366844}
-    m_Position: {x: 2550, y: 1160, z: 0}
+    m_Position: {x: -100, y: 1150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 274203605576849254}
-    m_Position: {x: 2770, y: 1320, z: 0}
+    m_Position: {x: 140, y: 1150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5069278407652696333}
-    m_Position: {x: 2980, y: 1550, z: 0}
+    m_Position: {x: 140, y: 1200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1816414190983592799}
-    m_Position: {x: 3100, y: 1340, z: 0}
+    m_Position: {x: 400, y: 1150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3928620440311290419}
-    m_Position: {x: 2130, y: 1250, z: 0}
+    m_Position: {x: 340, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7008724023057030095}
-    m_Position: {x: 2360, y: 1290, z: 0}
+    m_Position: {x: 550, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6924780275025161253}
-    m_Position: {x: 2310, y: 1470, z: 0}
+    m_Position: {x: 460, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5451317900602966521}
-    m_Position: {x: 2390, y: 1590, z: 0}
+    m_Position: {x: 460, y: 570, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -400455141053437866}
-    m_Position: {x: 2060, y: 1610, z: 0}
+    m_Position: {x: 460, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7077535646427012463}
-    m_Position: {x: 2420, y: 1770, z: 0}
+    m_Position: {x: -80, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9161333771827761595}
-    m_Position: {x: 2520, y: 1340, z: 0}
+    m_Position: {x: 760, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3986951546814588370}
-    m_Position: {x: 2410, y: 1410, z: 0}
+    m_Position: {x: 770, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4144478197465221956}
-    m_Position: {x: 2820, y: 810, z: 0}
+    m_Position: {x: 210, y: 890, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1218792238428802644}
-    m_Position: {x: 2570, y: 880, z: 0}
+    m_Position: {x: 210, y: 790, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6435479440392344088}
-    m_Position: {x: 3170, y: 1020, z: 0}
+    m_Position: {x: 1050, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8070501483393697391}
-    m_Position: {x: 2920, y: 730, z: 0}
+    m_Position: {x: 210, y: 690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -216389755596074573}
-    m_Position: {x: 2710, y: 670, z: 0}
+    m_Position: {x: 210, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1158021483754153977}
-    m_Position: {x: 3220, y: 700, z: 0}
+    m_Position: {x: 210, y: 740, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9031887134369765351}
-    m_Position: {x: 2920, y: 960, z: 0}
+    m_Position: {x: 460, y: 940, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5970372654772443337}
-    m_Position: {x: 3060, y: 870, z: 0}
+    m_Position: {x: 460, y: 890, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7780676095253262002}
-    m_Position: {x: 2520, y: 1010, z: 0}
+    m_Position: {x: -10, y: 940, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1508453044055986847}
-    m_Position: {x: 3240, y: 1150, z: 0}
+    m_Position: {x: 210, y: 940, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7587186912476501983}
-    m_Position: {x: 2940, y: 630, z: 0}
+    m_Position: {x: 210, y: 840, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7704596364688685952}
-    m_Position: {x: 2720, y: 590, z: 0}
+    m_Position: {x: 550, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1594483265905029998}
-    m_Position: {x: 3100, y: 490, z: 0}
+    m_Position: {x: 130, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7772594683182426504}
-    m_Position: {x: 2520, y: 800, z: 0}
+    m_Position: {x: 340, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3071192447024148496}
-    m_Position: {x: 2770, y: 1040, z: 0}
+    m_Position: {x: 550, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8642980041562866328}
-    m_Position: {x: 2440, y: 930, z: 0}
+    m_Position: {x: 340, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4394395734282651516}
-    m_Position: {x: 2790, y: 890, z: 0}
+    m_Position: {x: -20, y: 740, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8694441896175096973}
-    m_Position: {x: 2940, y: 1090, z: 0}
+    m_Position: {x: 210, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1519950096684524397}
-    m_Position: {x: 3210, y: 1290, z: 0}
+    m_Position: {x: 210, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7166821498503953238}
-    m_Position: {x: 2810, y: 480, z: 0}
+    m_Position: {x: 460, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2945277486471107082}
-    m_Position: {x: 2970, y: 390, z: 0}
+    m_Position: {x: 460, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7521502585727351139}
-    m_Position: {x: 3410, y: 940, z: 0}
+    m_Position: {x: 590, y: 1370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1504834126353424758}
-    m_Position: {x: 3510, y: 1120, z: 0}
+    m_Position: {x: 590, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3753209787629535257}
-    m_Position: {x: 3490, y: 1230, z: 0}
+    m_Position: {x: -600, y: 1420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5326721480600859747}
-    m_Position: {x: 2890, y: 1160, z: 0}
+    m_Position: {x: -600, y: 1370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -790280578909858207}
-    m_Position: {x: 3380, y: 1390, z: 0}
+    m_Position: {x: -600, y: 1470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5706800355226519737}
-    m_Position: {x: 2910, y: 1220, z: 0}
+    m_Position: {x: -600, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1800173047715317282}
-    m_Position: {x: 1460, y: 940, z: 0}
+    m_Position: {x: 370, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 174594748774829071}
-    m_Position: {x: 1360, y: 1150, z: 0}
+    m_Position: {x: -360, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4696728148561710882}
-    m_Position: {x: 1500, y: 860, z: 0}
+    m_Position: {x: -360, y: 1420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2675567844874020664}
-    m_Position: {x: 1460, y: 1300, z: 0}
+    m_Position: {x: -360, y: 1370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6674208015726955053}
-    m_Position: {x: 1310, y: 1050, z: 0}
+    m_Position: {x: 160, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -745446893470605037}
-    m_Position: {x: 1360, y: 1400, z: 0}
+    m_Position: {x: -100, y: 1370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1967131928503012752}
-    m_Position: {x: 1980, y: 1750, z: 0}
+    m_Position: {x: -100, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 460564262398008545}
-    m_Position: {x: 2040, y: 1510, z: 0}
+    m_Position: {x: 850, y: 1320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2167237906767252876}
-    m_Position: {x: 1550, y: 1580, z: 0}
+    m_Position: {x: 210, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4169806514108294734}
-    m_Position: {x: 1690, y: 1460, z: 0}
+    m_Position: {x: 210, y: 570, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4737460519424952700}
-    m_Position: {x: 1790, y: 1040, z: 0}
+    m_Position: {x: 210, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7000709616395302930}
-    m_Position: {x: 1990, y: 1080, z: 0}
+    m_Position: {x: 550, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3046769303520550446}
-    m_Position: {x: 2040, y: 1420, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4043594448795149060}
-    m_Position: {x: 2240, y: 1670, z: 0}
+    m_Position: {x: 340, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6336519836125520955}
-    m_Position: {x: 1750, y: 1650, z: 0}
+    m_Position: {x: 270, y: 1600, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4382563379313075626}
-    m_Position: {x: 1300, y: 1650, z: 0}
+    m_Position: {x: 270, y: 1650, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4121327024312017019}
-    m_Position: {x: 1160, y: 1280, z: 0}
+    m_Position: {x: -310, y: 1600, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2290949417225066139}
-    m_Position: {x: 1130, y: 1550, z: 0}
+    m_Position: {x: -30, y: 1600, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9061008262430127971}
-    m_Position: {x: 1740, y: 1360, z: 0}
+    m_Position: {x: -30, y: 1650, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9069871092103682538}
-    m_Position: {x: 2470, y: 1670, z: 0}
+    m_Position: {x: 540, y: 1600, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1407136107717884819}
-    m_Position: {x: 1530, y: 1910, z: 0}
+    m_Position: {x: 900, y: 1070, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4635372516922160029}
-    m_Position: {x: 1870, y: 1890, z: 0}
+    m_Position: {x: 900, y: 1020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4546349261930340676}
-    m_Position: {x: 1230, y: 1820, z: 0}
+    m_Position: {x: -240, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2891330182843479941}
-    m_Position: {x: 2350, y: 1960, z: 0}
+    m_Position: {x: 130, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2844398466672600488}
-    m_Position: {x: 1640, y: 1100, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1947370674776246327}
-    m_Position: {x: 1770, y: 1170, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1869353267137123204}
-    m_Position: {x: 1830, y: 1220, z: 0}
+    m_Position: {x: 550, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6714590019326016326}
-    m_Position: {x: 2020, y: 1340, z: 0}
+    m_Position: {x: -20, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3486624231456949354}
-    m_Position: {x: 1810, y: 1290, z: 0}
+    m_Position: {x: -20, y: 690, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -3083,7 +1639,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 360, y: -30, z: 0}
   m_ExitPosition: {x: 360, y: -70, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 2750270915868297681}
+  m_DefaultState: {fileID: -3046769303520550446}
 --- !u!1102 &-1023272970469995663
 AnimatorState:
   serializedVersion: 6
@@ -3131,32 +1687,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -5917701952581411220, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-943934537616981452
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Super_Install_214214LK_Connected
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -4527922689287081163, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3240,58 +1770,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-739893129443375841
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Super_236236LK_Connected
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5979365774146536927, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-583158000917268774
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_5LK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7171218174471114442, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-400455141053437866
 AnimatorState:
   serializedVersion: 6
@@ -3339,57 +1817,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -4090645854661383388, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1101 &-194444751629610282
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: Y_Float
-    m_EventTreshold: -0.2
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 7775986353507929581}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.05
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1102 &-74706906633405764
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5LK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8554799403314659576, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3501,84 +1928,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &329167105445386632
-AnimatorState:
-  serializedVersion: 6
+--- !u!1101 &293798716078635460
+AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_6HK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8176074641487289552, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &367141248900360119
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Light_Low
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8854085969716297354, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &389530532615738408
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Heavy
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 3411093198353683759, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1519950096684524397}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &460564262398008545
 AnimatorState:
   serializedVersion: 6
@@ -3605,7 +1976,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &471204877998476421
+--- !u!1101 &567624064689426695
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3617,7 +1988,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Y_Float
     m_EventTreshold: -0.2
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 7775986353507929581}
+  m_DstState: {fileID: -7772594683182426504}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -3708,32 +2079,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &1357992519209711759
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Winning_LowHealth
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7134004279347318706, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &1407136107717884819
 AnimatorState:
   serializedVersion: 6
@@ -3786,84 +2131,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &1510288814907605855
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Light_High
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7872749075628528436, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &1647889412827413774
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_DizzyState
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1634496924262950828, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &1869353267137123204
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Walking_Forward_Install
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 3182480399493883114, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &1967131928503012752
 AnimatorState:
   serializedVersion: 6
@@ -3885,32 +2152,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 9149281415483546127, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &1977090331221523022
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_236LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -2790398681434406786, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3942,163 +2183,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &2210337324461505922
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_4HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -3794553727803683437, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2249804931965784804
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_AirHit_Medium
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2397056910424422235
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8777249000468463234, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2443457024127441281
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2581781561196636401, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2750270915868297681
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -674535695382519385, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2837181121000517548
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Parry_Low
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 8841225114635116065}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 5928701067807609425, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &2844398466672600488
 AnimatorState:
   serializedVersion: 6
@@ -4106,7 +2190,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Walk_Forward
+  m_Name: Walk_Forward
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -4120,84 +2204,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 3484709746454959671, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2865009668314347588
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214HP_Connected
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 210767233130955563, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &3228643334476714360
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Parry_Low_Recovery
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6380743392354205617, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &3308481014652621520
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5LK_Air
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 644492590998941888, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4229,84 +2235,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &3512291519519099551
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Crumple
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -3782299768679352025, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &3568421283787849948
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Dash_Forward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5225545110838053801, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &3679875670112622514
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_6LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -507893978242424171, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &3986951546814588370
 AnimatorState:
   serializedVersion: 6
@@ -4328,32 +2256,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -595738940348649634, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &4043594448795149060
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Standing_Idle_Install
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -3921048611790706213, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4406,136 +2308,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -429112501588761137, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &4290762484876509484
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_623LP_Stance
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7816935948255349934, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &4459976493626028162
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_214LK_Stance
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -3587738320604911209, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &4586700068922413240
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5HK_Air
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -363016302663691467, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &4595228065063473999
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_3HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -2780180223206722928, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &4651939163699499467
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Hit_Scorpion
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 4524985264203469723, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4671,59 +2443,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &6106382425413764985
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Jumping_Forward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -194444751629610282}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -7156960129557567078, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &6355107622895975097
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Amplify_Activation
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 4883245189638671926, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &6435479440392344088
 AnimatorState:
   serializedVersion: 6
@@ -4776,32 +2495,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &6799239985817643754
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Winning_HighHealth
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -6289351214074848020, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &6924780275025161253
 AnimatorState:
   serializedVersion: 6
@@ -4835,7 +2528,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Crouch_Idle_2
+  m_Name: Crouch_2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -4849,188 +2542,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -6351023488375472113, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7111118686829093787
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Special_623HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 4391277489329264029, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7190551329185634810
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_2LK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6444753655065575093, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7190880556637473520
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5LP_Air
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -2041318611409276106, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7294742340509237985
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Throw_Connected
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -3144009502565718107, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7426285689502424363
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Crouch
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 1167547444993862567, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7453208580903926764
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_AirHit_Light
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -6766769711721395919, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7483942854481357598
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_5HK
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 4364280801458906172, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -5057,58 +2568,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -6196306789179244435, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7775986353507929581
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Jumping_Falling
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2589084857301621401, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7799849336301137996
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_5HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 2775425299808974397, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -5166,84 +2625,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &8153640192563485708
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Walk_Backward
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 8283462779267664905, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &8160104221235395521
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_VictoryScreen
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1330783496532177914, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &8317666106892733493
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_2HP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7730445260723488697, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &8385121042306442405
 AnimatorState:
   serializedVersion: 6
@@ -5280,7 +2661,8 @@ AnimatorState:
   m_Name: YujiroHanma|Yujiro_Jumping_Neutral
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 8942103955399591236}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -5348,48 +2730,24 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &8820105676157423767
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Jumping_Neutral
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 471204877998476421}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1115301640332520266, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1101 &8841225114635116065
+--- !u!1101 &8942103955399591236
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: Y_Float
+    m_EventTreshold: -0.2
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 3228643334476714360}
+  m_DstState: {fileID: -7772594683182426504}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.05
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 1
@@ -5397,32 +2755,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &8967392677182636415
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Yujiro_Attack_Sequence_2LP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -8562905712875590813, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &9069871092103682538
 AnimatorState:
   serializedVersion: 6
