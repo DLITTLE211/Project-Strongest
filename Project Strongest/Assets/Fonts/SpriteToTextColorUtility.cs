@@ -11,6 +11,11 @@ public static class SpriteToTextColorUtility
 
         for (int i = 0; i < number.Length; i++)
         {
+            if (number[i].ToString() == " ") 
+            {
+                formated += " ";
+                continue;
+            }
             formated += $"<sprite name=\"{number[i]}\"" + " color=#" + HexColor + ">";
         }
 
