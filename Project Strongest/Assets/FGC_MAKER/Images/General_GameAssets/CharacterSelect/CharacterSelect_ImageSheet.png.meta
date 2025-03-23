@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7353572561e79094e855be910c81e05e
+guid: fa7088f359cc0354299a433f5c690a97
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -149,211 +149,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Amplifier_Bloodthirsty_Image
+      name: CharacterSelect_Amplifier_Background_Image
       rect:
         serializedVersion: 2
         x: 1
-        y: 1808
-        width: 197
-        height: 239
+        y: 3552
+        width: 1536
+        height: 543
       alignment: 9
-      pivot: {x: 0.43654823, y: 0.5230126}
+      pivot: {x: 0.16796875, y: 0.5377532}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2fbd81e272adce41983e58751d2d0e5
-      internalID: 1563652526
+      spriteID: 6adb5ae4069506e4f875e34b0dde1523
+      internalID: 455371445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amplifier_Fleetfoot_Image
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 1779
-        width: 343
-        height: 268
-      alignment: 9
-      pivot: {x: 0.3644315, y: 0.42537314}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce67d4144dda6234b89df4f135aeff1a
-      internalID: -951372172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Amplifier_Focus_Image
-      rect:
-        serializedVersion: 2
-        x: 545
-        y: 1746
-        width: 284
-        height: 301
-      alignment: 9
-      pivot: {x: 0.40140846, y: 0.41860464}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25a5e0d0c4f0b754c8c2bb8d3d291c95
-      internalID: 724693481
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Amplifier_Frame_Image
+      name: CharacterSelect_Black_Border
       rect:
         serializedVersion: 2
         x: 1
-        y: 1357
-        width: 386
-        height: 387
+        y: 2945
+        width: 2560
+        height: 605
       alignment: 9
-      pivot: {x: 0.48963732, y: 0.49354005}
+      pivot: {x: 0.5, y: 0.5272727}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f17c41e5f9853643888f5880504d63e
-      internalID: 2078028031
+      spriteID: 68186046483bb1142b4571a9a44dc802
+      internalID: -1484181766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amplifier_HeavyHitter_Image
+      name: CharacterSelect_Nameplate
       rect:
         serializedVersion: 2
-        x: 389
-        y: 1467
-        width: 258
-        height: 277
+        x: 2563
+        y: 3358
+        width: 754
+        height: 192
       alignment: 9
-      pivot: {x: 0.48062015, y: 0.5740072}
+      pivot: {x: -0.6976127, y: -1.265625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56a7c260b626bcf4dadaee5c9e014f7d
-      internalID: 1321007690
+      spriteID: 8d999508bbde2ae4dbe2cfc5ddd7f38b
+      internalID: 1903423311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amplifier_InnerBackground_Image
+      name: CharacterSelect_Random_BackgroundImage
       rect:
         serializedVersion: 2
-        x: 649
-        y: 1382
-        width: 362
-        height: 362
+        x: 3319
+        y: 3110
+        width: 247
+        height: 440
       alignment: 9
-      pivot: {x: 0.49171272, y: 0.49723756}
+      pivot: {x: 5.1538463, y: 0.5386364}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca80df6ccc7e63949874d79d3f7afb4b
-      internalID: -1053042026
+      spriteID: 16bb78ec5dc5b834a8f86e25680f18f3
+      internalID: 1881181740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amplifier_Iron_Image
+      name: CharacterSelect_Random_QuestionMark
       rect:
         serializedVersion: 2
-        x: 1
-        y: 983
-        width: 356
-        height: 372
+        x: 3568
+        y: 3235
+        width: 172
+        height: 315
       alignment: 9
-      pivot: {x: 0.505618, y: 0.4919355}
+      pivot: {x: 7.1744184, y: 0.53650796}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 912d0fe6f73c2ca449781b9dc1fe2858
-      internalID: 1104818
+      spriteID: a7c75d965b898e24cbb04c660bef6a0f
+      internalID: 1330297227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amplifier_Might_Image
-      rect:
-        serializedVersion: 2
-        x: 359
-        y: 1038
-        width: 362
-        height: 317
-      alignment: 9
-      pivot: {x: 0.50276244, y: 0.5488959}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 189d51c45b266be488fddfe1c6d96c99
-      internalID: 393513212
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Amplifier_Perfectionist_Image
+      name: CharacterSelect_SelectCharacter_Header
       rect:
         serializedVersion: 2
         x: 1
-        y: 745
-        width: 346
-        height: 236
+        y: 2816
+        width: 908
+        height: 127
       alignment: 9
-      pivot: {x: 0.4768786, y: 0.45762712}
+      pivot: {x: 0.53634363, y: -2.0866141}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ed50e9084111ae4990b1d29a4746b56
-      internalID: -122680515
+      spriteID: 512012bbf1fc73240a129ca0df259f0e
+      internalID: -728910237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amplifier_Willpower_Image
+      name: CharacterSelect_Stage_FrameImage
       rect:
         serializedVersion: 2
-        x: 349
-        y: 662
-        width: 365
-        height: 319
+        x: 911
+        y: 2478
+        width: 1082
+        height: 465
       alignment: 9
-      pivot: {x: 0.49041095, y: 0.46394983}
+      pivot: {x: 0.5064695, y: 0.53763443}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65e2ae386e9a2bb498a9cbcc46af87d7
-      internalID: 518009
+      spriteID: 99774f1dfc297484a9598b74c120f0e4
+      internalID: -1001867612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_Stage_Nameplate
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 2829
+        width: 1036
+        height: 114
+      alignment: 9
+      pivot: {x: 0.49710426, y: 2.4122808}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc30e0de52d629243837db6fc0185e49
+      internalID: -1095331835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_White_Background
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2010
+        width: 2560
+        height: 466
+      alignment: 9
+      pivot: {x: 0.5, y: -0.5450644}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a34d6d3e94f4ecb41b979ae509da6e5c
+      internalID: -1082347674
       vertices: []
       indices: 
       edges: []
@@ -361,7 +340,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: edd6261e64d3ebc4b98923b1a54aeb92
+    spriteID: 2922246c0e3f5a649b40ca7ee24fd224
     internalID: 0
     vertices: []
     indices: 
@@ -369,16 +348,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Amplifier_Bloodthirsty_Image: 1563652526
-      Amplifier_Fleetfoot_Image: -951372172
-      Amplifier_Focus_Image: 724693481
-      Amplifier_Frame_Image: 2078028031
-      Amplifier_HeavyHitter_Image: 1321007690
-      Amplifier_InnerBackground_Image: -1053042026
-      Amplifier_Iron_Image: 1104818
-      Amplifier_Might_Image: 393513212
-      Amplifier_Perfectionist_Image: -122680515
-      Amplifier_Willpower_Image: 518009
+      CharacterSelect_Amplifier_Background_Image: 455371445
+      CharacterSelect_Black_Border: -1484181766
+      CharacterSelect_Nameplate: 1903423311
+      CharacterSelect_Random_BackgroundImage: 1881181740
+      CharacterSelect_Random_QuestionMark: 1330297227
+      CharacterSelect_SelectCharacter_Header: -728910237
+      CharacterSelect_Stage_FrameImage: -1001867612
+      CharacterSelect_Stage_Nameplate: -1095331835
+      CharacterSelect_White_Background: -1082347674
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1e95fc12ef2817a47a92e5b55e81799a
+guid: 657ac2f6a36d1aa42bbfa1945cca4b61
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -149,190 +149,274 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterSelect_Amplifier_Background_Image
+      name: Affliction_InnerRing
       rect:
         serializedVersion: 2
         x: 1
-        y: 3552
-        width: 1536
-        height: 543
+        y: 3705
+        width: 390
+        height: 390
       alignment: 9
-      pivot: {x: 0.16796875, y: 0.5377532}
+      pivot: {x: 3.6794872, y: -2.5615385}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 711bfd0d20a87d649bf9811b74c3f492
-      internalID: -2001737221
+      spriteID: b22481df62a1b504aabb86a1e3105a9d
+      internalID: 1797791725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSelect_Black_Border
+      name: Affliction_Outerring
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 3596
+        width: 458
+        height: 499
+      alignment: 9
+      pivot: {x: 4.2074237, y: -1.8957915}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53ad83d826696714384477281b84b511
+      internalID: -1132737003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Amplify_Frame
       rect:
         serializedVersion: 2
         x: 1
-        y: 2945
-        width: 2560
-        height: 605
+        y: 3448
+        width: 1435
+        height: 146
       alignment: 9
-      pivot: {x: 0.5, y: 0.5272727}
+      pivot: {x: 0.10174216, y: -12.246575}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f6a2c56908ed374db25eb37e340aacf
-      internalID: 1152260659
+      spriteID: a49202c8a8cc8e945a58c3ca690e7718
+      internalID: 29553599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSelect_Nameplate
-      rect:
-        serializedVersion: 2
-        x: 2563
-        y: 3358
-        width: 754
-        height: 192
-      alignment: 9
-      pivot: {x: -0.6976127, y: -1.265625}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a0f240b30193cd4f925016f3a3e1d34
-      internalID: 1131438171
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterSelect_Random_BackgroundImage
-      rect:
-        serializedVersion: 2
-        x: 3319
-        y: 3110
-        width: 247
-        height: 440
-      alignment: 9
-      pivot: {x: 5.1538463, y: 0.5386364}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 244d0a64d263dc94ab1bd2ecde491e7c
-      internalID: -1194211312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterSelect_Random_QuestionMark
-      rect:
-        serializedVersion: 2
-        x: 3568
-        y: 3235
-        width: 172
-        height: 315
-      alignment: 9
-      pivot: {x: 7.1744184, y: 0.53650796}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c295d66527b5d7458540c6439592912
-      internalID: -539415765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterSelect_SelectCharacter_Header
+      name: Amplify_Inner
       rect:
         serializedVersion: 2
         x: 1
-        y: 2816
-        width: 908
-        height: 127
+        y: 3338
+        width: 1410
+        height: 108
       alignment: 9
-      pivot: {x: 0.53634363, y: -2.0866141}
+      pivot: {x: 0.09858156, y: -13.166667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85eb475a0ca46434abb8ddb202f549ff
-      internalID: 898469722
+      spriteID: 6e3a8402b28690543b93293333ccfe7c
+      internalID: 103833465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSelect_Stage_FrameImage
-      rect:
-        serializedVersion: 2
-        x: 911
-        y: 2478
-        width: 1082
-        height: 465
-      alignment: 9
-      pivot: {x: 0.5064695, y: 0.53763443}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e9393eb59eedf0d4589cf92f738a9ac1
-      internalID: -1685928999
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterSelect_Stage_Nameplate
-      rect:
-        serializedVersion: 2
-        x: 1995
-        y: 2829
-        width: 1036
-        height: 114
-      alignment: 9
-      pivot: {x: 0.49710426, y: 2.4122808}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05b5da14dd2d3af41bdf529218d4a73d
-      internalID: -1231681799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterSelect_White_Background
+      name: HealthBar_Frame
       rect:
         serializedVersion: 2
         x: 1
-        y: 2010
-        width: 2560
-        height: 466
+        y: 3065
+        width: 1823
+        height: 271
       alignment: 9
-      pivot: {x: 0.5, y: -0.5450644}
+      pivot: {x: 1.0987383, y: -6.103321}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a658bc1c6dfc654f91b532a871eb2ac
-      internalID: 1544589877
+      spriteID: f1d9068a3b2f5614a8f9bf903c882851
+      internalID: 1285318497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealthBar_Inner
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2855
+        width: 1735
+        height: 208
+      alignment: 9
+      pivot: {x: 1.1302594, y: -6.8846154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 878721b140c077b44a30744d38e9112a
+      internalID: -1865703765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerIcon_Background
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1890
+        width: 953
+        height: 963
+      alignment: 9
+      pivot: {x: 2.0556138, y: 0.07165109}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 088a6e6d890841e42a0a85b6905dd260
+      internalID: 544979163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunMeter_Frame
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 2755
+        width: 905
+        height: 98
+      alignment: 9
+      pivot: {x: -0.279558, y: -17.102041}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c0323277135efc4899d9362acafbe8c
+      internalID: 1677594359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunMeter_Inner
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1802
+        width: 853
+        height: 86
+      alignment: 9
+      pivot: {x: -0.33059788, y: -18.33721}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8a6f380fa9f5e49add0b7a1f2ec54e
+      internalID: 829602109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperMeter_Frame
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1457
+        width: 1813
+        height: 343
+      alignment: 9
+      pivot: {x: 0.5140651, y: -2.9708455}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 794eb515b8ebb344483c0a9c0e2f857f
+      internalID: -242004044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperMeter_Inner
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1204
+        width: 1700
+        height: 251
+      alignment: 9
+      pivot: {x: 0.52882355, y: -2.9920318}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81b7a24501fe9f543adde09ad234564d
+      internalID: 113056258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Timer_Frame_Inner
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 830
+        width: 565
+        height: 372
+      alignment: 9
+      pivot: {x: 0.27079645, y: -0.8010753}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dfe70edd08ed83429ba192a048d8016
+      internalID: -1510223673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Timer_Frame_Outer
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 788
+        width: 629
+        height: 414
+      alignment: 9
+      pivot: {x: 1.2591414, y: -0.67874396}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24c7a7a0356d7bd42aafdf02eddc80d0
+      internalID: 633989173
       vertices: []
       indices: 
       edges: []
@@ -340,7 +424,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b453547ece3d2fa46a6a71eb5d9dcf18
+    spriteID: 13b4f9b309ab61842bac9e39af1902f0
     internalID: 0
     vertices: []
     indices: 
@@ -348,15 +432,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CharacterSelect_Amplifier_Background_Image: -2001737221
-      CharacterSelect_Black_Border: 1152260659
-      CharacterSelect_Nameplate: 1131438171
-      CharacterSelect_Random_BackgroundImage: -1194211312
-      CharacterSelect_Random_QuestionMark: -539415765
-      CharacterSelect_SelectCharacter_Header: 898469722
-      CharacterSelect_Stage_FrameImage: -1685928999
-      CharacterSelect_Stage_Nameplate: -1231681799
-      CharacterSelect_White_Background: 1544589877
+      Affliction_InnerRing: 1797791725
+      Affliction_Outerring: -1132737003
+      Amplify_Frame: 29553599
+      Amplify_Inner: 103833465
+      HealthBar_Frame: 1285318497
+      HealthBar_Inner: -1865703765
+      PlayerIcon_Background: 544979163
+      StunMeter_Frame: 1677594359
+      StunMeter_Inner: 829602109
+      SuperMeter_Frame: -242004044
+      SuperMeter_Inner: 113056258
+      Timer_Frame_Inner: -1510223673
+      Timer_Frame_Outer: 633989173
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
