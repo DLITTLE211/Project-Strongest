@@ -7,6 +7,7 @@ public class TestText : MonoBehaviour
 {
     public TMP_Text text1;
     public TMP_Text text2;
+    [TextArea]
     public string testString1,testString2;
     // Update is called once per frame
     private void Start()
@@ -14,22 +15,25 @@ public class TestText : MonoBehaviour
         setStringAsset(text1, testString1);
         setStringAsset(text2, testString2);
     }
-    void setStringAsset(TMP_Text text, string Message) 
+    void setStringAsset(TMP_Text text, string Message)
     {
-        string newMessage = "";
-        char[] characters = Message.ToCharArray();
-        for(int i = 0; i < characters.Length; i++)
+        if (text)
         {
-            for (int j = 0; j < text.spriteAsset.spriteCharacterTable.Count; j++)
+            string newMessage = "";
+            char[] characters = Message.ToUpper().ToCharArray();
+            for (int i = 0; i < characters.Length; i++)
             {
-                string letter = text.spriteAsset.spriteCharacterTable[j].name;
-                if (characters[i].ToString() == letter)
+                for (int j = 0; j < text.spriteAsset.spriteCharacterTable.Count; j++)
                 {
-                    newMessage += $"<sprite name=\"{ letter}\">";
-                    break;
+                    string letter = text.spriteAsset.spriteCharacterTable[j].name;
+                    if (characters[i].ToString() == letter)
+                    {
+                        newMessage += $"<sprite name=\"{ letter}\">";
+                        break;
+                    }
                 }
             }
+            text.text = newMessage;
         }
-        text.text = newMessage;
     }
 }
