@@ -14,6 +14,7 @@ public class Character_Profile : ScriptableObject
     public string CharacterName;
     public int CharacterID;
     public Sprite CharacterProfileImage;
+    public Sprite CharacterSelectIcon;
     #endregion
 
     #region Character Sizing Info
