@@ -10,7 +10,7 @@ using UnityEditor;
 [Serializable]
 public class Menu_MenuButton : Button
 {
-    public Image buttonBackgroundImage, buttonImage;
+    public Image buttonImage;
     public TMP_Text buttonNameText;
     public Color32 backgroundHighligtedColor;
     public Transform NavigationButton;
@@ -59,7 +59,6 @@ public class Menu_MenuButton : Button
     public void Fade(float valuePoint, float _time, bool _interactable) 
     {
         interactable = _interactable;
-        buttonBackgroundImage.DOFade(valuePoint, _time);
         buttonImage.DOFade(valuePoint, _time);
         buttonNameText.DOFade(valuePoint, _time);
     }
@@ -110,6 +109,7 @@ public class MenuButtonHolder
         for (int i = 0; i < buttonList.Count; i++)
         {
             buttonList[i].Fade(0, time, false);
+            buttonList[i].Lower();
         }
     }
     public void EnableButtons(float time = 1.5f)
