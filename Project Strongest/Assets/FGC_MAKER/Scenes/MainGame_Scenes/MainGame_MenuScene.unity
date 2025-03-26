@@ -688,8 +688,8 @@ MonoBehaviour:
     - {fileID: 1336606861}
     - {fileID: 1623713034}
     - {fileID: 1942176588}
-  _backgroundImage: {fileID: 1966183755}
-  whiteFillerImage: {fileID: 1762408976}
+  _backgroundImage: {fileID: 1762408976}
+  whiteFillerImage: {fileID: 1966183755}
   _eventSystem: {fileID: 1982503669}
   _titleText: {fileID: 1276099089}
   _versionText: {fileID: 1019730587}
@@ -2056,8 +2056,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190236
   NavigationButton: {fileID: 59521422}
-  startingPos: {x: 0, y: 0, z: 0}
-  forwardPosition: 0
+  startingPos: {x: 740.9795, y: 74.44, z: 0}
+  forwardPosition: 835.9795
   backgroundImage: {fileID: 0}
 --- !u!1 &507157410
 GameObject:
@@ -2659,8 +2659,8 @@ MonoBehaviour:
     - {fileID: 1336606861}
     - {fileID: 1623713034}
     - {fileID: 1942176588}
-  _backgroundImage: {fileID: 1966183755}
-  whiteFillerImage: {fileID: 1762408976}
+  _backgroundImage: {fileID: 1762408976}
+  whiteFillerImage: {fileID: 1966183755}
   _titleText: {fileID: 1276099089}
   _versionText: {fileID: 1019730587}
   menuGameState: 0
@@ -3765,6 +3765,7 @@ GameObject:
   - component: {fileID: 1019730586}
   - component: {fileID: 1019730588}
   - component: {fileID: 1019730587}
+  - component: {fileID: 1019730589}
   m_Layer: 0
   m_Name: VersionText
   m_TagString: Untagged
@@ -3812,9 +3813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Version: v.0.1.1
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3833,7 +3832,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -3841,7 +3840,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.9
+  m_fontSize: 35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3891,6 +3890,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019730585}
   m_CullTransparentMesh: 1
+--- !u!114 &1019730589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019730585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085d07196e52774daf98ae7d5391cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Version 0.5
+  _textObject: {fileID: 1019730587}
 --- !u!1 &1023774954
 GameObject:
   m_ObjectHideFlags: 0
@@ -8333,6 +8346,7 @@ GameObject:
   - component: {fileID: 1276099088}
   - component: {fileID: 1276099090}
   - component: {fileID: 1276099089}
+  - component: {fileID: 1276099091}
   m_Layer: 0
   m_Name: Title Text
   m_TagString: Untagged
@@ -8381,9 +8395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'baki strongest showdown
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8402,7 +8414,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -8410,7 +8422,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96.75
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8460,6 +8472,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276099087}
   m_CullTransparentMesh: 1
+--- !u!114 &1276099091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276099087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085d07196e52774daf98ae7d5391cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Baki Ultimate Fighter
+  _textObject: {fileID: 1276099089}
 --- !u!1 &1290105367
 GameObject:
   m_ObjectHideFlags: 0
@@ -8755,8 +8781,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4291899149
   NavigationButton: {fileID: 1290105368}
-  startingPos: {x: 0, y: 0, z: 0}
-  forwardPosition: 0
+  startingPos: {x: 835.3791, y: -74.880005, z: 0}
+  forwardPosition: 930.3791
   backgroundImage: {fileID: 0}
 --- !u!1 &1368814059
 GameObject:
@@ -9402,7 +9428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1512261974
 Transform:
   m_ObjectHideFlags: 0
@@ -10169,8 +10195,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4284809164
   NavigationButton: {fileID: 529025240}
-  startingPos: {x: 0, y: 0, z: 0}
-  forwardPosition: 0
+  startingPos: {x: 930.18835, y: -225.07996, z: 0}
+  forwardPosition: 1025.1884
   backgroundImage: {fileID: 0}
 --- !u!1 &1632610029
 GameObject:
@@ -10450,18 +10476,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683914538}
-  m_LocalRotation: {x: -0, y: -0, z: 0.2302124, w: 0.9731404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20.14025, y: 20.14025, z: 0.80561}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 847844081}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -165.25, y: 176.92}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 534.33704, y: 541.4854}
+  m_SizeDelta: {x: 1161.5248, y: 1147.2288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683914540
 MonoBehaviour:
@@ -10483,9 +10509,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -952181126, guid: 44582611a5c0e8d41890910872eb9690, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -10681,7 +10707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1794216024, guid: 44582611a5c0e8d41890910872eb9690, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11548,8 +11574,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4279308561
   NavigationButton: {fileID: 1291546001}
-  startingPos: {x: 0, y: 0, z: 0}
-  forwardPosition: 0
+  startingPos: {x: 1026.0698, y: -374.91998, z: 0}
+  forwardPosition: 1121.0698
   backgroundImage: {fileID: 0}
 --- !u!1 &1966183753
 GameObject:
@@ -11576,18 +11602,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966183753}
-  m_LocalRotation: {x: -0, y: -0, z: 0.2302124, w: 0.9731404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20.14025, y: 20.14025, z: 0.80561}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 847844081}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -208.75, y: 201.08}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 542, y: 541.4854}
+  m_SizeDelta: {x: 1161.5248, y: 1147.2288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966183755
 MonoBehaviour:
@@ -11602,16 +11628,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 1}
+  m_Color: {r: 0.81960785, g: 0.80784315, b: 0.80784315, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -952181126, guid: 44582611a5c0e8d41890910872eb9690, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -12098,7 +12124,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: 26833692be3ad0245aa2e6df3e189812, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
