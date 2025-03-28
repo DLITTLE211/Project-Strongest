@@ -44,13 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2880a53a1b53f364690a7d447ca4ab07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 0}
   amplifier: 1
   durationType: 1
   fillType: 1
+  buffType: 0
   currentState: 1
   meterColor:
     serializedVersion: 2
     rgba: 4294955776
+  amplifierImage: {fileID: -391148205, guid: c2c34cba4c7de7f4ab5cc71ea8123f3c, type: 3}
   fillRateInFrames: 0.002083333
   fillRate: 20
   activeDuration: 30

@@ -396,14 +396,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 631966752, guid: c2c34cba4c7de7f4ab5cc71ea8123f3c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1423,8 +1423,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 157.29883, y: 0}
-  m_SizeDelta: {x: 1444.5977, y: 320}
+  m_AnchoredPosition: {x: 155, y: 0}
+  m_SizeDelta: {x: 1475.1755, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &153415074
 MonoBehaviour:
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.961699, g: 0.9622642, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1953,7 +1953,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -864.3165, y: 0.000015258789}
+  m_AnchoredPosition: {x: -1181, y: 0.000015258789}
   m_SizeDelta: {x: 185.6586, y: -92.516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &229982048
@@ -3383,8 +3383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -84.63861, y: 0}
-  m_SizeDelta: {x: 1615.5974, y: 320}
+  m_AnchoredPosition: {x: -107.5719, y: 0}
+  m_SizeDelta: {x: 1595.9404, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495645502
 MonoBehaviour:
@@ -3399,7 +3399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4056604, g: 0.05931826, b: 0.05931826, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4378,14 +4378,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -390074068, guid: c2c34cba4c7de7f4ab5cc71ea8123f3c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4903,10 +4903,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chosenStage: {fileID: 0}
   _objectTransform: {fileID: 660399947}
-  CurrentStageDataIndex: 0
   _stageImage: {fileID: 916966713}
   _stageName: {fileID: 375229433}
   ToggleReady: 0
+  CurrentStageLocationIndex: 0
 --- !u!1 &680184147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5167,7 +5167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 871, y: 0.000015258789}
+  m_AnchoredPosition: {x: 1182, y: 0.000015258789}
   m_SizeDelta: {x: 185.6586, y: -92.516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &716134252
@@ -10756,7 +10756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1147932938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10790,7 +10790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a76c8d050c962048b063816d822cd32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowBase: 1
+  allowBase: 0
   _activeStages:
   - {fileID: 3537958316884096584, guid: 88a1d13ff4b16304cb74ba2136cd1e86, type: 3}
   - {fileID: 3537958316884096584, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
@@ -10811,6 +10811,7 @@ MonoBehaviour:
   - {fileID: 2118996565}
   _stageImagerHolder: {fileID: 1718111247}
   stageImageLocations: []
+  centerIndex: 0
 --- !u!1 &1156783430
 GameObject:
   m_ObjectHideFlags: 0
@@ -10962,7 +10963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1160356782
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11002,6 +11003,9 @@ MonoBehaviour:
   _activeProfiles:
   - {fileID: 11400000, guid: 0cf4e6787272b2b448ab5d372f552710, type: 2}
   - {fileID: 11400000, guid: 499fe2530eea2bf46ac6db6eb90b009d, type: 2}
+  activeCharacterSelectButtons: []
+  characterSelectButtonPrefab: {fileID: 9206346132393860188, guid: 417349bc215c33a4586da392c385e985, type: 3}
+  characterSelectHolder: {fileID: 1767974627}
 --- !u!1 &1161881691
 GameObject:
   m_ObjectHideFlags: 0
@@ -12675,10 +12679,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chosenStage: {fileID: 0}
   _objectTransform: {fileID: 1318592848}
-  CurrentStageDataIndex: 0
   _stageImage: {fileID: 1523789728}
   _stageName: {fileID: 26101240}
   ToggleReady: 0
+  CurrentStageLocationIndex: 0
 --- !u!1 &1336606856
 GameObject:
   m_ObjectHideFlags: 0
@@ -12956,7 +12960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BloodThirsty
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12983,7 +12987,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 164.45
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13929,9 +13933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fleetfoot
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13958,7 +13960,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 197.9
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15140,6 +15142,7 @@ MonoBehaviour:
   _amplifierBackgroundImage: {fileID: 564861783}
   _amplifierImage: {fileID: 18661471}
   _amplifierText: {fileID: 1351872506}
+  AmplifierIndex: 0
   ToggleReady: 0
 --- !u!1 &1680828179
 GameObject:
@@ -15530,10 +15533,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chosenStage: {fileID: 0}
   _objectTransform: {fileID: 1724851496}
-  CurrentStageDataIndex: 0
   _stageImage: {fileID: 1344641276}
   _stageName: {fileID: 87801265}
   ToggleReady: 0
+  CurrentStageLocationIndex: 0
 --- !u!1 &1735383070
 GameObject:
   m_ObjectHideFlags: 0
@@ -15726,8 +15729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.7654, y: -0.0000019073486}
-  m_SizeDelta: {x: 1539.457, y: 282.484}
+  m_AnchoredPosition: {x: 0.51022, y: -0.0000019073486}
+  m_SizeDelta: {x: 2177.3, y: 282.484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1767974629
 MonoBehaviour:
@@ -16074,6 +16077,7 @@ MonoBehaviour:
   _amplifierBackgroundImage: {fileID: 504483364}
   _amplifierImage: {fileID: 624094080}
   _amplifierText: {fileID: 1524957665}
+  AmplifierIndex: 0
   ToggleReady: 0
 --- !u!1 &1826259320
 GameObject:
@@ -17298,10 +17302,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chosenStage: {fileID: 0}
   _objectTransform: {fileID: 2023571184}
-  CurrentStageDataIndex: 0
   _stageImage: {fileID: 1996552987}
   _stageName: {fileID: 1028287649}
   ToggleReady: 0
+  CurrentStageLocationIndex: 0
 --- !u!1 &2031926653
 GameObject:
   m_ObjectHideFlags: 0
@@ -18016,10 +18020,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chosenStage: {fileID: 0}
   _objectTransform: {fileID: 2118996562}
-  CurrentStageDataIndex: 0
   _stageImage: {fileID: 177060845}
   _stageName: {fileID: 136242268}
   ToggleReady: 0
+  CurrentStageLocationIndex: 0
 --- !u!1 &2142704926
 GameObject:
   m_ObjectHideFlags: 0

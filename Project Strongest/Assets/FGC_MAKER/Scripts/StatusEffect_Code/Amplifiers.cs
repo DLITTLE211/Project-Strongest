@@ -16,6 +16,7 @@ public class Amplifiers : StatusEffect
     public BuffType buffType;
     public ActiveState currentState = ActiveState.Inactive;
     public Color32 meterColor;
+    public Sprite amplifierImage;
     [Space(15)]
 
     [Header("Fill Meter Variables")]

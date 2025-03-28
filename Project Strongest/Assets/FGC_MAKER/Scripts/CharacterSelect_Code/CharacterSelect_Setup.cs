@@ -203,7 +203,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                 activeCharacterSelectButtons = new List<GameObject>();
             }
         }
-        AddCharacterSelectButtons();
+        //AddCharacterSelectButtons();
     }
     public async void CallCharacterSelectObject()
     {

@@ -14,10 +14,11 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
     }
     protected override void ActivateSubMenu()
     {
-        for(int i = 0; i < amplifierObjects.Count; i++) 
+        for (int i = 0; i < amplifierObjects.Count; i++) 
         {
             amplifierObjects[i].gameObject.SetActive(true);
             amplifierObjects[i].Activate();
+            amplifierObjects[i].UpdateAmplifier(_activeAmplifiers[0], 0, true);
         }
     }
     protected override void DeactivateSubMenu()
@@ -32,6 +33,48 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
         if (allowBase)
         {
             base.OnUpdate();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow)) 
+        {
+            CyclePlayerAmplifierUp();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            CyclePlayerAmplifierDown();
+        }
+    }
+    public void CyclePlayerAmplifierUp(int playerIndex = 0)
+    {
+        if (amplifierObjects[playerIndex].AmplifierIndex >= _activeAmplifiers.Count - 1)
+        {
+            if (amplifierObjects[playerIndex].ToggleReady)
+            {
+                amplifierObjects[playerIndex].AmplifierIndex = 0;
+                amplifierObjects[playerIndex].UpdateAmplifier(_activeAmplifiers[amplifierObjects[playerIndex].AmplifierIndex], 0);
+                return;
+            }
+        }
+        if (amplifierObjects[playerIndex].ToggleReady)
+        {
+            amplifierObjects[playerIndex].AmplifierIndex++;
+            amplifierObjects[playerIndex].UpdateAmplifier(_activeAmplifiers[amplifierObjects[playerIndex].AmplifierIndex], amplifierObjects[playerIndex].AmplifierIndex);
+        }
+    }
+    public void CyclePlayerAmplifierDown(int playerIndex = 0)
+    {
+        if (amplifierObjects[playerIndex].AmplifierIndex <= 0)
+        {
+            if (amplifierObjects[playerIndex].ToggleReady)
+            {
+                amplifierObjects[playerIndex].AmplifierIndex = _activeAmplifiers.Count - 1;
+                amplifierObjects[playerIndex].UpdateAmplifier(_activeAmplifiers[amplifierObjects[playerIndex].AmplifierIndex], _activeAmplifiers.Count - 1);
+                return;
+            }
+        }
+        if (amplifierObjects[playerIndex].ToggleReady)
+        {
+            amplifierObjects[playerIndex].AmplifierIndex--;
+            amplifierObjects[playerIndex].UpdateAmplifier(_activeAmplifiers[amplifierObjects[playerIndex].AmplifierIndex], amplifierObjects[playerIndex].AmplifierIndex);
         }
     }
 }
