@@ -4,19 +4,19 @@ using UnityEngine;
 
 public static class SpriteToTextColorUtility
 {
-    public static string AppendSpriteName(string number, UnityEngine.Color color)
+    public static string AppendSpriteName(string message, UnityEngine.Color color)
     {
         string HexColor = UnityEngine.ColorUtility.ToHtmlStringRGBA(color);
         string formated = "";
 
-        for (int i = 0; i < number.Length; i++)
+        for (int i = 0; i < message.Length; i++)
         {
-            if (number[i].ToString() == " ") 
+            if (message[i].ToString() == " ") 
             {
                 formated += " ";
                 continue;
             }
-            formated += $"<sprite name=\"{number[i]}\"" + " color=#" + HexColor + ">";
+            formated += $"<sprite name=\"{message[i]}\"" + " color=#" + HexColor + ">";
         }
 
         return formated;
