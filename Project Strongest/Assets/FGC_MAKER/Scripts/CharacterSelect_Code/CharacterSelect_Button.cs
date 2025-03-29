@@ -12,7 +12,6 @@ public class CharacterSelect_Button : MonoBehaviour
     [SerializeField] private CharacterSelect_CharacterButton selectionState;
     public Character_Profile characterProfile;
     public Image hoverImage;
-    public BoxCollider2D hoverCollider2D;
     [SerializeField] private Transform leftCursor, rightCursor;
     public enum hoverState {none,left,right,both }
     public hoverState _hoverState;
@@ -23,7 +22,6 @@ public class CharacterSelect_Button : MonoBehaviour
     bool leftHover,rightHover;
     public void Start()
     {
-        hoverCollider2D = hoverImage.GetComponent<BoxCollider2D>();
         Messenger.AddListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);
     }
 

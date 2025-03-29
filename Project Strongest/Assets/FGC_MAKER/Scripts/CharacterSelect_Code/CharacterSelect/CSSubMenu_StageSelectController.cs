@@ -36,6 +36,12 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
                 _stageImageObject[i].SetToggleState(true);
             }
         });
+        _topHeaderText.DOFade(0.15f, 0.15f);
+        _bottomHeaderText.DOFade(0.15f, 0.15f).OnComplete(() =>
+        {
+            SetHeaderText(_topHeaderText, "Choose Your");
+            SetHeaderText(_bottomHeaderText, "Stage");
+        });
     }
     protected override void DeactivateSubMenu()
     {
@@ -44,6 +50,8 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
             _stageImageObject[i].SetToggleState(false);
         }
         _stageImagerHolder.DOLocalMoveX(5000, 1.45f);
+        _topHeaderText.DOFade(0.15f, 0.15f);
+        _bottomHeaderText.DOFade(0.15f, 0.15f);
     }
     // Update is called once per frame
     void Update()

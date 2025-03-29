@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using FightingGame_FrameData;
 
 public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
 {
@@ -10,13 +11,20 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
+    Vector3 standardButtonSize;
+    Vector3 largeButtonSize;
     protected override void ActivateSubMenu()
     {
+        standardButtonSize = new Vector3(0.7f, 0.7f, 0.7f);
+        largeButtonSize = new Vector3(1f, 1f, 1f);
+        characterSelectHolder.SetActive(true);
         AddCharacterSelectButtons();
     }
     protected override void DeactivateSubMenu()
     {
-
+        characterSelectHolder.SetActive(false);
+        _topHeaderText.DOFade(0.15f, 0.15f);
+        _bottomHeaderText.DOFade(0.15f, 0.15f);
     }
     private void Update()
     {
@@ -32,9 +40,21 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             GameObject selectButton = Instantiate(characterSelectButtonPrefab, characterSelectHolder.transform);
             selectButton.gameObject.transform.localPosition = new Vector3(1, 1, 1);
             selectButton.gameObject.transform.localRotation = Quaternion.identity;
-            selectButton.gameObject.transform.localScale = new Vector3(0.85f, 0.85f, 0.85f);
-            selectButton.GetComponentInChildren<Button>().image.sprite = _activeProfiles[i].CharacterSelectIcon;
-            selectButton.GetComponentInChildren<Button>().interactable = true;
+            selectButton.gameObject.transform.localScale = standardButtonSize;
+            Button characterIconImage = selectButton.GetComponentInChildren<Button>();
+            characterIconImage.image.sprite = _activeProfiles[i].CharacterSelectIcon;
+            characterIconImage.image.DOFade(1f, 0f);
+            if (_activeProfiles[i].characterModel != null) 
+            {
+                characterIconImage.image.color = Color.white;
+                characterIconImage.interactable = true;
+            }
+            else 
+            {
+                characterIconImage.image.color = Color.black;
+                characterIconImage.interactable = false;
+            }
+            selectButton.name = $"{_activeProfiles[i].CharacterName}_CSButton_{i}";
             GameObject _selectButtonInfo = selectButton;
             _selectButtonInfo.GetComponent<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
             activeCharacterSelectButtons.Add(_selectButtonInfo);
@@ -45,12 +65,19 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     {
         for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
         {
-            yield return new WaitForSeconds(0.05f);
-            Vector3 selectButtonFirstSize = new Vector3(1.15f, 1.15f, 1.15f);
-            activeCharacterSelectButtons[i].transform.DOScale(selectButtonFirstSize, 0.15f);
-            yield return new WaitForSeconds(0.025f);
-            activeCharacterSelectButtons[i].transform.DOScale(new Vector3(0.85f, 0.85f, 0.85f), 0.15f);
+            Vector3 selectButtonFirstSize = largeButtonSize;
+            Sequence sizingSequence = DOTween.Sequence();
+            sizingSequence.Append(activeCharacterSelectButtons[i].transform.DOScale(selectButtonFirstSize, 0.1f));
+            sizingSequence.Append(activeCharacterSelectButtons[i].transform.DOScale(standardButtonSize, 0.05f));
+            sizingSequence.Play();
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME*1.15f);
         }
+        _topHeaderText.DOFade(0.15f, 0.15f);
+        _bottomHeaderText.DOFade(0.15f, 0.15f).OnComplete(() =>
+        {
+            SetHeaderText(_topHeaderText, "Choose Your");
+            SetHeaderText(_bottomHeaderText, "Character");
+        });
     }
 }

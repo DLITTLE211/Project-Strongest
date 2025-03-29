@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Threading.Tasks;
+using DG.Tweening;
 
 public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
 {
@@ -20,6 +21,12 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
             amplifierObjects[i].Activate();
             amplifierObjects[i].UpdateAmplifier(_activeAmplifiers[0], 0, true);
         }
+        _topHeaderText.DOFade(0.15f, 0.15f);
+        _bottomHeaderText.DOFade(0.15f, 0.15f).OnComplete(() => 
+        {
+            SetHeaderText(_topHeaderText,"Select Your");
+            SetHeaderText(_bottomHeaderText, "Amplifier");
+        });
     }
     protected override void DeactivateSubMenu()
     {
@@ -27,6 +34,8 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
         {
             amplifierObjects[i].Deactivate();
         }
+        _topHeaderText.DOFade(0.15f, 0.15f);
+        _bottomHeaderText.DOFade(0.15f, 0.15f);
     }
     private void Update()
     {

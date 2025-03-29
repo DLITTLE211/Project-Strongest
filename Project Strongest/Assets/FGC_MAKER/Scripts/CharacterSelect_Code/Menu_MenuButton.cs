@@ -17,9 +17,14 @@ public class Menu_MenuButton : Button
     [SerializeField]private Vector3 startingPos;
     public float forwardPosition;
     public Image backgroundImage;
+    Color normalColor;
+    Color highlightedColor;
     Sequence SlideTween;
+    Tween imageColorTween;
     public void OnEnable()
     {
+        normalColor = new Color32((byte)219f, (byte)219f, (byte)219f, (byte)255f);
+        highlightedColor = new Color32((byte)150f, (byte)150f, (byte)150f, (byte)255f);
         forwardPosition = NavigationButton.transform.localPosition.x + 95f;
         startingPos = NavigationButton.localPosition;
     }
@@ -41,12 +46,23 @@ public class Menu_MenuButton : Button
             SlideTween = null;
         }
     }
+    private void TransitionButtonColor(Color newColor) 
+    {
+        if(imageColorTween != null) 
+        {
+            imageColorTween.Complete();
+            imageColorTween = null;
+        }
+        imageColorTween = buttonImage.DOColor(newColor, 0.15f);
+        imageColorTween.Play();
+    }
     public void Raise()
     {
         CompleteActiveTween(forwardPosition);
         SlideTween.Append(NavigationButton.DOMoveX(forwardPosition, 0.35f));
         SlideTween.Append(NavigationButton.DOScale(1.1f, 0.35f));
         SlideTween.Play();
+        TransitionButtonColor(highlightedColor);
         backgroundImage.DOColor(backgroundHighligtedColor, 0.35f);
     }
     public void Lower()
@@ -54,6 +70,7 @@ public class Menu_MenuButton : Button
         CompleteActiveTween(startingPos.x);
         SlideTween.Append(NavigationButton.DOLocalMoveX(startingPos.x, 0.35f));
         SlideTween.Append(NavigationButton.DOScale(1, 0.35f));
+        TransitionButtonColor(normalColor);
         SlideTween.Play();
     }
     public void Fade(float valuePoint, float _time, bool _interactable) 
@@ -118,6 +135,5 @@ public class MenuButtonHolder
         {
             buttonList[i].Fade(255f, time,true);
         }
-        
     }
 }
