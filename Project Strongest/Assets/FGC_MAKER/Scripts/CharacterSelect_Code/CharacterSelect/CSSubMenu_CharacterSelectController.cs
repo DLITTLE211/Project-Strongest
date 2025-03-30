@@ -4,17 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using FightingGame_FrameData;
+using UnityEngine.EventSystems;
+using Rewired;
 
 public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
 {
+    public List<CharacterSelect_Cursor> _playerCursors;
+    [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private List<Character_Profile> _activeProfiles;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
     Vector3 standardButtonSize;
     Vector3 largeButtonSize;
-    public void Activate() 
+    private void OnEnable()
     {
+        objectHolder.SetActive(false);
+    }
+    public void Activate()
+    {
+        objectHolder.SetActive(true);
         ActivateSubMenu();
     }
     protected override void ActivateSubMenu()
@@ -87,5 +96,72 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             SetHeaderText(_topHeaderText, "Choose Your");
             SetHeaderText(_bottomHeaderText, "Character");
         });
+    }
+    public void SetPlayerControllers()
+    {
+        if (ReInput.controllers.GetJoystickNames().Length <= 0)
+        {
+            return;
+        }
+        else
+        {
+            for(int i = 0; i < _playerCursors.Count; i++) 
+            {
+                CharacterSelect_Cursor curCursor = _playerCursors[i];
+                if (curCursor.curPlayer == null) 
+                {
+                    SetCharacterSelectCursorState(curCursor, i);
+                }
+                else 
+                {
+                    curCursor.UnlockCharacterChoice();
+                    curCursor.isConnected = true;
+                    curCursor.cursorPage.ClearInfo();
+                }
+            }
+            /*for (int i = 0; i < _characterSelect.players.UsedID.Item1.Count; i++)
+            {
+                if (i == 0)
+                {
+                    if (_player1_Cursor.curPlayer == null)
+                    {
+                        SetCharacterSelectCursorState(_player1_Cursor, 0);
+                    }
+                    else
+                    {
+                        _player1_Cursor.UnlockCharacterChoice();
+                        _player1_Cursor.isConnected = true;
+                        _player1_PlayerPage.ClearInfo();
+                    }
+                }
+                else if (i == 1)
+                {
+                    if (_player2_Cursor.curPlayer == null)
+                    {
+                        SetCharacterSelectCursorState(_player2_Cursor, i);
+                    }
+                    else
+                    {
+                        _player2_Cursor.UnlockCharacterChoice();
+                        _player2_Cursor.isConnected = true;
+                        _player2_PlayerPage.ClearInfo();
+                    }
+                }
+            }*/
+        }
+    }
+    void SetCharacterSelectCursorState(CharacterSelect_Cursor player, int ID)
+    {
+        player.curPlayer = ReInput.players.GetPlayer(_characterSelect.players.UsedID.Item1[ID]);
+        player.ID = ID;
+        player.curPlayer.controllers.AddController(ControllerType.Joystick, _characterSelect.players.UsedID.Item1[ID], true);
+        player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, _characterSelect.players.UsedID.Item1[ID], $"UI_CanvasController", $"TestPlayer{_characterSelect.players.UsedID.Item1[ID]}");
+        if (_characterSelect.currentSet.gameMode == GameMode.Training)
+        {
+            player.cursorObject.SetActive(true);
+            player.cursorText.text = $"{_characterSelect.players.UsedID.Item1[ID] + 1}";
+
+        }
+        player.isConnected = true;
     }
 }

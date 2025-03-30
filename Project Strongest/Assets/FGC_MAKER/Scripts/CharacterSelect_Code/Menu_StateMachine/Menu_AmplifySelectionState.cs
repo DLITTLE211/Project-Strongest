@@ -38,6 +38,8 @@ public class Menu_AmplifySelectionState : Menu_BaseState
         ToggleActivationRoutine = null;
         yield return new WaitForSeconds(0.5f);
         toggleReady = true;
+        _player1_Cursor.cursorPage.amplifySelectCooldown = true;
+        _player2_Cursor.cursorPage.amplifySelectCooldown = true;
     }
     public override void OnExit()
     {
@@ -91,10 +93,18 @@ public class Menu_AmplifySelectionState : Menu_BaseState
 
     public override void CycleLeft(CharacterSelect_Cursor _currentCursor) 
     {
-        _amplifyController.CyclePlayerAmplifierDown(_currentCursor.ID);
+        if (_currentCursor.cursorPage.amplifySelectCooldown)
+        {
+            _currentCursor.cursorPage.CallDelayResetBool();
+            _amplifyController.CyclePlayerAmplifierDown(_currentCursor.ID);
+        }
     }
-    public override void CycleRight(CharacterSelect_Cursor _currentCursor) 
+    public override void CycleRight(CharacterSelect_Cursor _currentCursor)
     {
-        _amplifyController.CyclePlayerAmplifierUp(_currentCursor.ID);
+        if (_currentCursor.cursorPage.amplifySelectCooldown)
+        {
+            _currentCursor.cursorPage.CallDelayResetBool();
+            _amplifyController.CyclePlayerAmplifierUp(_currentCursor.ID);
+        }
     }
 }

@@ -16,6 +16,11 @@ public static class SpriteToTextColorUtility
                 formated += " ";
                 continue;
             }
+            if (message[i].ToString() == "\n")
+            {
+                formated += "\n";
+                continue;
+            }
             formated += $"<sprite name=\"{message[i]}\"" + " color=#" + HexColor + ">";
         }
 

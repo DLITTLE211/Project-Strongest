@@ -6,6 +6,7 @@ using TMPro;
 public class Menu_PlayerSideState : Menu_BaseState
 {
     [SerializeField] private CharacterSelect_Setup _characterSelect;
+    [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
     [SerializeField] private CSSubMenu_StageSelectController _stageSelecter;
     [SerializeField] private GameObject mainObjectHolder;
     [SerializeField] private GameObject SideSelectionObject;
@@ -44,7 +45,7 @@ public class Menu_PlayerSideState : Menu_BaseState
         _characterSelect.ResetCharacterSide();
         _characterSelect.AddControllerCounter();
         _characterSelect.CheckControllerState();
-        _characterSelect.SetPlayerControllers();
+        _characterSelectController.SetPlayerControllers();
         _characterSelect.SetListeners();
         yield return new WaitForSeconds(0.25f);
         player1.InitSideIterator();

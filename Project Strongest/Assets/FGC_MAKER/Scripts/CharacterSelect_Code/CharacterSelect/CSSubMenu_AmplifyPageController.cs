@@ -11,7 +11,8 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
     [SerializeField] private List<AmplifyController_Object> amplifierObjects;
     private void OnEnable()
     {
-        for(int i = 0; i < amplifierObjects.Count; i++) 
+        objectHolder.SetActive(false);
+        for (int i = 0; i < amplifierObjects.Count; i++) 
         {
             amplifierObjects[i].DeactivateInstant();
         }
@@ -19,6 +20,7 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
 
     public void Activate() 
     {
+        objectHolder.SetActive(true);
         ActivateSubMenu();
     }
     public void Deactivate()
@@ -55,14 +57,14 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
         {
             base.OnUpdate();
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow)) 
+        /*if (Input.GetKeyDown(KeyCode.UpArrow)) 
         {
             CyclePlayerAmplifierUp();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             CyclePlayerAmplifierDown();
-        }
+        }*/
     }
     public void CyclePlayerAmplifierUp(int playerIndex = 0)
     {

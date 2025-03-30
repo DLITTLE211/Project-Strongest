@@ -553,19 +553,34 @@ public class CharacterSelect_Setup : MonoBehaviour
                 currentController.yVal = currentController.curPlayer.GetAxisRaw("Vertical");
                 currentController.xVal = (currentController.xVal >= currentController.xYield) ? 1 : ((currentController.xVal <= -currentController.xYield) ? -1 : 0);
                 currentController.yVal = (currentController.yVal >= currentController.yYield) ? 1 : ((currentController.yVal <= -currentController.yYield) ? -1 : 0);
-
-
-                if (currentController.xVal == 0 && currentController.yVal == 0)
+                if (SideSelectionObject.activeInHierarchy)
+                {
+                    ChooseSide_Object curObject = currentController.ID == 0 ? player1 : player2;
+                    if ((int)currentController.xVal != 0)
+                    {
+                        sideController.UpdateControllerSide(curObject, (int)currentController.xVal, DisplayObjectlapMessage);
+                    }
+                }
+                else
+                {
+                    if (currentController.xVal == 1)
+                    {
+                        _menuStateMachine.GetCurrentState().CycleRight(currentController);
+                        return;
+                    }
+                    if (currentController.xVal == -1)
+                    {
+                        _menuStateMachine.GetCurrentState().CycleLeft(currentController);
+                        return;
+                    }
+                }
+                /*if (currentController.xVal == 0 && currentController.yVal == 0)
                 {
                     currentController.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
                 }
                 else
                 {
-                    if (SideSelectionObject.activeInHierarchy)
-                    {
-                        ChooseSide_Object curObject = currentController.ID == 0 ? player1 : player2;
-                        sideController.UpdateControllerSide(curObject, (int)currentController.xVal, DisplayObjectlapMessage); 
-                    }
+                    
                     else
                     {
                         float xVal = currentController.xVal * 10;
@@ -581,13 +596,13 @@ public class CharacterSelect_Setup : MonoBehaviour
                         }
                         currentController.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
                     }
-                }
+                }*/
             }
             else
             {
                 if (currentController.cursorPage.lockedIn)
                 {
-                    currentController.xVal = currentController.curPlayer.GetAxis("Horizontal");
+                    /*currentController.xVal = currentController.curPlayer.GetAxis("Horizontal");
                     currentController.xVal = (currentController.xVal >= currentController.xYield) ? 1 : ((currentController.xVal <= -currentController.xYield) ? -1 : 0);
                     if (currentController.xVal == 1)
                     {
@@ -604,7 +619,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                             StopCoroutine(DelayResetStageBool());
                             stageSelectCooldown = false;
                         }
-                    }
+                    }*/
                 }
             }
         }

@@ -24,6 +24,7 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
     public bool roundCountSelected;
     private void OnEnable()
     {
+        objectHolder.SetActive(false);
         DeactivateSubMenu();
         GetStageImageLocalLocations();
         SetStartingStageData();
@@ -42,8 +43,9 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
         stageSelected = false;
         roundCountSelected = false;
     }
-    public void Activate() 
+    public void Activate()
     {
+        objectHolder.SetActive(true);
         ActivateSubMenu();
     }
     public void Deactivate()

@@ -22,6 +22,7 @@ public class CharacterSelect_Page : MonoBehaviour
     public Amplifiers chosenAmplifier;
     [Range(0, 4)] public int colorSelectIndex;
     public bool amplifySelectCooldown;
+    IEnumerator delayResetRoutine;
     public void UpdateInfo(Character_Profile profile)
     {
         _characterIconImage.color = Color.white;
@@ -109,11 +110,20 @@ public class CharacterSelect_Page : MonoBehaviour
         characterName.DOFade(value, 1.5f);
         //characterAmplify.SetAmplifyInfo(value);
     }
-
+    public void CallDelayResetBool() 
+    {
+        if(delayResetRoutine != null) 
+        {
+            StopCoroutine(delayResetRoutine);
+            delayResetRoutine = null;
+        }
+        delayResetRoutine = DelayResetBool();
+        StartCoroutine(delayResetRoutine);
+    }
     public IEnumerator DelayResetBool() 
     {
-        amplifySelectCooldown = true;
-        yield return new WaitForSeconds(0.75f);
         amplifySelectCooldown = false;
+        yield return new WaitForSeconds(0.75f);
+        amplifySelectCooldown = true;
     }
 }
