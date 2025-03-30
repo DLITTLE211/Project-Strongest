@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public class Menu_BaseState : MonoBehaviour
 {
+    [SerializeField] protected Menu_StateMachine _menuStateMachine;
     public virtual void OnEnter() 
     { }
     public virtual void OnExit()

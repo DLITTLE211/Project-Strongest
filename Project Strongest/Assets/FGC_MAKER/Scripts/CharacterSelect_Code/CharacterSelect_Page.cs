@@ -42,6 +42,10 @@ public class CharacterSelect_Page : MonoBehaviour
         chosenCharacter = null;
         colorSelectIndex = 0;
     }
+    public void ClearAmplifierData() 
+    {
+        chosenAmplifier = null;
+    }
     public void ClearColorText()
     {
         colorPicker.ClearText();

@@ -11,7 +11,10 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
     [SerializeField] private List<AmplifyController_Object> amplifierObjects;
     private void OnEnable()
     {
-        DeactivateSubMenu();
+        for(int i = 0; i < amplifierObjects.Count; i++) 
+        {
+            amplifierObjects[i].DeactivateInstant();
+        }
     }
 
     public void Activate() 
@@ -30,8 +33,8 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
             amplifierObjects[i].Activate();
             amplifierObjects[i].UpdateAmplifier(_activeAmplifiers[0], 0, true);
         }
-        _topHeaderText.DOFade(0.15f, 0.15f);
-        _bottomHeaderText.DOFade(0.15f, 0.15f).OnComplete(() => 
+        _topHeaderText.DOFade(1f, 0.15f);
+        _bottomHeaderText.DOFade(1f, 0.15f).OnComplete(() => 
         {
             SetHeaderText(_topHeaderText,"Select Your");
             SetHeaderText(_bottomHeaderText, "Amplifier");
@@ -43,8 +46,8 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
         {
             amplifierObjects[i].Deactivate();
         }
-        _topHeaderText.DOFade(0.15f, 0.15f);
-        _bottomHeaderText.DOFade(0.15f, 0.15f);
+        _topHeaderText.DOFade(0f, 0.15f);
+        _bottomHeaderText.DOFade(0f, 0.15f);
     }
     private void Update()
     {

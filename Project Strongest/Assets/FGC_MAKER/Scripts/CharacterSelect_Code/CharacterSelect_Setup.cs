@@ -33,6 +33,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
 
+    [SerializeField] private List<CharacterSelect_Cursor> _playerCursors;
     [SerializeField] private CharacterSelect_Page _player1_PlayerPage, _player2_PlayerPage;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
     [SerializeField] private ChooseSide_Object player1;
@@ -460,6 +461,22 @@ public class CharacterSelect_Setup : MonoBehaviour
             return true;
         }
     }
+    public void CheckAmplifiersFilled() 
+    {
+        bool allActive = true;
+        for(int i = 0; i < _playerCursors.Count; i++) 
+        {
+            if(_playerCursors[i].isConnected && _playerCursors[i].cursorPage.chosenAmplifier == null) 
+            {
+                allActive = false;
+                break;
+            }
+        }
+        if (allActive) 
+        {
+            _menuStateMachine.CallCharacterSelectState();
+        }
+    }
     public void CheckGameModeSet() 
     {
         if (CheckPlayersReady(_player1_Cursor) && CheckPlayersReady(_player2_Cursor))
@@ -502,7 +519,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 if (SideSelectionObject.activeInHierarchy)
                 {
-                    _menuStateMachine.CallCharacterSelectState();
+                    _menuStateMachine.CallAmplifierSelectState();
                     sideController.CloseChooseSideMenu(SetPlayerInformation_OnCharacterSelect);
                 }
                 else

@@ -43,6 +43,22 @@ public class AmplifyController_Object : MonoBehaviour
             _amplifierTransform.DOLocalMoveX(offSceenPos, 0f);
         });
     }
+    public void DeactivateInstant()
+    {
+        ToggleReady = false;
+        _amplifierBackground.DOFade(0f, 0);
+        _amplifierFrameImage.DOFade(0f, 0);
+        _amplifierBackgroundImage.DOFade(0f, 0);
+        _amplifierImage.DOFade(0f, 0).OnComplete(() =>
+        {
+            _amplifierTransform.DOLocalMoveX(offSceenPos, 0f);
+        });
+    }
+    public void SetSelected() 
+    {
+        string message = $"{_chosenAmplifier.amplifier.ToString().ToUpper()} \nSELECTED";
+        _amplifierText.text = SpriteToTextColorUtility.AppendSpriteName(message, _amplifierText.color);
+    }
     // Start is called before the first frame update
     public void UpdateAmplifier(Amplifiers newAmplifier, int index, bool overrideReady = false) 
     {
@@ -56,11 +72,11 @@ public class AmplifyController_Object : MonoBehaviour
 
         AmplifierIndex = index;
         string amplifierName = newAmplifier.amplifier.ToString().ToUpper();
-        ShiftImage(newAmplifier.amplifierImage);
+        ShiftImage(newAmplifier);
         _amplifierText.text = SpriteToTextColorUtility.AppendSpriteName(amplifierName, _amplifierText.color);
         BackgroundShiftColor(newAmplifier.meterColor);
     }
-    public void ShiftImage(Sprite newImage) 
+    public void ShiftImage(Amplifiers newAmp) 
     {
         if (imageShift != null)
         {
@@ -74,7 +90,8 @@ public class AmplifyController_Object : MonoBehaviour
             imageShift = _amplifierImage.DOFade(1f, 0.35f);
             imageShift.OnStart(() =>
             {
-                _amplifierImage.sprite = newImage;
+                _amplifierImage.sprite = newAmp.amplifierImage;
+                _chosenAmplifier = newAmp;
             });
             imageShift.Play();
         });

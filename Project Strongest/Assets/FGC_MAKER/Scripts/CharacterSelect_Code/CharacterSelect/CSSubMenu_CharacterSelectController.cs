@@ -23,8 +23,8 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     protected override void DeactivateSubMenu()
     {
         characterSelectHolder.SetActive(false);
-        _topHeaderText.DOFade(0.15f, 0.15f);
-        _bottomHeaderText.DOFade(0.15f, 0.15f);
+        _topHeaderText.DOFade(0f, 0.15f);
+        _bottomHeaderText.DOFade(0f, 0.15f);
     }
     private void Update()
     {
@@ -73,8 +73,8 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME*1.15f);
         }
-        _topHeaderText.DOFade(0.15f, 0.15f);
-        _bottomHeaderText.DOFade(0.15f, 0.15f).OnComplete(() =>
+        _topHeaderText.DOFade(1f, 0.15f);
+        _bottomHeaderText.DOFade(1f, 0.15f).OnComplete(() =>
         {
             SetHeaderText(_topHeaderText, "Choose Your");
             SetHeaderText(_bottomHeaderText, "Character");
