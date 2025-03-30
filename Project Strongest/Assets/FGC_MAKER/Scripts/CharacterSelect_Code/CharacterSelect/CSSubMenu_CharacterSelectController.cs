@@ -13,12 +13,20 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     [SerializeField] private GameObject characterSelectHolder;
     Vector3 standardButtonSize;
     Vector3 largeButtonSize;
+    public void Activate() 
+    {
+        ActivateSubMenu();
+    }
     protected override void ActivateSubMenu()
     {
         standardButtonSize = new Vector3(0.7f, 0.7f, 0.7f);
         largeButtonSize = new Vector3(1f, 1f, 1f);
         characterSelectHolder.SetActive(true);
         AddCharacterSelectButtons();
+    }
+    public void Deactivate()
+    {
+        DeactivateSubMenu();
     }
     protected override void DeactivateSubMenu()
     {

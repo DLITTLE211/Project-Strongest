@@ -7,8 +7,12 @@ using DG.Tweening;
 
 public class CharacterSelect_Page : MonoBehaviour
 {
-    [SerializeField] private RectTransform _nameplateTransform;
-    [SerializeField] private RectTransform _colorPickerTransform;
+    [SerializeField] private Transform _nameplateTransform;
+    [SerializeField] private Vector3 _startNtPosition,_endNtPosition;
+
+    [SerializeField] private Transform _colorPickerTransform;
+    [SerializeField] private Vector3 _startColorPosition, _endColorPosition;
+
     public AmplifyController_Object characterAmplify;
     public CharacterSelect_ColorPicker colorPicker;
     public TMP_Text characterName;
@@ -30,17 +34,33 @@ public class CharacterSelect_Page : MonoBehaviour
         lockedIn = true; 
         chosenCharacter = profile;
         _characterIconImage.sprite = profile.CharacterProfileImage;
-        characterName.text = $"{profile.CharacterName} \n(Selected)";
+        string characterNameString = $"{profile.CharacterName}";
+        characterName.text = SpriteToTextColorUtility.AppendSpriteName(characterNameString.ToUpper(), characterName.color);
         chosenAmplifier = characterAmplify.ReturnChosenAmplifier();
     }
     public void ClearInfo()
     {
         lockedIn = false;
         _characterIconImage.sprite = null;
-        characterName.text = "Choose Your Character";
+        characterName.text = "";
         chosenAmplifier = null;
         chosenCharacter = null;
         colorSelectIndex = 0;
+    }
+    public void ResetNamePlatePosition()
+    {
+        Sequence resetSequence = DOTween.Sequence();
+        resetSequence.Append(_colorPickerTransform.DOLocalMove(_startColorPosition, 0.55f));
+        resetSequence.Append(_nameplateTransform.DOLocalMove(_startNtPosition, 0.45f));
+        resetSequence.Play();
+    }
+    public void ActivateColorPanelPosition()
+    {
+        _colorPickerTransform.DOLocalMove(_endColorPosition, 1.15f).SetEase(Ease.OutBack);
+    }
+    public void ActivateNamePlatePosition()
+    {
+        _nameplateTransform.DOLocalMove(_endNtPosition, 1.15f).SetEase(Ease.OutBack);
     }
     public void ClearAmplifierData() 
     {

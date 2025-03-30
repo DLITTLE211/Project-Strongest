@@ -33,7 +33,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
 
-    [SerializeField] private List<CharacterSelect_Cursor> _playerCursors;
+    public List<CharacterSelect_Cursor> _playerCursors;
     [SerializeField] private CharacterSelect_Page _player1_PlayerPage, _player2_PlayerPage;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
     [SerializeField] private ChooseSide_Object player1;

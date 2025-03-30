@@ -51,7 +51,6 @@ public class Menu_AmplifySelectionState : Menu_BaseState
         _amplifyController.Deactivate();
         yield return new WaitForSeconds(1.15f);
         _amplifyControllerObject.SetActive(false);
-        _menuStateMachine.CallPlayerSideState();
         ToggleActivationRoutine = null;
     }
     public override void OnUpdate()

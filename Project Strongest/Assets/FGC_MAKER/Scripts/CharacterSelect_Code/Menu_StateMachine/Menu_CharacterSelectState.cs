@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class Menu_CharacterSelectState : Menu_BaseState
 {
     [SerializeField] private CharacterSelect_Setup _characterSelect;
+    [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
     [SerializeField] private CharacterSelect_Page _player1_PlayerPage, _player2_PlayerPage;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
     private bool allowUpdate;
@@ -14,19 +15,28 @@ public class Menu_CharacterSelectState : Menu_BaseState
     {
         allowUpdate = false;
         allowColorUpdate = true;
-        _player1_Cursor.cursorPage.ClearColorText();
-        _player2_Cursor.cursorPage.ClearColorText();
-        _player1_Cursor.UnlockCharacterChoice();
-        _player1_PlayerPage.ClearInfo();
-        _player2_Cursor.UnlockCharacterChoice();
-        _player2_PlayerPage.ClearInfo();
-        _characterSelect.CallCharacterSelectObject();
-        _characterSelect.SetCharacterSelectObjects();
+        for(int i = 0; i < _characterSelect._playerCursors.Count; i++) 
+        {
+            CharacterSelect_Cursor cursor = _characterSelect._playerCursors[i];
+            cursor.cursorPage.ClearColorText();
+            cursor.UnlockCharacterChoice();
+            cursor.cursorPage.ClearInfo();
+            cursor.cursorPage.ClearColorText();
+            cursor.cursorPage.ActivateNamePlatePosition();
+
+        }
+        _characterSelectController.gameObject.SetActive(true);
         StartCoroutine(DelayUpdateRoutine(1f));
     }
     public override void OnExit()
     {
+        for (int i = 0; i < _characterSelect._playerCursors.Count; i++)
+        {
+            CharacterSelect_Cursor cursor = _characterSelect._playerCursors[i];
+            cursor.cursorPage.ResetNamePlatePosition();
 
+        }
+        _characterSelectController.Deactivate();
     }
     public override void OnUpdate()
     {
@@ -42,11 +52,13 @@ public class Menu_CharacterSelectState : Menu_BaseState
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor) 
     {
-        _characterSelect._menuStateMachine.CallPlayerSideState();
+        _characterSelect._menuStateMachine.CallAmplifierSelectState();
     }
     IEnumerator DelayUpdateRoutine(float time)
     {
         allowUpdate = false;
+        yield return new WaitForSeconds(time);
+        _characterSelectController.Activate();
         yield return new WaitForSeconds(time);
         allowUpdate = true;
     }
