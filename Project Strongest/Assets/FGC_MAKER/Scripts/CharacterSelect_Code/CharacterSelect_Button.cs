@@ -137,7 +137,7 @@ public class CharacterSelect_Button : MonoBehaviour
     {
         if (hoverImage.color != Color.black)
         {
-            if (cursor.cursorPage.characterBackgroundImage.sprite == characterProfile.CharacterProfileImage)
+            if (cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage)
             {
                 Messenger.Broadcast<int>(Events.ClearCharacterInfo, cursor.ID);
             }
@@ -145,7 +145,7 @@ public class CharacterSelect_Button : MonoBehaviour
     }
     public void SendCharacterSelected(CharacterSelect_Cursor cursor) 
     {
-        if (CheckCursorOverlap(cursor.gameObject.transform) && cursor.cursorPage.characterBackgroundImage.sprite == characterProfile.CharacterProfileImage) 
+        if (CheckCursorOverlap(cursor.gameObject.transform) && cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage) 
         {
             Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, characterProfile, cursor);
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class Menu_StateMachine : MonoBehaviour
 {
     public Menu_TitleState _mTState;
+    public Menu_AmplifySelectionState _mASState;
     public Menu_MainMenuState _mMMState;
     public Menu_PlayerSideState _mPState;
     public Menu_CharacterSelectState _mCState;
@@ -47,6 +48,10 @@ public class Menu_StateMachine : MonoBehaviour
     public void CallPlayerSideState()
     {
         SetCurrentState(_mPState);
+    }
+    public void CallAmplifierSelectState()
+    {
+        SetCurrentState(_mASState);
     }
     public void CallCharacterSelectState()
     {

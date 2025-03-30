@@ -5,6 +5,7 @@ using TMPro;
 
 public class CharacterSelect_SubMenuBase : MonoBehaviour
 {
+    [SerializeField] protected CharacterSelect_Setup _characterSelect;
     [SerializeField] protected TMP_Text _topHeaderText;
     [SerializeField] protected TMP_Text _bottomHeaderText;
     public bool allowBase;

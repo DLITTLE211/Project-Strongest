@@ -17,6 +17,7 @@ public class AmplifyController_Object : MonoBehaviour
     [SerializeField] private TMP_Text _amplifierText;
     Tween colorShift;
     Tween imageShift;
+    private Amplifiers _chosenAmplifier;
     public int AmplifierIndex;
     public bool ToggleReady;
     public void Activate() 
@@ -87,5 +88,9 @@ public class AmplifyController_Object : MonoBehaviour
         }
         colorShift = _amplifierBackground.DOColor(newColor, 0.55f);
         colorShift.Play();
+    }
+    public Amplifiers ReturnChosenAmplifier() 
+    {
+        return _chosenAmplifier;
     }
 }

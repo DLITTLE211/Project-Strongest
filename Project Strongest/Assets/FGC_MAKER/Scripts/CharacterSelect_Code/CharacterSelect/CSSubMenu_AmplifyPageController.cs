@@ -13,6 +13,15 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
     {
         DeactivateSubMenu();
     }
+
+    public void Activate() 
+    {
+        ActivateSubMenu();
+    }
+    public void Deactivate()
+    {
+        DeactivateSubMenu();
+    }
     protected override void ActivateSubMenu()
     {
         for (int i = 0; i < amplifierObjects.Count; i++) 

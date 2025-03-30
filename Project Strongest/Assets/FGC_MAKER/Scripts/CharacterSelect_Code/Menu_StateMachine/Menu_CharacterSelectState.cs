@@ -44,18 +44,12 @@ public class Menu_CharacterSelectState : Menu_BaseState
     {
         _characterSelect._menuStateMachine.CallPlayerSideState();
     }
-    public override void CycleLeft(CharacterSelect_Cursor _currentCursor) 
-    {
-        _currentCursor.cursorPage.characterAmplify.UpdateInfoDown();
-    }
-    public override void CycleRight(CharacterSelect_Cursor _currentCursor) 
-    {
-        _currentCursor.cursorPage.characterAmplify.UpdateInfoUp();
-    }
     IEnumerator DelayUpdateRoutine(float time)
     {
         allowUpdate = false;
         yield return new WaitForSeconds(time);
         allowUpdate = true;
     }
+    public override void CycleLeft(CharacterSelect_Cursor _currentCursor) { }
+    public override void CycleRight(CharacterSelect_Cursor _currentCursor) { }
 }

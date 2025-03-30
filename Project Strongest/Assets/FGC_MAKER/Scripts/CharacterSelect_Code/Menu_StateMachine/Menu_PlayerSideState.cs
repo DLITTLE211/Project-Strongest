@@ -6,7 +6,7 @@ using TMPro;
 public class Menu_PlayerSideState : Menu_BaseState
 {
     [SerializeField] private CharacterSelect_Setup _characterSelect;
-    [SerializeField] private CharacterSelect_StageSelect _stageSelecter;
+    [SerializeField] private CSSubMenu_StageSelectController _stageSelecter;
     [SerializeField] private GameObject mainObjectHolder;
     [SerializeField] private GameObject SideSelectionObject;
     [SerializeField] private TMP_Text advisoryMessage;
@@ -18,8 +18,8 @@ public class Menu_PlayerSideState : Menu_BaseState
     IEnumerator activateRoutine;
     public override void OnEnter()
     {
-        _stageSelecter.ClearStageSelect();
-        _stageSelecter.DisableRoundSelectorObject();
+        _stageSelecter.DeactivateRoundSelectObject();
+        _stageSelecter.Deactivate();
         if (activateRoutine != null)
         {
             StopCoroutine(activateRoutine);
@@ -40,6 +40,7 @@ public class Menu_PlayerSideState : Menu_BaseState
         SetCursorStartPosition(_player2_Cursor.transform, 335f);
 
         _stageSelecter.ResetValues();
+
         _characterSelect.ResetCharacterSide();
         _characterSelect.AddControllerCounter();
         _characterSelect.CheckControllerState();

@@ -72,7 +72,6 @@ public class CharacterSelect_ChosenSideController : MonoBehaviour
     }
     public void CloseChooseSideMenu(Callback func) 
     {
-
         chooseCharacterSelectObject.SetActive(false);
         func();
     }

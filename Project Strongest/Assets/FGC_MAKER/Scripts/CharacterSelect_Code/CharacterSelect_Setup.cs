@@ -71,7 +71,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     void SetupPlayerPage(CharacterSelect_Page playerPage) 
     {
-        playerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
+        //playerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         playerPage.SetPlayerInfo(255f);
 
     }
@@ -252,7 +252,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             player2.SetImageP2();
         }
     }
-    public void AddCharacterSelectButtons()
+   /* public void AddCharacterSelectButtons()
     {
         for (int i = 0; i < _activeProfiles.Count; i++)
         {
@@ -281,7 +281,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             activeCharacterSelectButtons[i].transform.DOScale(new Vector3(0.85f, 0.85f, 0.85f), 0.15f);
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
         }
-    }
+    }*/
 
     public void SetPlayerControllers()
     {
@@ -776,6 +776,7 @@ public class ChooseSide_Object
     public void InitSideIterator() 
     {
         sideIterator = 1;
+        SetImageCPU(false);
     }
     public void SetImageCPU(bool setText = true) 
     {
@@ -783,7 +784,7 @@ public class ChooseSide_Object
         {
             if (setText)
             {
-                objectText.text = "CPU";
+                objectText.text = SpriteToTextColorUtility.AppendSpriteName("CPU",objectText.color);
             }
         });
     }
@@ -793,7 +794,7 @@ public class ChooseSide_Object
         {
             if (setText)
             {
-                objectText.text = "P1";
+                objectText.text = SpriteToTextColorUtility.AppendSpriteName("P1", objectText.color);
             }
         });
     }
@@ -803,7 +804,7 @@ public class ChooseSide_Object
         {
             if (setText)
             {
-                objectText.text = "P2";
+                objectText.text = SpriteToTextColorUtility.AppendSpriteName("P2", objectText.color);
             }
         });
     }

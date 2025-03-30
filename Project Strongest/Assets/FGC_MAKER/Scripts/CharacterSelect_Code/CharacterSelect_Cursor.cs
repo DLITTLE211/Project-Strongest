@@ -26,7 +26,6 @@ public class CharacterSelect_Cursor : MonoBehaviour
     {
         profile = chosenProfile;
         
-        cursorPage.characterFrame.color = cursorImage.color;
         cursorPage.LockInfo(profile);
         cursorObject.transform.DOScale(0.5f, 0.15f);
     }
@@ -41,7 +40,6 @@ public class CharacterSelect_Cursor : MonoBehaviour
         {
             canChooseStage = false;
         }
-        cursorPage.characterFrame.color = Color.white;
         cursorPage.characterName.text = "Choose Your Character";
         cursorObject.transform.DOScale(0.65f, 0.15f);
     }
