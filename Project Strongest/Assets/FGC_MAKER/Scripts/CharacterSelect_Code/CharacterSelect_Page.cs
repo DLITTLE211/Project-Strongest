@@ -108,7 +108,6 @@ public class CharacterSelect_Page : MonoBehaviour
     {
         _characterIconImage.DOFade(value, 1.5f);
         characterName.DOFade(value, 1.5f);
-        //characterAmplify.SetAmplifyInfo(value);
     }
     public void CallDelayResetBool() 
     {

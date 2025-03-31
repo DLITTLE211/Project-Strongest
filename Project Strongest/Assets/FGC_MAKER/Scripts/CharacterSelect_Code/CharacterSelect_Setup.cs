@@ -531,7 +531,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 _menuStateMachine.GetCurrentState().Cancel(currentController);
             }
-            if (currentController.curPlayer.GetButtonDown("Shift_Right"))
+            /*if (currentController.curPlayer.GetButtonDown("Shift_Right"))
             {
                 if (!_stageSelecter.allowRoundSelect && !_stageSelecter.allowStageSelect)
                 {
@@ -546,7 +546,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                     StartCoroutine(currentController.cursorPage.DelayResetBool());
                     _menuStateMachine.GetCurrentState().CycleLeft(currentController);
                 }
-            }
+            }*/
             if (currentController.profile == null)
             {
                 currentController.xVal = currentController.curPlayer.GetAxisRaw("Horizontal");
@@ -563,6 +563,16 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
                 else
                 {
+                    if (currentController.yVal == 1)
+                    {
+                        _menuStateMachine.GetCurrentState().CycleUp(currentController);
+                        return;
+                    }
+                    if (currentController.yVal == -1)
+                    {
+                        _menuStateMachine.GetCurrentState().CycleDown(currentController);
+                        return;
+                    }
                     if (currentController.xVal == 1)
                     {
                         _menuStateMachine.GetCurrentState().CycleRight(currentController);

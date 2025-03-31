@@ -47,7 +47,74 @@ public class CharacterSelect_Cursor : MonoBehaviour
         cursorPage.characterName.text = "Choose Your Character";
         cursorObject.transform.DOScale(0.65f, 0.15f);
     }
-
+    public void FindSelectableUp() 
+    {
+        Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnUp.gameObject.GetComponent<Button>();
+        if(tryNewButton != null) 
+        {
+            CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
+            if (regCharacterButton != null)
+            {
+                highlightedButton = regCharacterButton;
+                highlightedButton.HighlightSelection(this);
+            }
+            else
+            {
+                //TODO
+            }
+        }
+    }
+    public void FindSelectableDown()
+    {
+        Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnDown.gameObject.GetComponent<Button>();
+        if (tryNewButton != null)
+        {
+            CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
+            if (regCharacterButton != null)
+            {
+                highlightedButton = regCharacterButton;
+                highlightedButton.HighlightSelection(this);
+            }
+            else
+            {
+                //TODO
+            }
+        }
+    }
+    public void FindSelectableRight()
+    {
+        Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnRight.gameObject.GetComponent<Button>();
+        if (tryNewButton != null)
+        {
+            CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
+            if (regCharacterButton != null)
+            {
+                highlightedButton = regCharacterButton;
+                highlightedButton.HighlightSelection(this);
+            }
+            else
+            {
+                //TODO
+            }
+        }
+    }
+    public void FindSelectableLeft()
+    {
+        Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnLeft.gameObject.GetComponent<Button>();
+        if (tryNewButton != null)
+        {
+            CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
+            if (regCharacterButton != null)
+            {
+                highlightedButton = regCharacterButton;
+                highlightedButton.HighlightSelection(this);
+            }
+            else 
+            {
+                //TODO
+            }
+        }
+    }
     public void DesyncController()
     {
         isConnected = false;

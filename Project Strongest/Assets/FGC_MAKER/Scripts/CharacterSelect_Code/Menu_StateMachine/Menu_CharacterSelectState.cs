@@ -61,6 +61,20 @@ public class Menu_CharacterSelectState : Menu_BaseState
         yield return new WaitForSeconds(time);
         allowUpdate = true;
     }
-    public override void CycleLeft(CharacterSelect_Cursor _currentCursor) { }
-    public override void CycleRight(CharacterSelect_Cursor _currentCursor) { }
+    public override void CycleLeft(CharacterSelect_Cursor _currentCursor) 
+    {
+        _currentCursor.FindSelectableLeft();
+    }
+    public override void CycleRight(CharacterSelect_Cursor _currentCursor) 
+    {
+        _currentCursor.FindSelectableRight();
+    }
+    public override void CycleUp(CharacterSelect_Cursor _currentCursor)
+    {
+        _currentCursor.FindSelectableUp();
+    }
+    public override void CycleDown(CharacterSelect_Cursor _currentCursor)
+    {
+        _currentCursor.FindSelectableDown();
+    }
 }

@@ -16,6 +16,8 @@ public class Menu_BaseState : MonoBehaviour
     public virtual void Cancel(CharacterSelect_Cursor _currentCursor) { }
     public virtual void CycleLeft(CharacterSelect_Cursor _currentCursor) { }
     public virtual void CycleRight(CharacterSelect_Cursor _currentCursor) { }
+    public virtual void CycleUp(CharacterSelect_Cursor _currentCursor) { }
+    public virtual void CycleDown(CharacterSelect_Cursor _currentCursor) { }
 
     public async Task DelayWithTime(int time) 
     {

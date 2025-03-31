@@ -9531,6 +9531,7 @@ MonoBehaviour:
   yVal: 0
   xYield: 0.5
   yYield: 0.5
+  highlightedButton: {fileID: 0}
   canChooseStage: 0
   colorChosen: 0
 --- !u!1 &1066661553
@@ -13058,6 +13059,7 @@ MonoBehaviour:
   yVal: 0
   xYield: 0.5
   yYield: 0.5
+  highlightedButton: {fileID: 0}
   canChooseStage: 0
   colorChosen: 0
 --- !u!1 &1370398432
@@ -17345,7 +17347,7 @@ MonoBehaviour:
   rewiredInputManager: {fileID: 1038265044}
   useAllRewiredGamePlayers: 0
   useRewiredSystemPlayer: 0
-  rewiredPlayerIds: 0000000001000000
+  rewiredPlayerIds: 00000000
   usePlayingPlayersOnly: 1
   playerMice: []
   moveOneElementPerAxisPress: 0

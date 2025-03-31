@@ -10,6 +10,7 @@ using Rewired;
 public class CharacterSelect_Button : MonoBehaviour
 {
     [SerializeField] private CharacterSelect_CharacterButton selectionState;
+    public CharacterSelect_CharacterButton SelectionState { get { return selectionState; } }
     public Character_Profile characterProfile;
     public Image hoverImage_Whole;
     public Image hoverImage_Front;
@@ -32,24 +33,30 @@ public class CharacterSelect_Button : MonoBehaviour
         buttonList = new List<Selectable>();
         buttonSize = this.GetComponent<Transform>().localPosition;
     }
-    public void SetNavTransforms() 
+    public void SetNavTransforms()
     {
-        for(int i = 0; i < 4; i++) 
+        Navigation newNav = new Navigation();
+        newNav.mode = Navigation.Mode.Explicit;
+        for (int i = 0; i < 4; i++) 
         {
             Selectable newSelectableButton = null;
             switch (i) 
             {
                 case 0:
                     newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    newNav.selectOnUp = newSelectableButton;
                     break;
                 case 1:
                     newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    newNav.selectOnRight = newSelectableButton;
                     break;
                 case 2:
                     newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    newNav.selectOnDown = newSelectableButton;
                     break;
                 case 3:
                     newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    newNav.selectOnLeft = newSelectableButton;
                     break;
             }
             if (newSelectableButton != null)
@@ -62,6 +69,7 @@ public class CharacterSelect_Button : MonoBehaviour
                 buttonList.Add(null);
             }
         }
+        selectionState.navigation = newNav;
     }
     /*public void GetLeftCursor(Transform Cursor) 
     {
