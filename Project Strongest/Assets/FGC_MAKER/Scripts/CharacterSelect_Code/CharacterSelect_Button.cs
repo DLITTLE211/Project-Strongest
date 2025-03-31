@@ -11,8 +11,8 @@ public class CharacterSelect_Button : MonoBehaviour
 {
     [SerializeField] private CharacterSelect_CharacterButton selectionState;
     public Character_Profile characterProfile;
-    public Image hoverImage;
-    [SerializeField] private Transform leftCursor, rightCursor;
+    public Image hoverImage_Whole;
+    public Image hoverImage_Front;
     public enum hoverState {none,left,right,both }
     public hoverState _hoverState;
     public Vector3 buttonSize;
@@ -20,6 +20,8 @@ public class CharacterSelect_Button : MonoBehaviour
     public float heightFloatTop;
     public float heightFloatBottom;
     bool leftHover,rightHover;
+    public List<Selectable> buttonList;
+    public List<Vector3> buttonListDirections;
     public void Start()
     {
         Messenger.AddListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);
@@ -27,22 +29,54 @@ public class CharacterSelect_Button : MonoBehaviour
 
     public void SetPosition() 
     {
+        buttonList = new List<Selectable>();
         buttonSize = this.GetComponent<Transform>().localPosition;
     }
-    public void GetLeftCursor(Transform Cursor) 
+    public void SetNavTransforms() 
+    {
+        for(int i = 0; i < 4; i++) 
+        {
+            Selectable newSelectableButton = null;
+            switch (i) 
+            {
+                case 0:
+                    newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    break;
+                case 1:
+                    newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    break;
+                case 2:
+                    newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    break;
+                case 3:
+                    newSelectableButton = selectionState.FindSelectable(buttonListDirections[i]);
+                    break;
+            }
+            if (newSelectableButton != null)
+            {
+                Debug.Log(newSelectableButton.name);
+                buttonList.Add(newSelectableButton);
+            }
+            else 
+            {
+                buttonList.Add(null);
+            }
+        }
+    }
+    /*public void GetLeftCursor(Transform Cursor) 
     {
         leftCursor = Cursor;
     }
     public void GetRightCursor(Transform Cursor)
     {
         rightCursor = Cursor;
-    }
+    }*/
     private void Update()
     {
-        CheckCursorPos();
-        SetHoverColor();
+        //CheckCursorPos();
+        
     }
-    void CheckCursorPos() 
+   /* void CheckCursorPos() 
     { 
         if (leftCursor != null && leftCursor.gameObject.activeInHierarchy)
         {
@@ -70,7 +104,7 @@ public class CharacterSelect_Button : MonoBehaviour
                 UnselectButton(rightCursor.GetComponent<CharacterSelect_Cursor>());
             }
         }
-    }
+    }*/
     void SetHoverColor() 
     {
         if (!leftHover && !rightHover)
@@ -80,62 +114,74 @@ public class CharacterSelect_Button : MonoBehaviour
         switch (_hoverState) 
         {
             case hoverState.both:
-                hoverImage.color = Color.white;
+                hoverImage_Whole.color = Color.white;
+                hoverImage_Front.color = Color.white;
                 break;
             case hoverState.left:
-                hoverImage.color = Color.red;
+                hoverImage_Whole.color = Color.red;
+                hoverImage_Front.color = Color.red;
                 break;
             case hoverState.right:
-                hoverImage.color = Color.blue;
+                hoverImage_Whole.color = Color.blue;
+                hoverImage_Front.color = Color.blue;
                 break;
             case hoverState.none:
-                hoverImage.color = Color.black;
+                hoverImage_Whole.color = Color.black;
+                hoverImage_Front.color = Color.black;
                 break;
         }
     }
     public void HighlightSelection(CharacterSelect_Cursor cursor)
     {
-        if (leftHover && rightHover)
+        if (cursor == null)
         {
-            _hoverState = hoverState.both;
-            if (hoverImage.color != Color.white)
-            {
-                if (!cursor.cursorPage.characterName.text.Contains("Selected"))
-                {
-                    Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
-                }
-            }
+            _hoverState = hoverState.none;
         }
         else
         {
-            if (cursor.ID == 0)
+            if (leftHover && rightHover)
             {
-                _hoverState = hoverState.left;
-                if (hoverImage.color != Color.red)
+                _hoverState = hoverState.both;
+                /*if (hoverImage_Whole.color != Color.white)
                 {
                     if (!cursor.cursorPage.characterName.text.Contains("Selected"))
                     {
-                        Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
+                        //Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
                     }
-                }
-
+                }*/
             }
-            else if (cursor.ID == 1)
+            else
             {
-                _hoverState = hoverState.right;
-                if (hoverImage.color != Color.blue)
+                if (cursor.ID == 0)
                 {
-                    if (!cursor.cursorPage.characterName.text.Contains("Selected"))
+                    _hoverState = hoverState.left;
+                    /*if (hoverImage_Whole.color != Color.red)
                     {
-                        Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
-                    }
+                        if (!cursor.cursorPage.characterName.text.Contains("Selected"))
+                        {
+                           // Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
+                        }
+                    }*/
+
+                }
+                else if (cursor.ID == 1)
+                {
+                    _hoverState = hoverState.right;
+                    /*if (hoverImage_Whole.color != Color.blue)
+                    {
+                        if (!cursor.cursorPage.characterName.text.Contains("Selected"))
+                        {
+                           // Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
+                        }
+                    }*/
                 }
             }
         }
+        SetHoverColor();
     }
     public void UnselectButton(CharacterSelect_Cursor cursor)
     {
-        if (hoverImage.color != Color.black)
+        if (hoverImage_Whole.color != Color.black)
         {
             if (cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage)
             {
@@ -145,12 +191,12 @@ public class CharacterSelect_Button : MonoBehaviour
     }
     public void SendCharacterSelected(CharacterSelect_Cursor cursor) 
     {
-        if (CheckCursorOverlap(cursor.gameObject.transform) && cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage) 
+       /* if (CheckCursorOverlap(cursor.gameObject.transform) && cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage) 
         {
             Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, characterProfile, cursor);
-        }
+        }*/
     }
-    bool CheckCursorOverlap(Transform cursor) 
+   /* bool CheckCursorOverlap(Transform cursor) 
     {
         float cursorXPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.x;
         float cursorYPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.y;
@@ -163,7 +209,7 @@ public class CharacterSelect_Button : MonoBehaviour
         {
             return false;
         }
-    }
+    }*/
     public void OnApplicationQuit()
     {
         Messenger.RemoveListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);

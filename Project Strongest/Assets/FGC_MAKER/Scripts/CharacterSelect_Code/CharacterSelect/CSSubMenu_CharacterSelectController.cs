@@ -29,7 +29,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     protected override void ActivateSubMenu()
     {
         standardButtonSize = new Vector3(0.7f, 0.7f, 0.7f);
-        largeButtonSize = new Vector3(1f, 1f, 1f);
+        largeButtonSize = new Vector3(0.85f, 0.85f, 0.85f);
         characterSelectHolder.SetActive(true);
         AddCharacterSelectButtons();
     }
@@ -88,7 +88,12 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             sizingSequence.Append(activeCharacterSelectButtons[i].transform.DOScale(standardButtonSize, 0.05f));
             sizingSequence.Play();
             activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
+            activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().HighlightSelection(null);
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME*1.15f);
+        }
+        for(int i = 0; i < activeCharacterSelectButtons.Count; i++) 
+        {
+            activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetNavTransforms();
         }
         _topHeaderText.DOFade(1f, 0.15f);
         _bottomHeaderText.DOFade(1f, 0.15f).OnComplete(() =>
@@ -96,6 +101,16 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             SetHeaderText(_topHeaderText, "Choose Your");
             SetHeaderText(_bottomHeaderText, "Character");
         });
+        for (int i = 0; i < _playerCursors.Count; i++)
+        {
+            int buttonStartIndex = ((activeCharacterSelectButtons.Count / 2) + _playerCursors[i].ID) - 1;
+            CharacterSelect_Button currentButton = activeCharacterSelectButtons[buttonStartIndex].GetComponent<CharacterSelect_Button>();
+            if (_playerCursors[i].isConnected)
+            {
+                _playerCursors[i].SetHighlightedButton(currentButton);
+                currentButton.HighlightSelection(_playerCursors[i]);
+            }
+        }
     }
     public void SetPlayerControllers()
     {
@@ -105,7 +120,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
         }
         else
         {
-            for(int i = 0; i < _playerCursors.Count; i++) 
+            for(int i = 0; i < ReInput.controllers.GetJoystickNames().Length; i++) 
             {
                 CharacterSelect_Cursor curCursor = _playerCursors[i];
                 if (curCursor.curPlayer == null) 
@@ -119,35 +134,6 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
                     curCursor.cursorPage.ClearInfo();
                 }
             }
-            /*for (int i = 0; i < _characterSelect.players.UsedID.Item1.Count; i++)
-            {
-                if (i == 0)
-                {
-                    if (_player1_Cursor.curPlayer == null)
-                    {
-                        SetCharacterSelectCursorState(_player1_Cursor, 0);
-                    }
-                    else
-                    {
-                        _player1_Cursor.UnlockCharacterChoice();
-                        _player1_Cursor.isConnected = true;
-                        _player1_PlayerPage.ClearInfo();
-                    }
-                }
-                else if (i == 1)
-                {
-                    if (_player2_Cursor.curPlayer == null)
-                    {
-                        SetCharacterSelectCursorState(_player2_Cursor, i);
-                    }
-                    else
-                    {
-                        _player2_Cursor.UnlockCharacterChoice();
-                        _player2_Cursor.isConnected = true;
-                        _player2_PlayerPage.ClearInfo();
-                    }
-                }
-            }*/
         }
     }
     void SetCharacterSelectCursorState(CharacterSelect_Cursor player, int ID)

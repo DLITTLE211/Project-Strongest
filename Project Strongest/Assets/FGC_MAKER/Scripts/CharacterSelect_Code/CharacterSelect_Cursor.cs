@@ -19,7 +19,7 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public int ChosenPlayerSide;
     [SerializeField] public float xVal, yVal;
     [SerializeField, Range(0f, 1f)] public float xYield, yYield;
-
+    [SerializeField] private CharacterSelect_Button highlightedButton;
     public bool canChooseStage;
     public bool colorChosen;
     public void LockinCharacterChoice(Character_Profile chosenProfile)
@@ -32,6 +32,10 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public void SetColorLockState(bool state) 
     {
         colorChosen = state;
+    }
+    public void SetHighlightedButton(CharacterSelect_Button _newButton) 
+    {
+        highlightedButton = _newButton;
     }
     public void UnlockCharacterChoice()
     {

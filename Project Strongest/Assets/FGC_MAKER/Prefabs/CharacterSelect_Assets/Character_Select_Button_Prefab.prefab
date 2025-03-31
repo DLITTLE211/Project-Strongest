@@ -418,11 +418,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionState: {fileID: 1133922391732543638}
   characterProfile: {fileID: 0}
-  hoverImage: {fileID: 723604421338464387}
-  leftCursor: {fileID: 0}
-  rightCursor: {fileID: 0}
+  hoverImage_Whole: {fileID: 723604421338464387}
+  hoverImage_Front: {fileID: 2472378717321477445}
   _hoverState: 0
   buttonSize: {x: 0, y: 0, z: 0}
   widthFloat: 60
   heightFloatTop: 110
   heightFloatBottom: 10
+  buttonList: []
+  buttonListDirections:
+  - {x: 0, y: 1, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: -1, y: 0, z: 0}

@@ -130,8 +130,7 @@ public class Menu_Manager : MonoBehaviour
         _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
         _mainMenuPlayerID = ID;
         _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
-        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],
-            $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],$"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
         SetActiveButton();
     }
     public void SetButtonHolderImages()
