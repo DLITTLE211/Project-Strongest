@@ -21,15 +21,17 @@ public class CharacterSelect_Button : MonoBehaviour
     public float heightFloatTop;
     public float heightFloatBottom;
     bool leftHover,rightHover;
+    [SerializeField] private List<CharacterSelect_Cursor> playerCursors;
     public List<Selectable> buttonList;
     public List<Vector3> buttonListDirections;
     public void Start()
     {
-        Messenger.AddListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);
+       // Messenger.AddListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);
     }
 
     public void SetPosition() 
     {
+        playerCursors = new List<CharacterSelect_Cursor>();
         buttonList = new List<Selectable>();
         buttonSize = this.GetComponent<Transform>().localPosition;
     }
@@ -71,72 +73,54 @@ public class CharacterSelect_Button : MonoBehaviour
         }
         selectionState.navigation = newNav;
     }
-    /*public void GetLeftCursor(Transform Cursor) 
+    void SetHoverColor(int ID) 
     {
-        leftCursor = Cursor;
-    }
-    public void GetRightCursor(Transform Cursor)
-    {
-        rightCursor = Cursor;
-    }*/
-    private void Update()
-    {
-        //CheckCursorPos();
-        
-    }
-   /* void CheckCursorPos() 
-    { 
-        if (leftCursor != null && leftCursor.gameObject.activeInHierarchy)
+        if (playerCursors.Count == 0 || ID== -1)
         {
-            if (CheckCursorOverlap(leftCursor))
+            hoverImage_Whole.color = Color.black;
+            hoverImage_Front.color = Color.black;
+            return;
+        }
+        if (playerCursors.Count == 2) 
+        {
+            hoverImage_Whole.color = Color.white;
+            hoverImage_Front.color = Color.white;
+            return;
+        }
+        else 
+        {
+            if(ID == 0) 
             {
-                leftHover = true;
-                HighlightSelection(leftCursor.GetComponent<CharacterSelect_Cursor>());
+                hoverImage_Whole.color = Color.red;
+                hoverImage_Front.color = Color.red;
             }
-            else
+            else 
             {
-                leftHover = false;
-                UnselectButton(leftCursor.GetComponent<CharacterSelect_Cursor>());
+                hoverImage_Whole.color = Color.blue;
+                hoverImage_Front.color = Color.blue;
             }
         }
-        if (rightCursor != null && rightCursor.gameObject.activeInHierarchy)
-        {
-            if (CheckCursorOverlap(rightCursor))
-            {
-                rightHover = true;
-                HighlightSelection(rightCursor.GetComponent<CharacterSelect_Cursor>());
-            }
-            else
-            {
-                rightHover = false;
-                UnselectButton(rightCursor.GetComponent<CharacterSelect_Cursor>());
-            }
-        }
-    }*/
-    void SetHoverColor() 
+    }
+    public void UnhighlightSelection(CharacterSelect_Cursor cursor) 
     {
-        if (!leftHover && !rightHover)
+        if (cursor == null)
         {
             _hoverState = hoverState.none;
         }
-        switch (_hoverState) 
+        else
         {
-            case hoverState.both:
-                hoverImage_Whole.color = Color.white;
-                hoverImage_Front.color = Color.white;
-                break;
-            case hoverState.left:
-                hoverImage_Whole.color = Color.red;
-                hoverImage_Front.color = Color.red;
-                break;
-            case hoverState.right:
-                hoverImage_Whole.color = Color.blue;
-                hoverImage_Front.color = Color.blue;
-                break;
-            case hoverState.none:
-                hoverImage_Whole.color = Color.black;
-                hoverImage_Front.color = Color.black;
-                break;
+            if (playerCursors.Contains(cursor))
+            {
+                playerCursors.Remove(cursor);
+                if (playerCursors.Count == 0)
+                {
+                    SetHoverColor(-1);
+                }
+                else
+                {
+                    SetHoverColor(playerCursors[0].ID);
+                }
+            }
         }
     }
     public void HighlightSelection(CharacterSelect_Cursor cursor)
@@ -147,79 +131,11 @@ public class CharacterSelect_Button : MonoBehaviour
         }
         else
         {
-            if (leftHover && rightHover)
+            if (!playerCursors.Contains(cursor)) 
             {
-                _hoverState = hoverState.both;
-                /*if (hoverImage_Whole.color != Color.white)
-                {
-                    if (!cursor.cursorPage.characterName.text.Contains("Selected"))
-                    {
-                        //Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
-                    }
-                }*/
-            }
-            else
-            {
-                if (cursor.ID == 0)
-                {
-                    _hoverState = hoverState.left;
-                    /*if (hoverImage_Whole.color != Color.red)
-                    {
-                        if (!cursor.cursorPage.characterName.text.Contains("Selected"))
-                        {
-                           // Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
-                        }
-                    }*/
-
-                }
-                else if (cursor.ID == 1)
-                {
-                    _hoverState = hoverState.right;
-                    /*if (hoverImage_Whole.color != Color.blue)
-                    {
-                        if (!cursor.cursorPage.characterName.text.Contains("Selected"))
-                        {
-                           // Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, characterProfile, cursor);
-                        }
-                    }*/
-                }
+                playerCursors.Insert(cursor.ID, cursor);
+                SetHoverColor(cursor.ID);
             }
         }
-        SetHoverColor();
-    }
-    public void UnselectButton(CharacterSelect_Cursor cursor)
-    {
-        if (hoverImage_Whole.color != Color.black)
-        {
-            if (cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage)
-            {
-                Messenger.Broadcast<int>(Events.ClearCharacterInfo, cursor.ID);
-            }
-        }
-    }
-    public void SendCharacterSelected(CharacterSelect_Cursor cursor) 
-    {
-       /* if (CheckCursorOverlap(cursor.gameObject.transform) && cursor.cursorPage._characterIconImage.sprite == characterProfile.CharacterProfileImage) 
-        {
-            Messenger.Broadcast<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, characterProfile, cursor);
-        }*/
-    }
-   /* bool CheckCursorOverlap(Transform cursor) 
-    {
-        float cursorXPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.x;
-        float cursorYPos = cursor.GetComponent<CircleCollider2D>().transform.localPosition.y;
-
-        if (cursorXPos <= buttonSize.x + widthFloat && cursorXPos > buttonSize.x - widthFloat && cursorYPos < buttonSize.y + heightFloatTop && cursorYPos > buttonSize.y - heightFloatBottom)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
-    }*/
-    public void OnApplicationQuit()
-    {
-        Messenger.RemoveListener<CharacterSelect_Cursor>(Events.TryApplyCharacter, SendCharacterSelected);
     }
 }

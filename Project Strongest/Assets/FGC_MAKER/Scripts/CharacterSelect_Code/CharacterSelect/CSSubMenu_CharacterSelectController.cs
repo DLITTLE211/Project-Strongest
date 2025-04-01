@@ -80,20 +80,25 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     }
     IEnumerator CascadeScaleSelectButtons()
     {
+        _topHeaderText.text = "";
+        _bottomHeaderText.text = "";
         for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
         {
             Vector3 selectButtonFirstSize = largeButtonSize;
             Sequence sizingSequence = DOTween.Sequence();
-            sizingSequence.Append(activeCharacterSelectButtons[i].transform.DOScale(selectButtonFirstSize, 0.1f));
-            sizingSequence.Append(activeCharacterSelectButtons[i].transform.DOScale(standardButtonSize, 0.05f));
+            Transform buttonTransform = activeCharacterSelectButtons[i].transform;
+            sizingSequence.Append(buttonTransform.DOScale(selectButtonFirstSize, 0.1f));
+            sizingSequence.Append(buttonTransform.DOScale(standardButtonSize, 0.05f));
             sizingSequence.Play();
-            activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetPosition();
-            activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().HighlightSelection(null);
+            CharacterSelect_Button csButton = activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>();
+            csButton.SetPosition();
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME*1.15f);
         }
-        for(int i = 0; i < activeCharacterSelectButtons.Count; i++) 
+        for(int i = 0; i < activeCharacterSelectButtons.Count; i++)
         {
-            activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>().SetNavTransforms();
+            CharacterSelect_Button csButton = activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>();
+            csButton.SetNavTransforms();
+            csButton.HighlightSelection(null);
         }
         _topHeaderText.DOFade(1f, 0.15f);
         _bottomHeaderText.DOFade(1f, 0.15f).OnComplete(() =>
@@ -107,6 +112,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             CharacterSelect_Button currentButton = activeCharacterSelectButtons[buttonStartIndex].GetComponent<CharacterSelect_Button>();
             if (_playerCursors[i].isConnected)
             {
+                _playerCursors[i].AllowInitialChange();
                 _playerCursors[i].SetHighlightedButton(currentButton);
                 currentButton.HighlightSelection(_playerCursors[i]);
             }
