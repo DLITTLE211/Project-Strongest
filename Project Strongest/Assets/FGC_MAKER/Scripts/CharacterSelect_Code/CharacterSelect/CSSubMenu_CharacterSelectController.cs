@@ -53,6 +53,11 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     }
     public void AddCharacterSelectButtons()
     {
+        if(characterSelectHolder.transform.childCount > 0)
+        {
+            EnableControllerButtonNavigation(); 
+            return; 
+        }
         for (int i = 0; i < _activeProfiles.Count; i++)
         {
             GameObject selectButton = Instantiate(characterSelectButtonPrefab, characterSelectHolder.transform);
@@ -107,6 +112,10 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             SetHeaderText(_topHeaderText, "Choose Your");
             SetHeaderText(_bottomHeaderText, "Character");
         });
+        EnableControllerButtonNavigation();
+    }
+    public void EnableControllerButtonNavigation() 
+    {
         for (int i = 0; i < _playerCursors.Count; i++)
         {
             int buttonStartIndex = ((activeCharacterSelectButtons.Count / 2) + _playerCursors[i].ID) - 1;
