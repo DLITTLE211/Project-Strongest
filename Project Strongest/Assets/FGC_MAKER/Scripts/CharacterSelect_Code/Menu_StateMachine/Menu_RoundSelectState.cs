@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 public class Menu_RoundSelectState : Menu_BaseState
 {
+    [SerializeField] private CSSubMenu_StageSelectController _stageSelectController;
+
     [SerializeField] private CharacterSelect_StageSelect _stageSelect;
     [SerializeField] private CharacterSelect_Setup _characterSelect;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
     private bool allowUpdate;
     public override void OnEnter()
     {
-        _stageSelect.ActivateRoundSelector(_characterSelect.currentSet.gameMode);
+        _stageSelectController.ActivateRoundSelectObject();
+        //_stageSelect.ActivateRoundSelector(_characterSelect.currentSet.gameMode);
         StartCoroutine(DelayUpdateRoutine(1f));
     }
     public override void OnExit()
@@ -37,7 +40,7 @@ public class Menu_RoundSelectState : Menu_BaseState
     {
         if (_currentCursor.canChooseStage)
         {
-            _characterSelect._menuStateMachine.CallStageSelectState();
+           // _characterSelect._menuStateMachine.CallStageSelectState();
         }
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor)

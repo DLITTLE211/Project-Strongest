@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Rewired;
+using System;
 using DG.Tweening;
 
 public class CharacterSelect_Cursor : MonoBehaviour
@@ -24,13 +25,13 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public bool colorChosen;
     public bool allowChange;
     IEnumerator ChangeCharacterRoutine;
-    public void LockinCharacterChoice(Character_Profile chosenProfile)
+    /*public void LockinCharacterChoice(Character_Profile chosenProfile)
     {
         profile = chosenProfile;
         
         cursorPage.LockInfo(profile);
         cursorObject.transform.DOScale(0.5f, 0.15f);
-    }
+    }*/
     public void SetColorLockState(bool state) 
     {
         colorChosen = state;
@@ -53,91 +54,46 @@ public class CharacterSelect_Cursor : MonoBehaviour
         cursorPage.characterName.text = "Choose Your Character";
         cursorObject.transform.DOScale(0.65f, 0.15f);
     }
-    public void FindSelectableUp() 
+    public void ApplyCharacterData() 
     {
-        if (allowChange)
+        profile = highlightedButton.characterProfile;
+        cursorPage.UpdateInfo(profile);
+    }
+    public void FindSelectable(int direction,bool positive) 
+    {
+        Button tryNewButton = null;
+        try
         {
-            if (highlightedButton.SelectionState.navigation.selectOnUp == null) { return; }
-            Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnUp.gameObject.GetComponent<Button>();
-            if (tryNewButton != null)
+            switch (direction)
             {
-                CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
-                if (regCharacterButton != null)
-                {
-                    ChangeHighlightedButton(regCharacterButton);
-                    SetDelayRoutine();
-                }
-                else
-                {
-                    //TODO
-                }
+                case 0:
+                    tryNewButton = positive == true ?
+                        highlightedButton.SelectionState.navigation.selectOnRight.gameObject.GetComponent<Button>() :
+                        highlightedButton.SelectionState.navigation.selectOnLeft.gameObject.GetComponent<Button>();
+                    break;
+                case 1:
+                    tryNewButton = positive == true ?
+                        highlightedButton.SelectionState.navigation.selectOnUp.gameObject.GetComponent<Button>() :
+                        highlightedButton.SelectionState.navigation.selectOnDown.gameObject.GetComponent<Button>();
+                    break;
+            }
+        }
+        catch (NullReferenceException){ return; }
+        if (tryNewButton != null)
+        {
+            CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
+            if (regCharacterButton != null)
+            {
+                ChangeHighlightedButton(regCharacterButton);
+                SetDelayRoutine();
+            }
+            else
+            {
+                //TODO
             }
         }
     }
-    public void FindSelectableDown()
-    {
-        if (allowChange)
-        {
-            if (highlightedButton.SelectionState.navigation.selectOnDown == null) { return; }
-
-            Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnDown.gameObject.GetComponent<Button>();
-            if (tryNewButton != null)
-            {
-                CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
-                if (regCharacterButton != null)
-                {
-                    ChangeHighlightedButton(regCharacterButton);
-                    SetDelayRoutine();
-                }
-                else
-                {
-                    //TODO
-                }
-            }
-        }
-    }
-    public void FindSelectableRight()
-    {
-        if (allowChange)
-        {
-            if (highlightedButton.SelectionState.navigation.selectOnRight == null) { return; }
-            Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnRight.gameObject.GetComponent<Button>();
-            if (tryNewButton != null)
-            {
-                CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
-                if (regCharacterButton != null)
-                {
-                    ChangeHighlightedButton(regCharacterButton);
-                    SetDelayRoutine();
-                }
-                else
-                {
-                    //TODO
-                }
-            }
-        }
-    }
-    public void FindSelectableLeft()
-    {
-        if (allowChange)
-        {
-            if (highlightedButton.SelectionState.navigation.selectOnLeft == null) { return; }
-            Button tryNewButton = highlightedButton.SelectionState.navigation.selectOnLeft.gameObject.GetComponent<Button>();
-            if (tryNewButton != null)
-            {
-                CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
-                if (regCharacterButton != null)
-                {
-                    ChangeHighlightedButton(regCharacterButton);
-                    SetDelayRoutine();
-                }
-                else
-                {
-                    //TODO
-                }
-            }
-        }
-    }
+    
     public void SetDelayRoutine()
     {
         if (ChangeCharacterRoutine != null)

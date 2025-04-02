@@ -15,6 +15,7 @@ public class CharacterSelect_Page : MonoBehaviour
 
     public AmplifyController_Object characterAmplify;
     public CharacterSelect_ColorPicker colorPicker;
+
     public TMP_Text characterName;
     public Image _characterIconImage;
     public bool lockedIn;
@@ -23,30 +24,32 @@ public class CharacterSelect_Page : MonoBehaviour
     [Range(0, 4)] public int colorSelectIndex;
     public bool amplifySelectCooldown;
     IEnumerator delayResetRoutine;
+    [SerializeField] private Transform chosenCharacterImageObject;
+    [SerializeField] private float startXPos;
+    [SerializeField] private float endXPos;
+    private void Start()
+    {
+        endXPos = chosenCharacterImageObject.transform.localPosition.x;
+    }
     public void UpdateInfo(Character_Profile profile)
     {
-        _characterIconImage.color = Color.white;
-        _characterIconImage.preserveAspect = true;
+        Vector3 startPos = new Vector3(chosenCharacterImageObject.transform.localPosition.x+ startXPos,0,0);
+        chosenCharacterImageObject.transform.localPosition = startPos;
         _characterIconImage.sprite = profile.CharacterProfileImage;
-        characterName.text = profile.CharacterName;
-    }
-    public void LockInfo(Character_Profile profile)
-    {
-        lockedIn = true; 
+        string nameMessage = $"{profile.CharacterName.ToUpper()}";
+        characterName.text = SpriteToTextColorUtility.AppendSpriteName(nameMessage,characterName.color);
+        chosenCharacterImageObject.transform.DOLocalMoveX(endXPos, 0.65f);
         chosenCharacter = profile;
-        _characterIconImage.sprite = profile.CharacterProfileImage;
-        string characterNameString = $"{profile.CharacterName}";
-        characterName.text = SpriteToTextColorUtility.AppendSpriteName(characterNameString.ToUpper(), characterName.color);
-        chosenAmplifier = characterAmplify.ReturnChosenAmplifier();
+        lockedIn = true;
     }
     public void ClearInfo()
     {
         lockedIn = false;
         _characterIconImage.sprite = null;
         characterName.text = "";
-        chosenAmplifier = null;
-        chosenCharacter = null;
         colorSelectIndex = 0;
+        Vector3 startPos = new Vector3(chosenCharacterImageObject.transform.localPosition.x + startXPos, 0, 0);
+        chosenCharacterImageObject.transform.localPosition = startPos;
     }
     public void ResetNamePlatePosition()
     {
@@ -57,7 +60,10 @@ public class CharacterSelect_Page : MonoBehaviour
     }
     public void ActivateColorPanelPosition()
     {
-        _colorPickerTransform.DOLocalMove(_endColorPosition, 1.15f).SetEase(Ease.OutBack);
+        _colorPickerTransform.DOLocalMove(_endColorPosition, 1.15f).SetEase(Ease.OutBack).OnComplete(() => 
+        {
+            SetDefaultText();
+        });
     }
     public void ActivateNamePlatePosition()
     {

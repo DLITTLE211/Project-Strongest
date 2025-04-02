@@ -9,11 +9,11 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
 {
     [Header("Stage Select Info")]
     [SerializeField] private List<Stage_StageAsset> _activeStages;
-    [SerializeField] private Stage_StageAsset _chosenStage;
     [SerializeField] private List<StageController_Object> _stageImageObject;
     [SerializeField] private RectTransform _stageImagerHolder;    
     [SerializeField] private List<Vector3> stageImageLocations;
     [SerializeField] private int centerIndex;
+    public Stage_StageAsset _chosenStage;
 
     [Space(15)]
     [Header("Round Select Info")]
@@ -55,24 +55,10 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
     protected override void ActivateSubMenu()
     {
         _mode = _characterSelect.currentSet.gameMode;
-        switch (_mode)
-        {
-            case GameMode.Training:
-                roundCountSelected = true;
-                break;
-            default:
-                roundCountSelected = false;
-                roundCount = 2;
-                SetRoundCountText();
-                break;
-        }
-
+        stageSelected = false;
+        roundCountSelected = false;
         _stageImagerHolder.DOLocalMoveX(0, 1.45f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            for (int i = 0; i < _stageImageObject.Count; i++)
-            {
-                _stageImageObject[i].SetToggleState(true);
-            }
         });
         _topHeaderText.DOFade(1f, 0.15f);
         _bottomHeaderText.DOFade(1f, 0.15f).OnComplete(() =>
@@ -80,6 +66,11 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
             SetHeaderText(_topHeaderText, "Choose Your");
             SetHeaderText(_bottomHeaderText, "Stage");
         });
+    }
+    public void SetDefaultRoundCount() 
+    {
+        roundCount = 2;
+        SetRoundCountText();
     }
     private void SetStartingStageData()
     {
@@ -94,10 +85,6 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
     {
         stageSelected = false;
         roundCountSelected = false;
-        for (int i = 0; i < stageImageLocations.Count; i++)
-        {
-            _stageImageObject[i].SetToggleState(false);
-        }
         _stageImagerHolder.DOLocalMoveX(5000, 1.45f);
         _topHeaderText.DOFade(0f, 0.15f);
         _bottomHeaderText.DOFade(0f, 0.15f);
@@ -105,7 +92,7 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
 
     public void ActivateRoundSelectObject() 
     {
-        _roundSelectObject.Activate();
+        _roundSelectObject.Activate(SetDefaultRoundCount); 
     }
     public void DeactivateRoundSelectObject()
     {
@@ -114,83 +101,68 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            CycleMenuRight();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            CycleMenuLeft();
-        }
         if (allowBase)
         {
             base.OnUpdate();
         }
     }
-    public void ChooseCenterStage() 
-    {
-        
-    }
     #region Toggle Functions
     public void ToggleLeft()
     {
-        if (!stageSelected)
+        if (!roundCountSelected)
         {
-            CycleMenuLeft();
-        }
-        if (roundCountSelected)
-        {
-            DecreaseCount();
+            if (!stageSelected)
+            {
+                CycleMenuLeft();
+                return;
+            }
+            IncreaseCount();
         }
     }
     public void ToggleRight()
     {
-        if (stageSelected)
+        if (!roundCountSelected)
         {
-            CycleMenuRight();
-        }
-        if (roundCountSelected)
-        {
-            IncreaseCount();
+            if (!stageSelected)
+            {
+                CycleMenuRight();
+                return;
+            }
+            DecreaseCount();
         }
     }
     #region Stage Cycle Functions
-    private void CycleMenuLeft() 
+    private void CycleMenuLeft()
     {
-        bool moved = false;
-        int locationIndex = 0; 
-        for (int i = 0; i < stageImageLocations.Count; i++) 
+        int locationIndex = 0;
+        for (int i = 0; i < stageImageLocations.Count; i++)
         {
             locationIndex = _stageImageObject[i].CurrentStageLocationIndex - 1;
             float speed = 0.85f;
             Vector3 newLoc = Vector3.zero;
-            if (locationIndex < 0) 
+            if (locationIndex < 0)
             {
                 locationIndex = stageImageLocations.Count - 1;
                 newLoc = stageImageLocations[locationIndex];
-                Vector3 newIndexPlus = new Vector3(stageImageLocations[locationIndex].x +700,0,0);
+                Vector3 newIndexPlus = new Vector3(stageImageLocations[locationIndex].x + 700, 0, 0);
                 _stageImageObject[i].MoveInstant(newIndexPlus, newLoc, locationIndex, speed);
                 continue;
             }
-             newLoc = stageImageLocations[locationIndex];
-            _stageImageObject[i].Move(newLoc, locationIndex, speed,out moved);
+            newLoc = stageImageLocations[locationIndex];
+            _stageImageObject[i].Move(newLoc, locationIndex, speed);
         }
-        if (moved)
+        if (centerIndex >= stageImageLocations.Count - 1)
         {
-            if (centerIndex >= stageImageLocations.Count-1)
-            {
-                centerIndex = 0;
-            }
-            else
-            {
-                centerIndex++;
-            }
+            centerIndex = 0;
+        }
+        else
+        {
+            centerIndex++;
         }
         _chosenStage = _stageImageObject[centerIndex].ReturnCurrentStage();
     }
     private void CycleMenuRight()
     {
-        bool moved = false;
         float speed = 0.85f;
         int locationIndex = 0;
         for (int i = 0; i < stageImageLocations.Count; i++)
@@ -199,32 +171,32 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
             Vector3 newLoc = Vector3.zero;
             if (locationIndex >= stageImageLocations.Count)
             {
-                locationIndex = 0; 
+                locationIndex = 0;
                 newLoc = stageImageLocations[locationIndex];
                 Vector3 newIndexPlus = new Vector3(stageImageLocations[locationIndex].x - 700, 0, 0);
-                _stageImageObject[i].MoveInstant(newIndexPlus, newLoc, locationIndex,speed);
+                _stageImageObject[i].MoveInstant(newIndexPlus, newLoc, locationIndex, speed);
                 continue;
             }
-             newLoc = stageImageLocations[locationIndex];
-            _stageImageObject[i].Move(newLoc, locationIndex, speed, out moved);
+            newLoc = stageImageLocations[locationIndex];
+            _stageImageObject[i].Move(newLoc, locationIndex, speed);
         }
-        if (moved)
+        if (centerIndex <= 0)
         {
-            if (centerIndex <= 0)
-            {
-                centerIndex = stageImageLocations.Count - 1;
-            }
-            else
-            {
-                centerIndex--;
-            }
+            centerIndex = stageImageLocations.Count - 1;
         }
-
+        else
+        {
+            centerIndex--;
+        }
         _chosenStage = _stageImageObject[centerIndex].ReturnCurrentStage();
     }
     #endregion
 
     #region Round Count Functions
+    public Round_Info GetRoundInfomation()
+    {
+        return new Round_Info(roundCount);
+    }
     private void IncreaseCount() 
     {
         if (roundCount >= 5)
@@ -252,7 +224,7 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
     private void SetRoundCountText() 
     {
         string roundText = roundCount == 1 ? "Round" : "Rounds";
-        string fullMessage = $"Best Of {roundCount} {roundText}";
+        string fullMessage = $"Best Of {roundCount}  {roundText}";
         _roundSelectObject.SetRoundText(fullMessage);
     }
     #endregion

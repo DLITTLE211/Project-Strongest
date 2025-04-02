@@ -10,11 +10,13 @@ public class CharacterSelect_ColorPicker : MonoBehaviour
     public void UpdateColorChoice(int colorChoice) 
     {
         lastInt = colorChoice;
-        _colorText.text = $"Color {lastInt + 1}";
+        string message = $"Color {lastInt + 1}";
+        _colorText.text = SpriteToTextColorUtility.AppendSpriteName(message.ToUpper(), _colorText.color);
     }
     public void LockInColorChoice()
     {
-        _colorText.text = $"Color {lastInt + 1} Selected";
+        string message = $"Color {lastInt + 1} Selected";
+        _colorText.text = SpriteToTextColorUtility.AppendSpriteName(message.ToUpper(), _colorText.color);
     }
     public void ClearText()
     {

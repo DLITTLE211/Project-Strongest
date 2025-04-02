@@ -29,13 +29,6 @@ public class Menu_CharacterSelectState : Menu_BaseState
     }
     public override void OnExit()
     {
-        for (int i = 0; i < _characterSelect._playerCursors.Count; i++)
-        {
-            CharacterSelect_Cursor cursor = _characterSelect._playerCursors[i];
-            cursor.cursorPage.ResetNamePlatePosition();
-
-        }
-        _characterSelectController.Deactivate();
     }
     public override void OnUpdate()
     {
@@ -47,11 +40,18 @@ public class Menu_CharacterSelectState : Menu_BaseState
     }
     public override void Select(CharacterSelect_Cursor _currentCursor) 
     {
-        Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _currentCursor);
+        _currentCursor.ApplyCharacterData();
+        _characterSelect.CheckIfBothPlayersLockedIn(_currentCursor);
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor) 
     {
         _characterSelect._menuStateMachine.CallAmplifierSelectState();
+        for (int i = 0; i < _characterSelect._playerCursors.Count; i++)
+        {
+            CharacterSelect_Cursor cursor = _characterSelect._playerCursors[i];
+            cursor.cursorPage.ResetNamePlatePosition();
+        }
+        _characterSelectController.Deactivate();
     }
     IEnumerator DelayUpdateRoutine(float time)
     {
@@ -61,20 +61,20 @@ public class Menu_CharacterSelectState : Menu_BaseState
         yield return new WaitForSeconds(time);
         allowUpdate = true;
     }
-    public override void CycleLeft(CharacterSelect_Cursor _currentCursor) 
+    public override void CycleLeft(CharacterSelect_Cursor _currentCursor)
     {
-        _currentCursor.FindSelectableLeft();
+        _currentCursor.FindSelectable(0, false);
     }
-    public override void CycleRight(CharacterSelect_Cursor _currentCursor) 
+    public override void CycleRight(CharacterSelect_Cursor _currentCursor)
     {
-        _currentCursor.FindSelectableRight();
+        _currentCursor.FindSelectable(0, true);
     }
     public override void CycleUp(CharacterSelect_Cursor _currentCursor)
     {
-        _currentCursor.FindSelectableUp();
+        _currentCursor.FindSelectable(1, true);
     }
     public override void CycleDown(CharacterSelect_Cursor _currentCursor)
     {
-        _currentCursor.FindSelectableDown();
+        _currentCursor.FindSelectable(1, false);
     }
 }

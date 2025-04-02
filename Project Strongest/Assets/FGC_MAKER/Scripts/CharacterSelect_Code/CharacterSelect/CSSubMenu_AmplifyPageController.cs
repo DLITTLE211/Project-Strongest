@@ -8,6 +8,7 @@ using DG.Tweening;
 public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
 {
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
+    public List<Amplifiers> ActiveAmplifiers { get { return _activeAmplifiers; } }
     [SerializeField] private List<AmplifyController_Object> amplifierObjects;
     private void OnEnable()
     {

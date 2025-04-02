@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 public class CharacterSelect_LoadArena : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuCamera;
+    [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
+    [SerializeField] private CSSubMenu_StageSelectController _stageSelectController;
     [SerializeField] private CharacterSelect_Setup _characterSelectSetup;
     private bool _arenaLoaded;
     public static ChosenCharacter leftPlayerChosenProfile, rightPlayerChosenProfile;
@@ -28,9 +30,9 @@ public class CharacterSelect_LoadArena : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
             curPlayerData = _characterSelectSetup.players;
-            _roundInfo = _characterSelectSetup.GetRoundInfomation();
-            leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
-            rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();
+            _roundInfo = _stageSelectController.GetRoundInfomation();
+            leftPlayerChosenProfile = _characterSelectController.GetLeftPlayerProfile();
+            rightPlayerChosenProfile = _characterSelectController.GetRightPlayerProfile();
             chosenStage = _characterSelectSetup.GetChosenStage();
             Task[] tasks = new Task[]
             {

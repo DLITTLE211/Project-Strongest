@@ -10,6 +10,7 @@ using Rewired;
 public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
 {
     public List<CharacterSelect_Cursor> _playerCursors;
+    [SerializeField] private CSSubMenu_AmplifyPageController _AmplifyPageController;
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private List<Character_Profile> _activeProfiles;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
@@ -39,7 +40,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     }
     protected override void DeactivateSubMenu()
     {
-        characterSelectHolder.SetActive(false);
+        objectHolder.SetActive(false);
         _topHeaderText.DOFade(0f, 0.15f);
         _bottomHeaderText.DOFade(0f, 0.15f);
     }
@@ -155,5 +156,60 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
 
         }
         player.isConnected = true;
+    }
+    public ChosenCharacter GetLeftPlayerProfile()
+    {
+        CharacterSelect_Cursor curCursor = _playerCursors[0];
+        if (curCursor.cursorPage.chosenCharacter != null)
+        {
+            int colorIndex = curCursor.cursorPage.colorSelectIndex;
+            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(curCursor.cursorPage.chosenCharacter, curCursor.cursorPage.chosenAmplifier, curCursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
+
+            return leftPlayerCharacter;
+        }
+        return RandomizeChoice(_characterSelect.player1, curCursor);
+    }
+    public ChosenCharacter GetRightPlayerProfile()
+    {
+        CharacterSelect_Cursor curCursor = _playerCursors[1];
+        int colorIndex = curCursor.cursorPage.colorSelectIndex;
+        if (_playerCursors[0].cursorPage.chosenCharacter == curCursor.cursorPage.chosenCharacter)
+        {
+            colorIndex = curCursor.cursorPage.colorSelectIndex != _playerCursors[0].cursorPage.colorSelectIndex ? curCursor.cursorPage.colorSelectIndex : curCursor.cursorPage.colorSelectIndex + 1;
+            if (colorIndex > curCursor.cursorPage.chosenCharacter._characterSkins.ColorSets.Count - 1)
+            {
+                colorIndex = 0;
+            }
+        }
+        if (curCursor.cursorPage.chosenCharacter != null)
+        {
+            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(curCursor.cursorPage.chosenCharacter, curCursor.cursorPage.chosenAmplifier, curCursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
+            return rightPlayerCharacter;
+        }
+        return RandomizeChoice(_characterSelect.player2, curCursor);
+    }
+    public ChosenCharacter RandomizeChoice(ChooseSide_Object chosenSide, CharacterSelect_Cursor cursorObject)
+    {
+        int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);
+        int randomAmplifier = UnityEngine.Random.Range(0, _AmplifyPageController.ActiveAmplifiers.Count - 1);
+        int colorIndex = _playerCursors[1].cursorPage.colorSelectIndex;
+        if (_playerCursors[0].cursorPage.chosenCharacter == _activeProfiles[randomProfile])
+        {
+            colorIndex = cursorObject.cursorPage.colorSelectIndex != _playerCursors[0].cursorPage.colorSelectIndex ? cursorObject.cursorPage.colorSelectIndex : cursorObject.cursorPage.colorSelectIndex + 1;
+            if (colorIndex >= _activeProfiles[randomProfile]._characterSkins.ColorSets.Count - 1)
+            {
+                colorIndex = 0;
+            }
+        }
+        if (chosenSide.sideIterator == 1)
+        {
+            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _AmplifyPageController.ActiveAmplifiers[randomAmplifier], -1, colorIndex);
+            return _randomizedCharacter;
+        }
+        else
+        {
+            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _AmplifyPageController.ActiveAmplifiers[randomAmplifier], cursorObject.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
+            return _randomizedCharacter;
+        }
     }
 }

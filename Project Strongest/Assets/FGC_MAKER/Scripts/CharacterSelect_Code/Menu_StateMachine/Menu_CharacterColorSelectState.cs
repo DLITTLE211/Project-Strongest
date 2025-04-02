@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Menu_CharacterColorSelectState : Menu_BaseState
 {
+    [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
     [SerializeField] private CharacterSelect_Setup _characterSelect;
     [SerializeField] private CharacterSelect_Page _player1_PlayerPage, _player2_PlayerPage;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
@@ -15,12 +16,12 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
         allowColorUpdate = false;
         StartCoroutine(DelayColorUpdateRoutine(0.275f));
         StartCoroutine(DelayUpdateRoutine(0.45f));
-        _player1_Cursor.cursorPage.SetDefaultText();
-        _player2_Cursor.cursorPage.SetDefaultText();
+        _player1_Cursor.cursorPage.ActivateColorPanelPosition();
+        _player2_Cursor.cursorPage.ActivateColorPanelPosition();
     }
     public override void OnExit()
     {
-
+        _characterSelectController.Deactivate();
     }
     public override void OnUpdate()
     {
