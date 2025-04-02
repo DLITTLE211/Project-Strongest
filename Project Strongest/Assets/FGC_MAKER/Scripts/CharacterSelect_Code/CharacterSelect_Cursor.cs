@@ -59,26 +59,20 @@ public class CharacterSelect_Cursor : MonoBehaviour
         profile = highlightedButton.characterProfile;
         cursorPage.UpdateInfo(profile);
     }
-    public void FindSelectable(int direction,bool positive) 
+    public void FindSelectable(int direction, bool positive)
     {
         Button tryNewButton = null;
-        try
+        Selectable buttonInDirection = null;
+        switch (direction)
         {
-            switch (direction)
-            {
-                case 0:
-                    tryNewButton = positive == true ?
-                        highlightedButton.SelectionState.navigation.selectOnRight.gameObject.GetComponent<Button>() :
-                        highlightedButton.SelectionState.navigation.selectOnLeft.gameObject.GetComponent<Button>();
-                    break;
-                case 1:
-                    tryNewButton = positive == true ?
-                        highlightedButton.SelectionState.navigation.selectOnUp.gameObject.GetComponent<Button>() :
-                        highlightedButton.SelectionState.navigation.selectOnDown.gameObject.GetComponent<Button>();
-                    break;
-            }
+            case 0:
+                buttonInDirection = positive == true ? highlightedButton.SelectionState.navigation.selectOnRight : highlightedButton.SelectionState.navigation.selectOnLeft;
+                break;
+            case 1:
+                buttonInDirection = positive == true ? highlightedButton.SelectionState.navigation.selectOnUp : highlightedButton.SelectionState.navigation.selectOnDown;
+                break;
         }
-        catch (NullReferenceException){ return; }
+        tryNewButton = buttonInDirection.gameObject.GetComponent<Button>();
         if (tryNewButton != null)
         {
             CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();

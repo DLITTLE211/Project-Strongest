@@ -46,29 +46,29 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 7e1c9030b5e41584187628df16d57678, type: 2}
     ColorSets:
     - _imageSet:
-      - {fileID: 2800000, guid: 2b6b312f59421204cb0e7a912b29e592, type: 3}
-      - {fileID: 2800000, guid: 2f81cf39b50f9a046ab3b75e2af4ce30, type: 3}
       - {fileID: 2800000, guid: 27688c43371e7a84fac7da13d303bcb2, type: 3}
+      - {fileID: 2800000, guid: 2f81cf39b50f9a046ab3b75e2af4ce30, type: 3}
+      - {fileID: 2800000, guid: 2b6b312f59421204cb0e7a912b29e592, type: 3}
       - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
     - _imageSet:
-      - {fileID: 2800000, guid: 78417aa569cc4bb4cbcc47838fa131f5, type: 3}
-      - {fileID: 2800000, guid: 2d1bc762853e2a6498d288f2baf0afc7, type: 3}
       - {fileID: 2800000, guid: 9ee48ef5e67c02c45a5eaa3b3b2b99e2, type: 3}
+      - {fileID: 2800000, guid: 2d1bc762853e2a6498d288f2baf0afc7, type: 3}
+      - {fileID: 2800000, guid: 78417aa569cc4bb4cbcc47838fa131f5, type: 3}
       - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
     - _imageSet:
-      - {fileID: 2800000, guid: a182f8b55602fcb4bbd5d5e043875319, type: 3}
-      - {fileID: 2800000, guid: 9847d3141480468409eb9a5909b6f759, type: 3}
       - {fileID: 2800000, guid: 5d29bb8934046c74abd99f191e4d95d2, type: 3}
+      - {fileID: 2800000, guid: 9847d3141480468409eb9a5909b6f759, type: 3}
+      - {fileID: 2800000, guid: a182f8b55602fcb4bbd5d5e043875319, type: 3}
       - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
     - _imageSet:
-      - {fileID: 2800000, guid: fe4d97e85fd412747af1a781a1387691, type: 3}
-      - {fileID: 2800000, guid: 934a0255b4357ce4187caae6dd774180, type: 3}
       - {fileID: 2800000, guid: 29056c2527c667748b224a52fee9d6f3, type: 3}
+      - {fileID: 2800000, guid: 934a0255b4357ce4187caae6dd774180, type: 3}
+      - {fileID: 2800000, guid: fe4d97e85fd412747af1a781a1387691, type: 3}
       - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
     - _imageSet:
-      - {fileID: 2800000, guid: f3fd6956ee8b5274387c388883c25de0, type: 3}
-      - {fileID: 2800000, guid: 1bcc63139b5756844a56afbd5637eb54, type: 3}
       - {fileID: 2800000, guid: f73a5ffc9b5d6b54fb5cc2cf1efedd09, type: 3}
+      - {fileID: 2800000, guid: 1bcc63139b5756844a56afbd5637eb54, type: 3}
+      - {fileID: 2800000, guid: f3fd6956ee8b5274387c388883c25de0, type: 3}
       - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
   characterModel: {fileID: 2619550513160664684, guid: 926b334e5591a5d47bce2b6a9b4e51c6, type: 3}
   characterAnimator: {fileID: 0}
@@ -77,9 +77,9 @@ MonoBehaviour:
   CharacterModel: {fileID: 919132149155446097, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
   properHitResponseAnimations:
   - anim: {fileID: -6766769711721395919, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.3166667
+    animName: Armature|Yujiro_AirHit_Light
+    animHash: 1798075520
     hitReactionType: 0
     hitLevel: 2
     isGroundedReaction: 0
@@ -87,9 +87,9 @@ MonoBehaviour:
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.40000004
+    animName: Armature|Yujiro_AirHit_Medium
+    animHash: 135436032
     hitReactionType: 1
     hitLevel: 4
     isGroundedReaction: 0
@@ -97,9 +97,9 @@ MonoBehaviour:
     knockdownAnimType: 12
     _getupType: 0
   - anim: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.40000004
+    animName: Armature|Yujiro_AirHit_Medium
+    animHash: 135436032
     hitReactionType: 1
     hitLevel: 4
     isGroundedReaction: 0
@@ -107,9 +107,9 @@ MonoBehaviour:
     knockdownAnimType: 12
     _getupType: 0
   - anim: {fileID: 5448678849941723091, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.40000004
+    animName: Armature|Yujiro_AirHit_Medium
+    animHash: 135436032
     hitReactionType: 1
     hitLevel: 8
     isGroundedReaction: 0
@@ -117,9 +117,9 @@ MonoBehaviour:
     knockdownAnimType: 12
     _getupType: 0
   - anim: {fileID: -7872749075628528436, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.3166667
+    animName: Armature|Yujiro_Hit_Light_High
+    animHash: -2118807883
     hitReactionType: 0
     hitLevel: 2
     isGroundedReaction: 1
@@ -127,9 +127,9 @@ MonoBehaviour:
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: 8854085969716297354, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.3166667
+    animName: Armature|Yujiro_Hit_Light_Low
+    animHash: 1209407396
     hitReactionType: 0
     hitLevel: 2
     isGroundedReaction: 1
@@ -137,9 +137,9 @@ MonoBehaviour:
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: 6991049729840257660, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.48333335
+    animName: Armature|Yujiro_Hit_Medium
+    animHash: -1259860194
     hitReactionType: 0
     hitLevel: 4
     isGroundedReaction: 0
@@ -147,9 +147,9 @@ MonoBehaviour:
     knockdownAnimType: 6
     _getupType: 0
   - anim: {fileID: 4524985264203469723, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.48333335
+    animName: Armature|Yujiro_Hit_Scorpion
+    animHash: 176793587
     hitReactionType: 1
     hitLevel: 256
     isGroundedReaction: 1
@@ -157,9 +157,9 @@ MonoBehaviour:
     knockdownAnimType: 4
     _getupType: 0
   - anim: {fileID: 4524985264203469723, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.48333335
+    animName: Armature|Yujiro_Hit_Scorpion
+    animHash: 176793587
     hitReactionType: 1
     hitLevel: 256
     isGroundedReaction: 0
@@ -167,9 +167,9 @@ MonoBehaviour:
     knockdownAnimType: 4
     _getupType: 0
   - anim: {fileID: 6991049729840257660, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.48333335
+    animName: Armature|Yujiro_Hit_Medium
+    animHash: -1259860194
     hitReactionType: 0
     hitLevel: 4
     isGroundedReaction: 1
@@ -177,9 +177,9 @@ MonoBehaviour:
     knockdownAnimType: 6
     _getupType: 0
   - anim: {fileID: 3411093198353683759, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.40000004
+    animName: Armature|Yujiro_Hit_Heavy
+    animHash: -434350439
     hitReactionType: 1
     hitLevel: 8
     isGroundedReaction: 1
@@ -187,9 +187,9 @@ MonoBehaviour:
     knockdownAnimType: 12
     _getupType: 0
   - anim: {fileID: 8808309529977388113, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.5666667
+    animName: Armature|Yujiro_Hit_Spiral
+    animHash: -1635514488
     hitReactionType: 1
     hitLevel: 32
     isGroundedReaction: 0
@@ -197,9 +197,9 @@ MonoBehaviour:
     knockdownAnimType: 12
     _getupType: 0
   - anim: {fileID: -3782299768679352025, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.9833334
+    animName: Armature|Yujiro_Hit_Crumple
+    animHash: -1765852025
     hitReactionType: 1
     hitLevel: 16
     isGroundedReaction: 1
@@ -207,9 +207,9 @@ MonoBehaviour:
     knockdownAnimType: 8
     _getupType: 0
   - anim: {fileID: -7053362206078326854, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.5666667
+    animName: Armature|Yujiro_Hit_Recovery_Quick_Neutral
+    animHash: -1532614690
     hitReactionType: 4
     hitLevel: 0
     isGroundedReaction: 1
@@ -217,9 +217,9 @@ MonoBehaviour:
     knockdownAnimType: 6
     _getupType: 0
   - anim: {fileID: -1617866586953134164, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.5666667
+    animName: Armature|Yujiro_Hit_Recovery_Quick_Backward
+    animHash: -1907225508
     hitReactionType: 4
     hitLevel: 0
     isGroundedReaction: 1
@@ -227,9 +227,9 @@ MonoBehaviour:
     knockdownAnimType: 6
     _getupType: 1
   - anim: {fileID: -2773910506096812512, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 1.2333333
+    animName: Armature|Yujiro_Hit_Recovery_Slow
+    animHash: -709023138
     hitReactionType: 4
     hitLevel: 0
     isGroundedReaction: 1
@@ -237,9 +237,9 @@ MonoBehaviour:
     knockdownAnimType: 8
     _getupType: 0
   - anim: {fileID: -5235734787564728245, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.3166667
+    animName: Armature|Yujiro_AirHit_Recovery
+    animHash: 807065135
     hitReactionType: 4
     hitLevel: 2
     isGroundedReaction: 0
@@ -247,9 +247,9 @@ MonoBehaviour:
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: -5089333823743093384, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.15
+    animName: Armature|Yujiro_Crouching_Block_Light
+    animHash: -1662584690
     hitReactionType: 2
     hitLevel: 64
     isGroundedReaction: 1
@@ -257,9 +257,9 @@ MonoBehaviour:
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: 1683118064374378176, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.23333335
+    animName: Armature|Yujiro_Crouching_Block_GB
+    animHash: -1873199064
     hitReactionType: 3
     hitLevel: 128
     isGroundedReaction: 1
@@ -267,9 +267,9 @@ MonoBehaviour:
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: 6005964115479548752, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.15
+    animName: Armature|Yujiro_Standing_Block_Light
+    animHash: 1300032556
     hitReactionType: 2
     hitLevel: 64
     isGroundedReaction: 1
@@ -277,9 +277,9 @@ MonoBehaviour:
     knockdownAnimType: 0
     _getupType: 0
   - anim: {fileID: 6388789729137327533, guid: 2878c2d1757e1064d8daf232a50b2e26, type: 3}
-    animLength: 0
-    animName: 
-    animHash: 0
+    animLength: 0.23333335
+    animName: Armature|Yujiro_Standing_Block_GB
+    animHash: -522141613
     hitReactionType: 3
     hitLevel: 128
     isGroundedReaction: 1
