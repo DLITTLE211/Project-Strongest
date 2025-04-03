@@ -133,7 +133,14 @@ public class CharacterSelect_Button : MonoBehaviour
         {
             if (!playerCursors.Contains(cursor)) 
             {
-                playerCursors.Insert(cursor.ID, cursor);
+                if (playerCursors.Count == 0)
+                {
+                    playerCursors.Add(cursor);
+                }
+                else
+                {
+                    playerCursors.Insert(cursor.ID, cursor);
+                }
                 SetHoverColor(cursor.ID);
             }
         }

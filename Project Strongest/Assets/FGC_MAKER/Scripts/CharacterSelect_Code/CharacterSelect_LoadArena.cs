@@ -33,7 +33,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             _roundInfo = _stageSelectController.GetRoundInfomation();
             leftPlayerChosenProfile = _characterSelectController.GetLeftPlayerProfile();
             rightPlayerChosenProfile = _characterSelectController.GetRightPlayerProfile();
-            chosenStage = _characterSelectSetup.GetChosenStage();
+            chosenStage = _stageSelectController.GetChosenStage();
             Task[] tasks = new Task[]
             {
             _characterSelectSetup.DisableCharacterCursors(),

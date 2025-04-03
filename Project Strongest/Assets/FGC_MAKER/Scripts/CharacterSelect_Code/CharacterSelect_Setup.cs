@@ -659,7 +659,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             return _randomizedCharacter;
         }
     }*/
-    public Stage_StageAsset GetChosenStage()
+    /*public Stage_StageAsset GetChosenStage()
     {
         if (_chosenStage.stageName == "Random")
         {
@@ -676,15 +676,15 @@ public class CharacterSelect_Setup : MonoBehaviour
             return _chosenStage;
         }
         return _chosenStage;
-    }
-    public Round_Info GetRoundInfomation()
+    }*/
+    /*public Round_Info GetRoundInfomation()
     {
         return new Round_Info(_stageSelecter.winningRoundCount);
-    }
-    public void SetChosenStage(Stage_StageAsset _newStage) 
+    }*/
+   /* public void SetChosenStage(Stage_StageAsset _newStage) 
     {
         _chosenStage = _newStage;
-    }
+    }*/
     #endregion
 }
 [Serializable]

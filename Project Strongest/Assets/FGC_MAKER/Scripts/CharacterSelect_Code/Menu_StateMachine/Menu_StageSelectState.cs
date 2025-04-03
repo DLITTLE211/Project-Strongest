@@ -36,15 +36,26 @@ public class Menu_StageSelectState : Menu_BaseState
     {
         if (_currentCursor.canChooseStage)
         {
-            if(_stageSelectController.stageSelected)
+            if (_characterSelect.currentSet.gameMode == GameMode.Training)
             {
+                _stageSelectController.stageSelected = true;
                 _stageSelectController.roundCountSelected = true;
                 _characterSelect.CallStageSelected();
-                return;
             }
-            _characterSelect.SetChosenStage(_stageSelectController._chosenStage);
-            _stageSelectController.stageSelected = true;
-            _stageSelectController.ActivateRoundSelectObject();       
+            else 
+            {
+                if (!_stageSelectController.stageSelected) 
+                {
+                    _stageSelectController.stageSelected = true;
+                    _stageSelectController.ActivateRoundSelectObject();
+                    return;
+                }
+                if (!_stageSelectController.roundCountSelected)
+                {
+                    _stageSelectController.roundCountSelected = true;
+                    _characterSelect.CallStageSelected();
+                }
+            }
         }
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor)
@@ -60,7 +71,7 @@ public class Menu_StageSelectState : Menu_BaseState
             if (_stageSelectController.stageSelected)
             {
                 _stageSelectController.stageSelected = false;
-                _characterSelect.SetChosenStage(null);
+                //_characterSelect.SetChosenStage(null);
                 _stageSelectController.Deactivate();
                 _menuStateMachine.CallCharacterSelectState();
             }
