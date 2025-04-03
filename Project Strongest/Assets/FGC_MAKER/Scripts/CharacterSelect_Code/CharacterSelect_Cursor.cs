@@ -25,13 +25,6 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public bool colorChosen;
     public bool allowChange;
     IEnumerator ChangeCharacterRoutine;
-    /*public void LockinCharacterChoice(Character_Profile chosenProfile)
-    {
-        profile = chosenProfile;
-        
-        cursorPage.LockInfo(profile);
-        cursorObject.transform.DOScale(0.5f, 0.15f);
-    }*/
     public void SetColorLockState(bool state) 
     {
         colorChosen = state;

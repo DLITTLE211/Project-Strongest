@@ -114,8 +114,13 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
         });
         EnableControllerButtonNavigation();
     }
-    public void EnableControllerButtonNavigation() 
+    public void EnableControllerButtonNavigation()
     {
+        for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
+        {
+            CharacterSelect_Button csButton = activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>();
+            csButton.HighlightSelection(null);
+        }
         for (int i = 0; i < _playerCursors.Count; i++)
         {
             int buttonStartIndex = ((activeCharacterSelectButtons.Count / 2) + _playerCursors[i].ID) - 1;

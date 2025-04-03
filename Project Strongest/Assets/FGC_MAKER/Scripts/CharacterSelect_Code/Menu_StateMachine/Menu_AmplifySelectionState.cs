@@ -96,7 +96,8 @@ public class Menu_AmplifySelectionState : Menu_BaseState
         if (_currentCursor.cursorPage.amplifySelectCooldown)
         {
             _currentCursor.cursorPage.CallDelayResetBool();
-            _amplifyController.CyclePlayerAmplifierDown(_currentCursor.ID);
+            int amplifySide = _currentCursor.ChosenPlayerSide == 0 ? 0 : 1;
+            _amplifyController.CyclePlayerAmplifierDown(amplifySide);
         }
     }
     public override void CycleRight(CharacterSelect_Cursor _currentCursor)
@@ -104,7 +105,8 @@ public class Menu_AmplifySelectionState : Menu_BaseState
         if (_currentCursor.cursorPage.amplifySelectCooldown)
         {
             _currentCursor.cursorPage.CallDelayResetBool();
-            _amplifyController.CyclePlayerAmplifierUp(_currentCursor.ID);
+            int amplifySide = _currentCursor.ChosenPlayerSide == 0 ? 0 : 1;
+            _amplifyController.CyclePlayerAmplifierUp(amplifySide);
         }
     }
 }

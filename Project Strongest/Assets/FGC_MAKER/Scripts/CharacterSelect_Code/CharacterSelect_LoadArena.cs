@@ -37,8 +37,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             Task[] tasks = new Task[]
             {
             _characterSelectSetup.DisableCharacterCursors(),
-            _characterSelectSetup.ToggleStageSelectState(false),
-            _characterSelectSetup.ToggleCharacterSelectInfo(false,0),
+            //_characterSelectSetup.ToggleCharacterSelectInfo(false,0),
             _characterSelectSetup.TogglePlayerInfo(0),
             };
             await Task.WhenAll(tasks);

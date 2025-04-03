@@ -58,14 +58,6 @@ public class CSSubMenu_AmplifyPageController : CharacterSelect_SubMenuBase
         {
             base.OnUpdate();
         }
-        /*if (Input.GetKeyDown(KeyCode.UpArrow)) 
-        {
-            CyclePlayerAmplifierUp();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            CyclePlayerAmplifierDown();
-        }*/
     }
     public void CyclePlayerAmplifierUp(int playerIndex = 0)
     {
