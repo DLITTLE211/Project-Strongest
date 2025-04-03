@@ -58,8 +58,6 @@ public class Editor_CharacterMaker : EditorWindow
     private void OnEnable()
     {
         createdCharacterFilePath = $"{Application.dataPath}/CharacterList";
-
-
         Debug.Log("Data Path: " + createdCharacterFilePath);
         InitTextures();
         InitData();
