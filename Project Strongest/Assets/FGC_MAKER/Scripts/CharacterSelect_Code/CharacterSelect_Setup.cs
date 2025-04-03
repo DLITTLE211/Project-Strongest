@@ -149,21 +149,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         players = _characterSelectplayers;
         currentSet = set;
     }
-    /*public void SetCharacterSelectObjects() 
-    {
-        if (activeCharacterSelectButtons != null)
-        {
-            if (activeCharacterSelectButtons.Count > 0)
-            {
-                for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
-                {
-                    Destroy(activeCharacterSelectButtons[i]);
-                }
-                activeCharacterSelectButtons = new List<GameObject>();
-            }
-        }
-        //AddCharacterSelectButtons();
-    }*/
     public async void CallCharacterSelectObject()
     {
         await OpenCharacterSelectObject();
@@ -211,88 +196,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
     }
 
-   /* public void SetPlayerControllers()
-    {
-        if (ReInput.controllers.GetJoystickNames().Length <= 0)
-        {
-            return;
-        }
-        else
-        {
-            for (int i = 0; i < players.UsedID.Item1.Count; i++)
-            {
-                if (i == 0)
-                {
-                    if (_player1_Cursor.curPlayer == null)
-                    {
-                        SetCharacterSelectCursorState(_player1_Cursor, 0);
-                    }
-                    else
-                    {
-                        _player1_Cursor.UnlockCharacterChoice();
-                        _player1_Cursor.isConnected = true;
-                        topPage.ClearInfo();
-                    }
-                }
-                else if (i == 1) 
-                {
-                    if (_player2_Cursor.curPlayer == null)
-                    {
-                        SetCharacterSelectCursorState(_player2_Cursor, i);
-                    }
-                    else
-                    {
-                        _player2_Cursor.UnlockCharacterChoice();
-                        _player2_Cursor.isConnected = true;
-                        bottomPage.ClearInfo();
-                    }
-                }
-            }
-        }
-    }*/
-    /*void SetCharacterSelectCursorState(CharacterSelect_Cursor player, int ID) 
-    {
-        player.curPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
-        player.ID = ID;
-        player.curPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
-        player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[ID]}");
-        if (currentSet.gameMode == GameMode.Training)
-        {
-            player.cursorObject.SetActive(true);
-            player.cursorText.text = $"{players.UsedID.Item1[ID] + 1}";
-
-        }
-        player.isConnected = true;
-    }*/
-    /*public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, CharacterSelect_Cursor cursorHighlight)
-    {
-       // cursorHighlight.cursorPage.UpdateInfo(hoveredProfile);
-    }*/
-   /* public void ClearCharacterSelectInformation(int curHighlightedPlayerID)
-    {
-        if (curHighlightedPlayerID == 0)
-        {
-            topPage.ClearInfo();
-        }
-        if (curHighlightedPlayerID == 1)
-        {
-            bottomPage.ClearInfo();
-        }
-    }*/
-    #region Deactivate Character Select
-   /* public async Task ToggleCharacterSelectInfo(bool state, float fadeValue) 
-    {
-        for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
-        {
-            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().interactable = state;
-            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(fadeValue, 1.5f);
-            activeCharacterSelectButtons[i].SetActive(state);
-        }
-        characterSelectBackgroundImage.gameObject.SetActive(state);
-        characterSelect_Header.SetActive(state);
-        characterSelectHolder.SetActive(state);
-        await Task.Delay(400);
-    }*/
+   
     public async Task DisableCharacterCursors() 
     {
         _player1_Cursor.DesyncController();
@@ -316,7 +220,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         await Task.Delay(400);
     }
-    #endregion
 
     public void CheckIfBothPlayersLockedIn(CharacterSelect_Cursor cursor)
     {
@@ -393,22 +296,12 @@ public class CharacterSelect_Setup : MonoBehaviour
         if (CheckPlayersReady(_player1_Cursor) && CheckPlayersReady(_player2_Cursor))
         {
             _menuStateMachine.CallStageSelectState();
-            /*if (currentSet.gameMode == GameMode.Training)
-            {
-                //ActivateStageSelector();
-            }
-            if (currentSet.gameMode == GameMode.Versus)
-            {
-                _menuStateMachine.CallRoundSelectState();
-                ActivateStageSelector();
-            }*/
         }
     }
     public void ClearListeners() 
     {
         ReInput.ControllerConnectedEvent -= AddControllerCounter;
         ReInput.ControllerDisconnectedEvent -= SubtractControllerCounter;
-        //Messenger.RemoveListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
     }
     public void CallStageSelected() 
     {
@@ -478,6 +371,7 @@ public class CharacterSelect_Setup : MonoBehaviour
 
         }
     }
+    #endregion
     public void DisplayObjectlapMessage()
     {
         advisoryMessage.gameObject.SetActive(true);
@@ -497,146 +391,6 @@ public class CharacterSelect_Setup : MonoBehaviour
             advisoryMessage.gameObject.SetActive(false);
         });
     }
-    /*IEnumerator DelayResetStageBool() 
-    {
-        stageSelectCooldown = true;
-        yield return new WaitForSeconds(0.65f);
-        stageSelectCooldown = false;
-    }
-    bool HitHeightBound(Transform cursorTransform) 
-    {
-        Bounds heightBounds = new Bounds(cursorTransform.localPosition, Vector3.zero);
-        heightBounds.SetMinMax(downBound.localPosition, upBound.localPosition);
-        float yPos = cursorTransform.localPosition.y;
-        if (yPos > heightBounds.max.y - 1f)
-        {
-            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
-            cursorTransform.localPosition = new Vector3(cursorTransform.localPosition.x, heightBounds.max.y - 10f, 0);
-            return true;
-        }
-        if (yPos < heightBounds.min.y + 1f)
-        {
-            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
-            cursorTransform.localPosition = new Vector3(cursorTransform.localPosition.x, heightBounds.min.y + 10f, 0); ;
-            return true;
-        }
-        return false;
-    }
-    bool HitWidthBound(Transform cursorTransform)
-    {
-        Bounds widthBounds = new Bounds(cursorTransform.localPosition, Vector3.zero);
-        widthBounds.SetMinMax(leftBound.localPosition, rightBound.localPosition);
-        float xPos = cursorTransform.localPosition.x;
-        if (xPos > widthBounds.max.x - 1)
-        {
-            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
-
-            cursorTransform.localPosition = new Vector3(widthBounds.max.x - 10f, cursorTransform.localPosition.y, 0);
-            return true;
-        }
-        if (xPos < widthBounds.min.x + 1)
-        {
-            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
-            cursorTransform.localPosition = new Vector3(widthBounds.min.x + 10f, cursorTransform.localPosition.y, 0);
-            return true;
-        }
-        return false;
-    }*/
-
-    #endregion
-
-    /*void LockinCharacterChoice(Character_Profile chosenProfile, CharacterSelect_Cursor cursor)
-    {
-        cursor.LockinCharacterChoice(chosenProfile);
-        CheckIfBothPlayersLockedIn(cursor);
-    }*/
-
-    /*void ActivateStageSelector()
-    {
-        characterSelect_Assets[1].SetActive(true);
-        _stageSelecter.SetArrowsLitState(_activeStages);
-    }*/
-    #region Return Character Select Information
- /*   public ChosenCharacter GetLeftPlayerProfile() 
-    {
-        if (_player1_Cursor.cursorPage.chosenCharacter != null)
-        {
-            int colorIndex = _player1_Cursor.cursorPage.colorSelectIndex;
-            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(_player1_Cursor.cursorPage.chosenCharacter, _player1_Cursor.cursorPage.chosenAmplifier, _player1_Cursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
-
-            return leftPlayerCharacter;
-        }
-        return RandomizeChoice(player1, _player1_Cursor);
-    }
-    public ChosenCharacter GetRightPlayerProfile()
-    {
-        int colorIndex = _player2_Cursor.cursorPage.colorSelectIndex;
-        if (_player1_Cursor.cursorPage.chosenCharacter == _player2_Cursor.cursorPage.chosenCharacter)
-        {
-            colorIndex = _player2_Cursor.cursorPage.colorSelectIndex != _player1_Cursor.cursorPage.colorSelectIndex ? _player2_Cursor.cursorPage.colorSelectIndex : _player2_Cursor.cursorPage.colorSelectIndex + 1;
-            if (colorIndex > _player2_Cursor.cursorPage.chosenCharacter._characterSkins.ColorSets.Count - 1)
-            {
-                colorIndex = 0;
-            }
-        }
-        if (_player2_Cursor.cursorPage.chosenCharacter != null)
-        {
-            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_player2_Cursor.cursorPage.chosenCharacter, _player2_Cursor.cursorPage.chosenAmplifier, _player2_Cursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
-            return rightPlayerCharacter;
-        }
-        return RandomizeChoice(player2, _player2_Cursor);
-    }
-    public ChosenCharacter RandomizeChoice(ChooseSide_Object chosenSide, CharacterSelect_Cursor cursorObject)
-    {
-        int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);
-        int randomAmplifier = UnityEngine.Random.Range(0, _activeAmplifiers.Count - 1);
-        int colorIndex = _player2_Cursor.cursorPage.colorSelectIndex;
-        if (_player1_Cursor.cursorPage.chosenCharacter == _activeProfiles[randomProfile])
-        {
-            colorIndex = cursorObject.cursorPage.colorSelectIndex != _player1_Cursor.cursorPage.colorSelectIndex ? cursorObject.cursorPage.colorSelectIndex : cursorObject.cursorPage.colorSelectIndex + 1;
-            if (colorIndex >= _activeProfiles[randomProfile]._characterSkins.ColorSets.Count - 1)
-            {
-                colorIndex = 0;
-            }
-        }
-        if (chosenSide.sideIterator == 1)
-        {
-            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], -1, colorIndex);
-            return _randomizedCharacter;
-        }
-        else
-        {
-            ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier], cursorObject.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
-            return _randomizedCharacter;
-        }
-    }*/
-    /*public Stage_StageAsset GetChosenStage()
-    {
-        if (_chosenStage.stageName == "Random")
-        {
-            for (int i = 0; i < _activeStages.Count; i++)
-            {
-                if (_activeStages[i].stageName == "Random")
-                {
-                    _activeStages.RemoveAt(i);
-                    break;
-                }
-                continue;
-            }
-            _chosenStage = _activeStages[UnityEngine.Random.Range(0, _activeStages.Count - 1)];
-            return _chosenStage;
-        }
-        return _chosenStage;
-    }*/
-    /*public Round_Info GetRoundInfomation()
-    {
-        return new Round_Info(_stageSelecter.winningRoundCount);
-    }*/
-   /* public void SetChosenStage(Stage_StageAsset _newStage) 
-    {
-        _chosenStage = _newStage;
-    }*/
-    #endregion
 }
 [Serializable]
 public class ChosenCharacter 
