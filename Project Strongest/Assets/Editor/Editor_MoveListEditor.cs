@@ -7,17 +7,22 @@ using UnityEditor;
 public class Editor_MoveListEditor : EditorWindow
 {
     #region Visual Code For Windows
+    enum MoveListEditMode {MainAttackInfoMode, MainAttackCollisionMode }
+    MoveListEditMode _moveListEditState;
     public EditorMoveListObject MoveListHeaderObject;
     public EditorMoveListObject MoveListBodyObject;
     public EditorMoveListObject CurrentAttackHeaderObject;
     public EditorMoveListObject CurrentAttackBodyObject;
     public EditorMoveListObject CurrentAttackInformationObject;
     public EditorMoveListObject SaveDataObject;
+    public EditorMoveListObject ToggleEditObject;
     #endregion
 
     #region Character Data
     private Character_MoveList moveListData;
-    Character_MoveList editedMoveList;
+    FullMoveList editedMoveList;
+    int index;
+    GenericMenu NormalFullList; 
     private GameObject characterModel;
     private Animator characterAnimator;
     #endregion
@@ -47,6 +52,7 @@ public class Editor_MoveListEditor : EditorWindow
         DrawCurrentAttackHeader();
         DrawCurrentAttackBody();
         DrawCurrentAttackInfo();
+        DrawSaveChangesHeader();
         DrawToggleDataHeader();
     }
     void SetScreenSize() 
@@ -116,17 +122,30 @@ public class Editor_MoveListEditor : EditorWindow
         GUI.DrawTexture(CurrentAttackInformationObject.editorRect, CurrentAttackInformationObject.editorTexture);
         #endregion
 
-        #region Toggle Data
+        #region Save Data
         Color32 toggleDataColor = new Color32((byte)25f, (byte)25f, (byte)25f, (byte)255f);
         Rect size6 = new Rect();
         size6.x = 0f;
         size6.y = Screen.height/1.05f;
-        size6.width = Screen.width;
+        size6.width = Screen.width/3f;
         size6.height = Screen.height;
         SaveDataObject = new EditorMoveListObject(new Texture2D(1, 1), toggleDataColor, size6);
         SaveDataObject.editorTexture.SetPixel(0, 0, toggleDataColor);
         SaveDataObject.editorTexture.Apply();
         GUI.DrawTexture(SaveDataObject.editorRect, SaveDataObject.editorTexture);
+        #endregion
+
+        #region Toggle Header
+        Color32 toggleColor = new Color32((byte)75f, (byte)75f, (byte)75f, (byte)255f);
+        Rect size7 = new Rect();
+        size7.x = size4.x * 3;
+        size7.y = Screen.height / 1.05f;
+        size7.width = Screen.width/4f;
+        size7.height = Screen.height;
+        ToggleEditObject = new EditorMoveListObject(new Texture2D(1, 1), toggleColor, size7);
+        ToggleEditObject.editorTexture.SetPixel(0, 0, cAHColor);
+        ToggleEditObject.editorTexture.Apply();
+        GUI.DrawTexture(ToggleEditObject.editorRect, ToggleEditObject.editorTexture);
         #endregion
     }
     void DrawMoveListHeader() 
@@ -150,10 +169,42 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
-    string newString;
+    private int highlightedMoveIndex = -1;
+    bool displayNormalAttacks = false;
     void FillDataOnScreen() 
     {
+        GetMoveListData();
+        Debug.Log(editedMoveList.simpleAttacks.Count);
+        GUILayout.Label("Normal Attacks");
+        if (GUILayout.Button("Add New Normal Attack Entry"))
+        {
+            AddNewNormalAttackEntry();
+        }
+        displayNormalAttacks = EditorGUILayout.Foldout(displayNormalAttacks, "Show NormalAttacks");
+        if (displayNormalAttacks)
+        {
+            
+            for (int i = 0; i < editedMoveList.simpleAttacks.Count; i++)
+            {
+                var move = editedMoveList.simpleAttacks[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.SpecialAttackName, style))
+                {
+                    DisplaySimpleAttackData(move, i);
+                }
+            }
+        }
         Debug.Log("Present ALL Attacks");
+    }
+    void AddNewNormalAttackEntry()
+    {
+
+    }
+    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack, int index) 
+    {
+
     }
     void DrawCurrentAttackHeader()
     {
@@ -172,7 +223,7 @@ public class Editor_MoveListEditor : EditorWindow
         if (moveListData != null)
         {
             GUILayout.Label("Current Attack"); 
-            newString = (string)EditorGUILayout.TextField("Character Name:", newString);
+            //newString = (string)EditorGUILayout.TextField("Character Name:", newString);
         }
         #endregion
         GUILayout.EndArea();
@@ -185,7 +236,7 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
-    void DrawToggleDataHeader()
+    void DrawSaveChangesHeader()
     {
         GUILayout.BeginArea(SaveDataObject.editorRect);
         #region FillArea
@@ -200,13 +251,30 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
+    void DrawToggleDataHeader()
+    {
+        GUILayout.BeginArea(ToggleEditObject.editorRect);
+        #region FillArea
+        //GUILayout.Label("Toggle Data");
+        if (moveListData != null)
+        {
+            _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" });
+            //if (GUILayout.Button("Save Changes?", GUILayout.Width(155), GUILayout.Height(30)))
+            //{
+
+            //}
+        }
+        #endregion
+        GUILayout.EndArea();
+    }
     void SaveMoveListChanges() 
     {
         Debug.Log("MoveList Changes Saved");
     }
     void GetMoveListData() 
     {
-        editedMoveList = moveListData;
+        FullMoveList newMoveList = null;
+        editedMoveList = moveListData.GetFullMoveList(newMoveList);
     } 
 }
 [Serializable]
