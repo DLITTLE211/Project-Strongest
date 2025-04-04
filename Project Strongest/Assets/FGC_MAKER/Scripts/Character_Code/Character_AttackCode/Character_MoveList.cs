@@ -556,4 +556,41 @@ public class Character_MoveList : MonoBehaviour
         return null;
     }
     #endregion
+
+}
+[Serializable]
+public class FullMoveList 
+{
+    public List<Attack_AdvancedSpecialMove> BasicSuperAttacks;
+    public List<Attack_AdvancedSpecialMove> CommandThrows;
+    public List<Attack_AdvancedSpecialMove> CounterAttacks;
+    public List<Attack_StanceSpecialMove> stanceSpecials;
+    public List<Attack_RekkaSpecialMove> rekkaSpecials;
+    public List<Attack_BasicSpecialMove> special_Simple;
+    public List<Attack_NonSpecialAttack> stringNormalAttacks;
+    public List<Attack_NonSpecialAttack> commandNormalAttacks;
+    public List<Attack_NonSpecialAttack> simpleAttacks;
+    public List<Attack_ThrowBase> BasicThrows;
+    public FullMoveList(List<Attack_AdvancedSpecialMove> _supers, 
+        List<Attack_AdvancedSpecialMove> _commandGrabs, 
+        List<Attack_AdvancedSpecialMove> _counters, 
+        List<Attack_StanceSpecialMove> _stances, 
+        List<Attack_RekkaSpecialMove> _rekkas, 
+        List<Attack_BasicSpecialMove> _specials, 
+        List<Attack_NonSpecialAttack> _stringNormals, 
+        List<Attack_NonSpecialAttack> _commandNormals, 
+        List<Attack_NonSpecialAttack> _normals,
+        List<Attack_ThrowBase> _throws) 
+    {
+        BasicSuperAttacks = _supers;
+        CommandThrows = _commandGrabs;
+        CounterAttacks = _counters;
+        stanceSpecials = _stances;
+        rekkaSpecials = _rekkas;
+        special_Simple = _specials;
+        stringNormalAttacks = _stringNormals;
+        commandNormalAttacks = _commandNormals;
+        simpleAttacks = _normals;
+        BasicThrows = _throws;
+    }
 }
