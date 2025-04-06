@@ -27,9 +27,27 @@ public class Editor_MoveListEditor : EditorWindow
     private Animator characterAnimator;
     #endregion
 
+    #region Menu Display Bools
+
+    private int highlightedMoveIndex = -1;
+
+    bool displaySuperAttacks = false;
+    bool displayCommandGrabs = false;
+    bool displayCounterAttacks = false;
+    bool displayStanceAttacks = false;
+    bool displayRekkaAttacks = false;
+    bool displaySpecialAttacks = false;
+    bool displayStringAttacks = false;
+    bool displayCommandNormalAttacks = false;
+    bool displayNormalAttacks = false;
+    bool displayThrowAttacks = false;
+    #endregion
+
     #region Preview Window Code
 
     #endregion
+
+
     [MenuItem("Window/Roster/Characters/Edit Character Movelist")]
     static void OpenMoveListEditorWindow() 
     {
@@ -169,11 +187,322 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
-    private int highlightedMoveIndex = -1;
-    bool displayNormalAttacks = false;
     void FillDataOnScreen() 
     {
         GetMoveListData();
+        ShowSupersAttacks();
+        ShowCommandGrabAttacks();
+        ShowCounterAttacks();
+        ShowStanceAttacks();
+        ShowRekkaAttacks();
+        ShowSpecialAttacks();
+        ShowStringNormalAttacks();
+        ShowCommandNormalAttacks();
+        ShowNormalAttacks();
+        ShowThrowAttacks();
+        Debug.Log("Present ALL Attacks");
+    }
+
+    #region Supers Function Section
+    void ShowSupersAttacks()
+    {
+        #region Command Grabs Display
+        Debug.Log(editedMoveList.CommandThrows.Count);
+        GUILayout.Label("Super Attacks");
+        if (GUILayout.Button("Add New Supers Entry"))
+        {
+            AddBasicSuperAttacksEntry();
+        }
+        displaySuperAttacks = EditorGUILayout.Foldout(displaySuperAttacks, "Show Supers");
+        if (displaySuperAttacks)
+        {
+            for (int i = 0; i < editedMoveList.BasicSuperAttacks.Count; i++)
+            {
+                var move = editedMoveList.BasicSuperAttacks[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.specialMoveName, style))
+                {
+                    DisplayBasicSuperAttacksMoveData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddBasicSuperAttacksEntry()
+    {
+
+    }
+    void DisplayBasicSuperAttacksMoveData(Attack_AdvancedSpecialMove specialAttack)
+    {
+
+    }
+    #endregion
+
+    #region Command Grabs Function Section
+    void ShowCommandGrabAttacks()
+    {
+        #region Command Grabs Display
+        Debug.Log(editedMoveList.CommandThrows.Count);
+        GUILayout.Label("Command Grabs");
+        if (GUILayout.Button("Add New Command Grab Entry"))
+        {
+            AddCommandGrabEntry();
+        }
+        displayCommandGrabs = EditorGUILayout.Foldout(displayCommandGrabs, "Show Command Grabs");
+        if (displayCommandGrabs)
+        {
+            for (int i = 0; i < editedMoveList.CommandThrows.Count; i++)
+            {
+                var move = editedMoveList.CommandThrows[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.specialMoveName, style))
+                {
+                    DisplayCommandGrabMoveData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddCommandGrabEntry()
+    {
+
+    }
+    void DisplayCommandGrabMoveData(Attack_AdvancedSpecialMove specialAttack)
+    {
+
+    }
+    #endregion
+
+    #region Counter Attack Function Section
+    void ShowCounterAttacks()
+    {
+        #region Counter Attack Display
+        Debug.Log(editedMoveList.CounterAttacks.Count);
+        GUILayout.Label("Counter Attacks");
+        if (GUILayout.Button("Add New Counter Attack Entry"))
+        {
+            AddCounterAttackEntry();
+        }
+        displayCounterAttacks = EditorGUILayout.Foldout(displayCounterAttacks, "Show Counter Attacks");
+        if (displayCounterAttacks)
+        {
+            for (int i = 0; i < editedMoveList.CounterAttacks.Count; i++)
+            {
+                var move = editedMoveList.CounterAttacks[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.specialMoveName, style))
+                {
+                    DisplayCounterAttackMoveData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddCounterAttackEntry()
+    {
+
+    }
+    void DisplayCounterAttackMoveData(Attack_AdvancedSpecialMove specialAttack)
+    {
+
+    }
+    #endregion
+
+    #region Stance Function Section
+    void ShowStanceAttacks()
+    {
+        #region Stance Attack Display
+        Debug.Log(editedMoveList.stanceSpecials.Count);
+        GUILayout.Label("Stance Attacks");
+        if (GUILayout.Button("Add New Stance Entry"))
+        {
+            AddStanceAttackEntry();
+        }
+        displayStanceAttacks = EditorGUILayout.Foldout(displayStanceAttacks, "Show Stance Attacks");
+        if (displayStanceAttacks)
+        {
+            for (int i = 0; i < editedMoveList.stanceSpecials.Count; i++)
+            {
+                var move = editedMoveList.stanceSpecials[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.StanceSpecialAttack_Name, style))
+                {
+                    DisplayStanceMoveData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddStanceAttackEntry()
+    {
+
+    }
+    void DisplayStanceMoveData(Attack_StanceSpecialMove specialAttack)
+    {
+
+    }
+    #endregion
+
+    #region Rekka Function Section
+    void ShowRekkaAttacks()
+    {
+        #region String Attack Display
+        Debug.Log(editedMoveList.rekkaSpecials.Count);
+        GUILayout.Label("Rekka Attacks");
+        if (GUILayout.Button("Add New Rekka Move Entry"))
+        {
+            AddRekkaAttackEntry();
+        }
+        displayRekkaAttacks = EditorGUILayout.Foldout(displayRekkaAttacks, "Show Rekka Attacks");
+        if (displayRekkaAttacks)
+        {
+            for (int i = 0; i < editedMoveList.rekkaSpecials.Count; i++)
+            {
+                var move = editedMoveList.rekkaSpecials[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.RekkaSpecialAttack_Name, style))
+                {
+                    DisplayRekkaMoveData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddRekkaAttackEntry()
+    {
+
+    }
+    void DisplayRekkaMoveData(Attack_RekkaSpecialMove specialAttack)
+    {
+
+    }
+    #endregion
+
+    #region Special Move Function Section
+    void ShowSpecialAttacks()
+    {
+        #region String Attack Display
+        Debug.Log(editedMoveList.special_Simple.Count);
+        GUILayout.Label("Special Move Attacks");
+        if (GUILayout.Button("Add New Special Move Entry"))
+        {
+            AddSpecialAttackEntry();
+        }
+        displaySpecialAttacks = EditorGUILayout.Foldout(displaySpecialAttacks, "Show Special Move Attacks");
+        if (displaySpecialAttacks)
+        {
+            for (int i = 0; i < editedMoveList.special_Simple.Count; i++)
+            {
+                var move = editedMoveList.special_Simple[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.BasicSpecialAttack_Name, style))
+                {
+                    DisplaySpecialMoveData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddSpecialAttackEntry()
+    {
+
+    }
+    void DisplaySpecialMoveData(Attack_Special_Base specialAttack)
+    {
+
+    }
+    #endregion
+
+    #region String Attack Function Section
+    void ShowStringNormalAttacks()
+    {
+        #region String Attack Display
+        Debug.Log(editedMoveList.stringNormalAttacks.Count);
+        GUILayout.Label("String Attacks");
+        if (GUILayout.Button("Add New String Normal Attack Entry"))
+        {
+            AddStringNormalAttackEntry();
+        }
+        displayStringAttacks = EditorGUILayout.Foldout(displayStringAttacks, "Show String Normals Attacks");
+        if (displayStringAttacks)
+        {
+            for (int i = 0; i < editedMoveList.stringNormalAttacks.Count; i++)
+            {
+                var move = editedMoveList.stringNormalAttacks[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.SpecialAttackName, style))
+                {
+                    DisplayStringNormalData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddStringNormalAttackEntry()
+    {
+
+    }
+    void DisplayStringNormalData(Attack_NonSpecialAttack simpleAttack)
+    {
+
+    }
+    #endregion
+
+    #region Command Attack Function Section
+    void ShowCommandNormalAttacks()
+    {
+        #region Command Attack Display
+        Debug.Log(editedMoveList.commandNormalAttacks.Count);
+        GUILayout.Label("Command Attacks");
+        if (GUILayout.Button("Add New Command Normal Attack Entry"))
+        {
+            AddCommandNormalAttackEntry();
+        }
+        displayCommandNormalAttacks = EditorGUILayout.Foldout(displayCommandNormalAttacks, "Show Command Attacks");
+        if (displayCommandNormalAttacks)
+        {
+            for (int i = 0; i < editedMoveList.commandNormalAttacks.Count; i++)
+            {
+                var move = editedMoveList.commandNormalAttacks[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.SpecialAttackName, style))
+                {
+                    DisplayCommandNormalData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddCommandNormalAttackEntry()
+    {
+
+    }
+    void DisplayCommandNormalData(Attack_NonSpecialAttack simpleAttack)
+    {
+
+    }
+    #endregion
+
+    #region Normal Attack Function Section
+    void ShowNormalAttacks() 
+    {
+        #region Normal Attack Display
         Debug.Log(editedMoveList.simpleAttacks.Count);
         GUILayout.Label("Normal Attacks");
         if (GUILayout.Button("Add New Normal Attack Entry"))
@@ -183,7 +512,7 @@ public class Editor_MoveListEditor : EditorWindow
         displayNormalAttacks = EditorGUILayout.Foldout(displayNormalAttacks, "Show NormalAttacks");
         if (displayNormalAttacks)
         {
-            
+
             for (int i = 0; i < editedMoveList.simpleAttacks.Count; i++)
             {
                 var move = editedMoveList.simpleAttacks[i];
@@ -192,20 +521,60 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.SpecialAttackName, style))
                 {
-                    DisplaySimpleAttackData(move, i);
+                    DisplaySimpleAttackData(move);
                 }
             }
         }
-        Debug.Log("Present ALL Attacks");
+        #endregion
     }
     void AddNewNormalAttackEntry()
     {
 
     }
-    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack, int index) 
+    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack) 
     {
 
     }
+    #endregion
+
+    #region Throw Function Section
+    void ShowThrowAttacks()
+    {
+        #region Throw Display
+        Debug.Log(editedMoveList.simpleAttacks.Count);
+        GUILayout.Label("Throws");
+        if (GUILayout.Button("Add New Throw Entry"))
+        {
+            AddNewThrowEntry();
+        }
+        displayThrowAttacks = EditorGUILayout.Foldout(displayThrowAttacks, "Show Throws");
+        if (displayThrowAttacks)
+        {
+            for (int i = 0; i < editedMoveList.BasicThrows.Count; i++)
+            {
+                var move = editedMoveList.BasicThrows[i];
+                if (move == null) continue;
+
+                var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                if (GUILayout.Button(move.ThrowName, style))
+                {
+                    DisplayThrowData(move);
+                }
+            }
+        }
+        #endregion
+    }
+    void AddNewThrowEntry()
+    {
+
+    }
+    void DisplayThrowData(Attack_ThrowBase throwAttack)
+    {
+
+    }
+    #endregion
+
+    #region Show Window Data
     void DrawCurrentAttackHeader()
     {
         GUILayout.BeginArea(CurrentAttackHeaderObject.editorRect);
@@ -255,7 +624,6 @@ public class Editor_MoveListEditor : EditorWindow
     {
         GUILayout.BeginArea(ToggleEditObject.editorRect);
         #region FillArea
-        //GUILayout.Label("Toggle Data");
         if (moveListData != null)
         {
             _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" });
@@ -267,6 +635,8 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
+    #endregion
+
     void SaveMoveListChanges() 
     {
         Debug.Log("MoveList Changes Saved");
