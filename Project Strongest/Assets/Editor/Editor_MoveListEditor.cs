@@ -27,10 +27,16 @@ public class Editor_MoveListEditor : EditorWindow
     private Animator characterAnimator;
     #endregion
 
+    #region CompositeAttackData
+    CompositeAttackData _attackData;
+    Attack_BaseProperties currentCenterAttackData;
+    private int highlightedAttackIndex = -1;
+    bool displayCurrentAttackList = false;
+    #endregion
+
     #region Menu Display Bools
 
     private int highlightedMoveIndex = -1;
-
     bool displaySuperAttacks = false;
     bool displayCommandGrabs = false;
     bool displayCounterAttacks = false;
@@ -57,6 +63,7 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
+        _attackData = null;
     }
     void OnGUI()
     {
@@ -187,6 +194,8 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
+
+    #region Left Page Information
     void FillDataOnScreen() 
     {
         GetMoveListData();
@@ -200,6 +209,12 @@ public class Editor_MoveListEditor : EditorWindow
         ShowCommandNormalAttacks();
         ShowNormalAttacks();
         ShowThrowAttacks();
+
+        if (GUILayout.Button("Clear Attack Data?"))
+        {
+            _attackData = null;
+        }
+
         Debug.Log("Present ALL Attacks");
     }
 
@@ -512,7 +527,6 @@ public class Editor_MoveListEditor : EditorWindow
         displayNormalAttacks = EditorGUILayout.Foldout(displayNormalAttacks, "Show NormalAttacks");
         if (displayNormalAttacks)
         {
-
             for (int i = 0; i < editedMoveList.simpleAttacks.Count; i++)
             {
                 var move = editedMoveList.simpleAttacks[i];
@@ -529,11 +543,11 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddNewNormalAttackEntry()
     {
-
     }
     void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack) 
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { simpleAttack._attackInput._correctInput[0].property };
+        _attackData = new CompositeAttackData(propertyList);
     }
     #endregion
 
@@ -574,6 +588,12 @@ public class Editor_MoveListEditor : EditorWindow
     }
     #endregion
 
+
+
+
+    #endregion
+
+
     #region Show Window Data
     void DrawCurrentAttackHeader()
     {
@@ -591,12 +611,39 @@ public class Editor_MoveListEditor : EditorWindow
         #region FillArea
         if (moveListData != null)
         {
-            GUILayout.Label("Current Attack"); 
-            //newString = (string)EditorGUILayout.TextField("Character Name:", newString);
+            GUILayout.Label("Current Attack");
+            if (_attackData != null)
+            {
+                DisplayAttackInfomation();
+            }
         }
         #endregion
         GUILayout.EndArea();
     }
+    #region Center Page Information
+    public void DisplayAttackInfomation()
+    {
+        if (_attackData != null)
+        {
+            displayCurrentAttackList = EditorGUILayout.Foldout(displayCurrentAttackList, "Show Attack Property List");
+            if (displayCurrentAttackList)
+            {
+                for (int i = 0; i < _attackData.baseAttackProperties.Count; i++)
+                {
+                    var move = _attackData.baseAttackProperties[i];
+                    if (move == null) continue;
+
+                    var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                    if (GUILayout.Button($"Attack Property {i + 1}", style))
+                    {
+                        //DisplayStringNormalData(move);
+                    }
+                }
+            }
+        }
+        //currentCenterAttackData = _attackData.baseAttackProperties[i]
+    }
+    #endregion
     void DrawCurrentAttackInfo()
     {
         GUILayout.BeginArea(CurrentAttackInformationObject.editorRect);
@@ -658,5 +705,31 @@ public class EditorMoveListObject
         editorTexture = _texture;
         editorColor = _color;
         editorRect = _rect;
+    }
+}
+[Serializable]
+public class CompositeAttackData 
+{
+    public List<Attack_BaseProperties> baseAttackProperties;
+
+    public Attack_AdvancedSpecialMove advancedInputData;
+    public RekkaInput rekkaAttackData;
+    public StanceInput stanceInputData;
+    public Attack_ThrowBase throwInputData;
+    public Attack_NonSpecialAttack normalAttackData;
+    public CompositeAttackData(
+        List<Attack_BaseProperties> _baseProperties, 
+        Attack_AdvancedSpecialMove _advancedInputData = null, 
+        RekkaInput _rekkaData = null, 
+        StanceInput _stanceData = null, 
+        Attack_ThrowBase _throwData = null, 
+        Attack_NonSpecialAttack _nonSpecialData = null) 
+    {
+        baseAttackProperties = _baseProperties;
+        advancedInputData = _advancedInputData;
+        rekkaAttackData = _rekkaData;
+        stanceInputData = _stanceData;
+        throwInputData = _throwData;
+        normalAttackData = _nonSpecialData;
     }
 }
