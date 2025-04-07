@@ -64,6 +64,8 @@ public class Editor_MoveListEditor : EditorWindow
     void OnEnable()
     {
         _attackData = null;
+        currentCenterAttackData = null;
+        displayCurrentAttackList = false;
     }
     void OnGUI()
     {
@@ -593,6 +595,98 @@ public class Editor_MoveListEditor : EditorWindow
 
     #endregion
 
+    #region Center Page Information
+    public void DisplayAttackInfomation()
+    {
+        if (_attackData != null)
+        {
+            displayCurrentAttackList = EditorGUILayout.Foldout(displayCurrentAttackList, "Show Attack Property List");
+            if (displayCurrentAttackList)
+            {
+                for (int i = 0; i < _attackData.basePropertyCount; i++)
+                {
+                    var move = _attackData.baseAttackProperties[i];
+                    if (move == null) continue;
+                    string attackName = _attackData.baseAttackProperties[i]._attackName;
+                    var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
+                    if (GUILayout.Button($"{attackName}_Property {i + 1}", style))
+                    {
+                        currentCenterAttackData = _attackData.baseAttackProperties[i];
+                    }
+                }
+            }
+            /*
+             * Animation TimeLine
+             *Preview Window
+             */
+            GUILayout.Space(75);
+            if (GUILayout.Button("Clear Current Attack Info"))
+            {
+                currentCenterAttackData = null;
+            }
+        }
+        
+    }
+    #endregion
+
+    #region Right Page Information
+    void ShowRightPageAttackInformation() 
+    {
+        GUILayout.Space(50);
+        GUILayout.Label("General Attack Information");
+
+        currentCenterAttackData._attackName = (string)EditorGUILayout.TextField("Attack Name:", currentCenterAttackData._attackName);
+        currentCenterAttackData.rawAttackDamage = (float)EditorGUILayout.FloatField("Raw Damage:", currentCenterAttackData.rawAttackDamage);
+        currentCenterAttackData.counterHitDamageMult = (float)EditorGUILayout.FloatField("Counter Hit Multiplier:", currentCenterAttackData.counterHitDamageMult);
+
+        GUILayout.Space(25);
+        Attack_StunValues stunValues = currentCenterAttackData.attackMainStunValues;
+        stunValues.hitstunValue = (int)EditorGUILayout.FloatField("Hit Stun:", stunValues.hitstunValue);
+        stunValues.blockStunValue = (int)EditorGUILayout.FloatField("Block Stun:", stunValues.blockStunValue);
+        stunValues.hitstopValue = (int)EditorGUILayout.FloatField("Hit Stop:", stunValues.hitstopValue);
+        stunValues.blockStopValue = (int)EditorGUILayout.FloatField("Block Stop:", stunValues.blockStopValue);
+
+        GUILayout.Space(25);
+        currentCenterAttackData.hitLevel = (HitLevel)EditorGUILayout.EnumFlagsField("Hit Level", currentCenterAttackData.hitLevel);
+
+        GUILayout.Space(25);
+        currentCenterAttackData._meterRequirement = (int)EditorGUILayout.FloatField("Meter Requirement:", currentCenterAttackData._meterRequirement);
+        currentCenterAttackData._meterAwardedOnHit = (int)EditorGUILayout.FloatField("Meter Awarded:", currentCenterAttackData._meterAwardedOnHit);
+        currentCenterAttackData.attackScalingPercent = (int)EditorGUILayout.FloatField("Attack Scaling:", currentCenterAttackData.attackScalingPercent);
+
+        currentCenterAttackData.dashCancelable = (bool)EditorGUILayout.Toggle("Dash Cancelable:", currentCenterAttackData.dashCancelable);
+        currentCenterAttackData.JumpCancelable = (bool)EditorGUILayout.Toggle("Jump Cancelable:", currentCenterAttackData.JumpCancelable);
+        
+        GUILayout.Space(25);
+        currentCenterAttackData._airInfo = (AirAttackInfo)EditorGUILayout.EnumFlagsField("Air Properties", currentCenterAttackData._airInfo);
+
+        Attack_CancelInfo _cancelProperty = currentCenterAttackData.cancelProperty;
+        GUILayout.Space(25);
+        _cancelProperty.CurrentLevel = (Cancel_State)EditorGUILayout.EnumFlagsField("Attack Cancel Level", _cancelProperty.CurrentLevel);
+        _cancelProperty.nextAvailableAttackRoute = (Cancel_State)EditorGUILayout.EnumFlagsField("Next Cancel State", _cancelProperty.nextAvailableAttackRoute);
+        currentCenterAttackData._moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", currentCenterAttackData._moveType);
+
+        GUILayout.Space(25);
+        Horizontal_KnockBack LateralKnockBackData = currentCenterAttackData.LateralKB_Data;
+        Vertical_KnockBack VerticalKnockBackData = currentCenterAttackData.VerticalKB_Data;
+
+        LateralKnockBackData.Hit_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Hit Knockback", LateralKnockBackData.Hit_HKB_Level);
+        LateralKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("Knockback Value:", LateralKnockBackData.Hit_Value);
+        LateralKnockBackData.Block_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Block Knockback", LateralKnockBackData.Block_HKB_Level);
+        LateralKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block Knockback Value:", LateralKnockBackData.Block_Value);
+        GUILayout.Space(25);
+        VerticalKnockBackData.Hit_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Hit KnockUp/Down", VerticalKnockBackData.Hit_VKB_Level);
+        VerticalKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("KnockUp Value:", VerticalKnockBackData.Hit_Value);
+        VerticalKnockBackData.Block_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Block KnockUp/Down", VerticalKnockBackData.Block_VKB_Level);
+        VerticalKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
+        currentCenterAttackData.KnockDown = (Attack_KnockDown)EditorGUILayout.EnumPopup("Knockdown", currentCenterAttackData.KnockDown);
+    }
+    void ShowRightPageCollisionInformation()
+    {
+        GUILayout.Space(50);
+        GUILayout.Label("Collision Information");
+    }
+    #endregion
 
     #region Show Window Data
     void DrawCurrentAttackHeader()
@@ -620,35 +714,22 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
         GUILayout.EndArea();
     }
-    #region Center Page Information
-    public void DisplayAttackInfomation()
-    {
-        if (_attackData != null)
-        {
-            displayCurrentAttackList = EditorGUILayout.Foldout(displayCurrentAttackList, "Show Attack Property List");
-            if (displayCurrentAttackList)
-            {
-                for (int i = 0; i < _attackData.baseAttackProperties.Count; i++)
-                {
-                    var move = _attackData.baseAttackProperties[i];
-                    if (move == null) continue;
-
-                    var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
-                    if (GUILayout.Button($"Attack Property {i + 1}", style))
-                    {
-                        //DisplayStringNormalData(move);
-                    }
-                }
-            }
-        }
-        //currentCenterAttackData = _attackData.baseAttackProperties[i]
-    }
-    #endregion
     void DrawCurrentAttackInfo()
     {
         GUILayout.BeginArea(CurrentAttackInformationObject.editorRect);
         #region FillArea
         GUILayout.Label("Current Attack Information");
+        if(currentCenterAttackData != null) 
+        {
+            if(_moveListEditState == MoveListEditMode.MainAttackInfoMode) 
+            {
+                ShowRightPageAttackInformation();
+            }
+            if(_moveListEditState == MoveListEditMode.MainAttackCollisionMode) 
+            {
+                ShowRightPageCollisionInformation();
+            }
+        }
         #endregion
         GUILayout.EndArea();
     }
@@ -674,10 +755,7 @@ public class Editor_MoveListEditor : EditorWindow
         if (moveListData != null)
         {
             _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" });
-            //if (GUILayout.Button("Save Changes?", GUILayout.Width(155), GUILayout.Height(30)))
-            //{
 
-            //}
         }
         #endregion
         GUILayout.EndArea();
@@ -712,6 +790,7 @@ public class CompositeAttackData
 {
     public List<Attack_BaseProperties> baseAttackProperties;
 
+    public int basePropertyCount;
     public Attack_AdvancedSpecialMove advancedInputData;
     public RekkaInput rekkaAttackData;
     public StanceInput stanceInputData;
@@ -723,7 +802,7 @@ public class CompositeAttackData
         RekkaInput _rekkaData = null, 
         StanceInput _stanceData = null, 
         Attack_ThrowBase _throwData = null, 
-        Attack_NonSpecialAttack _nonSpecialData = null) 
+        Attack_NonSpecialAttack _nonSpecialData = null,int _basePropertyCount = 0) 
     {
         baseAttackProperties = _baseProperties;
         advancedInputData = _advancedInputData;
@@ -731,5 +810,13 @@ public class CompositeAttackData
         stanceInputData = _stanceData;
         throwInputData = _throwData;
         normalAttackData = _nonSpecialData;
+        if(baseAttackProperties.Count > 0) 
+        {
+            basePropertyCount = baseAttackProperties.Count;
+        }
+        else 
+        {
+            basePropertyCount = _basePropertyCount;
+        }
     }
 }
