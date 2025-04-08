@@ -50,6 +50,11 @@ public class Editor_MoveListEditor : EditorWindow
     private float timelineCurrentTime = 0f;
     private int fps = 60;
     private int currentFrame;
+    float init;
+    float startup;
+    float active;
+    float inactive;
+    float recoveryAmount;
     private bool isPlaying = false;
     private double lastTime;
     private bool loopPreview = false;
@@ -673,7 +678,7 @@ public class Editor_MoveListEditor : EditorWindow
             }
         }
     }
-    void DisplayAnimationTimeline() 
+    void DisplayAnimationTimeline()
     {
         #region AnimSlider
         GUILayout.Label($"Current Animation Frame: {currentFrame}");
@@ -688,6 +693,14 @@ public class Editor_MoveListEditor : EditorWindow
         currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
 
         GUILayout.EndHorizontal();
+
+        init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+        startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+        active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+        inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+        recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
+
+
         #endregion
         #endregion
     }
