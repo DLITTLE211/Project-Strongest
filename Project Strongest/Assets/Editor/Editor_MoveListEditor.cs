@@ -81,8 +81,8 @@ public class Editor_MoveListEditor : EditorWindow
     private float previewCameraFarClippingPlane = 1000f;
     private Color backgroundPreviewColor = Color.black;
     private bool showLightingSettings = true;
-    private float light0Intensity = 1.4f;
-    private float light1Intensity = 1f;
+    private float light0Intensity;
+    private float light1Intensity;
 
     // Panning/Zoom
     private Vector2 previewPan = Vector2.zero;
@@ -103,7 +103,10 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
+        light0Intensity = 0.35f;
+        light1Intensity = 0.55f;
         previewUtility = new PreviewRenderUtility();
+        previewUtility.camera.cullingMask = LayerMask.GetMask("Default", "Outlined Objects", "UI", "Player1", "Player2");
         previewUtility.cameraFieldOfView = previewCameraFOV;
         previewUtility.lights[0].intensity = light0Intensity;
         previewUtility.lights[0].color = Color.white;
@@ -116,7 +119,6 @@ public class Editor_MoveListEditor : EditorWindow
         characterAnimator = null;
         currentCenterAttackData = null;
         displayCurrentAttackList = false;
-        
     }
     private void OnDisable()
     {
@@ -700,17 +702,7 @@ public class Editor_MoveListEditor : EditorWindow
                     UpdatePreviewInstance();
                     DisplayPreviewWindow();
 
-                    showPreview = EditorGUILayout.Foldout(showPreview, "Preview Settings");
-                    if (showPreview)
-                    {
-                        EditorGUI.indentLevel++;
-                        backgroundPreviewColor = EditorGUILayout.ColorField("Background Color", backgroundPreviewColor);
-                        previewCameraFOV = EditorGUILayout.Slider("Camera FOV", previewCameraFOV, 10, 90);
-                        previewCameraPositionOffset = EditorGUILayout.Vector3Field("Camera Offset", previewCameraPositionOffset);
-                        light0Intensity = EditorGUILayout.Slider("Light 0 Intensity", light0Intensity, 0, 5);
-                        light1Intensity = EditorGUILayout.Slider("Light 1 Intensity", light1Intensity, 0, 5);
-                        EditorGUI.indentLevel--;
-                    }
+                    
                 }
             }
             GUILayout.Space(25);
@@ -763,7 +755,7 @@ public class Editor_MoveListEditor : EditorWindow
 
         previewInstance = Instantiate(characterModel);
         previewInstance.hideFlags = HideFlags.HideAndDontSave;
-
+        previewInstance.layer = LayerMask.GetMask("Outlined Objects");
         var animator = previewInstance.GetComponentInChildren<Animator>();
         if (animator == null)
         {
@@ -795,7 +787,16 @@ public class Editor_MoveListEditor : EditorWindow
         previewRect.y = CurrentAttackBodyObject.editorRect.height-650f;
         previewRect.width = 500f;
         previewRect.height = 500f;
+        showPreview = EditorGUILayout.Foldout(showPreview, "Preview Settings");
+        if (showPreview)
+        {
+            EditorGUI.indentLevel++;
+            previewCameraFOV = EditorGUILayout.Slider("Camera FOV", previewCameraFOV, 10, 90);
+            previewCameraPositionOffset = EditorGUILayout.Vector3Field("Camera Offset", previewCameraPositionOffset);
+            EditorGUI.indentLevel--;
+        }
         DrawPreview(previewRect);
+        Repaint();
     }
     void UpdatePreviewInstance() 
     {
