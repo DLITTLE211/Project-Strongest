@@ -21,7 +21,7 @@ public class Editor_MoveListEditor : EditorWindow
     private Character_MoveList moveListData;
     FullMoveList editedMoveList;
     private GameObject characterModel;
-    private Animator characterAnimator;
+    private RuntimeAnimatorController characterAnimator;
     #endregion
 
     #region CompositeAttackData
@@ -47,6 +47,7 @@ public class Editor_MoveListEditor : EditorWindow
     #endregion
 
     #region Animation Timeline Data
+    private AnimationClip _currentAnimClip;
     private float timelineCurrentTime = 0f;
     private int fps = 60;
     private int currentFrame;
@@ -70,6 +71,7 @@ public class Editor_MoveListEditor : EditorWindow
     public GameObject previewInstance;
     private Rect previewRect;
     private float previewHeight = 250f;
+    bool showPreview;
 
     // Camera & Lighting settings
     private Vector3 previewCameraPositionOffset = new Vector3(0, 0, -10);
@@ -77,7 +79,7 @@ public class Editor_MoveListEditor : EditorWindow
     private float previewCameraFOV = 30f;
     private float previewCameraNearClippingPlane = 0.1f;
     private float previewCameraFarClippingPlane = 1000f;
-    private Color backgroundPreviewColor = Color.gray;
+    private Color backgroundPreviewColor = Color.black;
     private bool showLightingSettings = true;
     private float light0Intensity = 1.4f;
     private float light1Intensity = 1f;
@@ -101,13 +103,39 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
+        previewUtility = new PreviewRenderUtility();
+        previewUtility.cameraFieldOfView = previewCameraFOV;
+        previewUtility.lights[0].intensity = light0Intensity;
+        previewUtility.lights[0].color = Color.white;
+        previewUtility.lights[0].transform.rotation = Quaternion.Euler(50, 50, 0);
+        previewUtility.lights[1].intensity = light1Intensity;
+        previewUtility.lights[1].color = Color.white;
+        previewUtility.ambientColor = Color.gray;
         _attackData = null;
+        characterModel = null;
+        characterAnimator = null;
         currentCenterAttackData = null;
         displayCurrentAttackList = false;
+        
+    }
+    private void OnDisable()
+    {
+        if (previewUtility != null)
+        {
+            previewUtility.Cleanup();
+            previewUtility = null;
+        }
+
+        if (previewInstance != null)
+        {
+            DestroyImmediate(previewInstance);
+            previewInstance = null;
+        }
     }
     void OnGUI()
     {
         DrawLayouts();
+
     }
     void DrawLayouts()
     {
@@ -668,7 +696,21 @@ public class Editor_MoveListEditor : EditorWindow
                 DisplayAnimationTimeline();
                 if (characterModel != null && characterAnimator != null)
                 {
+                    CreateOrUpdatePreviewInstance();
+                    UpdatePreviewInstance();
                     DisplayPreviewWindow();
+
+                    showPreview = EditorGUILayout.Foldout(showPreview, "Preview Settings");
+                    if (showPreview)
+                    {
+                        EditorGUI.indentLevel++;
+                        backgroundPreviewColor = EditorGUILayout.ColorField("Background Color", backgroundPreviewColor);
+                        previewCameraFOV = EditorGUILayout.Slider("Camera FOV", previewCameraFOV, 10, 90);
+                        previewCameraPositionOffset = EditorGUILayout.Vector3Field("Camera Offset", previewCameraPositionOffset);
+                        light0Intensity = EditorGUILayout.Slider("Light 0 Intensity", light0Intensity, 0, 5);
+                        light1Intensity = EditorGUILayout.Slider("Light 1 Intensity", light1Intensity, 0, 5);
+                        EditorGUI.indentLevel--;
+                    }
                 }
             }
             GUILayout.Space(25);
@@ -702,17 +744,188 @@ public class Editor_MoveListEditor : EditorWindow
 
 
         #endregion
+
         #endregion
+    }
+    #region Preview Functions
+    private void CreateOrUpdatePreviewInstance()
+    {
+        if (previewInstance != null)
+        {
+            DestroyImmediate(previewInstance);
+        }
+
+        if (characterModel == null)
+        {
+            Debug.LogError("FighterPrefab not assigned in FighterData!");
+            return;
+        }
+
+        previewInstance = Instantiate(characterModel);
+        previewInstance.hideFlags = HideFlags.HideAndDontSave;
+
+        var animator = previewInstance.GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component missing in FighterPrefab!");
+            DestroyImmediate(previewInstance);
+            return;
+        }
+
+        /*if (_currentAnimClip != selectedAnimationClip)
+        {
+            currentClip = selectedAnimationClip;
+            //CreateAnimationController(animator);
+        }*/
+
+        animator.Rebind();
+        animator.Update(0);
+        previewUtility.AddSingleGO(previewInstance);
+        ResetPreviewCamera();
+    }
+    void ResetPreviewCamera()
+    {
+        previewUtility.camera.transform.position = Vector3.zero;
+        previewUtility.camera.transform.rotation = Quaternion.identity;
     }
     void DisplayPreviewWindow() 
     {
-
+        previewRect = new Rect();
+        previewRect.x = CurrentAttackBodyObject.editorRect.width/3f;
+        previewRect.y = CurrentAttackBodyObject.editorRect.height-650f;
+        previewRect.width = 500f;
+        previewRect.height = 500f;
+        DrawPreview(previewRect);
     }
+    void UpdatePreviewInstance() 
+    {
+        if (currentCenterAttackData.AttackAnims.animClip == null || previewInstance == null)
+            return;
+
+        var animator = previewInstance.GetComponentInChildren<Animator>();
+        if (animator == null)
+            return;
+
+        if (animator.HasState(0, Animator.StringToHash("PreviewState")))
+        {
+            float normalizedTime = Mathf.Clamp01(timelineCurrentTime / currentCenterAttackData.AttackAnims.animClip.length);
+            animator.Play("PreviewState", 0, normalizedTime);
+            animator.speed = 0;
+            animator.Update(0);
+        }
+        else
+        {
+            Debug.LogWarning("PreviewState not found in animator controller!");
+        }
+    }
+    void DrawPreview(Rect _rectSize) 
+    {
+        if (previewInstance == null)
+            return;
+
+        try
+        {
+            previewUtility.BeginPreview(_rectSize, GUIStyle.none);
+            SetupPreviewCamera();
+            DrawPreviewInstanceUtil();
+            //DrawCollisionBoxesInPreview();
+            previewUtility.camera.Render();
+            GUI.DrawTexture(_rectSize, previewUtility.EndPreview(), ScaleMode.StretchToFill, false);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error drawing preview: " + ex.Message);
+            previewUtility.Cleanup();
+            throw;
+        }
+    }
+    private Bounds ComputeBounds(GameObject go)
+    {
+        Bounds bounds = new Bounds(go.transform.position, Vector3.zero);
+        foreach (Renderer r in go.GetComponentsInChildren<Renderer>())
+        {
+            bounds.Encapsulate(r.bounds);
+        }
+        return bounds;
+    }
+    private void SetupPreviewCamera()
+    {
+        Bounds bounds = ComputeBounds(previewInstance);
+        Vector3 center = bounds.center;
+
+        previewUtility.camera.transform.position = center + new Vector3(0, 0, -10) + previewCameraPositionOffset - new Vector3(previewPan.x, previewPan.y, 0);
+        previewUtility.camera.transform.rotation = Quaternion.Euler(previewCameraRotationEuler);
+        previewUtility.camera.fieldOfView = previewCameraFOV / previewZoom;
+        previewUtility.camera.nearClipPlane = previewCameraNearClippingPlane;
+        previewUtility.camera.farClipPlane = previewCameraFarClippingPlane;
+        previewUtility.camera.backgroundColor = backgroundPreviewColor;
+    }
+
+    private void DrawPreviewInstanceUtil()
+    {
+        foreach (Renderer r in previewInstance.GetComponentsInChildren<Renderer>())
+        {
+            Mesh mesh = null;
+            Material mat = null;
+
+            if (r is MeshRenderer mr)
+            {
+                MeshFilter mf = mr.GetComponent<MeshFilter>();
+                if (mf != null)
+                    mesh = mf.sharedMesh;
+                mat = mr.sharedMaterial;
+            }
+            else if (r is SkinnedMeshRenderer smr)
+            {
+                mesh = new Mesh();
+                smr.BakeMesh(mesh);
+                mat = smr.sharedMaterial;
+            }
+
+            if (mesh != null && mat != null)
+                previewUtility.DrawMesh(mesh, r.transform.localToWorldMatrix, mat, 0);
+        }
+    }
+
+    /*private void DrawCollisionBoxesInPreview()
+    {
+        if (fighterController?.CharacterData?.collisionConfig == null || selectedAnimationClip == null)
+            return;
+
+        int currentFrame = Mathf.FloorToInt(timelineCurrentTime * fighterController.CharacterData.collisionConfig.fps);
+        Mesh cubeMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
+
+        foreach (var entry in fighterController.CharacterData.collisionConfig.collisionEntries)
+        {
+            if (entry.stateName != selectedState)
+                continue;
+
+            foreach (var box in entry.collisionBoxes)
+            {
+                if (currentFrame < box.activeFrameStart || currentFrame > box.activeFrameEnd)
+                    continue;
+
+                Transform parent = GetParentTransformInPreview(box.parentName);
+                Vector3 position = parent.TransformPoint(box.offset);
+                Vector3 size = new Vector3(box.size.x, box.size.y, 0.02f);
+
+                previewSolidMaterial.color = box.GetColor();
+                previewUtility.DrawMesh(cubeMesh,
+                    Matrix4x4.TRS(position, Quaternion.identity, size),
+                    previewSolidMaterial, 0);
+
+                previewWireMaterial.color = box.WireColor;
+                DrawWireframeCube(position, size);
+            }
+        }
+    }*/
+    #endregion
     void ShowAnimationInformation()
     {
         characterModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Object"), characterModel, typeof(GameObject), true, GUILayout.Width(500), GUILayout.Height(20));
-        characterAnimator = (Animator)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(Animator), true, GUILayout.Width(500), GUILayout.Height(20));
-        currentCenterAttackData.AttackAnims.animClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), currentCenterAttackData.AttackAnims.animClip, typeof(AnimationClip),true ,GUILayout.Width(500), GUILayout.Height(20));
+        characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
+        _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
+        _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip),true ,GUILayout.Width(500), GUILayout.Height(20));
     }
     #endregion
 
