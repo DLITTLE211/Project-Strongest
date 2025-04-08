@@ -15,14 +15,11 @@ public class Editor_MoveListEditor : EditorWindow
     public EditorMoveListObject CurrentAttackBodyObject;
     public EditorMoveListObject CurrentAttackInformationObject;
     public EditorMoveListObject SaveDataObject;
-    public EditorMoveListObject ToggleEditObject;
     #endregion
 
     #region Character Data
     private Character_MoveList moveListData;
     FullMoveList editedMoveList;
-    int index;
-    GenericMenu NormalFullList; 
     private GameObject characterModel;
     private Animator characterAnimator;
     #endregion
@@ -49,8 +46,44 @@ public class Editor_MoveListEditor : EditorWindow
     bool displayThrowAttacks = false;
     #endregion
 
-    #region Preview Window Code
+    #region Animation Timeline Data
+    private float timelineCurrentTime = 0f;
+    private int fps = 60;
+    private int currentFrame;
+    private bool isPlaying = false;
+    private double lastTime;
+    private bool loopPreview = false;
+    [SerializeField] private float playbackSpeed = 1f;
+    private Color moveEventColor = Color.cyan;
+    private Color collisionBoxColor = new Color(1f, 0.5f, 0f, 0.6f); // semi-transparent orange
+    private Color collisionBoxOutlineColor = Color.yellow; // fallback color
+    private float markerWidth = 4f;
+    #endregion
 
+    #region Preview Window Code
+    private PreviewRenderUtility previewUtility;
+    public GameObject previewInstance;
+    private Rect previewRect;
+    private float previewHeight = 250f;
+
+    // Camera & Lighting settings
+    private Vector3 previewCameraPositionOffset = new Vector3(0, 0, -10);
+    private Vector3 previewCameraRotationEuler = Vector3.zero;
+    private float previewCameraFOV = 30f;
+    private float previewCameraNearClippingPlane = 0.1f;
+    private float previewCameraFarClippingPlane = 1000f;
+    private Color backgroundPreviewColor = Color.gray;
+    private bool showLightingSettings = true;
+    private float light0Intensity = 1.4f;
+    private float light1Intensity = 1f;
+
+    // Panning/Zoom
+    private Vector2 previewPan = Vector2.zero;
+    private float previewZoom = 1f;
+
+    // Panel widths
+    private float leftPanelWidth = 200f;
+    private float rightPanelWidth = 300f;
     #endregion
 
 
@@ -59,7 +92,7 @@ public class Editor_MoveListEditor : EditorWindow
     {
         Editor_MoveListEditor window = (Editor_MoveListEditor)GetWindow(typeof(Editor_MoveListEditor));
         window.minSize = new Vector2(1600f, 1000f);
-        window.maxSize = new Vector2(1600f, 1000f);
+        window.maxSize = new Vector2(2400f, 1200f);
     }
     void OnEnable()
     {
@@ -80,7 +113,6 @@ public class Editor_MoveListEditor : EditorWindow
         DrawCurrentAttackBody();
         DrawCurrentAttackInfo();
         DrawSaveChangesHeader();
-        DrawToggleDataHeader();
     }
     void SetScreenSize() 
     {
@@ -128,7 +160,7 @@ public class Editor_MoveListEditor : EditorWindow
         Rect size4 = new Rect();
         size4.x = size1.width;
         size4.y = size1.height + 10f;
-        size4.width = size3.width-200f;
+        size4.width = (Screen.width / 2.05f);
         size4.height = Screen.height - (Screen.height / 10f);
         CurrentAttackBodyObject = new EditorMoveListObject(new Texture2D(1, 1), cABColor, size4);
         CurrentAttackBodyObject.editorTexture.SetPixel(0, 0, cABColor);
@@ -141,7 +173,7 @@ public class Editor_MoveListEditor : EditorWindow
         Rect size5 = new Rect();
         size5.x = size4.x*3;
         size5.y = 0f;
-        size5.width = 400f;
+        size5.width = size1.width;
         size5.height = Screen.height;
         CurrentAttackInformationObject = new EditorMoveListObject(new Texture2D(1, 1), cAInfoColor, size5);
         CurrentAttackInformationObject.editorTexture.SetPixel(0, 0, cAInfoColor);
@@ -162,18 +194,6 @@ public class Editor_MoveListEditor : EditorWindow
         GUI.DrawTexture(SaveDataObject.editorRect, SaveDataObject.editorTexture);
         #endregion
 
-        #region Toggle Header
-        Color32 toggleColor = new Color32((byte)75f, (byte)75f, (byte)75f, (byte)255f);
-        Rect size7 = new Rect();
-        size7.x = size4.x * 3;
-        size7.y = Screen.height / 1.05f;
-        size7.width = Screen.width/4f;
-        size7.height = Screen.height;
-        ToggleEditObject = new EditorMoveListObject(new Texture2D(1, 1), toggleColor, size7);
-        ToggleEditObject.editorTexture.SetPixel(0, 0, cAHColor);
-        ToggleEditObject.editorTexture.Apply();
-        GUI.DrawTexture(ToggleEditObject.editorRect, ToggleEditObject.editorTexture);
-        #endregion
     }
     void DrawMoveListHeader() 
     {
@@ -193,6 +213,10 @@ public class Editor_MoveListEditor : EditorWindow
         {
             FillDataOnScreen();
         }
+        else 
+        {
+            currentCenterAttackData = null;
+        }
         #endregion
         GUILayout.EndArea();
     }
@@ -201,18 +225,30 @@ public class Editor_MoveListEditor : EditorWindow
     void FillDataOnScreen() 
     {
         GetMoveListData();
+        GUILayout.Space(10);
         ShowSupersAttacks();
+        GUILayout.Space(10);
         ShowCommandGrabAttacks();
+        GUILayout.Space(10);
         ShowCounterAttacks();
+        GUILayout.Space(10);
         ShowStanceAttacks();
+        GUILayout.Space(10);
         ShowRekkaAttacks();
+        GUILayout.Space(10);
         ShowSpecialAttacks();
+        GUILayout.Space(10);
         ShowStringNormalAttacks();
+        GUILayout.Space(10);
         ShowCommandNormalAttacks();
+        GUILayout.Space(10);
         ShowNormalAttacks();
+        GUILayout.Space(10);
         ShowThrowAttacks();
 
-        if (GUILayout.Button("Clear Attack Data?"))
+
+        GUILayout.Space(50);
+        if (GUILayout.Button("Clear Attack Data"))
         {
             _attackData = null;
         }
@@ -609,23 +645,61 @@ public class Editor_MoveListEditor : EditorWindow
                     if (move == null) continue;
                     string attackName = _attackData.baseAttackProperties[i]._attackName;
                     var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
-                    if (GUILayout.Button($"{attackName}_Property {i + 1}", style))
+                    if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(155), GUILayout.Height(25)))
                     {
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
                     }
                 }
             }
-            /*
-             * Animation TimeLine
-             *Preview Window
+            /**/
+             /*Preview Window
              */
-            GUILayout.Space(75);
-            if (GUILayout.Button("Clear Current Attack Info"))
+
+            GUILayout.Space(50);
+            if (moveListData != null && currentCenterAttackData != null)
+            {
+                ShowAnimationInformation();
+                GUILayout.Space(10);
+                DisplayAnimationTimeline();
+                if (characterModel != null && characterAnimator != null)
+                {
+                    DisplayPreviewWindow();
+                }
+            }
+            GUILayout.Space(25);
+            if (GUILayout.Button("Clear Current Attack Info", GUILayout.Width(155), GUILayout.Height(25)))
             {
                 currentCenterAttackData = null;
             }
         }
-        
+    }
+    void DisplayAnimationTimeline() 
+    {
+        #region AnimSlider
+        GUILayout.Label($"Current Animation Frame: {currentFrame}");
+        GUILayout.Space(25);
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+
+        #region Slider Region
+        float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
+        float currentClipLength = clipLength * fps;
+
+        currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
+
+        GUILayout.EndHorizontal();
+        #endregion
+        #endregion
+    }
+    void DisplayPreviewWindow() 
+    {
+
+    }
+    void ShowAnimationInformation()
+    {
+        characterModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Object"), characterModel, typeof(GameObject), true, GUILayout.Width(500), GUILayout.Height(20));
+        characterAnimator = (Animator)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(Animator), true, GUILayout.Width(500), GUILayout.Height(20));
+        currentCenterAttackData.AttackAnims.animClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), currentCenterAttackData.AttackAnims.animClip, typeof(AnimationClip),true ,GUILayout.Width(500), GUILayout.Height(20));
     }
     #endregion
 
@@ -680,11 +754,30 @@ public class Editor_MoveListEditor : EditorWindow
         VerticalKnockBackData.Block_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Block KnockUp/Down", VerticalKnockBackData.Block_VKB_Level);
         VerticalKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
         currentCenterAttackData.KnockDown = (Attack_KnockDown)EditorGUILayout.EnumPopup("Knockdown", currentCenterAttackData.KnockDown);
+       
     }
     void ShowRightPageCollisionInformation()
     {
         GUILayout.Space(50);
         GUILayout.Label("Collision Information");
+        AttackHandler_Attack attackAnim = currentCenterAttackData.AttackAnims;
+
+        attackAnim.attackType = (HitBoxType)EditorGUILayout.EnumPopup("Attack Type:", attackAnim.attackType);
+        attackAnim.hb_placement = (Vector3)EditorGUILayout.Vector3Field("Hitbox Placement", attackAnim.hb_placement);
+        attackAnim.hb_orientation = (Vector3)EditorGUILayout.Vector3Field("Hitbox Orientation", attackAnim.hb_orientation);
+        attackAnim.hb_size = (Vector2)EditorGUILayout.Vector2Field("Hitbox size", attackAnim.hb_size);
+
+        GUILayout.Space(25);
+        attackAnim.hurtType = (HurtBoxType)EditorGUILayout.EnumPopup("Hurtbox Type:", attackAnim.hurtType);
+        attackAnim.hb_placement = (Vector3)EditorGUILayout.Vector3Field("Hurtbox Placement", attackAnim.hu_placement);
+        attackAnim.hb_orientation = (Vector3)EditorGUILayout.Vector3Field("Hurtbox Orientation", attackAnim.hu_orientation);
+        attackAnim.hb_size = (Vector2)EditorGUILayout.Vector2Field("Hurtbox size", attackAnim.hu_size);
+
+        GUILayout.Space(25);
+        HitCount _hitCount = attackAnim._hitCount;
+        _hitCount._startCount = (int)EditorGUILayout.FloatField("Initial Hit Count:", _hitCount._startCount);
+        _hitCount._startRefreshRate = (int)EditorGUILayout.FloatField("Initial Refresh Rate:", _hitCount._startRefreshRate);
+
     }
     #endregion
 
@@ -730,6 +823,11 @@ public class Editor_MoveListEditor : EditorWindow
                 ShowRightPageCollisionInformation();
             }
         }
+        GUILayout.Space(145);
+        if (moveListData != null)
+        {
+            _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" }, GUILayout.Width(460), GUILayout.Height(50));
+        }
         #endregion
         GUILayout.EndArea();
     }
@@ -744,18 +842,6 @@ public class Editor_MoveListEditor : EditorWindow
             {
                 SaveMoveListChanges();
             }
-        }
-        #endregion
-        GUILayout.EndArea();
-    }
-    void DrawToggleDataHeader()
-    {
-        GUILayout.BeginArea(ToggleEditObject.editorRect);
-        #region FillArea
-        if (moveListData != null)
-        {
-            _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" });
-
         }
         #endregion
         GUILayout.EndArea();

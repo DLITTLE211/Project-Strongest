@@ -11,18 +11,18 @@ public class AttackHandler_Attack : AttackHandler_Base
     [Space(15)]
     public HitBox HitBox;
     public HitBoxType attackType;
-    [SerializeField] internal Vector3 hb_placement;
-    [SerializeField] internal Vector3 hb_orientation = new Vector3(0, 0, 0);
-    [SerializeField] internal Vector2 hb_size;
+    public Vector3 hb_placement;
+    public Vector3 hb_orientation = new Vector3(0, 0, 0);
+    public Vector2 hb_size;
     [Space(15)]
     #endregion
 
     #region HurtBox Variables
     public HurtBox extendedHitBox;
     public HurtBoxType hurtType;
-    [SerializeField] internal Vector3 hu_placement;
-    [SerializeField] internal Vector3 hu_orientation = new Vector3(0, 0, 0);
-    [SerializeField] internal Vector2 hu_size;
+    public Vector3 hu_placement;
+    public Vector3 hu_orientation = new Vector3(0, 0, 0);
+    public Vector2 hu_size;
     [Space(15)]
     #endregion
 
