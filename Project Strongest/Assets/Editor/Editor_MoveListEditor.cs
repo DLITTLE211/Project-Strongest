@@ -72,6 +72,8 @@ public class Editor_MoveListEditor : EditorWindow
     private Color collisionBoxColor = new Color(1f, 0.5f, 0f, 0.6f); // semi-transparent orange
     private Color collisionBoxOutlineColor = Color.yellow; // fallback color
     private float markerWidth = 4f;
+    int lastFrame;
+    bool previewActive;
     #endregion
 
     #region Preview Window Code
@@ -111,7 +113,11 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
-        light0Intensity = 0.35f;
+        previewActive = false;
+        ClearPreview();
+        currentFrame = 0;
+        lastFrame = currentFrame;
+           light0Intensity = 0.35f;
         light1Intensity = 0.55f;
         previewUtility = new PreviewRenderUtility();
         previewUtility.camera.cullingMask = LayerMask.GetMask("Default", "Outlined Objects", "UI", "Player1", "Player2");
@@ -151,6 +157,8 @@ public class Editor_MoveListEditor : EditorWindow
             DestroyImmediate(overrideController);
             overrideController = null;
         }
+        previewActive = false;
+        ClearPreview();
     }
     void OnGUI()
     {
@@ -700,16 +708,13 @@ public class Editor_MoveListEditor : EditorWindow
                     var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                     if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(155), GUILayout.Height(25)))
                     {
+                        previewActive = false;
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
                         currentFrame = 0;
                         isPlaying = false;
                     }
                 }
             }
-            /**/
-             /*Preview Window
-             */
-
             GUILayout.Space(50);
             if (moveListData != null && currentCenterAttackData != null)
             {
@@ -763,7 +768,6 @@ public class Editor_MoveListEditor : EditorWindow
         if (isPlaying && _currentAnimClip != null)
         {
             double currentTime = EditorApplication.timeSinceStartup;
-            float deltaTime = (float)(currentTime - lastTime);
             lastTime = currentTime;
             timelineCurrentTime += (1/60f) * playbackSpeed;
             currentFrame = (int)(timelineCurrentTime * 60f);
@@ -786,24 +790,27 @@ public class Editor_MoveListEditor : EditorWindow
         }
         if (!isPlaying && _currentAnimClip != null)
         {
-            double currentTime = EditorApplication.timeSinceStartup;
-            float deltaTime = (float)(currentTime - lastTime);
-            lastTime = currentTime;
-            timelineCurrentTime = currentFrame /60f;
-
-            if (timelineCurrentTime >= _currentAnimClip.length)
+            if (lastFrame != currentFrame)
             {
-                if (loopPreview)
-                    timelineCurrentTime %= _currentAnimClip.length;
-                else
-                {
-                    timelineCurrentTime = _currentAnimClip.length;
-                    isPlaying = false;
-                }
-            }
+                double currentTime = EditorApplication.timeSinceStartup;
+                lastTime = currentTime;
+                lastFrame = currentFrame;
+                timelineCurrentTime = lastFrame / 60f;
 
-            UpdatePreviewInstance();
-            Repaint();
+                if (timelineCurrentTime >= _currentAnimClip.length)
+                {
+                    if (loopPreview)
+                        timelineCurrentTime %= _currentAnimClip.length;
+                    else
+                    {
+                        timelineCurrentTime = _currentAnimClip.length;
+                        isPlaying = false;
+                    }
+                }
+
+                UpdatePreviewInstance();
+                Repaint();
+            }
         }
     }
     private void DrawTimelineControls()
@@ -854,6 +861,10 @@ public class Editor_MoveListEditor : EditorWindow
     #region Preview Functions
     private void CreateOrUpdatePreviewInstance()
     {
+        if (previewActive) 
+        {
+            return;
+        }
         if (previewInstance != null)
         {
             DestroyImmediate(previewInstance);
@@ -886,6 +897,7 @@ public class Editor_MoveListEditor : EditorWindow
         animator.Update(0);
         previewUtility.AddSingleGO(previewInstance);
         ResetPreviewCamera();
+        previewActive = true;
     }
     void ResetPreviewCamera()
     {
@@ -1032,7 +1044,16 @@ public class Editor_MoveListEditor : EditorWindow
 
         animator.runtimeAnimatorController = overrideController;
     }
-
+    void ClearPreview()
+    {
+        timelineCurrentTime = 0f;
+        isPlaying = false;
+        if (previewInstance != null)
+        {
+            DestroyImmediate(previewInstance);
+            previewInstance = null;
+        }
+    }
     /*private void DrawCollisionBoxesInPreview()
     {
         if (fighterController?.CharacterData?.collisionConfig == null || selectedAnimationClip == null)
