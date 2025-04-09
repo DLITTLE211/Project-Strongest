@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEditor.Animations;
 using UnityEditor;
+using System.Linq;
+using UnityEngine.Rendering;
+
 public class Editor_MoveListEditor : EditorWindow
 {
     #region Visual Code For Windows
@@ -47,6 +52,9 @@ public class Editor_MoveListEditor : EditorWindow
     #endregion
 
     #region Animation Timeline Data
+    private AnimatorOverrideController overrideController;
+    private AnimationClip currentClip;
+    private AnimatorController tempController;
     private AnimationClip _currentAnimClip;
     private float timelineCurrentTime = 0f;
     private int fps = 60;
@@ -132,6 +140,16 @@ public class Editor_MoveListEditor : EditorWindow
         {
             DestroyImmediate(previewInstance);
             previewInstance = null;
+        }
+        if (tempController != null)
+        {
+            DestroyImmediate(tempController);
+            tempController = null;
+        }
+        if (overrideController != null)
+        {
+            DestroyImmediate(overrideController);
+            overrideController = null;
         }
     }
     void OnGUI()
@@ -683,6 +701,8 @@ public class Editor_MoveListEditor : EditorWindow
                     if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(155), GUILayout.Height(25)))
                     {
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
+                        currentFrame = 0;
+                        isPlaying = false;
                     }
                 }
             }
@@ -701,8 +721,7 @@ public class Editor_MoveListEditor : EditorWindow
                     CreateOrUpdatePreviewInstance();
                     UpdatePreviewInstance();
                     DisplayPreviewWindow();
-
-                    
+                    OnEditorUpdate();
                 }
             }
             GUILayout.Space(25);
@@ -716,28 +735,121 @@ public class Editor_MoveListEditor : EditorWindow
     {
         #region AnimSlider
         GUILayout.Label($"Current Animation Frame: {currentFrame}");
-        GUILayout.Space(25);
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
 
         #region Slider Region
         float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
         float currentClipLength = clipLength * fps;
-
         currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
 
         GUILayout.EndHorizontal();
 
+        DrawTimelineControls();
         init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
         startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
         active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
         inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
         recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
 
+        GUILayout.Space(25);
 
         #endregion
 
         #endregion
+    }
+    void OnEditorUpdate() 
+    {
+        if (isPlaying && _currentAnimClip != null)
+        {
+            double currentTime = EditorApplication.timeSinceStartup;
+            float deltaTime = (float)(currentTime - lastTime);
+            lastTime = currentTime;
+            timelineCurrentTime += (1/60f) * playbackSpeed;
+            currentFrame = (int)(timelineCurrentTime * 60f);
+
+            if (currentFrame >= (int)(_currentAnimClip.length * 60f))
+            {
+                if (loopPreview)
+                {
+                    timelineCurrentTime %= _currentAnimClip.length;
+                }
+                else
+                {
+                    timelineCurrentTime = (int)(_currentAnimClip.length * 60f);
+                    isPlaying = false;
+                }
+            }
+
+            UpdatePreviewInstance();
+            Repaint();
+        }
+        if (!isPlaying && _currentAnimClip != null)
+        {
+            double currentTime = EditorApplication.timeSinceStartup;
+            float deltaTime = (float)(currentTime - lastTime);
+            lastTime = currentTime;
+            timelineCurrentTime = currentFrame /60f;
+
+            if (timelineCurrentTime >= _currentAnimClip.length)
+            {
+                if (loopPreview)
+                    timelineCurrentTime %= _currentAnimClip.length;
+                else
+                {
+                    timelineCurrentTime = _currentAnimClip.length;
+                    isPlaying = false;
+                }
+            }
+
+            UpdatePreviewInstance();
+            Repaint();
+        }
+    }
+    private void DrawTimelineControls()
+    {
+
+        playbackSpeed = EditorGUILayout.FloatField(new GUIContent("Playback Speed", "Adjust playback speed multiplier"), playbackSpeed, GUILayout.Width(500), GUILayout.Height(20));
+        loopPreview = EditorGUILayout.Toggle(new GUIContent("Loop Animation", "Toggle looping"), loopPreview, GUILayout.Width(500), GUILayout.Height(20));
+
+        EditorGUILayout.BeginHorizontal();
+        {
+            if (GUILayout.Button(isPlaying ? "Pause" : "Play", GUILayout.Width(500), GUILayout.Height(20)))
+            {
+                TogglePlayback(_currentAnimClip.length);
+            }
+
+            if (GUILayout.Button("Restart", GUILayout.Width(500), GUILayout.Height(20)))
+            {
+                RestartPlayback();
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void TogglePlayback(float clipLength)
+    {
+        isPlaying = !isPlaying;
+        lastTime = EditorApplication.timeSinceStartup;
+        Animator previewAnimator = previewInstance.GetComponentInChildren<Animator>();
+        if (isPlaying) 
+        {
+            previewAnimator.Play(_currentAnimClip.name, 0);
+        }
+        else 
+        {
+            previewAnimator.StopPlayback();
+        }
+        if (timelineCurrentTime >= clipLength)
+        {
+            timelineCurrentTime = 0f;
+        }
+    }
+    private void RestartPlayback()
+    {
+        timelineCurrentTime = 0f;
+        isPlaying = true;
+        lastTime = EditorApplication.timeSinceStartup;
     }
     #region Preview Functions
     private void CreateOrUpdatePreviewInstance()
@@ -764,11 +876,11 @@ public class Editor_MoveListEditor : EditorWindow
             return;
         }
 
-        /*if (_currentAnimClip != selectedAnimationClip)
+        if (currentCenterAttackData.AttackAnims.animClip != null)
         {
-            currentClip = selectedAnimationClip;
-            //CreateAnimationController(animator);
-        }*/
+            _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
+            CreateAnimationController(animator);
+        }
 
         animator.Rebind();
         animator.Update(0);
@@ -783,8 +895,8 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplayPreviewWindow() 
     {
         previewRect = new Rect();
-        previewRect.x = CurrentAttackBodyObject.editorRect.width/3f;
-        previewRect.y = CurrentAttackBodyObject.editorRect.height-650f;
+        previewRect.x = CurrentAttackBodyObject.editorRect.width/3.5f;
+        previewRect.y = CurrentAttackBodyObject.editorRect.height/2.015f;
         previewRect.width = 500f;
         previewRect.height = 500f;
         showPreview = EditorGUILayout.Foldout(showPreview, "Preview Settings");
@@ -886,6 +998,39 @@ public class Editor_MoveListEditor : EditorWindow
             if (mesh != null && mat != null)
                 previewUtility.DrawMesh(mesh, r.transform.localToWorldMatrix, mat, 0);
         }
+    }
+    private void CreateAnimationController(Animator animator)
+    {
+        if (tempController != null)
+        {
+            DestroyImmediate(tempController);
+        }
+        if (overrideController != null)
+        {
+            DestroyImmediate(overrideController);
+        }
+
+        tempController = new AnimatorController();
+
+        if (tempController.layers.Length == 0)
+            tempController.AddLayer("Base Layer");
+
+        var stateMachine = tempController.layers[0].stateMachine;
+        if (stateMachine == null)
+        {
+            stateMachine = new AnimatorStateMachine();
+            tempController.layers[0].stateMachine = stateMachine;
+        }
+
+        var state = stateMachine.AddState("PreviewState");
+        state.motion = _currentAnimClip;
+
+        overrideController = new AnimatorOverrideController(tempController)
+        {
+            ["PreviewState"] = _currentAnimClip
+        };
+
+        animator.runtimeAnimatorController = overrideController;
     }
 
     /*private void DrawCollisionBoxesInPreview()
