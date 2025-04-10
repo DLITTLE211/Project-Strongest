@@ -647,27 +647,21 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddNewNormalAttackEntry()
     {
+        List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>();
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
-
         Attack_NonSpecialAttack newNormalEntry = new Attack_NonSpecialAttack();
-
         Attack_BasicInput newBasicInput = new Attack_BasicInput();
-
         Attack_BaseInput newBaseInput = new Attack_BaseInput();
-
         Attack_BaseProperties newProperty = new Attack_BaseProperties();
 
         newProperty._attackName = "New Attack Entry";
-
         newBaseInput.property = newProperty;
-
         newBasicInput._correctInput = new List<Attack_BaseInput> { newBaseInput };
-
         newNormalEntry._attackInput = newBasicInput;
-
         propertyList.Add(newProperty);
+        newNonSpecialAttackData.Add(newNormalEntry);
 
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null, null, newNormalEntry, 1);
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null,null ,null, newNonSpecialAttackData, 1);
 
         editedMoveList.simpleAttacks.Insert(0,newNormalEntry);
         _attackData = newCompositeAttackData;
@@ -675,7 +669,8 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack) 
     {
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { simpleAttack._attackInput._correctInput[0].property };
-        _attackData = new CompositeAttackData(propertyList);
+        List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
+        _attackData = new CompositeAttackData(propertyList, null, null, null, null, null, newNonSpecialAttackData, 1);
     }
     #endregion
 
@@ -1135,14 +1130,10 @@ public class Editor_MoveListEditor : EditorWindow
         displayPrimaryAttackData = EditorGUILayout.Foldout(displayPrimaryAttackData, "Show Primary Data");
         if (displayPrimaryAttackData)
         {
-            DisplaySuperData();
-            DisplayCommandGrabData();
-            DisplayCounterData();
+            DisplayAdvanceSpecialData();
             DisplayStanceData();
             DisplayRekkaData();
             DisplaySpecialData();
-            DisplayStringData();
-            DisplayCommandNormalData();
             DisplayNormalData();
             DisplayThrowData();
         }
@@ -1200,45 +1191,47 @@ public class Editor_MoveListEditor : EditorWindow
        
     }
     #region Specific Attack Data Display Code
-    void DisplaySuperData() 
+    void DisplayAdvanceSpecialData() 
     {
-
-    }
-    void DisplayCommandGrabData()
-    {
-
-    }
-    void DisplayCounterData()
-    {
-
+        if (_attackData.advancedInputData != null)
+        {
+            GUILayout.Label("Advanced Input Primary Data");
+        }
     }
     void DisplayStanceData()
     {
-
+        if (_attackData.stanceInputData != null)
+        {
+            GUILayout.Label("Stance Primary Data");
+        }
     }
     void DisplayRekkaData()
     {
-
+        if (_attackData.rekkaAttackData != null)
+        {
+            GUILayout.Label("Rekka Primary Data");
+        }
     }
     void DisplaySpecialData()
     {
-
-    }
-    void DisplayStringData()
-    {
-
-    }
-    void DisplayCommandNormalData()
-    {
-
+        if (_attackData.specialInputData != null)
+        {
+            GUILayout.Label("Special Primary Data");
+        }
     }
     void DisplayNormalData()
     {
-
+        if (_attackData.normalAttackData != null)
+        {
+            GUILayout.Label("Normal Primary Data");
+        }
     }
     void DisplayThrowData()
     {
-
+        if (_attackData.throwInputData != null)
+        {
+            GUILayout.Label("Throw Primary Data");
+        }
     }
     #endregion
     void ShowRightPageCollisionInformation()
@@ -1366,20 +1359,23 @@ public class CompositeAttackData
     public Attack_AdvancedSpecialMove advancedInputData;
     public RekkaInput rekkaAttackData;
     public StanceInput stanceInputData;
+    public Attack_BasicSpecialMove specialInputData;
     public Attack_ThrowBase throwInputData;
-    public Attack_NonSpecialAttack normalAttackData;
+    public List<Attack_NonSpecialAttack> normalAttackData;
     public CompositeAttackData(
         List<Attack_BaseProperties> _baseProperties, 
         Attack_AdvancedSpecialMove _advancedInputData = null, 
-        RekkaInput _rekkaData = null, 
+        RekkaInput _rekkaData = null,
+        Attack_BasicSpecialMove _specialData = null,
         StanceInput _stanceData = null, 
-        Attack_ThrowBase _throwData = null, 
-        Attack_NonSpecialAttack _nonSpecialData = null,int _basePropertyCount = 0) 
+        Attack_ThrowBase _throwData = null,
+        List<Attack_NonSpecialAttack> _nonSpecialData = null,int _basePropertyCount = 0) 
     {
         baseAttackProperties = _baseProperties;
         advancedInputData = _advancedInputData;
         rekkaAttackData = _rekkaData;
         stanceInputData = _stanceData;
+        specialInputData = _specialData;
         throwInputData = _throwData;
         normalAttackData = _nonSpecialData;
         if(baseAttackProperties.Count > 0) 
