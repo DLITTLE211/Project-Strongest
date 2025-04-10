@@ -309,10 +309,6 @@ public class Editor_MoveListEditor : EditorWindow
 
 
         GUILayout.Space(50);
-        if (GUILayout.Button("Clear Attack Data"))
-        {
-            _attackData = null;
-        }
 
         Debug.Log("Present ALL Attacks");
     }
@@ -637,11 +633,39 @@ public class Editor_MoveListEditor : EditorWindow
                     DisplaySimpleAttackData(move);
                 }
             }
+            if (GUILayout.Button("Clear Normal Attack Data"))
+            {
+                editedMoveList.simpleAttacks.RemoveAt(0);
+                _attackData = null;
+            }
         }
+
         #endregion
     }
     void AddNewNormalAttackEntry()
     {
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+
+        Attack_NonSpecialAttack newNormalEntry = new Attack_NonSpecialAttack();
+
+        Attack_BasicInput newBasicInput = new Attack_BasicInput();
+
+        Attack_BaseInput newBaseInput = new Attack_BaseInput();
+
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+
+        newBaseInput.property = newProperty;
+
+        newBasicInput._correctInput = new List<Attack_BaseInput> { newBaseInput };
+
+        newNormalEntry._attackInput = newBasicInput;
+
+        propertyList.Add(newProperty);
+
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null, null, newNormalEntry, 1);
+
+        editedMoveList.simpleAttacks.Insert(0,newNormalEntry);
+        _attackData = newCompositeAttackData;
     }
     void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack) 
     {
@@ -1091,8 +1115,11 @@ public class Editor_MoveListEditor : EditorWindow
     {
         characterModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Object"), characterModel, typeof(GameObject), true, GUILayout.Width(500), GUILayout.Height(20));
         characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
-        _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
-        _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip),true ,GUILayout.Width(500), GUILayout.Height(20));
+        if (currentCenterAttackData.AttackAnims.animClip != null)
+        {
+            _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
+            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
+        }
     }
     #endregion
 
