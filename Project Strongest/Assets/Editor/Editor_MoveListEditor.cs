@@ -317,7 +317,7 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowSupersAttacks()
     {
         #region Command Grabs Display
-        Debug.Log(editedMoveList.CommandThrows.Count);
+        Debug.Log(editedMoveList.BasicSuperAttacks.Count);
         GUILayout.Label("Super Attacks");
         if (GUILayout.Button("Add New Supers Entry"))
         {
@@ -654,6 +654,8 @@ public class Editor_MoveListEditor : EditorWindow
 
         Attack_BaseProperties newProperty = new Attack_BaseProperties();
 
+        newProperty._attackName = "New Attack Entry";
+
         newBaseInput.property = newProperty;
 
         newBasicInput._correctInput = new List<Attack_BaseInput> { newBaseInput };
@@ -678,7 +680,7 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowThrowAttacks()
     {
         #region Throw Display
-        Debug.Log(editedMoveList.simpleAttacks.Count);
+        Debug.Log(editedMoveList.BasicThrows.Count);
         GUILayout.Label("Throws");
         if (GUILayout.Button("Add New Throw Entry"))
         {
@@ -763,28 +765,30 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplayAnimationTimeline()
     {
         #region AnimSlider
-        GUILayout.Label($"Current Animation Frame: {currentFrame}");
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
+        if (currentCenterAttackData.AttackAnims.animClip != null)
+        {
+            GUILayout.Label($"Current Animation Frame: {currentFrame}");
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
 
-        #region Slider Region
-        float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
-        float currentClipLength = clipLength * fps;
-        currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
+            #region Slider Region
+            float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
+            float currentClipLength = clipLength * fps;
+            currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
 
-        GUILayout.EndHorizontal();
+            GUILayout.EndHorizontal();
 
-        DrawTimelineControls();
-        init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-        startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-        active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-        inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-        recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
+            DrawTimelineControls();
+            init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+            startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+            active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+            inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+            recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
 
-        GUILayout.Space(25);
+            GUILayout.Space(25);
 
-        #endregion
-
+            #endregion
+        }
         #endregion
     }
     void OnEditorUpdate() 
@@ -1115,11 +1119,9 @@ public class Editor_MoveListEditor : EditorWindow
     {
         characterModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Object"), characterModel, typeof(GameObject), true, GUILayout.Width(500), GUILayout.Height(20));
         characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
-        if (currentCenterAttackData.AttackAnims.animClip != null)
-        {
-            _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
-            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
-        }
+
+        _currentAnimClip = currentCenterAttackData.AttackAnims.animClip != null ? currentCenterAttackData.AttackAnims.animClip : null;
+        _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
     }
     #endregion
 
@@ -1275,7 +1277,8 @@ public class Editor_MoveListEditor : EditorWindow
     void GetMoveListData() 
     {
         FullMoveList newMoveList = null;
-        editedMoveList = moveListData.GetFullMoveList(newMoveList);
+        newMoveList = moveListData.GetFullMoveList();
+        editedMoveList = newMoveList;
     } 
 }
 [Serializable]

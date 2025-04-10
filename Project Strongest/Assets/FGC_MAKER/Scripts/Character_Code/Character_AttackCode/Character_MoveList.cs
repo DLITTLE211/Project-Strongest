@@ -557,10 +557,9 @@ public class Character_MoveList : MonoBehaviour
     }
     #endregion
 
-    public FullMoveList GetFullMoveList(FullMoveList newMoveList) 
+    public FullMoveList GetFullMoveList() 
     {
-        newMoveList = new FullMoveList(BasicSuperAttacks, CommandThrows,CounterAttacks,stanceSpecials,rekkaSpecials,special_Simple,stringNormalAttacks,commandNormalAttacks,simpleAttacks,BasicThrows);
-        return newMoveList;
+        return new FullMoveList(BasicSuperAttacks, CommandThrows, CounterAttacks, stanceSpecials, rekkaSpecials, special_Simple, stringNormalAttacks, commandNormalAttacks, simpleAttacks, BasicThrows);
     }
 }
 [Serializable]
