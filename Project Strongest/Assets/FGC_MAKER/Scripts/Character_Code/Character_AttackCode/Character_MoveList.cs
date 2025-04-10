@@ -586,15 +586,15 @@ public class FullMoveList
         List<Attack_NonSpecialAttack> _normals,
         List<Attack_ThrowBase> _throws) 
     {
-        BasicSuperAttacks = _supers;
-        CommandThrows = _commandGrabs;
-        CounterAttacks = _counters;
-        stanceSpecials = _stances;
-        rekkaSpecials = _rekkas;
-        special_Simple = _specials;
-        stringNormalAttacks = _stringNormals;
-        commandNormalAttacks = _commandNormals;
-        simpleAttacks = _normals;
-        BasicThrows = _throws;
+        BasicSuperAttacks = new(_supers);
+        CommandThrows = new(_commandGrabs);
+        CounterAttacks = new(_counters);
+        stanceSpecials = new(_stances);
+        rekkaSpecials = new(_rekkas);
+        special_Simple = new(_specials);
+        stringNormalAttacks = new(_stringNormals);
+        commandNormalAttacks = new(_commandNormals);
+        simpleAttacks = new(_normals);
+        BasicThrows = new(_throws);
     }
 }
