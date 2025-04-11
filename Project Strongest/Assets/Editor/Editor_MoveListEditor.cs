@@ -633,13 +633,16 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.SpecialAttackName, style))
                 {
-                    DisplaySimpleAttackData(move);
+                    DisplaySimpleAttackData(move, move.SpecialAttackName);
                 }
             }
             if (GUILayout.Button("Clear Normal Attack Data"))
             {
-                editedMoveList.simpleAttacks.RemoveAt(0);
-                _attackData = null;
+                if (editedMoveList.simpleAttacks.Count > 0)
+                {
+                    editedMoveList.simpleAttacks.RemoveAt(0);
+                    _attackData = null;
+                }
             }
         }
 
@@ -661,16 +664,16 @@ public class Editor_MoveListEditor : EditorWindow
         propertyList.Add(newProperty);
         newNonSpecialAttackData.Add(newNormalEntry);
 
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null,null ,null, newNonSpecialAttackData, 1);
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null,null ,null, newNonSpecialAttackData, 1,"");
 
         editedMoveList.simpleAttacks.Insert(0,newNormalEntry);
         _attackData = newCompositeAttackData;
     }
-    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack) 
+    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack,string attackName) 
     {
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { simpleAttack._attackInput._correctInput[0].property };
         List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
-        _attackData = new CompositeAttackData(propertyList, null, null, null, null, null, newNonSpecialAttackData, 1);
+        _attackData = new CompositeAttackData(propertyList, null, null, null, null, null, newNonSpecialAttackData, 1, attackName);
     }
     #endregion
 
@@ -695,19 +698,44 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.ThrowName, style))
                 {
-                    DisplayThrowData(move);
+                    DisplayThrowData(move, move.ThrowName);
                 }
+            }
+        }
+        if (GUILayout.Button("Clear Throw Attack Data"))
+        {
+            if (editedMoveList.BasicThrows.Count > 0)
+            {
+                editedMoveList.BasicThrows.RemoveAt(0);
+                _attackData = null;
             }
         }
         #endregion
     }
     void AddNewThrowEntry()
     {
+        Attack_ThrowBase _newThrowBase = new Attack_ThrowBase();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        Attack_BasicInput newBasicInput = new Attack_BasicInput();
+        Attack_BaseInput newBaseInput = new Attack_BaseInput();
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
 
+        newProperty._attackName = "New Throw Attack Entry";
+        newBaseInput.property = newProperty;
+        newBasicInput._correctInput = new List<Attack_BaseInput> { newBaseInput };
+        _newThrowBase._attackInput = newBasicInput;
+        propertyList.Add(newProperty);
+
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, _newThrowBase,null, 1, "");
+        AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
+        _newThrowBase._throwAnimation = new List<AttackHandler_Attack>() { newAttackHandler };
+        editedMoveList.BasicThrows.Insert(0, _newThrowBase);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayThrowData(Attack_ThrowBase throwAttack)
+    void DisplayThrowData(Attack_ThrowBase throwAttack, string throwName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { throwAttack._attackInput._correctInput[0].property };
+        _attackData = new CompositeAttackData(propertyList, null, null, null, null, throwAttack, null, 1, throwName);
     }
     #endregion
 
@@ -734,6 +762,7 @@ public class Editor_MoveListEditor : EditorWindow
                     {
                         previewActive = false;
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
+                        currentCenterAttackData.AttackAnims = _attackData.baseAttackProperties[i].AttackAnims;
                         currentFrame = 0;
                         isPlaying = false;
                     }
@@ -763,29 +792,32 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplayAnimationTimeline()
     {
         #region AnimSlider
-        if (currentCenterAttackData.AttackAnims.animClip != null)
+        if (currentCenterAttackData.AttackAnims != null)
         {
-            GUILayout.Label($"Current Animation Frame: {currentFrame}");
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
+            if (currentCenterAttackData.AttackAnims.animClip != null)
+            {
+                GUILayout.Label($"Current Animation Frame: {currentFrame}");
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
 
-            #region Slider Region
-            float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
-            float currentClipLength = clipLength * fps;
-            currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
+                #region Slider Region
+                float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
+                float currentClipLength = clipLength * fps;
+                currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
 
-            GUILayout.EndHorizontal();
+                GUILayout.EndHorizontal();
 
-            DrawTimelineControls();
-            init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-            startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-            active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-            inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-            recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
+                DrawTimelineControls();
+                init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+                startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+                active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+                inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+                recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
 
-            GUILayout.Space(25);
+                GUILayout.Space(25);
 
-            #endregion
+                #endregion
+            }
         }
         #endregion
     }
@@ -847,7 +879,7 @@ public class Editor_MoveListEditor : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
         {
-            if (GUILayout.Button(isPlaying ? "Pause" : "Play", GUILayout.Width(500), GUILayout.Height(20)))
+            if (GUILayout.Button(isPlaying ? "Pause" : "Play", GUILayout.Width(CurrentAttackBodyObject.editorRect.width/2f), GUILayout.Height(20)))
             {
                 TogglePlayback(_currentAnimClip.length);
             }
@@ -1117,9 +1149,16 @@ public class Editor_MoveListEditor : EditorWindow
     {
         characterModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Object"), characterModel, typeof(GameObject), true, GUILayout.Width(500), GUILayout.Height(20));
         characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
-
-        _currentAnimClip = currentCenterAttackData.AttackAnims.animClip != null ? currentCenterAttackData.AttackAnims.animClip : null;
-        _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
+        if (currentCenterAttackData.AttackAnims != null)
+        {
+            _currentAnimClip = currentCenterAttackData.AttackAnims.animClip != null ? currentCenterAttackData.AttackAnims.animClip : null;
+            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
+        }
+        else
+        {
+            _currentAnimClip = null;
+            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
+        }
     }
     #endregion
 
@@ -1224,6 +1263,9 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.normalAttackData != null)
         {
             GUILayout.Label("Normal Primary Data");
+            GUILayout.Label($"Normal Attack Count: {_attackData.normalAttackData.Count}");
+            _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+
         }
     }
     void DisplayThrowData()
@@ -1231,6 +1273,10 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.throwInputData != null)
         {
             GUILayout.Label("Throw Primary Data");
+            GUILayout.Label($"Throw Attack Count: {_attackData.throwInputData._attackInput._correctInput.Count}");
+            _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            AnimationClip throwAnim = _attackData.throwInputData._throwAnimation[0] != null ? _attackData.throwInputData._throwAnimation[0].animClip : null;
+            throwAnim = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), throwAnim, typeof(AnimationClip), true, GUILayout.Width(CurrentAttackInformationObject.editorRect.width), GUILayout.Height(20));
         }
     }
     #endregion
@@ -1362,6 +1408,7 @@ public class CompositeAttackData
     public Attack_BasicSpecialMove specialInputData;
     public Attack_ThrowBase throwInputData;
     public List<Attack_NonSpecialAttack> normalAttackData;
+    public string SpecialAttackName;
     public CompositeAttackData(
         List<Attack_BaseProperties> _baseProperties, 
         Attack_AdvancedSpecialMove _advancedInputData = null, 
@@ -1369,7 +1416,7 @@ public class CompositeAttackData
         Attack_BasicSpecialMove _specialData = null,
         StanceInput _stanceData = null, 
         Attack_ThrowBase _throwData = null,
-        List<Attack_NonSpecialAttack> _nonSpecialData = null,int _basePropertyCount = 0) 
+        List<Attack_NonSpecialAttack> _nonSpecialData = null,int _basePropertyCount = 0, string _specialName = "") 
     {
         baseAttackProperties = _baseProperties;
         advancedInputData = _advancedInputData;
@@ -1386,5 +1433,6 @@ public class CompositeAttackData
         {
             basePropertyCount = _basePropertyCount;
         }
+        SpecialAttackName = _specialName;
     }
 }

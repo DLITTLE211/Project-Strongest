@@ -45,7 +45,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicSuperAttacks: []
-  CommandThrows: []
+  CommandThrows:
+  - specialMoveName: 
+    attackInput: []
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      rawChipDamage: 0
+      counterHitDamageMult: 0
+      attackMainStunValues:
+        hitstunValue: 0
+        blockStunValue: 0
+        hitstopValue: 0
+        blockStopValue: 0
+      hitLevel: 0
+      attackHashes: 0
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        CurrentLevel: 0
+        nextAvailableAttackRoute: 0
+      _moveType: 0
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 0}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 0
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recoveryEnd: 0
+          recoveryAmount: 0
+          totalRecovery: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      hitLanded: 0
+      hitConnected: 0
+      LateralKB_Data:
+        Hit_HKB_Level: 0
+        Hit_Value: 0
+        Block_HKB_Level: 0
+        Block_Value: 0
+      VerticalKB_Data:
+        Hit_VKB_Level: 0
+        Hit_Value: 0
+        Block_VKB_Level: 0
+        Block_Value: 0
+      KnockDown: 0
+    _customAnimation: []
+    movementPortionLength: 0
+    finalAttackButton: 0
+    _curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+    currentCustomAnim: 0
   CounterAttacks: []
   stanceSpecials: []
   rekkaSpecials: []
