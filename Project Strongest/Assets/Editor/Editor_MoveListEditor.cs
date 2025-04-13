@@ -56,7 +56,7 @@ public class Editor_MoveListEditor : EditorWindow
 
     #region Animation Timeline Data
     private AnimatorOverrideController overrideController;
-    private AnimationClip currentClip;
+    private AnimationClip lastClip;
     private AnimatorController tempController;
     private AnimationClip _currentAnimClip;
     private float timelineCurrentTime = 0f;
@@ -116,11 +116,12 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
+        editedMoveList = null;
         previewActive = false;
         ClearPreview();
         currentFrame = 0;
         lastFrame = currentFrame;
-           light0Intensity = 0.35f;
+        light0Intensity = 0.35f;
         light1Intensity = 0.55f;
         previewUtility = new PreviewRenderUtility();
         previewUtility.camera.cullingMask = LayerMask.GetMask("Default", "Outlined Objects", "UI", "Player1", "Player2");
@@ -160,6 +161,7 @@ public class Editor_MoveListEditor : EditorWindow
             DestroyImmediate(overrideController);
             overrideController = null;
         }
+        editedMoveList = null;
         previewActive = false;
         ClearPreview();
     }
@@ -211,7 +213,7 @@ public class Editor_MoveListEditor : EditorWindow
         Rect size3 = new Rect();
         size3.x = size1.width;
         size3.y = 0f;
-        size3.width = 1000f;
+        size3.width = (Screen.width / 1.95f);
         size3.height = 30f;
         CurrentAttackHeaderObject = new EditorMoveListObject(new Texture2D(1, 1), cAHColor, size3);
         CurrentAttackHeaderObject.editorTexture.SetPixel(0, 0, cAHColor);
@@ -224,7 +226,7 @@ public class Editor_MoveListEditor : EditorWindow
         Rect size4 = new Rect();
         size4.x = size1.width;
         size4.y = size1.height + 10f;
-        size4.width = (Screen.width / 2.05f);
+        size4.width = (Screen.width / 1.95f);
         size4.height = Screen.height - (Screen.height / 10f);
         CurrentAttackBodyObject = new EditorMoveListObject(new Texture2D(1, 1), cABColor, size4);
         CurrentAttackBodyObject.editorTexture.SetPixel(0, 0, cABColor);
@@ -249,8 +251,8 @@ public class Editor_MoveListEditor : EditorWindow
         Color32 toggleDataColor = new Color32((byte)25f, (byte)25f, (byte)25f, (byte)255f);
         Rect size6 = new Rect();
         size6.x = 0f;
-        size6.y = Screen.height/1.05f;
-        size6.width = Screen.width/3f;
+        size6.y = Screen.height/1.08f;
+        size6.width = Screen.width / 4f;
         size6.height = Screen.height;
         SaveDataObject = new EditorMoveListObject(new Texture2D(1, 1), toggleDataColor, size6);
         SaveDataObject.editorTexture.SetPixel(0, 0, toggleDataColor);
@@ -555,11 +557,10 @@ public class Editor_MoveListEditor : EditorWindow
             {
                 var move = editedMoveList.stringNormalAttacks[i];
                 if (move == null) continue;
-
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.SpecialAttackName, style))
                 {
-                    DisplayStringNormalData(move);
+                    DisplayStringNormalData(move, move.SpecialAttackName);
                 }
             }
         }
@@ -569,9 +570,15 @@ public class Editor_MoveListEditor : EditorWindow
     {
 
     }
-    void DisplayStringNormalData(Attack_NonSpecialAttack simpleAttack)
+    void DisplayStringNormalData(Attack_NonSpecialAttack simpleAttack, string attackName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        for (int i = 0; i < simpleAttack._attackInput._correctInput.Count; i++) 
+        {
+            propertyList.Add(simpleAttack._attackInput._correctInput[i].property);
+        }
+        List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
+        _attackData = new CompositeAttackData(propertyList, null, null, null, null, null, newNonSpecialAttackData, propertyList.Count, attackName);
     }
     #endregion
 
@@ -596,7 +603,7 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.SpecialAttackName, style))
                 {
-                    DisplayCommandNormalData(move);
+                    DisplayCommandNormalData(move, move.SpecialAttackName);
                 }
             }
         }
@@ -604,11 +611,30 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddCommandNormalAttackEntry()
     {
+        List<Attack_NonSpecialAttack> newCommandAttackData = new List<Attack_NonSpecialAttack>();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        Attack_NonSpecialAttack newNormalEntry = new Attack_NonSpecialAttack();
+        Attack_BasicInput newBasicInput = new Attack_BasicInput();
+        Attack_BaseInput newBaseInput = new Attack_BaseInput();
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
 
+        newProperty._attackName = "New Command Attack Entry";
+        newBaseInput.property = newProperty;
+        newBasicInput._correctInput = new List<Attack_BaseInput> { newBaseInput };
+        newNormalEntry._attackInput = newBasicInput;
+        propertyList.Add(newProperty);
+        newCommandAttackData.Add(newNormalEntry);
+
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newCommandAttackData, 1, "");
+
+        editedMoveList.simpleAttacks.Insert(0, newNormalEntry);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayCommandNormalData(Attack_NonSpecialAttack simpleAttack)
+    void DisplayCommandNormalData(Attack_NonSpecialAttack simpleAttack, string attackName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { simpleAttack._attackInput._correctInput[0].property };
+        List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
+        _attackData = new CompositeAttackData(propertyList, null, null, null, null, null, newNonSpecialAttackData, 1, attackName);
     }
     #endregion
 
@@ -657,7 +683,7 @@ public class Editor_MoveListEditor : EditorWindow
         Attack_BaseInput newBaseInput = new Attack_BaseInput();
         Attack_BaseProperties newProperty = new Attack_BaseProperties();
 
-        newProperty._attackName = "New Attack Entry";
+        newProperty._attackName = "New Normal Attack Entry";
         newBaseInput.property = newProperty;
         newBasicInput._correctInput = new List<Attack_BaseInput> { newBaseInput };
         newNormalEntry._attackInput = newBasicInput;
@@ -758,7 +784,7 @@ public class Editor_MoveListEditor : EditorWindow
                     if (move == null) continue;
                     string attackName = _attackData.baseAttackProperties[i]._attackName;
                     var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
-                    if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(155), GUILayout.Height(25)))
+                    if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 3f), GUILayout.Height(25)))
                     {
                         previewActive = false;
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
@@ -797,15 +823,12 @@ public class Editor_MoveListEditor : EditorWindow
             if (currentCenterAttackData.AttackAnims.animClip != null)
             {
                 GUILayout.Label($"Current Animation Frame: {currentFrame}");
-                GUILayout.BeginHorizontal();
-                GUILayout.FlexibleSpace();
 
                 #region Slider Region
                 float clipLength = currentCenterAttackData.AttackAnims.animClip.length;
                 float currentClipLength = clipLength * fps;
-                currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width((Screen.width / 2.05f)), GUILayout.Height(20));
+                currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 2f), GUILayout.Height(20));
 
-                GUILayout.EndHorizontal();
 
                 DrawTimelineControls();
                 init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
@@ -877,19 +900,15 @@ public class Editor_MoveListEditor : EditorWindow
         playbackSpeed = EditorGUILayout.FloatField(new GUIContent("Playback Speed", "Adjust playback speed multiplier"), playbackSpeed, GUILayout.Width(500), GUILayout.Height(20));
         loopPreview = EditorGUILayout.Toggle(new GUIContent("Loop Animation", "Toggle looping"), loopPreview, GUILayout.Width(500), GUILayout.Height(20));
 
-        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button(isPlaying ? "Pause" : "Play", GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 4f), GUILayout.Height(20)))
         {
-            if (GUILayout.Button(isPlaying ? "Pause" : "Play", GUILayout.Width(CurrentAttackBodyObject.editorRect.width/2f), GUILayout.Height(20)))
-            {
-                TogglePlayback(_currentAnimClip.length);
-            }
-
-            if (GUILayout.Button("Restart", GUILayout.Width(500), GUILayout.Height(20)))
-            {
-                RestartPlayback();
-            }
+            TogglePlayback(_currentAnimClip.length);
         }
-        EditorGUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Restart", GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 4f), GUILayout.Height(20)))
+        {
+            RestartPlayback();
+        }
     }
 
     private void TogglePlayback(float clipLength)
@@ -1152,6 +1171,18 @@ public class Editor_MoveListEditor : EditorWindow
         if (currentCenterAttackData.AttackAnims != null)
         {
             _currentAnimClip = currentCenterAttackData.AttackAnims.animClip != null ? currentCenterAttackData.AttackAnims.animClip : null;
+            if (lastClip != _currentAnimClip)
+            {
+                if (_currentAnimClip != null)
+                {
+                    lastClip = _currentAnimClip;
+                    init = currentCenterAttackData.AttackAnims._frameData.init;
+                    startup = currentCenterAttackData.AttackAnims._frameData.startup;
+                    active = currentCenterAttackData.AttackAnims._frameData.active;
+                    inactive = currentCenterAttackData.AttackAnims._frameData.inactive;
+                    recoveryAmount = currentCenterAttackData.AttackAnims._frameData.recoveryAmount;
+                }
+            }
             _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
         }
         else
@@ -1265,6 +1296,7 @@ public class Editor_MoveListEditor : EditorWindow
             GUILayout.Label("Normal Primary Data");
             GUILayout.Label($"Normal Attack Count: {_attackData.normalAttackData.Count}");
             _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            _attackData.normalAttackData[0]._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.normalAttackData[0]._attackInput._correctInput[0]._correctSequence);
 
         }
     }
@@ -1275,6 +1307,7 @@ public class Editor_MoveListEditor : EditorWindow
             GUILayout.Label("Throw Primary Data");
             GUILayout.Label($"Throw Attack Count: {_attackData.throwInputData._attackInput._correctInput.Count}");
             _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            _attackData.throwInputData._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.throwInputData._attackInput._correctInput[0]._correctSequence);
             AnimationClip throwAnim = _attackData.throwInputData._throwAnimation[0] != null ? _attackData.throwInputData._throwAnimation[0].animClip : null;
             throwAnim = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), throwAnim, typeof(AnimationClip), true, GUILayout.Width(CurrentAttackInformationObject.editorRect.width), GUILayout.Height(20));
         }
@@ -1359,7 +1392,7 @@ public class Editor_MoveListEditor : EditorWindow
         //GUILayout.Label("Toggle Data");
         if (moveListData != null)
         {
-            if (GUILayout.Button("Save Changes?", GUILayout.Width(155), GUILayout.Height(30)))
+            if (GUILayout.Button("Save Changes?", GUILayout.Width(SaveDataObject.editorRect.width/3f), GUILayout.Height(SaveDataObject.editorRect.height/20f)))
             {
                 SaveMoveListChanges();
             }
