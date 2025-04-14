@@ -82,6 +82,7 @@ public class Attack_BaseProperties
         cancelProperty = new Attack_CancelInfo();
         _moveType = MoveType.Normal;
         AttackAnims = new AttackHandler_Attack();
+        AttackAnims._hitCount = new HitCount(); 
 
         LateralKB_Data = new Horizontal_KnockBack();
         VerticalKB_Data = new Vertical_KnockBack();

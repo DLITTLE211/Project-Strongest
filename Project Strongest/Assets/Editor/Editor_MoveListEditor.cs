@@ -594,6 +594,7 @@ public class Editor_MoveListEditor : EditorWindow
             propertyList.Add(newProperty);
             newStringAttackData.Add(newStringEntry);
         }
+        newStringEntry.SpecialAttackName = "New String Attack";
         newStringEntry._attackInput = newBasicInput;
         CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newStringAttackData, 1, "");
         editedMoveList.stringNormalAttacks.Insert(0, newStringEntry);
@@ -1441,7 +1442,16 @@ public class Editor_MoveListEditor : EditorWindow
 
     void SaveMoveListChanges() 
     {
-        Debug.Log("MoveList Changes Saved");
+        try 
+        {
+            moveListData.SetFullMoveListData(editedMoveList);
+            Debug.Log($"MoveList Changes ARE SAVED.");
+        }
+        catch (Exception e) 
+        {
+            Debug.LogError($"MoveList Changes ARE NOT SAVED. ERROR: {e}");
+        }
+        
     }
     void GetMoveListData() 
     {

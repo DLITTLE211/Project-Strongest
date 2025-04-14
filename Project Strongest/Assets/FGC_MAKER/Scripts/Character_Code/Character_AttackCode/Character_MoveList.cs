@@ -561,6 +561,19 @@ public class Character_MoveList : MonoBehaviour
     {
         return new FullMoveList(BasicSuperAttacks, CommandThrows, CounterAttacks, stanceSpecials, rekkaSpecials, special_Simple, stringNormalAttacks, commandNormalAttacks, simpleAttacks, BasicThrows);
     }
+    public void SetFullMoveListData(FullMoveList _newMoveListChanges) 
+    {
+        BasicSuperAttacks = _newMoveListChanges.BasicSuperAttacks;
+        CommandThrows = _newMoveListChanges.CommandThrows;
+        CounterAttacks = _newMoveListChanges.CounterAttacks;
+        stanceSpecials = _newMoveListChanges.stanceSpecials;
+        rekkaSpecials = _newMoveListChanges.rekkaSpecials;
+        special_Simple = _newMoveListChanges.special_Simple;
+        stringNormalAttacks = _newMoveListChanges.stringNormalAttacks;
+        commandNormalAttacks = _newMoveListChanges.commandNormalAttacks;
+        simpleAttacks = _newMoveListChanges.simpleAttacks;
+        BasicThrows = _newMoveListChanges.BasicThrows;
+    }
 }
 [Serializable]
 public class FullMoveList 
