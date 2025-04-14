@@ -63,7 +63,30 @@ public class Attack_BaseProperties
     {
         rawChipDamage = (rawAttackDamage / 6.5f);
     }
+    public Attack_BaseProperties()
+    {
+        _cTimer = null;
+        rawAttackDamage = 0;
+        rawChipDamage = 0;
+        counterHitDamageMult = 1;
 
+        attackMainStunValues = new Attack_StunValues();
+
+        _meterRequirement = 0;
+        _meterAwardedOnHit = 0;
+        attackScalingPercent = 0;
+        dashCancelable = false;
+        JumpCancelable = false;
+
+        _airInfo = new AirAttackInfo();
+        cancelProperty = new Attack_CancelInfo();
+        _moveType = MoveType.Normal;
+        AttackAnims = new AttackHandler_Attack();
+
+        LateralKB_Data = new Horizontal_KnockBack();
+        VerticalKB_Data = new Vertical_KnockBack();
+        KnockDown = Attack_KnockDown.NONE;
+    }
 }
 [Serializable]
 public class Attack_StunValues

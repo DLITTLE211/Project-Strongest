@@ -46,6 +46,7 @@ public class Editor_MoveListEditor : EditorWindow
     bool displayRekkaAttacks = false;
     bool displaySpecialAttacks = false;
     bool displayStringAttacks = false;
+    int stringNormalCount;
     bool displayCommandNormalAttacks = false;
     bool displayNormalAttacks = false;
     bool displayThrowAttacks = false;
@@ -116,6 +117,7 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
+        stringNormalCount = 0;
         editedMoveList = null;
         previewActive = false;
         ClearPreview();
@@ -546,6 +548,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region String Attack Display
         Debug.Log(editedMoveList.stringNormalAttacks.Count);
         GUILayout.Label("String Attacks");
+        stringNormalCount = EditorGUILayout.IntField("Set Attack Strings Count", stringNormalCount, GUILayout.Width(MoveListBodyObject.editorRect.width/2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New String Normal Attack Entry"))
         {
             AddStringNormalAttackEntry();
@@ -563,12 +566,38 @@ public class Editor_MoveListEditor : EditorWindow
                     DisplayStringNormalData(move, move.SpecialAttackName);
                 }
             }
+            if (GUILayout.Button("Clear String Attack Data"))
+            {
+                if (editedMoveList.stringNormalAttacks.Count > 0)
+                {
+                    editedMoveList.stringNormalAttacks.RemoveAt(0);
+                    _attackData = null;
+                }
+            }
         }
         #endregion
     }
     void AddStringNormalAttackEntry()
     {
-
+        List<Attack_NonSpecialAttack> newStringAttackData = new List<Attack_NonSpecialAttack>();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        Attack_NonSpecialAttack newStringEntry = new Attack_NonSpecialAttack();
+        Attack_BasicInput newBasicInput = new Attack_BasicInput();
+        newBasicInput._correctInput = new List<Attack_BaseInput>();
+        for (int i = 0; i < stringNormalCount; i++)
+        {
+            Attack_BaseInput newBaseInput = new Attack_BaseInput();
+            Attack_BaseProperties newProperty = new Attack_BaseProperties();
+            newProperty._attackName = $"String Attack Entry({i+1})";
+            newBaseInput.property = newProperty;
+            newBasicInput._correctInput.Add(newBaseInput);
+            propertyList.Add(newProperty);
+            newStringAttackData.Add(newStringEntry);
+        }
+        newStringEntry._attackInput = newBasicInput;
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newStringAttackData, 1, "");
+        editedMoveList.stringNormalAttacks.Insert(0, newStringEntry);
+        _attackData = newCompositeAttackData;
     }
     void DisplayStringNormalData(Attack_NonSpecialAttack simpleAttack, string attackName)
     {
@@ -606,6 +635,14 @@ public class Editor_MoveListEditor : EditorWindow
                     DisplayCommandNormalData(move, move.SpecialAttackName);
                 }
             }
+            if (GUILayout.Button("Clear Command Attack Data"))
+            {
+                if (editedMoveList.commandNormalAttacks.Count > 0)
+                {
+                    editedMoveList.commandNormalAttacks.RemoveAt(0);
+                    _attackData = null;
+                }
+            }
         }
         #endregion
     }
@@ -627,7 +664,7 @@ public class Editor_MoveListEditor : EditorWindow
 
         CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newCommandAttackData, 1, "");
 
-        editedMoveList.simpleAttacks.Insert(0, newNormalEntry);
+        editedMoveList.commandNormalAttacks.Insert(0, newNormalEntry);
         _attackData = newCompositeAttackData;
     }
     void DisplayCommandNormalData(Attack_NonSpecialAttack simpleAttack, string attackName)
