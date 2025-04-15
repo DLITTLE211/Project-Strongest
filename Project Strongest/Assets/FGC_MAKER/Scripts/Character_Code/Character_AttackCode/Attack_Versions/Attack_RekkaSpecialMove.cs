@@ -7,6 +7,11 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
 {
     [SerializeField] private int curRekkaInput, rekkaInputCount;
     [SerializeField] internal int leewayTime;
+    public int LeewayTime 
+    {
+        get { return leewayTime; } 
+        set { leewayTime = value; } 
+    }
     [SerializeField] internal bool inRekkaState;
     [SerializeField] internal List<Attack_BaseProperties> usedRekkas;
     public Character_Base _curBase;

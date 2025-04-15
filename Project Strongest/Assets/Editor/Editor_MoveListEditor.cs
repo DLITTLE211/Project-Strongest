@@ -24,6 +24,7 @@ public class Editor_MoveListEditor : EditorWindow
 
     #region Character Data
     private Character_MoveList moveListData;
+    private Character_MoveList lastMoveList;
     FullMoveList editedMoveList;
     private GameObject characterModel;
     private RuntimeAnimatorController characterAnimator;
@@ -47,6 +48,7 @@ public class Editor_MoveListEditor : EditorWindow
     bool displaySpecialAttacks = false;
     bool displayStringAttacks = false;
     int stringNormalCount;
+    int rekkaAttackCount;
     bool displayCommandNormalAttacks = false;
     bool displayNormalAttacks = false;
     bool displayThrowAttacks = false;
@@ -117,8 +119,8 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
-        stringNormalCount = 0;
         editedMoveList = null;
+        lastMoveList = null;
         previewActive = false;
         ClearPreview();
         currentFrame = 0;
@@ -277,7 +279,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region FillArea
         GUILayout.Label("Full MoveList");
         moveListData = (Character_MoveList)EditorGUILayout.ObjectField(new GUIContent("Current Movelist", "Insert Movelist"), moveListData, typeof(Character_MoveList), true);
-        if (moveListData != null) 
+        if (moveListData != null)
         {
             FillDataOnScreen();
         }
@@ -474,6 +476,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region String Attack Display
         Debug.Log(editedMoveList.rekkaSpecials.Count);
         GUILayout.Label("Rekka Attacks");
+        rekkaAttackCount = EditorGUILayout.IntField("Set Rekka Count", rekkaAttackCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Rekka Move Entry"))
         {
             AddRekkaAttackEntry();
@@ -489,7 +492,15 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.RekkaSpecialAttack_Name, style))
                 {
-                    DisplayRekkaMoveData(move);
+                    DisplayRekkaMoveData(move, move.RekkaSpecialAttack_Name,i);
+                }
+            }
+            if (GUILayout.Button("Clear Rekka Attack Data"))
+            {
+                if (editedMoveList.rekkaSpecials.Count > 0)
+                {
+                    editedMoveList.rekkaSpecials.RemoveAt(0);
+                    _attackData = null;
                 }
             }
         }
@@ -497,10 +508,54 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddRekkaAttackEntry()
     {
+        Attack_RekkaSpecialMove newRekkaMove = new Attack_RekkaSpecialMove();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+        RekkaInput newRekkaInput = new RekkaInput();
+        newRekkaMove.RekkaSpecialAttack_Name = $"New Rekka Attack Entry";
+        newProperty._attackName = $"Rekka Main Attack Entry";
+        propertyList.Add(newProperty);
+        newRekkaMove.rekkaInput = new RekkaInput();
+        newRekkaInput.mainAttackInput = new List<Attack_Input>();
+        for (int i = 0; i < 3; i++)
+        {
+            newRekkaInput.mainAttackInput.Add(new Attack_Input("", ("").ToCharArray()));
+        }
+        newRekkaInput.mainAttackProperty = newProperty;
+        newRekkaInput._rekkaProperties = new List<Attack_BaseProperties>();
+        newRekkaInput._rekkaPortion = new List<RekkaAttack>();
+        for (int i = 0; i < rekkaAttackCount; i++)
+        {
+            Attack_BaseProperties newRekkaProperty = new Attack_BaseProperties();
+            newRekkaProperty._attackName = $"New Rekka Sub Entry{i+1}";
+            Attack_BaseInput newBaseInput = new Attack_BaseInput();
+            RekkaAttack newRekkaAttack = new RekkaAttack();
+            newRekkaAttack.individualRekkaAttack = new Attack_BasicInput();
+            newRekkaAttack.individualRekkaAttack._correctInput = new List<Attack_BaseInput>();
 
+            newBaseInput.property = newRekkaProperty;
+            newRekkaAttack.individualRekkaAttack._correctInput.Add(newBaseInput);
+            newRekkaInput._rekkaPortion.Add(newRekkaAttack);
+            propertyList.Add(newRekkaProperty);
+            newRekkaInput._rekkaProperties.Add(newRekkaProperty);
+        }
+        newRekkaMove.rekkaInput = newRekkaInput;
+
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, newRekkaMove, null, null, null, null, propertyList.Count, newRekkaMove.RekkaSpecialAttack_Name);
+        editedMoveList.rekkaSpecials.Insert(0, newRekkaMove);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayRekkaMoveData(Attack_RekkaSpecialMove specialAttack)
+    void DisplayRekkaMoveData(Attack_RekkaSpecialMove specialAttack,string specialName, int propertyIndex)
     {
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        propertyList.Add(specialAttack.rekkaInput.mainAttackProperty);
+        for (int i = 0; i < specialAttack.rekkaInput._rekkaPortion.Count; i++) 
+        {
+            Attack_BaseProperties currentProperty = specialAttack.rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput[0].property;
+            propertyList.Add(currentProperty);
+        }
+        Attack_RekkaSpecialMove newRekkaData = specialAttack;
+        _attackData = new CompositeAttackData(propertyList, null, newRekkaData,null , null, null, null, propertyList.Count, specialName);
 
     }
     #endregion
@@ -1346,6 +1401,17 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.rekkaAttackData != null)
         {
             GUILayout.Label("Rekka Primary Data");
+            _attackData.rekkaAttackData.RekkaSpecialAttack_Name = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.rekkaAttackData.RekkaSpecialAttack_Name);
+            for (int i = 0; i < _attackData.rekkaAttackData.rekkaInput.mainAttackInput.Count; i++)
+            {
+                _attackData.rekkaAttackData.rekkaInput.mainAttackInput[i].attackString = (string)EditorGUILayout.TextField($"Rekka Attack Input_{i + 1}:", _attackData.rekkaAttackData.rekkaInput.mainAttackInput[i].attackString);
+            }
+            _attackData.rekkaAttackData.LeewayTime = (int)EditorGUILayout.FloatField($"Leeway Time Between Attacks:", _attackData.rekkaAttackData.LeewayTime);
+            if (_attackData.followUpAttackIndex > 0)
+            {
+                string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[_attackData.followUpAttackIndex].individualRekkaAttack._correctInput[0]._correctSequence;
+                currentHighlightedRekkaInput = (string)EditorGUILayout.TextField("Rekka Individual Input:", currentHighlightedRekkaInput);
+            }
         }
     }
     void DisplaySpecialData()
@@ -1488,6 +1554,15 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void GetMoveListData() 
     {
+        if (editedMoveList != null)
+        {
+            if (lastMoveList != moveListData)
+            {
+                FullMoveList newMoveList = null;
+                newMoveList = moveListData.GetFullMoveList();
+                editedMoveList = newMoveList;
+            }
+        }
         if (editedMoveList == null)
         {
             FullMoveList newMoveList = null;
@@ -1516,20 +1591,24 @@ public class CompositeAttackData
 
     public int basePropertyCount;
     public Attack_AdvancedSpecialMove advancedInputData;
-    public RekkaInput rekkaAttackData;
-    public StanceInput stanceInputData;
+    public Attack_RekkaSpecialMove rekkaAttackData;
+    public Attack_StanceSpecialMove stanceInputData;
     public Attack_BasicSpecialMove specialInputData;
     public Attack_ThrowBase throwInputData;
     public List<Attack_NonSpecialAttack> normalAttackData;
     public string SpecialAttackName;
+    public int followUpAttackIndex;
     public CompositeAttackData(
         List<Attack_BaseProperties> _baseProperties, 
-        Attack_AdvancedSpecialMove _advancedInputData = null, 
-        RekkaInput _rekkaData = null,
-        StanceInput _stanceData = null,
+        Attack_AdvancedSpecialMove _advancedInputData = null,
+        Attack_RekkaSpecialMove _rekkaData = null,
+        Attack_StanceSpecialMove _stanceData = null,
         Attack_BasicSpecialMove _specialData = null,
         Attack_ThrowBase _throwData = null,
-        List<Attack_NonSpecialAttack> _nonSpecialData = null,int _basePropertyCount = 0, string _specialName = "") 
+        List<Attack_NonSpecialAttack> _nonSpecialData = null
+        ,int _basePropertyCount = 0,
+        string _specialName = "",
+        int _followUpIndex = -1) 
     {
         baseAttackProperties = _baseProperties;
         advancedInputData = _advancedInputData;
@@ -1547,5 +1626,6 @@ public class CompositeAttackData
             basePropertyCount = _basePropertyCount;
         }
         SpecialAttackName = _specialName;
+        followUpAttackIndex = _followUpIndex;
     }
 }
