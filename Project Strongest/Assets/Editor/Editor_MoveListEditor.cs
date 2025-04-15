@@ -526,7 +526,15 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.BasicSpecialAttack_Name, style))
                 {
-                    DisplaySpecialMoveData(move);
+                    DisplaySpecialMoveData(move,move.BasicSpecialAttack_Name);
+                }
+            }
+            if (GUILayout.Button("Clear Special Attack Data"))
+            {
+                if (editedMoveList.special_Simple.Count > 0)
+                {
+                    editedMoveList.special_Simple.RemoveAt(0);
+                    _attackData = null;
                 }
             }
         }
@@ -534,11 +542,29 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddSpecialAttackEntry()
     {
+        Attack_BasicSpecialMove newSpecialMove = new Attack_BasicSpecialMove();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
 
+
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+        newProperty._attackName = $"Special Attack Entry";
+        propertyList.Add(newProperty);
+        newSpecialMove.property = newProperty;
+        newSpecialMove.attackInput = new List<Attack_Input>();
+        for (int i = 0; i < 3; i++)
+        {
+            newSpecialMove.attackInput.Add(new Attack_Input("", ("").ToCharArray()));
+        }
+        newSpecialMove.BasicSpecialAttack_Name = "New Special Attack";
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, newSpecialMove,null , null, propertyList.Count, newSpecialMove.BasicSpecialAttack_Name);
+        editedMoveList.special_Simple.Insert(0, newSpecialMove);
+        _attackData = newCompositeAttackData;
     }
-    void DisplaySpecialMoveData(Attack_Special_Base specialAttack)
+    void DisplaySpecialMoveData(Attack_BasicSpecialMove specialAttack, string attackName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property};
+        Attack_BasicSpecialMove newSpecialMoveData =  specialAttack;
+        _attackData = new CompositeAttackData(propertyList, null, null, null, newSpecialMoveData,null , null, 1, attackName);
     }
     #endregion
 
@@ -596,7 +622,7 @@ public class Editor_MoveListEditor : EditorWindow
         }
         newStringEntry.SpecialAttackName = "New String Attack";
         newStringEntry._attackInput = newBasicInput;
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newStringAttackData, 1, "");
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newStringAttackData, 1, newStringEntry.SpecialAttackName);
         editedMoveList.stringNormalAttacks.Insert(0, newStringEntry);
         _attackData = newCompositeAttackData;
     }
@@ -662,8 +688,9 @@ public class Editor_MoveListEditor : EditorWindow
         newNormalEntry._attackInput = newBasicInput;
         propertyList.Add(newProperty);
         newCommandAttackData.Add(newNormalEntry);
+        newNormalEntry.SpecialAttackName = "New Command Attack";
 
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newCommandAttackData, 1, "");
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newCommandAttackData, 1, newNormalEntry.SpecialAttackName);
 
         editedMoveList.commandNormalAttacks.Insert(0, newNormalEntry);
         _attackData = newCompositeAttackData;
@@ -727,8 +754,9 @@ public class Editor_MoveListEditor : EditorWindow
         newNormalEntry._attackInput = newBasicInput;
         propertyList.Add(newProperty);
         newNonSpecialAttackData.Add(newNormalEntry);
+        newNormalEntry.SpecialAttackName = "New Command Attack";
 
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null,null ,null, newNonSpecialAttackData, 1,"");
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null,null ,null, newNonSpecialAttackData, 1, newNormalEntry.SpecialAttackName);
 
         editedMoveList.simpleAttacks.Insert(0,newNormalEntry);
         _attackData = newCompositeAttackData;
@@ -1325,6 +1353,11 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.specialInputData != null)
         {
             GUILayout.Label("Special Primary Data");
+            _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            for (int i = 0; i < 3; i++) 
+            {
+                _attackData.specialInputData.attackInput[i].attackString = (string)EditorGUILayout.TextField($"Special Attack Input_{i+1}:", _attackData.specialInputData.attackInput[i].attackString);
+            }
         }
     }
     void DisplayNormalData()
@@ -1493,8 +1526,8 @@ public class CompositeAttackData
         List<Attack_BaseProperties> _baseProperties, 
         Attack_AdvancedSpecialMove _advancedInputData = null, 
         RekkaInput _rekkaData = null,
+        StanceInput _stanceData = null,
         Attack_BasicSpecialMove _specialData = null,
-        StanceInput _stanceData = null, 
         Attack_ThrowBase _throwData = null,
         List<Attack_NonSpecialAttack> _nonSpecialData = null,int _basePropertyCount = 0, string _specialName = "") 
     {
