@@ -34,6 +34,7 @@ public class Editor_MoveListEditor : EditorWindow
     CompositeAttackData _attackData;
     Attack_BaseProperties currentCenterAttackData;
     private int highlightedAttackIndex = -1;
+    private int subAttackDataIndex;
     bool displayCurrentAttackList = false;
     #endregion
 
@@ -48,6 +49,8 @@ public class Editor_MoveListEditor : EditorWindow
     bool displaySpecialAttacks = false;
     bool displayStringAttacks = false;
     int stringNormalCount;
+    int stanceAttackCount;
+    int stanceKillCount;
     int rekkaAttackCount;
     bool displayCommandNormalAttacks = false;
     bool displayNormalAttacks = false;
@@ -443,6 +446,8 @@ public class Editor_MoveListEditor : EditorWindow
         {
             AddStanceAttackEntry();
         }
+        stanceAttackCount = EditorGUILayout.IntField("Set Stance Attack Count", stanceAttackCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
+        stanceKillCount = EditorGUILayout.IntField("Set Stance Kill Count", stanceKillCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         displayStanceAttacks = EditorGUILayout.Foldout(displayStanceAttacks, "Show Stance Attacks");
         if (displayStanceAttacks)
         {
@@ -454,7 +459,15 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.StanceSpecialAttack_Name, style))
                 {
-                    DisplayStanceMoveData(move);
+                    DisplayStanceMoveData(move, move.StanceSpecialAttack_Name);
+                }
+            }
+            if (GUILayout.Button("Clear Stance Attack Data"))
+            {
+                if (editedMoveList.stanceSpecials.Count > 0)
+                {
+                    editedMoveList.stanceSpecials.RemoveAt(0);
+                    _attackData = null;
                 }
             }
         }
@@ -462,11 +475,70 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddStanceAttackEntry()
     {
+        Attack_StanceSpecialMove newStanceMove = new Attack_StanceSpecialMove();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+        StanceInput newStanceInput = new StanceInput();
+        List<Attack_Input> _totalStanceInputs = new List<Attack_Input>();
+        newStanceMove.StanceSpecialAttack_Name = $"New Stance Attack Entry";
+        newProperty._attackName = $"Stance Main Attack Entry";
+        propertyList.Add(newProperty);
+        newStanceMove.stanceInput = new StanceInput();
+        newStanceMove.stanceInput._stanceInput = new List<Attack_Input>();
+        for (int i = 0; i < 3; i++)
+        {
+            _totalStanceInputs.Add(new Attack_Input("", ("").ToCharArray()));
+        }
+        newStanceMove.stanceStartProperty = newProperty;
+        StanceAttack newStanceAttack = new StanceAttack();
+        newStanceAttack._stanceButtonInput = new Attack_BasicInput();
+        newStanceAttack._stanceButtonInput._correctInput = new List<Attack_BaseInput>();
+        for (int i = 0; i < stanceAttackCount; i++)
+        {
+            Attack_BaseProperties newstanceProperty = new Attack_BaseProperties();
+            newstanceProperty._attackName = $"New Stance Attack Sub Entry{i + 1}";
+            Attack_BaseInput newBaseInput = new Attack_BaseInput();
 
+            newBaseInput.property = newstanceProperty;
+            newStanceAttack._stanceButtonInput._correctInput.Add(newBaseInput);
+            newStanceInput.stanceAttack = newStanceAttack;
+            propertyList.Add(newstanceProperty);
+        }
+
+        StanceAttack newStanceKill = new StanceAttack();
+        newStanceKill._stanceButtonInput = new Attack_BasicInput();
+        newStanceKill._stanceButtonInput._correctInput = new List<Attack_BaseInput>();
+        for (int i = 0; i < stanceKillCount; i++)
+        {
+            Attack_BaseProperties newstanceProperty = new Attack_BaseProperties();
+            newstanceProperty._attackName = $"New Stance Kill Sub Entry{i + 1}";
+            Attack_BaseInput newBaseInput = new Attack_BaseInput();
+
+            newBaseInput.property = newstanceProperty;
+            newStanceKill._stanceButtonInput._correctInput.Add(newBaseInput);
+            newStanceInput.stanceKill = newStanceKill;
+            propertyList.Add(newstanceProperty);
+        }
+        newStanceInput._stanceInput = _totalStanceInputs;
+        newStanceMove.stanceInput = newStanceInput;
+
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, newStanceMove, null, null, null, propertyList.Count, newStanceMove.StanceSpecialAttack_Name);
+        editedMoveList.stanceSpecials.Insert(0, newStanceMove);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayStanceMoveData(Attack_StanceSpecialMove specialAttack)
+    void DisplayStanceMoveData(Attack_StanceSpecialMove specialAttack, string specialMoveName)
     {
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        propertyList.Add(specialAttack.stanceStartProperty);
 
+        Attack_BaseProperties currentAttackProperty = specialAttack.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property;
+        propertyList.Add(currentAttackProperty);
+
+        Attack_BaseProperties currentKillProperty = specialAttack.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property;
+        propertyList.Add(currentKillProperty);
+
+        Attack_StanceSpecialMove mewStamceData = specialAttack;
+        _attackData = new CompositeAttackData(propertyList, null, null, mewStamceData, null, null, null, propertyList.Count, specialMoveName);
     }
     #endregion
 
@@ -556,7 +628,6 @@ public class Editor_MoveListEditor : EditorWindow
         }
         Attack_RekkaSpecialMove newRekkaData = specialAttack;
         _attackData = new CompositeAttackData(propertyList, null, newRekkaData,null , null, null, null, propertyList.Count, specialName);
-
     }
     #endregion
 
@@ -908,6 +979,11 @@ public class Editor_MoveListEditor : EditorWindow
                     if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 3f), GUILayout.Height(25)))
                     {
                         previewActive = false;
+                        if(i > 0) 
+                        {
+                            subAttackDataIndex = i;
+                        }
+                        else { subAttackDataIndex = -1; }
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
                         currentCenterAttackData.AttackAnims = _attackData.baseAttackProperties[i].AttackAnims;
                         currentFrame = 0;
@@ -1407,9 +1483,9 @@ public class Editor_MoveListEditor : EditorWindow
                 _attackData.rekkaAttackData.rekkaInput.mainAttackInput[i].attackString = (string)EditorGUILayout.TextField($"Rekka Attack Input_{i + 1}:", _attackData.rekkaAttackData.rekkaInput.mainAttackInput[i].attackString);
             }
             _attackData.rekkaAttackData.LeewayTime = (int)EditorGUILayout.FloatField($"Leeway Time Between Attacks:", _attackData.rekkaAttackData.LeewayTime);
-            if (_attackData.followUpAttackIndex > 0)
+            if (subAttackDataIndex > 0)
             {
-                string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[_attackData.followUpAttackIndex].individualRekkaAttack._correctInput[0]._correctSequence;
+                string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex-1].individualRekkaAttack._correctInput[0]._correctSequence;
                 currentHighlightedRekkaInput = (string)EditorGUILayout.TextField("Rekka Individual Input:", currentHighlightedRekkaInput);
             }
         }
@@ -1559,6 +1635,7 @@ public class Editor_MoveListEditor : EditorWindow
             if (lastMoveList != moveListData)
             {
                 FullMoveList newMoveList = null;
+                lastMoveList = moveListData;
                 newMoveList = moveListData.GetFullMoveList();
                 editedMoveList = newMoveList;
             }
@@ -1597,7 +1674,6 @@ public class CompositeAttackData
     public Attack_ThrowBase throwInputData;
     public List<Attack_NonSpecialAttack> normalAttackData;
     public string SpecialAttackName;
-    public int followUpAttackIndex;
     public CompositeAttackData(
         List<Attack_BaseProperties> _baseProperties, 
         Attack_AdvancedSpecialMove _advancedInputData = null,
@@ -1607,8 +1683,7 @@ public class CompositeAttackData
         Attack_ThrowBase _throwData = null,
         List<Attack_NonSpecialAttack> _nonSpecialData = null
         ,int _basePropertyCount = 0,
-        string _specialName = "",
-        int _followUpIndex = -1) 
+        string _specialName = "") 
     {
         baseAttackProperties = _baseProperties;
         advancedInputData = _advancedInputData;
@@ -1626,6 +1701,5 @@ public class CompositeAttackData
             basePropertyCount = _basePropertyCount;
         }
         SpecialAttackName = _specialName;
-        followUpAttackIndex = _followUpIndex;
     }
 }
