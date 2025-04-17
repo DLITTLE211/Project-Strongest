@@ -12,7 +12,7 @@ using UnityEngine.Rendering;
 public class Editor_MoveListEditor : EditorWindow
 {
     #region Visual Code For Windows
-    enum MoveListEditMode {MainAttackInfoMode, MainAttackCollisionMode }
+    enum MoveListEditMode { MainAttackInfoMode, MainAttackCollisionMode }
     MoveListEditMode _moveListEditState;
     public EditorMoveListObject MoveListHeaderObject;
     public EditorMoveListObject MoveListBodyObject;
@@ -48,10 +48,13 @@ public class Editor_MoveListEditor : EditorWindow
     bool displayRekkaAttacks = false;
     bool displaySpecialAttacks = false;
     bool displayStringAttacks = false;
-    int stringNormalCount;
+    int superFollowUpCount;
+    int commandGrabFollowUpCount;
+    int counterFollowUpCount;
     int stanceAttackCount;
     int stanceKillCount;
     int rekkaAttackCount;
+    int stringNormalCount;
     bool displayCommandNormalAttacks = false;
     bool displayNormalAttacks = false;
     bool displayThrowAttacks = false;
@@ -114,7 +117,7 @@ public class Editor_MoveListEditor : EditorWindow
 
 
     [MenuItem("Window/Roster/Characters/Edit Character Movelist")]
-    static void OpenMoveListEditorWindow() 
+    static void OpenMoveListEditorWindow()
     {
         Editor_MoveListEditor window = (Editor_MoveListEditor)GetWindow(typeof(Editor_MoveListEditor));
         window.minSize = new Vector2(1600f, 1000f);
@@ -122,7 +125,15 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void OnEnable()
     {
+        StartFunctionCalls();
+    }
+    void StartFunctionCalls()
+    {
+        extraFramePointCount = 0;
+        showExtraFramePointVariables = false;
         editedMoveList = null;
+        lastClip = null;
+        _currentAnimClip = null;
         lastMoveList = null;
         previewActive = false;
         ClearPreview();
@@ -181,20 +192,20 @@ public class Editor_MoveListEditor : EditorWindow
     {
         SetScreenSize();
         DrawMoveListHeader();
-        DrawMoveListBody(); 
+        DrawMoveListBody();
         DrawCurrentAttackHeader();
         DrawCurrentAttackBody();
         DrawCurrentAttackInfo();
         DrawSaveChangesHeader();
     }
-    void SetScreenSize() 
+    void SetScreenSize()
     {
         #region MoveList Header
         Color32 headerColor1 = new Color32((byte)40f, (byte)40f, (byte)40f, (byte)255f);
         Rect size1 = new Rect();
         size1.x = 0f;
         size1.y = 0f;
-        size1.width = Screen.width /4f;
+        size1.width = Screen.width / 4f;
         size1.height = 30f;
         MoveListHeaderObject = new EditorMoveListObject(new Texture2D(1, 1), headerColor1, size1);
         MoveListHeaderObject.editorTexture.SetPixel(0, 0, headerColor1);
@@ -206,7 +217,7 @@ public class Editor_MoveListEditor : EditorWindow
         Color32 mBodyColor = new Color32((byte)25f, (byte)25f, (byte)25f, (byte)255f);
         Rect size2 = new Rect();
         size2.x = 0f;
-        size2.y = size1.height+10f;
+        size2.y = size1.height + 10f;
         size2.width = size1.width;
         size2.height = Screen.height - (Screen.height / 10f);
         MoveListBodyObject = new EditorMoveListObject(new Texture2D(1, 1), mBodyColor, size2);
@@ -244,7 +255,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region CA Info 
         Color32 cAInfoColor = new Color32((byte)45f, (byte)45f, (byte)45f, (byte)255f);
         Rect size5 = new Rect();
-        size5.x = size4.x*3;
+        size5.x = size4.x * 3;
         size5.y = 0f;
         size5.width = size1.width;
         size5.height = Screen.height;
@@ -258,7 +269,7 @@ public class Editor_MoveListEditor : EditorWindow
         Color32 toggleDataColor = new Color32((byte)25f, (byte)25f, (byte)25f, (byte)255f);
         Rect size6 = new Rect();
         size6.x = 0f;
-        size6.y = Screen.height/1.08f;
+        size6.y = Screen.height / 1.08f;
         size6.width = Screen.width / 4f;
         size6.height = Screen.height;
         SaveDataObject = new EditorMoveListObject(new Texture2D(1, 1), toggleDataColor, size6);
@@ -268,7 +279,7 @@ public class Editor_MoveListEditor : EditorWindow
         #endregion
 
     }
-    void DrawMoveListHeader() 
+    void DrawMoveListHeader()
     {
         GUILayout.BeginArea(MoveListHeaderObject.editorRect);
         #region FillArea
@@ -286,7 +297,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             FillDataOnScreen();
         }
-        else 
+        else
         {
             currentCenterAttackData = null;
         }
@@ -295,8 +306,10 @@ public class Editor_MoveListEditor : EditorWindow
     }
 
     #region Left Page Information
-    void FillDataOnScreen() 
+    Vector2 moveListScrollWheelPos;
+    void FillDataOnScreen()
     {
+        moveListScrollWheelPos = EditorGUILayout.BeginScrollView(moveListScrollWheelPos, GUILayout.Width(MoveListBodyObject.editorRect.width), GUILayout.Height(800));
         GetMoveListData();
         GUILayout.Space(10);
         ShowSupersAttacks();
@@ -318,6 +331,7 @@ public class Editor_MoveListEditor : EditorWindow
         ShowNormalAttacks();
         GUILayout.Space(10);
         ShowThrowAttacks();
+        EditorGUILayout.EndScrollView();
 
 
         GUILayout.Space(50);
@@ -331,6 +345,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region Command Grabs Display
         Debug.Log(editedMoveList.BasicSuperAttacks.Count);
         GUILayout.Label("Super Attacks");
+        superFollowUpCount = EditorGUILayout.IntField("Super FollowUp Count", superFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Supers Entry"))
         {
             AddBasicSuperAttacksEntry();
@@ -346,7 +361,15 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.specialMoveName, style))
                 {
-                    DisplayBasicSuperAttacksMoveData(move);
+                    DisplayBasicSuperAttacksMoveData(move, move.specialMoveName);
+                }
+            }
+            if (GUILayout.Button("Clear Super Attack Data"))
+            {
+                if (editedMoveList.BasicSuperAttacks.Count > 0)
+                {
+                    editedMoveList.BasicSuperAttacks.RemoveAt(0);
+                    _attackData = null;
                 }
             }
         }
@@ -354,11 +377,35 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddBasicSuperAttacksEntry()
     {
+        Attack_AdvancedSpecialMove newAdvancedAttackData = new Attack_AdvancedSpecialMove();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
 
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+        newProperty._attackName = $"Special Attack Entry";
+        propertyList.Add(newProperty);
+        newAdvancedAttackData.property = newProperty;
+        newAdvancedAttackData.attackInput = new List<Attack_Input>();
+        for (int i = 0; i < 3; i++)
+        {
+            newAdvancedAttackData.attackInput.Add(new Attack_Input("", ("").ToCharArray()));
+        }
+        for (int i = 0; i < superFollowUpCount; i++)
+        {
+            AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
+            newAttackHandler._frameData = new FrameData();
+            animationFollowupList.Add(newAttackHandler);
+        }
+        newAdvancedAttackData.specialMoveName = "New Super Attack Data";
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, newAdvancedAttackData, null, null, null, null, null, propertyList.Count, newAdvancedAttackData.specialMoveName);
+        editedMoveList.BasicSuperAttacks.Insert(0, newAdvancedAttackData);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayBasicSuperAttacksMoveData(Attack_AdvancedSpecialMove specialAttack)
+    void DisplayBasicSuperAttacksMoveData(Attack_AdvancedSpecialMove specialAttack, string specialAttackName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property };
+        Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
+        _attackData = new CompositeAttackData(propertyList, newAdvancedMoveData, null, null, null, null, null, 1, specialAttackName);
     }
     #endregion
 
@@ -368,6 +415,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region Command Grabs Display
         Debug.Log(editedMoveList.CommandThrows.Count);
         GUILayout.Label("Command Grabs");
+        commandGrabFollowUpCount = EditorGUILayout.IntField("CommandGrab FollowUp Count", commandGrabFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Command Grab Entry"))
         {
             AddCommandGrabEntry();
@@ -383,7 +431,15 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.specialMoveName, style))
                 {
-                    DisplayCommandGrabMoveData(move);
+                    DisplayCommandGrabMoveData(move, move.specialMoveName);
+                }
+            }
+            if (GUILayout.Button("Clear Command Grab Attack Data"))
+            {
+                if (editedMoveList.CommandThrows.Count > 0)
+                {
+                    editedMoveList.CommandThrows.RemoveAt(0);
+                    _attackData = null;
                 }
             }
         }
@@ -391,11 +447,35 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddCommandGrabEntry()
     {
+        Attack_AdvancedSpecialMove newAdvancedAttackData = new Attack_AdvancedSpecialMove();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
 
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+        newProperty._attackName = $"Special Attack Entry";
+        propertyList.Add(newProperty);
+        newAdvancedAttackData.property = newProperty;
+        newAdvancedAttackData.attackInput = new List<Attack_Input>();
+        for (int i = 0; i < 3; i++)
+        {
+            newAdvancedAttackData.attackInput.Add(new Attack_Input("", ("").ToCharArray()));
+        }
+        for (int i = 0; i < commandGrabFollowUpCount; i++)
+        {
+            AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
+            newAttackHandler._frameData = new FrameData();
+            animationFollowupList.Add(newAttackHandler);
+        }
+        newAdvancedAttackData.specialMoveName = "New Command Grab Attack Data";
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, newAdvancedAttackData, null, null, null, null, null, propertyList.Count, newAdvancedAttackData.specialMoveName);
+        editedMoveList.CommandThrows.Insert(0, newAdvancedAttackData);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayCommandGrabMoveData(Attack_AdvancedSpecialMove specialAttack)
+    void DisplayCommandGrabMoveData(Attack_AdvancedSpecialMove specialAttack, string specialAttackName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property };
+        Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
+        _attackData = new CompositeAttackData(propertyList, newAdvancedMoveData, null, null, null, null, null, 1, specialAttackName);
     }
     #endregion
 
@@ -405,6 +485,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region Counter Attack Display
         Debug.Log(editedMoveList.CounterAttacks.Count);
         GUILayout.Label("Counter Attacks");
+        counterFollowUpCount = EditorGUILayout.IntField("Counter FollowUp Count", counterFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Counter Attack Entry"))
         {
             AddCounterAttackEntry();
@@ -420,7 +501,15 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.specialMoveName, style))
                 {
-                    DisplayCounterAttackMoveData(move);
+                    DisplayCounterAttackMoveData(move, move.specialMoveName);
+                }
+            }
+            if (GUILayout.Button("Clear Counter Attack Data"))
+            {
+                if (editedMoveList.CounterAttacks.Count > 0)
+                {
+                    editedMoveList.CounterAttacks.RemoveAt(0);
+                    _attackData = null;
                 }
             }
         }
@@ -428,11 +517,35 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddCounterAttackEntry()
     {
+        Attack_AdvancedSpecialMove newAdvancedAttackData = new Attack_AdvancedSpecialMove();
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
+        List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
 
+        Attack_BaseProperties newProperty = new Attack_BaseProperties();
+        newProperty._attackName = $"Special Attack Entry";
+        propertyList.Add(newProperty);
+        newAdvancedAttackData.property = newProperty;
+        newAdvancedAttackData.attackInput = new List<Attack_Input>();
+        for (int i = 0; i < 3; i++)
+        {
+            newAdvancedAttackData.attackInput.Add(new Attack_Input("", ("").ToCharArray()));
+        }
+        for (int i = 0; i < counterFollowUpCount; i++)
+        {
+            AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
+            newAttackHandler._frameData = new FrameData();
+            animationFollowupList.Add(newAttackHandler);
+        }
+        newAdvancedAttackData.specialMoveName = "New Counter Attack Data";
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, newAdvancedAttackData, null, null, null, null, null, propertyList.Count, newAdvancedAttackData.specialMoveName);
+        editedMoveList.CounterAttacks.Insert(0, newAdvancedAttackData);
+        _attackData = newCompositeAttackData;
     }
-    void DisplayCounterAttackMoveData(Attack_AdvancedSpecialMove specialAttack)
+    void DisplayCounterAttackMoveData(Attack_AdvancedSpecialMove specialAttack, string specialAttackName)
     {
-
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property };
+        Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
+        _attackData = new CompositeAttackData(propertyList, newAdvancedMoveData, null, null, null, null, null, 1, specialAttackName);
     }
     #endregion
 
@@ -564,7 +677,7 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.RekkaSpecialAttack_Name, style))
                 {
-                    DisplayRekkaMoveData(move, move.RekkaSpecialAttack_Name,i);
+                    DisplayRekkaMoveData(move, move.RekkaSpecialAttack_Name, i);
                 }
             }
             if (GUILayout.Button("Clear Rekka Attack Data"))
@@ -599,7 +712,7 @@ public class Editor_MoveListEditor : EditorWindow
         for (int i = 0; i < rekkaAttackCount; i++)
         {
             Attack_BaseProperties newRekkaProperty = new Attack_BaseProperties();
-            newRekkaProperty._attackName = $"New Rekka Sub Entry{i+1}";
+            newRekkaProperty._attackName = $"New Rekka Sub Entry{i + 1}";
             Attack_BaseInput newBaseInput = new Attack_BaseInput();
             RekkaAttack newRekkaAttack = new RekkaAttack();
             newRekkaAttack.individualRekkaAttack = new Attack_BasicInput();
@@ -617,17 +730,17 @@ public class Editor_MoveListEditor : EditorWindow
         editedMoveList.rekkaSpecials.Insert(0, newRekkaMove);
         _attackData = newCompositeAttackData;
     }
-    void DisplayRekkaMoveData(Attack_RekkaSpecialMove specialAttack,string specialName, int propertyIndex)
+    void DisplayRekkaMoveData(Attack_RekkaSpecialMove specialAttack, string specialName, int propertyIndex)
     {
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
         propertyList.Add(specialAttack.rekkaInput.mainAttackProperty);
-        for (int i = 0; i < specialAttack.rekkaInput._rekkaPortion.Count; i++) 
+        for (int i = 0; i < specialAttack.rekkaInput._rekkaPortion.Count; i++)
         {
             Attack_BaseProperties currentProperty = specialAttack.rekkaInput._rekkaPortion[i].individualRekkaAttack._correctInput[0].property;
             propertyList.Add(currentProperty);
         }
         Attack_RekkaSpecialMove newRekkaData = specialAttack;
-        _attackData = new CompositeAttackData(propertyList, null, newRekkaData,null , null, null, null, propertyList.Count, specialName);
+        _attackData = new CompositeAttackData(propertyList, null, newRekkaData, null, null, null, null, propertyList.Count, specialName);
     }
     #endregion
 
@@ -652,7 +765,7 @@ public class Editor_MoveListEditor : EditorWindow
                 var style = i == highlightedMoveIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
                 if (GUILayout.Button(move.BasicSpecialAttack_Name, style))
                 {
-                    DisplaySpecialMoveData(move,move.BasicSpecialAttack_Name);
+                    DisplaySpecialMoveData(move, move.BasicSpecialAttack_Name);
                 }
             }
             if (GUILayout.Button("Clear Special Attack Data"))
@@ -682,15 +795,15 @@ public class Editor_MoveListEditor : EditorWindow
             newSpecialMove.attackInput.Add(new Attack_Input("", ("").ToCharArray()));
         }
         newSpecialMove.BasicSpecialAttack_Name = "New Special Attack";
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, newSpecialMove,null , null, propertyList.Count, newSpecialMove.BasicSpecialAttack_Name);
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, newSpecialMove, null, null, propertyList.Count, newSpecialMove.BasicSpecialAttack_Name);
         editedMoveList.special_Simple.Insert(0, newSpecialMove);
         _attackData = newCompositeAttackData;
     }
     void DisplaySpecialMoveData(Attack_BasicSpecialMove specialAttack, string attackName)
     {
-        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property};
-        Attack_BasicSpecialMove newSpecialMoveData =  specialAttack;
-        _attackData = new CompositeAttackData(propertyList, null, null, null, newSpecialMoveData,null , null, 1, attackName);
+        List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property };
+        Attack_BasicSpecialMove newSpecialMoveData = specialAttack;
+        _attackData = new CompositeAttackData(propertyList, null, null, null, newSpecialMoveData, null, null, 1, attackName);
     }
     #endregion
 
@@ -700,7 +813,7 @@ public class Editor_MoveListEditor : EditorWindow
         #region String Attack Display
         Debug.Log(editedMoveList.stringNormalAttacks.Count);
         GUILayout.Label("String Attacks");
-        stringNormalCount = EditorGUILayout.IntField("Set Attack Strings Count", stringNormalCount, GUILayout.Width(MoveListBodyObject.editorRect.width/2f), GUILayout.Height(20));
+        stringNormalCount = EditorGUILayout.IntField("Set Attack Strings Count", stringNormalCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New String Normal Attack Entry"))
         {
             AddStringNormalAttackEntry();
@@ -740,7 +853,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             Attack_BaseInput newBaseInput = new Attack_BaseInput();
             Attack_BaseProperties newProperty = new Attack_BaseProperties();
-            newProperty._attackName = $"String Attack Entry({i+1})";
+            newProperty._attackName = $"String Attack Entry({i + 1})";
             newBaseInput.property = newProperty;
             newBasicInput._correctInput.Add(newBaseInput);
             propertyList.Add(newProperty);
@@ -755,7 +868,7 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplayStringNormalData(Attack_NonSpecialAttack simpleAttack, string attackName)
     {
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
-        for (int i = 0; i < simpleAttack._attackInput._correctInput.Count; i++) 
+        for (int i = 0; i < simpleAttack._attackInput._correctInput.Count; i++)
         {
             propertyList.Add(simpleAttack._attackInput._correctInput[i].property);
         }
@@ -830,7 +943,7 @@ public class Editor_MoveListEditor : EditorWindow
     #endregion
 
     #region Normal Attack Function Section
-    void ShowNormalAttacks() 
+    void ShowNormalAttacks()
     {
         #region Normal Attack Display
         Debug.Log(editedMoveList.simpleAttacks.Count);
@@ -882,12 +995,12 @@ public class Editor_MoveListEditor : EditorWindow
         newNonSpecialAttackData.Add(newNormalEntry);
         newNormalEntry.SpecialAttackName = "New Command Attack";
 
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,null, null, null,null ,null, newNonSpecialAttackData, 1, newNormalEntry.SpecialAttackName);
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, null, newNonSpecialAttackData, 1, newNormalEntry.SpecialAttackName);
 
-        editedMoveList.simpleAttacks.Insert(0,newNormalEntry);
+        editedMoveList.simpleAttacks.Insert(0, newNormalEntry);
         _attackData = newCompositeAttackData;
     }
-    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack,string attackName) 
+    void DisplaySimpleAttackData(Attack_NonSpecialAttack simpleAttack, string attackName)
     {
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { simpleAttack._attackInput._correctInput[0].property };
         List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
@@ -944,7 +1057,7 @@ public class Editor_MoveListEditor : EditorWindow
         _newThrowBase._attackInput = newBasicInput;
         propertyList.Add(newProperty);
 
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, _newThrowBase,null, 1, "");
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, null, null, null, null, _newThrowBase, null, 1, "");
         AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
         _newThrowBase._throwAnimation = new List<AttackHandler_Attack>() { newAttackHandler };
         editedMoveList.BasicThrows.Insert(0, _newThrowBase);
@@ -956,9 +1069,6 @@ public class Editor_MoveListEditor : EditorWindow
         _attackData = new CompositeAttackData(propertyList, null, null, null, null, throwAttack, null, 1, throwName);
     }
     #endregion
-
-
-
 
     #endregion
 
@@ -979,7 +1089,7 @@ public class Editor_MoveListEditor : EditorWindow
                     if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 3f), GUILayout.Height(25)))
                     {
                         previewActive = false;
-                        if(i > 0) 
+                        if (i > 0)
                         {
                             subAttackDataIndex = i;
                         }
@@ -1009,6 +1119,7 @@ public class Editor_MoveListEditor : EditorWindow
             if (GUILayout.Button("Clear Current Attack Info", GUILayout.Width(155), GUILayout.Height(25)))
             {
                 currentCenterAttackData = null;
+                _attackData = null;
             }
         }
     }
@@ -1033,13 +1144,81 @@ public class Editor_MoveListEditor : EditorWindow
                 active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
                 inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
                 recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
-
+                if(currentCenterAttackData.AttackAnims != null) 
+                {
+                    DisplayExtraFramePoints(currentCenterAttackData.AttackAnims);
+                }
                 GUILayout.Space(25);
 
                 #endregion
             }
         }
         #endregion
+    }
+    int extraFramePointCount;
+    bool showExtraFramePointVariables;
+    Vector2 extraFramePointScrollWheel;
+    int lastCount;
+    void DisplayExtraFramePoints(AttackHandler_Attack attackAnim)
+    {
+        extraFramePointCount = (int)EditorGUILayout.Slider("ExtraFramePoint Count:", extraFramePointCount, 0, 15, GUILayout.Width(500), GUILayout.Height(20));
+        if (lastCount != extraFramePointCount)
+        {
+            lastCount = extraFramePointCount;
+            attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
+            for (int i = 0; i < extraFramePointCount; i++)
+            {
+                attackAnim._frameData._extraPoints.Add(new ExtraFrameHitPoints());
+            }
+        }
+        showExtraFramePointVariables = EditorGUILayout.Foldout(showExtraFramePointVariables, "Show Extra Frame Point Variables");
+        if (showExtraFramePointVariables)
+        {
+            extraFramePointScrollWheel = EditorGUILayout.BeginScrollView(extraFramePointScrollWheel, GUILayout.Width(850), GUILayout.Height(250));
+            if (attackAnim._frameData._extraPoints != null)
+            {
+                for (int i = 0; i < attackAnim._frameData._extraPoints.Count; i++)
+                {
+                    GUILayout.Label($"Extra Frame Point {i + 1}");
+                    DisplayIndividualExtraPoint(attackAnim._frameData._extraPoints[i]);
+                    GUILayout.Label("______________________________________________________________________________________________________________________________________________________");
+                    GUILayout.Space(25);
+                }
+            }
+            EditorGUILayout.EndScrollView();
+        }
+    }
+    void DisplayIndividualExtraPoint(ExtraFrameHitPoints framePointI) 
+    {
+        framePointI.hitFramePoints = (int)EditorGUILayout.FloatField("Hit Frame Point:", framePointI.hitFramePoints,GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.call = (HitPointCall)EditorGUILayout.EnumFlagsField("Individual Frame Call:", framePointI.call, GUILayout.Width(500), GUILayout.Height(20));
+        if(framePointI.awaitEnum == null) 
+        { 
+            framePointI.awaitEnum = new AwaitClass();
+        }
+        framePointI.awaitEnum.keyRef = (WaitingEnumKey)EditorGUILayout.EnumPopup("On Await End Call:", framePointI.awaitEnum.keyRef, GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.awaitEnum.awaitingCheck = (HitPointCall)EditorGUILayout.EnumFlagsField("On Await End Call:", framePointI.awaitEnum.awaitingCheck, GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.Force = (float)EditorGUILayout.FloatField("Force:", framePointI.Force, GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.projectileSpeed = (float)EditorGUILayout.FloatField("Projectile Speed:", framePointI.projectileSpeed, GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.camPos = EditorGUILayout.Vector3Field("Camera Position:", framePointI.camPos);
+        framePointI.camRotation = EditorGUILayout.Vector3Field("Camera Rotation:", framePointI.camRotation);
+        framePointI.snapMovement = (bool)EditorGUILayout.Toggle("Snap Movement:", framePointI.snapMovement);
+        if(framePointI.customDamage == null) 
+        {
+            framePointI.customDamage = new CustomDamageField();
+            framePointI.customDamage.customDamageFieldStunValues = new Attack_StunValues();
+        }
+        framePointI.customDamage.rawAttackDamage = (float)EditorGUILayout.FloatField("Raw Damage:", framePointI.customDamage.rawAttackDamage, GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.customDamage.counterHitDamageMult = (float)EditorGUILayout.FloatField("Counter Hit Multiplier:", framePointI.customDamage.counterHitDamageMult, GUILayout.Width(500), GUILayout.Height(20));
+
+        GUILayout.Space(25);
+        Attack_StunValues stunValues = currentCenterAttackData.attackMainStunValues;
+        stunValues.hitstunValue = (int)EditorGUILayout.FloatField("Hit Stun:", stunValues.hitstunValue, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.blockStunValue = (int)EditorGUILayout.FloatField("Block Stun:", stunValues.blockStunValue, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.hitstopValue = (int)EditorGUILayout.FloatField("Hit Stop:", stunValues.hitstopValue, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.blockStopValue = (int)EditorGUILayout.FloatField("Block Stop:", stunValues.blockStopValue, GUILayout.Width(500), GUILayout.Height(20));
+
+        framePointI._hurtboxType = (HurtBoxType)EditorGUILayout.EnumPopup("Hurt Box Type:", framePointI._hurtboxType, GUILayout.Width(500), GUILayout.Height(20));
     }
     void OnEditorUpdate() 
     {
@@ -1367,12 +1546,13 @@ public class Editor_MoveListEditor : EditorWindow
         characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
         if (currentCenterAttackData.AttackAnims != null)
         {
-            _currentAnimClip = currentCenterAttackData.AttackAnims.animClip != null ? currentCenterAttackData.AttackAnims.animClip : null;
-            if (lastClip != _currentAnimClip)
+            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
+            if (_currentAnimClip != null)
             {
-                if (_currentAnimClip != null)
+                if (lastClip != _currentAnimClip)
                 {
                     lastClip = _currentAnimClip;
+                    currentCenterAttackData.AttackAnims.animClip = lastClip;
                     init = currentCenterAttackData.AttackAnims._frameData.init;
                     startup = currentCenterAttackData.AttackAnims._frameData.startup;
                     active = currentCenterAttackData.AttackAnims._frameData.active;
@@ -1380,12 +1560,6 @@ public class Editor_MoveListEditor : EditorWindow
                     recoveryAmount = currentCenterAttackData.AttackAnims._frameData.recoveryAmount;
                 }
             }
-            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
-        }
-        else
-        {
-            _currentAnimClip = null;
-            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
         }
     }
     #endregion
@@ -1590,10 +1764,10 @@ public class Editor_MoveListEditor : EditorWindow
                 ShowRightPageCollisionInformation();
             }
         }
-        GUILayout.Space(145);
+        //GUILayout.Space(145);
         if (moveListData != null)
         {
-            _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" }, GUILayout.Width(CurrentAttackInformationObject.editorRect.width/1f), GUILayout.Height(50));
+            _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" }, GUILayout.Width(CurrentAttackInformationObject.editorRect.width/1f), GUILayout.Height(SaveDataObject.editorRect.height / 20f));
         }
         #endregion
         GUILayout.EndArea();
@@ -1638,7 +1812,9 @@ public class Editor_MoveListEditor : EditorWindow
                 lastMoveList = moveListData;
                 newMoveList = moveListData.GetFullMoveList();
                 editedMoveList = newMoveList;
+                return;
             }
+
         }
         if (editedMoveList == null)
         {
