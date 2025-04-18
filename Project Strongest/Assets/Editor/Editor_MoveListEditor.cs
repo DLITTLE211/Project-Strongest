@@ -1762,13 +1762,11 @@ public class Editor_MoveListEditor : EditorWindow
             {
                 string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0]._correctSequence;
                 DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
-                //stanceAttackString = (string)EditorGUILayout.TextField("Stance Attack Individual Input:", stanceAttackString);
             }
             if (_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
             {
                 string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0]._correctSequence;
                 DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
-                //stanceAttackString = (string)EditorGUILayout.TextField("Stance Attack Individual Input:", stanceAttackString);
             }
         }
     }
@@ -1785,8 +1783,9 @@ public class Editor_MoveListEditor : EditorWindow
             _attackData.rekkaAttackData.LeewayTime = (int)EditorGUILayout.FloatField($"Leeway Time Between Attacks:", _attackData.rekkaAttackData.LeewayTime);
             if (subAttackDataIndex > 0)
             {
-                string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex-1].individualRekkaAttack._correctInput[0]._correctSequence;
+                string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0]._correctSequence;
                 currentHighlightedRekkaInput = (string)EditorGUILayout.TextField("Rekka Individual Input:", currentHighlightedRekkaInput);
+                DisplayMainInformation(_attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0].property);
             }
         }
     }
