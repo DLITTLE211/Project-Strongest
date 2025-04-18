@@ -58,6 +58,7 @@ public class Editor_MoveListEditor : EditorWindow
     bool displayCommandNormalAttacks = false;
     bool displayNormalAttacks = false;
     bool displayThrowAttacks = false;
+    List<DisplayExtraFramePoint> attackAnimExtraPoints;
 
     bool displayPrimaryAttackData = false;
     bool displayMainPropertyData = false;
@@ -129,7 +130,9 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void StartFunctionCalls()
     {
+        attackAnimExtraPoints = new List<DisplayExtraFramePoint>();
         extraFramePointCount = 0;
+        lastCount = 0;
         showExtraFramePointVariables = false;
         editedMoveList = null;
         lastClip = null;
@@ -1146,6 +1149,18 @@ public class Editor_MoveListEditor : EditorWindow
                 recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
                 if(currentCenterAttackData.AttackAnims != null) 
                 {
+                    FrameData curFrameData = currentCenterAttackData.AttackAnims._frameData;
+                    if(curFrameData != null) 
+                    {
+                        List<ExtraFrameHitPoints> curExtraPoints = curFrameData._extraPoints;
+                        if(curExtraPoints != null) 
+                        {
+                            if (curExtraPoints.Count > 0) 
+                            {
+                                extraFramePointCount = currentCenterAttackData.AttackAnims._frameData._extraPoints.Count;
+                            }
+                        }
+                    }
                     DisplayExtraFramePoints(currentCenterAttackData.AttackAnims);
                 }
                 GUILayout.Space(25);
@@ -1164,12 +1179,75 @@ public class Editor_MoveListEditor : EditorWindow
         extraFramePointCount = (int)EditorGUILayout.Slider("ExtraFramePoint Count:", extraFramePointCount, 0, 15, GUILayout.Width(500), GUILayout.Height(20));
         if (lastCount != extraFramePointCount)
         {
-            lastCount = extraFramePointCount;
-            attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
-            for (int i = 0; i < extraFramePointCount; i++)
+            List<DisplayExtraFramePoint> newHitPointList = new List<DisplayExtraFramePoint>();
+            if (attackAnim._frameData._extraPoints != null)
             {
-                attackAnim._frameData._extraPoints.Add(new ExtraFrameHitPoints());
+                if (attackAnim._frameData._extraPoints.Count > 0)
+                {
+                    if (extraFramePointCount > lastCount)
+                    {
+                        if (attackAnim._frameData._extraPoints.Count > 0)
+                        {
+                            for (int i = 0; i < extraFramePointCount; i++)
+                            {
+                                newHitPointList.Add(new DisplayExtraFramePoint(false, attackAnim._frameData._extraPoints[i]));
+                            }
+                            attackAnimExtraPoints = newHitPointList;
+                            attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
+                            for (int i = 0; i < newHitPointList.Count; i++)
+                            {
+                                attackAnim._frameData._extraPoints.Add(newHitPointList[i]._extraFrameHitPoint);
+                            }
+                        }
+                        else
+                        {
+                            int finalAdditionCount = extraFramePointCount - attackAnim._frameData._extraPoints.Count;
+                            for (int i = 0; i < finalAdditionCount; i++)
+                            {
+                                DisplayExtraFramePoint newDisplayPoint = new DisplayExtraFramePoint(false, new ExtraFrameHitPoints());
+                                attackAnimExtraPoints.Add(newDisplayPoint);
+                                attackAnim._frameData._extraPoints.Add(new ExtraFrameHitPoints());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < extraFramePointCount; i++)
+                        {
+                            newHitPointList.Add(new DisplayExtraFramePoint(false, attackAnim._frameData._extraPoints[i]));
+                        }
+                        attackAnimExtraPoints = newHitPointList;
+                        attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
+                        for (int i = 0; i < newHitPointList.Count; i++)
+                        {
+                            attackAnim._frameData._extraPoints.Add(newHitPointList[i]._extraFrameHitPoint);
+                        }
+                    }
+                }
+                else
+                {
+                    attackAnimExtraPoints = new List<DisplayExtraFramePoint>();
+                    attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
+                    for (int i = 0; i < extraFramePointCount; i++)
+                    {
+                        DisplayExtraFramePoint newDisplayPoint = new DisplayExtraFramePoint(false, new ExtraFrameHitPoints());
+                        attackAnimExtraPoints.Add(newDisplayPoint);
+                        attackAnim._frameData._extraPoints.Add(attackAnimExtraPoints[i]._extraFrameHitPoint);
+                    }
+                }
             }
+            else
+            {
+                attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
+                attackAnimExtraPoints = new List<DisplayExtraFramePoint>();
+                for (int i = 0; i < extraFramePointCount; i++)
+                {
+                    attackAnim._frameData._extraPoints.Add(new ExtraFrameHitPoints());
+                    DisplayExtraFramePoint newDisplayPoint = new DisplayExtraFramePoint(false, new ExtraFrameHitPoints());
+                    attackAnimExtraPoints.Add(newDisplayPoint);
+                }
+            }
+            lastCount = extraFramePointCount;
         }
         showExtraFramePointVariables = EditorGUILayout.Foldout(showExtraFramePointVariables, "Show Extra Frame Point Variables");
         if (showExtraFramePointVariables)
@@ -1177,10 +1255,15 @@ public class Editor_MoveListEditor : EditorWindow
             extraFramePointScrollWheel = EditorGUILayout.BeginScrollView(extraFramePointScrollWheel, GUILayout.Width(850), GUILayout.Height(250));
             if (attackAnim._frameData._extraPoints != null)
             {
-                for (int i = 0; i < attackAnim._frameData._extraPoints.Count; i++)
+                for (int i = 0; i < attackAnimExtraPoints.Count; i++)
                 {
                     GUILayout.Label($"Extra Frame Point {i + 1}");
-                    DisplayIndividualExtraPoint(attackAnim._frameData._extraPoints[i]);
+                    attackAnimExtraPoints[i].isDisplayed = EditorGUILayout.Foldout(attackAnimExtraPoints[i].isDisplayed, $"Display Extra Frame Point {i+1}");
+                    if (attackAnimExtraPoints[i].isDisplayed)
+                    {
+                        DisplayIndividualExtraPoint(attackAnimExtraPoints[i]._extraFrameHitPoint);
+                        attackAnim._frameData._extraPoints[i] = attackAnimExtraPoints[i]._extraFrameHitPoint;
+                    }
                     GUILayout.Label("______________________________________________________________________________________________________________________________________________________");
                     GUILayout.Space(25);
                 }
@@ -1560,6 +1643,16 @@ public class Editor_MoveListEditor : EditorWindow
                     recoveryAmount = currentCenterAttackData.AttackAnims._frameData.recoveryAmount;
                 }
             }
+            else 
+            {
+                _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
+                lastClip = _currentAnimClip;
+                init = currentCenterAttackData.AttackAnims._frameData.init;
+                startup = currentCenterAttackData.AttackAnims._frameData.startup;
+                active = currentCenterAttackData.AttackAnims._frameData.active;
+                inactive = currentCenterAttackData.AttackAnims._frameData.inactive;
+                recoveryAmount = currentCenterAttackData.AttackAnims._frameData.recoveryAmount;
+            } 
         }
     }
     #endregion
@@ -1835,6 +1928,17 @@ public class EditorMoveListObject
         editorTexture = _texture;
         editorColor = _color;
         editorRect = _rect;
+    }
+}
+[Serializable]
+public class DisplayExtraFramePoint
+{
+    public bool isDisplayed;
+    public ExtraFrameHitPoints _extraFrameHitPoint;
+    public DisplayExtraFramePoint(bool _displayed, ExtraFrameHitPoints _hitPoint)
+    {
+        isDisplayed = _displayed;
+        _extraFrameHitPoint = _hitPoint;
     }
 }
 [Serializable]
