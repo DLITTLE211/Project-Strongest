@@ -647,11 +647,16 @@ public class Editor_MoveListEditor : EditorWindow
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
         propertyList.Add(specialAttack.stanceStartProperty);
 
-        Attack_BaseProperties currentAttackProperty = specialAttack.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property;
-        propertyList.Add(currentAttackProperty);
-
-        Attack_BaseProperties currentKillProperty = specialAttack.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property;
-        propertyList.Add(currentKillProperty);
+        if (specialAttack.stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
+        {
+            Attack_BaseProperties currentAttackProperty = specialAttack.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property;
+            propertyList.Add(currentAttackProperty);
+        }
+        if (specialAttack.stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
+        {
+            Attack_BaseProperties currentKillProperty = specialAttack.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property;
+            propertyList.Add(currentKillProperty);
+        }
 
         Attack_StanceSpecialMove mewStamceData = specialAttack;
         _attackData = new CompositeAttackData(propertyList, null, null, mewStamceData, null, null, null, propertyList.Count, specialMoveName);
@@ -1629,6 +1634,10 @@ public class Editor_MoveListEditor : EditorWindow
         characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
         if (currentCenterAttackData.AttackAnims != null)
         {
+            if(_currentAnimClip != currentCenterAttackData.AttackAnims.animClip) 
+            {
+                _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
+            }
             _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(500), GUILayout.Height(20));
             if (_currentAnimClip != null)
             {
@@ -1658,9 +1667,11 @@ public class Editor_MoveListEditor : EditorWindow
     #endregion
 
     #region Right Page Information
+    Vector2 rightPageScrollVector;
     void ShowRightPageAttackInformation() 
     {
         GUILayout.Space(50);
+        rightPageScrollVector = EditorGUILayout.BeginScrollView(rightPageScrollVector, GUILayout.Width(CurrentAttackInformationObject.editorRect.width), GUILayout.Height(900));
         displayPrimaryAttackData = EditorGUILayout.Foldout(displayPrimaryAttackData, "Show Primary Data");
         if (displayPrimaryAttackData)
         {
@@ -1675,54 +1686,57 @@ public class Editor_MoveListEditor : EditorWindow
         if (displayMainPropertyData)
         {
             GUILayout.Label("General Attack Information");
-
-            currentCenterAttackData._attackName = (string)EditorGUILayout.TextField("Attack Name:", currentCenterAttackData._attackName);
-            currentCenterAttackData.rawAttackDamage = (float)EditorGUILayout.FloatField("Raw Damage:", currentCenterAttackData.rawAttackDamage);
-            currentCenterAttackData.counterHitDamageMult = (float)EditorGUILayout.FloatField("Counter Hit Multiplier:", currentCenterAttackData.counterHitDamageMult);
-
-            GUILayout.Space(25);
-            Attack_StunValues stunValues = currentCenterAttackData.attackMainStunValues;
-            stunValues.hitstunValue = (int)EditorGUILayout.FloatField("Hit Stun:", stunValues.hitstunValue);
-            stunValues.blockStunValue = (int)EditorGUILayout.FloatField("Block Stun:", stunValues.blockStunValue);
-            stunValues.hitstopValue = (int)EditorGUILayout.FloatField("Hit Stop:", stunValues.hitstopValue);
-            stunValues.blockStopValue = (int)EditorGUILayout.FloatField("Block Stop:", stunValues.blockStopValue);
-
-            GUILayout.Space(25);
-            currentCenterAttackData.hitLevel = (HitLevel)EditorGUILayout.EnumFlagsField("Hit Level", currentCenterAttackData.hitLevel);
-
-            GUILayout.Space(25);
-            currentCenterAttackData._meterRequirement = (int)EditorGUILayout.FloatField("Meter Requirement:", currentCenterAttackData._meterRequirement);
-            currentCenterAttackData._meterAwardedOnHit = (int)EditorGUILayout.FloatField("Meter Awarded:", currentCenterAttackData._meterAwardedOnHit);
-            currentCenterAttackData.attackScalingPercent = (int)EditorGUILayout.FloatField("Attack Scaling:", currentCenterAttackData.attackScalingPercent);
-
-            currentCenterAttackData.dashCancelable = (bool)EditorGUILayout.Toggle("Dash Cancelable:", currentCenterAttackData.dashCancelable);
-            currentCenterAttackData.JumpCancelable = (bool)EditorGUILayout.Toggle("Jump Cancelable:", currentCenterAttackData.JumpCancelable);
-
-            GUILayout.Space(25);
-            currentCenterAttackData._airInfo = (AirAttackInfo)EditorGUILayout.EnumFlagsField("Air Properties", currentCenterAttackData._airInfo);
-
-            Attack_CancelInfo _cancelProperty = currentCenterAttackData.cancelProperty;
-            GUILayout.Space(25);
-            _cancelProperty.CurrentLevel = (Cancel_State)EditorGUILayout.EnumFlagsField("Attack Cancel Level", _cancelProperty.CurrentLevel);
-            _cancelProperty.nextAvailableAttackRoute = (Cancel_State)EditorGUILayout.EnumFlagsField("Next Cancel State", _cancelProperty.nextAvailableAttackRoute);
-            currentCenterAttackData._moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", currentCenterAttackData._moveType);
-
-            GUILayout.Space(25);
-            Horizontal_KnockBack LateralKnockBackData = currentCenterAttackData.LateralKB_Data;
-            Vertical_KnockBack VerticalKnockBackData = currentCenterAttackData.VerticalKB_Data;
-
-            LateralKnockBackData.Hit_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Hit Knockback", LateralKnockBackData.Hit_HKB_Level);
-            LateralKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("Knockback Value:", LateralKnockBackData.Hit_Value);
-            LateralKnockBackData.Block_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Block Knockback", LateralKnockBackData.Block_HKB_Level);
-            LateralKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block Knockback Value:", LateralKnockBackData.Block_Value);
-            GUILayout.Space(25);
-            VerticalKnockBackData.Hit_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Hit KnockUp/Down", VerticalKnockBackData.Hit_VKB_Level);
-            VerticalKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("KnockUp Value:", VerticalKnockBackData.Hit_Value);
-            VerticalKnockBackData.Block_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Block KnockUp/Down", VerticalKnockBackData.Block_VKB_Level);
-            VerticalKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
-            currentCenterAttackData.KnockDown = (Attack_KnockDown)EditorGUILayout.EnumPopup("Knockdown", currentCenterAttackData.KnockDown);
+            DisplayMainInformation(currentCenterAttackData);
         }
-       
+        EditorGUILayout.EndScrollView();
+    }
+    void DisplayMainInformation(Attack_BaseProperties newProperty) 
+    {
+        newProperty._attackName = (string)EditorGUILayout.TextField("Attack Name:", newProperty._attackName);
+        newProperty.rawAttackDamage = (float)EditorGUILayout.FloatField("Raw Damage:", newProperty.rawAttackDamage);
+        newProperty.counterHitDamageMult = (float)EditorGUILayout.FloatField("Counter Hit Multiplier:", newProperty.counterHitDamageMult);
+
+        GUILayout.Space(25);
+        Attack_StunValues stunValues = newProperty.attackMainStunValues;
+        stunValues.hitstunValue = (int)EditorGUILayout.FloatField("Hit Stun:", stunValues.hitstunValue);
+        stunValues.blockStunValue = (int)EditorGUILayout.FloatField("Block Stun:", stunValues.blockStunValue);
+        stunValues.hitstopValue = (int)EditorGUILayout.FloatField("Hit Stop:", stunValues.hitstopValue);
+        stunValues.blockStopValue = (int)EditorGUILayout.FloatField("Block Stop:", stunValues.blockStopValue);
+
+        GUILayout.Space(25);
+        newProperty.hitLevel = (HitLevel)EditorGUILayout.EnumFlagsField("Hit Level", newProperty.hitLevel);
+
+        GUILayout.Space(25);
+        newProperty._meterRequirement = (int)EditorGUILayout.FloatField("Meter Requirement:", newProperty._meterRequirement);
+        newProperty._meterAwardedOnHit = (int)EditorGUILayout.FloatField("Meter Awarded:", newProperty._meterAwardedOnHit);
+        newProperty.attackScalingPercent = (int)EditorGUILayout.FloatField("Attack Scaling:", newProperty.attackScalingPercent);
+
+        newProperty.dashCancelable = (bool)EditorGUILayout.Toggle("Dash Cancelable:", newProperty.dashCancelable);
+        newProperty.JumpCancelable = (bool)EditorGUILayout.Toggle("Jump Cancelable:", newProperty.JumpCancelable);
+
+        GUILayout.Space(25);
+        newProperty._airInfo = (AirAttackInfo)EditorGUILayout.EnumFlagsField("Air Properties", newProperty._airInfo);
+
+        Attack_CancelInfo _cancelProperty = newProperty.cancelProperty;
+        GUILayout.Space(25);
+        _cancelProperty.CurrentLevel = (Cancel_State)EditorGUILayout.EnumFlagsField("Attack Cancel Level", _cancelProperty.CurrentLevel);
+        _cancelProperty.nextAvailableAttackRoute = (Cancel_State)EditorGUILayout.EnumFlagsField("Next Cancel State", _cancelProperty.nextAvailableAttackRoute);
+        newProperty._moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", newProperty._moveType);
+
+        GUILayout.Space(25);
+        Horizontal_KnockBack LateralKnockBackData = newProperty.LateralKB_Data;
+        Vertical_KnockBack VerticalKnockBackData = newProperty.VerticalKB_Data;
+
+        LateralKnockBackData.Hit_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Hit Knockback", LateralKnockBackData.Hit_HKB_Level);
+        LateralKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("Knockback Value:", LateralKnockBackData.Hit_Value);
+        LateralKnockBackData.Block_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Block Knockback", LateralKnockBackData.Block_HKB_Level);
+        LateralKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block Knockback Value:", LateralKnockBackData.Block_Value);
+        GUILayout.Space(25);
+        VerticalKnockBackData.Hit_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Hit KnockUp/Down", VerticalKnockBackData.Hit_VKB_Level);
+        VerticalKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("KnockUp Value:", VerticalKnockBackData.Hit_Value);
+        VerticalKnockBackData.Block_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Block KnockUp/Down", VerticalKnockBackData.Block_VKB_Level);
+        VerticalKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
+        newProperty.KnockDown = (Attack_KnockDown)EditorGUILayout.EnumPopup("Knockdown", newProperty.KnockDown);
     }
     #region Specific Attack Data Display Code
     void DisplayAdvanceSpecialData() 
@@ -1737,6 +1751,25 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.stanceInputData != null)
         {
             GUILayout.Label("Stance Primary Data");
+            _attackData.stanceInputData.StanceSpecialAttack_Name = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.stanceInputData.StanceSpecialAttack_Name);
+            for (int i = 0; i < _attackData.stanceInputData.stanceInput._stanceInput.Count; i++)
+            {
+                _attackData.stanceInputData.stanceInput._stanceInput[i].attackString = (string)EditorGUILayout.TextField($"Stance Attack Input_{i + 1}:", _attackData.stanceInputData.stanceInput._stanceInput[i].attackString);
+            }
+            _attackData.stanceInputData.stanceHeldTime = (int)EditorGUILayout.FloatField($"Stance Held Time:", _attackData.stanceInputData.stanceHeldTime);
+
+            if (_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
+            {
+                string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0]._correctSequence;
+                DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
+                //stanceAttackString = (string)EditorGUILayout.TextField("Stance Attack Individual Input:", stanceAttackString);
+            }
+            if (_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
+            {
+                string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0]._correctSequence;
+                DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
+                //stanceAttackString = (string)EditorGUILayout.TextField("Stance Attack Individual Input:", stanceAttackString);
+            }
         }
     }
     void DisplayRekkaData()
