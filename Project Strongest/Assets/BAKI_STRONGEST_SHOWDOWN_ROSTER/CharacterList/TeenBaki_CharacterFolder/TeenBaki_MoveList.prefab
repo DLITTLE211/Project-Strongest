@@ -269,31 +269,31 @@ MonoBehaviour:
         animName: 
         animLength: 0
         HitBox: {fileID: 0}
-        attackType: 1
-        hb_placement: {x: 1, y: 0, z: 0}
+        attackType: 7
+        hb_placement: {x: 0, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0.85, y: 2.15}
+        hb_size: {x: 0, y: 0}
         extendedHitBox: {fileID: 0}
         hurtType: 7
-        hu_placement: {x: 1, y: 0, z: 0}
+        hu_placement: {x: 0, y: 0, z: 0}
         hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 0.8, y: 2.15}
+        hu_size: {x: 0, y: 0}
         _frameData:
           init: 0
-          startup: 7
-          active: 8
-          inactive: 65
+          startup: 0
+          active: 0
+          inactive: 18
           recoveryEnd: 0
-          recoveryAmount: 20
+          recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
-          - hitFramePoints: 10
-            call: 33554432
+          - hitFramePoints: 0
+            call: 262144
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 3
+            Force: 0
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -306,7 +306,7 @@ MonoBehaviour:
                 blockStunValue: 0
                 hitstopValue: 0
                 blockStopValue: 0
-              hitLevel: 0
+              hitLevel: 16
               isFinalAttack: 0
               isScaling: 0
               lateralKBP:
@@ -319,49 +319,15 @@ MonoBehaviour:
                 Hit_Value: 0
                 Block_VKB_Level: 0
                 Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 7
-          - hitFramePoints: 25
-            call: 2
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 15
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
+              KnockDown: 4
             _hurtboxType: 0
-          - hitFramePoints: 25
-            call: 4
+          - hitFramePoints: 2
+            call: 1048576
             hitFrameBool: 0
             awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 3
+              keyRef: 1
+              awaitingCheck: 2
+            Force: 1
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -2468,12 +2434,12 @@ MonoBehaviour:
         hitConnected: 0
         LateralKB_Data:
           Hit_HKB_Level: 2
-          Hit_Value: 2.7
+          Hit_Value: 2
           Block_HKB_Level: 2
-          Block_Value: 1.4
+          Block_Value: 1
         VerticalKB_Data:
           Hit_VKB_Level: 1
-          Hit_Value: 6.4
+          Hit_Value: 6
           Block_VKB_Level: 0
           Block_Value: 0
         KnockDown: 4
@@ -2578,12 +2544,12 @@ MonoBehaviour:
               hitConnected: 0
               LateralKB_Data:
                 Hit_HKB_Level: 4
-                Hit_Value: 7.5
+                Hit_Value: 7
                 Block_HKB_Level: 0
-                Block_Value: 1.65
+                Block_Value: 1
               VerticalKB_Data:
                 Hit_VKB_Level: 1
-                Hit_Value: 4.1
+                Hit_Value: 4
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 4
