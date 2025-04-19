@@ -1175,7 +1175,8 @@ public class Editor_MoveListEditor : EditorWindow
                     var move = _attackData.baseAttackAnimations[i];
                     if (move == null) continue;
                     var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
-                    if (GUILayout.Button($"Override to {_attackData.baseAttackAnimations[i].animClip.name}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 2.15f), GUILayout.Height(25)))
+                    string attackName = _attackData.baseAttackAnimations[i].animClip != null ? _attackData.baseAttackAnimations[i].animClip.name : $"BaseAnim_{i+1}";
+                    if (GUILayout.Button($"Override to {attackName}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 2.15f), GUILayout.Height(25)))
                     {
                         newAttackAnim = _attackData.baseAttackAnimations[i];
                         _currentAnimClip = newAttackAnim.animClip;
