@@ -1188,15 +1188,18 @@ public class Editor_MoveListEditor : EditorWindow
             GUILayout.Space(50);
             if (moveListData != null && currentCenterAttackData != null)
             {
+                if (characterModel != null && characterAnimator != null)
+                {
+                    DisplayPreviewWindow();
+                }
                 ShowAnimationInformation(newAttackAnim);
                 GUILayout.Space(10);
                 DisplayAnimationTimeline(newAttackAnim);
 
                 if (characterModel != null && characterAnimator != null)
                 {
-                    CreateOrUpdatePreviewInstance();
-                    UpdatePreviewInstance();
-                    DisplayPreviewWindow();
+                    CreateOrUpdatePreviewInstance(newAttackAnim);
+                    UpdatePreviewInstance(newAttackAnim);
                     OnEditorUpdate();
                 }
             }
@@ -1208,26 +1211,6 @@ public class Editor_MoveListEditor : EditorWindow
                 _currentAnimClip = null;
             }
         }
-    }
-    void DisplayExtraAnimations(string attackType,List<AttackHandler_Attack> AttackAnims, out AttackHandler_Attack newAttackAnim) 
-    {
-        for (int i = 0; i < AttackAnims.Count; i++)
-        {
-            var move = AttackAnims[i];
-            if (move == null) continue;
-            var style = i == highlightedAttackIndex ? EditorStyles.toolbarButton : EditorStyles.miniButton;
-            if (GUILayout.Button($"Override Anim with {attackType}_Anim {i + 1}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 3f), GUILayout.Height(25)))
-            {
-                previewActive = false;
-                newAttackAnim = AttackAnims[i];
-                currentCenterAttackData.AttackAnims = newAttackAnim;
-                _currentAnimClip = newAttackAnim.animClip;
-                currentFrame = 0;
-                isPlaying = false;
-                return;
-            }
-        }
-        newAttackAnim = null;
     }
     void DisplayAnimationTimeline(AttackHandler_Attack newAttackAnim)
     {
@@ -1431,7 +1414,7 @@ public class Editor_MoveListEditor : EditorWindow
                 }
             }
 
-            UpdatePreviewInstance();
+            UpdatePreviewInstance(newAttackAnim);
             Repaint();
         }
         if (!isPlaying && _currentAnimClip != null)
@@ -1453,10 +1436,9 @@ public class Editor_MoveListEditor : EditorWindow
                         isPlaying = false;
                     }
                 }
-
-                UpdatePreviewInstance();
-                Repaint();
             }
+            UpdatePreviewInstance(newAttackAnim);
+            Repaint();
         }
     }
     private void DrawTimelineControls()
@@ -1501,7 +1483,7 @@ public class Editor_MoveListEditor : EditorWindow
         lastTime = EditorApplication.timeSinceStartup;
     }
     #region Preview Functions
-    private void CreateOrUpdatePreviewInstance()
+    private void CreateOrUpdatePreviewInstance(AttackHandler_Attack newAttackAnim)
     {
         if (previewActive) 
         {
@@ -1529,9 +1511,9 @@ public class Editor_MoveListEditor : EditorWindow
             return;
         }
 
-        if (currentCenterAttackData.AttackAnims.animClip != null)
+        if (newAttackAnim.animClip != null)
         {
-            _currentAnimClip = currentCenterAttackData.AttackAnims.animClip;
+            _currentAnimClip = newAttackAnim.animClip;
             CreateAnimationController(animator);
         }
 
@@ -1549,8 +1531,8 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplayPreviewWindow() 
     {
         previewRect = new Rect();
-        previewRect.x = CurrentAttackBodyObject.editorRect.width/3.5f;
-        previewRect.y = CurrentAttackBodyObject.editorRect.height/2.015f;
+        previewRect.x = CurrentAttackBodyObject.editorRect.width/1.95f;
+        previewRect.y = CurrentAttackBodyObject.editorRect.height/2.95f;
         previewRect.width = 500f;
         previewRect.height = 500f;
         showPreview = EditorGUILayout.Foldout(showPreview, "Preview Settings");
@@ -1564,25 +1546,28 @@ public class Editor_MoveListEditor : EditorWindow
         DrawPreview(previewRect);
         Repaint();
     }
-    void UpdatePreviewInstance() 
+    void UpdatePreviewInstance(AttackHandler_Attack newAttackAnim) 
     {
-        if (currentCenterAttackData.AttackAnims.animClip == null || previewInstance == null)
-            return;
-
-        var animator = previewInstance.GetComponentInChildren<Animator>();
-        if (animator == null)
-            return;
-
-        if (animator.HasState(0, Animator.StringToHash("PreviewState")))
+        if (newAttackAnim != null) 
         {
-            float normalizedTime = Mathf.Clamp01(timelineCurrentTime / currentCenterAttackData.AttackAnims.animClip.length);
-            animator.Play("PreviewState", 0, normalizedTime);
-            animator.speed = 0;
-            animator.Update(0);
-        }
-        else
-        {
-            Debug.LogWarning("PreviewState not found in animator controller!");
+            if (newAttackAnim.animClip == null || previewInstance == null)
+                return;
+
+            var animator = previewInstance.GetComponentInChildren<Animator>();
+            if (animator == null)
+                return;
+
+            if (animator.HasState(0, Animator.StringToHash("PreviewState")))
+            {
+                float normalizedTime = Mathf.Clamp01(timelineCurrentTime / newAttackAnim.animClip.length);
+                animator.Play("PreviewState", 0, normalizedTime);
+                animator.speed = 0;
+                animator.Update(0);
+            }
+            else
+            {
+                Debug.LogWarning("PreviewState not found in animator controller!");
+            }
         }
     }
     void DrawPreview(Rect _rectSize) 
