@@ -23,7 +23,7 @@ public class Editor_MoveListEditor : EditorWindow
     #endregion
 
     #region Character Data
-    private Character_MoveList moveListData;
+    Character_MoveList moveListData;
     private Character_MoveList lastMoveList;
     FullMoveList editedMoveList;
     private GameObject characterModel;
@@ -82,6 +82,8 @@ public class Editor_MoveListEditor : EditorWindow
     private double lastTime;
     private bool loopPreview = false;
     [SerializeField] private float playbackSpeed = 1f;
+    private Material previewSolidMaterial;
+    private Material previewWireMaterial;
     private Color moveEventColor = Color.cyan;
     private Color collisionBoxColor = new Color(1f, 0.5f, 0f, 0.6f); // semi-transparent orange
     private Color collisionBoxOutlineColor = Color.yellow; // fallback color
@@ -297,7 +299,7 @@ public class Editor_MoveListEditor : EditorWindow
         GUILayout.BeginArea(MoveListBodyObject.editorRect);
         #region FillArea
         GUILayout.Label("Full MoveList");
-        moveListData = (Character_MoveList)EditorGUILayout.ObjectField(new GUIContent("Current Movelist", "Insert Movelist"), moveListData, typeof(Character_MoveList), true);
+        moveListData = (Character_MoveList)EditorGUILayout.ObjectField("Current Movelist", moveListData, typeof(Character_MoveList), true);
         if (moveListData != null)
         {
             FillDataOnScreen();
@@ -1200,6 +1202,10 @@ public class Editor_MoveListEditor : EditorWindow
                 {
                     CreateOrUpdatePreviewInstance(newAttackAnim);
                     UpdatePreviewInstance(newAttackAnim);
+                    if (_moveListEditState == MoveListEditMode.MainAttackCollisionMode)
+                    {
+
+                    }
                     OnEditorUpdate();
                 }
             }
@@ -1681,38 +1687,62 @@ public class Editor_MoveListEditor : EditorWindow
             previewInstance = null;
         }
     }
+
     /*private void DrawCollisionBoxesInPreview()
     {
-        if (fighterController?.CharacterData?.collisionConfig == null || selectedAnimationClip == null)
-            return;
-
-        int currentFrame = Mathf.FloorToInt(timelineCurrentTime * fighterController.CharacterData.collisionConfig.fps);
-        Mesh cubeMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
-
-        foreach (var entry in fighterController.CharacterData.collisionConfig.collisionEntries)
+        if (newAttackAnim != null && _currentAnimClip != null)
         {
-            if (entry.stateName != selectedState)
-                continue;
-
-            foreach (var box in entry.collisionBoxes)
+            Mesh cubeMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
+            HitBox currentHitbox = newAttackAnim.HitBox;
+            HurtBox currentHurtbox = newAttackAnim.extendedHitBox;
+            
+            //foreach (var entry in fighterController.CharacterData.collisionConfig.collisionEntries)
             {
-                if (currentFrame < box.activeFrameStart || currentFrame > box.activeFrameEnd)
-                    continue;
 
-                Transform parent = GetParentTransformInPreview(box.parentName);
-                Vector3 position = parent.TransformPoint(box.offset);
-                Vector3 size = new Vector3(box.size.x, box.size.y, 0.02f);
+               // foreach (var box in entry.collisionBoxes)
+                {
+                    if (currentFrame < newAttackAnim._frameData.startup || currentFrame > newAttackAnim._frameData.inactive) 
+                    {
+                        Transform parent = GetParentTransformInPreview(box.parentName);
+                        Vector3 position = parent.TransformPoint(newAttackAnim.hb_placement);
+                        Vector3 size = new Vector3(newAttackAnim.hb_size.x, newAttackAnim.hb_size.y, 0.02f);
 
-                previewSolidMaterial.color = box.GetColor();
-                previewUtility.DrawMesh(cubeMesh,
-                    Matrix4x4.TRS(position, Quaternion.identity, size),
-                    previewSolidMaterial, 0);
+                        previewSolidMaterial.color = currentHurtbox.GetColor();
+                        previewUtility.DrawMesh(cubeMesh,
+                            Matrix4x4.TRS(position, Quaternion.identity, size),
+                            previewSolidMaterial, 0);
 
-                previewWireMaterial.color = box.WireColor;
-                DrawWireframeCube(position, size);
+                        previewWireMaterial.color = box.WireColor;
+                        DrawWireframeCube(position, size);
+                    }
+
+                    if (currentFrame < newAttackAnim._frameData.active || currentFrame > newAttackAnim._frameData.inactive) 
+                    {
+                        Transform parent = GetParentTransformInPreview(box.parentName);
+                        Vector3 position = parent.TransformPoint(box.offset);
+                        Vector3 size = new Vector3(box.size.x, box.size.y, 0.02f);
+
+                        previewSolidMaterial.color = box.GetColor();
+                        previewUtility.DrawMesh(cubeMesh,
+                            Matrix4x4.TRS(position, Quaternion.identity, size),
+                            previewSolidMaterial, 0);
+
+                        previewWireMaterial.color = box.WireColor;
+                        DrawWireframeCube(position, size);
+                    }
+
+                }
             }
         }
     }*/
+    private Transform GetParentTransformInPreview(string parentName)
+    {
+        if (string.IsNullOrEmpty(parentName))
+        {
+            return previewInstance.transform;
+        }
+        return previewInstance.transform.Find(parentName) ?? previewInstance.transform;
+    }
     #endregion
     void ShowAnimationInformation(AttackHandler_Attack newAttackAnim)
     {
@@ -1847,12 +1877,12 @@ public class Editor_MoveListEditor : EditorWindow
             if (_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
             {
                 string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0]._correctSequence;
-                DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
+                //DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
             }
             if (_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
             {
                 string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0]._correctSequence;
-                DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
+                //DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
             }
         }
     }
@@ -1875,7 +1905,7 @@ public class Editor_MoveListEditor : EditorWindow
                 {
                     string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0]._correctSequence;
                     currentHighlightedRekkaInput = (string)EditorGUILayout.TextField("Rekka Individual Input:", currentHighlightedRekkaInput);
-                    DisplayMainInformation(_attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0].property);
+                    //DisplayMainInformation(_attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0].property);
                 }
             }
         }
@@ -1986,6 +2016,7 @@ public class Editor_MoveListEditor : EditorWindow
         if (moveListData != null)
         {
             _moveListEditState = (MoveListEditMode)GUILayout.Toolbar((int)_moveListEditState, new[] { "Current Attack Info Editor", "Current Attack Collision Editor" }, GUILayout.Width(CurrentAttackInformationObject.editorRect.width/1f), GUILayout.Height(SaveDataObject.editorRect.height / 20f));
+           
         }
         #endregion
         GUILayout.EndArea();
