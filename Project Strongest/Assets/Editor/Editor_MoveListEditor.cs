@@ -82,8 +82,8 @@ public class Editor_MoveListEditor : EditorWindow
     private double lastTime;
     private bool loopPreview = false;
     [SerializeField] private float playbackSpeed = 1f;
-    private Material previewSolidMaterial;
-    private Material previewWireMaterial;
+    private Material hitboxMat;
+    private Material hurtboxMat;
     private Color moveEventColor = Color.cyan;
     private Color collisionBoxColor = new Color(1f, 0.5f, 0f, 0.6f); // semi-transparent orange
     private Color collisionBoxOutlineColor = Color.yellow; // fallback color
@@ -97,6 +97,7 @@ public class Editor_MoveListEditor : EditorWindow
     public GameObject previewInstance;
     private Rect previewRect;
     private float previewHeight = 250f;
+    private float verticalBias;
     bool showPreview;
 
     // Camera & Lighting settings
@@ -117,6 +118,8 @@ public class Editor_MoveListEditor : EditorWindow
     // Panel widths
     private float leftPanelWidth = 200f;
     private float rightPanelWidth = 300f;
+    List<Color> hitboxColorList = new List<Color>();
+    List<Color> hurtboxColorList = new List<Color>();
     #endregion
 
 
@@ -131,8 +134,41 @@ public class Editor_MoveListEditor : EditorWindow
     {
         StartFunctionCalls();
     }
+    void AddHitboxColorList()
+    {
+        hitboxColorList.Add(Color.green);
+        hitboxColorList.Add(Color.red);
+        hitboxColorList.Add(Color.blue);
+        hitboxColorList.Add(Color.white);
+        hitboxColorList.Add(Color.grey);
+        hitboxColorList.Add(Color.cyan);
+        hitboxColorList.Add(Color.yellow);
+        hitboxColorList.Add(Color.black);
+        hitboxColorList.Add(Color.magenta);
+    }
+    void AddHurtboxColorList() 
+    {
+
+        hurtboxColorList.Add(new Color32(255, 0, 170, 95));
+        hurtboxColorList.Add( new Color32(102, 222, 255, 95));
+        hurtboxColorList.Add( new Color32(197, 255, 102, 95));
+        hurtboxColorList.Add(new Color32(236, 220, 188, 95));
+        hurtboxColorList.Add( new Color32(155, 97, 52, 95));
+        hurtboxColorList.Add( new Color32(57, 207, 255, 95));
+        hurtboxColorList.Add( new Color32(135, 135, 135, 95));
+        hurtboxColorList.Add( new Color32(255, 255, 255, 95));
+        hurtboxColorList.Add( new Color32(0, 0, 0, 95));
+        hurtboxColorList.Add( new Color32(188, 106, 106, 95));
+        hurtboxColorList.Add( new Color32(2, 150, 90, 95));
+        hurtboxColorList.Add( new Color32(210, 3, 45, 95));
+    }
     void StartFunctionCalls()
     {
+        hitboxMat = new Material(Shader.Find("Unlit/Color"));
+        hurtboxMat = new Material(Shader.Find("Unlit/Color"));
+        AddHitboxColorList();
+        verticalBias = 0f;
+        AddHurtboxColorList();
         newAttackAnim = null;
         attackAnimExtraPoints = new List<DisplayExtraFramePoint>();
         extraFramePointCount = 0;
@@ -1545,9 +1581,10 @@ public class Editor_MoveListEditor : EditorWindow
         if (showPreview)
         {
             EditorGUI.indentLevel++;
-            previewCameraFOV = EditorGUILayout.Slider("Camera FOV", previewCameraFOV, 10, 90);
-            previewCameraPositionOffset = EditorGUILayout.Vector3Field("Camera Offset", previewCameraPositionOffset);
+            previewCameraFOV = EditorGUILayout.Slider("Camera FOV", previewCameraFOV, 10, 90,GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 1.95f), GUILayout.Height(20));
+            previewCameraPositionOffset = EditorGUILayout.Vector3Field("Camera Offset", previewCameraPositionOffset, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 1.15f), GUILayout.Height(20));
             EditorGUI.indentLevel--;
+            GUILayout.Space(50);
         }
         DrawPreview(previewRect);
         Repaint();
@@ -1586,7 +1623,10 @@ public class Editor_MoveListEditor : EditorWindow
             previewUtility.BeginPreview(_rectSize, GUIStyle.none);
             SetupPreviewCamera();
             DrawPreviewInstanceUtil();
-            //DrawCollisionBoxesInPreview();
+            if (_moveListEditState ==  MoveListEditMode.MainAttackCollisionMode) 
+            {
+                DrawCollisionBoxesInPreview();
+            }
             previewUtility.camera.Render();
             GUI.DrawTexture(_rectSize, previewUtility.EndPreview(), ScaleMode.StretchToFill, false);
         }
@@ -1688,60 +1728,62 @@ public class Editor_MoveListEditor : EditorWindow
         }
     }
 
-    /*private void DrawCollisionBoxesInPreview()
+    private void DrawCollisionBoxesInPreview()
     {
         if (newAttackAnim != null && _currentAnimClip != null)
         {
             Mesh cubeMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
-            HitBox currentHitbox = newAttackAnim.HitBox;
-            HurtBox currentHurtbox = newAttackAnim.extendedHitBox;
-            
-            //foreach (var entry in fighterController.CharacterData.collisionConfig.collisionEntries)
+            string modelInPreviewName = $"{characterModel.name}(Clone)";
+            if (currentFrame >= newAttackAnim._frameData.startup && currentFrame <= (newAttackAnim._frameData.inactive+ newAttackAnim._frameData.recoveryAmount))
             {
+                Vector3 position = new Vector3(newAttackAnim.hu_placement.x, newAttackAnim.hu_placement.y + 1, newAttackAnim.hu_placement.z);// parent.TransformPoint(newAttackAnim.hu_placement);
+                Vector3 size = new Vector3(newAttackAnim.hu_size.x, newAttackAnim.hu_size.y, 0.02f);
 
-               // foreach (var box in entry.collisionBoxes)
-                {
-                    if (currentFrame < newAttackAnim._frameData.startup || currentFrame > newAttackAnim._frameData.inactive) 
-                    {
-                        Transform parent = GetParentTransformInPreview(box.parentName);
-                        Vector3 position = parent.TransformPoint(newAttackAnim.hb_placement);
-                        Vector3 size = new Vector3(newAttackAnim.hb_size.x, newAttackAnim.hb_size.y, 0.02f);
+                previewUtility.DrawMesh(cubeMesh, Matrix4x4.TRS(position, Quaternion.identity, size), hurtboxMat, 0);
+                Color hurtboxColor = hurtboxColorList[(int)newAttackAnim.hurtType];
+                hurtboxMat.color = hurtboxColor;
+                DrawWireframeCube(newAttackAnim.hu_placement, size,hurtboxMat);
+            }
 
-                        previewSolidMaterial.color = currentHurtbox.GetColor();
-                        previewUtility.DrawMesh(cubeMesh,
-                            Matrix4x4.TRS(position, Quaternion.identity, size),
-                            previewSolidMaterial, 0);
+            if (currentFrame >= newAttackAnim._frameData.active && currentFrame <= newAttackAnim._frameData.inactive)
+            {
+                Vector3 position = new Vector3(newAttackAnim.hb_placement.x, newAttackAnim.hb_placement.y + 1, newAttackAnim.hb_placement.z);
+                Vector3 size = new Vector3(newAttackAnim.hb_size.x, newAttackAnim.hb_size.y, 0.02f);
 
-                        previewWireMaterial.color = box.WireColor;
-                        DrawWireframeCube(position, size);
-                    }
-
-                    if (currentFrame < newAttackAnim._frameData.active || currentFrame > newAttackAnim._frameData.inactive) 
-                    {
-                        Transform parent = GetParentTransformInPreview(box.parentName);
-                        Vector3 position = parent.TransformPoint(box.offset);
-                        Vector3 size = new Vector3(box.size.x, box.size.y, 0.02f);
-
-                        previewSolidMaterial.color = box.GetColor();
-                        previewUtility.DrawMesh(cubeMesh,
-                            Matrix4x4.TRS(position, Quaternion.identity, size),
-                            previewSolidMaterial, 0);
-
-                        previewWireMaterial.color = box.WireColor;
-                        DrawWireframeCube(position, size);
-                    }
-
-                }
+                previewUtility.DrawMesh(cubeMesh, Matrix4x4.TRS(position, Quaternion.identity, size), hitboxMat, 0);
+                Color hitboxColor = hitboxColorList[(int)newAttackAnim.attackType];
+                hitboxMat.color = hitboxColor;
+                DrawWireframeCube(newAttackAnim.hb_placement, size,hitboxMat);
             }
         }
-    }*/
-    private Transform GetParentTransformInPreview(string parentName)
+    }
+    private void DrawWireframeCube(Vector3 position, Vector3 size, Material curMat)
     {
-        if (string.IsNullOrEmpty(parentName))
+        Vector3 half = size * 0.5f;
+        Vector3[] vertices = new Vector3[]
         {
-            return previewInstance.transform;
+            position + new Vector3(-half.x, -half.y, -half.z),
+            position + new Vector3(half.x, -half.y, -half.z),
+            position + new Vector3(half.x, half.y, -half.z),
+            position + new Vector3(-half.x, half.y, -half.z),
+            position + new Vector3(-half.x, -half.y, half.z),
+            position + new Vector3(half.x, -half.y, half.z),
+            position + new Vector3(half.x, half.y, half.z),
+            position + new Vector3(-half.x, half.y, half.z)
+        };
+
+        int[] lines = { 0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7 };
+
+        GL.PushMatrix();
+        GL.MultMatrix(previewUtility.camera.worldToCameraMatrix);
+        curMat.SetPass(0);
+        GL.Begin(GL.LINES);
+        foreach (int i in lines)
+        {
+            GL.Vertex(vertices[i]);
         }
-        return previewInstance.transform.Find(parentName) ?? previewInstance.transform;
+        GL.End();
+        GL.PopMatrix();
     }
     #endregion
     void ShowAnimationInformation(AttackHandler_Attack newAttackAnim)
@@ -1952,21 +1994,21 @@ public class Editor_MoveListEditor : EditorWindow
     {
         GUILayout.Space(50);
         GUILayout.Label("Collision Information");
-        AttackHandler_Attack attackAnim = currentCenterAttackData.AttackAnims;
+        //verticalBias = (float)EditorGUILayout.Slider("Vertical Bias:", verticalBias, 0f, 15f, GUILayout.Width(CurrentAttackInformationObject.editorRect.width / 2f), GUILayout.Height(20));
 
-        attackAnim.attackType = (HitBoxType)EditorGUILayout.EnumPopup("Attack Type:", attackAnim.attackType);
-        attackAnim.hb_placement = (Vector3)EditorGUILayout.Vector3Field("Hitbox Placement", attackAnim.hb_placement);
-        attackAnim.hb_orientation = (Vector3)EditorGUILayout.Vector3Field("Hitbox Orientation", attackAnim.hb_orientation);
-        attackAnim.hb_size = (Vector2)EditorGUILayout.Vector2Field("Hitbox size", attackAnim.hb_size);
-
-        GUILayout.Space(25);
-        attackAnim.hurtType = (HurtBoxType)EditorGUILayout.EnumPopup("Hurtbox Type:", attackAnim.hurtType);
-        attackAnim.hb_placement = (Vector3)EditorGUILayout.Vector3Field("Hurtbox Placement", attackAnim.hu_placement);
-        attackAnim.hb_orientation = (Vector3)EditorGUILayout.Vector3Field("Hurtbox Orientation", attackAnim.hu_orientation);
-        attackAnim.hb_size = (Vector2)EditorGUILayout.Vector2Field("Hurtbox size", attackAnim.hu_size);
+        newAttackAnim.attackType = (HitBoxType)EditorGUILayout.EnumPopup("Attack Type:", newAttackAnim.attackType);
+        newAttackAnim.hb_placement = (Vector3)EditorGUILayout.Vector3Field("Hitbox Placement", newAttackAnim.hb_placement);
+        newAttackAnim.hb_orientation = (Vector3)EditorGUILayout.Vector3Field("Hitbox Orientation", newAttackAnim.hb_orientation);
+        newAttackAnim.hb_size = (Vector2)EditorGUILayout.Vector2Field("Hitbox size", newAttackAnim.hb_size);
 
         GUILayout.Space(25);
-        HitCount _hitCount = attackAnim._hitCount;
+        newAttackAnim.hurtType = (HurtBoxType)EditorGUILayout.EnumPopup("Hurtbox Type:", newAttackAnim.hurtType);
+        newAttackAnim.hu_placement = (Vector3)EditorGUILayout.Vector3Field("Hurtbox Placement", newAttackAnim.hu_placement);
+        newAttackAnim.hu_orientation = (Vector3)EditorGUILayout.Vector3Field("Hurtbox Orientation", newAttackAnim.hu_orientation);
+        newAttackAnim.hu_size = (Vector2)EditorGUILayout.Vector2Field("Hurtbox size", newAttackAnim.hu_size);
+
+        GUILayout.Space(25);
+        HitCount _hitCount = newAttackAnim._hitCount;
         _hitCount._startCount = (int)EditorGUILayout.FloatField("Initial Hit Count:", _hitCount._startCount);
         _hitCount._startRefreshRate = (int)EditorGUILayout.FloatField("Initial Refresh Rate:", _hitCount._startRefreshRate);
 
