@@ -375,18 +375,13 @@ public class Editor_MoveListEditor : EditorWindow
         GUILayout.Space(10);
         ShowThrowAttacks();
         EditorGUILayout.EndScrollView();
-
-
         GUILayout.Space(50);
-
-        Debug.Log("Present ALL Attacks");
     }
 
     #region Supers Function Section
     void ShowSupersAttacks()
     {
         #region Command Grabs Display
-        Debug.Log(editedMoveList.BasicSuperAttacks.Count);
         GUILayout.Label("Super Attacks");
         superFollowUpCount = EditorGUILayout.IntField("Super FollowUp Count", superFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Supers Entry"))
@@ -465,7 +460,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowCommandGrabAttacks()
     {
         #region Command Grabs Display
-        Debug.Log(editedMoveList.CommandThrows.Count);
         GUILayout.Label("Command Grabs");
         commandGrabFollowUpCount = EditorGUILayout.IntField("CommandGrab FollowUp Count", commandGrabFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Command Grab Entry"))
@@ -544,7 +538,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowCounterAttacks()
     {
         #region Counter Attack Display
-        Debug.Log(editedMoveList.CounterAttacks.Count);
         GUILayout.Label("Counter Attacks");
         counterFollowUpCount = EditorGUILayout.IntField("Counter FollowUp Count", counterFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Counter Attack Entry"))
@@ -624,7 +617,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowStanceAttacks()
     {
         #region Stance Attack Display
-        Debug.Log(editedMoveList.stanceSpecials.Count);
         GUILayout.Label("Stance Attacks");
         if (GUILayout.Button("Add New Stance Entry"))
         {
@@ -742,7 +734,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowRekkaAttacks()
     {
         #region String Attack Display
-        Debug.Log(editedMoveList.rekkaSpecials.Count);
         GUILayout.Label("Rekka Attacks");
         rekkaAttackCount = EditorGUILayout.IntField("Set Rekka Count", rekkaAttackCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Rekka Move Entry"))
@@ -837,7 +828,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowSpecialAttacks()
     {
         #region String Attack Display
-        Debug.Log(editedMoveList.special_Simple.Count);
         GUILayout.Label("Special Move Attacks");
         if (GUILayout.Button("Add New Special Move Entry"))
         {
@@ -904,7 +894,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowStringNormalAttacks()
     {
         #region String Attack Display
-        Debug.Log(editedMoveList.stringNormalAttacks.Count);
         GUILayout.Label("String Attacks");
         stringNormalCount = EditorGUILayout.IntField("Set Attack Strings Count", stringNormalCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New String Normal Attack Entry"))
@@ -978,7 +967,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowCommandNormalAttacks()
     {
         #region Command Attack Display
-        Debug.Log(editedMoveList.commandNormalAttacks.Count);
         GUILayout.Label("Command Attacks");
         if (GUILayout.Button("Add New Command Normal Attack Entry"))
         {
@@ -1047,7 +1035,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowNormalAttacks()
     {
         #region Normal Attack Display
-        Debug.Log(editedMoveList.simpleAttacks.Count);
         GUILayout.Label("Normal Attacks");
         if (GUILayout.Button("Add New Normal Attack Entry"))
         {
@@ -1117,7 +1104,6 @@ public class Editor_MoveListEditor : EditorWindow
     void ShowThrowAttacks()
     {
         #region Throw Display
-        Debug.Log(editedMoveList.BasicThrows.Count);
         GUILayout.Label("Throws");
         if (GUILayout.Button("Add New Throw Entry"))
         {
@@ -1190,6 +1176,8 @@ public class Editor_MoveListEditor : EditorWindow
     #endregion
 
     #region Center Page Information
+
+    Vector2 attackPropertyAnimView;
     public void DisplayAttackInfomation()
     {
         if (_attackData != null)
@@ -1197,6 +1185,8 @@ public class Editor_MoveListEditor : EditorWindow
             displayCurrentAttackList = EditorGUILayout.Foldout(displayCurrentAttackList, "Show Attack Property List");
             if (displayCurrentAttackList)
             {
+                attackPropertyAnimView = EditorGUILayout.BeginScrollView(attackPropertyAnimView, GUILayout.Width(CurrentAttackBodyObject.editorRect.width/2f), GUILayout.Height(250));
+
                 for (int i = 0; i < _attackData.basePropertyCount; i++)
                 {
                     var move = _attackData.baseAttackProperties[i];
@@ -1230,8 +1220,9 @@ public class Editor_MoveListEditor : EditorWindow
                         isPlaying = false;
                     }
                 }
+                EditorGUILayout.EndScrollView();
+                GUILayout.Space(50);
             }
-            GUILayout.Space(50);
             if (moveListData != null && currentCenterAttackData != null)
             {
                 if (characterModel != null && characterAnimator != null)
@@ -1246,10 +1237,6 @@ public class Editor_MoveListEditor : EditorWindow
                 {
                     CreateOrUpdatePreviewInstance(newAttackAnim);
                     UpdatePreviewInstance(newAttackAnim);
-                    if (_moveListEditState == MoveListEditMode.MainAttackCollisionMode)
-                    {
-
-                    }
                     OnEditorUpdate();
                 }
             }
@@ -1799,13 +1786,13 @@ public class Editor_MoveListEditor : EditorWindow
     {
         characterModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Object"), characterModel, typeof(GameObject), true, GUILayout.Width(500), GUILayout.Height(20));
         characterAnimator = (RuntimeAnimatorController)EditorGUILayout.ObjectField(new GUIContent("Object Animator"), characterAnimator, typeof(RuntimeAnimatorController), true, GUILayout.Width(500), GUILayout.Height(20));
+        _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 1.95f), GUILayout.Height(20));
+        if(_currentAnimClip != null) 
+        {
+            newAttackAnim.animClip = _currentAnimClip;
+        }
         if (newAttackAnim != null)
         {
-            if(_currentAnimClip != newAttackAnim.animClip) 
-            {
-                _currentAnimClip = newAttackAnim.animClip;
-            }
-            _currentAnimClip = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), _currentAnimClip, typeof(AnimationClip), true, GUILayout.Width(800), GUILayout.Height(20));
             if (_currentAnimClip != null)
             {
                 if (lastClip != _currentAnimClip)
@@ -1828,7 +1815,29 @@ public class Editor_MoveListEditor : EditorWindow
                 active = newAttackAnim._frameData.active;
                 inactive = newAttackAnim._frameData.inactive;
                 recoveryAmount = newAttackAnim._frameData.recoveryAmount;
-            } 
+            }
+            /*if (_currentAnimClip != newAttackAnim.animClip)
+            {
+                if (newAttackAnim.animClip != null)
+                {
+                    _currentAnimClip = newAttackAnim.animClip;
+                }
+                else 
+                {
+                    if(_currentAnimClip != null) 
+                    {
+                        newAttackAnim.animClip = _currentAnimClip;
+                    }
+                }
+            }
+            else
+            {
+                if (_currentAnimClip != null)
+                {
+                    newAttackAnim.animClip = _currentAnimClip;
+                }
+            }*/
+
         }
     }
     #endregion
