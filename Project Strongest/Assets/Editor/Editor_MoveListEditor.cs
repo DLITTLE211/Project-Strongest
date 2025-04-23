@@ -136,36 +136,40 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void AddHitboxColorList()
     {
-        hitboxColorList.Add(Color.green);
-        hitboxColorList.Add(Color.red);
-        hitboxColorList.Add(Color.blue);
-        hitboxColorList.Add(Color.white);
-        hitboxColorList.Add(Color.grey);
-        hitboxColorList.Add(Color.cyan);
-        hitboxColorList.Add(Color.yellow);
-        hitboxColorList.Add(Color.black);
-        hitboxColorList.Add(Color.magenta);
+
+        hitboxColorList.Add(new Color32(0,255,0,25));
+        hitboxColorList.Add(new Color32(255, 0, 0, 25));
+        hitboxColorList.Add(new Color32(0, 0, 255, 25));
+        hitboxColorList.Add(new Color32(255, 255, 255, 25));
+        hitboxColorList.Add(new Color32(125, 125, 125, 25));
+        hitboxColorList.Add(new Color32(0, 255, 255, 25));
+        hitboxColorList.Add(new Color32(255, 255, 0, 25));
+        hitboxColorList.Add(new Color32(0, 0, 0, 25));
+        hitboxColorList.Add(new Color32(255, 0, 255, 25));
     }
     void AddHurtboxColorList() 
     {
 
-        hurtboxColorList.Add(new Color32(255, 0, 170, 95));
-        hurtboxColorList.Add( new Color32(102, 222, 255, 95));
-        hurtboxColorList.Add( new Color32(197, 255, 102, 95));
-        hurtboxColorList.Add(new Color32(236, 220, 188, 95));
-        hurtboxColorList.Add( new Color32(155, 97, 52, 95));
-        hurtboxColorList.Add( new Color32(57, 207, 255, 95));
-        hurtboxColorList.Add( new Color32(135, 135, 135, 95));
-        hurtboxColorList.Add( new Color32(255, 255, 255, 95));
-        hurtboxColorList.Add( new Color32(0, 0, 0, 95));
-        hurtboxColorList.Add( new Color32(188, 106, 106, 95));
-        hurtboxColorList.Add( new Color32(2, 150, 90, 95));
-        hurtboxColorList.Add( new Color32(210, 3, 45, 95));
+        hurtboxColorList.Add( new Color32(255, 0, 170, 25));
+        hurtboxColorList.Add( new Color32(102, 222, 255, 25));
+        hurtboxColorList.Add( new Color32(197, 255, 102, 25));
+        hurtboxColorList.Add( new Color32(236, 220, 188, 25));
+        hurtboxColorList.Add( new Color32(155, 97, 52, 25));
+        hurtboxColorList.Add( new Color32(57, 207, 255, 25));
+        hurtboxColorList.Add( new Color32(135, 135, 135, 25));
+        hurtboxColorList.Add( new Color32(255, 255, 255, 25));
+        hurtboxColorList.Add( new Color32(0, 0, 0, 25));
+        hurtboxColorList.Add( new Color32(188, 106, 106, 25));
+        hurtboxColorList.Add( new Color32(2, 150, 90, 25));
+        hurtboxColorList.Add( new Color32(210, 3, 45, 25));
     }
     void StartFunctionCalls()
     {
         hitboxMat = new Material(Shader.Find("Unlit/Color"));
-        hurtboxMat = new Material(Shader.Find("Unlit/Color"));
+        hurtboxMat = new Material(Shader.Find("Unlit/Color")); 
+        //Material testMat = Resources.Load("TestMats/HitboxPreviewMat.mat", typeof(Material)) as Material;
+        //hurtboxMat = testMat;
+        //hitboxMat = testMat;
         AddHitboxColorList();
         verticalBias = 0f;
         AddHurtboxColorList();
@@ -381,7 +385,7 @@ public class Editor_MoveListEditor : EditorWindow
     #region Supers Function Section
     void ShowSupersAttacks()
     {
-        #region Command Grabs Display
+        #region Super Display
         GUILayout.Label("Super Attacks");
         superFollowUpCount = EditorGUILayout.IntField("Super FollowUp Count", superFollowUpCount, GUILayout.Width(MoveListBodyObject.editorRect.width / 2f), GUILayout.Height(20));
         if (GUILayout.Button("Add New Supers Entry"))
@@ -452,7 +456,8 @@ public class Editor_MoveListEditor : EditorWindow
             animationFollowupList.Add(specialAttack._customAnimation[i]);
         }
         Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
-        _attackData = new CompositeAttackData(propertyList, animationFollowupList,newAdvancedMoveData, null, null, null, null, null, 1, specialAttackName);
+        newAdvancedMoveData.specialMoveName = specialAttackName;
+        _attackData = new CompositeAttackData(propertyList, animationFollowupList,newAdvancedMoveData, null, null, null, null, null, 1, newAdvancedMoveData.specialMoveName);
     }
     #endregion
 
@@ -530,7 +535,8 @@ public class Editor_MoveListEditor : EditorWindow
             animationFollowupList.Add(specialAttack._customAnimation[i]);
         }
         Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
-        _attackData = new CompositeAttackData(propertyList, animationFollowupList, newAdvancedMoveData, null, null, null, null, null, 1, specialAttackName);
+        newAdvancedMoveData.specialMoveName = specialAttackName;
+        _attackData = new CompositeAttackData(propertyList, animationFollowupList, newAdvancedMoveData, null, null, null, null, null, 1, newAdvancedMoveData.specialMoveName);
     }
     #endregion
 
@@ -609,7 +615,8 @@ public class Editor_MoveListEditor : EditorWindow
         {
             animationFollowupList.Add(specialAttack._customAnimation[i]);
         }
-        _attackData = new CompositeAttackData(propertyList,animationFollowupList ,newAdvancedMoveData, null, null, null, null, null, 1, specialAttackName);
+        newAdvancedMoveData.specialMoveName = specialAttackName;
+       _attackData = new CompositeAttackData(propertyList,animationFollowupList ,newAdvancedMoveData, null, null, null, null, null, 1, newAdvancedMoveData.specialMoveName);
     }
     #endregion
 
@@ -725,8 +732,9 @@ public class Editor_MoveListEditor : EditorWindow
             attackAnimList.Add(currentKillProperty.AttackAnims);
         }
 
-        Attack_StanceSpecialMove mewStamceData = specialAttack;
-        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, null, mewStamceData, null, null, null, propertyList.Count, specialMoveName);
+        Attack_StanceSpecialMove mewStanceData = specialAttack;
+        mewStanceData.StanceSpecialAttack_Name = specialMoveName;
+        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, null, mewStanceData, null, null, null, propertyList.Count, mewStanceData.StanceSpecialAttack_Name);
     }
     #endregion
 
@@ -820,7 +828,8 @@ public class Editor_MoveListEditor : EditorWindow
             attackAnimList.Add(currentProperty.AttackAnims);
         }
         Attack_RekkaSpecialMove newRekkaData = specialAttack;
-        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, newRekkaData, null, null, null, null, propertyList.Count, specialName);
+        newRekkaData.RekkaSpecialAttack_Name = specialName;
+        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, newRekkaData, null, null, null, null, propertyList.Count, newRekkaData.RekkaSpecialAttack_Name);
     }
     #endregion
 
@@ -886,7 +895,8 @@ public class Editor_MoveListEditor : EditorWindow
         List<AttackHandler_Attack> attackAnimList = new List<AttackHandler_Attack>();
         Attack_BasicSpecialMove newSpecialMoveData = specialAttack;
         attackAnimList.Add(newSpecialMoveData.property.AttackAnims);
-        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, null, null, newSpecialMoveData, null, null, 1, attackName);
+        specialAttack.BasicSpecialAttack_Name = attackName;
+        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, null, null, newSpecialMoveData, null, null, 1, specialAttack.BasicSpecialAttack_Name);
     }
     #endregion
 
@@ -958,8 +968,9 @@ public class Editor_MoveListEditor : EditorWindow
             propertyList.Add(simpleAttack._attackInput._correctInput[i].property);
             attackAnimList.Add(simpleAttack._attackInput._correctInput[i].property.AttackAnims);
         }
+        simpleAttack.SpecialAttackName = attackName;
         List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
-        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, null, null, null, null, newNonSpecialAttackData, propertyList.Count, attackName);
+        _attackData = new CompositeAttackData(propertyList, attackAnimList, null, null, null, null, null, newNonSpecialAttackData, propertyList.Count, simpleAttack.SpecialAttackName);
     }
     #endregion
 
@@ -1027,7 +1038,8 @@ public class Editor_MoveListEditor : EditorWindow
         List<AttackHandler_Attack> attackAnimList = new List<AttackHandler_Attack>();
         List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
         attackAnimList.Add(newNonSpecialAttackData[0]._attackInput._correctInput[0].property.AttackAnims);
-        _attackData = new CompositeAttackData(propertyList, attackAnimList,null, null, null, null, null, newNonSpecialAttackData, 1, attackName);
+        simpleAttack.SpecialAttackName = attackName;
+        _attackData = new CompositeAttackData(propertyList, attackAnimList,null, null, null, null, null, newNonSpecialAttackData, 1, simpleAttack.SpecialAttackName);
     }
     #endregion
 
@@ -1096,7 +1108,8 @@ public class Editor_MoveListEditor : EditorWindow
         List<AttackHandler_Attack> attackAnimList = new List<AttackHandler_Attack>();
         List<Attack_NonSpecialAttack> newNonSpecialAttackData = new List<Attack_NonSpecialAttack>() { simpleAttack };
         attackAnimList.Add(newNonSpecialAttackData[0]._attackInput._correctInput[0].property.AttackAnims);
-        _attackData = new CompositeAttackData(propertyList, attackAnimList,null, null, null, null, null, newNonSpecialAttackData, 1, attackName);
+        simpleAttack.SpecialAttackName = attackName;
+        _attackData = new CompositeAttackData(propertyList, attackAnimList,null, null, null, null, null, newNonSpecialAttackData, 1, simpleAttack.SpecialAttackName);
     }
     #endregion
 
@@ -1157,7 +1170,8 @@ public class Editor_MoveListEditor : EditorWindow
             attackAnimList.Add(_newThrowBase._throwAnimation[i]);
         }
         editedMoveList.BasicThrows.Insert(0, _newThrowBase);
-        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, attackAnimList, null, null, null, null, _newThrowBase, null, 1, "");
+        _newThrowBase.ThrowName = "New Main Throw Data";
+        CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, attackAnimList, null, null, null, null, _newThrowBase, null, 1, _newThrowBase.ThrowName);
         _attackData = newCompositeAttackData;
     }
     void DisplayThrowData(Attack_ThrowBase throwAttack, string throwName)
@@ -1169,7 +1183,8 @@ public class Editor_MoveListEditor : EditorWindow
         {
             attackAnimList.Add(throwAttack._throwAnimation[0]);
         }
-        _attackData = new CompositeAttackData(propertyList, attackAnimList,null, null, null, null, throwAttack, null, 1, throwName);
+        throwAttack.ThrowName = throwName;
+        _attackData = new CompositeAttackData(propertyList, attackAnimList,null, null, null, null, throwAttack, null, 1, throwAttack.ThrowName);
     }
     #endregion
 
@@ -1221,14 +1236,16 @@ public class Editor_MoveListEditor : EditorWindow
                     }
                 }
                 EditorGUILayout.EndScrollView();
-                GUILayout.Space(50);
+                if (moveListData != null && currentCenterAttackData != null)
+                {
+                    if (characterModel != null && characterAnimator != null)
+                    {
+                        DisplayPreviewWindow();
+                    }
+                }
             }
             if (moveListData != null && currentCenterAttackData != null)
             {
-                if (characterModel != null && characterAnimator != null)
-                {
-                    DisplayPreviewWindow();
-                }
                 ShowAnimationInformation(newAttackAnim);
                 GUILayout.Space(10);
                 DisplayAnimationTimeline(newAttackAnim);
@@ -1423,12 +1440,26 @@ public class Editor_MoveListEditor : EditorWindow
 
         GUILayout.Space(25);
         Attack_StunValues stunValues = currentCenterAttackData.attackMainStunValues;
-        stunValues.hitstunValue = (int)EditorGUILayout.FloatField("Hit Stun:", stunValues.hitstunValue, GUILayout.Width(500), GUILayout.Height(20));
-        stunValues.blockStunValue = (int)EditorGUILayout.FloatField("Block Stun:", stunValues.blockStunValue, GUILayout.Width(500), GUILayout.Height(20));
-        stunValues.hitstopValue = (int)EditorGUILayout.FloatField("Hit Stop:", stunValues.hitstopValue, GUILayout.Width(500), GUILayout.Height(20));
-        stunValues.blockStopValue = (int)EditorGUILayout.FloatField("Block Stop:", stunValues.blockStopValue, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.hitstunValue = (int)EditorGUILayout.Slider("Hit Stun:", stunValues.hitstunValue,0,50, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.blockStunValue = (int)EditorGUILayout.Slider("Block Stun:", stunValues.blockStunValue, 0, 50, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.hitstopValue = (int)EditorGUILayout.Slider("Hit Stop:", stunValues.hitstopValue, 0, 50, GUILayout.Width(500), GUILayout.Height(20));
+        stunValues.blockStopValue = (int)EditorGUILayout.Slider("Block Stop:", stunValues.blockStopValue, 0, 50, GUILayout.Width(500), GUILayout.Height(20));
 
         framePointI._hurtboxType = (HurtBoxType)EditorGUILayout.EnumPopup("Hurt Box Type:", framePointI._hurtboxType, GUILayout.Width(500), GUILayout.Height(20));
+
+        Horizontal_KnockBack LateralKnockBackData = framePointI.customDamage.lateralKBP;
+        Vertical_KnockBack VerticalKnockBackData = framePointI.customDamage.verticalKBP;
+
+        LateralKnockBackData.Hit_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Hit Knockback", LateralKnockBackData.Hit_HKB_Level);
+        LateralKnockBackData.Hit_Value = (float)EditorGUILayout.FloatField("Knockback Value:", LateralKnockBackData.Hit_Value);
+        LateralKnockBackData.Block_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Block Knockback", LateralKnockBackData.Block_HKB_Level);
+        LateralKnockBackData.Block_Value = (float)EditorGUILayout.FloatField("Block Knockback Value:", LateralKnockBackData.Block_Value);
+        GUILayout.Space(25);
+        VerticalKnockBackData.Hit_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Hit KnockUp/Down", VerticalKnockBackData.Hit_VKB_Level);
+        VerticalKnockBackData.Hit_Value = (float)EditorGUILayout.FloatField("KnockUp Value:", VerticalKnockBackData.Hit_Value);
+        VerticalKnockBackData.Block_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Block KnockUp/Down", VerticalKnockBackData.Block_VKB_Level);
+        VerticalKnockBackData.Block_Value = (float)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
+        framePointI.customDamage.KnockDown = (Attack_KnockDown)EditorGUILayout.EnumPopup("Knockdown", framePointI.customDamage.KnockDown);
     }
     void OnEditorUpdate() 
     {
@@ -1736,7 +1767,7 @@ public class Editor_MoveListEditor : EditorWindow
                 Vector3 size = new Vector3(newAttackAnim.hu_size.x, newAttackAnim.hu_size.y, 0.02f);
 
                 previewUtility.DrawMesh(cubeMesh, Matrix4x4.TRS(position, Quaternion.identity, size), hurtboxMat, 0);
-                Color hurtboxColor = hurtboxColorList[(int)newAttackAnim.hurtType];
+                Color32 hurtboxColor = hurtboxColorList[(int)newAttackAnim.hurtType];
                 hurtboxMat.color = hurtboxColor;
                 DrawWireframeCube(newAttackAnim.hu_placement, size,hurtboxMat);
             }
@@ -1747,7 +1778,7 @@ public class Editor_MoveListEditor : EditorWindow
                 Vector3 size = new Vector3(newAttackAnim.hb_size.x, newAttackAnim.hb_size.y, 0.02f);
 
                 previewUtility.DrawMesh(cubeMesh, Matrix4x4.TRS(position, Quaternion.identity, size), hitboxMat, 0);
-                Color hitboxColor = hitboxColorList[(int)newAttackAnim.attackType];
+                Color32 hitboxColor = hitboxColorList[(int)newAttackAnim.attackType];
                 hitboxMat.color = hitboxColor;
                 DrawWireframeCube(newAttackAnim.hb_placement, size,hitboxMat);
             }
@@ -1874,10 +1905,10 @@ public class Editor_MoveListEditor : EditorWindow
 
         GUILayout.Space(25);
         Attack_StunValues stunValues = newProperty.attackMainStunValues;
-        stunValues.hitstunValue = (int)EditorGUILayout.FloatField("Hit Stun:", stunValues.hitstunValue);
-        stunValues.blockStunValue = (int)EditorGUILayout.FloatField("Block Stun:", stunValues.blockStunValue);
-        stunValues.hitstopValue = (int)EditorGUILayout.FloatField("Hit Stop:", stunValues.hitstopValue);
-        stunValues.blockStopValue = (int)EditorGUILayout.FloatField("Block Stop:", stunValues.blockStopValue);
+        stunValues.hitstunValue = (int)EditorGUILayout.Slider("Hit Stun:", stunValues.hitstunValue, 0, 50);
+        stunValues.blockStunValue = (int)EditorGUILayout.Slider("Block Stun:", stunValues.blockStunValue, 0, 50);
+        stunValues.hitstopValue = (int)EditorGUILayout.Slider("Hit Stop:", stunValues.hitstopValue, 0, 50);
+        stunValues.blockStopValue = (int)EditorGUILayout.Slider("Block Stop:", stunValues.blockStopValue, 0, 50);
 
         GUILayout.Space(25);
         newProperty.hitLevel = (HitLevel)EditorGUILayout.EnumFlagsField("Hit Level", newProperty.hitLevel);
@@ -1904,14 +1935,14 @@ public class Editor_MoveListEditor : EditorWindow
         Vertical_KnockBack VerticalKnockBackData = newProperty.VerticalKB_Data;
 
         LateralKnockBackData.Hit_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Hit Knockback", LateralKnockBackData.Hit_HKB_Level);
-        LateralKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("Knockback Value:", LateralKnockBackData.Hit_Value);
+        LateralKnockBackData.Hit_Value = (float)EditorGUILayout.FloatField("Knockback Value:", LateralKnockBackData.Hit_Value);
         LateralKnockBackData.Block_HKB_Level = (Attack_KnockBack_Lateral)EditorGUILayout.EnumPopup("Block Knockback", LateralKnockBackData.Block_HKB_Level);
-        LateralKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block Knockback Value:", LateralKnockBackData.Block_Value);
+        LateralKnockBackData.Block_Value = (float)EditorGUILayout.FloatField("Block Knockback Value:", LateralKnockBackData.Block_Value);
         GUILayout.Space(25);
         VerticalKnockBackData.Hit_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Hit KnockUp/Down", VerticalKnockBackData.Hit_VKB_Level);
-        VerticalKnockBackData.Hit_Value = (int)EditorGUILayout.FloatField("KnockUp Value:", VerticalKnockBackData.Hit_Value);
+        VerticalKnockBackData.Hit_Value = (float)EditorGUILayout.FloatField("KnockUp Value:", VerticalKnockBackData.Hit_Value);
         VerticalKnockBackData.Block_VKB_Level = (Attack_KnockBack_Vertical)EditorGUILayout.EnumPopup("Block KnockUp/Down", VerticalKnockBackData.Block_VKB_Level);
-        VerticalKnockBackData.Block_Value = (int)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
+        VerticalKnockBackData.Block_Value = (float)EditorGUILayout.FloatField("Block KnockUp Value:", VerticalKnockBackData.Block_Value);
         newProperty.KnockDown = (Attack_KnockDown)EditorGUILayout.EnumPopup("Knockdown", newProperty.KnockDown);
     }
     #region Specific Attack Data Display Code
@@ -1920,6 +1951,7 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.advancedInputData != null)
         {
             GUILayout.Label("Advanced Input Primary Data");
+            _attackData.advancedInputData.specialMoveName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.advancedInputData.specialMoveName);
         }
     }
     void DisplayStanceData()
@@ -1975,7 +2007,7 @@ public class Editor_MoveListEditor : EditorWindow
         if (_attackData.specialInputData != null)
         {
             GUILayout.Label("Special Primary Data");
-            _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            _attackData.specialInputData.BasicSpecialAttack_Name = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.specialInputData.BasicSpecialAttack_Name);
             for (int i = 0; i < 3; i++) 
             {
                 _attackData.specialInputData.attackInput[i].attackString = (string)EditorGUILayout.TextField($"Special Attack Input_{i+1}:", _attackData.specialInputData.attackInput[i].attackString);
@@ -1988,7 +2020,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             GUILayout.Label("Normal Primary Data");
             GUILayout.Label($"Normal Attack Count: {_attackData.normalAttackData.Count}");
-            _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            _attackData.normalAttackData[0].SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.normalAttackData[0].SpecialAttackName);
             _attackData.normalAttackData[0]._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.normalAttackData[0]._attackInput._correctInput[0]._correctSequence);
 
         }
@@ -1999,7 +2031,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             GUILayout.Label("Throw Primary Data");
             GUILayout.Label($"Throw Attack Count: {_attackData.throwInputData._attackInput._correctInput.Count}");
-            _attackData.SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.SpecialAttackName);
+            _attackData.throwInputData.ThrowName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.throwInputData.ThrowName);
             _attackData.throwInputData._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.throwInputData._attackInput._correctInput[0]._correctSequence);
 
             /*AnimationClip throwAnim = _attackData.throwInputData._throwAnimation[0] != null ? _attackData.throwInputData._throwAnimation[0].animClip : null;
@@ -2013,7 +2045,7 @@ public class Editor_MoveListEditor : EditorWindow
         GUILayout.Space(50);
         GUILayout.Label("Collision Information");
         //verticalBias = (float)EditorGUILayout.Slider("Vertical Bias:", verticalBias, 0f, 15f, GUILayout.Width(CurrentAttackInformationObject.editorRect.width / 2f), GUILayout.Height(20));
-
+        if(newAttackAnim != null) { 
         newAttackAnim.attackType = (HitBoxType)EditorGUILayout.EnumPopup("Attack Type:", newAttackAnim.attackType);
         newAttackAnim.hb_placement = (Vector3)EditorGUILayout.Vector3Field("Hitbox Placement", newAttackAnim.hb_placement);
         newAttackAnim.hb_orientation = (Vector3)EditorGUILayout.Vector3Field("Hitbox Orientation", newAttackAnim.hb_orientation);
@@ -2029,7 +2061,7 @@ public class Editor_MoveListEditor : EditorWindow
         HitCount _hitCount = newAttackAnim._hitCount;
         _hitCount._startCount = (int)EditorGUILayout.FloatField("Initial Hit Count:", _hitCount._startCount);
         _hitCount._startRefreshRate = (int)EditorGUILayout.FloatField("Initial Refresh Rate:", _hitCount._startRefreshRate);
-
+            }
     }
     #endregion
 
