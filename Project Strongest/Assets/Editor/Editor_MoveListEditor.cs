@@ -90,6 +90,7 @@ public class Editor_MoveListEditor : EditorWindow
     private float markerWidth = 4f;
     int lastFrame;
     bool previewActive;
+    byte alphaLevel = 127;
     #endregion
 
     #region Preview Window Code
@@ -137,39 +138,36 @@ public class Editor_MoveListEditor : EditorWindow
     void AddHitboxColorList()
     {
 
-        hitboxColorList.Add(new Color32(0,255,0,25));
-        hitboxColorList.Add(new Color32(255, 0, 0, 25));
-        hitboxColorList.Add(new Color32(0, 0, 255, 25));
-        hitboxColorList.Add(new Color32(255, 255, 255, 25));
-        hitboxColorList.Add(new Color32(125, 125, 125, 25));
-        hitboxColorList.Add(new Color32(0, 255, 255, 25));
-        hitboxColorList.Add(new Color32(255, 255, 0, 25));
-        hitboxColorList.Add(new Color32(0, 0, 0, 25));
-        hitboxColorList.Add(new Color32(255, 0, 255, 25));
+        hitboxColorList.Add(new Color32(0,255,0, alphaLevel));
+        hitboxColorList.Add(new Color32(255, 0, 0, alphaLevel));
+        hitboxColorList.Add(new Color32(0, 0, 255, alphaLevel));
+        hitboxColorList.Add(new Color32(255, 255, 255, alphaLevel));
+        hitboxColorList.Add(new Color32(125, 125, 125, alphaLevel));
+        hitboxColorList.Add(new Color32(0, 255, 255, alphaLevel));
+        hitboxColorList.Add(new Color32(255, 255, 0, alphaLevel));
+        hitboxColorList.Add(new Color32(0, 0, 0, alphaLevel));
+        hitboxColorList.Add(new Color32(255, 0, 255, alphaLevel));
     }
     void AddHurtboxColorList() 
     {
 
-        hurtboxColorList.Add( new Color32(255, 0, 170, 25));
-        hurtboxColorList.Add( new Color32(102, 222, 255, 25));
-        hurtboxColorList.Add( new Color32(197, 255, 102, 25));
-        hurtboxColorList.Add( new Color32(236, 220, 188, 25));
-        hurtboxColorList.Add( new Color32(155, 97, 52, 25));
-        hurtboxColorList.Add( new Color32(57, 207, 255, 25));
-        hurtboxColorList.Add( new Color32(135, 135, 135, 25));
-        hurtboxColorList.Add( new Color32(255, 255, 255, 25));
-        hurtboxColorList.Add( new Color32(0, 0, 0, 25));
-        hurtboxColorList.Add( new Color32(188, 106, 106, 25));
-        hurtboxColorList.Add( new Color32(2, 150, 90, 25));
-        hurtboxColorList.Add( new Color32(210, 3, 45, 25));
+        hurtboxColorList.Add( new Color32(255, 0, 170, alphaLevel));
+        hurtboxColorList.Add( new Color32(102, 222, 255, alphaLevel));
+        hurtboxColorList.Add( new Color32(197, 255, 102, alphaLevel));
+        hurtboxColorList.Add( new Color32(236, 220, 188, alphaLevel));
+        hurtboxColorList.Add( new Color32(155, 97, 52, alphaLevel));
+        hurtboxColorList.Add( new Color32(57, 207, 255, alphaLevel));
+        hurtboxColorList.Add( new Color32(135, 135, 135, alphaLevel));
+        hurtboxColorList.Add( new Color32(255, 255, 255, alphaLevel));
+        hurtboxColorList.Add( new Color32(0, 0, 0, alphaLevel));
+        hurtboxColorList.Add( new Color32(188, 106, 106, alphaLevel));
+        hurtboxColorList.Add( new Color32(2, 150, 90, alphaLevel));
+        hurtboxColorList.Add( new Color32(210, 3, 45, alphaLevel));
     }
     void StartFunctionCalls()
     {
         hitboxMat = new Material(Shader.Find("Unlit/Color"));
-        hurtboxMat = new Material(Shader.Find("Unlit/Color")); 
-        //Material testMat = Resources.Load("TestMats/HitboxPreviewMat.mat", typeof(Material)) as Material;
-        //hurtboxMat = testMat;
-        //hitboxMat = testMat;
+        hurtboxMat = new Material(Shader.Find("Unlit/Color"));
         AddHitboxColorList();
         verticalBias = 0f;
         AddHurtboxColorList();
@@ -339,6 +337,8 @@ public class Editor_MoveListEditor : EditorWindow
         GUILayout.BeginArea(MoveListBodyObject.editorRect);
         #region FillArea
         GUILayout.Label("Full MoveList");
+        hitboxMat = (Material)EditorGUILayout.ObjectField("HitBoxMat", hitboxMat, typeof(Material), true);
+        hurtboxMat = (Material)EditorGUILayout.ObjectField("HurtBoxMat", hurtboxMat, typeof(Material), true);
         moveListData = (Character_MoveList)EditorGUILayout.ObjectField("Current Movelist", moveListData, typeof(Character_MoveList), true);
         if (moveListData != null)
         {
@@ -2135,6 +2135,7 @@ public class Editor_MoveListEditor : EditorWindow
         try 
         {
             moveListData.SetFullMoveListData(editedMoveList);
+            EditorUtility.SetDirty(moveListData);
             Debug.Log($"MoveList Changes ARE SAVED.");
         }
         catch (Exception e) 
