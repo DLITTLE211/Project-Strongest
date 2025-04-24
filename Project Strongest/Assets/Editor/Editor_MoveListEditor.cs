@@ -1211,11 +1211,12 @@ public class Editor_MoveListEditor : EditorWindow
                     if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 3f), GUILayout.Height(25)))
                     {
                         previewActive = false;
-                        if (i > 0)
+                        /*if (i > 0)
                         {
                             subAttackDataIndex = i;
                         }
-                        else { subAttackDataIndex = -1; }
+                        else { subAttackDataIndex = -1; }*/
+                        subAttackDataIndex = i;
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
                         currentFrame = 0;
                         isPlaying = false;
@@ -2021,8 +2022,7 @@ public class Editor_MoveListEditor : EditorWindow
             GUILayout.Label("Normal Primary Data");
             GUILayout.Label($"Normal Attack Count: {_attackData.normalAttackData.Count}");
             _attackData.normalAttackData[0].SpecialAttackName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.normalAttackData[0].SpecialAttackName);
-            _attackData.normalAttackData[0]._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.normalAttackData[0]._attackInput._correctInput[0]._correctSequence);
-
+            _attackData.normalAttackData[0]._attackInput._correctInput[subAttackDataIndex]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.normalAttackData[0]._attackInput._correctInput[subAttackDataIndex]._correctSequence);
         }
     }
     void DisplayThrowData()
@@ -2032,8 +2032,9 @@ public class Editor_MoveListEditor : EditorWindow
             GUILayout.Label("Throw Primary Data");
             GUILayout.Label($"Throw Attack Count: {_attackData.throwInputData._attackInput._correctInput.Count}");
             _attackData.throwInputData.ThrowName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.throwInputData.ThrowName);
-            _attackData.throwInputData._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.throwInputData._attackInput._correctInput[0]._correctSequence);
-
+           
+                _attackData.throwInputData._attackInput._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Attack Button Sequence:", _attackData.throwInputData._attackInput._correctInput[0]._correctSequence);
+            
             /*AnimationClip throwAnim = _attackData.throwInputData._throwAnimation[0] != null ? _attackData.throwInputData._throwAnimation[0].animClip : null;
 
             throwAnim = (AnimationClip)EditorGUILayout.ObjectField(new GUIContent("Current Attack Animation:"), throwAnim, typeof(AnimationClip), true, GUILayout.Width(CurrentAttackInformationObject.editorRect.width), GUILayout.Height(20));*/
