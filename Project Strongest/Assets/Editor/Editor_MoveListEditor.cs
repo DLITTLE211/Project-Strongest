@@ -1979,6 +1979,7 @@ public class Editor_MoveListEditor : EditorWindow
             }
         }
     }
+    bool displaySubAttackData;
     void DisplayRekkaData()
     {
         if (_attackData.rekkaAttackData != null)
@@ -1992,13 +1993,12 @@ public class Editor_MoveListEditor : EditorWindow
             _attackData.rekkaAttackData.LeewayTime = (int)EditorGUILayout.FloatField($"Leeway Time Between Attacks:", _attackData.rekkaAttackData.LeewayTime);
             if (subAttackDataIndex > 0)
             {
-                bool displaySubAttackData = false;
                 displaySubAttackData = (bool)EditorGUILayout.Foldout(displaySubAttackData,"Display Sub Rekka Data");
                 if (displaySubAttackData)
                 {
                     string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0]._correctSequence;
                     currentHighlightedRekkaInput = (string)EditorGUILayout.TextField("Rekka Individual Input:", currentHighlightedRekkaInput);
-                    //DisplayMainInformation(_attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0].property);
+                    DisplayMainInformation(_attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0].property);
                 }
             }
         }
