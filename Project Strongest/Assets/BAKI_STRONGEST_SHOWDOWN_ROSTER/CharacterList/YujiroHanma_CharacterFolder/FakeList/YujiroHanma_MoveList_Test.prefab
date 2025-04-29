@@ -45,7 +45,151 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicSuperAttacks: []
-  CommandThrows: []
+  CommandThrows:
+  - specialMoveName: Cutter Snatch (Anti-Air)
+    attackInput:
+    - attackString: 
+      attackStringArray: 
+    - attackString: 
+      attackStringArray: 
+    - attackString: 
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: Snatch Attack
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      rawChipDamage: 0
+      counterHitDamageMult: 1
+      attackMainStunValues:
+        hitstunValue: 14
+        blockStunValue: 0
+        hitstopValue: 6
+        blockStopValue: 0
+      hitLevel: 0
+      attackHashes: 0
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        CurrentLevel: 262144
+        nextAvailableAttackRoute: 196608
+      _moveType: 8
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: -5290256836950544589, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 8
+        hb_placement: {x: 1.26, y: 1.34, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 1.07, y: 1.55}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 1.1, y: 1, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 1.18, y: 1.75}
+        _frameData:
+          init: 0
+          startup: 13
+          active: 14
+          inactive: 20
+          recoveryEnd: 0
+          recoveryAmount: 11
+          totalRecovery: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      hitLanded: 0
+      hitConnected: 0
+      LateralKB_Data:
+        Hit_HKB_Level: 0
+        Hit_Value: 0
+        Block_HKB_Level: 0
+        Block_Value: 0
+      VerticalKB_Data:
+        Hit_VKB_Level: 0
+        Hit_Value: 0
+        Block_VKB_Level: 0
+        Block_Value: 0
+      KnockDown: 2
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: -6196306789179244435, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 1
+        active: 1
+        inactive: 38
+        recoveryEnd: 0
+        recoveryAmount: 0
+        totalRecovery: 0
+        _extraPoints:
+        - hitFramePoints: 20
+          call: 262144
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 15
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 14
+              blockStunValue: 0
+              hitstopValue: 6
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 1
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 2
+              Hit_Value: 1.15
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 3
+              Hit_Value: 2
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 4
+          _hurtboxType: 0
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    _curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+    currentCustomAnim: 0
   CounterAttacks: []
   stanceSpecials: []
   rekkaSpecials:
@@ -127,26 +271,26 @@ MonoBehaviour:
       _rekkaPortion:
       - individualRekkaAttack:
           _correctInput:
-          - _correctSequence: 2A
+          - _correctSequence: 5A
             correctAttack: 0
             correctInput: 0
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Benda Stance (Low)
+              _attackName: Benda Stance (High)
               _cTimer: {fileID: 0}
               rawAttackDamage: 10
               rawChipDamage: 0
-              counterHitDamageMult: 1
+              counterHitDamageMult: 1.025
               attackMainStunValues:
-                hitstunValue: 12
-                blockStunValue: 7
-                hitstopValue: 3
-                blockStopValue: 1
+                hitstunValue: 10
+                blockStunValue: 5
+                hitstopValue: 4
+                blockStopValue: 0
               hitLevel: 68
               attackHashes: 0
               _meterRequirement: 0
-              _meterAwardedOnHit: 6
+              _meterAwardedOnHit: 4
               attackScalingPercent: 20
               dashCancelable: 0
               JumpCancelable: 0
@@ -157,26 +301,26 @@ MonoBehaviour:
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
-                animClip: {fileID: -8308347431815843912, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+                animClip: {fileID: -1812022656395085052, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
-                attackType: 0
-                hb_placement: {x: 1.13, y: -0.37, z: 0}
+                attackType: 1
+                hb_placement: {x: 1, y: 1, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0.85, y: 1}
+                hb_size: {x: 1.25, y: 0.6}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 1.1, y: -0.36, z: 0}
+                hu_placement: {x: 1, y: 1, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 1, y: 1.25}
+                hu_size: {x: 1.5, y: 0.85}
                 _frameData:
                   init: 0
                   startup: 12
-                  active: 14
-                  inactive: 23
+                  active: 13
+                  inactive: 20
                   recoveryEnd: 0
-                  recoveryAmount: 13
+                  recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
@@ -187,10 +331,10 @@ MonoBehaviour:
               hitLanded: 0
               hitConnected: 0
               LateralKB_Data:
-                Hit_HKB_Level: 2
-                Hit_Value: 2.05
+                Hit_HKB_Level: 3
+                Hit_Value: 3.15
                 Block_HKB_Level: 2
-                Block_Value: 1.15
+                Block_Value: 1.85
               VerticalKB_Data:
                 Hit_VKB_Level: 0
                 Hit_Value: 0
@@ -202,56 +346,56 @@ MonoBehaviour:
               directionalInput: 0
       - individualRekkaAttack:
           _correctInput:
-          - _correctSequence: 5A
+          - _correctSequence: 5B
             correctAttack: 0
             correctInput: 0
             moveInput: 0
             attackInput: 0
             property:
-              _attackName: Benda Stance (High)
+              _attackName: Benda Stance (Low)
               _cTimer: {fileID: 0}
-              rawAttackDamage: 0
+              rawAttackDamage: 12
               rawChipDamage: 0
-              counterHitDamageMult: 1
+              counterHitDamageMult: 1.045
               attackMainStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
+                hitstunValue: 14
+                blockStunValue: 6
+                hitstopValue: 4
+                blockStopValue: 1
+              hitLevel: 66
               attackHashes: 0
               _meterRequirement: 0
-              _meterAwardedOnHit: 0
-              attackScalingPercent: 0
+              _meterAwardedOnHit: 5
+              attackScalingPercent: 15
               dashCancelable: 0
               JumpCancelable: 0
               _airInfo: 0
               cancelProperty:
-                CurrentLevel: 0
-                nextAvailableAttackRoute: 0
-              _moveType: 0
+                CurrentLevel: 4096
+                nextAvailableAttackRoute: 16384
+              _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
-                animClip: {fileID: -1812022656395085052, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+                animClip: {fileID: -8308347431815843912, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
-                attackType: 2
-                hb_placement: {x: 0, y: 0, z: 0}
+                attackType: 0
+                hb_placement: {x: 1.08, y: -0.35, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0, y: 0}
+                hb_size: {x: 0.85, y: 1.15}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 0, y: 0, z: 0}
+                hu_placement: {x: 0.82, y: -0.07, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 0, y: 0}
+                hu_size: {x: 1.23, y: 1.75}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 12
+                  active: 13
+                  inactive: 20
                   recoveryEnd: 0
-                  recoveryAmount: 0
+                  recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
@@ -262,10 +406,10 @@ MonoBehaviour:
               hitLanded: 0
               hitConnected: 0
               LateralKB_Data:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
+                Hit_HKB_Level: 2
+                Hit_Value: 2.25
                 Block_HKB_Level: 0
-                Block_Value: 0
+                Block_Value: 1.15
               VerticalKB_Data:
                 Hit_VKB_Level: 0
                 Hit_Value: 0
@@ -285,14 +429,14 @@ MonoBehaviour:
             property:
               _attackName: Benda Stance (Center)
               _cTimer: {fileID: 0}
-              rawAttackDamage: 0
+              rawAttackDamage: 20
               rawChipDamage: 0
-              counterHitDamageMult: 1
+              counterHitDamageMult: 1.25
               attackMainStunValues:
-                hitstunValue: 20
+                hitstunValue: 18
                 blockStunValue: 9
                 hitstopValue: 6
-                blockStopValue: 2
+                blockStopValue: 3
               hitLevel: 136
               attackHashes: 0
               _meterRequirement: 0
@@ -312,21 +456,21 @@ MonoBehaviour:
                 animLength: 0
                 HitBox: {fileID: 0}
                 attackType: 1
-                hb_placement: {x: 1.55, y: 0.65, z: 0}
+                hb_placement: {x: 1.35, y: 0.75, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 1.35, y: 0.65}
+                hb_size: {x: 1.25, y: 0.5}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 1.55, y: 0.65, z: 0}
+                hu_placement: {x: 1.35, y: 0.75, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 1.5, y: 0.85}
+                hu_size: {x: 1.45, y: 0.75}
                 _frameData:
                   init: 0
                   startup: 19
-                  active: 21
-                  inactive: 26
+                  active: 20
+                  inactive: 25
                   recoveryEnd: 0
-                  recoveryAmount: 15
+                  recoveryAmount: 12
                   totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
@@ -340,7 +484,7 @@ MonoBehaviour:
                 Hit_HKB_Level: 5
                 Hit_Value: 10
                 Block_HKB_Level: 3
-                Block_Value: 3.15
+                Block_Value: 3
               VerticalKB_Data:
                 Hit_VKB_Level: 1
                 Hit_Value: 3
@@ -704,56 +848,56 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 
+      - _correctSequence: 2A
         correctAttack: 0
         correctInput: 0
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: String Attack Entry(2)
+          _attackName: Rising Gut Punch
           _cTimer: {fileID: 0}
-          rawAttackDamage: 0
+          rawAttackDamage: 8
           rawChipDamage: 0
           counterHitDamageMult: 1
           attackMainStunValues:
-            hitstunValue: 0
-            blockStunValue: 0
-            hitstopValue: 0
+            hitstunValue: 12
+            blockStunValue: 7
+            hitstopValue: 3
             blockStopValue: 0
-          hitLevel: 0
+          hitLevel: 68
           attackHashes: 0
           _meterRequirement: 0
-          _meterAwardedOnHit: 0
-          attackScalingPercent: 0
+          _meterAwardedOnHit: 4
+          attackScalingPercent: 15
           dashCancelable: 0
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 0
-            nextAvailableAttackRoute: 0
+            CurrentLevel: 1024
+            nextAvailableAttackRoute: 474112
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
-            animClip: {fileID: 0}
+            animClip: {fileID: -2087345165282687609, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
-            attackType: 0
-            hb_placement: {x: 0, y: 0, z: 0}
+            attackType: 1
+            hb_placement: {x: 1, y: 1.22, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.95, y: 0.75}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.85, y: 1, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1, y: 1}
             _frameData:
               init: 0
-              startup: 0
-              active: 0
-              inactive: 0
+              startup: 13
+              active: 14
+              inactive: 20
               recoveryEnd: 0
-              recoveryAmount: 0
+              recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -764,10 +908,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 2
             Block_HKB_Level: 0
-            Block_Value: 0
+            Block_Value: 0.95
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -777,56 +921,56 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 
+      - _correctSequence: 2B
         correctAttack: 0
         correctInput: 0
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: String Attack Entry(3)
+          _attackName: Low Crushing Blow
           _cTimer: {fileID: 0}
-          rawAttackDamage: 0
+          rawAttackDamage: 10
           rawChipDamage: 0
-          counterHitDamageMult: 1
+          counterHitDamageMult: 1.015
           attackMainStunValues:
-            hitstunValue: 0
-            blockStunValue: 0
-            hitstopValue: 0
-            blockStopValue: 0
-          hitLevel: 0
+            hitstunValue: 11
+            blockStunValue: 8
+            hitstopValue: 4
+            blockStopValue: 1
+          hitLevel: 68
           attackHashes: 0
           _meterRequirement: 0
-          _meterAwardedOnHit: 0
-          attackScalingPercent: 0
+          _meterAwardedOnHit: 4
+          attackScalingPercent: 15
           dashCancelable: 0
           JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 0
-            nextAvailableAttackRoute: 0
-          _moveType: 0
+            CurrentLevel: 1024
+            nextAvailableAttackRoute: 473088
+          _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
-            animClip: {fileID: 0}
+            animClip: {fileID: -612635529048318946, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 0
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 1.35, y: -0.65, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 1, y: 0.65}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 1.35, y: -0.65, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 1.15, y: 0.85}
             _frameData:
               init: 0
-              startup: 0
-              active: 0
-              inactive: 0
+              startup: 15
+              active: 16
+              inactive: 23
               recoveryEnd: 0
-              recoveryAmount: 0
+              recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
@@ -837,10 +981,10 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 0
-            Hit_Value: 0
-            Block_HKB_Level: 0
-            Block_Value: 0
+            Hit_HKB_Level: 2
+            Hit_Value: 1.85
+            Block_HKB_Level: 2
+            Block_Value: 0.9
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 0
@@ -935,7 +1079,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: High Kick
+          _attackName: 'High Kick '
           _cTimer: {fileID: 0}
           rawAttackDamage: 9
           rawChipDamage: 0

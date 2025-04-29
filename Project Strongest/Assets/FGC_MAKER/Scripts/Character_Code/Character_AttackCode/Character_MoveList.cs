@@ -563,16 +563,16 @@ public class Character_MoveList : MonoBehaviour
     }
     public void SetFullMoveListData(FullMoveList _newMoveListChanges) 
     {
-        BasicSuperAttacks = _newMoveListChanges.BasicSuperAttacks;
-        CommandThrows = _newMoveListChanges.CommandThrows;
-        CounterAttacks = _newMoveListChanges.CounterAttacks;
-        stanceSpecials = _newMoveListChanges.stanceSpecials;
-        rekkaSpecials = _newMoveListChanges.rekkaSpecials;
-        special_Simple = _newMoveListChanges.special_Simple;
-        stringNormalAttacks = _newMoveListChanges.stringNormalAttacks;
-        commandNormalAttacks = _newMoveListChanges.commandNormalAttacks;
-        simpleAttacks = _newMoveListChanges.simpleAttacks;
-        BasicThrows = _newMoveListChanges.BasicThrows;
+        BasicSuperAttacks = new List<Attack_AdvancedSpecialMove>(_newMoveListChanges.BasicSuperAttacks);
+        CommandThrows = new List<Attack_AdvancedSpecialMove>(_newMoveListChanges.CommandThrows); 
+        CounterAttacks = new List<Attack_AdvancedSpecialMove>(_newMoveListChanges.CounterAttacks); 
+        stanceSpecials = new List<Attack_StanceSpecialMove>(_newMoveListChanges.stanceSpecials);
+        rekkaSpecials = new List<Attack_RekkaSpecialMove>(_newMoveListChanges.rekkaSpecials);
+        special_Simple = new List<Attack_BasicSpecialMove>(_newMoveListChanges.special_Simple);
+        stringNormalAttacks = new List<Attack_NonSpecialAttack>(_newMoveListChanges.stringNormalAttacks);
+        commandNormalAttacks = new List<Attack_NonSpecialAttack>(_newMoveListChanges.commandNormalAttacks);
+        simpleAttacks = new List<Attack_NonSpecialAttack>(_newMoveListChanges.simpleAttacks);
+        BasicThrows = new List<Attack_ThrowBase>(_newMoveListChanges.BasicThrows);
     }
 }
 [Serializable]

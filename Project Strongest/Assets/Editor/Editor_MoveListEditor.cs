@@ -166,8 +166,6 @@ public class Editor_MoveListEditor : EditorWindow
     }
     void StartFunctionCalls()
     {
-        hitboxMat = new Material(Shader.Find("Unlit/Color"));
-        hurtboxMat = new Material(Shader.Find("Unlit/Color"));
         AddHitboxColorList();
         verticalBias = 0f;
         AddHurtboxColorList();
@@ -439,6 +437,7 @@ public class Editor_MoveListEditor : EditorWindow
             AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
             newAttackHandler._frameData = new FrameData();
             animationFollowupList.Add(newAttackHandler);
+            newAttackHandler._hitCount = new HitCount();
             newAdvancedAttackData._customAnimation.Add(newAttackHandler);
         }
         newAdvancedAttackData.specialMoveName = "New Super Attack Data";
@@ -517,6 +516,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
             newAttackHandler._frameData = new FrameData();
+            newAttackHandler._hitCount = new HitCount();
             animationFollowupList.Add(newAttackHandler);
             newAdvancedAttackData._customAnimation.Add(newAttackHandler);
         }
@@ -596,6 +596,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             AttackHandler_Attack newAttackHandler = new AttackHandler_Attack();
             newAttackHandler._frameData = new FrameData();
+            newAttackHandler._hitCount = new HitCount();
             animationFollowupList.Add(newAttackHandler);
             newAdvancedAttackData._customAnimation.Add(newAttackHandler);
         }
@@ -1398,7 +1399,7 @@ public class Editor_MoveListEditor : EditorWindow
         if (showExtraFramePointVariables)
         {
             extraFramePointScrollWheel = EditorGUILayout.BeginScrollView(extraFramePointScrollWheel, GUILayout.Width(850), GUILayout.Height(250));
-            if (attackAnim._frameData._extraPoints != null)
+            if (attackAnim._frameData._extraPoints != null && attackAnim._frameData._extraPoints.Count > 0)
             {
                 for (int i = 0; i < attackAnimExtraPoints.Count; i++)
                 {
@@ -1431,13 +1432,15 @@ public class Editor_MoveListEditor : EditorWindow
         framePointI.camPos = EditorGUILayout.Vector3Field("Camera Position:", framePointI.camPos);
         framePointI.camRotation = EditorGUILayout.Vector3Field("Camera Rotation:", framePointI.camRotation);
         framePointI.snapMovement = (bool)EditorGUILayout.Toggle("Snap Movement:", framePointI.snapMovement);
-        if(framePointI.customDamage == null) 
+        if (framePointI.customDamage == null) 
         {
             framePointI.customDamage = new CustomDamageField();
             framePointI.customDamage.customDamageFieldStunValues = new Attack_StunValues();
         }
         framePointI.customDamage.rawAttackDamage = (float)EditorGUILayout.FloatField("Raw Damage:", framePointI.customDamage.rawAttackDamage, GUILayout.Width(500), GUILayout.Height(20));
         framePointI.customDamage.counterHitDamageMult = (float)EditorGUILayout.FloatField("Counter Hit Multiplier:", framePointI.customDamage.counterHitDamageMult, GUILayout.Width(500), GUILayout.Height(20));
+        framePointI.customDamage.isScaling = (bool)EditorGUILayout.Toggle("Is Scaling:", framePointI.customDamage.isScaling);
+        framePointI.customDamage.isFinalAttack = (bool)EditorGUILayout.Toggle("Is Final Attack:", framePointI.customDamage.isFinalAttack);
 
         GUILayout.Space(25);
         Attack_StunValues stunValues = currentCenterAttackData.attackMainStunValues;
@@ -1447,7 +1450,14 @@ public class Editor_MoveListEditor : EditorWindow
         stunValues.blockStopValue = (int)EditorGUILayout.Slider("Block Stop:", stunValues.blockStopValue, 0, 50, GUILayout.Width(500), GUILayout.Height(20));
 
         framePointI._hurtboxType = (HurtBoxType)EditorGUILayout.EnumPopup("Hurt Box Type:", framePointI._hurtboxType, GUILayout.Width(500), GUILayout.Height(20));
-
+        if (framePointI.customDamage.lateralKBP == null)
+        {
+            framePointI.customDamage.lateralKBP = new Horizontal_KnockBack();
+        }
+        if (framePointI.customDamage.verticalKBP == null)
+        {
+            framePointI.customDamage.verticalKBP = new Vertical_KnockBack();
+        }
         Horizontal_KnockBack LateralKnockBackData = framePointI.customDamage.lateralKBP;
         Vertical_KnockBack VerticalKnockBackData = framePointI.customDamage.verticalKBP;
 
@@ -1953,6 +1963,10 @@ public class Editor_MoveListEditor : EditorWindow
         {
             GUILayout.Label("Advanced Input Primary Data");
             _attackData.advancedInputData.specialMoveName = (string)EditorGUILayout.TextField("Current Attack Name:", _attackData.advancedInputData.specialMoveName);
+            for (int i = 0; i < 3; i++)
+            {
+                _attackData.advancedInputData.attackInput[i].attackString = (string)EditorGUILayout.TextField($"(Advanced)Special Attack Input_{i + 1}:", _attackData.advancedInputData.attackInput[i].attackString);
+            }
         }
     }
     void DisplayStanceData()
