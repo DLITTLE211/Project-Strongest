@@ -1969,6 +1969,8 @@ public class Editor_MoveListEditor : EditorWindow
             }
         }
     }
+    bool displaySubStanceAttackData;
+    bool displaySubStanceKillData;
     void DisplayStanceData()
     {
         if (_attackData.stanceInputData != null)
@@ -1980,16 +1982,31 @@ public class Editor_MoveListEditor : EditorWindow
                 _attackData.stanceInputData.stanceInput._stanceInput[i].attackString = (string)EditorGUILayout.TextField($"Stance Attack Input_{i + 1}:", _attackData.stanceInputData.stanceInput._stanceInput[i].attackString);
             }
             _attackData.stanceInputData.stanceHeldTime = (int)EditorGUILayout.FloatField($"Stance Held Time:", _attackData.stanceInputData.stanceHeldTime);
-
-            if (_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
+            if (_attackData.stanceInputData.stanceInput.stanceAttack != null)
             {
-                string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0]._correctSequence;
-                //DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
+                if (_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput?.Count > 0)
+                {
+                    displaySubStanceAttackData = (bool)EditorGUILayout.Foldout(displaySubStanceAttackData, "Display Sub Attack Data");
+                    if (displaySubStanceAttackData)
+                    {
+                        string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0]._correctSequence;
+                        stanceAttackString = (string)EditorGUILayout.TextField("Rekka Individual Input:", stanceAttackString);
+                        DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
+                    }
+                }
             }
-            if (_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
+            if (_attackData.stanceInputData.stanceInput.stanceKill != null)
             {
-                string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0]._correctSequence;
-                //DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
+                if (_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput?.Count > 0)
+                {
+                    displaySubStanceKillData = (bool)EditorGUILayout.Foldout(displaySubStanceKillData, "Display Sub Kill Data");
+                    if (displaySubStanceKillData)
+                    {
+                        string stanceAttackString = _attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0]._correctSequence;
+                        stanceAttackString = (string)EditorGUILayout.TextField("Rekka Individual Input:", stanceAttackString);
+                        DisplayMainInformation(_attackData.stanceInputData.stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
+                    }
+                }
             }
         }
     }
@@ -2010,8 +2027,7 @@ public class Editor_MoveListEditor : EditorWindow
                 displaySubAttackData = (bool)EditorGUILayout.Foldout(displaySubAttackData,"Display Sub Rekka Data");
                 if (displaySubAttackData)
                 {
-                    string currentHighlightedRekkaInput = _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0]._correctSequence;
-                    currentHighlightedRekkaInput = (string)EditorGUILayout.TextField("Rekka Individual Input:", currentHighlightedRekkaInput);
+                    _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0]._correctSequence = (string)EditorGUILayout.TextField("Rekka Individual Input:", _attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0]._correctSequence);
                     DisplayMainInformation(_attackData.rekkaAttackData.rekkaInput._rekkaPortion[subAttackDataIndex - 1].individualRekkaAttack._correctInput[0].property);
                 }
             }
