@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6761783529042898323}
   - component: {fileID: 6891314296479737942}
   m_Layer: 0
-  m_Name: YujiroHanma_MobilityPrefab
+  m_Name: TeenBaki_MobilityOptions 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6891314296479737942
 MonoBehaviour:
@@ -92,7 +92,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -126,9 +125,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: 6244098377305756818, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -182,7 +180,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -216,9 +213,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: 101930092094946648, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -272,7 +268,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -306,9 +301,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: -2095584444650364927, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -362,7 +356,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -396,9 +389,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: -2095584444650364927, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -452,7 +444,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -486,9 +477,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: 6244098377305756818, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -542,7 +532,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -576,9 +565,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: 101930092094946648, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -632,7 +620,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 14
         call: 512
         hitFrameBool: 0
@@ -666,9 +653,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: 8491965711044901119, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: -478295745125350043, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
@@ -722,7 +708,6 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
       - hitFramePoints: 13
         call: 512
         hitFrameBool: 0
@@ -756,9 +741,8 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
-        _hurtboxType: 0
     _animInformation:
-      _animationClip: {fileID: -8972713555320109107, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      _animationClip: {fileID: 5713790909594089297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0

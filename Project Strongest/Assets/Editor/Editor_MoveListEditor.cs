@@ -1334,9 +1334,13 @@ public class Editor_MoveListEditor : EditorWindow
                     {
                         if (attackAnim._frameData._extraPoints.Count > 0)
                         {
-                            for (int i = 0; i < extraFramePointCount; i++)
+                            for (int i = 0; i < attackAnim._frameData._extraPoints.Count; i++)
                             {
                                 newHitPointList.Add(new DisplayExtraFramePoint(false, attackAnim._frameData._extraPoints[i]));
+                            }
+                            for (int i = 0; i < extraFramePointCount-1; i++)
+                            {
+                                newHitPointList.Add(new DisplayExtraFramePoint(false, new ExtraFrameHitPoints()));
                             }
                             attackAnimExtraPoints = newHitPointList;
                             attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();

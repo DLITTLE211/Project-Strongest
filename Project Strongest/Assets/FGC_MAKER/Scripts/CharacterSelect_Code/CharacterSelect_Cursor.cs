@@ -65,7 +65,7 @@ public class CharacterSelect_Cursor : MonoBehaviour
                 buttonInDirection = positive == true ? highlightedButton.SelectionState.navigation.selectOnUp : highlightedButton.SelectionState.navigation.selectOnDown;
                 break;
         }
-        tryNewButton = buttonInDirection.gameObject.GetComponent<Button>();
+        tryNewButton = buttonInDirection?.gameObject.GetComponent<Button>();
         if (tryNewButton != null)
         {
             CharacterSelect_Button regCharacterButton = tryNewButton.GetComponentInParent<CharacterSelect_Button>();
