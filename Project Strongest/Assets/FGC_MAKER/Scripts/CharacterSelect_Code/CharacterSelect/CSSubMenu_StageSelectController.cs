@@ -26,16 +26,23 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
     {
         objectHolder.SetActive(false);
         DeactivateSubMenu();
+        ResetStagePositionData();
+        _roundSelectObject.Deactivate();
+    }
+    public void ResetStagePositionData() 
+    {
         GetStageImageLocalLocations();
         SetStartingStageData();
-        _roundSelectObject.Deactivate();
     }
     private void GetStageImageLocalLocations() 
     {
-        stageImageLocations = new List<Vector3>();
-        for (int i = 0; i < _stageImageObject.Count; i++)
+        if (stageImageLocations.Count == 0)
         {
-            stageImageLocations.Add(_stageImageObject[i].transform.localPosition);
+            stageImageLocations = new List<Vector3>();
+            for (int i = 0; i < _stageImageObject.Count; i++)
+            {
+                stageImageLocations.Add(_stageImageObject[i].transform.localPosition);
+            }
         }
     }
     public void ResetValues()
@@ -78,6 +85,7 @@ public class CSSubMenu_StageSelectController : CharacterSelect_SubMenuBase
         {
             _stageImageObject[i].UpdateStageData(_activeStages[i]);
             _stageImageObject[i].SetLocationIndex(i);
+            _stageImageObject[i].transform.localPosition = stageImageLocations[i];
         }
         centerIndex = 2;
     }

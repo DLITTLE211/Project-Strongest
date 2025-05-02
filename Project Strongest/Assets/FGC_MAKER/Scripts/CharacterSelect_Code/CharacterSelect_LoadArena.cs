@@ -41,6 +41,12 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             _characterSelectSetup.TogglePlayerInfo(0),
             };
             await Task.WhenAll(tasks);
+            for(int i = 0; i < _characterSelectController._playerCursors.Count; i++) 
+            {
+                CharacterSelect_Page currentPage = _characterSelectController._playerCursors[i].cursorPage;
+                currentPage.ResetNamePlatePosition();
+            }
+            _stageSelectController.ResetStagePositionData();
             _mainMenuCamera.SetActive(false);
             SceneManager.UnloadSceneAsync("MainGame_MenuScene");
             SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
