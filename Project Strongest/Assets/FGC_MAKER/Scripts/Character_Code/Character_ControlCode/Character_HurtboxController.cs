@@ -116,7 +116,7 @@ public class Character_HurtboxController : MonoBehaviour
             groundCheck = false;
             return groundCheck;
         }
-        catch (UnassignedReferenceException) { return false; }
+        catch (Exception) { return false; }
     }
     #endregion
 

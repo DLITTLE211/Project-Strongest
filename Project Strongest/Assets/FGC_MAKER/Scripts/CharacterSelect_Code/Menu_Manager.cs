@@ -177,33 +177,6 @@ public class Menu_Manager : MonoBehaviour
     {
         _mainMenuHolder.SetActive(state);
     }
-    public async Task CloseMainMenuScreen()
-    {
-        FirstMenuButtonLayer.DisableButtons();
-        FirstMenuButtonLayer.DisableButtons();
-        _titleText.DOFade(0, 1.5f);
-        _versionText.DOFade(0, 1.5f);
-        FirstMenuButtonLayer.SlideHolderOut();
-        float moveUpPos = _titleTextTransform.localPosition.y + 225f;
-        _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f);
-        _backgroundImage.DOFade(0, 1.5f);
-        whiteFillerImage.DOFade(0, 1.5f);
-        await Task.Delay(40);
-    }
-    public async Task OpenMainMenuScreen()
-    {
-        _titleTextTransform = _titleText.GetComponent<Transform>();
-        FirstMenuButtonLayer.SlideHolderIn(SetActiveButton);
-        SetButtonHolderImages();
-        FirstMenuButtonLayer.SlideHolderIn(SetActiveButton);
-        _titleText.DOFade(255f, 1.5f);
-        _versionText.DOFade(255f, 1.5f);
-        float moveUpPos = _titleTextTransform.localPosition.y - 225f;
-        _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f).SetEase(Ease.InOutBack);
-        _backgroundImage.DOFade(1f, 1.5f);
-        whiteFillerImage.DOFade(1f, 1.5f);
-        await Task.Delay(40);
-    }
 
 }
 [Serializable]

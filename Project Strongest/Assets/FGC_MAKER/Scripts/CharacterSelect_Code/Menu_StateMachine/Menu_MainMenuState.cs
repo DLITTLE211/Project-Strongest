@@ -55,7 +55,7 @@ public class Menu_MainMenuState : Menu_BaseState
         _titleText.DOFade(255f, 1.5f);
         _versionText.DOFade(255f, 1.5f);
         Transform _titleTextTransform = _titleText.transform;
-        float moveUpPos = _titleTextTransform.localPosition.y - 225f;
+        float moveUpPos = _titleTextTransform.localPosition.y - 405f;
         _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f).SetEase(Ease.InOutBack);
         _backgroundImage.DOFade(1f, 1.5f);
         whiteFillerImage.DOFade(1f, 1.5f);
@@ -64,11 +64,9 @@ public class Menu_MainMenuState : Menu_BaseState
     {
         FirstMenuButtonLayer.DisableButtons();
         FirstMenuButtonLayer.DisableButtons();
-        _titleText.DOFade(0, 1.5f);
-        _versionText.DOFade(0, 1.5f);
         FirstMenuButtonLayer.SlideHolderOut();
         Transform _titleTextTransform = _titleText.transform;
-        float moveUpPos = _titleTextTransform.localPosition.y + 225f;
+        float moveUpPos = _titleTextTransform.localPosition.y + 405f;
         _titleTextTransform.DOLocalMoveY(moveUpPos, 1.5f);
         _backgroundImage.DOFade(0, 1.5f);
         whiteFillerImage.DOFade(0, 1.5f);

@@ -73,11 +73,14 @@ public class Menu_MenuButton : Button
         TransitionButtonColor(normalColor);
         SlideTween.Play();
     }
-    public void Fade(float valuePoint, float _time, bool _interactable) 
+    public void Fade(float valuePoint, float _time, bool _interactable)
     {
         interactable = _interactable;
         buttonImage.DOFade(valuePoint, _time);
-        buttonNameText.DOFade(valuePoint, _time);
+        if (valuePoint > 0)
+        {
+            buttonNameText.DOFade(valuePoint, _time);
+        }
     }
 }
 #if UNITY_EDITOR

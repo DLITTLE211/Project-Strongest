@@ -104,6 +104,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
         {
             CharacterSelect_Button csButton = activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>();
             csButton.SetNavTransforms();
+            csButton.ClearPlayerCursorCount();
             csButton.HighlightSelection(null);
         }
         _topHeaderText.DOFade(1f, 0.15f);
@@ -124,6 +125,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
         for (int i = 0; i < _playerCursors.Count; i++)
         {
             int buttonStartIndex = ((activeCharacterSelectButtons.Count / 2) + _playerCursors[i].ID) - 1;
+            _playerCursors[i].ClearHighlightedButton();
             CharacterSelect_Button currentButton = activeCharacterSelectButtons[buttonStartIndex].GetComponent<CharacterSelect_Button>();
             if (_playerCursors[i].isConnected)
             {

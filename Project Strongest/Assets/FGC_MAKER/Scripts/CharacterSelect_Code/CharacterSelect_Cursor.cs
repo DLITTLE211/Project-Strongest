@@ -33,6 +33,10 @@ public class CharacterSelect_Cursor : MonoBehaviour
     {
         highlightedButton = _newButton;
     }
+    public void ClearHighlightedButton() 
+    {
+        highlightedButton = null;
+    }
     public void AllowInitialChange() 
     {
         allowChange = true;

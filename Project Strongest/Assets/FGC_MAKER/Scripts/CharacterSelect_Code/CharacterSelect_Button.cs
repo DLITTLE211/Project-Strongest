@@ -73,18 +73,22 @@ public class CharacterSelect_Button : MonoBehaviour
         }
         selectionState.navigation = newNav;
     }
+    public void ClearPlayerCursorCount() 
+    {
+        playerCursors.Clear();
+    }
     void SetHoverColor(int ID) 
     {
         if (playerCursors.Count == 0 || ID== -1)
         {
-            hoverImage_Whole.color = Color.black;
-            hoverImage_Front.color = Color.black;
+            hoverImage_Whole.color = Color.white;
+            hoverImage_Front.color = Color.white;
             return;
         }
         if (playerCursors.Count == 2) 
         {
-            hoverImage_Whole.color = Color.white;
-            hoverImage_Front.color = Color.white;
+            hoverImage_Whole.color = Color.red;
+            hoverImage_Front.color = Color.blue;
             return;
         }
         else 
@@ -128,6 +132,7 @@ public class CharacterSelect_Button : MonoBehaviour
         if (cursor == null)
         {
             _hoverState = hoverState.none;
+            SetHoverColor(-1);
         }
         else
         {
@@ -141,8 +146,8 @@ public class CharacterSelect_Button : MonoBehaviour
                 {
                     playerCursors.Insert(cursor.ID, cursor);
                 }
-                SetHoverColor(cursor.ID);
             }
+            SetHoverColor(cursor.ID);
         }
     }
 }
