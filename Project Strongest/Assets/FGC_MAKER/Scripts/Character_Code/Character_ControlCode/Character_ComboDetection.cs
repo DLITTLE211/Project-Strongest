@@ -265,7 +265,9 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
         {
             entry = _base.CharacterMoveListAttacks.ElementAt(i);
-            if ((int)entry.Value.GetAttackMoveType() > 3)
+            MoveType currentMoveType = entry.Value.GetAttackMoveType();
+            int moveTypeIndex = (int)currentMoveType;
+            if (moveTypeIndex > 3)
             {
                 if (entry.Key.specialMoveTypeInput != null)
                 {
@@ -294,19 +296,26 @@ public class Character_ComboDetection : MonoBehaviour
             }
             else
             {
-                if ((int)entry.Value.GetAttackMoveType() <= 3)
+                if (moveTypeIndex <= 3)
                 {
                     if (entry.Key.normalAirAttackInfo == key.keyGroundCheck)
                     {
-                        if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
+                        if (entry.Key.normalTypeInput == null)
                         {
-                            string normalButton = entry.Key.normalTypeInput[0].Substring(entry.Key.normalTypeInput[0].Length - 1);
-                            int normalButtonIndex = key.specialMoveTypeInput.attackString.IndexOf(normalButton);
-                            string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
-                            //key.specialMoveTypeInput.attackString = clearAttackButton;
-                            key.currentAttackInput = "";
-                            Debug.Log(entry.Value);
-                            return entry;
+                            continue;
+                        }
+                        else
+                        {
+                            if (key.currentAttackInput.Contains(entry.Key.normalTypeInput[0]))
+                            {
+                                string normalButton = entry.Key.normalTypeInput[0].Substring(entry.Key.normalTypeInput[0].Length - 1);
+                                int normalButtonIndex = key.specialMoveTypeInput.attackString.IndexOf(normalButton);
+                                string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
+                                //key.specialMoveTypeInput.attackString = clearAttackButton;
+                                key.currentAttackInput = "";
+                                Debug.Log(entry.Value);
+                                return entry;
+                            }
                         }
                         continue;
                     }

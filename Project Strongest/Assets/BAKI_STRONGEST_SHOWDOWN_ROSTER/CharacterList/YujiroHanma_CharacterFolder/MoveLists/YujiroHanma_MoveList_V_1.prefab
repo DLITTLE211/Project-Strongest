@@ -803,6 +803,86 @@ MonoBehaviour:
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
+  - specialMoveName: Demon Rush
+    attackInput:
+    - attackString: 41236A
+      attackStringArray: 
+    - attackString: 426A
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: Rush Attack
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 2
+      rawChipDamage: 0
+      counterHitDamageMult: 1.045
+      attackMainStunValues:
+        hitstunValue: 3
+        blockStunValue: 1
+        hitstopValue: 0
+        blockStopValue: 0
+      hitLevel: 80
+      attackHashes: 0
+      _meterRequirement: 0
+      _meterAwardedOnHit: 5
+      attackScalingPercent: 2
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        CurrentLevel: 2048
+        nextAvailableAttackRoute: 196608
+      _moveType: 4
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 2297544199944320159, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 1
+        hb_placement: {x: 1.04, y: 0.4, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0.85, y: 1.35}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 1.05, y: 0.45, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0.85, y: 1.35}
+        _frameData:
+          init: 0
+          startup: 13
+          active: 14
+          inactive: 96
+          recoveryEnd: 0
+          recoveryAmount: 12
+          totalRecovery: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 8
+          _refreshRate: 0
+          _startRefreshRate: 15
+      hitLanded: 0
+      hitConnected: 0
+      LateralKB_Data:
+        Hit_HKB_Level: 2
+        Hit_Value: 0.45
+        Block_HKB_Level: 0
+        Block_Value: 0
+      VerticalKB_Data:
+        Hit_VKB_Level: 0
+        Hit_Value: 0
+        Block_VKB_Level: 0
+        Block_Value: 0
+      KnockDown: 4
+    _customAnimation: []
+    movementPortionLength: 0
+    finalAttackButton: 0
+    _curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+    currentCustomAnim: 0
   CommandThrows:
   - specialMoveName: Cutter Snatch (Anti-Air)
     attackInput:
@@ -1289,17 +1369,17 @@ MonoBehaviour:
           Block_Value: 0.75
         VerticalKB_Data:
           Hit_VKB_Level: 1
-          Hit_Value: 4
+          Hit_Value: 6
           Block_VKB_Level: 0
           Block_Value: 0
-        KnockDown: 2
+        KnockDown: 4
       mainAttackInputState:
         _state: 0
         directionalInput: 0
       _rekkaPortion:
       - individualRekkaAttack:
           _correctInput:
-          - _correctSequence: 6B
+          - _correctSequence: 0B
             correctAttack: 0
             correctInput: 0
             moveInput: 0
@@ -1333,22 +1413,22 @@ MonoBehaviour:
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
-                attackType: 0
-                hb_placement: {x: 0, y: 0, z: 0}
+                attackType: 1
+                hb_placement: {x: 1.34, y: 0.5, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0, y: 0}
+                hb_size: {x: 0.65, y: 0.95}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 0, y: 0, z: 0}
+                hu_placement: {x: 1.05, y: 0.5, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 0, y: 0}
+                hu_size: {x: 0.95, y: 1}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 13
+                  active: 14
+                  inactive: 20
                   recoveryEnd: 0
-                  recoveryAmount: 0
+                  recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
@@ -1374,7 +1454,7 @@ MonoBehaviour:
               directionalInput: 0
       - individualRekkaAttack:
           _correctInput:
-          - _correctSequence: 6D
+          - _correctSequence: 0D
             correctAttack: 0
             correctInput: 0
             moveInput: 0
@@ -1408,22 +1488,22 @@ MonoBehaviour:
                 animName: 
                 animLength: 0
                 HitBox: {fileID: 0}
-                attackType: 0
-                hb_placement: {x: 0, y: 0, z: 0}
+                attackType: 1
+                hb_placement: {x: 1.47, y: 0.25, z: 0}
                 hb_orientation: {x: 0, y: 0, z: 0}
-                hb_size: {x: 0, y: 0}
+                hb_size: {x: 1.5, y: 0.65}
                 extendedHitBox: {fileID: 0}
                 hurtType: 0
-                hu_placement: {x: 0, y: 0, z: 0}
+                hu_placement: {x: 1.18, y: 0.25, z: 0}
                 hu_orientation: {x: 0, y: 0, z: 0}
-                hu_size: {x: 0, y: 0}
+                hu_size: {x: 1.48, y: 0.73}
                 _frameData:
                   init: 0
-                  startup: 0
-                  active: 0
-                  inactive: 0
+                  startup: 20
+                  active: 21
+                  inactive: 27
                   recoveryEnd: 0
-                  recoveryAmount: 0
+                  recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
@@ -1577,8 +1657,8 @@ MonoBehaviour:
           Block_Value: 0
         KnockDown: 4
     curRekkaInput: 0
-    rekkaInputCount: 0
-    leewayTime: 50
+    rekkaInputCount: 1
+    leewayTime: 60
     inRekkaState: 0
     usedRekkas: []
     _curBase: {fileID: 0}
@@ -1761,7 +1841,7 @@ MonoBehaviour:
               _airInfo: 0
               cancelProperty:
                 CurrentLevel: 4096
-                nextAvailableAttackRoute: 16384
+                nextAvailableAttackRoute: 212992
               _moveType: 5
               AttackAnims:
                 playerAnim: {fileID: 0}
@@ -2077,8 +2157,8 @@ MonoBehaviour:
           Block_Value: 0
         KnockDown: 2
     curRekkaInput: 0
-    rekkaInputCount: 0
-    leewayTime: 0
+    rekkaInputCount: 1
+    leewayTime: 65
     inRekkaState: 0
     usedRekkas: []
     _curBase: {fileID: 0}
@@ -2106,7 +2186,7 @@ MonoBehaviour:
       cancelProperty:
         CurrentLevel: 2048
         nextAvailableAttackRoute: 196608
-      _moveType: 0
+      _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
         animClip: {fileID: 2297544199944320159, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
@@ -2337,7 +2417,7 @@ MonoBehaviour:
           cancelProperty:
             CurrentLevel: 1024
             nextAvailableAttackRoute: 474112
-          _moveType: 0
+          _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
             animClip: {fileID: -2087345165282687609, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
@@ -3682,7 +3762,7 @@ MonoBehaviour:
             Hit_Value: 0
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 0
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -3761,7 +3841,7 @@ MonoBehaviour:
             Hit_Value: 0
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 0
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -3952,7 +4032,7 @@ MonoBehaviour:
           attackScalingPercent: 11
           dashCancelable: 0
           JumpCancelable: 0
-          _airInfo: 0
+          _airInfo: 2
           cancelProperty:
             CurrentLevel: 16
             nextAvailableAttackRoute: 473838
@@ -4110,7 +4190,7 @@ MonoBehaviour:
           attackScalingPercent: 11
           dashCancelable: 0
           JumpCancelable: 0
-          _airInfo: 0
+          _airInfo: 2
           cancelProperty:
             CurrentLevel: 16
             nextAvailableAttackRoute: 473838
@@ -4156,7 +4236,7 @@ MonoBehaviour:
             Hit_Value: 2.2
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -4172,7 +4252,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 
+          _attackName: Parry(High)
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
           rawChipDamage: 0
@@ -4213,7 +4293,7 @@ MonoBehaviour:
               init: 0
               startup: 1
               active: 3
-              inactive: 8
+              inactive: 7
               recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
@@ -4251,7 +4331,7 @@ MonoBehaviour:
         moveInput: 0
         attackInput: 0
         property:
-          _attackName: 
+          _attackName: Parry(Low)
           _cTimer: {fileID: 0}
           rawAttackDamage: 0
           rawChipDamage: 0
@@ -4292,7 +4372,7 @@ MonoBehaviour:
               init: 0
               startup: 1
               active: 3
-              inactive: 8
+              inactive: 7
               recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
@@ -4394,7 +4474,7 @@ MonoBehaviour:
             Hit_Value: 0
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 0
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0

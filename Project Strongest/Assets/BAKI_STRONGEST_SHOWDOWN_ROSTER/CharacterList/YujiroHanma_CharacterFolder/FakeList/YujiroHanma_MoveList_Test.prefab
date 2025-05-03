@@ -717,7 +717,7 @@ MonoBehaviour:
         _refreshRate: 0
         _startRefreshRate: 0
     movementPortionLength: 0
-    finalAttackButton: 0
+    finalAttackButton: 48
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     currentCustomAnim: 0
@@ -2083,81 +2083,6 @@ MonoBehaviour:
     usedRekkas: []
     _curBase: {fileID: 0}
   special_Simple:
-  - BasicSpecialAttack_Name: Demon Rush
-    property:
-      _attackName: Rush Attack
-      _cTimer: {fileID: 0}
-      rawAttackDamage: 2
-      rawChipDamage: 0
-      counterHitDamageMult: 1.045
-      attackMainStunValues:
-        hitstunValue: 3
-        blockStunValue: 1
-        hitstopValue: 0
-        blockStopValue: 0
-      hitLevel: 80
-      attackHashes: 0
-      _meterRequirement: 0
-      _meterAwardedOnHit: 5
-      attackScalingPercent: 2
-      dashCancelable: 0
-      JumpCancelable: 0
-      _airInfo: 0
-      cancelProperty:
-        CurrentLevel: 2048
-        nextAvailableAttackRoute: 196608
-      _moveType: 0
-      AttackAnims:
-        playerAnim: {fileID: 0}
-        animClip: {fileID: 2297544199944320159, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-        animName: 
-        animLength: 0
-        HitBox: {fileID: 0}
-        attackType: 1
-        hb_placement: {x: 1.04, y: 0.4, z: 0}
-        hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 0.85, y: 1.35}
-        extendedHitBox: {fileID: 0}
-        hurtType: 0
-        hu_placement: {x: 1.05, y: 0.45, z: 0}
-        hu_orientation: {x: 0, y: 0, z: 0}
-        hu_size: {x: 1, y: 1.6}
-        _frameData:
-          init: 0
-          startup: 13
-          active: 14
-          inactive: 96
-          recoveryEnd: 0
-          recoveryAmount: 12
-          totalRecovery: 0
-          _extraPoints: []
-        _hitCount:
-          _count: 0
-          _startCount: 8
-          _refreshRate: 0
-          _startRefreshRate: 15
-      hitLanded: 0
-      hitConnected: 0
-      LateralKB_Data:
-        Hit_HKB_Level: 2
-        Hit_Value: 0.25
-        Block_HKB_Level: 0
-        Block_Value: 0
-      VerticalKB_Data:
-        Hit_VKB_Level: 0
-        Hit_Value: 0
-        Block_VKB_Level: 0
-        Block_Value: 0
-      KnockDown: 4
-    attackInput:
-    - attackString: 41236A
-      attackStringArray: 
-    - attackString: 426A
-      attackStringArray: 
-    attackInputState:
-      _state: 0
-      directionalInput: 0
-    framesBetweenAttacks: 0
   - BasicSpecialAttack_Name: Low Cut Laucher
     property:
       _attackName: Uppercut

@@ -353,14 +353,7 @@ public class Attack_Manager : MonoBehaviour
     }
     void PlayAttack(Attack_BaseProperties attack)
     {
-        if (attack._moveType == MoveType.Normal)
-        {
-     //       normalGatlingCount--;
-        }
         _cAnimator.SetNextAttackStartVariables(attack);
-   //     ClearRoutine();
-    //    RechargeRoutine = RechargeGatlings();
-   //     StartCoroutine(RechargeRoutine);
     }
     void ClearRoutine() 
     {
