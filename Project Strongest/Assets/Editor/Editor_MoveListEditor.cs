@@ -1232,6 +1232,15 @@ public class Editor_MoveListEditor : EditorWindow
                     if (GUILayout.Button($"Override to {attackName}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 2.15f), GUILayout.Height(25)))
                     {
                         newAttackAnim = _attackData.baseAttackAnimations[i];
+                        if(newAttackAnim._frameData != null) 
+                        {
+                            FrameData currentFrameData = newAttackAnim._frameData;
+                            if(currentFrameData._extraPoints != null) 
+                            {
+                                List<ExtraFrameHitPoints> framePoints = currentFrameData._extraPoints;
+                                extraFramePointCount = framePoints.Count;
+                            }
+                        }
                         _currentAnimClip = newAttackAnim.animClip;
                         currentFrame = 0;
                         isPlaying = false;
@@ -1332,7 +1341,7 @@ public class Editor_MoveListEditor : EditorWindow
                 {
                     if (extraFramePointCount > lastCount)
                     {
-                        if (attackAnim._frameData._extraPoints.Count > 0)
+                        if (lastCount > 0)
                         {
                             for (int i = 0; i < attackAnim._frameData._extraPoints.Count; i++)
                             {

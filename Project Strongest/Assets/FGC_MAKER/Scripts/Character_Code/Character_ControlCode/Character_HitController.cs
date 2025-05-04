@@ -128,7 +128,7 @@ public class Character_HitController : MonoBehaviour
         {
             for (int i = 0; i < refField.Count; i++)
             {
-                if (!refField[i].hitLevel.HasFlag(currentCustomDamageField.hitLevel))
+                if (!currentCustomDamageField.hitLevel.HasFlag(refField[i].hitLevel))
                 {
                     refField[i] = null;
                     continue;
