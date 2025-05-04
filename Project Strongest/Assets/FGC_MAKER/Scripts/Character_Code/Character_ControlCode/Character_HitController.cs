@@ -714,6 +714,8 @@ public class Character_HitController : MonoBehaviour
             _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
             _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
             yield return new WaitForSeconds(recoveryAnim.animLength);
+            EndingFunctionCalls();
+            yield break;
         }
         else
         {
@@ -754,6 +756,10 @@ public class Character_HitController : MonoBehaviour
         _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
         _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
         yield return new WaitForSeconds(recoveryAnim.animLength);
+        EndingFunctionCalls();
+    }
+    void EndingFunctionCalls() 
+    {
         SetRecoverable();
         if (bigHitRecovering)
         {
@@ -771,7 +777,6 @@ public class Character_HitController : MonoBehaviour
         _base.CheckAttackActive(false);
         ClearFrameTickRoutine();
     }
-
     public bool HoldingAway() 
     {
         if (_base._subState == Character_SubStates.Controlled)
