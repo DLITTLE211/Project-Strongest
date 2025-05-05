@@ -386,7 +386,7 @@ public class Character_ComboDetection : MonoBehaviour
                 if (keyInput.currentAttackInput.Contains(stringCheck))
                 {
                     keyInput.currentAttackInput = "";
-                    return 1;
+                    return stringComparison;
                 }
             }
             catch (ArgumentOutOfRangeException)

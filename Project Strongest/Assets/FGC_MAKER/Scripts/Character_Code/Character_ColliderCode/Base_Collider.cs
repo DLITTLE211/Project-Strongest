@@ -33,6 +33,7 @@ public class Base_Collider : CollisionDetection
                 currentCollider.isTrigger = false;
             }
             pushCollider.SetCharacterBase(this.gameObject.GetComponentInParent<Character_Base>());
+            currentCollider.transform.localPosition = Vector3.zero;
         }
         headCollider.GetComponent<CapsuleCollider>().material = physicsMat;
         xSize = sizeX;

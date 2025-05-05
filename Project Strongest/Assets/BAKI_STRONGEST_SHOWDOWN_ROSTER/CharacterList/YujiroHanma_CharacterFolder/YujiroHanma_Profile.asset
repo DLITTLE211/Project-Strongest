@@ -21,8 +21,9 @@ MonoBehaviour:
   Weight: 120
   hurtboxSizing:
     radius: 0.25
-    hurtboxPosition: {x: 0.25, y: 0, z: -0.5}
+    hurtboxPosition: {x: 0.25, y: 0.25, z: -0.5}
     hurtboxSizing: {x: 1, y: 2, z: 1.35}
+    bias: 0
   collisionSizing:
     headRadius: 0.35
     headHeight: 0.27
@@ -34,7 +35,7 @@ MonoBehaviour:
   JumpForce: 350
   InAirMoveForce: 115
   dashSpeed: 4
-  MaxHealth: 120
+  MaxHealth: 90
   MaxStunValue: 20
   DefenseValue: 35
   HealthRegenRate: 2.5
@@ -133,7 +134,7 @@ MonoBehaviour:
     hitReactionType: 0
     hitLevel: 2
     isGroundedReaction: 1
-    isLowReaction: 0
+    isLowReaction: 1
     knockdownAnimType: 2
     _getupType: 0
   - anim: {fileID: 1196315301562031167, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
@@ -142,7 +143,7 @@ MonoBehaviour:
     animHash: 1936784582
     hitReactionType: 0
     hitLevel: 4
-    isGroundedReaction: 0
+    isGroundedReaction: 1
     isLowReaction: 0
     knockdownAnimType: 6
     _getupType: 0

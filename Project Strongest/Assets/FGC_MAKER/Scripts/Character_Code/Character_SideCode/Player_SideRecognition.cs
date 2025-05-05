@@ -93,11 +93,11 @@ public class Character_Position
         {
             if (_face == Character_Face_Direction.FacingRight)
             {
-                CollisionDetectionTransform.DOLocalMoveX(-0.25f, speed);
+                CollisionDetectionTransform.DOLocalMoveX(-_base.characterProfile.hurtboxSizing.bias, speed);
             }
             else if (_face == Character_Face_Direction.FacingLeft)
             {
-                CollisionDetectionTransform.DOLocalMoveX(0.25f, speed);
+                CollisionDetectionTransform.DOLocalMoveX(_base.characterProfile.hurtboxSizing.bias, speed);
             }
         }).OnComplete(() =>
         {

@@ -50,10 +50,25 @@ public class HitBox : CollisionDetection
                 Transform target = c.transform.root;
                 if (HBType != HitBoxType.nullified)
                 {
-                    hitboxProperties.hitLanded = true;
-                    allowHitCheck = false;
-                    SendHitStateAndHurtBox(this, c.GetComponentInParent<HurtBox>(),target, () => ClearAdditionalHit(this));
-                    
+                    bool targetGroundedState = target.GetComponent<Character_Base>()._cHurtBox.IsGrounded();
+                    if (HBType == HitBoxType.CommandGrab_Ground || HBType == HitBoxType.Throw) 
+                    {
+                        if (targetGroundedState)
+                        {
+                            AttackLandedFunc(c, target);
+                        }
+                    }
+                    else if (HBType == HitBoxType.CommandGrab_Air)
+                    {
+                        if (!targetGroundedState)
+                        {
+                            AttackLandedFunc(c, target);
+                        }
+                    }
+                    else
+                    {
+                        AttackLandedFunc(c, target);
+                    }
                 }
 
                 DebugMessageHandler.instance.DisplayErrorMessage(3, c.name);
@@ -62,6 +77,12 @@ public class HitBox : CollisionDetection
             else { continue; }
         }
     }
+    void AttackLandedFunc(Collider c, Transform target)
+    {
+        hitboxProperties.hitLanded = true;
+        allowHitCheck = false;
+        SendHitStateAndHurtBox(this, c.GetComponentInParent<HurtBox>(), target, () => ClearAdditionalHit(this));
+    }
     public void DestroySelf() 
     {
         SetHitColliderType(this, HitBoxType.nullified);
@@ -69,7 +90,6 @@ public class HitBox : CollisionDetection
     public void SendHitStateAndHurtBox(HitBox thisHitbox,HurtBox hitHurtbox,Transform target,Callback endFunc)
     {
         hitHurtbox.ReceieveHitBox(thisHitbox, target, endFunc);
-        //target.GetComponentInChildren<HurtBox>().ReceieveHitBox(thisHitbox, target, endFunc);
     }
     private void OnTriggerEnter(Collider other)
     {

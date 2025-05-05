@@ -144,6 +144,8 @@ public class HurtBox : CollisionDetection
         };
         AttackCheckDictionary.Add(HighImmune, null);
         #endregion
+
+
         #endregion
     }
 
