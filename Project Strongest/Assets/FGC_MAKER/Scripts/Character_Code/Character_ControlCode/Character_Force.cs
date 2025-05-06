@@ -513,11 +513,11 @@ public class Character_Force : MonoBehaviour
             {
                 if (_base._cHurtBox.IsGrounded() == false) 
                 {
-                    _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+                    _myRB.AddForce(transform.up * -V_KnockDown, ForceMode.VelocityChange);
                 }
                 else 
                 {
-                    _myRB.AddForce(transform.up * -V_KnockDown, ForceMode.VelocityChange);
+                    _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
                 }
             }
         }

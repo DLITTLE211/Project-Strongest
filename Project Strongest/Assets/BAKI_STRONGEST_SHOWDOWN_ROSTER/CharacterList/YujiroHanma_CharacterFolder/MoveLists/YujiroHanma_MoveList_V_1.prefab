@@ -2704,9 +2704,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1
           attackMainStunValues:
-            hitstunValue: 16
+            hitstunValue: 12
             blockStunValue: 9
-            hitstopValue: 4
+            hitstopValue: 3
             blockStopValue: 2
           hitLevel: 66
           attackHashes: 0
@@ -2777,7 +2777,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.035
           attackMainStunValues:
-            hitstunValue: 9
+            hitstunValue: 12
             blockStunValue: 5
             hitstopValue: 2
             blockStopValue: 0
@@ -2883,9 +2883,9 @@ MonoBehaviour:
             hu_size: {x: 1, y: 1.95}
             _frameData:
               init: 0
-              startup: 16
-              active: 17
-              inactive: 24
+              startup: 13
+              active: 14
+              inactive: 20
               recoveryEnd: 0
               recoveryAmount: 18
               totalRecovery: 0
@@ -2898,23 +2898,23 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 4
-            Hit_Value: 4
-            Block_HKB_Level: 3
+            Hit_HKB_Level: 2
+            Hit_Value: 5.4
+            Block_HKB_Level: 0
             Block_Value: 2.15
           VerticalKB_Data:
-            Hit_VKB_Level: 1
-            Hit_Value: 2.75
+            Hit_VKB_Level: 0
+            Hit_Value: 4
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
     curInput: 0
     curAttack: 0
     leewayTime: 0
-  - SpecialAttackName: Light Punch Attack String Combo
+  - SpecialAttackName: Light Punch String Combo
     _attackInput:
       _correctInput:
       - _correctSequence: 5A
@@ -3035,9 +3035,9 @@ MonoBehaviour:
             hu_size: {x: 0.95, y: 0.95}
             _frameData:
               init: 0
-              startup: 12
-              active: 13
-              inactive: 20
+              startup: 10
+              active: 11
+              inactive: 18
               recoveryEnd: 0
               recoveryAmount: 15
               totalRecovery: 0
@@ -3075,7 +3075,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1
           attackMainStunValues:
-            hitstunValue: 15
+            hitstunValue: 30
             blockStunValue: 13
             hitstopValue: 7
             blockStopValue: 4
@@ -3123,7 +3123,7 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 1
+            Hit_HKB_Level: 2
             Hit_Value: 1.15
             Block_HKB_Level: 0
             Block_Value: 0
@@ -3159,7 +3159,7 @@ MonoBehaviour:
             blockStunValue: 14
             hitstopValue: 8
             blockStopValue: 5
-          hitLevel: 80
+          hitLevel: 96
           attackHashes: 0
           _meterRequirement: 0
           _meterAwardedOnHit: 6
@@ -3203,13 +3203,13 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 1
-            Hit_Value: 1.15
+            Hit_HKB_Level: 3
+            Hit_Value: 5.2
             Block_HKB_Level: 0
             Block_Value: 0
           VerticalKB_Data:
-            Hit_VKB_Level: 0
-            Hit_Value: 0
+            Hit_VKB_Level: 1
+            Hit_Value: 5.4
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 4
@@ -3446,7 +3446,7 @@ MonoBehaviour:
             Block_Value: 1.75
           VerticalKB_Data:
             Hit_VKB_Level: 3
-            Hit_Value: 2
+            Hit_Value: 10
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 2
@@ -3471,9 +3471,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1
           attackMainStunValues:
-            hitstunValue: 12
+            hitstunValue: 8
             blockStunValue: 8
-            hitstopValue: 5
+            hitstopValue: 3
             blockStopValue: 2
           hitLevel: 66
           attackHashes: 0
@@ -3709,7 +3709,7 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0045
           attackMainStunValues:
-            hitstunValue: 7
+            hitstunValue: 5
             blockStunValue: 3
             hitstopValue: 3
             blockStopValue: 0
@@ -3788,9 +3788,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.025
           attackMainStunValues:
-            hitstunValue: 11
-            blockStunValue: 5
-            hitstopValue: 5
+            hitstunValue: 9
+            blockStunValue: 4
+            hitstopValue: 3
             blockStopValue: 3
           hitLevel: 72
           attackHashes: 0
@@ -3836,13 +3836,13 @@ MonoBehaviour:
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
-            Hit_HKB_Level: 2
-            Hit_Value: 2.5
+            Hit_HKB_Level: 3
+            Hit_Value: 3
             Block_HKB_Level: 2
-            Block_Value: 2.2
+            Block_Value: 1.95
           VerticalKB_Data:
             Hit_VKB_Level: 1
-            Hit_Value: 4
+            Hit_Value: 3
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 4
@@ -3946,10 +3946,10 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.003
           attackMainStunValues:
-            hitstunValue: 0
-            blockStunValue: 0
-            hitstopValue: 0
-            blockStopValue: 0
+            hitstunValue: 12
+            blockStunValue: 2
+            hitstopValue: 3
+            blockStopValue: 1
           hitLevel: 68
           attackHashes: 0
           _meterRequirement: 0
@@ -4026,8 +4026,8 @@ MonoBehaviour:
           counterHitDamageMult: 1.0034
           attackMainStunValues:
             hitstunValue: 10
-            blockStunValue: 0
-            hitstopValue: 0
+            blockStunValue: 4
+            hitstopValue: 2
             blockStopValue: 0
           hitLevel: 66
           attackHashes: 0
@@ -4104,10 +4104,10 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.015
           attackMainStunValues:
-            hitstunValue: 12
-            blockStunValue: 7
-            hitstopValue: 4
-            blockStopValue: 2
+            hitstunValue: 15
+            blockStunValue: 5
+            hitstopValue: 6
+            blockStopValue: 1
           hitLevel: 72
           attackHashes: 0
           _meterRequirement: 0
@@ -4141,7 +4141,7 @@ MonoBehaviour:
               active: 14
               inactive: 20
               recoveryEnd: 0
-              recoveryAmount: 0
+              recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
               - hitFramePoints: 0
@@ -4391,15 +4391,15 @@ MonoBehaviour:
           hitConnected: 0
           LateralKB_Data:
             Hit_HKB_Level: 3
-            Hit_Value: 4.3
+            Hit_Value: 4
             Block_HKB_Level: 2
-            Block_Value: 2.6
+            Block_Value: 2
           VerticalKB_Data:
             Hit_VKB_Level: 1
-            Hit_Value: 2.2
+            Hit_Value: 3
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 2
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0
