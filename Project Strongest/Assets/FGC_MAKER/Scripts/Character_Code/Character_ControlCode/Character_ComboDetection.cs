@@ -337,7 +337,9 @@ public class Character_ComboDetection : MonoBehaviour
             {
                 continue;
             }
-            if ((int)entry.Value.GetAttackMoveType() > 3)
+            MoveType currentMoveType = entry.Value.GetAttackMoveType();
+            int moveTypeIndex = (int)currentMoveType;
+            if (moveTypeIndex > 3)
             {
                 if (entry.Key.specialMoveTypeInput != null)
                 {

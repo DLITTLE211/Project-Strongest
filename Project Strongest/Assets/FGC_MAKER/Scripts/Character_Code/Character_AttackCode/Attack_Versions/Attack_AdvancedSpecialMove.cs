@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Rewired;
+using FightingGame_FrameData;
 [Serializable]
 public abstract class AdvancedSpecialBase
 {
@@ -20,6 +21,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     [SerializeField] private char finalAttackButton;
     [SerializeField] private Character_Base _curBase;
     [SerializeField] private int framesBetweenAttacks;
+    [SerializeField] private int timeInAttackState;
     public int currentCustomAnim;
     #region Attack Base Code
 
@@ -64,7 +66,8 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         }
         else 
         {
-            property.InputTimer.SetTimerType(TimerType.Special);
+            float heldTime = timeInAttackState > 0 ? (float)timeInAttackState * Base_FrameCode.ONE_FRAME : 0.4f;
+            property.InputTimer.SetTimerType(TimerType.Special, heldTime);
         }
         _curBase.comboList3_0.ClearFollowUpAttack();
         _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);

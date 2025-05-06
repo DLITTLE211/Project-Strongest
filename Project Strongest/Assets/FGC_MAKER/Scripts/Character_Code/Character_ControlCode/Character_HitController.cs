@@ -406,7 +406,10 @@ public class Character_HitController : MonoBehaviour
         if (DownedFrameTickRoutine != null)
         {
             StopCoroutine(DownedFrameTickRoutine);
-            _base._aFrameDataMeter.SetHitRecoveringState(false);
+            if (currentCustomDamageField == null)
+            {
+                _base._aFrameDataMeter.SetHitRecoveringState(false);
+            }
             DownedFrameTickRoutine = null;
         }
     }

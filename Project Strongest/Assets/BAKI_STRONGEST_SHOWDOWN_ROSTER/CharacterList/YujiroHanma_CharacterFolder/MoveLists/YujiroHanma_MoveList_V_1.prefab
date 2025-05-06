@@ -126,6 +126,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: '"Dress"'
     attackInput:
@@ -178,9 +179,9 @@ MonoBehaviour:
         hu_size: {x: 0.75, y: 1}
         _frameData:
           init: 0
-          startup: 30
-          active: 31
-          inactive: 38
+          startup: 24
+          active: 25
+          inactive: 30
           recoveryEnd: 0
           recoveryAmount: 15
           totalRecovery: 0
@@ -222,9 +223,9 @@ MonoBehaviour:
         init: 0
         startup: 1
         active: 1
-        inactive: 370
+        inactive: 300
         recoveryEnd: 0
-        recoveryAmount: 5
+        recoveryAmount: 50
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 48
@@ -548,11 +549,11 @@ MonoBehaviour:
             rawAttackDamage: 20
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 25
               blockStunValue: 0
-              hitstopValue: 0
+              hitstopValue: 7
               blockStopValue: 0
-            hitLevel: 16
+            hitLevel: 320
             isFinalAttack: 1
             isScaling: 1
             lateralKBP:
@@ -562,7 +563,7 @@ MonoBehaviour:
               Block_Value: 0
             verticalKBP:
               Hit_VKB_Level: 1
-              Hit_Value: 2
+              Hit_Value: 6.2
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 8
@@ -576,6 +577,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: The Crying Demon
     attackInput:
@@ -672,9 +674,9 @@ MonoBehaviour:
         init: 0
         startup: 1
         active: 1
-        inactive: 137
+        inactive: 80
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 30
         totalRecovery: 0
         _extraPoints:
         - hitFramePoints: 60
@@ -692,9 +694,9 @@ MonoBehaviour:
             rawAttackDamage: 35
             counterHitDamageMult: 1
             customDamageFieldStunValues:
-              hitstunValue: 0
+              hitstunValue: 30
               blockStunValue: 0
-              hitstopValue: 0
+              hitstopValue: 10
               blockStopValue: 0
             hitLevel: 80
             isFinalAttack: 1
@@ -720,6 +722,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Out of My Way!!
     attackInput:
@@ -772,11 +775,11 @@ MonoBehaviour:
         hu_size: {x: 1, y: 1.35}
         _frameData:
           init: 0
-          startup: 39
-          active: 40
-          inactive: 45
+          startup: 29
+          active: 30
+          inactive: 37
           recoveryEnd: 0
-          recoveryAmount: 15
+          recoveryAmount: 20
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -802,6 +805,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Demon Rush
     attackInput:
@@ -882,6 +886,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   CommandThrows:
   - specialMoveName: Cutter Snatch (Anti-Air)
@@ -1001,7 +1006,7 @@ MonoBehaviour:
               blockStunValue: 0
               hitstopValue: 6
               blockStopValue: 0
-            hitLevel: 0
+            hitLevel: 256
             isFinalAttack: 1
             isScaling: 0
             lateralKBP:
@@ -1010,8 +1015,8 @@ MonoBehaviour:
               Block_HKB_Level: 0
               Block_Value: 0
             verticalKBP:
-              Hit_VKB_Level: 3
-              Hit_Value: 2
+              Hit_VKB_Level: 2
+              Hit_Value: 7
               Block_VKB_Level: 0
               Block_Value: 0
             KnockDown: 4
@@ -1025,6 +1030,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   CounterAttacks:
   - specialMoveName: Demon Aura (Counter)
@@ -1076,11 +1082,11 @@ MonoBehaviour:
         hu_size: {x: 1, y: 2.5}
         _frameData:
           init: 0
-          startup: 20
-          active: 20
-          inactive: 150
+          startup: 14
+          active: 15
+          inactive: 110
           recoveryEnd: 0
-          recoveryAmount: 28
+          recoveryAmount: 20
           totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 20
@@ -1089,7 +1095,7 @@ MonoBehaviour:
             awaitEnum:
               keyRef: 2
               awaitingCheck: 2
-            Force: 0.35
+            Force: 0.225
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -1140,6 +1146,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 110
     currentCustomAnim: 0
   stanceSpecials:
   - StanceSpecialAttack_Name: 5 Second Punch
@@ -1183,11 +1190,11 @@ MonoBehaviour:
         hu_size: {x: 0.75, y: 1.65}
         _frameData:
           init: 0
-          startup: 29
-          active: 30
-          inactive: 120
+          startup: 19
+          active: 20
+          inactive: 170
           recoveryEnd: 0
-          recoveryAmount: 50
+          recoveryAmount: 19
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -1267,7 +1274,7 @@ MonoBehaviour:
                   init: 0
                   startup: 0
                   active: 1
-                  inactive: 10
+                  inactive: 3
                   recoveryEnd: 0
                   recoveryAmount: 11
                   totalRecovery: 0
@@ -1298,7 +1305,7 @@ MonoBehaviour:
           _correctInput: []
     curInput: 0
     inStanceState: 0
-    stanceHeldTime: 115
+    stanceHeldTime: 150
     _curBase: {fileID: 0}
   rekkaSpecials:
   - RekkaSpecialAttack_Name: Savage Uppercut
@@ -1329,7 +1336,7 @@ MonoBehaviour:
         _airInfo: 0
         cancelProperty:
           CurrentLevel: 4096
-          nextAvailableAttackRoute: 212992
+          nextAvailableAttackRoute: 475136
         _moveType: 5
         AttackAnims:
           playerAnim: {fileID: 0}
@@ -1369,7 +1376,7 @@ MonoBehaviour:
           Block_Value: 0.75
         VerticalKB_Data:
           Hit_VKB_Level: 1
-          Hit_Value: 10
+          Hit_Value: 8
           Block_VKB_Level: 0
           Block_Value: 0
         KnockDown: 4
@@ -1711,9 +1718,9 @@ MonoBehaviour:
             init: 0
             startup: 1
             active: 1
-            inactive: 165
+            inactive: 110
             recoveryEnd: 0
-            recoveryAmount: 10
+            recoveryAmount: 69
             totalRecovery: 0
             _extraPoints: []
           _hitCount:
@@ -1831,7 +1838,7 @@ MonoBehaviour:
                 blockStunValue: 6
                 hitstopValue: 4
                 blockStopValue: 1
-              hitLevel: 66
+              hitLevel: 70
               attackHashes: 0
               _meterRequirement: 0
               _meterAwardedOnHit: 5
@@ -2158,7 +2165,7 @@ MonoBehaviour:
         KnockDown: 2
     curRekkaInput: 0
     rekkaInputCount: 1
-    leewayTime: 65
+    leewayTime: 120
     inRekkaState: 0
     usedRekkas: []
     _curBase: {fileID: 0}
@@ -2185,7 +2192,7 @@ MonoBehaviour:
       _airInfo: 0
       cancelProperty:
         CurrentLevel: 2048
-        nextAvailableAttackRoute: 196992
+        nextAvailableAttackRoute: 459136
       _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
@@ -2205,10 +2212,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 13
-          active: 16
-          inactive: 24
+          active: 14
+          inactive: 20
           recoveryEnd: 0
-          recoveryAmount: 5
+          recoveryAmount: 10
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -2225,7 +2232,7 @@ MonoBehaviour:
         Block_Value: 1
       VerticalKB_Data:
         Hit_VKB_Level: 1
-        Hit_Value: 11
+        Hit_Value: 9
         Block_VKB_Level: 0
         Block_Value: 0
       KnockDown: 4
@@ -2254,9 +2261,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.055
           attackMainStunValues:
-            hitstunValue: 13
+            hitstunValue: 12
             blockStunValue: 8
-            hitstopValue: 4
+            hitstopValue: 3
             blockStopValue: 1
           hitLevel: 68
           attackHashes: 0
@@ -2327,9 +2334,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1
           attackMainStunValues:
-            hitstunValue: 12
-            blockStunValue: 7
-            hitstopValue: 3
+            hitstunValue: 10
+            blockStunValue: 6
+            hitstopValue: 2
             blockStopValue: 0
           hitLevel: 68
           attackHashes: 0
@@ -2479,9 +2486,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0035
           attackMainStunValues:
-            hitstunValue: 8
+            hitstunValue: 9
             blockStunValue: 5
-            hitstopValue: 2
+            hitstopValue: 3
             blockStopValue: 0
           hitLevel: 66
           attackHashes: 0
@@ -2552,9 +2559,9 @@ MonoBehaviour:
           rawChipDamage: 0
           counterHitDamageMult: 1.0085
           attackMainStunValues:
-            hitstunValue: 10
+            hitstunValue: 14
             blockStunValue: 6
-            hitstopValue: 3
+            hitstopValue: 4
             blockStopValue: 1
           hitLevel: 68
           attackHashes: 0
@@ -2601,15 +2608,15 @@ MonoBehaviour:
           hitConnected: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
-            Hit_Value: 1.85
+            Hit_Value: 1.05
             Block_HKB_Level: 2
-            Block_Value: 1.05
+            Block_Value: 0.95
           VerticalKB_Data:
             Hit_VKB_Level: 1
-            Hit_Value: 3.15
+            Hit_Value: 5
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -2658,9 +2665,9 @@ MonoBehaviour:
             hu_size: {x: 1.15, y: 2.35}
             _frameData:
               init: 0
-              startup: 25
-              active: 27
-              inactive: 35
+              startup: 20
+              active: 21
+              inactive: 28
               recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
@@ -3493,7 +3500,7 @@ MonoBehaviour:
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
-            attackType: 0
+            attackType: 1
             hb_placement: {x: 1, y: 0.8, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
             hb_size: {x: 0.65, y: 0.85}
