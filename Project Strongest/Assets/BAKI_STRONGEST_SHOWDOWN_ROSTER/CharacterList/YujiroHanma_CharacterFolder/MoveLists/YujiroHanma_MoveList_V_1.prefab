@@ -100,6 +100,9 @@ MonoBehaviour:
           active: 1
           inactive: 235
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 1
+            inactiveFrame: 235
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints: []
@@ -183,6 +186,9 @@ MonoBehaviour:
           active: 25
           inactive: 30
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 25
+            inactiveFrame: 30
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints: []
@@ -225,6 +231,9 @@ MonoBehaviour:
         active: 1
         inactive: 300
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 1
+          inactiveFrame: 300
         recoveryAmount: 50
         totalRecovery: 0
         _extraPoints:
@@ -634,6 +643,9 @@ MonoBehaviour:
           active: 17
           inactive: 25
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 17
+            inactiveFrame: 25
           recoveryAmount: 50
           totalRecovery: 0
           _extraPoints: []
@@ -676,6 +688,9 @@ MonoBehaviour:
         active: 1
         inactive: 80
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 1
+          inactiveFrame: 80
         recoveryAmount: 30
         totalRecovery: 0
         _extraPoints:
@@ -779,6 +794,9 @@ MonoBehaviour:
           active: 30
           inactive: 37
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 30
+            inactiveFrame: 37
           recoveryAmount: 20
           totalRecovery: 0
           _extraPoints: []
@@ -860,14 +878,31 @@ MonoBehaviour:
           active: 14
           inactive: 96
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 15
+            inactiveFrame: 18
+          - activeFrame: 23
+            inactiveFrame: 26
+          - activeFrame: 33
+            inactiveFrame: 36
+          - activeFrame: 41
+            inactiveFrame: 44
+          - activeFrame: 49
+            inactiveFrame: 51
+          - activeFrame: 58
+            inactiveFrame: 61
+          - activeFrame: 69
+            inactiveFrame: 72
+          - activeFrame: 78
+            inactiveFrame: 96
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
           _count: 0
-          _startCount: 8
+          _startCount: 1
           _refreshRate: 0
-          _startRefreshRate: 15
+          _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
       LateralKB_Data:
@@ -942,6 +977,9 @@ MonoBehaviour:
           active: 14
           inactive: 20
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 14
+            inactiveFrame: 20
           recoveryAmount: 11
           totalRecovery: 0
           _extraPoints: []
@@ -984,6 +1022,9 @@ MonoBehaviour:
         active: 1
         inactive: 38
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 1
+          inactiveFrame: 38
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -1086,6 +1127,9 @@ MonoBehaviour:
           active: 15
           inactive: 110
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 15
+            inactiveFrame: 110
           recoveryAmount: 20
           totalRecovery: 0
           _extraPoints:
@@ -1194,6 +1238,9 @@ MonoBehaviour:
           active: 20
           inactive: 170
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 20
+            inactiveFrame: 170
           recoveryAmount: 19
           totalRecovery: 0
           _extraPoints: []
@@ -1276,6 +1323,9 @@ MonoBehaviour:
                   active: 1
                   inactive: 3
                   recoveryEnd: 0
+                  activeWindows:
+                  - activeFrame: 1
+                    inactiveFrame: 3
                   recoveryAmount: 11
                   totalRecovery: 0
                   _extraPoints: []
@@ -1359,6 +1409,9 @@ MonoBehaviour:
             active: 16
             inactive: 24
             recoveryEnd: 0
+            activeWindows:
+            - activeFrame: 16
+              inactiveFrame: 24
             recoveryAmount: 12
             totalRecovery: 0
             _extraPoints: []
@@ -1435,6 +1488,9 @@ MonoBehaviour:
                   active: 14
                   inactive: 20
                   recoveryEnd: 0
+                  activeWindows:
+                  - activeFrame: 14
+                    inactiveFrame: 20
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -1510,6 +1566,9 @@ MonoBehaviour:
                   active: 21
                   inactive: 27
                   recoveryEnd: 0
+                  activeWindows:
+                  - activeFrame: 21
+                    inactiveFrame: 27
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints: []
@@ -1578,6 +1637,7 @@ MonoBehaviour:
             active: 0
             inactive: 0
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -1642,6 +1702,7 @@ MonoBehaviour:
             active: 0
             inactive: 0
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -1720,6 +1781,9 @@ MonoBehaviour:
             active: 1
             inactive: 110
             recoveryEnd: 0
+            activeWindows:
+            - activeFrame: 1
+              inactiveFrame: 110
             recoveryAmount: 69
             totalRecovery: 0
             _extraPoints: []
@@ -1796,6 +1860,9 @@ MonoBehaviour:
                   active: 13
                   inactive: 20
                   recoveryEnd: 0
+                  activeWindows:
+                  - activeFrame: 13
+                    inactiveFrame: 20
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -1871,6 +1938,9 @@ MonoBehaviour:
                   active: 13
                   inactive: 20
                   recoveryEnd: 0
+                  activeWindows:
+                  - activeFrame: 13
+                    inactiveFrame: 20
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints: []
@@ -1946,6 +2016,9 @@ MonoBehaviour:
                   active: 20
                   inactive: 25
                   recoveryEnd: 0
+                  activeWindows:
+                  - activeFrame: 20
+                    inactiveFrame: 25
                   recoveryAmount: 12
                   totalRecovery: 0
                   _extraPoints: []
@@ -2014,6 +2087,7 @@ MonoBehaviour:
             active: 14
             inactive: 23
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 13
             totalRecovery: 0
             _extraPoints: []
@@ -2078,6 +2152,7 @@ MonoBehaviour:
             active: 0
             inactive: 0
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -2142,6 +2217,7 @@ MonoBehaviour:
             active: 0
             inactive: 0
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -2215,6 +2291,9 @@ MonoBehaviour:
           active: 14
           inactive: 20
           recoveryEnd: 0
+          activeWindows:
+          - activeFrame: 14
+            inactiveFrame: 20
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints: []
@@ -2298,6 +2377,9 @@ MonoBehaviour:
               active: 14
               inactive: 19
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 19
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2371,6 +2453,9 @@ MonoBehaviour:
               active: 14
               inactive: 20
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 20
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -2444,6 +2529,9 @@ MonoBehaviour:
               active: 16
               inactive: 23
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 16
+                inactiveFrame: 23
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2523,6 +2611,9 @@ MonoBehaviour:
               active: 7
               inactive: 14
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 7
+                inactiveFrame: 14
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -2596,6 +2687,9 @@ MonoBehaviour:
               active: 11
               inactive: 18
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 18
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -2669,6 +2763,9 @@ MonoBehaviour:
               active: 21
               inactive: 28
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 21
+                inactiveFrame: 28
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2748,14 +2845,19 @@ MonoBehaviour:
               active: 10
               inactive: 24
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 15
+              - activeFrame: 16
+                inactiveFrame: 24
               recoveryAmount: 13
               totalRecovery: 0
               _extraPoints: []
             _hitCount:
               _count: 0
-              _startCount: 2
+              _startCount: 1
               _refreshRate: 0
-              _startRefreshRate: 15
+              _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
           LateralKB_Data:
@@ -2821,6 +2923,9 @@ MonoBehaviour:
               active: 10
               inactive: 18
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 18
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2894,6 +2999,9 @@ MonoBehaviour:
               active: 14
               inactive: 20
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 20
               recoveryAmount: 18
               totalRecovery: 0
               _extraPoints: []
@@ -2973,6 +3081,9 @@ MonoBehaviour:
               active: 6
               inactive: 11
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 6
+                inactiveFrame: 11
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -3046,6 +3157,9 @@ MonoBehaviour:
               active: 11
               inactive: 18
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 18
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints: []
@@ -3119,6 +3233,9 @@ MonoBehaviour:
               active: 37
               inactive: 45
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 37
+                inactiveFrame: 45
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -3199,6 +3316,9 @@ MonoBehaviour:
               active: 20
               inactive: 28
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 20
+                inactiveFrame: 28
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -3278,6 +3398,9 @@ MonoBehaviour:
               active: 13
               inactive: 19
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 13
+                inactiveFrame: 19
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints: []
@@ -3357,6 +3480,9 @@ MonoBehaviour:
               active: 12
               inactive: 18
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 18
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -3436,6 +3562,9 @@ MonoBehaviour:
               active: 14
               inactive: 20
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 20
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -3515,6 +3644,9 @@ MonoBehaviour:
               active: 12
               inactive: 17
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 17
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -3595,6 +3727,9 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 6
+                inactiveFrame: 10
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -3674,6 +3809,9 @@ MonoBehaviour:
               active: 11
               inactive: 19
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 19
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -3753,6 +3891,9 @@ MonoBehaviour:
               active: 5
               inactive: 9
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 5
+                inactiveFrame: 9
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints: []
@@ -3832,6 +3973,9 @@ MonoBehaviour:
               active: 10
               inactive: 16
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 16
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -3911,6 +4055,9 @@ MonoBehaviour:
               active: 7
               inactive: 13
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 7
+                inactiveFrame: 13
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -3990,6 +4137,9 @@ MonoBehaviour:
               active: 10
               inactive: 19
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 19
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -4069,6 +4219,9 @@ MonoBehaviour:
               active: 10
               inactive: 16
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 16
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -4148,6 +4301,9 @@ MonoBehaviour:
               active: 14
               inactive: 20
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 20
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -4465,6 +4621,9 @@ MonoBehaviour:
               active: 3
               inactive: 7
               recoveryEnd: 25
+              activeWindows:
+              - activeFrame: 3
+                inactiveFrame: 7
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -4544,6 +4703,9 @@ MonoBehaviour:
               active: 3
               inactive: 7
               recoveryEnd: 25
+              activeWindows:
+              - activeFrame: 3
+                inactiveFrame: 7
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -4624,6 +4786,9 @@ MonoBehaviour:
               active: 14
               inactive: 18
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 18
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -4669,6 +4834,9 @@ MonoBehaviour:
         active: 3
         inactive: 120
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 3
+          inactiveFrame: 120
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -4767,6 +4935,9 @@ MonoBehaviour:
               active: 14
               inactive: 18
               recoveryEnd: 0
+              activeWindows:
+              - activeFrame: 14
+                inactiveFrame: 18
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -4812,6 +4983,9 @@ MonoBehaviour:
         active: 3
         inactive: 120
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 3
+          inactiveFrame: 120
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -4936,6 +5110,7 @@ MonoBehaviour:
         active: 0
         inactive: 0
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints: []
