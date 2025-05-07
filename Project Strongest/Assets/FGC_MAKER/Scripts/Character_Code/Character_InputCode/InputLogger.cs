@@ -16,17 +16,37 @@ public class InputLogger
             textObject[i].text = "";
         }
     }
-    public void setFirstItem(List<string> itemInfo) 
+    public void setFirstItem(List<string> itemInfo, bool numSize)
     {
-        textObject[0].text = itemInfo[0];
+        string stringMessage = SpriteToTextColorUtility.AppendSpriteName($"{itemInfo[0]}", Color.white);
+        textObject[0].SetText(stringMessage);
+        if (numSize) 
+        {
+            textObject[0].fontSize = 16;
+        }
+        else 
+        {
+            textObject[0].fontSize = 20;
+        }
     }
 
-    public void setNextItemInList(List<string> itemInfo) 
+    public void setNextItemInList(List<string> itemInfo, bool numSize)
     {
+        string stringMessage = "";
         for (int i = itemInfo.Count-1; i > 0; i--) 
         {
-            textObject[i].text = textObject[i-1].text;
+            stringMessage = textObject[i - 1].text;
+            textObject[i].SetText(stringMessage);
         }
-        textObject[0].text = itemInfo[0];
+        stringMessage = SpriteToTextColorUtility.AppendSpriteName($"{itemInfo[0]}", Color.white);
+        textObject[0].SetText(stringMessage);
+        if (numSize)
+        {
+            textObject[0].fontSize = 16;
+        }
+        else
+        {
+            textObject[0].fontSize = 20;
+        }
     }
 }

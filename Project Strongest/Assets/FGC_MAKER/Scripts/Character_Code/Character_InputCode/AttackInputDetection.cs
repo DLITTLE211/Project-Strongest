@@ -82,22 +82,22 @@ public class InputTimer
         switch (log.buttonState._state)
         {
             case ButtonStateMachine.InputState.pressed:
-                logString.Insert(0, $"{log.inputAction.name}-P");
+                logString.Insert(0, ($"{log.inputAction.name}(P)").ToUpper());
                 break;
             case ButtonStateMachine.InputState.held:
-                logString.Insert(0, $"{log.inputAction.name}-Ho");
+                logString.Insert(0, ($"{log.inputAction.name}(HO)").ToUpper());
                 break;
             case ButtonStateMachine.InputState.released:
-                logString.Insert(0, $"{log.inputAction.name}-R");
+                logString.Insert(0, ($"{log.inputAction.name}(R)").ToUpper());
                 break;
         }
         if (logString.Count == 1)
         {
-            inputLogger.setFirstItem(logString);
+           // inputLogger.setFirstItem(logString);
         }
         else 
         {
-            inputLogger.setNextItemInList(logString);
+           // inputLogger.setNextItemInList(logString);
         }
     }
 }

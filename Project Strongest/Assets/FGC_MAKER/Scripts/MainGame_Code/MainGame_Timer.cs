@@ -15,7 +15,8 @@ public class MainGame_Timer : MonoBehaviour
         if (startingTime == Mathf.Infinity)
         {
             tickDownStopWatch = true;
-            stopwatchText.text = "\u221E";
+            string timerMessage = SpriteToTextColorUtility.AppendSpriteName($"\u221E", Color.white);
+            stopwatchText.text = timerMessage;
             tickDownStopWatch = false;
             return;
         }

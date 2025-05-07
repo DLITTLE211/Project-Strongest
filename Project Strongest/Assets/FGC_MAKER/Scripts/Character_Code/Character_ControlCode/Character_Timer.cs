@@ -68,32 +68,34 @@ public class Character_Timer
     }
     public void UpdateInputLogger(Character_ButtonInput log)
     {
-        if (logString.Count >= 20)
+        if (logString.Count >= 19)
         {
             TrimString();
         }
+        bool numSize = false;
         switch (log.Button_State._state)
         {
             case ButtonStateMachine.InputState.pressed:
-                logString.Insert(0, $"{log.Button_Name}-P");
+                logString.Insert(0, ($"{log.Button_Name} (P)").ToUpper());
                 break;
             case ButtonStateMachine.InputState.held:
-                logString.Insert(0, $"{log.Button_Name}-Ho");
+                logString.Insert(0, ($"{log.Button_Name} (HO)").ToUpper());
                 break;
             case ButtonStateMachine.InputState.released:
-                logString.Insert(0, $"{log.Button_Name}-R");
+                logString.Insert(0, ($"{log.Button_Name} (R)").ToUpper());
                 break;
             case ButtonStateMachine.InputState.directional:
                 logString.Insert(0, $"{log.Button_State.directionalInput}");
+                numSize = true;
                 break;
         }
         if (logString.Count == 1)
         {
-            inputLogger.setFirstItem(logString);
+            inputLogger.setFirstItem(logString,numSize);
         }
         else
         {
-            inputLogger.setNextItemInList(logString);
+            inputLogger.setNextItemInList(logString, numSize);
         }
     }
 }
