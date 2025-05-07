@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using TMPro;
 
 public class MainGame_Timer : MonoBehaviour
@@ -24,7 +25,8 @@ public class MainGame_Timer : MonoBehaviour
     {
         stopwatchTime -= Time.deltaTime;
         string currentTime = (int)stopwatchTime < 0 ? (0).ToString("n0") : ((int)stopwatchTime).ToString("n0");
-        stopwatchText.text = $"Timer \n {currentTime}";
+        string timerMessage = SpriteToTextColorUtility.AppendSpriteName($"Timer \n {currentTime}", Color.white);
+        stopwatchText.text = timerMessage;// $"Timer \n {currentTime}";
     }
     public bool ReturnTimerOver() 
     {
