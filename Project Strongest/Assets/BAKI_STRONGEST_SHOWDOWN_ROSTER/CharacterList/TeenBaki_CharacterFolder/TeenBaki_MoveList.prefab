@@ -100,7 +100,9 @@ MonoBehaviour:
           active: 23
           inactive: 35
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 23
+            inactiveFrame: 35
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints:
@@ -283,10 +285,12 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 0
-          active: 0
+          active: 1
           inactive: 18
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 1
+            inactiveFrame: 18
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
@@ -358,6 +362,448 @@ MonoBehaviour:
                 Block_Value: 0
               KnockDown: 0
             _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -397,7 +843,9 @@ MonoBehaviour:
         active: 0
         inactive: 18
         recoveryEnd: 0
-        activeWindows: []
+        activeWindows:
+        - activeFrame: 0
+          inactiveFrame: 18
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -494,7 +942,9 @@ MonoBehaviour:
         active: 29
         inactive: 110
         recoveryEnd: 0
-        activeWindows: []
+        activeWindows:
+        - activeFrame: 29
+          inactiveFrame: 110
         recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
@@ -770,6 +1220,244 @@ MonoBehaviour:
               Block_Value: 0
             KnockDown: 0
           _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -836,7 +1524,9 @@ MonoBehaviour:
           active: 35
           inactive: 55
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 35
+            inactiveFrame: 55
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
@@ -908,6 +1598,448 @@ MonoBehaviour:
                 Block_Value: 0
               KnockDown: 0
             _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+          - hitFramePoints: 0
+            call: 0
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -947,7 +2079,9 @@ MonoBehaviour:
         active: 1
         inactive: 150
         recoveryEnd: 0
-        activeWindows: []
+        activeWindows:
+        - activeFrame: 1
+          inactiveFrame: 150
         recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
@@ -1221,7 +2355,9 @@ MonoBehaviour:
           active: 1
           inactive: 90
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 1
+            inactiveFrame: 90
           recoveryAmount: 50
           totalRecovery: 0
           _extraPoints:
@@ -1338,7 +2474,9 @@ MonoBehaviour:
           active: 19
           inactive: 28
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 19
+            inactiveFrame: 28
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints:
@@ -1449,7 +2587,9 @@ MonoBehaviour:
         active: 2
         inactive: 40
         recoveryEnd: 0
-        activeWindows: []
+        activeWindows:
+        - activeFrame: 2
+          inactiveFrame: 40
         recoveryAmount: 40
         totalRecovery: 0
         _extraPoints:
@@ -1657,6 +2797,312 @@ MonoBehaviour:
               Block_Value: 0
             KnockDown: 0
           _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
+        - hitFramePoints: 0
+          call: 0
+          hitFrameBool: 0
+          awaitEnum:
+            keyRef: 0
+            awaitingCheck: 0
+          Force: 0
+          projectileSpeed: 0
+          camPos: {x: 0, y: 0, z: 0}
+          camRotation: {x: 0, y: 0, z: 0}
+          snapMovement: 0
+          customDamage:
+            rawAttackDamage: 0
+            counterHitDamageMult: 0
+            customDamageFieldStunValues:
+              hitstunValue: 0
+              blockStunValue: 0
+              hitstopValue: 0
+              blockStopValue: 0
+            hitLevel: 0
+            isFinalAttack: 0
+            isScaling: 0
+            lateralKBP:
+              Hit_HKB_Level: 0
+              Hit_Value: 0
+              Block_HKB_Level: 0
+              Block_Value: 0
+            verticalKBP:
+              Hit_VKB_Level: 0
+              Hit_Value: 0
+              Block_VKB_Level: 0
+              Block_Value: 0
+            KnockDown: 0
+          _hurtboxType: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -1722,7 +3168,9 @@ MonoBehaviour:
           active: 5
           inactive: 17
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 5
+            inactiveFrame: 17
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
@@ -1765,7 +3213,9 @@ MonoBehaviour:
         active: 3
         inactive: 50
         recoveryEnd: 0
-        activeWindows: []
+        activeWindows:
+        - activeFrame: 3
+          inactiveFrame: 50
         recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
@@ -1969,7 +3419,9 @@ MonoBehaviour:
           active: 3
           inactive: 12
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 3
+            inactiveFrame: 12
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
@@ -2012,7 +3464,9 @@ MonoBehaviour:
         active: 3
         inactive: 50
         recoveryEnd: 0
-        activeWindows: []
+        activeWindows:
+        - activeFrame: 3
+          inactiveFrame: 50
         recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
@@ -2209,7 +3663,9 @@ MonoBehaviour:
           active: 1
           inactive: 40
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 1
+            inactiveFrame: 40
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
@@ -2326,7 +3782,9 @@ MonoBehaviour:
                   active: 3
                   inactive: 9
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 3
+                    inactiveFrame: 9
                   recoveryAmount: 25
                   totalRecovery: 0
                   _extraPoints: []
@@ -2410,7 +3868,9 @@ MonoBehaviour:
             active: 10
             inactive: 16
             recoveryEnd: 0
-            activeWindows: []
+            activeWindows:
+            - activeFrame: 10
+              inactiveFrame: 16
             recoveryAmount: 13
             totalRecovery: 0
             _extraPoints:
@@ -2521,7 +3981,9 @@ MonoBehaviour:
                   active: 12
                   inactive: 18
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 12
+                    inactiveFrame: 18
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints:
@@ -2631,7 +4093,9 @@ MonoBehaviour:
                   active: 11
                   inactive: 18
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 11
+                    inactiveFrame: 18
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints:
@@ -2748,7 +4212,9 @@ MonoBehaviour:
             active: 10
             inactive: 30
             recoveryEnd: 0
-            activeWindows: []
+            activeWindows:
+            - activeFrame: 10
+              inactiveFrame: 30
             recoveryAmount: 7
             totalRecovery: 0
             _extraPoints:
@@ -2859,7 +4325,13 @@ MonoBehaviour:
                   active: 29
                   inactive: 41
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 29
+                    inactiveFrame: 33
+                  - activeFrame: 35
+                    inactiveFrame: 38
+                  - activeFrame: 40
+                    inactiveFrame: 43
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -2935,7 +4407,9 @@ MonoBehaviour:
                   active: 11
                   inactive: 15
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 11
+                    inactiveFrame: 15
                   recoveryAmount: 14
                   totalRecovery: 0
                   _extraPoints:
@@ -3045,7 +4519,9 @@ MonoBehaviour:
                   active: 9
                   inactive: 15
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 9
+                    inactiveFrame: 15
                   recoveryAmount: 7
                   totalRecovery: 0
                   _extraPoints:
@@ -3162,7 +4638,9 @@ MonoBehaviour:
             active: 10
             inactive: 30
             recoveryEnd: 0
-            activeWindows: []
+            activeWindows:
+            - activeFrame: 10
+              inactiveFrame: 30
             recoveryAmount: 7
             totalRecovery: 0
             _extraPoints:
@@ -3273,7 +4751,13 @@ MonoBehaviour:
                   active: 29
                   inactive: 41
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 28
+                    inactiveFrame: 31
+                  - activeFrame: 33
+                    inactiveFrame: 36
+                  - activeFrame: 38
+                    inactiveFrame: 42
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -3349,7 +4833,9 @@ MonoBehaviour:
                   active: 11
                   inactive: 15
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 11
+                    inactiveFrame: 15
                   recoveryAmount: 14
                   totalRecovery: 0
                   _extraPoints:
@@ -3459,7 +4945,9 @@ MonoBehaviour:
                   active: 9
                   inactive: 15
                   recoveryEnd: 0
-                  activeWindows: []
+                  activeWindows:
+                  - activeFrame: 9
+                    inactiveFrame: 15
                   recoveryAmount: 7
                   totalRecovery: 0
                   _extraPoints:
@@ -3571,7 +5059,9 @@ MonoBehaviour:
           active: 4
           inactive: 9
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 4
+            inactiveFrame: 9
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints: []
@@ -3647,7 +5137,9 @@ MonoBehaviour:
           active: 18
           inactive: 25
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 18
+            inactiveFrame: 25
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints:
@@ -3757,7 +5249,9 @@ MonoBehaviour:
           active: 19
           inactive: 25
           recoveryEnd: 0
-          activeWindows: []
+          activeWindows:
+          - activeFrame: 19
+            inactiveFrame: 25
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints:
@@ -3875,7 +5369,9 @@ MonoBehaviour:
               active: 15
               inactive: 22
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 15
+                inactiveFrame: 22
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -3983,7 +5479,9 @@ MonoBehaviour:
               active: 11
               inactive: 17
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 17
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints:
@@ -4091,7 +5589,9 @@ MonoBehaviour:
               active: 17
               inactive: 24
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 17
+                inactiveFrame: 24
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -4205,7 +5705,9 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 6
+                inactiveFrame: 10
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -4279,7 +5781,9 @@ MonoBehaviour:
               active: 10
               inactive: 16
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 16
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints:
@@ -4387,7 +5891,9 @@ MonoBehaviour:
               active: 12
               inactive: 17
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 17
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints:
@@ -4501,7 +6007,9 @@ MonoBehaviour:
               active: 10
               inactive: 15
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 15
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -4609,7 +6117,9 @@ MonoBehaviour:
               active: 11
               inactive: 16
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 16
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -4717,7 +6227,9 @@ MonoBehaviour:
               active: 8
               inactive: 14
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 8
+                inactiveFrame: 14
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -4831,7 +6343,9 @@ MonoBehaviour:
               active: 11
               inactive: 14
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 14
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -4905,7 +6419,9 @@ MonoBehaviour:
               active: 10
               inactive: 15
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 10
+                inactiveFrame: 15
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints:
@@ -5013,7 +6529,9 @@ MonoBehaviour:
               active: 25
               inactive: 31
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 25
+                inactiveFrame: 31
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -5127,7 +6645,9 @@ MonoBehaviour:
               active: 12
               inactive: 16
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 16
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints:
@@ -5235,7 +6755,19 @@ MonoBehaviour:
               active: 15
               inactive: 37
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 15
+                inactiveFrame: 17
+              - activeFrame: 21
+                inactiveFrame: 23
+              - activeFrame: 23
+                inactiveFrame: 25
+              - activeFrame: 26
+                inactiveFrame: 28
+              - activeFrame: 30
+                inactiveFrame: 32
+              - activeFrame: 35
+                inactiveFrame: 37
               recoveryAmount: 2
               totalRecovery: 0
               _extraPoints:
@@ -5343,7 +6875,9 @@ MonoBehaviour:
               active: 13
               inactive: 19
               recoveryEnd: 25
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 13
+                inactiveFrame: 19
               recoveryAmount: 6
               totalRecovery: 0
               _extraPoints:
@@ -5458,7 +6992,9 @@ MonoBehaviour:
               active: 12
               inactive: 18
               recoveryEnd: 29
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 18
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -5572,7 +7108,9 @@ MonoBehaviour:
               active: 15
               inactive: 22
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 15
+                inactiveFrame: 22
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -5686,7 +7224,9 @@ MonoBehaviour:
               active: 13
               inactive: 18
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 13
+                inactiveFrame: 18
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -5800,7 +7340,9 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 12
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 6
+                inactiveFrame: 10
               recoveryAmount: 2
               totalRecovery: 0
               _extraPoints: []
@@ -5880,7 +7422,9 @@ MonoBehaviour:
               active: 12
               inactive: 23
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 23
               recoveryAmount: 3
               totalRecovery: 0
               _extraPoints:
@@ -5995,7 +7539,9 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 6
+                inactiveFrame: 10
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -6075,7 +7621,9 @@ MonoBehaviour:
               active: 12
               inactive: 18
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 18
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -6189,7 +7737,9 @@ MonoBehaviour:
               active: 5
               inactive: 9
               recoveryEnd: 16
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 5
+                inactiveFrame: 9
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -6303,7 +7853,9 @@ MonoBehaviour:
               active: 15
               inactive: 21
               recoveryEnd: 36
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 15
+                inactiveFrame: 21
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints:
@@ -6417,7 +7969,9 @@ MonoBehaviour:
               active: 5
               inactive: 10
               recoveryEnd: 12
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 5
+                inactiveFrame: 10
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -6497,7 +8051,9 @@ MonoBehaviour:
               active: 11
               inactive: 19
               recoveryEnd: 22
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 19
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -6577,7 +8133,9 @@ MonoBehaviour:
               active: 5
               inactive: 10
               recoveryEnd: 14
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 5
+                inactiveFrame: 10
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -6657,7 +8215,9 @@ MonoBehaviour:
               active: 11
               inactive: 15
               recoveryEnd: 0
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 11
+                inactiveFrame: 15
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -6737,7 +8297,9 @@ MonoBehaviour:
               active: 3
               inactive: 8
               recoveryEnd: 25
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 3
+                inactiveFrame: 8
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -6817,7 +8379,9 @@ MonoBehaviour:
               active: 3
               inactive: 8
               recoveryEnd: 25
-              activeWindows: []
+              activeWindows:
+              - activeFrame: 3
+                inactiveFrame: 8
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
