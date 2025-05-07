@@ -1212,11 +1212,6 @@ public class Editor_MoveListEditor : EditorWindow
                     if (GUILayout.Button($"{attackName}_Property {i + 1}", style, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 3f), GUILayout.Height(25)))
                     {
                         previewActive = false;
-                        /*if (i > 0)
-                        {
-                            subAttackDataIndex = i;
-                        }
-                        else { subAttackDataIndex = -1; }*/
                         subAttackDataIndex = i;
                         currentCenterAttackData = _attackData.baseAttackProperties[i];
                         currentFrame = 0;
@@ -1235,7 +1230,12 @@ public class Editor_MoveListEditor : EditorWindow
                         if(newAttackAnim._frameData != null) 
                         {
                             FrameData currentFrameData = newAttackAnim._frameData;
-                            if(currentFrameData._extraPoints != null) 
+                            if(currentFrameData.activeWindows == null) 
+                            {
+                                currentFrameData.activeWindows = new List<ActiveFrameWindows>();
+                            }
+                            hitCountTotal = currentFrameData.activeWindows.Count;
+                            if (currentFrameData._extraPoints != null) 
                             {
                                 List<ExtraFrameHitPoints> framePoints = currentFrameData._extraPoints;
                                 extraFramePointCount = framePoints.Count;
@@ -1278,6 +1278,9 @@ public class Editor_MoveListEditor : EditorWindow
             }
         }
     }
+    int hitCountTotal;
+    Vector2 ActiveFrameWindow;
+
     void DisplayAnimationTimeline(AttackHandler_Attack newAttackAnim)
     {
         #region AnimSlider
@@ -1291,13 +1294,53 @@ public class Editor_MoveListEditor : EditorWindow
                 float clipLength = newAttackAnim.animClip.length;
                 float currentClipLength = clipLength * fps;
                 currentFrame = (int)EditorGUILayout.Slider("Animation Frame Timeline:", currentFrame, 0f, currentClipLength, GUILayout.Width(CurrentAttackBodyObject.editorRect.width / 2f), GUILayout.Height(20));
-
-
+                hitCountTotal = (int)EditorGUILayout.Slider("Hit Count Total:", hitCountTotal, 1, 15, GUILayout.Width(500), GUILayout.Height(20));
+                if(newAttackAnim._frameData.activeWindows.Count == 0) 
+                {
+                    newAttackAnim._frameData.activeWindows.Add(new ActiveFrameWindows());
+                }
+                else 
+                {
+                    if (newAttackAnim._frameData.activeWindows.Count < hitCountTotal)
+                    {
+                        int difference = hitCountTotal - newAttackAnim._frameData.activeWindows.Count;
+                        for (int i = 0; i < difference; i++)
+                        {
+                            newAttackAnim._frameData.activeWindows.Add(new ActiveFrameWindows());
+                        }
+                    }
+                    else
+                    {
+                        if (newAttackAnim._frameData.activeWindows.Count != hitCountTotal) 
+                        {
+                            List<ActiveFrameWindows> previousWindows = new List<ActiveFrameWindows>();
+                            for (int i = 0; i < hitCountTotal; i++) 
+                            {
+                                previousWindows.Add(newAttackAnim._frameData.activeWindows[i]);
+                            }
+                            newAttackAnim._frameData.activeWindows = previousWindows;
+                        }
+                    }
+                }
                 DrawTimelineControls();
                 init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
                 startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
                 active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
                 inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+
+                ActiveFrameWindow = EditorGUILayout.BeginScrollView(ActiveFrameWindow, GUILayout.Width(510), GUILayout.Height(200));
+                for (int i = 0; i < newAttackAnim._frameData.activeWindows.Count; i++)
+                {
+                    GUILayout.Label($"Hit Frame Window {i+1}");
+                    try
+                    {
+                        newAttackAnim._frameData.activeWindows[i].activeFrame = (int)EditorGUILayout.Slider($"Active Frame {i+1}:", newAttackAnim._frameData.activeWindows[i].activeFrame, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+                        newAttackAnim._frameData.activeWindows[i].inactiveFrame = (int)EditorGUILayout.Slider($"Inactive Frame {i+1}:", newAttackAnim._frameData.activeWindows[i].inactiveFrame, newAttackAnim._frameData.activeWindows[i].activeFrame+1, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
+                    }
+                    catch (Exception) { continue; }
+                }
+                EditorGUILayout.EndScrollView();
+
                 recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
                 newAttackAnim._frameData.init = init;
                 newAttackAnim._frameData.startup = startup;

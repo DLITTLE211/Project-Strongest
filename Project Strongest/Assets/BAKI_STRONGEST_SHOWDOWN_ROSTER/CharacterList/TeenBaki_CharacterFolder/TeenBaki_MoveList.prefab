@@ -100,6 +100,7 @@ MonoBehaviour:
           active: 23
           inactive: 35
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints:
@@ -228,6 +229,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Triceratops Fist
     attackInput:
@@ -284,6 +286,7 @@ MonoBehaviour:
           active: 0
           inactive: 18
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
@@ -394,6 +397,7 @@ MonoBehaviour:
         active: 0
         inactive: 18
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -490,6 +494,7 @@ MonoBehaviour:
         active: 29
         inactive: 110
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
@@ -774,6 +779,7 @@ MonoBehaviour:
     finalAttackButton: 256
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Ultimate Guillotine Choke
     attackInput:
@@ -830,6 +836,7 @@ MonoBehaviour:
           active: 35
           inactive: 55
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
@@ -940,6 +947,7 @@ MonoBehaviour:
         active: 1
         inactive: 150
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
@@ -1156,6 +1164,7 @@ MonoBehaviour:
     finalAttackButton: 110
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Demon Blood Activation (Ultra)
     attackInput:
@@ -1212,6 +1221,7 @@ MonoBehaviour:
           active: 1
           inactive: 90
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 50
           totalRecovery: 0
           _extraPoints:
@@ -1272,6 +1282,7 @@ MonoBehaviour:
     finalAttackButton: 95
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   CommandThrows:
   - specialMoveName: Spinning Lotus
@@ -1327,6 +1338,7 @@ MonoBehaviour:
           active: 19
           inactive: 28
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints:
@@ -1437,6 +1449,7 @@ MonoBehaviour:
         active: 2
         inactive: 40
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 40
         totalRecovery: 0
         _extraPoints:
@@ -1653,6 +1666,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   CounterAttacks:
   - specialMoveName: Tiger King (Light)
@@ -1708,6 +1722,7 @@ MonoBehaviour:
           active: 5
           inactive: 17
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
@@ -1750,6 +1765,7 @@ MonoBehaviour:
         active: 3
         inactive: 50
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
@@ -1898,6 +1914,7 @@ MonoBehaviour:
     finalAttackButton: 121
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Tiger King (Heavy)
     attackInput:
@@ -1952,6 +1969,7 @@ MonoBehaviour:
           active: 3
           inactive: 12
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
@@ -1994,6 +2012,7 @@ MonoBehaviour:
         active: 3
         inactive: 50
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
@@ -2142,6 +2161,7 @@ MonoBehaviour:
     finalAttackButton: 87
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   stanceSpecials:
   - StanceSpecialAttack_Name: Blink Strike (Heavy)
@@ -2189,6 +2209,7 @@ MonoBehaviour:
           active: 1
           inactive: 40
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
@@ -2305,6 +2326,7 @@ MonoBehaviour:
                   active: 3
                   inactive: 9
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 25
                   totalRecovery: 0
                   _extraPoints: []
@@ -2388,6 +2410,7 @@ MonoBehaviour:
             active: 10
             inactive: 16
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 13
             totalRecovery: 0
             _extraPoints:
@@ -2498,6 +2521,7 @@ MonoBehaviour:
                   active: 12
                   inactive: 18
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints:
@@ -2607,6 +2631,7 @@ MonoBehaviour:
                   active: 11
                   inactive: 18
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints:
@@ -2723,6 +2748,7 @@ MonoBehaviour:
             active: 10
             inactive: 30
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 7
             totalRecovery: 0
             _extraPoints:
@@ -2833,6 +2859,7 @@ MonoBehaviour:
                   active: 29
                   inactive: 41
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -2908,6 +2935,7 @@ MonoBehaviour:
                   active: 11
                   inactive: 15
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 14
                   totalRecovery: 0
                   _extraPoints:
@@ -3017,6 +3045,7 @@ MonoBehaviour:
                   active: 9
                   inactive: 15
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 7
                   totalRecovery: 0
                   _extraPoints:
@@ -3133,6 +3162,7 @@ MonoBehaviour:
             active: 10
             inactive: 30
             recoveryEnd: 0
+            activeWindows: []
             recoveryAmount: 7
             totalRecovery: 0
             _extraPoints:
@@ -3243,6 +3273,7 @@ MonoBehaviour:
                   active: 29
                   inactive: 41
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -3318,6 +3349,7 @@ MonoBehaviour:
                   active: 11
                   inactive: 15
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 14
                   totalRecovery: 0
                   _extraPoints:
@@ -3427,6 +3459,7 @@ MonoBehaviour:
                   active: 9
                   inactive: 15
                   recoveryEnd: 0
+                  activeWindows: []
                   recoveryAmount: 7
                   totalRecovery: 0
                   _extraPoints:
@@ -3538,6 +3571,7 @@ MonoBehaviour:
           active: 4
           inactive: 9
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints: []
@@ -3613,6 +3647,7 @@ MonoBehaviour:
           active: 18
           inactive: 25
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints:
@@ -3722,6 +3757,7 @@ MonoBehaviour:
           active: 19
           inactive: 25
           recoveryEnd: 0
+          activeWindows: []
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints:
@@ -3839,6 +3875,7 @@ MonoBehaviour:
               active: 15
               inactive: 22
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -3946,6 +3983,7 @@ MonoBehaviour:
               active: 11
               inactive: 17
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints:
@@ -4053,6 +4091,7 @@ MonoBehaviour:
               active: 17
               inactive: 24
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -4166,6 +4205,7 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -4239,6 +4279,7 @@ MonoBehaviour:
               active: 10
               inactive: 16
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints:
@@ -4346,6 +4387,7 @@ MonoBehaviour:
               active: 12
               inactive: 17
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints:
@@ -4459,6 +4501,7 @@ MonoBehaviour:
               active: 10
               inactive: 15
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -4566,6 +4609,7 @@ MonoBehaviour:
               active: 11
               inactive: 16
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -4673,6 +4717,7 @@ MonoBehaviour:
               active: 8
               inactive: 14
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -4786,6 +4831,7 @@ MonoBehaviour:
               active: 11
               inactive: 14
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -4859,6 +4905,7 @@ MonoBehaviour:
               active: 10
               inactive: 15
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints:
@@ -4966,6 +5013,7 @@ MonoBehaviour:
               active: 25
               inactive: 31
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -5079,6 +5127,7 @@ MonoBehaviour:
               active: 12
               inactive: 16
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints:
@@ -5186,6 +5235,7 @@ MonoBehaviour:
               active: 15
               inactive: 37
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 2
               totalRecovery: 0
               _extraPoints:
@@ -5293,6 +5343,7 @@ MonoBehaviour:
               active: 13
               inactive: 19
               recoveryEnd: 25
+              activeWindows: []
               recoveryAmount: 6
               totalRecovery: 0
               _extraPoints:
@@ -5407,6 +5458,7 @@ MonoBehaviour:
               active: 12
               inactive: 18
               recoveryEnd: 29
+              activeWindows: []
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -5520,6 +5572,7 @@ MonoBehaviour:
               active: 15
               inactive: 22
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -5633,6 +5686,7 @@ MonoBehaviour:
               active: 13
               inactive: 18
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -5746,6 +5800,7 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 12
+              activeWindows: []
               recoveryAmount: 2
               totalRecovery: 0
               _extraPoints: []
@@ -5825,6 +5880,7 @@ MonoBehaviour:
               active: 12
               inactive: 23
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 3
               totalRecovery: 0
               _extraPoints:
@@ -5939,6 +5995,7 @@ MonoBehaviour:
               active: 6
               inactive: 10
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -6018,6 +6075,7 @@ MonoBehaviour:
               active: 12
               inactive: 18
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -6131,6 +6189,7 @@ MonoBehaviour:
               active: 5
               inactive: 9
               recoveryEnd: 16
+              activeWindows: []
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -6244,6 +6303,7 @@ MonoBehaviour:
               active: 15
               inactive: 21
               recoveryEnd: 36
+              activeWindows: []
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints:
@@ -6357,6 +6417,7 @@ MonoBehaviour:
               active: 5
               inactive: 10
               recoveryEnd: 12
+              activeWindows: []
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -6436,6 +6497,7 @@ MonoBehaviour:
               active: 11
               inactive: 19
               recoveryEnd: 22
+              activeWindows: []
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -6515,6 +6577,7 @@ MonoBehaviour:
               active: 5
               inactive: 10
               recoveryEnd: 14
+              activeWindows: []
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -6594,6 +6657,7 @@ MonoBehaviour:
               active: 11
               inactive: 15
               recoveryEnd: 0
+              activeWindows: []
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -6673,6 +6737,7 @@ MonoBehaviour:
               active: 3
               inactive: 8
               recoveryEnd: 25
+              activeWindows: []
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -6752,6 +6817,7 @@ MonoBehaviour:
               active: 3
               inactive: 8
               recoveryEnd: 25
+              activeWindows: []
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -6832,6 +6898,9 @@ MonoBehaviour:
               active: 12
               inactive: 16
               recoveryEnd: 27
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 16
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -6877,6 +6946,9 @@ MonoBehaviour:
         active: 3
         inactive: 65
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 3
+          inactiveFrame: 65
         recoveryAmount: 20
         totalRecovery: 0
         _extraPoints:
@@ -7043,6 +7115,9 @@ MonoBehaviour:
               active: 12
               inactive: 16
               recoveryEnd: 27
+              activeWindows:
+              - activeFrame: 12
+                inactiveFrame: 16
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -7085,9 +7160,12 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 2
+        active: 3
         inactive: 60
         recoveryEnd: 0
+        activeWindows:
+        - activeFrame: 3
+          inactiveFrame: 60
         recoveryAmount: 25
         totalRecovery: 0
         _extraPoints:
@@ -7348,6 +7426,7 @@ MonoBehaviour:
         active: 0
         inactive: 0
         recoveryEnd: 0
+        activeWindows: []
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints: []

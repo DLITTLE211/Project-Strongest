@@ -225,8 +225,13 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks.Add(new RequiredCallback(() => OnInit(curBase), _frameData.init, init));
         }
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnStartup(curBase), _frameData.startup, startup));
-        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.active, active));
-        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.inactive, inactive));
+        //requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.active, active));
+        //requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.inactive, inactive));
+        for (int i = 0; i < _frameData.activeWindows.Count; i++) 
+        {
+            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.activeWindows[i].activeFrame, active));
+            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.activeWindows[i].inactiveFrame, inactive));
+        }
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecovEnd(), _frameData.recoveryEnd, lastFrame));
     }
     public void AddCustomCallbacks(AttackHandler_Attack throwAttackCallbacks = null)
@@ -451,6 +456,7 @@ public class HitCount
 public class FrameData
 {
     public int init, startup, active, inactive, recoveryEnd;
+    public List<ActiveFrameWindows> activeWindows;
     [Range(1, 100)] public int recoveryAmount;
     public int totalRecovery;
     public List<ExtraFrameHitPoints> _extraPoints;
@@ -477,6 +483,12 @@ public class FrameData
             }
         }
     }
+}
+[Serializable]
+public class ActiveFrameWindows 
+{
+    public int activeFrame;
+    public int inactiveFrame;
 }
 [Serializable]
 public class RequiredCallback
