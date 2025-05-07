@@ -247,11 +247,11 @@ public class HurtBox : CollisionDetection
 
     public void ReceieveHitBox(HitBox _hitbox, Transform _target, Callback endFunc)
     {
-        currentHitbox = _hitbox;
+        currentHitbox = _hitbox;/*
         if (currentHitProperties != null)
         {
             currentHitProperties = currentHitbox.hitboxProperties;
-            if (currentHitProperties.hitConnected == false)
+            //if (currentHitProperties.hitConnected == false)
             {
                 currentHitProperties = currentHitbox.hitboxProperties;
                 target = _target;
@@ -260,12 +260,12 @@ public class HurtBox : CollisionDetection
             }
         }
         else 
-        {
+        {*/
             currentHitProperties = currentHitbox.hitboxProperties;
             target = _target;
             endingFunction = endFunc;
             FindAttackResponse();
-        }
+        //}
     }
     async void ReceiveCounterData()
     {

@@ -37,8 +37,8 @@ public class FrameMeterHolder
         _frameData = frameData;
         Sequence meterDataSequence = DOTween.Sequence();
         FrameDataMeter[0].SetMeterInformation(_frameData.recoveryEnd, _frameData.startup);
-        FrameDataMeter[1].SetMeterInformation(_frameData.recoveryEnd, _frameData.active);
-        FrameDataMeter[2].SetMeterInformation(_frameData.recoveryEnd, _frameData.inactive);
+        FrameDataMeter[1].SetMeterInformation(_frameData.recoveryEnd, _frameData.activeWindows[0].activeFrame);
+        FrameDataMeter[2].SetMeterInformation(_frameData.recoveryEnd, _frameData.activeWindows[0].inactiveFrame);
         FrameDataMeter[3].SetMeterInformation(_frameData.recoveryEnd, _frameData.recoveryEnd);
         for (int i = 0; i < FrameDataMeter.Count;i++) 
         {
@@ -54,7 +54,7 @@ public class FrameMeterHolder
     }
     public void SetText() 
     {
-        frameText.text = $"Startup Frames: {_frameData.startup}/ Active Frames: {_frameData.active}/ Recovery Frames: -{_frameData.totalRecovery}/ Total Frames: {_frameData.recoveryEnd}";
+        frameText.text = $"Startup Frames: {_frameData.startup}/ Active Frames: {_frameData.activeWindows[0].activeFrame}/ Recovery Frames: -{_frameData.totalRecovery}/ Total Frames: {_frameData.recoveryEnd}";
     }
 }
 [Serializable]

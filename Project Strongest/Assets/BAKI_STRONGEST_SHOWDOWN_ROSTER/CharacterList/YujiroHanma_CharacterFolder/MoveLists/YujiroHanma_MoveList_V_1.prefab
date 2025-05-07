@@ -841,9 +841,9 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 1.045
       attackMainStunValues:
-        hitstunValue: 3
+        hitstunValue: 6
         blockStunValue: 1
-        hitstopValue: 0
+        hitstopValue: 1
         blockStopValue: 0
       hitLevel: 80
       attackHashes: 0
@@ -874,28 +874,28 @@ MonoBehaviour:
         hu_size: {x: 0.85, y: 1.35}
         _frameData:
           init: 0
-          startup: 13
+          startup: 10
           active: 14
           inactive: 96
           recoveryEnd: 0
           activeWindows:
-          - activeFrame: 15
-            inactiveFrame: 18
-          - activeFrame: 23
-            inactiveFrame: 26
-          - activeFrame: 33
-            inactiveFrame: 36
-          - activeFrame: 41
-            inactiveFrame: 44
-          - activeFrame: 49
-            inactiveFrame: 51
-          - activeFrame: 58
+          - activeFrame: 11
+            inactiveFrame: 16
+          - activeFrame: 18
+            inactiveFrame: 23
+          - activeFrame: 25
+            inactiveFrame: 30
+          - activeFrame: 32
+            inactiveFrame: 37
+          - activeFrame: 39
+            inactiveFrame: 43
+          - activeFrame: 45
+            inactiveFrame: 49
+          - activeFrame: 51
+            inactiveFrame: 54
+          - activeFrame: 56
             inactiveFrame: 61
-          - activeFrame: 69
-            inactiveFrame: 72
-          - activeFrame: 78
-            inactiveFrame: 96
-          recoveryAmount: 12
+          recoveryAmount: 1
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -2841,15 +2841,15 @@ MonoBehaviour:
             hu_size: {x: 0.85, y: 1}
             _frameData:
               init: 0
-              startup: 9
+              startup: 7
               active: 10
               inactive: 24
               recoveryEnd: 0
               activeWindows:
-              - activeFrame: 10
-                inactiveFrame: 15
-              - activeFrame: 16
-                inactiveFrame: 24
+              - activeFrame: 9
+                inactiveFrame: 12
+              - activeFrame: 15
+                inactiveFrame: 20
               recoveryAmount: 13
               totalRecovery: 0
               _extraPoints: []

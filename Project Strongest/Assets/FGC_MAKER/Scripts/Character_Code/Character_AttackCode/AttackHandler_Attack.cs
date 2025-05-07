@@ -44,6 +44,9 @@ public class AttackHandler_Attack : AttackHandler_Base
     bool inactive;
     bool lastFrame;
     bool isFollowUpAttack;
+
+    int currentHitIndex;
+    int hitCountTotal;
     Character_Face_Direction currentFacingDirection;
     public void SetIsFollowUpAttack(bool state) 
     {
@@ -148,29 +151,35 @@ public class AttackHandler_Attack : AttackHandler_Base
         extendedHitBox.ActivateHurtbox(extendedHitBox);
         extendedHitBox.SetHurtboxState(extendedHitBox.huBType);
         _base._cHurtBox.SetHurboxState(extendedHitBox.huBType);
-        HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
     }
     public override void OnActive(Character_Base curBase)
     {
         active = true;
+        _curFrameType = FrameType.Active;
+        HitBox.allowHitCheck = true;
         if (currentFacingDirection != _base.pSide.thisPosition._directionFacing)
         {
             HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
             HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
         }
         HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount, _cAnimator.lastAttack);
+        HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
     }
     public override void OnRecov(Character_Base curBase)
     {
         inactive = true;
-        _curFrameType = FrameType.Recovery; 
-        if (HitBox != null)
+        _curFrameType = FrameType.Recovery;
+        if (currentHitIndex >= hitCountTotal-1) 
         {
-            HitBox.DestroyHitbox(HitBox, extendedHitBox);
-        }
-        else 
-        {
-            _base._cHitboxManager.DisableCurrentHitbox();
+            HitBox.allowHitCheck = false;
+            if (HitBox != null)
+            {
+                HitBox.DestroyHitbox(HitBox, extendedHitBox);
+            }
+            else
+            {
+                _base._cHitboxManager.DisableCurrentHitbox();
+            }
         }
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
         _cAnimator._base._aManager.SetStartNextAttack(true);
@@ -183,6 +192,8 @@ public class AttackHandler_Attack : AttackHandler_Base
                 _base._cHurtBox.SetHurboxState();
             }
         }
+
+        currentHitIndex++;
     }
     public override void OnRecovEnd()
     {
@@ -225,12 +236,10 @@ public class AttackHandler_Attack : AttackHandler_Base
             requiredHitboxCallBacks.Add(new RequiredCallback(() => OnInit(curBase), _frameData.init, init));
         }
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnStartup(curBase), _frameData.startup, startup));
-        //requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.active, active));
-        //requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.inactive, inactive));
         for (int i = 0; i < _frameData.activeWindows.Count; i++) 
         {
-            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.activeWindows[i].activeFrame, active));
-            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.activeWindows[i].inactiveFrame, inactive));
+            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.activeWindows[i].activeFrame, false));
+            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.activeWindows[i].inactiveFrame, false));
         }
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecovEnd(), _frameData.recoveryEnd, lastFrame));
     }
@@ -291,6 +300,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
+        currentHitIndex = 0;
+        hitCountTotal = lastAttack.AttackAnims._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
         while (frameCount < totalFrameTime)
         {
@@ -336,7 +347,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                     Debug.LogError(e.ToString());
                     frameCount = lastAttack.AttackAnims.animLength + 1f;
                     Debug.Log("Null Check");
-                    Debug.Log($"Inactive frame: {lastAttack.AttackAnims._frameData.inactive}");
                     Debug.Log($"Last Attack null?: {lastAttack == null}");
                     Debug.Log($"Inactive bool state: {inactive}");
                     Debug.Break();
@@ -370,6 +380,8 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
+        currentHitIndex = 0;
+        hitCountTotal = customProp._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
         while (frameCount < totalFrameTime)
         {
@@ -419,7 +431,6 @@ public class AttackHandler_Attack : AttackHandler_Base
                     Debug.LogError(e.ToString());
                     frameCount = customProp.animLength + 1f;
                     Debug.Log("Null Check");
-                    Debug.Log($"Inactive frame: {customProp._frameData.inactive}");
                     Debug.Log($"Last Attack null?: {customProp == null}");
                     Debug.Log($"Inactive bool state: {inactive}");
                     Debug.Break();
@@ -455,16 +466,17 @@ public class HitCount
 [Serializable]
 public class FrameData
 {
-    public int init, startup, active, inactive, recoveryEnd;
+    public int init, startup;
     public List<ActiveFrameWindows> activeWindows;
+    public int recoveryEnd;
     [Range(1, 100)] public int recoveryAmount;
     public int totalRecovery;
     public List<ExtraFrameHitPoints> _extraPoints;
     public void SetRecoveryFrames(float sampleRate, float animLength)
     {
         int totalFrames = (int)(Mathf.Ceil(animLength / (1 / sampleRate)));
-        recoveryEnd = inactive + recoveryAmount;
-        totalRecovery = Mathf.Abs(recoveryEnd - inactive);
+        recoveryEnd = activeWindows[activeWindows.Count-1].inactiveFrame + recoveryAmount;
+        totalRecovery = Mathf.Abs(recoveryEnd - activeWindows[activeWindows.Count - 1].inactiveFrame);
         if (_extraPoints.Count > 0)
         {
             for (int i = 0; i < _extraPoints.Count; i++)

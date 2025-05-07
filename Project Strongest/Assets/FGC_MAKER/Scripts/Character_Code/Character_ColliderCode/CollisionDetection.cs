@@ -237,7 +237,6 @@ public class CollisionDetection : MonoBehaviour
     public void ActivateHitbox(HitBox _hitbox, HurtBox hurtbox,string attackName, HitCount _hitCount, Attack_BaseProperties property)
     {
         hurtbox.gameObject.SetActive(true);
-        allowHitCheck = true;
     }
     public void DestroyHitbox(HitBox _hitbox, HurtBox hurtbox = null)
     {
@@ -254,13 +253,14 @@ public class CollisionDetection : MonoBehaviour
 
     public void ClearAdditionalHit(HitBox _hitbox)
     {
-        if(_hitbox != null) 
+        _hitbox.hitboxProperties.hitLanded = false;
+        /*if (_hitbox != null) 
         {
             if(_hitbox.hitboxProperties != null)
             {
                 _hitbox.hitboxProperties.hitLanded = false;
             }
             DestroyHitbox(_hitbox);
-        }
+        }*/
     }
 }

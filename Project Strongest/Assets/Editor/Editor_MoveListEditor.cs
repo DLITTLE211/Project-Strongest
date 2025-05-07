@@ -75,8 +75,6 @@ public class Editor_MoveListEditor : EditorWindow
     private int currentFrame;
     int init;
     int startup;
-    int active;
-    int inactive;
     int recoveryAmount;
     private bool isPlaying = false;
     private double lastTime;
@@ -1325,8 +1323,6 @@ public class Editor_MoveListEditor : EditorWindow
                 DrawTimelineControls();
                 init = (int)EditorGUILayout.Slider("Init:", init, 0f, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
                 startup = (int)EditorGUILayout.Slider("Startup:", startup, init, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-                active = (int)EditorGUILayout.Slider("Active:", active, startup, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
-                inactive = (int)EditorGUILayout.Slider("Inactive:", inactive, active, currentClipLength, GUILayout.Width(500), GUILayout.Height(20));
 
                 ActiveFrameWindow = EditorGUILayout.BeginScrollView(ActiveFrameWindow, GUILayout.Width(510), GUILayout.Height(200));
                 for (int i = 0; i < newAttackAnim._frameData.activeWindows.Count; i++)
@@ -1344,8 +1340,6 @@ public class Editor_MoveListEditor : EditorWindow
                 recoveryAmount = (int)EditorGUILayout.Slider("Recovery Amount:", recoveryAmount, 0f, 100f, GUILayout.Width(500), GUILayout.Height(20));
                 newAttackAnim._frameData.init = init;
                 newAttackAnim._frameData.startup = startup;
-                newAttackAnim._frameData.active = active;
-                newAttackAnim._frameData.inactive = inactive;
                 newAttackAnim._frameData.recoveryAmount = recoveryAmount;
                 FrameData curFrameData = newAttackAnim._frameData;
                 if (curFrameData != null)
@@ -1828,7 +1822,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             Mesh cubeMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
             string modelInPreviewName = $"{characterModel.name}(Clone)";
-            if (currentFrame >= newAttackAnim._frameData.startup && currentFrame <= (newAttackAnim._frameData.inactive+ newAttackAnim._frameData.recoveryAmount))
+            if (currentFrame >= newAttackAnim._frameData.startup && currentFrame <= (newAttackAnim._frameData.activeWindows[newAttackAnim._frameData.activeWindows.Count-1].inactiveFrame + newAttackAnim._frameData.recoveryAmount))
             {
                 Vector3 position = new Vector3(newAttackAnim.hu_placement.x, newAttackAnim.hu_placement.y + 1, newAttackAnim.hu_placement.z);// parent.TransformPoint(newAttackAnim.hu_placement);
                 Vector3 size = new Vector3(newAttackAnim.hu_size.x, newAttackAnim.hu_size.y, 0.02f);
@@ -1839,7 +1833,7 @@ public class Editor_MoveListEditor : EditorWindow
                 DrawWireframeCube(newAttackAnim.hu_placement, size,hurtboxMat);
             }
 
-            if (currentFrame >= newAttackAnim._frameData.active && currentFrame <= newAttackAnim._frameData.inactive)
+            if (currentFrame >= newAttackAnim._frameData.activeWindows[0].activeFrame && currentFrame <= newAttackAnim._frameData.activeWindows[newAttackAnim._frameData.activeWindows.Count - 1].inactiveFrame)
             {
                 Vector3 position = new Vector3(newAttackAnim.hb_placement.x, newAttackAnim.hb_placement.y + 1, newAttackAnim.hb_placement.z);
                 Vector3 size = new Vector3(newAttackAnim.hb_size.x, newAttackAnim.hb_size.y, 0.02f);
@@ -1899,8 +1893,6 @@ public class Editor_MoveListEditor : EditorWindow
                     _currentAnimClip = newAttackAnim.animClip;
                     init = newAttackAnim._frameData.init;
                     startup = newAttackAnim._frameData.startup;
-                    active = newAttackAnim._frameData.active;
-                    inactive = newAttackAnim._frameData.inactive;
                     recoveryAmount = newAttackAnim._frameData.recoveryAmount;
                 }
             }
@@ -1910,32 +1902,8 @@ public class Editor_MoveListEditor : EditorWindow
                 _currentAnimClip = newAttackAnim.animClip;
                 init = newAttackAnim._frameData.init;
                 startup = newAttackAnim._frameData.startup;
-                active = newAttackAnim._frameData.active;
-                inactive = newAttackAnim._frameData.inactive;
                 recoveryAmount = newAttackAnim._frameData.recoveryAmount;
             }
-            /*if (_currentAnimClip != newAttackAnim.animClip)
-            {
-                if (newAttackAnim.animClip != null)
-                {
-                    _currentAnimClip = newAttackAnim.animClip;
-                }
-                else 
-                {
-                    if(_currentAnimClip != null) 
-                    {
-                        newAttackAnim.animClip = _currentAnimClip;
-                    }
-                }
-            }
-            else
-            {
-                if (_currentAnimClip != null)
-                {
-                    newAttackAnim.animClip = _currentAnimClip;
-                }
-            }*/
-
         }
     }
     #endregion
