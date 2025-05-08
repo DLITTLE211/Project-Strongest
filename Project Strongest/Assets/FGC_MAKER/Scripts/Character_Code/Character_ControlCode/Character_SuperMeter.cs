@@ -161,7 +161,8 @@ public class Character_SuperMeter : MonoBehaviour
 
     void SetMeterTierText()
     {
-        meterTierText.text = $"{meterTier}";
+        string meterTierValue = SpriteToTextColorUtility.AppendSpriteName($"{meterTier}", Color.white);
+        meterTierText.text = meterTierValue;
     }
     void AddAmplifier(Amplifiers amp)
     {

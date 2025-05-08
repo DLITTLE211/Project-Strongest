@@ -54,7 +54,7 @@ public class Character_Health : MonoBehaviour
     {
         curProfile = profile;
         _chosenCharacterProfileImage.sprite = profile.CharacterProfileImage;
-        string charName = SpriteToTextColorUtility.AppendSpriteName(($"{profile.CharacterName}"), Color.white);
+        string charName = SpriteToTextColorUtility.AppendSpriteName(($"{profile.CharacterName}").ToUpper(), Color.white);
         _chosenCharacterName.SetText(charName);
         SetStartingHealthValues();
     }
