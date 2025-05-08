@@ -15,7 +15,7 @@ public class Character_ComboCounter : MonoBehaviour
     Tween fadeTextTween;
     Sequence fadeTextOut;
     IEnumerator fadeTextRoutine;
-    [SerializeField] Color32 redColor = new Color32((byte)255f, (byte)69f, (byte)69f, (byte)255f);
+    [SerializeField] Color32 textColor = new Color32((byte)255f, (byte)69f, (byte)69f, (byte)255f);
 
     public int CurrentHitCount
     {
@@ -76,7 +76,7 @@ public class Character_ComboCounter : MonoBehaviour
             fadeTextTween = null;
         }
         CurrentHitCount += 1;
-        UpdateText(redColor);
+        UpdateText(textColor);
 
         DOTween.Complete(comboHolder);
         comboHolder.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -100,12 +100,14 @@ public class Character_ComboCounter : MonoBehaviour
             {
                 _counterText.DOFade(1, 0.05f).OnStart(() =>
                 {
-                    _counterText.text = $"{CurrentHitCount} {hitCount}";
+                    string message = SpriteToTextColorUtility.AppendSpriteName($"{CurrentHitCount} {hitCount}", textColor);
+                    _counterText.text = message;
                 });
             }
             else
             {
-                _counterText.text = $"{CurrentHitCount} {hitCount}";
+                string message = SpriteToTextColorUtility.AppendSpriteName($"{CurrentHitCount} {hitCount}", textColor);
+                _counterText.text = message;
             }
         }
     }
@@ -124,12 +126,17 @@ public class Character_ComboCounter : MonoBehaviour
         {
             if (_counterText.color.a != 255)
             {
-                _QualityText.DOFade(1, 0.05f).OnStart(() => { _QualityText.text = $"{qualityType} Combo!!"; });
+                _QualityText.DOFade(1, 0.05f).OnStart(() => 
+                {
+                    string message = SpriteToTextColorUtility.AppendSpriteName(($"{qualityType} Combo!!").ToUpper(), Color.white);
+                    _QualityText.text = message;
+                });
             }
 
             else 
-            { 
-                _QualityText.text = $"{qualityType} Combo!!"; 
+            {
+                string message = SpriteToTextColorUtility.AppendSpriteName(($"{qualityType} Combo!!").ToUpper(), Color.white);
+                _QualityText.text = message; 
             }
         }
     }

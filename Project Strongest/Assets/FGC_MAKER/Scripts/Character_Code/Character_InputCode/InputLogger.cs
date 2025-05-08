@@ -22,11 +22,11 @@ public class InputLogger
         textObject[0].SetText(stringMessage);
         if (numSize) 
         {
-            textObject[0].fontSize = 16;
+            textObject[0].fontSize = 17;
         }
         else 
         {
-            textObject[0].fontSize = 20;
+            textObject[0].fontSize = 22;
         }
     }
 
@@ -37,16 +37,17 @@ public class InputLogger
         {
             stringMessage = textObject[i - 1].text;
             textObject[i].SetText(stringMessage);
+            textObject[i].fontSize = textObject[i - 1].fontSize;
         }
         stringMessage = SpriteToTextColorUtility.AppendSpriteName($"{itemInfo[0]}", Color.white);
         textObject[0].SetText(stringMessage);
         if (numSize)
         {
-            textObject[0].fontSize = 16;
+            textObject[0].fontSize = 17;
         }
         else
         {
-            textObject[0].fontSize = 20;
+            textObject[0].fontSize = 22;
         }
     }
 }

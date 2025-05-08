@@ -25,7 +25,8 @@ public class ControllerWidgetHandler : MonoBehaviour
             return;
         }
         prevInt = aKlocation;
-        numText.text = aKlocation.ToString();
+        string valueMessage = SpriteToTextColorUtility.AppendSpriteName($"{aKlocation}", numText.color);
+        numText.text = valueMessage;
         SetKnobPos(axisKnobLocations[prevInt - 1]);
     }
     public void SetKnobPos(Vector2 newPos) 
@@ -100,7 +101,7 @@ public class ControllerWidgetHandler : MonoBehaviour
 
     public void SetButtonHold(int i) 
     {
-        buttonList[i].color = Color.gray;
+        buttonList[i].color = Color.grey;
     }
 
     public void ReleasedButton(int i) 

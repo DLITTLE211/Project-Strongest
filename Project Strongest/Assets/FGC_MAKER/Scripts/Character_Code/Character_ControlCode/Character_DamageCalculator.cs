@@ -289,6 +289,7 @@ public class Character_DamageCalculator : MonoBehaviour
             _damageText.text = "";
             return;
         }
-        _damageText.text = $"Current Damage: ({damageTextAmount})";
+        string message = SpriteToTextColorUtility.AppendSpriteName(($"Damage ({damageTextAmount})").ToUpper(),Color.white);
+        _damageText.text = message;
     }
 }
