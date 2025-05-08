@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class Character_Health : MonoBehaviour
 {
     [SerializeField] private MainGame_HealthDisparityChecker _disparityChecker;
     [SerializeField] private Character_Base _base;
     [SerializeField] private Image _chosenCharacterProfileImage;
+    [SerializeField] private TMP_Text _chosenCharacterName;
     public MainMeterController health_Main;
     public MainMeterController health_Recov;
     public Character_StunController stunController;
@@ -52,6 +54,8 @@ public class Character_Health : MonoBehaviour
     {
         curProfile = profile;
         _chosenCharacterProfileImage.sprite = profile.CharacterProfileImage;
+        string charName = SpriteToTextColorUtility.AppendSpriteName(($"{profile.CharacterName}"), Color.white);
+        _chosenCharacterName.SetText(charName);
         SetStartingHealthValues();
     }
     public void SetStartingHealthValues() 

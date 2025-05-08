@@ -26,7 +26,8 @@ public class Character_AmplifyController : MonoBehaviour
             _amplifySlider.value = 0f;
             chosenAmplifier = _chosenAmplifier;
             chosenAmplifier._base = _base;
-            _amplifyText.text = $"{_chosenAmplifier.amplifier.ToString()}";
+            string message = SpriteToTextColorUtility.AppendSpriteName(($"{_chosenAmplifier.amplifier.ToString()}").ToUpper(),Color.white);
+            _amplifyText.text = message;
             allowFill = true;
             _chosenAmplifier.SetFillVariables();
             _amplifySlider.targetGraphic.color = chosenAmplifier.meterColor;
