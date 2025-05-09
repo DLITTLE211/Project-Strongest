@@ -60,9 +60,9 @@ public class Character_Health : MonoBehaviour
     }
     public void SetStartingHealthValues() 
     {
-        health_Main.SetStartMeterValues(curProfile.MaxHealth);
-        health_Recov.SetStartMeterValues(curProfile.MaxHealth);
-        stunController.stunMeter.SetStartMeterValues(curProfile.MaxStunValue);
+        health_Main.SetStartMeterValues(curProfile.MaxHealth, curProfile.MaxHealth);
+        health_Recov.SetStartMeterValues(curProfile.MaxHealth, curProfile.MaxHealth);
+        stunController.stunMeter.SetStartMeterValues(curProfile.MaxStunValue,0);
         recoverHealthRate = curProfile.HealthRegenRate;
     }
     public void SetHealthAndStunOnSceneReset(float currentHealthPercent, float currentStunValue) 

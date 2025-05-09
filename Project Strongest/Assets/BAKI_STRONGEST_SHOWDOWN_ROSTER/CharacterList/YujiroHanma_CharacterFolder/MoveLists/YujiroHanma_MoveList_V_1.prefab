@@ -97,12 +97,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 1
-          active: 1
-          inactive: 235
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 1
             inactiveFrame: 235
+          recoveryEnd: 0
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints: []
@@ -183,12 +181,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 24
-          active: 25
-          inactive: 30
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 25
             inactiveFrame: 30
+          recoveryEnd: 0
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints: []
@@ -228,12 +224,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 1
-        inactive: 300
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 1
           inactiveFrame: 300
+        recoveryEnd: 0
         recoveryAmount: 50
         totalRecovery: 0
         _extraPoints:
@@ -640,12 +634,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 16
-          active: 17
-          inactive: 25
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 17
             inactiveFrame: 25
+          recoveryEnd: 0
           recoveryAmount: 50
           totalRecovery: 0
           _extraPoints: []
@@ -685,12 +677,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 1
-        inactive: 80
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 1
           inactiveFrame: 80
+        recoveryEnd: 0
         recoveryAmount: 30
         totalRecovery: 0
         _extraPoints:
@@ -758,9 +748,9 @@ MonoBehaviour:
       counterHitDamageMult: 1
       attackMainStunValues:
         hitstunValue: 25
-        blockStunValue: 8
+        blockStunValue: 6
         hitstopValue: 10
-        blockStopValue: 2
+        blockStopValue: 1
       hitLevel: 72
       attackHashes: 0
       _meterRequirement: 1
@@ -791,12 +781,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 29
-          active: 30
-          inactive: 37
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 30
             inactiveFrame: 37
+          recoveryEnd: 0
           recoveryAmount: 20
           totalRecovery: 0
           _extraPoints: []
@@ -842,7 +830,7 @@ MonoBehaviour:
       counterHitDamageMult: 1.045
       attackMainStunValues:
         hitstunValue: 6
-        blockStunValue: 1
+        blockStunValue: 0.5
         hitstopValue: 1
         blockStopValue: 0
       hitLevel: 80
@@ -875,9 +863,6 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 10
-          active: 14
-          inactive: 96
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 11
             inactiveFrame: 16
@@ -895,7 +880,8 @@ MonoBehaviour:
             inactiveFrame: 54
           - activeFrame: 56
             inactiveFrame: 61
-          recoveryAmount: 1
+          recoveryEnd: 0
+          recoveryAmount: 4
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -974,12 +960,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 13
-          active: 14
-          inactive: 20
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 14
             inactiveFrame: 20
+          recoveryEnd: 0
           recoveryAmount: 11
           totalRecovery: 0
           _extraPoints: []
@@ -1019,12 +1003,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 1
-        inactive: 38
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 1
           inactiveFrame: 38
+        recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -1124,12 +1106,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 14
-          active: 15
-          inactive: 110
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 15
             inactiveFrame: 110
+          recoveryEnd: 0
           recoveryAmount: 20
           totalRecovery: 0
           _extraPoints:
@@ -1235,12 +1215,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 19
-          active: 20
-          inactive: 170
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 20
             inactiveFrame: 170
+          recoveryEnd: 0
           recoveryAmount: 19
           totalRecovery: 0
           _extraPoints: []
@@ -1320,12 +1298,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 0
-                  active: 1
-                  inactive: 3
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 1
                     inactiveFrame: 3
+                  recoveryEnd: 0
                   recoveryAmount: 11
                   totalRecovery: 0
                   _extraPoints: []
@@ -1373,9 +1349,9 @@ MonoBehaviour:
         counterHitDamageMult: 1.045
         attackMainStunValues:
           hitstunValue: 12
-          blockStunValue: 7
+          blockStunValue: 4
           hitstopValue: 4
-          blockStopValue: 1
+          blockStopValue: 0
         hitLevel: 72
         attackHashes: 0
         _meterRequirement: 0
@@ -1406,12 +1382,10 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 15
-            active: 16
-            inactive: 24
-            recoveryEnd: 0
             activeWindows:
             - activeFrame: 16
               inactiveFrame: 24
+            recoveryEnd: 0
             recoveryAmount: 12
             totalRecovery: 0
             _extraPoints: []
@@ -1452,9 +1426,9 @@ MonoBehaviour:
               counterHitDamageMult: 1.035
               attackMainStunValues:
                 hitstunValue: 14
-                blockStunValue: 6
+                blockStunValue: 5
                 hitstopValue: 3
-                blockStopValue: 1
+                blockStopValue: 0
               hitLevel: 72
               attackHashes: 0
               _meterRequirement: 0
@@ -1485,12 +1459,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 13
-                  active: 14
-                  inactive: 20
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 14
                     inactiveFrame: 20
+                  recoveryEnd: 0
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -1563,12 +1535,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 20
-                  active: 21
-                  inactive: 27
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 21
                     inactiveFrame: 27
+                  recoveryEnd: 0
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints: []
@@ -1634,10 +1604,8 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
-            recoveryEnd: 0
             activeWindows: []
+            recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -1699,10 +1667,8 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
-            recoveryEnd: 0
             activeWindows: []
+            recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -1778,12 +1744,10 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 1
-            active: 1
-            inactive: 110
-            recoveryEnd: 0
             activeWindows:
             - activeFrame: 1
               inactiveFrame: 110
+            recoveryEnd: 0
             recoveryAmount: 69
             totalRecovery: 0
             _extraPoints: []
@@ -1857,12 +1821,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 12
-                  active: 13
-                  inactive: 20
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 13
                     inactiveFrame: 20
+                  recoveryEnd: 0
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -1935,12 +1897,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 12
-                  active: 13
-                  inactive: 20
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 13
                     inactiveFrame: 20
+                  recoveryEnd: 0
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints: []
@@ -2013,12 +1973,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 19
-                  active: 20
-                  inactive: 25
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 20
                     inactiveFrame: 25
+                  recoveryEnd: 0
                   recoveryAmount: 12
                   totalRecovery: 0
                   _extraPoints: []
@@ -2084,10 +2042,8 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 12
-            active: 14
-            inactive: 23
-            recoveryEnd: 0
             activeWindows: []
+            recoveryEnd: 0
             recoveryAmount: 13
             totalRecovery: 0
             _extraPoints: []
@@ -2149,10 +2105,8 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
-            recoveryEnd: 0
             activeWindows: []
+            recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -2214,10 +2168,8 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
-            recoveryEnd: 0
             activeWindows: []
+            recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
             _extraPoints: []
@@ -2255,7 +2207,7 @@ MonoBehaviour:
       counterHitDamageMult: 1.025
       attackMainStunValues:
         hitstunValue: 15
-        blockStunValue: 8
+        blockStunValue: 5
         hitstopValue: 4
         blockStopValue: 1
       hitLevel: 96
@@ -2288,12 +2240,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 13
-          active: 14
-          inactive: 20
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 14
             inactiveFrame: 20
+          recoveryEnd: 0
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints: []
@@ -2374,12 +2324,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 14
-              inactive: 19
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 14
                 inactiveFrame: 19
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2393,7 +2341,7 @@ MonoBehaviour:
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 1.95
-            Block_HKB_Level: 2
+            Block_HKB_Level: 0
             Block_Value: 1
           VerticalKB_Data:
             Hit_VKB_Level: 0
@@ -2449,13 +2397,11 @@ MonoBehaviour:
             hu_size: {x: 1, y: 1}
             _frameData:
               init: 0
-              startup: 13
-              active: 14
-              inactive: 20
-              recoveryEnd: 0
+              startup: 11
               activeWindows:
-              - activeFrame: 14
-                inactiveFrame: 20
+              - activeFrame: 12
+                inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -2526,12 +2472,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 15
-              active: 16
-              inactive: 23
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 16
                 inactiveFrame: 23
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2608,12 +2552,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 6
-              active: 7
-              inactive: 14
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 7
                 inactiveFrame: 14
+              recoveryEnd: 0
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -2683,13 +2625,11 @@ MonoBehaviour:
             hu_size: {x: 1, y: 1.85}
             _frameData:
               init: 0
-              startup: 10
-              active: 11
-              inactive: 18
-              recoveryEnd: 0
+              startup: 7
               activeWindows:
-              - activeFrame: 11
-                inactiveFrame: 18
+              - activeFrame: 8
+                inactiveFrame: 12
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -2760,12 +2700,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 20
-              active: 21
-              inactive: 28
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 21
                 inactiveFrame: 28
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2809,9 +2747,9 @@ MonoBehaviour:
           counterHitDamageMult: 1
           attackMainStunValues:
             hitstunValue: 12
-            blockStunValue: 9
+            blockStunValue: 5
             hitstopValue: 3
-            blockStopValue: 2
+            blockStopValue: 1
           hitLevel: 66
           attackHashes: 0
           _meterRequirement: 0
@@ -2842,14 +2780,12 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 7
-              active: 10
-              inactive: 24
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 9
                 inactiveFrame: 12
               - activeFrame: 15
                 inactiveFrame: 20
+              recoveryEnd: 0
               recoveryAmount: 13
               totalRecovery: 0
               _extraPoints: []
@@ -2887,9 +2823,9 @@ MonoBehaviour:
           counterHitDamageMult: 1.035
           attackMainStunValues:
             hitstunValue: 12
-            blockStunValue: 5
+            blockStunValue: 8
             hitstopValue: 2
-            blockStopValue: 0
+            blockStopValue: 1
           hitLevel: 68
           attackHashes: 0
           _meterRequirement: 0
@@ -2920,12 +2856,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -2996,12 +2930,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 14
-              inactive: 20
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 14
                 inactiveFrame: 20
+              recoveryEnd: 0
               recoveryAmount: 18
               totalRecovery: 0
               _extraPoints: []
@@ -3016,7 +2948,7 @@ MonoBehaviour:
             Hit_HKB_Level: 2
             Hit_Value: 5.4
             Block_HKB_Level: 0
-            Block_Value: 2.15
+            Block_Value: 3.1
           VerticalKB_Data:
             Hit_VKB_Level: 0
             Hit_Value: 4
@@ -3078,12 +3010,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 11
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 6
                 inactiveFrame: 11
+              recoveryEnd: 0
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -3154,12 +3084,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints: []
@@ -3197,9 +3125,9 @@ MonoBehaviour:
           counterHitDamageMult: 1
           attackMainStunValues:
             hitstunValue: 30
-            blockStunValue: 13
+            blockStunValue: 30
             hitstopValue: 7
-            blockStopValue: 4
+            blockStopValue: 15
           hitLevel: 80
           attackHashes: 0
           _meterRequirement: 0
@@ -3230,12 +3158,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 36
-              active: 37
-              inactive: 45
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 37
                 inactiveFrame: 45
+              recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -3280,9 +3206,9 @@ MonoBehaviour:
           counterHitDamageMult: 1.35
           attackMainStunValues:
             hitstunValue: 20
-            blockStunValue: 14
+            blockStunValue: 10
             hitstopValue: 8
-            blockStopValue: 5
+            blockStopValue: 3
           hitLevel: 96
           attackHashes: 0
           _meterRequirement: 0
@@ -3313,12 +3239,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 19
-              active: 20
-              inactive: 28
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 20
                 inactiveFrame: 28
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -3362,7 +3286,7 @@ MonoBehaviour:
           counterHitDamageMult: 1.025
           attackMainStunValues:
             hitstunValue: 12
-            blockStunValue: 7
+            blockStunValue: 6
             hitstopValue: 4
             blockStopValue: 1
           hitLevel: 68
@@ -3395,12 +3319,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 13
-              inactive: 19
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 13
                 inactiveFrame: 19
+              recoveryEnd: 0
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints: []
@@ -3477,12 +3399,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -3526,9 +3446,9 @@ MonoBehaviour:
           counterHitDamageMult: 1.025
           attackMainStunValues:
             hitstunValue: 20
-            blockStunValue: 14
+            blockStunValue: 8
             hitstopValue: 7
-            blockStopValue: 3
+            blockStopValue: 2
           hitLevel: 320
           attackHashes: 0
           _meterRequirement: 0
@@ -3559,12 +3479,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 14
-              inactive: 20
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 14
                 inactiveFrame: 20
+              recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -3608,9 +3526,9 @@ MonoBehaviour:
           counterHitDamageMult: 1
           attackMainStunValues:
             hitstunValue: 8
-            blockStunValue: 8
+            blockStunValue: 5
             hitstopValue: 3
-            blockStopValue: 2
+            blockStopValue: 1
           hitLevel: 66
           attackHashes: 0
           _meterRequirement: 0
@@ -3641,12 +3559,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 17
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 17
+              recoveryEnd: 0
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -3724,12 +3640,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 10
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 6
                 inactiveFrame: 10
+              recoveryEnd: 0
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -3773,9 +3687,9 @@ MonoBehaviour:
           counterHitDamageMult: 1.035
           attackMainStunValues:
             hitstunValue: 10
-            blockStunValue: 6
+            blockStunValue: 5
             hitstopValue: 5
-            blockStopValue: 2
+            blockStopValue: 1
           hitLevel: 68
           attackHashes: 0
           _meterRequirement: 0
@@ -3806,12 +3720,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 19
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 19
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -3888,12 +3800,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 4
-              active: 5
-              inactive: 9
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 5
                 inactiveFrame: 9
+              recoveryEnd: 0
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints: []
@@ -3937,9 +3847,9 @@ MonoBehaviour:
           counterHitDamageMult: 1.025
           attackMainStunValues:
             hitstunValue: 9
-            blockStunValue: 4
+            blockStunValue: 1
             hitstopValue: 3
-            blockStopValue: 3
+            blockStopValue: 2
           hitLevel: 72
           attackHashes: 0
           _meterRequirement: 0
@@ -3970,12 +3880,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 16
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 16
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -4052,12 +3960,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 6
-              active: 7
-              inactive: 13
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 7
                 inactiveFrame: 13
+              recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -4134,12 +4040,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 8
-              active: 10
-              inactive: 19
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 19
+              recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -4216,12 +4120,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 16
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 16
+              recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints: []
@@ -4298,12 +4200,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 14
-              inactive: 20
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 14
                 inactiveFrame: 20
+              recoveryEnd: 0
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -4618,12 +4518,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 1
-              active: 3
-              inactive: 7
-              recoveryEnd: 25
               activeWindows:
               - activeFrame: 3
                 inactiveFrame: 7
+              recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -4700,12 +4598,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 1
-              active: 3
-              inactive: 7
-              recoveryEnd: 25
               activeWindows:
               - activeFrame: 3
                 inactiveFrame: 7
+              recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -4783,12 +4679,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 14
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 14
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -4831,12 +4725,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 3
-        inactive: 120
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 3
           inactiveFrame: 120
+        recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -4932,12 +4824,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 14
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 14
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints: []
@@ -4980,12 +4870,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 3
-        inactive: 120
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 3
           inactiveFrame: 120
+        recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -5107,10 +4995,8 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 0
-        inactive: 0
-        recoveryEnd: 0
         activeWindows: []
+        recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints: []

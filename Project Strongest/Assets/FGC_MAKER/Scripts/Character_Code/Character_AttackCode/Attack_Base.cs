@@ -95,10 +95,10 @@ public class Attack_StunValues
 {
     [Header("Stun Values")]
     [Range(1, 500)] public int hitstunValue;
-    [Range(0, 50)] public int blockStunValue;
+    [Range(0, 50)] public float blockStunValue;
     [Header("Stop Values")]
     [Range(0, 100)] public int hitstopValue;
-    [Range(0, 10)] public int blockStopValue;
+    [Range(0, 50)] public int blockStopValue;
 }
 
 [Serializable]

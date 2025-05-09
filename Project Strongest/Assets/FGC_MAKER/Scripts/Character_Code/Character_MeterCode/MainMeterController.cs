@@ -9,12 +9,12 @@ public class MainMeterController
     public Slider meterSlider;
     public float startValue,currentValue;
     public float maxValue;
-    public void SetStartMeterValues(float value)
+    public void SetStartMeterValues(float _maxValue, float _startValue)
     {
-        startValue = value;
-        currentValue = startValue;
-        maxValue = startValue;
-        meterSlider.maxValue = startValue;
+        startValue = _startValue;
+        currentValue = _startValue;
+        maxValue = _maxValue;
+        meterSlider.maxValue = maxValue;
         meterSlider.value = currentValue;
 
     }

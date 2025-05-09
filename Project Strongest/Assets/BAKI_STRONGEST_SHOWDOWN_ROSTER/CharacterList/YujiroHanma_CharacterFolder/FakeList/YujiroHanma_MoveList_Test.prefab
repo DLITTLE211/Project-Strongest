@@ -97,8 +97,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 1
-          active: 1
-          inactive: 235
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 0
           totalRecovery: 0
@@ -126,6 +125,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: '"Dress"'
     attackInput:
@@ -179,8 +179,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 30
-          active: 31
-          inactive: 38
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 15
           totalRecovery: 0
@@ -221,8 +220,7 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 1
-        inactive: 370
+        activeWindows: []
         recoveryEnd: 0
         recoveryAmount: 5
         totalRecovery: 0
@@ -576,6 +574,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: The Crying Demon
     attackInput:
@@ -629,8 +628,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 16
-          active: 17
-          inactive: 25
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 50
           totalRecovery: 0
@@ -671,8 +669,7 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 1
-        inactive: 137
+        activeWindows: []
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
@@ -720,6 +717,7 @@ MonoBehaviour:
     finalAttackButton: 48
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   - specialMoveName: Out of My Way!!
     attackInput:
@@ -773,8 +771,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 39
-          active: 40
-          inactive: 45
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 15
           totalRecovery: 0
@@ -802,6 +799,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   CommandThrows:
   - specialMoveName: Cutter Snatch (Anti-Air)
@@ -854,8 +852,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 13
-          active: 14
-          inactive: 20
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 11
           totalRecovery: 0
@@ -896,8 +893,7 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 1
-        inactive: 38
+        activeWindows: []
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
@@ -945,6 +941,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   CounterAttacks:
   - specialMoveName: Demon Aura (Counter)
@@ -997,8 +994,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 20
-          active: 20
-          inactive: 150
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 28
           totalRecovery: 0
@@ -1060,6 +1056,7 @@ MonoBehaviour:
     finalAttackButton: 0
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
+    timeInAttackState: 0
     currentCustomAnim: 0
   stanceSpecials:
   - StanceSpecialAttack_Name: 5 Second Punch
@@ -1104,8 +1101,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 40
-          active: 41
-          inactive: 170
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 10
           totalRecovery: 0
@@ -1186,8 +1182,7 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 0
-                  active: 1
-                  inactive: 10
+                  activeWindows: []
                   recoveryEnd: 0
                   recoveryAmount: 11
                   totalRecovery: 0
@@ -1269,8 +1264,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 15
-            active: 16
-            inactive: 24
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 12
             totalRecovery: 0
@@ -1345,8 +1339,7 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 0
-                  active: 0
-                  inactive: 0
+                  activeWindows: []
                   recoveryEnd: 0
                   recoveryAmount: 0
                   totalRecovery: 0
@@ -1420,8 +1413,7 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 0
-                  active: 0
-                  inactive: 0
+                  activeWindows: []
                   recoveryEnd: 0
                   recoveryAmount: 0
                   totalRecovery: 0
@@ -1488,8 +1480,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
@@ -1552,8 +1543,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
@@ -1630,8 +1620,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 1
-            active: 1
-            inactive: 165
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 10
             totalRecovery: 0
@@ -1706,8 +1695,7 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 12
-                  active: 13
-                  inactive: 20
+                  activeWindows: []
                   recoveryEnd: 0
                   recoveryAmount: 10
                   totalRecovery: 0
@@ -1781,8 +1769,7 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 12
-                  active: 13
-                  inactive: 20
+                  activeWindows: []
                   recoveryEnd: 0
                   recoveryAmount: 15
                   totalRecovery: 0
@@ -1856,8 +1843,7 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 19
-                  active: 20
-                  inactive: 25
+                  activeWindows: []
                   recoveryEnd: 0
                   recoveryAmount: 12
                   totalRecovery: 0
@@ -1924,8 +1910,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 12
-            active: 14
-            inactive: 23
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 13
             totalRecovery: 0
@@ -1988,8 +1973,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
@@ -2052,8 +2036,7 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 0
-            active: 0
-            inactive: 0
+            activeWindows: []
             recoveryEnd: 0
             recoveryAmount: 0
             totalRecovery: 0
@@ -2125,8 +2108,7 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 13
-          active: 16
-          inactive: 24
+          activeWindows: []
           recoveryEnd: 0
           recoveryAmount: 10
           totalRecovery: 0
@@ -2208,8 +2190,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 14
-              inactive: 19
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
@@ -2281,8 +2262,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 14
-              inactive: 20
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 11
               totalRecovery: 0
@@ -2354,8 +2334,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 15
-              active: 16
-              inactive: 23
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
@@ -2433,8 +2412,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 6
-              active: 7
-              inactive: 14
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 8
               totalRecovery: 0
@@ -2506,8 +2484,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 13
-              inactive: 20
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
@@ -2579,8 +2556,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 25
-              active: 27
-              inactive: 35
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
@@ -2625,9 +2601,9 @@ MonoBehaviour:
           counterHitDamageMult: 1
           attackMainStunValues:
             hitstunValue: 16
-            blockStunValue: 9
+            blockStunValue: 6
             hitstopValue: 4
-            blockStopValue: 2
+            blockStopValue: 1
           hitLevel: 66
           attackHashes: 0
           _meterRequirement: 0
@@ -2658,8 +2634,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 24
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 13
               totalRecovery: 0
@@ -2731,8 +2706,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 18
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
@@ -2804,8 +2778,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 16
-              active: 17
-              inactive: 24
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 18
               totalRecovery: 0
@@ -2883,8 +2856,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 11
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 9
               totalRecovery: 0
@@ -2956,8 +2928,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 13
-              inactive: 20
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 15
               totalRecovery: 0
@@ -3029,8 +3000,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 36
-              active: 37
-              inactive: 45
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
@@ -3109,8 +3079,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 19
-              active: 20
-              inactive: 28
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
@@ -3188,8 +3157,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 13
-              inactive: 19
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 15
               totalRecovery: 0
@@ -3267,8 +3235,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 18
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
@@ -3346,8 +3313,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 14
-              inactive: 20
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
@@ -3425,8 +3391,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 17
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 8
               totalRecovery: 0
@@ -3505,8 +3470,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 10
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 8
               totalRecovery: 0
@@ -3584,8 +3548,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -3663,8 +3626,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -3742,8 +3704,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -3821,8 +3782,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -3900,8 +3860,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -3979,8 +3938,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -4058,8 +4016,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 0
-              active: 0
-              inactive: 0
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 0
               totalRecovery: 0
@@ -4137,8 +4094,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 1
-              active: 3
-              inactive: 8
+              activeWindows: []
               recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
@@ -4216,8 +4172,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 1
-              active: 3
-              inactive: 8
+              activeWindows: []
               recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
@@ -4296,8 +4251,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 14
-              inactive: 18
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
@@ -4341,8 +4295,7 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 3
-        inactive: 120
+        activeWindows: []
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
@@ -4439,8 +4392,7 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 14
-              inactive: 18
+              activeWindows: []
               recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
@@ -4484,8 +4436,7 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 3
-        inactive: 120
+        activeWindows: []
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
@@ -4608,8 +4559,7 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 0
-        inactive: 0
+        activeWindows: []
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
