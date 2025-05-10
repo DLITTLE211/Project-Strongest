@@ -23,7 +23,6 @@ public class State_BlockReact : BaseState
 
     public override void OnExit()
     {
-       
         base.OnExit();
     }
 }

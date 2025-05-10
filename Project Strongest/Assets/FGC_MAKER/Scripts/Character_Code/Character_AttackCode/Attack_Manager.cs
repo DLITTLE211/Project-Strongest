@@ -353,6 +353,10 @@ public class Attack_Manager : MonoBehaviour
     }
     void PlayAttack(Attack_BaseProperties attack)
     {
+        if (attack.hitblocked) 
+        {
+            attack.hitblocked = false;
+        }
         _cAnimator.SetNextAttackStartVariables(attack);
     }
     void ClearRoutine() 

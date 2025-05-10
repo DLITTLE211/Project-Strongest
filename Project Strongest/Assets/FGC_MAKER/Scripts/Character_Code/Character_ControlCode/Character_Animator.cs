@@ -283,6 +283,14 @@ public class Character_Animator : MonoBehaviour
     {
         if (_attack != null)
         {
+            if (lastAttack != null)
+            {
+                if (lastAttack.hitblocked)
+                {
+                    _base._aFrameDataMeter.ResetMeterData();
+                }
+            }
+
             lastAttack = _attack;
             lastAttack.AttackAnims.AddRequiredCallbacks(_base, lastAttack);
             if (lastAttack.AttackAnims.HitBox != null)
@@ -319,6 +327,7 @@ public class Character_Animator : MonoBehaviour
         lastAttack.AttackAnims.SetIsFollowUpAttack(false);
 
         _lastAnim = lastAttack.AttackAnims;
+
         PlayNextAnimation(lastAttack.attackHashes, 2 * (1f / lastAttack.AttackAnims.animClip.frameRate),true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
@@ -461,6 +470,10 @@ public class Character_Animator : MonoBehaviour
     #endregion
     public void FullBaseAttackDataClear(Attack_BaseProperties thisAttack, FrameData _frameData)
     {
+        if (thisAttack.hitblocked)
+        {
+            thisAttack.hitblocked = false;
+        }
         if (_base._cAttackTimer._type == TimerType.Special)
         {
             _base._cAttackTimer.ClearAttackLanded();

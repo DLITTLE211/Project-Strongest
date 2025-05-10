@@ -43,6 +43,7 @@ public class Attack_BaseProperties
     public AttackHandler_Attack AttackAnims;
     public bool hitLanded;
     public bool hitConnected;
+    public bool hitblocked;
     #endregion
 
     #region KnockBack/KnockDown Variables
@@ -95,7 +96,7 @@ public class Attack_StunValues
 {
     [Header("Stun Values")]
     [Range(1, 500)] public int hitstunValue;
-    [Range(0, 50)] public float blockStunValue;
+    [Range(0, 500)] public float blockStunValue;
     [Header("Stop Values")]
     [Range(0, 100)] public int hitstopValue;
     [Range(0, 50)] public int blockStopValue;

@@ -31,7 +31,8 @@ public class AttackHandler_Attack : AttackHandler_Base
     public FrameData _frameData;
     public HitCount _hitCount;
     private float bias;
-    private float frameCount;
+    private float mainFrameCount;
+    private float customFrameCount;
 
     List<RequiredCallback> requiredHitboxCallBacks;
     public List<RequiredCallback> RequiredCallbacks { get { return requiredHitboxCallBacks; } }
@@ -295,7 +296,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
-        frameCount = 0;
+        mainFrameCount = 0;
         if (_cAnimator.lastAttack._moveType == MoveType.Super)
         {
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
@@ -303,7 +304,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         currentHitIndex = 0;
         hitCountTotal = lastAttack.AttackAnims._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
-        while (frameCount < totalFrameTime)
+        while (mainFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
@@ -315,14 +316,14 @@ public class AttackHandler_Attack : AttackHandler_Base
                 float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
                 if (_base._cHitstun.animSpeed == 0.25f)
                 {
-                    frameCount = frameCount - (frameCount * _base._cHitstun.animSpeed);
+                    mainFrameCount = mainFrameCount - (mainFrameCount * _base._cHitstun.animSpeed);
                 }
                 try
                 {
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
-                        if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                        if (mainFrameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
                         {
                             requiredHitboxCallBacks[0].func();
                             requiredHitboxCallBacks.RemoveAt(0);
@@ -332,7 +333,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (customHitboxCallBacks.Count > 0)
                         {
-                            if (frameCount >= Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                            if (mainFrameCount >= Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
                                 _base.ReceiveCustomCallBack(customHitboxCallBacks[0]);
                                 customHitboxCallBacks.RemoveAt(0);
@@ -345,13 +346,13 @@ public class AttackHandler_Attack : AttackHandler_Base
                 {
                     //HitBox.DestroySelf();
                     Debug.LogError(e.ToString());
-                    frameCount = lastAttack.AttackAnims.animLength + 1f;
+                    mainFrameCount = lastAttack.AttackAnims.animLength + 1f;
                     Debug.Log("Null Check");
                     Debug.Log($"Last Attack null?: {lastAttack == null}");
                     Debug.Log($"Inactive bool state: {inactive}");
                     Debug.Break();
                 }
-                frameCount += frameIterator;
+                mainFrameCount += frameIterator;
                 yield return new WaitForSeconds(waitTime);
             }
         }
@@ -367,7 +368,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
         _base._aFrameDataMeter.ResetMessage();
-        frameCount = 0;
+        customFrameCount = 0;
         if (!_cAnimator.canTick)
         {
             _cAnimator.canTick = true;
@@ -383,7 +384,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         currentHitIndex = 0;
         hitCountTotal = customProp._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
-        while (frameCount < totalFrameTime)
+        while (customFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
@@ -393,13 +394,13 @@ public class AttackHandler_Attack : AttackHandler_Base
             {
                 float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
                 float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
-                frameCount = frameCount * _base._cHitstun.animSpeed;
+                customFrameCount = customFrameCount * _base._cHitstun.animSpeed;
                 try
                 {
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
                     if (requiredHitboxCallBacks.Count > 0)
                     {
-                        if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                        if (customFrameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
                         {
                             requiredHitboxCallBacks[0].func();
                             requiredHitboxCallBacks.RemoveAt(0);
@@ -410,7 +411,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                         if (customHitboxCallBacks.Count > 0)
                         {
                             float curCustomTimeStamp = Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp;
-                            if (frameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
+                            if (customFrameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
                                 Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
                                 _base.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
@@ -429,13 +430,13 @@ public class AttackHandler_Attack : AttackHandler_Base
                 {
                     //HitBox.DestroySelf();
                     Debug.LogError(e.ToString());
-                    frameCount = customProp.animLength + 1f;
+                    customFrameCount = customProp.animLength + 1f;
                     Debug.Log("Null Check");
                     Debug.Log($"Last Attack null?: {customProp == null}");
                     Debug.Log($"Inactive bool state: {inactive}");
                     Debug.Break();
                 }
-                frameCount += frameIterator;
+                customFrameCount += frameIterator;
                 yield return new WaitForSeconds(waitTime);
             }
         }

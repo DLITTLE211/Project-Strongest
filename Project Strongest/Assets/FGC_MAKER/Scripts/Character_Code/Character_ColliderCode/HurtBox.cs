@@ -326,6 +326,7 @@ public class HurtBox : CollisionDetection
             hitCount = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties.AttackAnims._hitCount;
         }
         _attackBlocked = BlockedAttack;
+        currentHitProperties.hitblocked = _attackBlocked;
         int curHit = 0;
         if (!BlockedAttack)
         {

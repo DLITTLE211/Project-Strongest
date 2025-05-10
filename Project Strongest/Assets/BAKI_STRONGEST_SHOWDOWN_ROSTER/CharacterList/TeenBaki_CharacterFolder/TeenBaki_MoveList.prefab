@@ -97,12 +97,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 22
-          active: 23
-          inactive: 35
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 23
             inactiveFrame: 35
+          recoveryEnd: 0
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints:
@@ -215,6 +213,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 3
         Hit_Value: 7.85
@@ -285,12 +284,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 0
-          active: 1
-          inactive: 18
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 1
             inactiveFrame: 18
+          recoveryEnd: 0
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
@@ -811,6 +808,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -840,12 +838,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 0
-        inactive: 18
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 0
           inactiveFrame: 18
+        recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints:
@@ -939,12 +935,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 28
-        active: 29
-        inactive: 110
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 29
           inactiveFrame: 110
+        recoveryEnd: 0
         recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
@@ -1521,12 +1515,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 15
-          active: 35
-          inactive: 55
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 35
             inactiveFrame: 55
+          recoveryEnd: 0
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
@@ -2047,6 +2039,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -2076,12 +2069,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 1
-        inactive: 150
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 1
           inactiveFrame: 150
+        recoveryEnd: 0
         recoveryAmount: 35
         totalRecovery: 0
         _extraPoints:
@@ -2352,12 +2343,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 0
-          active: 1
-          inactive: 90
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 1
             inactiveFrame: 90
+          recoveryEnd: 0
           recoveryAmount: 50
           totalRecovery: 0
           _extraPoints:
@@ -2402,6 +2391,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -2471,12 +2461,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 18
-          active: 19
-          inactive: 28
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 19
             inactiveFrame: 28
+          recoveryEnd: 0
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints:
@@ -2555,6 +2543,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -2584,12 +2573,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 1
-        active: 2
-        inactive: 40
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 2
           inactiveFrame: 40
+        recoveryEnd: 0
         recoveryAmount: 40
         totalRecovery: 0
         _extraPoints:
@@ -3165,12 +3152,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 1
-          active: 5
-          inactive: 17
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 5
             inactiveFrame: 17
+          recoveryEnd: 0
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
@@ -3181,6 +3166,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -3210,12 +3196,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 2
-        active: 3
-        inactive: 50
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 3
           inactiveFrame: 50
+        recoveryEnd: 0
         recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
@@ -3416,12 +3400,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 1
-          active: 3
-          inactive: 12
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 3
             inactiveFrame: 12
+          recoveryEnd: 0
           recoveryAmount: 12
           totalRecovery: 0
           _extraPoints: []
@@ -3432,6 +3414,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -3461,12 +3444,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 2
-        active: 3
-        inactive: 50
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 3
           inactiveFrame: 50
+        recoveryEnd: 0
         recoveryAmount: 15
         totalRecovery: 0
         _extraPoints:
@@ -3660,12 +3641,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 0
-          active: 1
-          inactive: 40
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 1
             inactiveFrame: 40
+          recoveryEnd: 0
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
@@ -3710,6 +3689,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 0
         Hit_Value: 0
@@ -3779,12 +3759,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 2
-                  active: 3
-                  inactive: 9
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 3
                     inactiveFrame: 9
+                  recoveryEnd: 0
                   recoveryAmount: 25
                   totalRecovery: 0
                   _extraPoints: []
@@ -3795,6 +3773,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 3
                 Hit_Value: 4.4
@@ -3865,12 +3844,10 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 8
-            active: 10
-            inactive: 16
-            recoveryEnd: 0
             activeWindows:
             - activeFrame: 10
               inactiveFrame: 16
+            recoveryEnd: 0
             recoveryAmount: 13
             totalRecovery: 0
             _extraPoints:
@@ -3915,6 +3892,7 @@ MonoBehaviour:
             _startRefreshRate: 0
         hitLanded: 0
         hitConnected: 0
+        hitblocked: 0
         LateralKB_Data:
           Hit_HKB_Level: 2
           Hit_Value: 2
@@ -3978,12 +3956,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 11
-                  active: 12
-                  inactive: 18
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 12
                     inactiveFrame: 18
+                  recoveryEnd: 0
                   recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints:
@@ -4028,6 +4004,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 4
                 Hit_Value: 7
@@ -4090,12 +4067,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 10
-                  active: 11
-                  inactive: 18
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 11
                     inactiveFrame: 18
+                  recoveryEnd: 0
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints:
@@ -4140,6 +4115,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 3
                 Hit_Value: 3.14
@@ -4209,12 +4185,10 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 9
-            active: 10
-            inactive: 30
-            recoveryEnd: 0
             activeWindows:
             - activeFrame: 10
               inactiveFrame: 30
+            recoveryEnd: 0
             recoveryAmount: 7
             totalRecovery: 0
             _extraPoints:
@@ -4259,6 +4233,7 @@ MonoBehaviour:
             _startRefreshRate: 0
         hitLanded: 0
         hitConnected: 0
+        hitblocked: 0
         LateralKB_Data:
           Hit_HKB_Level: 0
           Hit_Value: 0
@@ -4322,9 +4297,6 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 20
-                  active: 29
-                  inactive: 41
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 21
                     inactiveFrame: 24
@@ -4332,6 +4304,7 @@ MonoBehaviour:
                     inactiveFrame: 34
                   - activeFrame: 38
                     inactiveFrame: 42
+                  recoveryEnd: 0
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -4342,6 +4315,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 2
                 Hit_Value: 1.85
@@ -4404,12 +4378,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 10
-                  active: 11
-                  inactive: 15
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 11
                     inactiveFrame: 15
+                  recoveryEnd: 0
                   recoveryAmount: 14
                   totalRecovery: 0
                   _extraPoints:
@@ -4454,6 +4426,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 3
                 Hit_Value: 5.6
@@ -4516,12 +4489,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 8
-                  active: 9
-                  inactive: 15
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 9
                     inactiveFrame: 15
+                  recoveryEnd: 0
                   recoveryAmount: 7
                   totalRecovery: 0
                   _extraPoints:
@@ -4566,6 +4537,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 2
                 Hit_Value: 3.9
@@ -4635,12 +4607,10 @@ MonoBehaviour:
           _frameData:
             init: 0
             startup: 9
-            active: 10
-            inactive: 30
-            recoveryEnd: 0
             activeWindows:
             - activeFrame: 10
               inactiveFrame: 30
+            recoveryEnd: 0
             recoveryAmount: 7
             totalRecovery: 0
             _extraPoints:
@@ -4685,6 +4655,7 @@ MonoBehaviour:
             _startRefreshRate: 0
         hitLanded: 0
         hitConnected: 0
+        hitblocked: 0
         LateralKB_Data:
           Hit_HKB_Level: 0
           Hit_Value: 0
@@ -4748,9 +4719,6 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 20
-                  active: 29
-                  inactive: 41
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 21
                     inactiveFrame: 25
@@ -4758,6 +4726,7 @@ MonoBehaviour:
                     inactiveFrame: 33
                   - activeFrame: 34
                     inactiveFrame: 40
+                  recoveryEnd: 0
                   recoveryAmount: 10
                   totalRecovery: 0
                   _extraPoints: []
@@ -4768,6 +4737,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 2
                 Hit_Value: 1.85
@@ -4830,12 +4800,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 10
-                  active: 11
-                  inactive: 15
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 11
                     inactiveFrame: 15
+                  recoveryEnd: 0
                   recoveryAmount: 14
                   totalRecovery: 0
                   _extraPoints:
@@ -4880,6 +4848,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 3
                 Hit_Value: 5.6
@@ -4942,12 +4911,10 @@ MonoBehaviour:
                 _frameData:
                   init: 0
                   startup: 8
-                  active: 9
-                  inactive: 15
-                  recoveryEnd: 0
                   activeWindows:
                   - activeFrame: 9
                     inactiveFrame: 15
+                  recoveryEnd: 0
                   recoveryAmount: 7
                   totalRecovery: 0
                   _extraPoints:
@@ -4992,6 +4959,7 @@ MonoBehaviour:
                   _startRefreshRate: 0
               hitLanded: 0
               hitConnected: 0
+              hitblocked: 0
               LateralKB_Data:
                 Hit_HKB_Level: 2
                 Hit_Value: 3.9
@@ -5056,12 +5024,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 3
-          active: 4
-          inactive: 9
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 4
             inactiveFrame: 9
+          recoveryEnd: 0
           recoveryAmount: 25
           totalRecovery: 0
           _extraPoints: []
@@ -5072,6 +5038,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 3
         Hit_Value: 5
@@ -5134,12 +5101,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 17
-          active: 18
-          inactive: 25
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 18
             inactiveFrame: 25
+          recoveryEnd: 0
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints:
@@ -5184,6 +5149,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 2
         Hit_Value: 3.15
@@ -5246,12 +5212,10 @@ MonoBehaviour:
         _frameData:
           init: 0
           startup: 18
-          active: 19
-          inactive: 25
-          recoveryEnd: 0
           activeWindows:
           - activeFrame: 19
             inactiveFrame: 25
+          recoveryEnd: 0
           recoveryAmount: 10
           totalRecovery: 0
           _extraPoints:
@@ -5296,6 +5260,7 @@ MonoBehaviour:
           _startRefreshRate: 0
       hitLanded: 0
       hitConnected: 0
+      hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 3
         Hit_Value: 4.3
@@ -5366,12 +5331,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 14
-              active: 15
-              inactive: 22
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 15
                 inactiveFrame: 22
+              recoveryEnd: 0
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -5416,6 +5379,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.6
@@ -5476,12 +5440,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 17
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 17
+              recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints:
@@ -5526,6 +5488,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 1.75
@@ -5586,12 +5549,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 16
-              active: 17
-              inactive: 24
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 17
                 inactiveFrame: 24
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -5636,6 +5597,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 3
@@ -5702,12 +5664,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 10
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 6
                 inactiveFrame: 10
+              recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -5718,6 +5678,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.1
@@ -5778,12 +5739,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 16
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 16
+              recoveryEnd: 0
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints:
@@ -5828,6 +5787,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.1
@@ -5888,12 +5848,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 17
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 17
+              recoveryEnd: 0
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints:
@@ -5938,6 +5896,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 3.1
@@ -6004,12 +5963,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 8
-              active: 10
-              inactive: 15
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 15
+              recoveryEnd: 0
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -6054,6 +6011,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.8
@@ -6114,12 +6072,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 16
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 16
+              recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -6164,6 +6120,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 0.5
@@ -6224,12 +6181,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 7
-              active: 8
-              inactive: 14
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 8
                 inactiveFrame: 14
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -6274,6 +6229,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.8
@@ -6340,12 +6296,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 14
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 14
+              recoveryEnd: 0
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -6356,6 +6310,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 3.8
@@ -6416,12 +6371,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 9
-              active: 10
-              inactive: 15
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 10
                 inactiveFrame: 15
+              recoveryEnd: 0
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints:
@@ -6466,6 +6419,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.3
@@ -6526,12 +6480,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 23
-              active: 25
-              inactive: 31
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 25
                 inactiveFrame: 31
+              recoveryEnd: 0
               recoveryAmount: 4
               totalRecovery: 0
               _extraPoints:
@@ -6576,6 +6528,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.8
@@ -6642,12 +6595,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 16
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 16
+              recoveryEnd: 0
               recoveryAmount: 15
               totalRecovery: 0
               _extraPoints:
@@ -6692,6 +6643,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 3.6
@@ -6752,9 +6704,6 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 15
-              inactive: 37
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 15
                 inactiveFrame: 17
@@ -6768,6 +6717,7 @@ MonoBehaviour:
                 inactiveFrame: 32
               - activeFrame: 35
                 inactiveFrame: 37
+              recoveryEnd: 0
               recoveryAmount: 2
               totalRecovery: 0
               _extraPoints:
@@ -6812,6 +6762,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.45
@@ -6872,12 +6823,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 13
-              inactive: 19
-              recoveryEnd: 25
               activeWindows:
               - activeFrame: 13
                 inactiveFrame: 19
+              recoveryEnd: 25
               recoveryAmount: 6
               totalRecovery: 0
               _extraPoints:
@@ -6922,6 +6871,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 1.35
@@ -6989,12 +6939,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 18
-              recoveryEnd: 29
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 18
+              recoveryEnd: 29
               recoveryAmount: 10
               totalRecovery: 0
               _extraPoints:
@@ -7039,6 +6987,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.75
@@ -7105,12 +7054,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 15
-              inactive: 22
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 15
                 inactiveFrame: 22
+              recoveryEnd: 0
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -7155,6 +7102,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 3
             Hit_Value: 5.9
@@ -7221,12 +7169,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 12
-              active: 13
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 13
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -7271,6 +7217,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 1.35
@@ -7337,12 +7284,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 10
-              recoveryEnd: 12
               activeWindows:
               - activeFrame: 6
                 inactiveFrame: 10
+              recoveryEnd: 12
               recoveryAmount: 2
               totalRecovery: 0
               _extraPoints: []
@@ -7353,6 +7298,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.15
@@ -7419,12 +7365,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 23
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 23
+              recoveryEnd: 0
               recoveryAmount: 3
               totalRecovery: 0
               _extraPoints:
@@ -7469,6 +7413,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.25
@@ -7536,12 +7481,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 5
-              active: 6
-              inactive: 10
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 6
                 inactiveFrame: 10
+              recoveryEnd: 0
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -7552,6 +7495,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.5
@@ -7618,12 +7562,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 18
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 18
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints:
@@ -7668,6 +7610,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 3
             Hit_Value: 3.15
@@ -7734,12 +7677,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 4
-              active: 5
-              inactive: 9
-              recoveryEnd: 16
               activeWindows:
               - activeFrame: 5
                 inactiveFrame: 9
+              recoveryEnd: 16
               recoveryAmount: 7
               totalRecovery: 0
               _extraPoints:
@@ -7784,6 +7725,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 0
             Hit_Value: 2.75
@@ -7850,12 +7792,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 13
-              active: 15
-              inactive: 21
-              recoveryEnd: 36
               activeWindows:
               - activeFrame: 15
                 inactiveFrame: 21
+              recoveryEnd: 36
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints:
@@ -7900,6 +7840,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 5.2
@@ -7966,12 +7907,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 4
-              active: 5
-              inactive: 10
-              recoveryEnd: 12
               activeWindows:
               - activeFrame: 5
                 inactiveFrame: 10
+              recoveryEnd: 12
               recoveryAmount: 5
               totalRecovery: 0
               _extraPoints: []
@@ -7982,6 +7921,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.4
@@ -8048,12 +7988,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 19
-              recoveryEnd: 22
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 19
+              recoveryEnd: 22
               recoveryAmount: 8
               totalRecovery: 0
               _extraPoints: []
@@ -8064,6 +8002,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 3.1
@@ -8130,12 +8069,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 4
-              active: 5
-              inactive: 10
-              recoveryEnd: 14
               activeWindows:
               - activeFrame: 5
                 inactiveFrame: 10
+              recoveryEnd: 14
               recoveryAmount: 9
               totalRecovery: 0
               _extraPoints: []
@@ -8146,6 +8083,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.45
@@ -8212,12 +8150,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 10
-              active: 11
-              inactive: 15
-              recoveryEnd: 0
               activeWindows:
               - activeFrame: 11
                 inactiveFrame: 15
+              recoveryEnd: 0
               recoveryAmount: 12
               totalRecovery: 0
               _extraPoints: []
@@ -8228,6 +8164,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
             Hit_Value: 2.75
@@ -8294,12 +8231,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 1
-              active: 3
-              inactive: 8
-              recoveryEnd: 25
               activeWindows:
               - activeFrame: 3
                 inactiveFrame: 8
+              recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -8310,6 +8245,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 0
             Hit_Value: 0
@@ -8376,12 +8312,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 1
-              active: 3
-              inactive: 8
-              recoveryEnd: 25
               activeWindows:
               - activeFrame: 3
                 inactiveFrame: 8
+              recoveryEnd: 25
               recoveryAmount: 17
               totalRecovery: 0
               _extraPoints: []
@@ -8392,6 +8326,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 0
             Hit_Value: 0
@@ -8459,12 +8394,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 16
-              recoveryEnd: 27
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 16
+              recoveryEnd: 27
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -8475,6 +8408,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 0
             Hit_Value: 0
@@ -8507,12 +8441,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 3
-        inactive: 65
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 3
           inactiveFrame: 65
+        recoveryEnd: 0
         recoveryAmount: 20
         totalRecovery: 0
         _extraPoints:
@@ -8537,7 +8469,7 @@ MonoBehaviour:
               blockStopValue: 0
             hitLevel: 2
             isFinalAttack: 0
-            isScaling: 0
+            isScaling: 1
             lateralKBP:
               Hit_HKB_Level: 0
               Hit_Value: 0
@@ -8571,7 +8503,7 @@ MonoBehaviour:
               blockStopValue: 0
             hitLevel: 4
             isFinalAttack: 0
-            isScaling: 0
+            isScaling: 1
             lateralKBP:
               Hit_HKB_Level: 0
               Hit_Value: 0
@@ -8605,7 +8537,7 @@ MonoBehaviour:
               blockStopValue: 0
             hitLevel: 8
             isFinalAttack: 1
-            isScaling: 0
+            isScaling: 1
             lateralKBP:
               Hit_HKB_Level: 3
               Hit_Value: 5.75
@@ -8676,12 +8608,10 @@ MonoBehaviour:
             _frameData:
               init: 0
               startup: 11
-              active: 12
-              inactive: 16
-              recoveryEnd: 27
               activeWindows:
               - activeFrame: 12
                 inactiveFrame: 16
+              recoveryEnd: 27
               recoveryAmount: 11
               totalRecovery: 0
               _extraPoints: []
@@ -8692,6 +8622,7 @@ MonoBehaviour:
               _startRefreshRate: 0
           hitLanded: 0
           hitConnected: 0
+          hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 0
             Hit_Value: 0
@@ -8724,12 +8655,10 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 3
-        inactive: 60
-        recoveryEnd: 0
         activeWindows:
         - activeFrame: 3
           inactiveFrame: 60
+        recoveryEnd: 0
         recoveryAmount: 25
         totalRecovery: 0
         _extraPoints:
@@ -8822,7 +8751,7 @@ MonoBehaviour:
               blockStopValue: 0
             hitLevel: 2
             isFinalAttack: 0
-            isScaling: 0
+            isScaling: 1
             lateralKBP:
               Hit_HKB_Level: 0
               Hit_Value: 0
@@ -8856,7 +8785,7 @@ MonoBehaviour:
               blockStopValue: 0
             hitLevel: 4
             isFinalAttack: 0
-            isScaling: 0
+            isScaling: 1
             lateralKBP:
               Hit_HKB_Level: 0
               Hit_Value: 0
@@ -8924,7 +8853,7 @@ MonoBehaviour:
               blockStopValue: 0
             hitLevel: 8
             isFinalAttack: 1
-            isScaling: 0
+            isScaling: 1
             lateralKBP:
               Hit_HKB_Level: 3
               Hit_Value: 5.75
@@ -8987,10 +8916,8 @@ MonoBehaviour:
       _frameData:
         init: 0
         startup: 0
-        active: 0
-        inactive: 0
-        recoveryEnd: 0
         activeWindows: []
+        recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 0
         _extraPoints: []
@@ -9001,6 +8928,7 @@ MonoBehaviour:
         _startRefreshRate: 0
     hitLanded: 0
     hitConnected: 0
+    hitblocked: 0
     LateralKB_Data:
       Hit_HKB_Level: 0
       Hit_Value: 0
