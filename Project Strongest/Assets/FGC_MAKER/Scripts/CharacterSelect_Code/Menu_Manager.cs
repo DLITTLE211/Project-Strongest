@@ -100,7 +100,8 @@ public class Menu_Manager : MonoBehaviour
     }
     void SetPlayerControllers(ControllerStatusChangedEventArgs args = null)
     {
-        if (ReInput.controllers.GetJoystickNames().Length <= 0)
+        string[] controllerNames = ReInput.controllers.GetJoystickNames();
+        if (controllerNames.Length <= 0)
         {
             return;
         }
@@ -108,9 +109,11 @@ public class Menu_Manager : MonoBehaviour
         {
             if (_mainMenuPlayer == null)
             {
-                players.InitAvailableIDs();
-                players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
-                players.AddUsedID(players.joystickNames[0]);
+                players.InitializePlayerControllers();
+                players.AddNewPlayer(0, controllerNames[0]);
+                //players.InitAvailableIDs();
+                //players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
+                //players.AddUsedID(players.joystickNames[0]);
                 SetCharacterSelectCursorState(0);
             }
         }
@@ -127,10 +130,11 @@ public class Menu_Manager : MonoBehaviour
     }
     void SetCharacterSelectCursorState(int ID)
     {
-        _mainMenuPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
+        int currentID = players.characterIdentification.IDs[ID];
+        _mainMenuPlayer = ReInput.players.GetPlayer(currentID);
         _mainMenuPlayerID = ID;
-        _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
-        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID],$"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+        _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, currentID, true);
+        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, currentID, $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
         SetActiveButton();
     }
     public void SetButtonHolderImages()

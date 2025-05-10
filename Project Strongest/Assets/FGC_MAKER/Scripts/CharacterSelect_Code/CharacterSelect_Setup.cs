@@ -58,23 +58,24 @@ public class CharacterSelect_Setup : MonoBehaviour
     public void SubtractControllerCounter(ControllerStatusChangedEventArgs args = null)
     {
         players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
-        CheckPlayerCount(args);
+        CheckPlayerCount();
     }
     public void AddControllerCounter(ControllerStatusChangedEventArgs args = null)
     {
         List<string> controllerNames = new List<string>();
         controllerNames = ReInput.controllers.GetJoystickNames().ToList();
+        
         for (int i = 0; i < controllerNames.Count; i++) 
         {
-            if (players.UsedID.Item2.Contains(controllerNames[i])) 
+            if (players.characterIdentification.controllerNames.Contains(controllerNames[i]))
             {
                 continue;
             }
-            players.AddUsedID(controllerNames[i]);
+            players.AddNewPlayer(players.characterIdentification.ReturnUseableIds(), controllerNames[i]);
         }
-        CheckPlayerCount(args);
+        CheckPlayerCount();
     }
-    public void CheckPlayerCount(ControllerStatusChangedEventArgs args = null) 
+    public void CheckPlayerCount() 
     {
         if (players.UsedID.Item1.Count == 0)
         {

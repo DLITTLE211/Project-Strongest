@@ -237,9 +237,88 @@ public class GameManager : MonoBehaviour
         ReInput.ControllerDisconnectedEvent -= SetupPlayers;
     }
 }
-[System.Serializable]
+[Serializable]
+public class PlayerCharacter_Controller
+{
+    public int ID;
+    public string ControllerName;
+    public Character_Base controllerPlayer;
+    public Character_SubStates subState;
+    public PlayerCharacter_Controller(int _newID, string _controllerName, Character_Base player = null, Character_SubStates _subState = Character_SubStates.Dummy) 
+    { 
+        ID = _newID;
+        ControllerName = _controllerName;
+        controllerPlayer = player;
+        subState = _subState;
+    }
+    public void SetPlayer_Active(int _newID, string _controllerName)
+    {
+        ID = _newID;
+        ControllerName = _controllerName;
+        subState = Character_SubStates.Controlled;
+    }
+    public void SetPlayer_Controlled(Character_Base player) 
+    {
+        controllerPlayer = player;
+        subState = Character_SubStates.Controlled;
+    }
+    public void SetPlayer_CPU(Character_Base player) 
+    {
+        controllerPlayer = player;
+        subState = Character_SubStates.CPU;
+    }
+}
+[Serializable]
+public class Identification 
+{
+    public List<int> IDs;
+    public List<string> controllerNames;
+    public Identification() 
+    {
+        IDs= new List<int>();
+        controllerNames= new List<string>();
+    }
+    public void AddEntry(int newUsedID, string newUsedControllerName) 
+    {
+        IDs.Add(newUsedID);
+        controllerNames.Add(newUsedControllerName);
+    }
+    public int ReturnUseableIds() 
+    {
+        if (IDs.Count == 0)
+        {
+            return 0;
+        }
+        else 
+        {
+            if(IDs.Count >= 2) 
+            {
+                return IDs.Count;
+            }
+            else 
+            {
+                if (IDs.Contains(0)) 
+                {
+                    return 1;
+                }
+                if (IDs.Contains(1))
+                {
+                    return 0;
+                }
+                return IDs.Count;
+            }
+        }
+    }
+}
+[Serializable]
 public class Character_AvailableID 
 {
+    public PlayerCharacter_Controller Player1;
+    public PlayerCharacter_Controller Player2;
+    public Identification characterIdentification;
+
+
+
     public List<int> availableIds;
     public (List<int>, List<string>) UsedID;
     public List<Character_Base> totalPlayers;
@@ -247,6 +326,35 @@ public class Character_AvailableID
 
     [SerializeField] List<int> usedIntID;
     [SerializeField] List<string> usedStrings;
+    public void InitializePlayerControllers()
+    {
+        characterIdentification = new Identification();
+        Player1 = new PlayerCharacter_Controller(-1, "");
+        Player2 = new PlayerCharacter_Controller(-1, "");
+    }
+    public void AddNewPlayer(int ID, string controllerName) 
+    {
+        if(Player1.ID == -1) 
+        {
+            Player1.SetPlayer_Active(ID, controllerName);
+        }
+        else if (Player2.ID == -1) 
+        {
+            Player1.SetPlayer_Active(ID, controllerName);
+        }
+        characterIdentification.AddEntry(ID, controllerName);
+    }
+    public void AddPlayerCharacter(Character_Base character)
+    {
+        if (Player1.controllerPlayer == null)
+        {
+            Player1.SetPlayer_Controlled(character);
+        }
+        else if (Player2.controllerPlayer == null)
+        {
+            Player1.SetPlayer_Controlled(character);
+        }
+    }
     public void InitAvailableIDs() 
     {
         availableIds = new List<int>();
