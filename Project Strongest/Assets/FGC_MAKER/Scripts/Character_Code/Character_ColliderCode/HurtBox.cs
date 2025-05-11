@@ -385,10 +385,6 @@ public class HurtBox : CollisionDetection
             {
                 yield return new WaitForSeconds(hitCount._refreshRate * (Base_FrameCode.ONE_FRAME));
             }
-            else
-            {
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
-            }
             curHit++;
         }
         hitCount.ResetRefresh();

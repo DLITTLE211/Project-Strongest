@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using TMPro;
 
 public class Menu_TitleState : Menu_BaseState
 {

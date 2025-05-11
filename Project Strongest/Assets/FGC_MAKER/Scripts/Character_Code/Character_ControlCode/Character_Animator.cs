@@ -9,6 +9,7 @@ using FightingGame_FrameData;
 public class Character_Animator : MonoBehaviour
 {
     public List<SkinnedMeshRenderer> _modelMeshCount;
+    public MeshRenderer hairMesh;
     #region HitAnimNums
     public bool isHit;
     #endregion
@@ -54,6 +55,12 @@ public class Character_Animator : MonoBehaviour
         inRekkaState = false;
         inStanceState = false;
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K)) 
+        {
+        }
+    }
     public void SetModelColors(Character_ColorData _colorData, int skinIndex) 
     {
         matCount = 0;
@@ -70,6 +77,8 @@ public class Character_Animator : MonoBehaviour
             int meshMatCount = _modelMeshCount[i].materials.Length;
             _modelMeshCount[i].materials = GetNewColorSet(_matList,meshMatCount);
         }
+        int hairMeshCount = hairMesh.materials.Length;
+        hairMesh.materials = GetNewColorSet(_matList, hairMeshCount);
         _matList = null;
     }
     public Material[] GetNewColorSet(List<Material> _matList, int meshCount) 
@@ -132,8 +141,8 @@ public class Character_Animator : MonoBehaviour
             }
             if (attackOverride)
             {
-                shadowAnim.Play(animHash, 0, overrideTime);
-                myAnim.Play(animHash, 0, overrideTime);
+                myAnim.Play(animHash, 0);
+                shadowAnim.Play(animHash, 0);
             }
             else
             {
@@ -328,7 +337,7 @@ public class Character_Animator : MonoBehaviour
 
         _lastAnim = lastAttack.AttackAnims;
 
-        PlayNextAnimation(lastAttack.attackHashes, 2 * (1f / lastAttack.AttackAnims.animClip.frameRate),true);
+        PlayNextAnimation(lastAttack.attackHashes, 0,true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
     }
@@ -342,7 +351,8 @@ public class Character_Animator : MonoBehaviour
         _lastAnim = throwCustom;
         lastAttack = throwProperty;
         throwCustom.SetIsFollowUpAttack(true);
-        PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 2 * (1f / throwCustom.animClip.frameRate), true);
+
+        PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 0, true);
         ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
         StartCoroutine(ThrowAttackRoutine);
     }
@@ -358,7 +368,7 @@ public class Character_Animator : MonoBehaviour
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
 
         _lastAnim = superCustom;
-        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2 * (1f / superCustom.animClip.frameRate),true);
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 0 ,true);
         superCustom.SetIsFollowUpAttack(true);
         if (SuperAttackRoutine != null) 
         {

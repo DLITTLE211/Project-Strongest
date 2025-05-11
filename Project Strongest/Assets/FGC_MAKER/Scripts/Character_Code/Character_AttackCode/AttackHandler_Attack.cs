@@ -367,6 +367,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
     {
+        _base._aFrameDataMeter.ResetMeterData();
         _base._aFrameDataMeter.ResetMessage();
         customFrameCount = 0;
         currentHitIndex = 0;
@@ -384,6 +385,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         hitCountTotal = customProp._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
+        
         while (customFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
@@ -401,10 +403,10 @@ public class AttackHandler_Attack : AttackHandler_Base
                 }
                 try
                 {
-                    float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
+                    int individualFrame = (int)(customFrameCount / Base_FrameCode.ONE_FRAME);
                     if (requiredHitboxCallBacks.Count > 0)
                     {
-                        if (customFrameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                        if (individualFrame >= requiredHitboxCallBacks[0].timeStamp && requiredHitboxCallBacks[0].funcBool == false)
                         {
                             requiredHitboxCallBacks[0].func();
                             requiredHitboxCallBacks.RemoveAt(0);
@@ -414,10 +416,9 @@ public class AttackHandler_Attack : AttackHandler_Base
                     {
                         if (customHitboxCallBacks.Count > 0)
                         {
-                            float curCustomTimeStamp = Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp;
-                            if (customFrameCount >= curCustomTimeStamp && customHitboxCallBacks[0].funcBool == false)
+                            if (individualFrame >= customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
                             {
-                                Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!");
+                                Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!, Frame: {individualFrame}");
                                 _base.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
                                 if (customHitboxCallBacks[0].awaitEnum.keyRef != WaitingEnumKey.NA) 
                                 {
