@@ -71,27 +71,29 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 continue;
             }
-            players.AddNewPlayer(players.characterIdentification.ReturnUseableIds(), controllerNames[i]);
+            int useableId = players.characterIdentification.ReturnUseableIds();
+            players.AddNewPlayer(useableId, controllerNames[i]);
         }
         CheckPlayerCount();
     }
     public void CheckPlayerCount() 
     {
-        if (players.UsedID.Item1.Count == 0)
+        int playerCount = players.characterIdentification.IDs.Count;
+        if (playerCount == 0)
         {
             advisoryMessage.text = "Please Plug in a controller to continue";
             advisoryMessage.gameObject.SetActive(true);
             player1.SetImageCPU();
             player2.SetImageCPU();
+            return;
         }
         advisoryMessage.gameObject.SetActive(false);
-        if (players.UsedID.Item1.Count == 1)
+        if (playerCount == 1)
         {
-            players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
             player1.SetImageP1();
             player2.SetImageCPU();
         }
-        else if (players.UsedID.Item1.Count == 2)
+        else 
         {
             player1.SetImageP1();
             player2.SetImageP2();
@@ -102,7 +104,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         CharacterSelectObject.SetActive(true);
         Task[] tasks = new Task[]
         {
-            //ToggleCharacterSelectInfo(true,255f),
             TogglePlayerInfo(255f),
         };
         await Task.WhenAll(tasks);
@@ -177,15 +178,16 @@ public class CharacterSelect_Setup : MonoBehaviour
             characterSelect_Assets[i].SetActive(true);
         }
     }
-    public void CheckControllerState() 
+    public void CheckControllerState()
     {
-        if (players.UsedID.Item1.Count == 0)
+        int playerCount = players.characterIdentification.IDs.Count;
+        if (playerCount == 0)
         {
             advisoryMessage.gameObject.SetActive(true);
             player1.SetImageCPU();
             player2.SetImageCPU();
         }
-        if (players.UsedID.Item1.Count == 1)
+        if (playerCount == 1)
         {
             player1.SetImageP1();
             player2.SetImageCPU();

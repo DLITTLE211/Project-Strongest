@@ -1277,6 +1277,7 @@ public class Editor_MoveListEditor : EditorWindow
         }
     }
     int hitCountTotal;
+    Vector2 FrameDataWindowView;
     Vector2 ActiveFrameWindow;
 
     void DisplayAnimationTimeline(AttackHandler_Attack newAttackAnim)
@@ -1286,6 +1287,7 @@ public class Editor_MoveListEditor : EditorWindow
         {
             if (newAttackAnim.animClip != null)
             {
+                FrameDataWindowView = EditorGUILayout.BeginScrollView(FrameDataWindowView, GUILayout.Width(750), GUILayout.Height(350));
                 GUILayout.Label($"Current Animation Frame: {currentFrame}");
 
                 #region Slider Region
@@ -1349,14 +1351,17 @@ public class Editor_MoveListEditor : EditorWindow
                     {
                         if (curExtraPoints.Count > 0)
                         {
-                            extraFramePointCount = newAttackAnim._frameData._extraPoints.Count;
+                            if (extraFramePointCount != newAttackAnim._frameData._extraPoints.Count)
+                            {
+                                //extraFramePointCount = newAttackAnim._frameData._extraPoints.Count;
+                            }
                         }
                     }
                 }
                 DisplayExtraFramePoints(newAttackAnim);
 
                 GUILayout.Space(25);
-
+                EditorGUILayout.EndScrollView();
                 #endregion
             }
         }
@@ -1369,7 +1374,42 @@ public class Editor_MoveListEditor : EditorWindow
     void DisplayExtraFramePoints(AttackHandler_Attack attackAnim)
     {
         extraFramePointCount = (int)EditorGUILayout.Slider("ExtraFramePoint Count:", extraFramePointCount, 0, 15, GUILayout.Width(500), GUILayout.Height(20));
-        if (lastCount != extraFramePointCount)
+
+        List<DisplayExtraFramePoint> HitPointList = new List<DisplayExtraFramePoint>();
+
+        if (lastCount < extraFramePointCount)
+        {
+            if (attackAnim._frameData._extraPoints.Count > 0)
+            {
+                for (int i = 0; i < attackAnim._frameData._extraPoints.Count; i++)
+                {
+                    HitPointList.Add(new DisplayExtraFramePoint(false, attackAnim._frameData._extraPoints[i]));
+                }
+            }
+            int finalAdditionCount = extraFramePointCount - attackAnim._frameData._extraPoints.Count;
+            for (int i = 0; i < finalAdditionCount; i++)
+            {
+                ExtraFrameHitPoints newFramePoint = new ExtraFrameHitPoints();
+                HitPointList.Add(new DisplayExtraFramePoint(false, newFramePoint));
+                attackAnim._frameData._extraPoints.Add(newFramePoint);
+            }
+            attackAnimExtraPoints = HitPointList;
+        }
+        else if (lastCount > extraFramePointCount)
+        {
+            for (int i = 0; i < extraFramePointCount; i++)
+            {
+                HitPointList.Add(new DisplayExtraFramePoint(false, attackAnim._frameData._extraPoints[i]));
+            }
+            attackAnimExtraPoints = HitPointList;
+            attackAnim._frameData._extraPoints = new List<ExtraFrameHitPoints>();
+            for (int i = 0; i < HitPointList.Count; i++)
+            {
+                attackAnim._frameData._extraPoints.Add(HitPointList[i]._extraFrameHitPoint);
+            }
+        }
+        lastCount = extraFramePointCount;
+        /*if (lastCount != extraFramePointCount)
         {
             List<DisplayExtraFramePoint> newHitPointList = new List<DisplayExtraFramePoint>();
             if (attackAnim._frameData._extraPoints != null)
@@ -1444,7 +1484,7 @@ public class Editor_MoveListEditor : EditorWindow
                 }
             }
             lastCount = extraFramePointCount;
-        }
+        }*/
         showExtraFramePointVariables = EditorGUILayout.Foldout(showExtraFramePointVariables, "Show Extra Frame Point Variables");
         if (showExtraFramePointVariables)
         {
@@ -1454,7 +1494,7 @@ public class Editor_MoveListEditor : EditorWindow
                 for (int i = 0; i < attackAnimExtraPoints.Count; i++)
                 {
                     GUILayout.Label($"Extra Frame Point {i + 1}");
-                    attackAnimExtraPoints[i].isDisplayed = EditorGUILayout.Foldout(attackAnimExtraPoints[i].isDisplayed, $"Display Extra Frame Point {i+1}");
+                    attackAnimExtraPoints[i].isDisplayed = EditorGUILayout.Foldout(attackAnimExtraPoints[i].isDisplayed, $"Display Extra Frame Point {i + 1}");
                     if (attackAnimExtraPoints[i].isDisplayed)
                     {
                         DisplayIndividualExtraPoint(attackAnimExtraPoints[i]._extraFrameHitPoint);

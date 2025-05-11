@@ -292,16 +292,16 @@ public class AttackHandler_Attack : AttackHandler_Base
     public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
     {
         _base._aFrameDataMeter.ResetMessage();
+        mainFrameCount = 0;
+        currentHitIndex = 0;
         if (lastAttack._moveType == MoveType.Counter)
         {
             extendedHitBox.SetCounterMoveProperty(lastAttack);
         }
-        mainFrameCount = 0;
         if (_cAnimator.lastAttack._moveType == MoveType.Super)
         {
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        currentHitIndex = 0;
         hitCountTotal = lastAttack.AttackAnims._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
         while (mainFrameCount < totalFrameTime)
@@ -369,6 +369,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         _base._aFrameDataMeter.ResetMessage();
         customFrameCount = 0;
+        currentHitIndex = 0;
         if (!_cAnimator.canTick)
         {
             _cAnimator.canTick = true;
@@ -381,7 +382,6 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
-        currentHitIndex = 0;
         hitCountTotal = customProp._frameData.activeWindows.Count;
         float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
         while (customFrameCount < totalFrameTime)
@@ -394,7 +394,11 @@ public class AttackHandler_Attack : AttackHandler_Base
             {
                 float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
                 float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
-                customFrameCount = customFrameCount * _base._cHitstun.animSpeed;
+
+                if (_base._cHitstun.animSpeed == 0.25f)
+                {
+                    customFrameCount = customFrameCount - (customFrameCount * _base._cHitstun.animSpeed);
+                }
                 try
                 {
                     float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;

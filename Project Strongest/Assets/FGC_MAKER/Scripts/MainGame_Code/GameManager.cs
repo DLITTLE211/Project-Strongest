@@ -125,7 +125,8 @@ public class GameManager : MonoBehaviour
             }
             else { continue; }
         }
-        if (ReInput.controllers.GetJoystickNames().Length <= 0)
+        int controllerNameLength = ReInput.controllers.GetJoystickNames().Length;
+        if (controllerNameLength <= 0)
         {
             for (int i = 0; i < players.totalPlayers.Count; i++)
             {
@@ -135,7 +136,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
             for (int i = 0; i < players.totalPlayers.Count; i++) 
             {
                 ChosenCharacter CurChosenCharacter = playerProfiles[i];
@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
                 {
                     players.totalPlayers[CurChosenCharacter.ChosenPlayerSide].characterProfile = CurChosenCharacter.chosenCharacter;
                     Character_Base curCharacter = players.totalPlayers[CurChosenCharacter.ChosenPlayerSide];
-                    curCharacter.Initialize(Character_SubStates.Controlled, CurChosenCharacter.ChosenPlayerSide, CurChosenCharacter.ColorChoice, CurChosenCharacter.chosenAmplifier, players.UsedID.Item1[i]);
+                    curCharacter.Initialize(Character_SubStates.Controlled, CurChosenCharacter.ChosenPlayerSide, CurChosenCharacter.ColorChoice, CurChosenCharacter.chosenAmplifier, players.characterIdentification.IDs[i]);
                 }
                 else 
                 {
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
         players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
         for(int i = 0; i < players.totalPlayers.Count; i++) 
         {
-            if (!players.UsedID.Item1.Contains(players.totalPlayers[i].playerID)) 
+            if (!players.characterIdentification.IDs.Contains(players.totalPlayers[i].playerID)) 
             {
                 players.totalPlayers[i].Initialize(Character_SubStates.Dummy,i, 0, null, -1);
             }
@@ -251,6 +251,13 @@ public class PlayerCharacter_Controller
         controllerPlayer = player;
         subState = _subState;
     }
+    public void ClearPlayerData() 
+    {
+        ID = -1;
+        ControllerName = "";
+        controllerPlayer = null;
+        subState = Character_SubStates.Dummy;
+    }
     public void SetPlayer_Active(int _newID, string _controllerName)
     {
         ID = _newID;
@@ -282,6 +289,12 @@ public class Identification
     {
         IDs.Add(newUsedID);
         controllerNames.Add(newUsedControllerName);
+    }
+    public void RemoveEntry(int removedID) 
+    {
+        int indexOFID = IDs.IndexOf(removedID);
+        IDs.RemoveAt(indexOFID);
+        controllerNames.RemoveAt(indexOFID);
     }
     public int ReturnUseableIds() 
     {
@@ -319,13 +332,13 @@ public class Character_AvailableID
 
 
 
-    public List<int> availableIds;
-    public (List<int>, List<string>) UsedID;
+    //public List<int> availableIds;
+    //public (List<int>, List<string>) UsedID;
     public List<Character_Base> totalPlayers;
-    public List<string> joystickNames,currentNames;
+    //public List<string> joystickNames,currentNames;
 
-    [SerializeField] List<int> usedIntID;
-    [SerializeField] List<string> usedStrings;
+    /*[SerializeField] List<int> usedIntID;
+    [SerializeField] List<string> usedStrings;*/
     public void InitializePlayerControllers()
     {
         characterIdentification = new Identification();
@@ -344,6 +357,18 @@ public class Character_AvailableID
         }
         characterIdentification.AddEntry(ID, controllerName);
     }
+    public void RemovePlayer(int ID)
+    {
+        if(Player1.ID == ID) 
+        {
+            Player1.ClearPlayerData();
+        }
+        else if (Player2.ID == ID) 
+        {
+            Player2.ClearPlayerData();
+        }
+        characterIdentification.RemoveEntry(ID);
+    }
     public void AddPlayerCharacter(Character_Base character)
     {
         if (Player1.controllerPlayer == null)
@@ -355,15 +380,15 @@ public class Character_AvailableID
             Player1.SetPlayer_Controlled(character);
         }
     }
-    public void InitAvailableIDs() 
+    /*public void InitAvailableIDs() 
     {
         availableIds = new List<int>();
         UsedID.Item1 = new List<int>();
         UsedID.Item2 = new List<string>();
         availableIds.Add(0);
         availableIds.Add(1);
-    }
-    public void AddToJoystickNames(string[] names) 
+    }*/
+    /*public void AddToJoystickNames(string[] names) 
     {
         for (int i = 0; i < names.Length; i++)
         {
@@ -373,10 +398,10 @@ public class Character_AvailableID
             }
             joystickNames.Add(names[i]);
         }
-    }
+    }*/
     public void SubtractFromJoystickNames(string[] names)
     {
-        currentNames = new List<string>();
+        /*currentNames = new List<string>();
         if (names.Length == 0)
         {
             availableIds.Add(UsedID.Item1[0]);
@@ -412,9 +437,9 @@ public class Character_AvailableID
         }
 
         usedIntID = UsedID.Item1;
-        usedStrings = UsedID.Item2;
+        usedStrings = UsedID.Item2;*/
     }
-    public void AddUsedID(string addectJoystick)
+    /*public void AddUsedID(string addectJoystick)
     {
         UsedID.Item1.Add(availableIds[0]);
         UsedID.Item2.Add(addectJoystick);
@@ -424,7 +449,7 @@ public class Character_AvailableID
         }
         usedIntID = UsedID.Item1;
         usedStrings = UsedID.Item2;
-    }
+    }*/
 }
 
 [System.Serializable]

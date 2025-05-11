@@ -5150,12 +5150,20 @@ MonoBehaviour:
   _mainCamera: {fileID: 1066661553}
   _eventSystem: {fileID: 1982503669}
   players:
-    availableIds: 
+    Player1:
+      ID: 0
+      ControllerName: 
+      controllerPlayer: {fileID: 0}
+      subState: 0
+    Player2:
+      ID: 0
+      ControllerName: 
+      controllerPlayer: {fileID: 0}
+      subState: 0
+    characterIdentification:
+      IDs: 
+      controllerNames: []
     totalPlayers: []
-    joystickNames: []
-    currentNames: []
-    usedIntID: 
-    usedStrings: []
   FirstMenuButtonLayer:
     buttonHolder: {fileID: 1691372230}
     buttonList:
@@ -11631,12 +11639,20 @@ MonoBehaviour:
     objectText: {fileID: 833554650}
   _arenaLoader: {fileID: 1107754685}
   players:
-    availableIds: 
+    Player1:
+      ID: 0
+      ControllerName: 
+      controllerPlayer: {fileID: 0}
+      subState: 0
+    Player2:
+      ID: 0
+      ControllerName: 
+      controllerPlayer: {fileID: 0}
+      subState: 0
+    characterIdentification:
+      IDs: 
+      controllerNames: []
     totalPlayers: []
-    joystickNames: []
-    currentNames: []
-    usedIntID: 
-    usedStrings: []
   currentSet:
     gameMode: 0
 --- !u!114 &1107754685

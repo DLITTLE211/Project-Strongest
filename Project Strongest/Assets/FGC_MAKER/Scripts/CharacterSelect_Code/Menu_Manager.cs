@@ -120,12 +120,12 @@ public class Menu_Manager : MonoBehaviour
     }
     void UnsetPlayerControllers(ControllerStatusChangedEventArgs args = null)
     {
-        _mainMenuPlayer.controllers.RemoveController(ControllerType.Joystick, players.UsedID.Item1[_mainMenuPlayerID]);
+        _mainMenuPlayer.controllers.RemoveController(ControllerType.Joystick, players.characterIdentification.IDs[0]); 
         _mainMenuPlayer = null;
         _mainMenuPlayerID = -1;
         if (ReInput.controllers.GetJoystickNames().Length <= 0)
         {
-            players.InitAvailableIDs();
+            players.InitializePlayerControllers();
         }
     }
     void SetCharacterSelectCursorState(int ID)

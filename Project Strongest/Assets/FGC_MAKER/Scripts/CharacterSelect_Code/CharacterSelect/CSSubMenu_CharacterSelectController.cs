@@ -161,14 +161,15 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
     }
     void SetCharacterSelectCursorState(CharacterSelect_Cursor player, int ID)
     {
-        player.curPlayer = ReInput.players.GetPlayer(_characterSelect.players.UsedID.Item1[ID]);
+        int currentID = _characterSelect.players.characterIdentification.IDs[ID];
+        player.curPlayer = ReInput.players.GetPlayer(currentID);
         player.ID = ID;
-        player.curPlayer.controllers.AddController(ControllerType.Joystick, _characterSelect.players.UsedID.Item1[ID], true);
-        player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, _characterSelect.players.UsedID.Item1[ID], $"UI_CanvasController", $"TestPlayer{_characterSelect.players.UsedID.Item1[ID]}");
+        player.curPlayer.controllers.AddController(ControllerType.Joystick, currentID, true);
+        player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, currentID, $"UI_CanvasController", $"TestPlayer{currentID}");
         if (_characterSelect.currentSet.gameMode == GameMode.Training)
         {
             player.cursorObject.SetActive(true);
-            player.cursorText.text = $"{_characterSelect.players.UsedID.Item1[ID] + 1}";
+            player.cursorText.text = $"{currentID + 1}";
 
         }
         player.isConnected = true;
