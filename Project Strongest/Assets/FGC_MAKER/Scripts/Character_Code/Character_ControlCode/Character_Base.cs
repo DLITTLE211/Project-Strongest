@@ -842,6 +842,7 @@ public class Character_Base : MonoBehaviour
         _cAnimator.isHit = true;
         _cHitController.ForceLockHitAnim(HitLevel.Crumple);
         opponentPlayer._cHitstun.HandleAnimatorFreeze(true,0);
+        throwFunc();
         while (frameCount < _cHurtBox.throwTechTime)
         {
             if (_cHurtBox.CheckIfThrowTeched())
@@ -868,7 +869,6 @@ public class Character_Base : MonoBehaviour
             frameCount += Base_FrameCode.ONE_FRAME;
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
-        throwFunc();
     }
     public void CheckAttackActive(bool forceClear = true)
     {

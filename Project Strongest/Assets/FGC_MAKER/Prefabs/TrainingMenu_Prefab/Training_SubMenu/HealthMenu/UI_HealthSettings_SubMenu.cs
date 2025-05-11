@@ -65,13 +65,15 @@ public class UI_HealthSettings_SubMenu : UI_SubMenuBase
         }
         SetP2ToggleText();
     }
-    public void SetP1ToggleText() 
+    public void SetP1ToggleText()
     {
-        P1_ToggleText.text = ((MeterRecoveryType)(P1_healthIterator)).ToString();
+        string message = SpriteToTextColorUtility.AppendSpriteName(((MeterRecoveryType)(P1_healthIterator)).ToString().ToUpper(), P1_ToggleText.color);
+        P1_ToggleText.text = message;
     }
     public void SetP2ToggleText()
     {
-        P2_ToggleText.text = ((MeterRecoveryType)(P2_healthIterator)).ToString();
+        string message = SpriteToTextColorUtility.AppendSpriteName(((MeterRecoveryType)(P2_healthIterator)).ToString().ToUpper(), P2_ToggleText.color);
+        P2_ToggleText.text = message;
     }
     public MeterRecoveryType ReturnP1RecoveryType() 
     {

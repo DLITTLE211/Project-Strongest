@@ -396,7 +396,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             {
                 float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
                 float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
-
+                waitTime = waitTime == Mathf.Infinity ? 1f* Base_FrameCode.ONE_FRAME : waitTime;
                 if (_base._cHitstun.animSpeed == 0.25f)
                 {
                     customFrameCount = customFrameCount - (customFrameCount * _base._cHitstun.animSpeed);

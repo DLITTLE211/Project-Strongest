@@ -81,6 +81,7 @@ public class Character_StateMachine : MonoBehaviour
         At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(C_BlockState, MoveState, new Predicate(() => At_2Move()));
         At(AttackState, MoveState, new Predicate(() => At_2Move()));
+        At(throwState, MoveState, new Predicate(() => At_2Move()));
         At(CustomSuperState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
         At(Hitstate, MoveState, new Predicate(() => At_Jump2Move()));

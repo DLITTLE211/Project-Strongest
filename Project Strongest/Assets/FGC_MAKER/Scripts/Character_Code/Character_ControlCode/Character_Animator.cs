@@ -55,12 +55,6 @@ public class Character_Animator : MonoBehaviour
         inRekkaState = false;
         inStanceState = false;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K)) 
-        {
-        }
-    }
     public void SetModelColors(Character_ColorData _colorData, int skinIndex) 
     {
         matCount = 0;
@@ -141,8 +135,10 @@ public class Character_Animator : MonoBehaviour
             }
             if (attackOverride)
             {
-                myAnim.Play(animHash, 0);
-                shadowAnim.Play(animHash, 0);
+                myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+                shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+                //myAnim.Play(animHash, 0);
+                //shadowAnim.Play(animHash, 0);
             }
             else
             {
@@ -337,7 +333,7 @@ public class Character_Animator : MonoBehaviour
 
         _lastAnim = lastAttack.AttackAnims;
 
-        PlayNextAnimation(lastAttack.attackHashes, 0,true);
+        PlayNextAnimation(lastAttack.attackHashes, 2f*Base_FrameCode.ONE_FRAME,true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
         StartCoroutine(BasicAttackRoutine);
     }
@@ -351,10 +347,9 @@ public class Character_Animator : MonoBehaviour
         _lastAnim = throwCustom;
         lastAttack = throwProperty;
         throwCustom.SetIsFollowUpAttack(true);
-
-        PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 0, true);
         ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
         StartCoroutine(ThrowAttackRoutine);
+        PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 0f, true);
     }
     public void StartSuperFrameCount(Attack_BaseProperties superProperty, int curAnim,int animCount,AttackHandler_Attack superCustom, Callback nextAnimIterator = null)
     {
@@ -368,7 +363,7 @@ public class Character_Animator : MonoBehaviour
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
 
         _lastAnim = superCustom;
-        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 0 ,true);
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2f * Base_FrameCode.ONE_FRAME, true);
         superCustom.SetIsFollowUpAttack(true);
         if (SuperAttackRoutine != null) 
         {

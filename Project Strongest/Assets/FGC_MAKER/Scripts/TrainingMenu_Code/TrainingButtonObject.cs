@@ -7,16 +7,17 @@ using UnityEngine.Events;
 
 public class TrainingButtonObject : MonoBehaviour
 {
-        public Button menuButton;
-        public string name;
-        public TMP_Text buttonFuncName;
-        public void Make(string _name, UnityAction func)
-        {
-            name = _name;
-            buttonFuncName.text = name;
-            UnityAction buttonAction = func;
-            menuButton.onClick.AddListener(buttonAction);
-        }
+    public Button menuButton;
+    public string name;
+    public TMP_Text buttonFuncName;
+    public void Make(string _name, UnityAction func)
+    {
+        name = _name;
+        string buttonText = SpriteToTextColorUtility.AppendSpriteName(name.ToUpper(), Color.black);
+        buttonFuncName.text = buttonText;
+        UnityAction buttonAction = func;
+        menuButton.onClick.AddListener(buttonAction);
+    }
     public void OnApplicationQuit()
     {
         menuButton.onClick.RemoveAllListeners();
