@@ -454,6 +454,8 @@ public class Character_Base : MonoBehaviour
         mainCallbackDictionary.Add(HitPointCall.TeleportBackward, _cForce.TeleportOnCommand);
         mainCallbackDictionary.Add(HitPointCall.LockPos, LockPos);
         mainCallbackDictionary.Add(HitPointCall.UnlockPos, UnlockPos);
+        mainCallbackDictionary.Add(HitPointCall.EnemyLockPos, opponentPlayer.LockPos);
+        mainCallbackDictionary.Add(HitPointCall.EnemyUnlockPos, opponentPlayer.UnlockPos);
 
         //mainCallbackDictionary.Add(HitPointCall.KillStance, null);
 

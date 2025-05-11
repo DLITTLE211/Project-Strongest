@@ -143,6 +143,11 @@ public class Character_ComboDetection : MonoBehaviour
                 {
                     if (currentFollowupMoveType == MoveType.String_Normal)
                     {
+                        IAttackFunctionality newInputtedSpecial = SpecialMoveOnlyCheck();
+                        if (newInputtedSpecial != null && newInputtedSpecial != ActiveFollowUpAttackCheck.Value)
+                        {
+                            return;
+                        }
                         if (followUpAttackIndex > -1)
                         {
                             ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));

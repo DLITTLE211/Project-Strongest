@@ -603,4 +603,6 @@ public enum HitPointCall
     Magnetize = 1 << 24,
     SetHurtboxOnCommand = 1 << 25,
     ActivateAmplification = 1 << 26,
+    EnemyLockPos = 1 << 27,
+    EnemyUnlockPos = 1 << 28,
 }
