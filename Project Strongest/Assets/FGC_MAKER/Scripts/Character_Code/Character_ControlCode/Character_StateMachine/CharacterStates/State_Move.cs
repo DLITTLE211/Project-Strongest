@@ -81,13 +81,13 @@ public class State_Move : BaseState
     {
         onForward = true;
         onBack = false;
-        _cAnim.PlayNextAnimation(moveFHash, 2 * (1 / 60f));
+        _cAnim.PlayNextAnimation(moveFHash, 1 * (1 / 60f));
     }
     void HandleBackwardAnimation()
     {
         onBack = true;
         onForward = false;
-        _cAnim.PlayNextAnimation(moveBHash, 2 * (1 / 60f));
+        _cAnim.PlayNextAnimation(moveBHash, 1 * (1 / 60f));
     }
     public override void OnRecov()
     {

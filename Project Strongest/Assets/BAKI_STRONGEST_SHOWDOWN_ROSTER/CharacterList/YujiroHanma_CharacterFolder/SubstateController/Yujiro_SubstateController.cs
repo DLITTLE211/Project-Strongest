@@ -2,22 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FightingGame_FrameData;
+using System.Linq;
 
 public class Yujiro_SubstateController : Character_SubStateController_Base
 {
     public bool _demonActivation;
+    [Header("Base Idle Animation")]
+    public AnimationClip _baseIdleAnim;
+    public AnimationClip _baseIdleFWalk;
+    public AnimationClip _baseIdleBWalk;
+    [Space(20)]
+    [Header("Install Idle Animation")]
+    public AnimationClip _installIdleAnim;
+    public AnimationClip _installIdleFWalk;
+    public AnimationClip _installIdleBWalk;
+
     public VictoryAnimation _victoryAnimation;
     [SerializeField] private GameObject _shirt;
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.I)) 
+        {
+            PlayActivateInstallProperties();
+        }
+        if (Input.GetKeyUp(KeyCode.O))
+        {
+            OnRoundReset();
+        }
+    }
 
     public override void PlayActivateInstallProperties(CustomCallback callback = null)
     {
         _demonActivation = true;
         _shirt.SetActive(!_demonActivation);
+        SetAnimClipsOnChange(1);
+    }
+    void SetAnimClipsOnChange(float inInstall)
+    {
+        _cAnimator.myAnim.SetFloat("InInstall", inInstall);
+        _cAnimator.shadowAnim.SetFloat("InInstall", inInstall);
     }
     public override void OnRoundReset()
     {
         _demonActivation = false;
         _shirt.SetActive(!_demonActivation);
+        SetAnimClipsOnChange(0);
     }
     public override void PlayVictoryWinAnimation()
     {

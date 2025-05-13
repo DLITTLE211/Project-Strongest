@@ -86,6 +86,11 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(0);
             return;
         }
+        if (!CheckAttackRequiresInstall(newAttack))
+        {
+            Combo.RemoveAt(0);
+            return;
+        }
         if (!CheckMeterCriteria(newAttack))
         {
             Combo.RemoveAt(0);
@@ -96,7 +101,6 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(0);
             return;
         }
-        
         if (decreaseGatlingCount != null)
         {
             decreaseGatlingCount();
@@ -118,17 +122,17 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(index);
             return;
         }
+        if (!CheckAttackRequiresInstall(newAttack))
+        {
+            Combo.RemoveAt(index);
+            return;
+        }
         if (!CheckMeterCriteria(newAttack))
         {
             Combo.RemoveAt(index);
             return;
         }
         if (!CheckGroundCriteria(newAttack))
-        {
-            Combo.RemoveAt(index);
-            return;
-        }
-        if (!CheckAttackRequiresInstall(newAttack)) 
         {
             Combo.RemoveAt(index);
             return;
