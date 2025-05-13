@@ -270,11 +270,15 @@ public class Character_Base : MonoBehaviour
     void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
     {
         GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
+
         _chosenCharacter.transform.localPosition = new Vector3(0f, -1f, 0f);
         _chosenCharacter.transform.localRotation = Quaternion.identity;
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
         Character_Animator _chosenCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
+
+        _cSubStateController = _chosenCharacter.GetComponentInChildren<Character_SubStateController_Base>();
+        _cSubStateController.SetStarterInformation(this);
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
 
         SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier,skinIndex);
@@ -480,6 +484,7 @@ public class Character_Base : MonoBehaviour
 
         mainCallbackDictionary.Add(HitPointCall.DealCustomDamage, opponentPlayer._cDamageCalculator.TakeCustomDamage);
         mainCallbackDictionary.Add(HitPointCall.ForceSideSwitch, _sideManager.ForceSideSwitch);
+        mainCallbackDictionary.Add(HitPointCall.ActivateInstallProperties, _cSubStateController.PlayActivateInstallProperties);
     }
     #endregion
 

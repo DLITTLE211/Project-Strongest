@@ -605,4 +605,5 @@ public enum HitPointCall
     ActivateAmplification = 1 << 26,
     EnemyLockPos = 1 << 27,
     EnemyUnlockPos = 1 << 28,
+    ActivateInstallProperties = 1 << 29,
 }

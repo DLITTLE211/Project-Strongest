@@ -959,8 +959,16 @@ PrefabInstance:
       addedObject: {fileID: 4691228394369359427}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7038203479419907724}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 7870534508119086931}
   m_SourcePrefab: {fileID: 100100000, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+--- !u!1 &1319682184999453785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4213761076027111091, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+  m_PrefabInstance: {fileID: 6329181820105821460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &1527235154415113356 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4819996317329807768, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
@@ -1012,6 +1020,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7038203479419907724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6563060244724428869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c53cc2fb52ee8e40a5525de45ca266e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _base: {fileID: 0}
+  _cAnimator: {fileID: 7870534508119086931}
+  _demonActivation: 0
+  _victoryAnimation:
+    _animationClip: {fileID: 0}
+    _animName: 
+    _animHash: 0
+    _animLength: 0
+    activatePoint: 0
+    activatePointInFrames: 0
+  _shirt: {fileID: 1319682184999453785}
 --- !u!114 &7870534508119086931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,6 +1106,7 @@ MonoBehaviour:
     hitLevel: 0
     attackHashes: 0
     _meterRequirement: 0
+    isInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0

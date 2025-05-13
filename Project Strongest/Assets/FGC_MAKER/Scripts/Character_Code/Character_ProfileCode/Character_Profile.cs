@@ -49,6 +49,7 @@ public class Character_Profile : ScriptableObject
     #region Character ColorData
     public Character_ColorData _characterSkins;
     #endregion
+
     #region Character Animator Info
     [Header("Character Animator Information")]
     public GameObject characterModel;
@@ -81,7 +82,6 @@ public class Character_Profile : ScriptableObject
     {
         characterAnimator = characterModel.GetComponent<Animator>();
         cAnimatorScript = animator;
-     
     }
 }
 [Serializable]

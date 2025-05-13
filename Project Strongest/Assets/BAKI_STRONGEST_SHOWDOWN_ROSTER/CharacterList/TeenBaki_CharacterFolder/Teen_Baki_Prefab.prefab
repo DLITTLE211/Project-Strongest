@@ -1901,6 +1901,9 @@ PrefabInstance:
       addedObject: {fileID: 8596617034931560135}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5758720175762165648}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2569374614122903550}
     - targetCorrespondingSourceObject: {fileID: 5695735803674598497, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       insertIndex: -1
@@ -2254,6 +2257,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5758720175762165648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6331712145590652518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fb8258fac9f7346948454b64e2f4dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _base: {fileID: 0}
+  _cAnimator: {fileID: 2569374614122903550}
+  demonActivation: 0
+  _victoryAnimation:
+    _animationClip: {fileID: 0}
+    _animName: 
+    _animHash: 0
+    _animLength: 0
+    activatePoint: 0
+    activatePointInFrames: 0
+  _sodaBottle: {fileID: 4473234312870259765}
 --- !u!114 &2569374614122903550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2316,6 +2342,7 @@ MonoBehaviour:
     hitLevel: 0
     attackHashes: 0
     _meterRequirement: 0
+    isInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0

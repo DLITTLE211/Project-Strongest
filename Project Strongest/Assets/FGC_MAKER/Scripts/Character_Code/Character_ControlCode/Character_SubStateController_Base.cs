@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class Character_SubStateController_Base : MonoBehaviour
 {
-    [SerializeField] private Character_Base _base;
-    [SerializeField] private Character_Animator _cAnimator;
-    private float startSecondaryIdle = 10f;
-    IEnumerator SecondIdleAnimRoutine;
-    private bool canPlaySecondIdle;
+    [SerializeField] protected Character_Base _base;
+    [SerializeField] protected Character_Animator _cAnimator;
+    protected float startSecondaryIdle = 10f;
+    protected IEnumerator SecondIdleAnimRoutine;
+    protected bool canPlaySecondIdle;
+    public void SetStarterInformation(Character_Base newBase) 
+    {
+        _base = newBase;
+    }
+    public virtual void OnRoundReset() 
+    {
+
+    }
     public void PlaySecondaryAnimation()
     {
         if (canPlaySecondIdle)
@@ -43,7 +51,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         canPlaySecondIdle = true;
     }
-    public virtual void PlayActivateInstallProperties()
+    public virtual void PlayActivateInstallProperties(CustomCallback callback = null)
     {
 
     }
