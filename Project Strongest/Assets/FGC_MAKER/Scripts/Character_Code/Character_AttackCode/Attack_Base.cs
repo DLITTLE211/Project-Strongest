@@ -30,6 +30,7 @@ public class Attack_BaseProperties
 
     [Header("_____REQUIREMENTS/RESTRICTIONS______")]
     [Range(0, 3)] public int _meterRequirement;
+    public bool isInInstall;
     [Range(0, 30)] public int _meterAwardedOnHit;
     [Range(-10, 40)] public int attackScalingPercent;
     public bool dashCancelable, JumpCancelable;
@@ -70,7 +71,7 @@ public class Attack_BaseProperties
         rawAttackDamage = 0;
         rawChipDamage = 0;
         counterHitDamageMult = 1;
-
+        isInInstall = false;
         attackMainStunValues = new Attack_StunValues();
 
         _meterRequirement = 0;

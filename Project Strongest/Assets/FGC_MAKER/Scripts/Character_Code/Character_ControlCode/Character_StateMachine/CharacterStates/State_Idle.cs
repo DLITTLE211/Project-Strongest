@@ -90,18 +90,23 @@ public class State_Idle : BaseState
     {
         if (!_base.isLockedPause)
         {
+            _base._cSubStateController?.PlaySecondaryAnimation();
+        }
+        //CallSecondaryIdleAnim();
+        /*if (!_base.isLockedPause)
+        {
             if (canDoSecondaryIdle)
             {
                 if (timeTillSecondaryIdle <= -Base_FrameCode.ONE_FRAME)
                 {
-                    CallSecondaryIdleAnim();
+                    
                 }
                 else
                 {
                     timeTillSecondaryIdle -= Base_FrameCode.ONE_FRAME;
                 }
             }
-        }
+        }*/
         base.OnUpdate();
     }
     public void CallSecondaryIdleAnim() 

@@ -44,11 +44,15 @@ public class State_Crouch : BaseState
     }
     public async override void OnUpdate()
     {
+        if (!_base.isLockedPause)
+        {
+            _base._cSubStateController?.PlaySecondaryAnimation();
+        }
         if (!_base._cComboDetection.superMobilityOption) 
         {
             _base._cComboDetection.superMobilityOption = true;
         }
-        if (!_base.isLockedPause)
+        /*if (!_base.isLockedPause)
         {
             if (canDoSecondaryCrouch)
             {
@@ -61,7 +65,7 @@ public class State_Crouch : BaseState
                     await PlaySecondaryAnim();
                 }
             }
-        }
+        }*/
         base.OnUpdate();
     }
     async Task PlaySecondaryAnim()

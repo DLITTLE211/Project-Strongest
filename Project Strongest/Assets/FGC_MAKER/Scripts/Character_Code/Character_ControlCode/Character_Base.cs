@@ -17,6 +17,7 @@ public class Character_Base : MonoBehaviour
 
     #region Script References
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
+    public Character_SubStateController_Base _cSubStateController;
     public Character_Hitstop _cHitstop;
     public Character_AttackDetection _cADetection;
     public Character_AfflictionManager _afflictionManager;
