@@ -20,10 +20,10 @@ TagManager:
   - UI
   - Stage
   - Player1
-  - CharacterSelect
+  - 
   - Player2
-  - 
-  - 
+  - CharacterSelect
+  - InGame_UI
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: InGameUI
+    uniqueID: 1537717519
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

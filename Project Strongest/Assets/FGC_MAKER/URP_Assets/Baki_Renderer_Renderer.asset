@@ -70,8 +70,8 @@ MonoBehaviour:
     zFailOperation: 0
   m_ShadowTransparentReceive: 0
   m_RenderingMode: 0
-  m_DepthPrimingMode: 0
-  m_CopyDepthMode: 1
+  m_DepthPrimingMode: 1
+  m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
 --- !u!114 &6957649831131170479
@@ -105,7 +105,7 @@ MonoBehaviour:
     depthCompareFunction: 4
     enableWrite: 1
     stencilSettings:
-      overrideStencilState: 0
+      overrideStencilState: 1
       stencilReference: 0
       stencilCompareFunction: 8
       passOperation: 0

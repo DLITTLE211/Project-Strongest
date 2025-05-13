@@ -27,6 +27,7 @@ public class Menu_MenuButton : Button
         highlightedColor = new Color32((byte)150f, (byte)150f, (byte)150f, (byte)255f);
         forwardPosition = NavigationButton.transform.localPosition.x + 95f;
         startingPos = NavigationButton.localPosition;
+        SlideTween = DOTween.Sequence();
     }
     public override void OnSelect(BaseEventData eventData)
     {

@@ -1828,6 +1828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSecondIdleAnim: 0
   characterProfile: {fileID: 0}
+  _cSubStateController: {fileID: 0}
   _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 498465949}
   _afflictionManager: {fileID: 1509354414}
@@ -5070,6 +5071,7 @@ MonoBehaviour:
     hitLevel: 0
     attackHashes: 0
     _meterRequirement: 0
+    isInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0
@@ -9131,7 +9133,7 @@ Camera:
   far clip plane: 900
   field of view: 60
   orthographic: 1
-  orthographic size: 2.4005082
+  orthographic size: 1.65
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11088,6 +11090,7 @@ MonoBehaviour:
     hitLevel: 0
     attackHashes: 0
     _meterRequirement: 0
+    isInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0
@@ -19259,6 +19262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSecondIdleAnim: 0
   characterProfile: {fileID: 0}
+  _cSubStateController: {fileID: 0}
   _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 510088399}
   _afflictionManager: {fileID: 1952859375}
@@ -20919,7 +20923,7 @@ GameObject:
   - component: {fileID: 1077507986}
   - component: {fileID: 1077507985}
   m_Layer: 5
-  m_Name: Canvas_MainGame
+  m_Name: Canvas_MainGame_UnderSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20976,7 +20980,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 474224558}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 4
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -20985,8 +20989,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: -1
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1077071607
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1077507988
 RectTransform:
@@ -36621,6 +36625,7 @@ MonoBehaviour:
     hitLevel: 0
     attackHashes: 0
     _meterRequirement: 0
+    isInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0
@@ -37667,6 +37672,7 @@ MonoBehaviour:
     hitLevel: 0
     attackHashes: 0
     _meterRequirement: 0
+    isInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0
