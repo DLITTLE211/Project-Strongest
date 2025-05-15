@@ -528,7 +528,8 @@ public class CustomCallback
     public float timeStamp;
     public bool funcBool;
     public AwaitClass awaitEnum;
-    public float forceFloat,projectileSpeedFloat;
+    public float forceFloat;
+    public float projectileSpeedFloat;
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
     public CustomDamageField customDamage;

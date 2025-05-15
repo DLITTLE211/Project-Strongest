@@ -49,6 +49,8 @@ MonoBehaviour:
     attackInput:
     - attackString: 2363236D
       attackStringArray: 
+    - attackString: 2365236D
+      attackStringArray: 
     - attackString: 236236D
       attackStringArray: 
     - attackString: 2626D
@@ -71,6 +73,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 3
       isInInstall: 0
+      isNotInInstall: 1
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
@@ -169,6 +172,8 @@ MonoBehaviour:
     attackInput:
     - attackString: 2363236C
       attackStringArray: 
+    - attackString: 2365236C
+      attackStringArray: 
     - attackString: 236236C
       attackStringArray: 
     - attackString: 2626C
@@ -191,6 +196,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 3
       isInInstall: 0
+      isNotInInstall: 0
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
@@ -624,6 +630,8 @@ MonoBehaviour:
     attackInput:
     - attackString: 2141214C
       attackStringArray: 
+    - attackString: 2145214C
+      attackStringArray: 
     - attackString: 214214C
       attackStringArray: 
     - attackString: 2424C
@@ -646,6 +654,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 3
       isInInstall: 1
+      isNotInInstall: 0
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
@@ -807,6 +816,8 @@ MonoBehaviour:
     attackInput:
     - attackString: 2363236A
       attackStringArray: 
+    - attackString: 2365236A
+      attackStringArray: 
     - attackString: 236236A
       attackStringArray: 
     - attackString: 2626A
@@ -829,6 +840,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 1
       isInInstall: 0
+      isNotInInstall: 0
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
@@ -973,7 +985,7 @@ MonoBehaviour:
       rawChipDamage: 0
       counterHitDamageMult: 1.045
       attackMainStunValues:
-        hitstunValue: 6
+        hitstunValue: 25
         blockStunValue: 0.5
         hitstopValue: 1
         blockStopValue: 0
@@ -981,6 +993,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 0
       isInInstall: 1
+      isNotInInstall: 0
       _meterAwardedOnHit: 2
       attackScalingPercent: 2
       dashCancelable: 0
@@ -1026,7 +1039,7 @@ MonoBehaviour:
           - activeFrame: 56
             inactiveFrame: 61
           recoveryEnd: 0
-          recoveryAmount: 4
+          recoveryAmount: 60
           totalRecovery: 0
           _extraPoints: []
         _hitCount:
@@ -1039,7 +1052,7 @@ MonoBehaviour:
       hitblocked: 0
       LateralKB_Data:
         Hit_HKB_Level: 2
-        Hit_Value: 0.45
+        Hit_Value: 0.75
         Block_HKB_Level: 0
         Block_Value: 0
       VerticalKB_Data:
@@ -1080,6 +1093,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 0
       isInInstall: 0
+      isNotInInstall: 0
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
@@ -1262,6 +1276,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 0
       isInInstall: 0
+      isNotInInstall: 0
       _meterAwardedOnHit: 7
       attackScalingPercent: 1
       dashCancelable: 0
@@ -1373,6 +1388,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 0
       isInInstall: 0
+      isNotInInstall: 0
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
@@ -1458,6 +1474,7 @@ MonoBehaviour:
               attackHashes: 0
               _meterRequirement: 0
               isInInstall: 0
+              isNotInInstall: 0
               _meterAwardedOnHit: 6
               attackScalingPercent: 30
               dashCancelable: 0
@@ -1578,6 +1595,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 5
         attackScalingPercent: 15
         dashCancelable: 0
@@ -1691,6 +1709,7 @@ MonoBehaviour:
               attackHashes: 0
               _meterRequirement: 0
               isInInstall: 0
+              isNotInInstall: 0
               _meterAwardedOnHit: 4
               attackScalingPercent: 18
               dashCancelable: 0
@@ -1803,6 +1822,7 @@ MonoBehaviour:
               attackHashes: 0
               _meterRequirement: 0
               isInInstall: 0
+              isNotInInstall: 0
               _meterAwardedOnHit: 3
               attackScalingPercent: 10
               dashCancelable: 0
@@ -1908,6 +1928,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 4
         attackScalingPercent: 18
         dashCancelable: 0
@@ -1973,6 +1994,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 3
         attackScalingPercent: 10
         dashCancelable: 0
@@ -2052,6 +2074,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 0
         attackScalingPercent: 0
         dashCancelable: 0
@@ -2131,6 +2154,7 @@ MonoBehaviour:
               attackHashes: 0
               _meterRequirement: 0
               isInInstall: 0
+              isNotInInstall: 0
               _meterAwardedOnHit: 4
               attackScalingPercent: 20
               dashCancelable: 0
@@ -2209,6 +2233,7 @@ MonoBehaviour:
               attackHashes: 0
               _meterRequirement: 0
               isInInstall: 0
+              isNotInInstall: 0
               _meterAwardedOnHit: 5
               attackScalingPercent: 15
               dashCancelable: 0
@@ -2287,6 +2312,7 @@ MonoBehaviour:
               attackHashes: 0
               _meterRequirement: 0
               isInInstall: 0
+              isNotInInstall: 0
               _meterAwardedOnHit: 6
               attackScalingPercent: 10
               dashCancelable: 0
@@ -2392,6 +2418,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 6
         attackScalingPercent: 20
         dashCancelable: 0
@@ -2457,6 +2484,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 0
         attackScalingPercent: 0
         dashCancelable: 0
@@ -2522,6 +2550,7 @@ MonoBehaviour:
         attackHashes: 0
         _meterRequirement: 0
         isInInstall: 0
+        isNotInInstall: 0
         _meterAwardedOnHit: 0
         attackScalingPercent: 0
         dashCancelable: 0
@@ -2596,6 +2625,7 @@ MonoBehaviour:
       attackHashes: 0
       _meterRequirement: 0
       isInInstall: 0
+      isNotInInstall: 0
       _meterAwardedOnHit: 6
       attackScalingPercent: 16
       dashCancelable: 0
@@ -2716,6 +2746,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 15
           dashCancelable: 0
@@ -2826,6 +2857,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 15
           dashCancelable: 0
@@ -2936,6 +2968,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 15
           dashCancelable: 0
@@ -3052,6 +3085,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 3
           attackScalingPercent: 25
           dashCancelable: 1
@@ -3128,6 +3162,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 19
           dashCancelable: 0
@@ -3204,6 +3239,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 5
           attackScalingPercent: 10
           dashCancelable: 0
@@ -3320,6 +3356,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 5
           attackScalingPercent: 14
           dashCancelable: 0
@@ -3432,6 +3469,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 15
           dashCancelable: 0
@@ -3542,6 +3580,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 2
           attackScalingPercent: 10
           dashCancelable: 0
@@ -3658,6 +3697,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 3
           attackScalingPercent: 25
           dashCancelable: 0
@@ -3734,6 +3774,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 22
           dashCancelable: 0
@@ -3810,6 +3851,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 5
           dashCancelable: 0
@@ -3893,6 +3935,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 6
           attackScalingPercent: 5
           dashCancelable: 0
@@ -4009,6 +4052,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 20
           dashCancelable: 0
@@ -4091,6 +4135,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 2
           attackScalingPercent: 25
           dashCancelable: 0
@@ -4207,6 +4252,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 6
           attackScalingPercent: 8
           dashCancelable: 0
@@ -4323,6 +4369,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 4
           attackScalingPercent: 17
           dashCancelable: 0
@@ -4440,6 +4487,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 2
           attackScalingPercent: 20
           dashCancelable: 0
@@ -4522,6 +4570,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 5
           attackScalingPercent: 10
           dashCancelable: 0
@@ -4604,6 +4653,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 2
           attackScalingPercent: 20
           dashCancelable: 0
@@ -4686,6 +4736,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 7
           attackScalingPercent: 12
           dashCancelable: 0
@@ -4768,6 +4819,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 3
           attackScalingPercent: 22
           dashCancelable: 0
@@ -4850,6 +4902,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 5
           attackScalingPercent: 11
           dashCancelable: 0
@@ -4932,6 +4985,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 0
           attackScalingPercent: 0
           dashCancelable: 0
@@ -5014,6 +5068,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 3
           attackScalingPercent: 11
           dashCancelable: 0
@@ -5334,6 +5389,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 9
           attackScalingPercent: -4
           dashCancelable: 0
@@ -5416,6 +5472,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 9
           attackScalingPercent: -4
           dashCancelable: 0
@@ -5499,6 +5556,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 5
           attackScalingPercent: 0
           dashCancelable: 0
@@ -5646,6 +5704,7 @@ MonoBehaviour:
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
+          isNotInInstall: 0
           _meterAwardedOnHit: 5
           attackScalingPercent: 0
           dashCancelable: 0
@@ -5819,6 +5878,7 @@ MonoBehaviour:
     attackHashes: 0
     _meterRequirement: 0
     isInInstall: 0
+    isNotInInstall: 0
     _meterAwardedOnHit: 0
     attackScalingPercent: 0
     dashCancelable: 0

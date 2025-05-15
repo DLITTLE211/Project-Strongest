@@ -86,6 +86,11 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(0);
             return;
         }
+        if (!CheckAttackRequiresNoInstall(newAttack))
+        {
+            Combo.RemoveAt(0);
+            return;
+        }
         if (!CheckAttackRequiresInstall(newAttack))
         {
             Combo.RemoveAt(0);
@@ -125,6 +130,11 @@ public class Attack_Manager : MonoBehaviour
         if (!CheckAttackRequiresInstall(newAttack))
         {
             Combo.RemoveAt(index);
+            return;
+        }
+        if (!CheckAttackRequiresNoInstall(newAttack))
+        {
+            Combo.RemoveAt(0);
             return;
         }
         if (!CheckMeterCriteria(newAttack))
@@ -229,15 +239,30 @@ public class Attack_Manager : MonoBehaviour
             return false;
         }
     }
-    public bool CheckAttackRequiresInstall(Attack_BaseProperties newAttack) 
+    public bool CheckAttackRequiresInstall(Attack_BaseProperties newAttack)
     {
-        if (!newAttack.isInInstall) 
+        if (!newAttack.isInInstall)
         {
             return true;
         }
         else
         {
-            if (_base._cSubStateController.VerifyInstallState()) 
+            if (_base._cSubStateController.VerifyInstallState())
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+    public bool CheckAttackRequiresNoInstall(Attack_BaseProperties newAttack) 
+    {
+        if (!newAttack.isNotInInstall) 
+        {
+            return true;
+        }
+        else
+        {
+            if (!_base._cSubStateController.VerifyInstallState()) 
             {
                 return true;
             }

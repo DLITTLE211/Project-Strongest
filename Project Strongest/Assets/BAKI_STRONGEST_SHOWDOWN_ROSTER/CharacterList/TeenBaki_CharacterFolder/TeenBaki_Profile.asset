@@ -35,9 +35,9 @@ MonoBehaviour:
   JumpForce: 325
   InAirMoveForce: 100
   dashSpeed: 4
-  MaxHealth: 100
+  MaxHealth: 200
   MaxStunValue: 30
-  DefenseValue: 30
+  DefenseValue: 50
   HealthRegenRate: 3
   _characterSkins:
     _modelMaterials:
@@ -392,7 +392,6 @@ MonoBehaviour:
   StandBlockAnim: {fileID: -1586074178185308347, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   CrouchBlockAnim: {fileID: -5350492469610822897, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   _characterMoveList: {fileID: -3225154758481460539, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}
-  _characterSubstateScript: {fileID: -6557624731064569231, guid: 167fdcc45b9563743bfefb73bf185ed7, type: 3}
   moveListCount: 1
   CharacterMoveListPrefab:
   - {fileID: 3315631830582736349, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}

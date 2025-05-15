@@ -31,6 +31,7 @@ public class Attack_BaseProperties
     [Header("_____REQUIREMENTS/RESTRICTIONS______")]
     [Range(0, 3)] public int _meterRequirement;
     public bool isInInstall;
+    public bool isNotInInstall;
     [Range(0, 30)] public int _meterAwardedOnHit;
     [Range(-10, 40)] public int attackScalingPercent;
     public bool dashCancelable, JumpCancelable;

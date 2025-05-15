@@ -90,7 +90,7 @@ public class CharacterSelect_Page : MonoBehaviour
     {
         if (colorSelectIndex <= 0)
         {
-            colorSelectIndex = 0;
+            colorSelectIndex = chosenCharacter._characterSkins.ColorSets.Count-1;
         }
         else
         {
@@ -102,7 +102,7 @@ public class CharacterSelect_Page : MonoBehaviour
     {
         if (colorSelectIndex >= 4)
         {
-            colorSelectIndex = 4;
+            colorSelectIndex = 0;
         }
         else
         {
