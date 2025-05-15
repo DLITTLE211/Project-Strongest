@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44586772, g: 0.49560046, b: 0.57435983, a: 1}
+  m_IndirectSpecularColor: {r: 0.44966698, g: 0.4997388, b: 0.5756465, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &203844587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1186,7 +1186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.049, y: 1.506, z: -0.995}
+  m_LocalPosition: {x: -0.25, y: 1.48, z: -4.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3775,6 +3775,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 982152756708896321, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022137369896156654, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195617435002915208, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476106893116994792, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2790319260035955099, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.63
@@ -3790,7 +3806,7 @@ PrefabInstance:
     - target: {fileID: 3460485413337176756, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: bfa96633ce2a91d40b53c8d4049762d4, type: 2}
+      objectReference: {fileID: 2100000, guid: 39d2d603090b2da429c6429fc4bc9da8, type: 2}
     - target: {fileID: 5458266101637155387, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3801,7 +3817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5458266101637155387, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 5458266101637155387, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3844,6 +3860,10 @@ PrefabInstance:
       value: 7.93
       objectReference: {fileID: 0}
     - target: {fileID: 5517402415058960918, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517402415058960918, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 0
       objectReference: {fileID: 0}
@@ -3854,6 +3874,14 @@ PrefabInstance:
     - target: {fileID: 6905584581088073532, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
       propertyPath: m_Name
       value: TrainingStage_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905584581088073532, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204909749646306913, guid: 06f8eaf4aa9512e4a8c882e1f4cd5c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
