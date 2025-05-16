@@ -163,7 +163,16 @@ public class TrainingMenu_Controller : MonoBehaviour
     }
     #endregion
 
-
+    #region Return Info States
+    public UI_DisplaySet ReturnPlayer1DisplaySettings() 
+    {
+        return InfoDisplayReturnValues.p1_booleanState;
+    }
+    public UI_DisplaySet ReturnPlayer2DisplaySettings()
+    {
+        return InfoDisplayReturnValues.p2_booleanState;
+    }
+    #endregion
 
 
     void SetActiveButton(GameObject button) 

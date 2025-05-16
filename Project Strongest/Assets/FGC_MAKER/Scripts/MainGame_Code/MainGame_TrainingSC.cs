@@ -52,6 +52,8 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         else 
         {
             _eventSystem.firstSelectedGameObject = null;
+            List<bool> p1UI_StateData = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnPlayer1DisplaySettings().ReturnBooleanStatesForObject();
+            List<bool> p2UI_StateData = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnPlayer2DisplaySettings().ReturnBooleanStatesForObject();
         }
     }
     public override void SetPlayersPosition()

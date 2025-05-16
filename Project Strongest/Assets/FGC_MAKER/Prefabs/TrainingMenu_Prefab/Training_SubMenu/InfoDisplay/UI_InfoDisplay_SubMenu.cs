@@ -30,6 +30,7 @@ public class UI_InfoDisplay_SubMenu : UI_SubMenuBase
     {
         p2_booleanState.displayToggle[level].SetState(!p2_booleanState.displayToggle[level].currentState);
     }
+
 }
 [Serializable]
 public class UI_DisplaySet 
