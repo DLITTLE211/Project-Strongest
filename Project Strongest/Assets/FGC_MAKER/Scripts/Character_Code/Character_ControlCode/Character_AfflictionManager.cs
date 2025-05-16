@@ -7,8 +7,9 @@ using FightingGame_FrameData;
 public class Character_AfflictionManager : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
+    [SerializeField] private Dictionary<StatusEffect.Effect_Affliction,Affliction_Object> _totalAfflictions;
     [SerializeField] private List<Affliction_Object> TotalAfflictions;
-    [SerializeField] private List<Affliction_Object> appliedAffliction = new List<Affliction_Object>();
+    [SerializeField] private List<Affliction_Object> appliedAffliction;
     public void ClearAppliedAffliction() 
     {
         if(appliedAffliction != null) 
@@ -18,14 +19,52 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     public void Start()
     {
-        for(int i = 0; i < TotalAfflictions.Count; i++)
+        appliedAffliction = new List<Affliction_Object>();
+        for (int i = 0; i < TotalAfflictions.Count; i++)
         {
             TotalAfflictions[i].SetAffliction(_base);
             TotalAfflictions[i]._afflictionObject.SetActive(false);
         }
+        for(int i = 0; i <TotalAfflictions.Count; i++) 
+        {
+            _totalAfflictions.Add(TotalAfflictions[i]._afflictionType, TotalAfflictions[i]);
+        }
         appliedAffliction.Clear();
     }
-    public void ApplyAffliction(Affliction_Object _appliedAffliction, int index)
+    #region Affliction Applier Code
+    public void SendAfflicion(StatusEffect.Effect_Affliction c)
+    {
+        Affliction_Object newAffliction = new Affliction_Object();
+        if (_totalAfflictions.TryGetValue(c, out newAffliction))
+        {
+            if (!_base._cSuperMeter.CanTakeFromMeter(newAffliction._afflictionBase.meterRequirement))
+            {
+                return;
+            }
+            _base._cSuperMeter.TakeMeter(newAffliction._afflictionBase.meterRequirement);
+            _base.opponentPlayer._afflictionManager.ApplyAffliction(newAffliction);
+        }
+    }
+    public void ApplyAffliction(Affliction_Object _appliedAffliction)
+    {
+        Affliction activeAffliction = _appliedAffliction._afflictionObject.GetComponent<Affliction>();
+        _appliedAffliction._afflictionObject.SetActive(true);
+        activeAffliction.SetDurationValues();
+        activeAffliction.durationSlider.value = 1;
+        activeAffliction.ActivateAffliction(() => DeactivateAffliction(_appliedAffliction, _appliedAffliction._afflictionObject));
+        appliedAffliction.Add(_appliedAffliction);
+        ApplyBaseAfflictions();
+    }
+    void DeactivateAffliction(Affliction_Object _appliedAffliction, GameObject thisAffliction)
+    {
+        _appliedAffliction._afflictionBase.ForceEndAffliction();
+        appliedAffliction.Remove(_appliedAffliction);
+        thisAffliction.SetActive(false);
+    }
+    #endregion
+
+
+    public void ApplyAffliction(int index)
     {
         Affliction activeAffliction = TotalAfflictions[index]._afflictionObject.GetComponent<Affliction>();
         TotalAfflictions[index]._afflictionObject.SetActive(true);
@@ -84,9 +123,14 @@ public class Character_AfflictionManager : MonoBehaviour
         Affliction _affliction = TotalAfflictions[Value]._afflictionBase;
         for (int i = 0; i < TotalAfflictions.Count; i++) 
         {
-            if (TotalAfflictions[i]._afflictionBase.affliction == _affliction.affliction) 
+            if (TotalAfflictions[i]._afflictionBase.affliction == _affliction.affliction)
             {
-                _base.opponentPlayer._afflictionManager.ApplyAffliction(TotalAfflictions[Value], i);
+                if (!_base._cSuperMeter.CanTakeFromMeter(TotalAfflictions[i]._afflictionBase.meterRequirement))
+                {
+                    return;
+                }
+                _base._cSuperMeter.TakeMeter(TotalAfflictions[i]._afflictionBase.meterRequirement);
+                _base.opponentPlayer._afflictionManager.ApplyAffliction(i);
                 break;
             }
             continue;

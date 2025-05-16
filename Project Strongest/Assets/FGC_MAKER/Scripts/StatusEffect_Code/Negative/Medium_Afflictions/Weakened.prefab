@@ -54,10 +54,12 @@ MonoBehaviour:
   affliction: 8
   durationType: 1
   currentState: 0
+  meterRequirement: 0.5
   activeDuration: 10
   duration: 0
   damageValue: 0
   _isConsumed: 0
+  _isSingleUse: 0
   durationSlider: {fileID: 7671293443315794294}
   textField: {fileID: 1149499002301919209}
   afflictionType: 0

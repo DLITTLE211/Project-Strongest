@@ -120,12 +120,19 @@ public class Character_SuperMeter : MonoBehaviour
         {
             if (checkLowerPossibleTier(calcValue))
             {
-                meterTier -= calcValue;
+                if(calcValue < 1)
+                {
+                    meterTier -= 1;
+                }
+                else
+                {
+                    meterTier -= calcValue;
+                }
                 SetMeterTierText();
-                superMeter.currentValue -= (calcValue * meterMaxThreshold);
-                superMeter.currentValue += meterMaxThreshold;
+                float meterValue = meterMaxThreshold + (superMeter.currentValue - (calcValue * meterMaxThreshold));
+                fullMeterLevel = meterValue;
+                superMeter.currentValue = meterValue;
                 superMeter.SetCurrentMeterValue(superMeter.currentValue);
-                fullMeterLevel -= (calcValue * meterMaxThreshold);
             }
             else
             {

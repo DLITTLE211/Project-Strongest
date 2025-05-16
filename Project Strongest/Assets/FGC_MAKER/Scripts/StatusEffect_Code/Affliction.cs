@@ -15,6 +15,7 @@ public class Affliction : StatusEffect
     public Effect_Affliction affliction;
     public DurationType durationType;
     public ActiveState currentState;
+    public float meterRequirement;
     [SerializeField,Range(5,30)]private int activeDuration;
     public float duration;
     public float damageValue;
