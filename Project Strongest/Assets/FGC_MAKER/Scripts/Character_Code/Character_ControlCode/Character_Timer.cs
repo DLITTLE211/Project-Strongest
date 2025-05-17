@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Character_Timer
 {
+    public GameObject mainObject;
     public InputLogger inputLogger;
     public float curTime;
     public float startTime;
@@ -12,6 +13,10 @@ public class Character_Timer
     public bool hasEnded;
     public Queue<Character_ButtonInput> receivedButtons2 = new Queue<Character_ButtonInput>();
 
+    public void SetObjectState(bool state)
+    {
+        mainObject.SetActive(state);
+    }
     public List<string> logString;
     public void setStartValues(Character_ButtonInput releaseCheck = null)
     {

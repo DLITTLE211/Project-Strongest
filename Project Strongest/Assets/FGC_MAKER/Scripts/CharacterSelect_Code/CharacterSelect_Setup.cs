@@ -57,7 +57,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public void SubtractControllerCounter(ControllerStatusChangedEventArgs args = null)
     {
-        players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
+        players.RemovePlayer(args.controllerId);
         CheckPlayerCount();
     }
     public void AddControllerCounter(ControllerStatusChangedEventArgs args = null)

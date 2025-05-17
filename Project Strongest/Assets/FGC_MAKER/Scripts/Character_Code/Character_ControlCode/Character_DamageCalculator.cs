@@ -32,10 +32,15 @@ public class Character_DamageCalculator : MonoBehaviour
     {
         victoryHit = false;
         ResetBuffs();
-   }
+    }
     public void SetAllowDeathCheck() 
     {
         allowDeathCheck = GameManager.instance._gameModeSet.gameMode != GameMode.Training;
+    }
+
+    public void SetObjectState(bool state)
+    {
+        _damageText.gameObject.SetActive(state);
     }
     public void ResetBuffs() 
     {

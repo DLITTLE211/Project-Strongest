@@ -7,6 +7,7 @@ using TMPro;
 
 public class ControllerWidgetHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject mainObject;
     public Transform knobPos;
     public List<Image> buttonList;
     public List<Vector2> axisKnobLocations;
@@ -16,6 +17,10 @@ public class ControllerWidgetHandler : MonoBehaviour
     private void Start()
     {
         prevInt = 5;
+    }
+    public void SetObjectState(bool state) 
+    {
+        mainObject.SetActive(state);
     }
     // Start is called before the first frame update
     public void GetAxisLocation(int aKlocation) 

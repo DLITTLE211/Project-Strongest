@@ -791,7 +791,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type_0*"!
+  m_text: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+    name="F" color=#000000FF>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1325,7 +1326,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type_0*"!
+  m_text: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+    name="F" color=#000000FF>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1595,7 +1597,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type_0*"!
+  m_text: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+    name="F" color=#000000FF>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2891,7 +2894,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type_0*"!
+  m_text: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+    name="F" color=#000000FF>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3652,7 +3656,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type_0*"!
+  m_text: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+    name="F" color=#000000FF>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4235,12 +4240,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
     - target: {fileID: 1731845729118224149, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_text
+      value: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+        name="F" color=#000000FF>
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731845729118224149, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_fontSize
+      value: 35.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731845729118224149, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_spriteAsset
       value: 
       objectReference: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
     - target: {fileID: 1731845729118224149, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970384030225764102, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_text
+      value: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+        name="F" color=#000000FF>
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970384030225764102, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_fontSize
+      value: 35.8
       objectReference: {fileID: 0}
     - target: {fileID: 1970384030225764102, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_spriteAsset
@@ -4691,6 +4714,15 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7147422438619833852, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_text
+      value: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+        name="F" color=#000000FF>
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147422438619833852, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_fontSize
+      value: 35.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147422438619833852, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_spriteAsset
       value: 
       objectReference: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
@@ -4699,12 +4731,30 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7242147425329239320, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_text
+      value: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+        name="F" color=#000000FF>
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242147425329239320, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_fontSize
+      value: 35.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242147425329239320, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_spriteAsset
       value: 
       objectReference: {fileID: 11400000, guid: 417d5842ab0443d40b5a34eaf5a27eef, type: 2}
     - target: {fileID: 7242147425329239320, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516582213392030005, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_text
+      value: <sprite name="O" color=#000000FF><sprite name="F" color=#000000FF><sprite
+        name="F" color=#000000FF>
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516582213392030005, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_fontSize
+      value: 35.8
       objectReference: {fileID: 0}
     - target: {fileID: 7516582213392030005, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_spriteAsset
@@ -5045,6 +5095,10 @@ PrefabInstance:
     - target: {fileID: 8698199081519490050, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781391106336408493, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
+      propertyPath: m_text
+      value: Show Hitstun Meter
       objectReference: {fileID: 0}
     - target: {fileID: 8781391106336408493, guid: 7b1a9c2f18564ad409d8198d51317608, type: 3}
       propertyPath: m_spriteAsset
@@ -7825,7 +7879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8430833660599353889, guid: e5c43d44554cfaf4e9808da5508e7795, type: 3}
       propertyPath: m_text
-      value: Show Invincibilty
+      value: Show Hitstun Meter
       objectReference: {fileID: 0}
     - target: {fileID: 8430833660599353889, guid: e5c43d44554cfaf4e9808da5508e7795, type: 3}
       propertyPath: m_fontSize

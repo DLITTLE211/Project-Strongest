@@ -51,10 +51,24 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         }
         else 
         {
-            _eventSystem.firstSelectedGameObject = null;
-            List<bool> p1UI_StateData = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnPlayer1DisplaySettings().ReturnBooleanStatesForObject();
-            List<bool> p2UI_StateData = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnPlayer2DisplaySettings().ReturnBooleanStatesForObject();
+            _eventSystem.firstSelectedGameObject = null; 
+            List<bool> backupSet = new List<bool> { false, false, false, false, false };
+            UI_DisplaySet p1Set = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnPlayer1DisplaySettings();
+            List<bool> p1UI_StateData = p1Set != null ? p1Set.ReturnBooleanStatesForObject() : backupSet;
+            SetObjectState(mainPlayer, p1UI_StateData);
+
+            UI_DisplaySet p2Set = _pauseMenu.GetComponent<TrainingMenu_Controller>().ReturnPlayer2DisplaySettings();
+            List<bool> p2UI_StateData = p2Set != null ? p2Set.ReturnBooleanStatesForObject() : backupSet;
+            SetObjectState(secondaryPlayer, p2UI_StateData);
         }
+    }
+    void SetObjectState(Character_Base player, List<bool> states)
+    {
+        player.widget.SetObjectState(states[0]);
+        player._timer.SetObjectState(states[1]);
+        player._cDamageCalculator.SetObjectState(states[2]);
+        player._aFrameDataMeter.SetObjectState(states[3]);
+        player._cHitController.SetObjectState(states[4]);
     }
     public override void SetPlayersPosition()
     {

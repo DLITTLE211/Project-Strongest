@@ -31,6 +31,10 @@ public class Character_HurtboxController : MonoBehaviour
     public float throwTechTime;
     public bool throwTeched;
 
+    public void SetObjectState(bool state)
+    {
+        _hurtboxStateText.gameObject.SetActive(state);
+    }
     public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing)
     {
         throwTechTime = totalTechTime * Base_FrameCode.ONE_FRAME;

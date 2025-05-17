@@ -8,8 +8,10 @@ using FightingGame_FrameData;
 
 public class AttackHandler_NewFrameDataMeter : MonoBehaviour
 {
+    [SerializeField] private GameObject mainObject;
     [SerializeField] private Character_Base _base;
     [SerializeField] private GameObject _refSingularFrame;
+    [SerializeField] private Transform frameMeterParent;
     [SerializeField] private List<AttackHandler_SingularFrame> _refSingularFrameList;
     [SerializeField] private TMP_Text frameDataInformationText;
     FrameType lastFrameDataType;
@@ -20,6 +22,11 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
     public int TrueFrameCount { get { return frameCount; } }
     [SerializeField] private bool _isHitRecovering;
     public bool HitRecovering { get { return _isHitRecovering; } }
+
+    public void SetObjectState(bool state)
+    {
+        mainObject.SetActive(state);
+    }
     public void SetupMeterData() 
     {
         if (GameManager.instance._gameModeSet.gameMode != GameMode.Training)
@@ -43,7 +50,7 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         }
         for (int i = 0; i < 60; i++)
         {
-            GameObject newFrame = Instantiate(_refSingularFrame, this.transform);
+            GameObject newFrame = Instantiate(_refSingularFrame, frameMeterParent);
             newFrame.name = $"SingleFrame_{i + 1}";
             AttackHandler_SingularFrame singularFrameData = newFrame.GetComponent<AttackHandler_SingularFrame>();
             singularFrameData.InitColors();

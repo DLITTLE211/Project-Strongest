@@ -199,8 +199,8 @@ public class GameManager : MonoBehaviour
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)
     {
-        players.SubtractFromJoystickNames(ReInput.controllers.GetJoystickNames());
-        for(int i = 0; i < players.totalPlayers.Count; i++) 
+        players.RemovePlayer(args.controllerId);
+        for (int i = 0; i < players.totalPlayers.Count; i++) 
         {
             if (!players.characterIdentification.IDs.Contains(players.totalPlayers[i].playerID)) 
             {
@@ -329,16 +329,7 @@ public class Character_AvailableID
     public PlayerCharacter_Controller Player1;
     public PlayerCharacter_Controller Player2;
     public Identification characterIdentification;
-
-
-
-    //public List<int> availableIds;
-    //public (List<int>, List<string>) UsedID;
     public List<Character_Base> totalPlayers;
-    //public List<string> joystickNames,currentNames;
-
-    /*[SerializeField] List<int> usedIntID;
-    [SerializeField] List<string> usedStrings;*/
     public void InitializePlayerControllers()
     {
         characterIdentification = new Identification();
@@ -353,7 +344,7 @@ public class Character_AvailableID
         }
         else if (Player2.ID == -1) 
         {
-            Player1.SetPlayer_Active(ID, controllerName);
+            Player2.SetPlayer_Active(ID, controllerName);
         }
         characterIdentification.AddEntry(ID, controllerName);
     }
@@ -380,76 +371,6 @@ public class Character_AvailableID
             Player1.SetPlayer_Controlled(character);
         }
     }
-    /*public void InitAvailableIDs() 
-    {
-        availableIds = new List<int>();
-        UsedID.Item1 = new List<int>();
-        UsedID.Item2 = new List<string>();
-        availableIds.Add(0);
-        availableIds.Add(1);
-    }*/
-    /*public void AddToJoystickNames(string[] names) 
-    {
-        for (int i = 0; i < names.Length; i++)
-        {
-            if (joystickNames.Contains(names[i])) 
-            {
-                continue;
-            }
-            joystickNames.Add(names[i]);
-        }
-    }*/
-    public void SubtractFromJoystickNames(string[] names)
-    {
-        /*currentNames = new List<string>();
-        if (names.Length == 0)
-        {
-            availableIds.Add(UsedID.Item1[0]);
-            UsedID.Item2.RemoveAt(0);
-            UsedID.Item1.RemoveAt(0);
-            joystickNames.RemoveAt(0);
-
-            usedIntID.Clear();
-            usedStrings.Clear();
-            if(availableIds[0] > availableIds[1]) 
-            {
-                availableIds.Clear();
-                availableIds.Add(0);
-                availableIds.Add(1);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < names.Length; i++)
-            {
-                currentNames.Add(names[i]);
-            }
-            for (int i = 0; i < joystickNames.Count; i++)
-            {
-                if (!currentNames.Contains(joystickNames[i]))
-                {
-                    availableIds.Add(UsedID.Item1[i]);
-                    UsedID.Item2.RemoveAt(i);
-                    UsedID.Item1.RemoveAt(i);
-                    joystickNames.RemoveAt(i);
-                }
-            }
-        }
-
-        usedIntID = UsedID.Item1;
-        usedStrings = UsedID.Item2;*/
-    }
-    /*public void AddUsedID(string addectJoystick)
-    {
-        UsedID.Item1.Add(availableIds[0]);
-        UsedID.Item2.Add(addectJoystick);
-        foreach (int id in UsedID.Item1) 
-        {
-            availableIds.Remove(id);
-        }
-        usedIntID = UsedID.Item1;
-        usedStrings = UsedID.Item2;
-    }*/
 }
 
 [System.Serializable]

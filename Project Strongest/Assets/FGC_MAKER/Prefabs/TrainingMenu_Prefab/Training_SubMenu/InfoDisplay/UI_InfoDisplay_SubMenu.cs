@@ -40,7 +40,6 @@ public class UI_DisplaySet
 
     public UI_DisplaySet()
     {
-        trainingUi_BooleanState = new List<bool>();
         for (int i = 0; i < displayToggle.Count; i++) 
         {
             displayToggle[i].currentState = false;
@@ -50,11 +49,12 @@ public class UI_DisplaySet
             trainingUi_BooleanState.Add(false);
         }
     }
-    public List<bool> ReturnBooleanStatesForObject() 
+    public List<bool> ReturnBooleanStatesForObject()
     {
-        for(int i = 0; i < displayToggle.Count; i++) 
+        trainingUi_BooleanState = new List<bool>();
+        for (int i = 0; i < displayToggle.Count; i++) 
         {
-            trainingUi_BooleanState[i] = displayToggle[i].currentState;
+            trainingUi_BooleanState.Add(displayToggle[i].currentState);
         }
         return trainingUi_BooleanState;
     } 
@@ -71,7 +71,7 @@ public class UI_DisplayToggle
     public void SetState(bool state) 
     {
         currentState = state;
-        string message = state ? SpriteToTextColorUtility.AppendSpriteName("ON".ToUpper(), Color.white) : SpriteToTextColorUtility.AppendSpriteName("OFF".ToUpper(), Color.white);
+        string message = state ? SpriteToTextColorUtility.AppendSpriteName("ON".ToUpper(), Color.black) : SpriteToTextColorUtility.AppendSpriteName("OFF".ToUpper(), Color.black);
         boolStateText.SetText(message);
     }
 }

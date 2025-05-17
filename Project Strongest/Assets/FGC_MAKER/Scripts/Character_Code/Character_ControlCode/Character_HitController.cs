@@ -35,7 +35,10 @@ public class Character_HitController : MonoBehaviour
     [SerializeField] private bool blockedAttack;
     public bool Recovering { get{ return _isRecovering;  } }
 
-
+    public void SetObjectState(bool state)
+    {
+        _hitStunSlider.gameObject.SetActive(state);
+    }
     List<MoveType> lockMoveTypes = new List<MoveType>()
     {
         MoveType.Counter,
