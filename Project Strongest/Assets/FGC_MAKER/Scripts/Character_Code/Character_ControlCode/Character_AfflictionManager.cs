@@ -10,6 +10,7 @@ public class Character_AfflictionManager : MonoBehaviour
     [SerializeField] private Dictionary<StatusEffect.Effect_Affliction,Affliction_Object> _totalAfflictions;
     [SerializeField] private List<Affliction_Object> TotalAfflictions;
     [SerializeField] private List<Affliction_Object> appliedAffliction;
+    IEnumerator applicationWindow;
     public void ClearAppliedAffliction() 
     {
         if(appliedAffliction != null) 
@@ -35,6 +36,62 @@ public class Character_AfflictionManager : MonoBehaviour
         appliedAffliction.Clear();
     }
     #region Affliction Applier Code
+    public void OpenAfflictionApplicationWindow(AfflictionSet currentSet) 
+    {
+        if(applicationWindow != null) 
+        {
+            StopCoroutine(applicationWindow);
+            applicationWindow = null;
+        }
+        applicationWindow = CheckAfflictionApplicationWindow(currentSet);
+        StartCoroutine(applicationWindow);
+    }
+
+    IEnumerator CheckAfflictionApplicationWindow(AfflictionSet currentSet) 
+    {
+        List<StatusEffect.Effect_Affliction> availableAfflictions = new List<StatusEffect.Effect_Affliction>();
+        if(currentSet._weakAffliction != StatusEffect.Effect_Affliction.None) 
+        {
+            availableAfflictions.Add(currentSet._weakAffliction);
+        }
+        if (currentSet._mediumAffliction != StatusEffect.Effect_Affliction.None)
+        {
+            availableAfflictions.Add(currentSet._mediumAffliction);
+        }
+        if (currentSet._strongAffliction != StatusEffect.Effect_Affliction.None)
+        {
+            availableAfflictions.Add(currentSet._strongAffliction);
+        }
+        float frameCount = 0;
+        float maxTime = 30f * Base_FrameCode.ONE_FRAME;
+        StatusEffect.Effect_Affliction inputtedAffliction = StatusEffect.Effect_Affliction.None;
+        while (frameCount < maxTime) 
+        {
+            if (CheckInputForAffliction(availableAfflictions,out inputtedAffliction)) 
+            {
+                SendAfflicion(inputtedAffliction);
+            }
+            frameCount += Base_FrameCode.ONE_FRAME;
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+        }
+    }
+    bool CheckInputForAffliction(List<StatusEffect.Effect_Affliction> totalAfflictions, out StatusEffect.Effect_Affliction inputtedAffliction) 
+    {
+        /*if () 
+        {
+
+        }
+        if ()
+        {
+
+        }
+        if ()
+        {
+
+        }*/
+        inputtedAffliction = StatusEffect.Effect_Affliction.None;
+        return false;
+    }
     public void SendAfflicion(StatusEffect.Effect_Affliction c)
     {
         Affliction_Object newAffliction = new Affliction_Object();
