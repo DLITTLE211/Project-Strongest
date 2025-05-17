@@ -90,5 +90,4 @@ interface IMobilityOption
     void PerformMobilityAction();
     void SetStarterInformation(Character_Base _base);
     MovementType GetMovementType();
-    void SetMobilityTimer();
 }

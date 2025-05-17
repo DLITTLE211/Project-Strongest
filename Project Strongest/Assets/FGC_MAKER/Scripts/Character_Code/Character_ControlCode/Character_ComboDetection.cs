@@ -19,6 +19,8 @@ public class Character_ComboDetection : MonoBehaviour
     List<MoveType> followUpInputMoveTypes;
     [HideInInspector] public int lastInput;
     bool isParalyzed;
+    List<Character_MobilityOption> MobilityNoDash;
+    List<Character_MobilityOption> MobilityOnlyDash;
     private void Start()
     {
         isParalyzed = false;
@@ -32,6 +34,23 @@ public class Character_ComboDetection : MonoBehaviour
         _cMOnChangeInputLog = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         _cMOnChangeInputLog.SetMaxStringSize(5);
         SetFollowUpAttackTypes();
+    }
+    public void SetMobilityData() 
+    {
+        MobilityNoDash = new List<Character_MobilityOption>();
+        MobilityOnlyDash = new List<Character_MobilityOption>();
+        for (int i = 0; i < _base.character_MobilityOptions.Mobility.Count; i++)
+        {
+            Character_MobilityOption currentMobility = _base.character_MobilityOptions.Mobility[i];
+            if (currentMobility.movementPriority != 2)
+            {
+                MobilityNoDash.Add(_base.character_MobilityOptions.Mobility[i]);
+            }
+            else
+            {
+                MobilityOnlyDash.Add(_base.character_MobilityOptions.Mobility[i]);
+            }
+        }
     }
     public void SetParalyzed(bool state = false)
     {
@@ -96,15 +115,18 @@ public class Character_ComboDetection : MonoBehaviour
             CompleteMoveListVerifier();
             return;
         }
-        _cMOnChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        if (direction != 5)
+        {
+            _cMOnChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        }
         currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
-        CompleteMobilityVerifier(2);
+        CompleteMobilityVerifier(MobilityOnlyDash, _cMOnChangeInputLog, _base._cMobiltyTimer_NoDash);
     }
     void AddToMobilityCurrentInput(int direction)
     {
         _cMAnyChangeInputLog.ClearFirstIndex();
         _cMAnyChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
-        CompleteMobilityVerifier();
+        CompleteMobilityVerifier(MobilityNoDash, _cMAnyChangeInputLog,_base._cMobiltyTimer_NoDash);
     }
     void CompleteMoveListVerifier()
     {
@@ -434,14 +456,14 @@ public class Character_ComboDetection : MonoBehaviour
     #endregion
 
     #region Mobility Verification Code
-    void CompleteMobilityVerifier(int mobilityCheckList = -1)
+    void CompleteMobilityVerifier(List<Character_MobilityOption> mobilityList, AttackInputTypes mobilityCheckList, Character_InputTimer_Mobility _mobTimer)
     {
         if (_base._cStateMachine._playerState.current.State == _base._cStateMachine.standBlockRef || _base._cStateMachine._playerState.current.State == _base._cStateMachine.crouchBlockRef)
         {
             return;
         }
         if (isParalyzed) { return; }
-        Character_MobilityOption curMobility = ExtraMovementVerifier(mobilityCheckList);
+        Character_MobilityOption curMobility = ExtraMovementVerifier(mobilityList, mobilityCheckList, _mobTimer);
 
         if (curMobility != null)
         {
@@ -450,16 +472,16 @@ public class Character_ComboDetection : MonoBehaviour
             return;
         }
     }
-    Character_MobilityOption ExtraMovementVerifier(int mobilityChecker)
+    Character_MobilityOption ExtraMovementVerifier(List<Character_MobilityOption> mobilityList, AttackInputTypes mobilityCheckList, Character_InputTimer_Mobility _mobTimer)
     {
-        _base._cMobiltyTimer.CheckForInput = true;
-        for (int i = 0; i < _base.character_MobilityOptions.Mobility.Count; i++)
+        _mobTimer.CheckForInput = true;
+        for (int i = 0; i < mobilityList.Count; i++)
         {
-            Character_MobilityOption entry = _base.character_MobilityOptions.Mobility[i];
+            Character_MobilityOption entry = mobilityList[i];
             string moveInDict = entry.mobilityInput.attackString;
-            AttackInputTypes usedInputString = mobilityChecker != 2 ? _cMAnyChangeInputLog : _cMOnChangeInputLog;
+            AttackInputTypes usedInputString = mobilityCheckList;
             string keyRef = usedInputString.specialMoveTypeInput.attackString;
-           
+
             if (keyRef.Contains(moveInDict))
             {
                 if (entry._requiresCharge && superMobilityOption == entry._requiresCharge)
@@ -496,6 +518,7 @@ public class Character_ComboDetection : MonoBehaviour
             curMobility.SetStarterInformation(_base);
         }
         canCheckMovement = true;
+        SetMobilityData();
     }
     public void ResetCombos()
     {
@@ -506,12 +529,15 @@ public class Character_ComboDetection : MonoBehaviour
             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
         }
     }
-    public void ResetMobilityString()
+    public void ResetMobilityString(bool isDashChecker)
     {
-        _cMAnyChangeInputLog.ResetComboInfo();
-        if (_cMOnChangeInputLog.specialMoveTypeInput.attackString.Length > 1)
+        if (isDashChecker)
         {
             _cMOnChangeInputLog.ResetComboInfo();
+        }
+        else
+        {
+            _cMAnyChangeInputLog.ResetComboInfo();
         }
     }
 

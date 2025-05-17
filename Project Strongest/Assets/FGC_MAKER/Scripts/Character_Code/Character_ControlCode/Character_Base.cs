@@ -26,7 +26,8 @@ public class Character_Base : MonoBehaviour
     public Character_Animator _cAnimator;
     public Character_InputDetection _cInput;
     public Character_InputTimer_Attacks _cAttackTimer;
-    public Character_InputTimer_Mobility _cMobiltyTimer;
+    public Character_InputTimer_Mobility _cMobiltyTimer_NoDash;
+    public Character_InputTimer_Mobility _cMobiltyTimer_OnlyDash;
     public ControllerWidgetHandler widget;
     public Character_Force _cForce;
     public Character_StateMachine _cStateMachine;
@@ -228,7 +229,8 @@ public class Character_Base : MonoBehaviour
         _jumpDirForce = characterProfile.InAirMoveForce;
 
 
-        _cMobiltyTimer.SetStartingValues();
+        _cMobiltyTimer_NoDash.SetStartingValues();
+        _cMobiltyTimer_OnlyDash.SetStartingValues();
         _cAnimator = chosenAnimator;
         _cHurtBox.SetCollisionHurtboxStartSize(characterProfile.collisionSizing);
         _cHurtBox.SetTriggerHurtboxStartSize(characterProfile.hurtboxSizing,this);
@@ -243,7 +245,8 @@ public class Character_Base : MonoBehaviour
         _cAttackTimer.ResetTimer();
         _cForce.Force_InitFunctions();
         _cForce.AddAcceptableStates();
-        _cMobiltyTimer.ResetTimer();
+        _cMobiltyTimer_NoDash.ResetTimer();
+        _cMobiltyTimer_OnlyDash.ResetTimer();
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();
         _cAnimator.SetModelColors(characterProfile._characterSkins, skinIndex);

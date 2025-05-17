@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character_InputTimer_Mobility : Character_InputTimer
 {
     [SerializeField] private Character_Base _base;
+    public bool isDashChecker;
     #region Function Summary
     /// <summary>
     /// Sets timer to starting value and sends broadcast to reset mobility based input checks
@@ -15,7 +16,7 @@ public class Character_InputTimer_Mobility : Character_InputTimer
     {
         FrameCountTimer = StartFrameCountTimer;
         CheckForInput = false;
-        _base._cComboDetection.ResetMobilityString();
+        _base._cComboDetection.ResetMobilityString(isDashChecker);
     }
     #region Function Summary
     /// <summary>

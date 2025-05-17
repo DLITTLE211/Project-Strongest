@@ -1738,7 +1738,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 569047790}
   m_Father: {fileID: 1684261299}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1758,6 +1759,7 @@ MonoBehaviour:
   _startFrameCountTimer: 0
   _checkForInput: 0
   _base: {fileID: 993311525}
+  isDashChecker: 0
 --- !u!114 &88445607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1996,7 +1998,8 @@ MonoBehaviour:
   _cAnimator: {fileID: 0}
   _cInput: {fileID: 830645725}
   _cAttackTimer: {fileID: 1371640602}
-  _cMobiltyTimer: {fileID: 1371640601}
+  _cMobiltyTimer_NoDash: {fileID: 1371640601}
+  _cMobiltyTimer_OnlyDash: {fileID: 1702505270}
   widget: {fileID: 1578916747}
   _cForce: {fileID: 1062369593}
   _cStateMachine: {fileID: 960065525}
@@ -11957,6 +11960,55 @@ MonoBehaviour:
     normalAirAttackInfo: 0
     keyGroundCheck: 0
   lastInput: 0
+--- !u!1 &569047789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569047790}
+  - component: {fileID: 569047791}
+  m_Layer: 7
+  m_Name: ______OnlyDash_Timers_______
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &569047790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569047789}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 88445605}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569047791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569047789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd78b5b2666a8fb489cdc77f199f50d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frameCountTimer: 0
+  _startFrameCountTimer: 0
+  _checkForInput: 0
+  _base: {fileID: 993311525}
+  isDashChecker: 1
 --- !u!1 &589503421
 GameObject:
   m_ObjectHideFlags: 0
@@ -19799,7 +19851,8 @@ MonoBehaviour:
   _cAnimator: {fileID: 0}
   _cInput: {fileID: 4569801}
   _cAttackTimer: {fileID: 88445607}
-  _cMobiltyTimer: {fileID: 88445606}
+  _cMobiltyTimer_NoDash: {fileID: 88445606}
+  _cMobiltyTimer_OnlyDash: {fileID: 569047791}
   widget: {fileID: 652720591}
   _cForce: {fileID: 493910409}
   _cStateMachine: {fileID: 686745047}
@@ -27235,7 +27288,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1702505269}
   m_Father: {fileID: 1663233169}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27255,6 +27309,7 @@ MonoBehaviour:
   _startFrameCountTimer: 0
   _checkForInput: 0
   _base: {fileID: 94923329}
+  isDashChecker: 0
 --- !u!114 &1371640602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32520,6 +32575,55 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1702505268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1702505269}
+  - component: {fileID: 1702505270}
+  m_Layer: 7
+  m_Name: ______OnlyDash_Timers_______
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1702505269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702505268}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1371640600}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1702505270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702505268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd78b5b2666a8fb489cdc77f199f50d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frameCountTimer: 0
+  _startFrameCountTimer: 0
+  _checkForInput: 0
+  _base: {fileID: 94923329}
+  isDashChecker: 1
 --- !u!1 &1714486075
 GameObject:
   m_ObjectHideFlags: 0

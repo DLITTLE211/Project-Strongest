@@ -12,7 +12,6 @@ public class Character_MobilityOption : IMobilityOption
     public Character_Base CurBase { get { return _curBase; } }
     public int movementPriority;
     public bool _requiresCharge;
-    public Character_InputTimer_Mobility _mobTimer;
     [SerializeField] private MovementType _movementType;
     public FrameData frameData;
     public MobilityOption_Anim _animInformation;
@@ -20,17 +19,12 @@ public class Character_MobilityOption : IMobilityOption
     public void SetStarterInformation(Character_Base _base)
     {
         _curBase = _base;
-        SetMobilityTimer();
         _animInformation.SetAnimInformation();
         mobilityInput.turnStringToArray();
         if (movementPriority == 0) 
         {
             movementPriority = 1;
         }
-    }
-    public void SetMobilityTimer()
-    {
-        _mobTimer = _curBase._cMobiltyTimer;
     }
     public void PerformMobilityAction()
     {

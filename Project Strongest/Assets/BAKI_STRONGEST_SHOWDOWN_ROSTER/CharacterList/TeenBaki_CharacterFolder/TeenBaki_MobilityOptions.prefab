@@ -48,13 +48,11 @@ MonoBehaviour:
   - mobilityOptionName: Neutral Super Jump
     movementPriority: 3
     _requiresCharge: 1
-    _mobTimer: {fileID: 0}
     _movementType: 3
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 10
       totalRecovery: 0
@@ -92,6 +90,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -125,6 +124,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
@@ -136,13 +136,11 @@ MonoBehaviour:
   - mobilityOptionName: Back Super Jump
     movementPriority: 3
     _requiresCharge: 1
-    _mobTimer: {fileID: 0}
     _movementType: 4
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 10
       totalRecovery: 0
@@ -180,6 +178,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -213,6 +212,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
@@ -224,13 +224,11 @@ MonoBehaviour:
   - mobilityOptionName: Forward Super Jump
     movementPriority: 3
     _requiresCharge: 1
-    _mobTimer: {fileID: 0}
     _movementType: 5
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 10
       totalRecovery: 0
@@ -268,6 +266,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -301,6 +300,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
@@ -312,13 +312,11 @@ MonoBehaviour:
   - mobilityOptionName: Forward Jump
     movementPriority: 0
     _requiresCharge: 0
-    _mobTimer: {fileID: 0}
     _movementType: 2
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 10
       totalRecovery: 0
@@ -356,6 +354,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -389,6 +388,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: -3867530233133899325, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
@@ -400,13 +400,11 @@ MonoBehaviour:
   - mobilityOptionName: Neutral Jump
     movementPriority: 1
     _requiresCharge: 0
-    _mobTimer: {fileID: 0}
     _movementType: 0
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 10
       totalRecovery: 0
@@ -444,6 +442,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -477,6 +476,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: -5973118211641507162, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
@@ -488,13 +488,11 @@ MonoBehaviour:
   - mobilityOptionName: Back Jump
     movementPriority: 1
     _requiresCharge: 0
-    _mobTimer: {fileID: 0}
     _movementType: 1
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 10
       totalRecovery: 0
@@ -532,6 +530,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 35
         call: 512
         hitFrameBool: 0
@@ -565,6 +564,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: 3309584049392005944, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
@@ -576,13 +576,11 @@ MonoBehaviour:
   - mobilityOptionName: Forward Dash
     movementPriority: 2
     _requiresCharge: 0
-    _mobTimer: {fileID: 0}
     _movementType: 6
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 5
       totalRecovery: 0
@@ -620,6 +618,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 14
         call: 512
         hitFrameBool: 0
@@ -653,24 +652,23 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: -478295745125350043, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
     mobilityInput:
-      attackString: 656
+      attackString: 66
       attackStringArray: 
   - mobilityOptionName: Back Dash
     movementPriority: 2
     _requiresCharge: 0
-    _mobTimer: {fileID: 0}
     _movementType: 7
     frameData:
       init: 0
       startup: 0
-      active: 0
-      inactive: 0
+      activeWindows: []
       recoveryEnd: 0
       recoveryAmount: 5
       totalRecovery: 0
@@ -708,6 +706,7 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
       - hitFramePoints: 13
         call: 512
         hitFrameBool: 0
@@ -741,11 +740,12 @@ MonoBehaviour:
             Block_VKB_Level: 0
             Block_Value: 0
           KnockDown: 0
+        _hurtboxType: 0
     _animInformation:
       _animationClip: {fileID: 5713790909594089297, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       _animName: 
       _animHash: 0
       _animLength: 0
     mobilityInput:
-      attackString: 454
+      attackString: 44
       attackStringArray: 
