@@ -40,6 +40,10 @@ public class UI_DisplaySet
 
     public UI_DisplaySet()
     {
+        if (displayToggle == null)
+        {
+            return;
+        } 
         for (int i = 0; i < displayToggle.Count; i++) 
         {
             displayToggle[i].currentState = false;

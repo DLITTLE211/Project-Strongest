@@ -120,7 +120,7 @@ public class Character_ComboDetection : MonoBehaviour
             _cMOnChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
         }
         currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
-        CompleteMobilityVerifier(MobilityOnlyDash, _cMOnChangeInputLog, _base._cMobiltyTimer_NoDash);
+        CompleteMobilityVerifier(MobilityOnlyDash, _cMOnChangeInputLog, _base._cMobiltyTimer_OnlyDash);
     }
     void AddToMobilityCurrentInput(int direction)
     {

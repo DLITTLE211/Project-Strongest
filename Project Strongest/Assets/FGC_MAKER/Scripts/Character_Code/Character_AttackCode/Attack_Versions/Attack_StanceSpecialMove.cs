@@ -10,6 +10,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     [SerializeField] private int curInput;
     [SerializeField] internal bool inStanceState;
     public int stanceHeldTime;
+    public AfflictionSet attackAfflictionSet;
 
     [SerializeField] private Character_Base _curBase;
     enum StanceState {KillStance, AttackStance }

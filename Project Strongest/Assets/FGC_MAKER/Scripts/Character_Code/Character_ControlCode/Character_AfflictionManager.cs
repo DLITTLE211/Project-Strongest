@@ -19,15 +19,18 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     public void Start()
     {
+        _totalAfflictions = new Dictionary<StatusEffect.Effect_Affliction, Affliction_Object>();
         appliedAffliction = new List<Affliction_Object>();
         for (int i = 0; i < TotalAfflictions.Count; i++)
         {
             TotalAfflictions[i].SetAffliction(_base);
             TotalAfflictions[i]._afflictionObject.SetActive(false);
         }
-        for(int i = 0; i <TotalAfflictions.Count; i++) 
+        for (int i = 0; i < TotalAfflictions.Count; i++)
         {
-            _totalAfflictions.Add(TotalAfflictions[i]._afflictionType, TotalAfflictions[i]);
+            StatusEffect.Effect_Affliction currentAffliction = TotalAfflictions[i]._afflictionType;
+            Affliction_Object currentObject = TotalAfflictions[i];
+            _totalAfflictions.Add(currentAffliction, currentObject);
         }
         appliedAffliction.Clear();
     }

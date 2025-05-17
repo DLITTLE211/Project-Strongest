@@ -424,7 +424,7 @@ public class Editor_MoveListEditor : EditorWindow
         propertyList.Add(newProperty);
         newAdvancedAttackData.property = newProperty;
         newAdvancedAttackData.attackInput = new List<Attack_Input>();
-        newAdvancedAttackData._customAnimation = new List<AttackHandler_Attack>();
+        newAdvancedAttackData._customAnimationField._customAnimation = new List<AttackHandler_Attack>();
         for (int i = 0; i < 3; i++)
         {
             newAdvancedAttackData.attackInput.Add(new Attack_Input("", ("").ToCharArray()));
@@ -436,7 +436,7 @@ public class Editor_MoveListEditor : EditorWindow
             newAttackHandler._frameData = new FrameData();
             animationFollowupList.Add(newAttackHandler);
             newAttackHandler._hitCount = new HitCount();
-            newAdvancedAttackData._customAnimation.Add(newAttackHandler);
+            newAdvancedAttackData._customAnimationField._customAnimation.Add(newAttackHandler);
         }
         newAdvancedAttackData.specialMoveName = "New Super Attack Data";
         CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, animationFollowupList, newAdvancedAttackData, null, null, null, null, null, propertyList.Count, newAdvancedAttackData.specialMoveName);
@@ -448,9 +448,9 @@ public class Editor_MoveListEditor : EditorWindow
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property };
         List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
         animationFollowupList.Add(specialAttack.property.AttackAnims);
-        for (int i = 0; i < specialAttack._customAnimation.Count; i++) 
+        for (int i = 0; i < specialAttack._customAnimationField._customAnimation.Count; i++) 
         {
-            animationFollowupList.Add(specialAttack._customAnimation[i]);
+            animationFollowupList.Add(specialAttack._customAnimationField._customAnimation[i]);
         }
         Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
         newAdvancedMoveData.specialMoveName = specialAttackName;
@@ -498,7 +498,7 @@ public class Editor_MoveListEditor : EditorWindow
         Attack_AdvancedSpecialMove newAdvancedAttackData = new Attack_AdvancedSpecialMove();
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
         List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
-        newAdvancedAttackData._customAnimation = new List<AttackHandler_Attack>();
+        newAdvancedAttackData._customAnimationField._customAnimation = new List<AttackHandler_Attack>();
 
         Attack_BaseProperties newProperty = new Attack_BaseProperties();
         newProperty._attackName = $"Special Attack Entry";
@@ -516,7 +516,7 @@ public class Editor_MoveListEditor : EditorWindow
             newAttackHandler._frameData = new FrameData();
             newAttackHandler._hitCount = new HitCount();
             animationFollowupList.Add(newAttackHandler);
-            newAdvancedAttackData._customAnimation.Add(newAttackHandler);
+            newAdvancedAttackData._customAnimationField._customAnimation.Add(newAttackHandler);
         }
         newAdvancedAttackData.specialMoveName = "New Command Grab Attack Data";
         CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList, animationFollowupList, newAdvancedAttackData, null, null, null, null, null, propertyList.Count, newAdvancedAttackData.specialMoveName);
@@ -528,9 +528,9 @@ public class Editor_MoveListEditor : EditorWindow
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>() { specialAttack.property };
         List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
         animationFollowupList.Add(specialAttack.property.AttackAnims);
-        for (int i = 0; i < specialAttack._customAnimation.Count; i++)
+        for (int i = 0; i < specialAttack._customAnimationField._customAnimation.Count; i++)
         {
-            animationFollowupList.Add(specialAttack._customAnimation[i]);
+            animationFollowupList.Add(specialAttack._customAnimationField._customAnimation[i]);
         }
         Attack_AdvancedSpecialMove newAdvancedMoveData = specialAttack;
         newAdvancedMoveData.specialMoveName = specialAttackName;
@@ -576,7 +576,7 @@ public class Editor_MoveListEditor : EditorWindow
     void AddCounterAttackEntry()
     {
         Attack_AdvancedSpecialMove newAdvancedAttackData = new Attack_AdvancedSpecialMove();
-        newAdvancedAttackData._customAnimation = new List<AttackHandler_Attack>();
+        newAdvancedAttackData._customAnimationField._customAnimation = new List<AttackHandler_Attack>();
         List<Attack_BaseProperties> propertyList = new List<Attack_BaseProperties>();
         List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
 
@@ -596,7 +596,7 @@ public class Editor_MoveListEditor : EditorWindow
             newAttackHandler._frameData = new FrameData();
             newAttackHandler._hitCount = new HitCount();
             animationFollowupList.Add(newAttackHandler);
-            newAdvancedAttackData._customAnimation.Add(newAttackHandler);
+            newAdvancedAttackData._customAnimationField._customAnimation.Add(newAttackHandler);
         }
         newAdvancedAttackData.specialMoveName = "New Counter Attack Data";
         CompositeAttackData newCompositeAttackData = new CompositeAttackData(propertyList,animationFollowupList ,newAdvancedAttackData, null, null, null, null, null, propertyList.Count, newAdvancedAttackData.specialMoveName);
@@ -610,9 +610,9 @@ public class Editor_MoveListEditor : EditorWindow
 
         List<AttackHandler_Attack> animationFollowupList = new List<AttackHandler_Attack>();
         animationFollowupList.Add(specialAttack.property.AttackAnims);
-        for (int i = 0; i < specialAttack._customAnimation.Count; i++)
+        for (int i = 0; i < specialAttack._customAnimationField._customAnimation.Count; i++)
         {
-            animationFollowupList.Add(specialAttack._customAnimation[i]);
+            animationFollowupList.Add(specialAttack._customAnimationField._customAnimation[i]);
         }
         newAdvancedMoveData.specialMoveName = specialAttackName;
        _attackData = new CompositeAttackData(propertyList,animationFollowupList ,newAdvancedMoveData, null, null, null, null, null, 1, newAdvancedMoveData.specialMoveName);

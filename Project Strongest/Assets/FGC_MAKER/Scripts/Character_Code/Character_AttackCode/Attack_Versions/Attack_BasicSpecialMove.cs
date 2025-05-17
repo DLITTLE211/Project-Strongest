@@ -6,6 +6,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
 {
     [SerializeField] private int framesBetweenAttacks;
     private Character_Base _curBase;
+    public AfflictionSet attackAfflictionSet;
     #region Attack Base Code
     public void SetStarterInformation(Character_Base _base)
     {

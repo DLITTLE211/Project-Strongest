@@ -186,7 +186,6 @@ public enum HitLevel
     StandardBlock = 64,
     GuardBreak = 128,
     Scorpion = 256,
-
 }
 /*
  * SKD = Soft KnockDown
@@ -205,4 +204,11 @@ public enum AirAttackInfo
     GroundOnly,
     AirOk,
     AirOnly
+}
+[Serializable]
+public class AfflictionSet 
+{
+    public StatusEffect.Effect_Affliction _weakAffliction;
+    public StatusEffect.Effect_Affliction _mediumAffliction;
+    public StatusEffect.Effect_Affliction _strongAffliction;
 }

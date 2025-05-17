@@ -212,9 +212,9 @@ public class Character_MoveList : MonoBehaviour
         {
             CounterAttacks[i].SetStarterInformation(baseCharacterInfo);
             CounterAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-            for (int j = 0; j < CounterAttacks[i]._customAnimation.Count; j++)
+            for (int j = 0; j < CounterAttacks[i]._customAnimationField._customAnimation.Count; j++)
             {
-                CounterAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+                CounterAttacks[i]._customAnimationField._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
             }
         }
     }
@@ -224,9 +224,9 @@ public class Character_MoveList : MonoBehaviour
         {
             CommandThrows[i].SetStarterInformation(baseCharacterInfo);
             CommandThrows[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-            for (int j = 0; j < CommandThrows[i]._customAnimation.Count; j++)
+            for (int j = 0; j < CommandThrows[i]._customAnimationField._customAnimation.Count; j++)
             {
-                CommandThrows[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+                CommandThrows[i]._customAnimationField._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
             }
         }
     }
@@ -236,9 +236,9 @@ public class Character_MoveList : MonoBehaviour
         {
             BasicSuperAttacks[i].SetStarterInformation(baseCharacterInfo);
             BasicSuperAttacks[i].property.SetAttackAnims(baseCharacterInfo._cAnimator);
-            for (int j = 0; j < BasicSuperAttacks[i]._customAnimation.Count; j++)
+            for (int j = 0; j < BasicSuperAttacks[i]._customAnimationField._customAnimation.Count; j++)
             {
-                BasicSuperAttacks[i]._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
+                BasicSuperAttacks[i]._customAnimationField._customAnimation[j].SetAttackAnim(baseCharacterInfo._cAnimator);
             }
         }
     }

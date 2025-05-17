@@ -80,6 +80,7 @@ public class RekkaInput
 public class RekkaAttack
 {
     public Attack_BasicInput individualRekkaAttack;
+    public AfflictionSet attackAfflictionSet;
 }
 #endregion
 
@@ -114,5 +115,6 @@ public class StanceInput
 public class StanceAttack
 {
     public Attack_BasicInput _stanceButtonInput;
+    public AfflictionSet attackAfflictionSet;
 }
 #endregion

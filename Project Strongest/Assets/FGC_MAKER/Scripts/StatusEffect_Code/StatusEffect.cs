@@ -47,6 +47,7 @@ public class StatusEffect : MonoBehaviour
         Erratic = 12,
         Sliced = 13,
         Severed = 14,
+        None =15,
     };
     /*
      *  Dizzy: Increase to stun damage taken on last attack

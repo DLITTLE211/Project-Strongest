@@ -11,8 +11,16 @@ public abstract class AdvancedSpecialBase
     public List<Attack_Input> attackInput;
     public ButtonStateMachine attackInputState;
     public Attack_BaseProperties property;
+    public CustomAnimationField _customAnimationField;
     public List<AttackHandler_Attack> _customAnimation;
+    public AfflictionSet attackAfflictionSet;
     public abstract void ResetCombo();
+}
+[Serializable]
+public class CustomAnimationField
+{
+    public List<AttackHandler_Attack> _customAnimation;
+    public AfflictionSet attackAfflictionSet;
 }
 [Serializable]
 public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctionality 
@@ -90,29 +98,29 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     }
     public void HandleSubAnimAttackInfo()
     {
-        _customAnimation[0].SetAttackAnim(_curBase._cAnimator);
-        _customAnimation[0].AddRequiredCallbacks(_curBase);
-        _customAnimation[0].AddCustomCallbacks(_customAnimation[0]);
-        _curBase._cAnimator.StartThrowFrameCount(property, _customAnimation[0]);
+        _customAnimationField._customAnimation[0].SetAttackAnim(_curBase._cAnimator);
+        _customAnimationField._customAnimation[0].AddRequiredCallbacks(_curBase);
+        _customAnimationField._customAnimation[0].AddCustomCallbacks(_customAnimationField._customAnimation[0]);
+        _curBase._cAnimator.StartThrowFrameCount(property, _customAnimationField._customAnimation[0]);
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {
-        if (currentCustomAnim <= _customAnimation.Count-1)
+        if (currentCustomAnim <= _customAnimationField._customAnimation.Count-1)
         {
             _curBase.opponentPlayer._cHitController.ClearHitResponseRoutine();
             _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine(true);
             _curBase.opponentPlayer._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
-            _customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
-            _customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);
-            _customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimation[currentCustomAnim]);
-            _curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimation.Count - 1, _customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
+            _customAnimationField._customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
+            _customAnimationField._customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);
+            _customAnimationField._customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimationField._customAnimation[currentCustomAnim]);
+            _curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimationField._customAnimation.Count - 1, _customAnimationField._customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
             return;
         }
         return;
     }
     public int GetCustomAnimLength() 
     { 
-        return _customAnimation.Count; 
+        return _customAnimationField._customAnimation.Count; 
     }
     public void PlayNextCustomAnim()
     {

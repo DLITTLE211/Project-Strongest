@@ -7,6 +7,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
 {
     [SerializeField] private int curRekkaInput, rekkaInputCount;
     [SerializeField] internal int leewayTime;
+    public AfflictionSet attackAfflictionSet;
     public int LeewayTime 
     {
         get { return leewayTime; } 
