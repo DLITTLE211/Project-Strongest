@@ -74,10 +74,10 @@ public class Character_InputDetection : MonoBehaviour
                 break;
         }
         _base.widget.GetAxisLocation(_base.numpadValue);
+        _base._timer.UpdateInputLogger(_base.moveAxes[0]);
         if (lastNum != _base.numpadValue)
         {
             lastNum = _base.numpadValue;
-            _base._timer.UpdateInputLogger(_base.moveAxes[0]);
         }
         await SendDirectionInputToCombo();
     }

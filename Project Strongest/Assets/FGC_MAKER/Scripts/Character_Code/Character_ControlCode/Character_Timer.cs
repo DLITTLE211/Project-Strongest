@@ -11,13 +11,16 @@ public class Character_Timer
     public float startTime;
     public bool hasStarted;
     public bool hasEnded;
+    public int count;
+    public int lastDirectionalInput;
+    public string lastAttackInput;
+    public List<string> logString;
     public Queue<Character_ButtonInput> receivedButtons2 = new Queue<Character_ButtonInput>();
 
     public void SetObjectState(bool state)
     {
         mainObject.SetActive(state);
     }
-    public List<string> logString;
     public void setStartValues(Character_ButtonInput releaseCheck = null)
     {
         if (releaseCheck != null)
@@ -29,6 +32,12 @@ public class Character_Timer
         }
         curTime = startTime;
         hasStarted = false;
+    }
+    public void SetLogString()
+    {
+        lastDirectionalInput = -1;
+        lastAttackInput = "";
+        logString = new List<string>();
     }
     public void startTimer()
     {
@@ -73,27 +82,74 @@ public class Character_Timer
     }
     public void UpdateInputLogger(Character_ButtonInput log)
     {
+        string convertedInput = ConvertNewInput(log);
+        ButtonStateMachine.InputState buttonState = log.Button_State._state;
         if (logString.Count >= 19)
         {
             TrimString();
         }
         bool numSize = false;
-        switch (log.Button_State._state)
+        if(buttonState == ButtonStateMachine.InputState.directional) 
+        {
+            if(log.Button_State.directionalInput == 0) 
+            {
+                return;
+            }
+            if (CheckNewInputState(lastDirectionalInput.ToString(), log.Button_State.directionalInput.ToString()))
+            {
+                ResetCount();
+                lastDirectionalInput = log.Button_State.directionalInput;
+                string newTopString = $"{convertedInput} {ConvertCount()}";
+                logString.Insert(0, newTopString);
+            }
+            else
+            {
+                IncreaseCount();
+                string newTopString = $"{convertedInput} {ConvertCount()}";
+                logString[0] = newTopString;
+            }
+            numSize = true;
+        }
+        else 
+        {
+
+        }
+        /*switch (log.Button_State._state)
         {
             case ButtonStateMachine.InputState.pressed:
-                logString.Insert(0, ($"{log.Button_Name} (P)").ToUpper());
+                if(CheckNewInputState(lastAttackInput, log.Button_Name)) 
+                {
+                    logString.Insert(0, ($"{log.Button_Name}").ToUpper());
+                }
+                else 
+                {
+                    logString[0] = ($"{log.Button_Name}").ToUpper();
+                }
+                lastAttackInput = log.Button_Name;
                 break;
             case ButtonStateMachine.InputState.held:
-                logString.Insert(0, ($"{log.Button_Name} (HO)").ToUpper());
+                if (CheckNewInputState(lastAttackInput, log.Button_Name))
+                {
+                    logString.Insert(0, ($"{log.Button_Name}").ToUpper());
+                }
+                lastAttackInput = log.Button_Name;
                 break;
             case ButtonStateMachine.InputState.released:
-                logString.Insert(0, ($"{log.Button_Name} (R)").ToUpper());
+                if (CheckNewInputState(lastAttackInput, log.Button_Name))
+                {
+                    logString.Insert(0, ($"{log.Button_Name}").ToUpper());
+                }
+                lastAttackInput = log.Button_Name;
                 break;
             case ButtonStateMachine.InputState.directional:
-                logString.Insert(0, $"{log.Button_State.directionalInput}");
+                if (CheckNewInputState(lastDirectionalInput.ToString(), log.Button_State.directionalInput.ToString()))
+                {
+                    logString.Insert(0, $"{log.Button_State.directionalInput}");
+                }
+                lastDirectionalInput = log.Button_State.directionalInput;
                 numSize = true;
                 break;
-        }
+        }*/
         if (logString.Count == 1)
         {
             inputLogger.setFirstItem(logString,numSize);
@@ -102,5 +158,39 @@ public class Character_Timer
         {
             inputLogger.setNextItemInList(logString, numSize);
         }
+    }
+    string ConvertNewInput(Character_ButtonInput newInput) 
+    {
+        if(newInput.Button_State._state == ButtonStateMachine.InputState.directional) 
+        {
+            int newDirection = newInput.Button_State.directionalInput;
+            string directionalString = newDirection.ToString();
+            return SpriteToTextColorUtility.AppendSpriteName($"{directionalString.ToUpper()}", Color.white);
+        }
+        else 
+        {
+            string buttonString = newInput.Button_Name;
+            return SpriteToTextColorUtility.AppendSpriteName($"{buttonString.ToUpper()}", Color.white);
+        }
+    }
+    void IncreaseCount() 
+    {
+        count++;
+    }
+    string ConvertCount()
+    {
+        return SpriteToTextColorUtility.AppendSpriteName($"( {count} )", Color.white);
+    }
+    bool CheckNewInputState(string lastInput, string newInput) 
+    {
+        if(lastInput != newInput) 
+        {
+            return true;
+        }
+        return false;
+    }
+    void ResetCount() 
+    {
+        count = 1;
     }
 }

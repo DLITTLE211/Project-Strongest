@@ -18,7 +18,7 @@ public class InputLogger
     }
     public void setFirstItem(List<string> itemInfo, bool numSize)
     {
-        string stringMessage = SpriteToTextColorUtility.AppendSpriteName($"{itemInfo[0]}", Color.white);
+        string stringMessage = itemInfo[0];
         textObject[0].SetText(stringMessage);
         if (numSize) 
         {
@@ -39,7 +39,7 @@ public class InputLogger
             textObject[i].SetText(stringMessage);
             textObject[i].fontSize = textObject[i - 1].fontSize;
         }
-        stringMessage = SpriteToTextColorUtility.AppendSpriteName($"{itemInfo[0]}", Color.white);
+        stringMessage = itemInfo[0];
         textObject[0].SetText(stringMessage);
         if (numSize)
         {

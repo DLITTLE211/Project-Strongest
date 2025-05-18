@@ -289,6 +289,7 @@ public class Character_Base : MonoBehaviour
 
     void ResetInputLog()
     {
+        _timer.SetLogString();
         _timer.inputLogger.ResetAllText();
     }
 
