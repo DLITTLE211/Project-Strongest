@@ -126,7 +126,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
                Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
             _curStanceState = StanceState.AttackStance;
             newAttack.InputTimer.SetTimerType(TimerType.InStance, (stanceHeldTime * (1 / 60f)));
-            _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess));
+            _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess), stanceInput.stanceAttack.attackAfflictionSet);
             ResetCombo();
         }
         else 
@@ -142,7 +142,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     public void PreformAttack(Callback SendAttackOnSucess)
     {
         _curBase.comboList3_0.ClearFollowUpAttack();
-        _curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess, attackAfflictionSet);
         stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance,(stanceHeldTime * (1/60f)));
         SetStanceStateTrue();
     }

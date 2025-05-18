@@ -912,7 +912,7 @@ public class Character_Base : MonoBehaviour
             return;
         }
         Attack_BaseProperties newAttack = _characterCompleteMovelist[_attackIndex];
-        _aManager.OVERRIDE_DOATTACK(newAttack);
+        //_aManager.OVERRIDE_DOATTACK(newAttack);
     }
     #endregion
 }

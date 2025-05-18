@@ -71,7 +71,7 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
     {
         Attack_BaseProperties newAttack = _attackInput._correctInput[0].property;
         _curBase.comboList3_0.ClearFollowUpAttack();
-        _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(newAttack, SendAttackOnSucess,null);
         _attackInput._correctInput[0].property.InputTimer.SetTimerType(TimerType.Throw);
     }
 
@@ -94,7 +94,7 @@ public class Attack_ThrowBase : ThrowActionBase , IAttackFunctionality
         _throwAnimation[0].SetAttackAnim(_curBase._cAnimator);
         _throwAnimation[0].AddRequiredCallbacks(_curBase);
         _throwAnimation[0].AddCustomCallbacks(_throwAnimation[0]);
-        _curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0]);
+        _curBase._cAnimator.StartThrowFrameCount(this._attackInput._correctInput[0].property, _throwAnimation[0],null);
     }
     public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {

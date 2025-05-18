@@ -50,16 +50,18 @@ public class AttackInputTypes
     {
         maxStringSize = maxSize;
     }
-    public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide)
+    public void AddDirectionalInput(int directionalInput, Character_Face_Direction faceSide, out int inputtedDirection)
     {
         if (faceSide == Character_Face_Direction.FacingLeft)
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(directionalInput);
             specialMoveTypeInput.attackString += alteredInput.ToString();
+            inputtedDirection = alteredInput;
         }
         else
         {
             specialMoveTypeInput.attackString += directionalInput.ToString();
+            inputtedDirection = directionalInput;
         }
     }
     public void ClearFirstIndex() 

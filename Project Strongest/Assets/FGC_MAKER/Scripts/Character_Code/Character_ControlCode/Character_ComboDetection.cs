@@ -21,6 +21,7 @@ public class Character_ComboDetection : MonoBehaviour
     bool isParalyzed;
     List<Character_MobilityOption> MobilityNoDash;
     List<Character_MobilityOption> MobilityOnlyDash;
+    private int lastDirectionalInput;
     private void Start()
     {
         isParalyzed = false;
@@ -51,6 +52,10 @@ public class Character_ComboDetection : MonoBehaviour
                 MobilityOnlyDash.Add(_base.character_MobilityOptions.Mobility[i]);
             }
         }
+    }
+    public int ReturnLastDirectionalInput() 
+    {
+        return lastDirectionalInput;
     }
     public void SetParalyzed(bool state = false)
     {
@@ -117,15 +122,16 @@ public class Character_ComboDetection : MonoBehaviour
         }
         if (direction != 5)
         {
-            _cMOnChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+            _cMOnChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing,out lastDirectionalInput);
         }
-        currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+        currentAttackInput.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing,out lastDirectionalInput);
         CompleteMobilityVerifier(MobilityOnlyDash, _cMOnChangeInputLog, _base._cMobiltyTimer_OnlyDash);
     }
     void AddToMobilityCurrentInput(int direction)
     {
         _cMAnyChangeInputLog.ClearFirstIndex();
-        _cMAnyChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing);
+
+        _cMAnyChangeInputLog.AddDirectionalInput(direction, _base.pSide.thisPosition._directionFacing, out lastDirectionalInput);
         CompleteMobilityVerifier(MobilityNoDash, _cMAnyChangeInputLog,_base._cMobiltyTimer_NoDash);
     }
     void CompleteMoveListVerifier()

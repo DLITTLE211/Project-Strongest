@@ -7,10 +7,11 @@ using FightingGame_FrameData;
 public class Character_AfflictionManager : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
-    [SerializeField] private Dictionary<StatusEffect.Effect_Affliction,Affliction_Object> _totalAfflictions;
+    public Dictionary<StatusEffect.Effect_Affliction,Affliction_Object> _totalAfflictions;
     [SerializeField] private List<Affliction_Object> TotalAfflictions;
     [SerializeField] private List<Affliction_Object> appliedAffliction;
     IEnumerator applicationWindow;
+    bool afflictionSent;
     public void ClearAppliedAffliction() 
     {
         if(appliedAffliction != null) 
@@ -36,40 +37,35 @@ public class Character_AfflictionManager : MonoBehaviour
         appliedAffliction.Clear();
     }
     #region Affliction Applier Code
-    public void OpenAfflictionApplicationWindow(AfflictionSet currentSet) 
+    public void OpenAfflictionApplicationWindow(AfflictionSet currentSet, Character_Base afflicted)
     {
-        if(applicationWindow != null) 
+        if (currentSet != null)
         {
-            StopCoroutine(applicationWindow);
-            applicationWindow = null;
+            if (applicationWindow != null)
+            {
+                StopCoroutine(applicationWindow);
+                applicationWindow = null;
+            }
+            applicationWindow = CheckAfflictionApplicationWindow(currentSet, afflicted);
+            StartCoroutine(applicationWindow);
         }
-        applicationWindow = CheckAfflictionApplicationWindow(currentSet);
-        StartCoroutine(applicationWindow);
     }
 
-    IEnumerator CheckAfflictionApplicationWindow(AfflictionSet currentSet) 
+    IEnumerator CheckAfflictionApplicationWindow(AfflictionSet currentSet, Character_Base afflicted)
     {
         List<StatusEffect.Effect_Affliction> availableAfflictions = new List<StatusEffect.Effect_Affliction>();
-        if(currentSet._weakAffliction != StatusEffect.Effect_Affliction.None) 
-        {
-            availableAfflictions.Add(currentSet._weakAffliction);
-        }
-        if (currentSet._mediumAffliction != StatusEffect.Effect_Affliction.None)
-        {
-            availableAfflictions.Add(currentSet._mediumAffliction);
-        }
-        if (currentSet._strongAffliction != StatusEffect.Effect_Affliction.None)
-        {
-            availableAfflictions.Add(currentSet._strongAffliction);
-        }
+        availableAfflictions.Add(currentSet._weakAffliction);
+        availableAfflictions.Add(currentSet._mediumAffliction);
+        availableAfflictions.Add(currentSet._strongAffliction);
+        afflictionSent = false;
         float frameCount = 0;
-        float maxTime = 30f * Base_FrameCode.ONE_FRAME;
+        float maxTime = 60f * Base_FrameCode.ONE_FRAME;
         StatusEffect.Effect_Affliction inputtedAffliction = StatusEffect.Effect_Affliction.None;
-        while (frameCount < maxTime) 
+        while (frameCount < maxTime && afflictionSent == false)
         {
-            if (CheckInputForAffliction(availableAfflictions,out inputtedAffliction)) 
+            if (CheckInputForAffliction(availableAfflictions, out inputtedAffliction))
             {
-                SendAfflicion(inputtedAffliction);
+                SendAfflicion(inputtedAffliction, afflicted);
             }
             frameCount += Base_FrameCode.ONE_FRAME;
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
@@ -77,35 +73,50 @@ public class Character_AfflictionManager : MonoBehaviour
     }
     bool CheckInputForAffliction(List<StatusEffect.Effect_Affliction> totalAfflictions, out StatusEffect.Effect_Affliction inputtedAffliction) 
     {
-        /*if () 
+        if (_base.ReturnAmplifyButton() == null)
         {
-
+            inputtedAffliction = StatusEffect.Effect_Affliction.None;
+            return false;
         }
-        if ()
+        else 
         {
-
+            if(_base.ReturnAmplifyButton().Button_State._state != ButtonStateMachine.InputState.released) 
+            {
+                if (_base._cComboDetection.ReturnLastDirectionalInput() == 4 || _base._cComboDetection.ReturnLastDirectionalInput() == 7)
+                {
+                    inputtedAffliction = totalAfflictions[0];
+                    return true;
+                }
+                if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+                {
+                    inputtedAffliction = totalAfflictions[1];
+                    return true;
+                }
+                if (_base._cComboDetection.ReturnLastDirectionalInput() == 6 || _base._cComboDetection.ReturnLastDirectionalInput() == 9)
+                {
+                    inputtedAffliction = totalAfflictions[2];
+                    return true;
+                }
+            }
         }
-        if ()
-        {
-
-        }*/
         inputtedAffliction = StatusEffect.Effect_Affliction.None;
         return false;
     }
-    public void SendAfflicion(StatusEffect.Effect_Affliction c)
+    public void SendAfflicion(StatusEffect.Effect_Affliction c, Character_Base afflicted)
     {
         Affliction_Object newAffliction = new Affliction_Object();
-        if (_totalAfflictions.TryGetValue(c, out newAffliction))
+        if (afflicted._afflictionManager._totalAfflictions.TryGetValue(c, out newAffliction))
         {
             if (!_base._cSuperMeter.CanTakeFromMeter(newAffliction._afflictionBase.meterRequirement))
             {
                 return;
             }
+            afflictionSent = true;
             _base._cSuperMeter.TakeMeter(newAffliction._afflictionBase.meterRequirement);
-            _base.opponentPlayer._afflictionManager.ApplyAffliction(newAffliction);
+            afflicted._afflictionManager.ApplyAffliction(newAffliction, afflicted);
         }
     }
-    public void ApplyAffliction(Affliction_Object _appliedAffliction)
+    public void ApplyAffliction(Affliction_Object _appliedAffliction, Character_Base afflicted)
     {
         Affliction activeAffliction = _appliedAffliction._afflictionObject.GetComponent<Affliction>();
         _appliedAffliction._afflictionObject.SetActive(true);

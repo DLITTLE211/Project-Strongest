@@ -40,7 +40,7 @@ public class Attack_BasicSpecialMove : Attack_Special_Base, IAttackFunctionality
     {
         _curBase.comboList3_0.ClearFollowUpAttack();
         property.InputTimer.SetTimerType(TimerType.Special);
-        _curBase._aManager.ReceiveAttack(property,SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(property,SendAttackOnSucess, attackAfflictionSet);
     }
     public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {

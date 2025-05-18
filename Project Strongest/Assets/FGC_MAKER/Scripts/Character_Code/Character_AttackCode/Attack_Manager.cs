@@ -62,24 +62,24 @@ public class Attack_Manager : MonoBehaviour
     {
         curTypeHierarchy = MoveType.Normal;
     }
-    public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
+    public void ReceiveAttack(Attack_BaseProperties attack, Callback SetAttackOnSuccess, AfflictionSet afflictionSet = null)
     {
-        GetAttackCriteriaifNotNull(attack, SetAttackOnSuccess, decreaseGatlingCount, resetGatlingCount); 
+        GetAttackCriteriaifNotNull(attack, SetAttackOnSuccess, afflictionSet); 
     }
-    public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
+    public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack, Callback SetAttackOnSuccess,AfflictionSet afflictionSet = null)
     {
         if (Combo.Count == 0 && currentCount == 0)
         {
             Combo.Add(newAttack);
-            ChecFirstAttackCriteria(newAttack,true, SetAttackOnSuccess, decreaseGatlingCount);
+            ChecFirstAttackCriteria(newAttack,true, SetAttackOnSuccess, afflictionSet);
         }
         else
         {
             Combo.Add(newAttack);
-            CheckNextAttackCriteria(newAttack, false, Combo.Count-1, SetAttackOnSuccess, decreaseGatlingCount, resetGatlingCount);
+            CheckNextAttackCriteria(newAttack, false, Combo.Count-1, SetAttackOnSuccess, afflictionSet);
         }
     }
-    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null)
+    void ChecFirstAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, Callback SetAttackOnSuccess, AfflictionSet afflictionSet = null)
     {
         if (!CheckStringPriority(Combo[0].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
         {
@@ -106,14 +106,10 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(0);
             return;
         }
-        if (decreaseGatlingCount != null)
-        {
-            decreaseGatlingCount();
-        }
         SetAttackOnSuccess();
-        DoAttack(newAttack);
+        DoAttack(newAttack, afflictionSet);
     }
-    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index, Callback SetAttackOnSuccess, Callback decreaseGatlingCount = null, Callback resetGatlingCount = null)
+    void CheckNextAttackCriteria(Attack_BaseProperties newAttack, bool isFirstAttack, int index, Callback SetAttackOnSuccess, AfflictionSet afflictionSet = null)
     {
         int newAttackHierarchy = (int)newAttack._moveType;
         int lastAttackHierachy = (int)curTypeHierarchy;
@@ -122,7 +118,7 @@ public class Attack_Manager : MonoBehaviour
             Combo.RemoveAt(index);
             return;
         }
-        if (!CheckMoveType(newAttack, false, index, resetGatlingCount)) 
+        if (!CheckMoveType(newAttack, false, index)) 
         {
             Combo.RemoveAt(index);
             return;
@@ -155,14 +151,10 @@ public class Attack_Manager : MonoBehaviour
         {
             _cAnimator.SetStanceBool(false);
         }
-        if (decreaseGatlingCount != null) 
-        {
-            decreaseGatlingCount();
-        }
         SetAttackOnSuccess();
-        DoAttack(newAttack);
+        DoAttack(newAttack, afflictionSet);
     }
-    bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0,Callback resetGatlingCount = null)
+    bool CheckMoveType(Attack_BaseProperties newAttack, bool isFirstAttack, int index = 0)
     {
         Attack_BaseProperties lastBase = Combo[index - 1];
         switch (newAttack._moveType) 
@@ -173,13 +165,6 @@ public class Attack_Manager : MonoBehaviour
                     if (!(CheckCancelCriteria(lastBase.cancelProperty, newAttack, newAttack.cancelProperty)))
                     {
                         return false;
-                    }
-                }
-                if(lastBase != newAttack) 
-                {
-                    if (resetGatlingCount != null)
-                    {
-                        resetGatlingCount();
                     }
                 }
                 break;
@@ -196,13 +181,6 @@ public class Attack_Manager : MonoBehaviour
                     if (!_base._cComboDetection.ReturnActiveFollowUp().CheckAttackContains(newAttack))
                     {
                         return false;
-                    }
-                }
-                if (lastBase != newAttack)
-                {
-                    if (resetGatlingCount != null)
-                    {
-                        resetGatlingCount();
                     }
                 }
                 break;
@@ -371,24 +349,24 @@ public class Attack_Manager : MonoBehaviour
         CanTransitionAnimation = state;
     }
 
-    public void OVERRIDE_DOATTACK(Attack_BaseProperties _base) 
+    public void OVERRIDE_DOATTACK(Attack_BaseProperties _base, AfflictionSet afflictionSet) 
     {
-        DoAttack(_base);
+        DoAttack(_base, afflictionSet);
     }
-    void DoAttack(Attack_BaseProperties _newAttack)
+    void DoAttack(Attack_BaseProperties _newAttack, AfflictionSet afflictionSet)
     {
         currentCount = Combo.Count;
         curTypeHierarchy = _newAttack._moveType;
         if (CanTransitionAnimation)
         {
-            PlayAttack(_newAttack);
+            PlayAttack(_newAttack, afflictionSet);
         }
         else 
         {
-           StartCoroutine(AwaitClear(_newAttack));
+           StartCoroutine(AwaitClear(_newAttack, afflictionSet));
         }
     }
-    IEnumerator AwaitClear(Attack_BaseProperties _newAttack)
+    IEnumerator AwaitClear(Attack_BaseProperties _newAttack, AfflictionSet afflictionSet)
     {
         _AttackAnimQueue.Enqueue(_newAttack);
         while (_AttackAnimQueue.Count > 0)
@@ -397,17 +375,17 @@ public class Attack_Manager : MonoBehaviour
             if (_AttackAnimQueue.Count > 0)
             {
                 Debug.LogError("Queued Attack successfully Released");
-                PlayAttack(_AttackAnimQueue.Dequeue());
+                PlayAttack(_AttackAnimQueue.Dequeue(), afflictionSet);
             }
         }
     }
-    void PlayAttack(Attack_BaseProperties attack)
+    void PlayAttack(Attack_BaseProperties attack, AfflictionSet afflictionSet)
     {
         if (attack.hitblocked) 
         {
             attack.hitblocked = false;
         }
-        _cAnimator.SetNextAttackStartVariables(attack);
+        _cAnimator.SetNextAttackStartVariables(attack, afflictionSet);
     }
     void ClearRoutine() 
     {

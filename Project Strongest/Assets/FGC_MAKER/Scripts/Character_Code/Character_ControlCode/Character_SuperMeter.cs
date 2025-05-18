@@ -129,8 +129,9 @@ public class Character_SuperMeter : MonoBehaviour
                     meterTier -= calcValue;
                 }
                 SetMeterTierText();
-                float meterValue = meterMaxThreshold + (superMeter.currentValue - (calcValue * meterMaxThreshold));
-                fullMeterLevel = meterValue;
+                float subtractedValue = (calcValue * meterMaxThreshold);
+                float meterValue = meterMaxThreshold + (superMeter.currentValue - subtractedValue);
+                fullMeterLevel -= subtractedValue;
                 superMeter.currentValue = meterValue;
                 superMeter.SetCurrentMeterValue(superMeter.currentValue);
             }

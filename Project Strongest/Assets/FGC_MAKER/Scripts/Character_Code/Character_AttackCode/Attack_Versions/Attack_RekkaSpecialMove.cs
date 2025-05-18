@@ -84,7 +84,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         curRekkaInput++;
         usedRekkas.Add(newProperty);
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, leewayTime);
-        _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess));
+        _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess), rekkaInput._rekkaPortion[attack].attackAfflictionSet);
     }
     public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 
     {
@@ -99,7 +99,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     public void PreformAttack(Callback SendAttackOnSucess)
     {
         _curBase.comboList3_0.ClearFollowUpAttack();
-        _curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess, attackAfflictionSet);
         SetRekkaStateTrue();
         ResetCombo();
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,leewayTime);

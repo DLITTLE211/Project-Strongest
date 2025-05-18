@@ -22,6 +22,7 @@ public class HurtBox : CollisionDetection
     private Character_Base thisPlayer;
     Callback endingFunction;
     HitboxTypeList refList;
+    AfflictionSet afflictionSet;
     bool _attackBlocked;
     public void SetHurtboxSizing(Character_HurtBoxSizing hu_Sizing,bool hurtboxType, Character_Base _base)
     {
@@ -247,27 +248,14 @@ public class HurtBox : CollisionDetection
 
     public void ReceieveHitBox(HitBox _hitbox, Transform _target, Callback endFunc)
     {
-        currentHitbox = _hitbox;/*
-        if (currentHitProperties != null)
-        {
-            currentHitProperties = currentHitbox.hitboxProperties;
-            //if (currentHitProperties.hitConnected == false)
-            {
-                currentHitProperties = currentHitbox.hitboxProperties;
-                target = _target;
-                endingFunction = endFunc;
-                FindAttackResponse();
-            }
-        }
-        else 
-        {*/
-            currentHitProperties = currentHitbox.hitboxProperties;
-            target = _target;
-            endingFunction = endFunc;
-            FindAttackResponse();
-        //}
+        currentHitbox = _hitbox;
+        afflictionSet = _hitbox._attackAfflictionSet;
+        currentHitProperties = currentHitbox.hitboxProperties;
+        target = _target;
+        endingFunction = endFunc;
+        FindAttackResponse();
     }
-    async void ReceiveCounterData()
+    void ReceiveCounterData()
     {
         Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
@@ -283,7 +271,7 @@ public class HurtBox : CollisionDetection
         {
             Attack_BaseProperties currentAttack = Base_Attacker._cHitboxManager.GetActiveHitBox().hitboxProperties;
             currentAttack.hitConnected = true;
-            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties);
+            Base_Attacker.comboList3_0.NewCheckAndApply(Base_Target, Base_Attacker, false, currentHitProperties, afflictionSet);
             //await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
             Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.attackMainStunValues.hitstunValue);
             //await Base_Target._cHitstun.ApplyHitStun(currentAttack.hitstunValue);
@@ -369,7 +357,7 @@ public class HurtBox : CollisionDetection
                 else
                 {
                     Base_Attacker._cComboCounter.OnHit_CountUp();
-                    Base_Attacker.comboList3_0.NewCheckAndApply(thisPlayer, Base_Attacker, BlockedAttack, currentHitProperties);
+                    Base_Attacker.comboList3_0.NewCheckAndApply(thisPlayer, Base_Attacker, BlockedAttack, currentHitProperties,afflictionSet);
                     Base_Attacker._cHitstop.TriggerHitStop(currentHitProperties, (currentHitProperties.attackMainStunValues.hitstopValue), Base_Attacker, thisPlayer, applyForceAfterStop);
                     thisPlayer._cGravity.UpdateGravityScaleOnHit(currentHitProperties.attackMainStunValues.hitstunValue);
                 }

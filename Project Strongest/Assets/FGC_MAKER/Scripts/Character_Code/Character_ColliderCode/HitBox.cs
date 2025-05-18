@@ -9,6 +9,7 @@ public class HitBox : CollisionDetection
     public HitBoxType HBType;
     public List<Affliction> attackAffliction;
     public Attack_BaseProperties hitboxProperties;
+    public AfflictionSet _attackAfflictionSet;
     string layerCheck;
     // Start is called before the first frame update
 

@@ -441,7 +441,7 @@ public class Character_MoveList : MonoBehaviour
     }
 
 
-    public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack, bool armoredHit = false) 
+    public void NewCheckAndApply(Character_Base target, Character_Base attacker, bool blockedAttack, Attack_BaseProperties attack,AfflictionSet _afflicitonSet = null ,bool armoredHit = false) 
     {
         if (currentAttack.Value != null)
         {
@@ -454,7 +454,7 @@ public class Character_MoveList : MonoBehaviour
                 }
                 else
                 {
-                    //attacker._cComboCounter.OnHit_CountUp();
+                    attacker._afflictionManager.OpenAfflictionApplicationWindow(_afflicitonSet, target);
                     currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack, followUp, armoredHit);
                     //Call interface function for dealing damage w/ block;
                 }
@@ -468,7 +468,7 @@ public class Character_MoveList : MonoBehaviour
                 }
                 else
                 {
-                    //attacker._cComboCounter.OnHit_CountUp();
+                    attacker._afflictionManager.OpenAfflictionApplicationWindow(_afflicitonSet, target);
                     currentAttack.Value.HandleDamageDealing(attacker, target, blockedAttack, attack, null, armoredHit);
                     //Call interface function for dealing damage w/ block;
                 }

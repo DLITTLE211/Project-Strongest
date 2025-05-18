@@ -78,7 +78,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
             property.InputTimer.SetTimerType(TimerType.Special, heldTime);
         }
         _curBase.comboList3_0.ClearFollowUpAttack();
-        _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess);
+        _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess, attackAfflictionSet);
     }
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUP = null)
     {
@@ -101,7 +101,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         _customAnimationField._customAnimation[0].SetAttackAnim(_curBase._cAnimator);
         _customAnimationField._customAnimation[0].AddRequiredCallbacks(_curBase);
         _customAnimationField._customAnimation[0].AddCustomCallbacks(_customAnimationField._customAnimation[0]);
-        _curBase._cAnimator.StartThrowFrameCount(property, _customAnimationField._customAnimation[0]);
+        _curBase._cAnimator.StartThrowFrameCount(property, _customAnimationField._customAnimation[0], _customAnimationField.attackAfflictionSet);
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {
@@ -113,7 +113,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
             _customAnimationField._customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
             _customAnimationField._customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);
             _customAnimationField._customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimationField._customAnimation[currentCustomAnim]);
-            _curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimationField._customAnimation.Count - 1, _customAnimationField._customAnimation[currentCustomAnim], () => PlayNextCustomAnim());
+            _curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimationField._customAnimation.Count - 1, _customAnimationField._customAnimation[currentCustomAnim], () => PlayNextCustomAnim(), _customAnimationField.attackAfflictionSet);
             return;
         }
         return;

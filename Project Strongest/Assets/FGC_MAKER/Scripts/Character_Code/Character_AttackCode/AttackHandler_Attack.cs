@@ -49,6 +49,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     int currentHitIndex;
     int hitCountTotal;
     Character_Face_Direction currentFacingDirection;
+    AfflictionSet _newAfflictSet;
     public void SetIsFollowUpAttack(bool state) 
     {
         isFollowUpAttack = state;
@@ -142,6 +143,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             HitBox.SetHitBoxProperties(newAttackProperties);
         }
+        HitBox._attackAfflictionSet = _newAfflictSet;
         _cAnimator.SetCanTransitionIdle(false);
         _cAnimator._base._aManager.SetStartNextAttack(false);
     }
@@ -289,8 +291,9 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
         }
     }
-    public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
+    public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack, AfflictionSet _attackAfflictionSet)
     {
+        _newAfflictSet = _attackAfflictionSet;
         _base._aFrameDataMeter.ResetMessage();
         mainFrameCount = 0;
         currentHitIndex = 0;
@@ -365,8 +368,9 @@ public class AttackHandler_Attack : AttackHandler_Base
         Attack_BaseProperties thisAttack = HitBox?.hitboxProperties != null ? HitBox?.hitboxProperties : _cAnimator.lastAttack ;
         _cAnimator.FullBaseAttackDataClear(thisAttack, _frameData);
     }
-    public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null)
+    public IEnumerator TickAnimCustomCount(AttackHandler_Attack customProp, int curAnim = -1, int animCount = 1, Callback superIteratorCallback = null, AfflictionSet _attackAfflictionSet = null)
     {
+        _newAfflictSet = _attackAfflictionSet;
         _base._aFrameDataMeter.ResetMeterData();
         _base._aFrameDataMeter.ResetMessage();
         customFrameCount = 0;

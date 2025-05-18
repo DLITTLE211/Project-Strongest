@@ -311,7 +311,7 @@ public class Character_Animator : MonoBehaviour
     {
         NullifyMobilityOption();
     }
-    public void SetNextAttackStartVariables(Attack_BaseProperties nextattack)
+    public void SetNextAttackStartVariables(Attack_BaseProperties nextattack, AfflictionSet _attackAfflictionSet)
     {
         canTick = true;
         SetLastAttack(nextattack);
@@ -319,10 +319,10 @@ public class Character_Animator : MonoBehaviour
         {
             lastAttack.AttackAnims.AddCustomCallbacks();
         }
-        StartFrameCount();
+        StartFrameCount(_attackAfflictionSet);
 
     }
-    public void StartFrameCount()
+    public void StartFrameCount(AfflictionSet _attackAfflictionSet)
     {
         if (BasicAttackRoutine != null)
         {
@@ -334,10 +334,10 @@ public class Character_Animator : MonoBehaviour
         _lastAnim = lastAttack.AttackAnims;
 
         PlayNextAnimation(lastAttack.attackHashes, 2f*Base_FrameCode.ONE_FRAME,true);
-        BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack);
+        BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack, _attackAfflictionSet);
         StartCoroutine(BasicAttackRoutine);
     }
-    public void StartThrowFrameCount(Attack_BaseProperties throwProperty, AttackHandler_Attack throwCustom)
+    public void StartThrowFrameCount(Attack_BaseProperties throwProperty, AttackHandler_Attack throwCustom, AfflictionSet _attackAfflictionSet)
     {
         if (BasicAttackRoutine != null)
         {
@@ -347,11 +347,11 @@ public class Character_Animator : MonoBehaviour
         _lastAnim = throwCustom;
         lastAttack = throwProperty;
         throwCustom.SetIsFollowUpAttack(true);
-        ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom);
+        ThrowAttackRoutine = throwCustom.TickAnimCustomCount(throwCustom,-1,1,null, _attackAfflictionSet);
         StartCoroutine(ThrowAttackRoutine);
         PlayNextAnimation(Animator.StringToHash(throwCustom.animName), 0f, true);
     }
-    public void StartSuperFrameCount(Attack_BaseProperties superProperty, int curAnim,int animCount,AttackHandler_Attack superCustom, Callback nextAnimIterator = null)
+    public void StartSuperFrameCount(Attack_BaseProperties superProperty, int curAnim,int animCount,AttackHandler_Attack superCustom, Callback nextAnimIterator, AfflictionSet _attackAfflictionSet)
     {
         if (BasicAttackRoutine != null)
         {
@@ -370,7 +370,7 @@ public class Character_Animator : MonoBehaviour
             StopCoroutine(SuperAttackRoutine);
             SuperAttackRoutine = null;
         }
-        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, curAnim, animCount, nextAnimIterator);
+        SuperAttackRoutine = superCustom.TickAnimCustomCount(superCustom, curAnim, animCount, nextAnimIterator, _attackAfflictionSet);
         StartCoroutine(SuperAttackRoutine);
     }
 
