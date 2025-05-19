@@ -369,7 +369,7 @@ public class Character_StateMachine : MonoBehaviour
             }
             else
             {
-                if(_CheckAmplifyButton()) 
+                if(_CheckAmplifyButton() && _base.ReturnMovementInputs().Button_State.directionalInput == 5) 
                 {
                     return true;
                 }
