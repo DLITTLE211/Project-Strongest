@@ -84,9 +84,13 @@ public class MainGame_TrainingSC : MainGame_SettingsController
 
         Character_Base firstCharacter = GameManager.instance.players.totalPlayers[0];
         firstCharacter._cHealth.SetHealthAndStunOnSceneReset(stunHealhList[0], stunHealhList[1]);
+        firstCharacter._timer.inputLogger.ResetAllText();
+        firstCharacter._timer.SetLogString();
 
         Character_Base secondCharacter = GameManager.instance.players.totalPlayers[1];
         secondCharacter._cHealth.SetHealthAndStunOnSceneReset(stunHealhList[2], stunHealhList[3]);
+        secondCharacter._timer.inputLogger.ResetAllText();
+        secondCharacter._timer.SetLogString();
     }
     private async Task LandingCheck() 
     {

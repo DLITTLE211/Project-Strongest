@@ -89,9 +89,9 @@ public class Character_Timer
             TrimString();
         }
         bool numSize = false;
-        if(buttonState == ButtonStateMachine.InputState.directional) 
+        if (buttonState == ButtonStateMachine.InputState.directional)
         {
-            if(log.Button_State.directionalInput == 0) 
+            if (log.Button_State.directionalInput == 0)
             {
                 return;
             }
@@ -109,8 +109,13 @@ public class Character_Timer
                 logString[0] = newTopString;
             }
             numSize = true;
+            if (count < 100)
+            {
+                inputLogger.SetTextLog(logString, numSize);
+                return;
+            }
         }
-        else 
+        else
         {
 
         }
@@ -150,14 +155,6 @@ public class Character_Timer
                 numSize = true;
                 break;
         }*/
-        if (logString.Count == 1)
-        {
-            inputLogger.setFirstItem(logString,numSize);
-        }
-        else
-        {
-            inputLogger.setNextItemInList(logString, numSize);
-        }
     }
     string ConvertNewInput(Character_ButtonInput newInput) 
     {
@@ -191,6 +188,6 @@ public class Character_Timer
     }
     void ResetCount() 
     {
-        count = 1;
+        count= 1; 
     }
 }

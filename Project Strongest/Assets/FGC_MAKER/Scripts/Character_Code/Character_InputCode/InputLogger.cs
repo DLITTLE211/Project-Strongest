@@ -16,6 +16,24 @@ public class InputLogger
             textObject[i].text = "";
         }
     }
+    public void SetTextLog(List<string> itemInfo, bool numSize) 
+    {
+        for (int i = 0; i < itemInfo.Count; i++)
+        {
+            if (i == 0) 
+            {
+                string stringMessage = itemInfo[0];
+                textObject[0].SetText(stringMessage);
+                textObject[0].fontSize = numSize ? 17 : 25;
+            }
+            else 
+            {
+                string stringMessage = itemInfo[i];
+                textObject[i].SetText(stringMessage);
+                textObject[i].fontSize = textObject[i - 1].fontSize;
+            }
+        }
+    }
     public void setFirstItem(List<string> itemInfo, bool numSize)
     {
         string stringMessage = itemInfo[0];
@@ -33,13 +51,13 @@ public class InputLogger
     public void setNextItemInList(List<string> itemInfo, bool numSize)
     {
         string stringMessage = "";
-        for (int i = itemInfo.Count-1; i > 0; i--) 
+        for (int i = itemInfo.Count - 1; i > 0; i--)
         {
             stringMessage = textObject[i - 1].text;
             textObject[i].SetText(stringMessage);
             textObject[i].fontSize = textObject[i - 1].fontSize;
         }
-        stringMessage = itemInfo[0];
+        /*stringMessage = itemInfo[0];
         textObject[0].SetText(stringMessage);
         if (numSize)
         {
@@ -48,6 +66,6 @@ public class InputLogger
         else
         {
             textObject[0].fontSize = 22;
-        }
+        }*/
     }
 }
