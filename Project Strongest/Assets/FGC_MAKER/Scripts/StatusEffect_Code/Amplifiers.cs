@@ -8,6 +8,7 @@ using FightingGame_FrameData;
 [Serializable]
 public class Amplifiers : StatusEffect 
 {
+
     public Character_Base _base;
     [Header("Amplifier Type")]
     public Effect_Amplify amplifier;
@@ -17,6 +18,7 @@ public class Amplifiers : StatusEffect
     public ActiveState currentState = ActiveState.Inactive;
     public Color32 meterColor;
     public Sprite amplifierImage;
+    [TextArea]public string AmplifierDescription;
     [Space(15)]
 
     [Header("Fill Meter Variables")]

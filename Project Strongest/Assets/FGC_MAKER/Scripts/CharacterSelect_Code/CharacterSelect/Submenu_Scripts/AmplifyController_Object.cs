@@ -15,6 +15,7 @@ public class AmplifyController_Object : MonoBehaviour
     [SerializeField] private Image _amplifierBackgroundImage;
     [SerializeField] private Image _amplifierImage;
     [SerializeField] private TMP_Text _amplifierText;
+    [SerializeField] private TMP_Text _amplifierDescription;
     Tween colorShift;
     Tween imageShift;
     private Amplifiers _chosenAmplifier;
@@ -72,8 +73,10 @@ public class AmplifyController_Object : MonoBehaviour
 
         AmplifierIndex = index;
         string amplifierName = newAmplifier.amplifier.ToString().ToUpper();
+        string descriptionMessage = $"{newAmplifier.AmplifierDescription.ToUpper()}";
         ShiftImage(newAmplifier);
         _amplifierText.text = SpriteToTextColorUtility.AppendSpriteName(amplifierName, _amplifierText.color);
+        _amplifierDescription.SetText(SpriteToTextColorUtility.AppendSpriteName(descriptionMessage, _amplifierText.color));
         BackgroundShiftColor(newAmplifier.meterColor);
     }
     public void ShiftImage(Amplifiers newAmp) 
