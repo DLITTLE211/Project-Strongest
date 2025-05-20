@@ -39,12 +39,18 @@ public class AttackInputTypes
     public AirAttackInfo normalAirAttackInfo;
     public AirAttackInfo keyGroundCheck;
     int maxStringSize;
+    public bool allowNeutral;
     public AttackInputTypes(Attack_Input _specialMoveTypeInput = null, List<string> _normalTypeInput = null,MoveType _moveType = MoveType.Normal, AirAttackInfo _normalAirAttackInfo = AirAttackInfo.GroundOnly) 
     {
         specialMoveTypeInput = _specialMoveTypeInput; 
         normalTypeInput = _normalTypeInput;
         moveType = _moveType;
         normalAirAttackInfo = _normalAirAttackInfo;
+        allowNeutral = true;
+    }
+    public void SetAllowNeutral(bool state) 
+    {
+        allowNeutral = state;
     }
     public void SetMaxStringSize(int maxSize) 
     {
@@ -55,12 +61,32 @@ public class AttackInputTypes
         if (faceSide == Character_Face_Direction.FacingLeft)
         {
             int alteredInput = TransfigureDirectionOnSideSwitch(directionalInput);
-            specialMoveTypeInput.attackString += alteredInput.ToString();
+            if(directionalInput == 5) 
+            {
+                if (allowNeutral)
+                {
+                    specialMoveTypeInput.attackString += alteredInput.ToString();
+                }
+            }
+            else 
+            {
+                specialMoveTypeInput.attackString += alteredInput.ToString();
+            }
             inputtedDirection = alteredInput;
         }
         else
         {
-            specialMoveTypeInput.attackString += directionalInput.ToString();
+            if (directionalInput == 5)
+            {
+                if (allowNeutral)
+                {
+                    specialMoveTypeInput.attackString += directionalInput.ToString();
+                }
+            }
+            else
+            {
+                specialMoveTypeInput.attackString += directionalInput.ToString();
+            }
             inputtedDirection = directionalInput;
         }
     }

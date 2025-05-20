@@ -14,6 +14,7 @@ public class InputLogger
         for (int i = 0; i < textObject.Count; i++) 
         {
             textObject[i].text = "";
+            textObject[i].fontSize = 18;
         }
     }
     public void SetTextLog(List<string> itemInfo, bool numSize) 
@@ -24,13 +25,11 @@ public class InputLogger
             {
                 string stringMessage = itemInfo[0];
                 textObject[0].SetText(stringMessage);
-                textObject[0].fontSize = numSize ? 17 : 25;
             }
             else 
             {
                 string stringMessage = itemInfo[i];
                 textObject[i].SetText(stringMessage);
-                textObject[i].fontSize = textObject[i - 1].fontSize;
             }
         }
     }

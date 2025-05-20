@@ -29,7 +29,8 @@ public class Character_ComboDetection : MonoBehaviour
         lastInput = 5;
         curString = "";
         currentAttackInput = new AttackInputTypes(new Attack_Input(curString, curStringArray));
-        currentAttackInput.SetMaxStringSize(9);
+        currentAttackInput.SetAllowNeutral(false);
+        currentAttackInput.SetMaxStringSize(30);
         _cMAnyChangeInputLog = new AttackInputTypes(new Attack_Input(curString, curStringArray));
         _cMAnyChangeInputLog.SetMaxStringSize(30);
         _cMOnChangeInputLog = new AttackInputTypes(new Attack_Input(curString, curStringArray));
