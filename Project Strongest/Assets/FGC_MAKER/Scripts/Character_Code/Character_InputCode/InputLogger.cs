@@ -33,38 +33,4 @@ public class InputLogger
             }
         }
     }
-    public void setFirstItem(List<string> itemInfo, bool numSize)
-    {
-        string stringMessage = itemInfo[0];
-        textObject[0].SetText(stringMessage);
-        if (numSize) 
-        {
-            textObject[0].fontSize = 17;
-        }
-        else 
-        {
-            textObject[0].fontSize = 22;
-        }
-    }
-
-    public void setNextItemInList(List<string> itemInfo, bool numSize)
-    {
-        string stringMessage = "";
-        for (int i = itemInfo.Count - 1; i > 0; i--)
-        {
-            stringMessage = textObject[i - 1].text;
-            textObject[i].SetText(stringMessage);
-            textObject[i].fontSize = textObject[i - 1].fontSize;
-        }
-        /*stringMessage = itemInfo[0];
-        textObject[0].SetText(stringMessage);
-        if (numSize)
-        {
-            textObject[0].fontSize = 17;
-        }
-        else
-        {
-            textObject[0].fontSize = 22;
-        }*/
-    }
 }

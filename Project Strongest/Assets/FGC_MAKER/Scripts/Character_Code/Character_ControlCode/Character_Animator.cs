@@ -481,7 +481,7 @@ public class Character_Animator : MonoBehaviour
         }
         if (_base._cAttackTimer._type == TimerType.Special)
         {
-            _base._cAttackTimer.ClearAttackLanded();
+            _base._cAttackTimer.ClearAttackLanded(thisAttack.cancelProperty);
         }
         else if (_base._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
         {
@@ -493,7 +493,7 @@ public class Character_Animator : MonoBehaviour
         }
         else
         {
-            _base._cAttackTimer.ClearAttackLanded();
+            _base._cAttackTimer.ClearAttackLanded(thisAttack.cancelProperty);
             SetCanTransitionIdle(true);
         }
         if (thisAttack._moveType == MoveType.Throw)
@@ -539,12 +539,12 @@ public class Character_Animator : MonoBehaviour
             }
             else
             {
-                _base._cAttackTimer.ClearAttackLanded();
+                _base._cAttackTimer.ClearAttackLanded(thisAttack.cancelProperty);
             }
         }
         else
         {
-            _base._cAttackTimer.ClearAttackLanded();
+            _base._cAttackTimer.ClearAttackLanded(thisAttack.cancelProperty);
         }
         if (requiredHitboxCallBacks.Count == 1)
         {

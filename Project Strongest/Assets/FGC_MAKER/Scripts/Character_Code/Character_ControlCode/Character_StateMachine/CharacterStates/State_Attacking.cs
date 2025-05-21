@@ -60,7 +60,7 @@ public class State_Attacking : BaseState
         _base._cHurtBox.SetHurboxState();
         _base._cComboDetection.inRekka = false;
         _base._cComboDetection.inStance = false;
-        _base._cAttackTimer.SetTimerType(TimerType.Normal);
+        //_base._cAttackTimer.SetTimerType(TimerType.Normal);
 
         ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
 

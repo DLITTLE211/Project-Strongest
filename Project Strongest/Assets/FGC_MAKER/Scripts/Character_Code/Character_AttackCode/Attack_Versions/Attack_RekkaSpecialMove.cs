@@ -6,12 +6,13 @@ using System.Collections.Generic;
 public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctionality
 {
     [SerializeField] private int curRekkaInput, rekkaInputCount;
-    [SerializeField] internal int leewayTime;
+    [SerializeField] internal int rekkaLeewayTime;
+    [SerializeField] internal int AttackResetTime;
     public AfflictionSet attackAfflictionSet;
     public int LeewayTime 
     {
-        get { return leewayTime; } 
-        set { leewayTime = value; } 
+        get { return rekkaLeewayTime; } 
+        set { rekkaLeewayTime = value; } 
     }
     [SerializeField] internal bool inRekkaState;
     [SerializeField] internal List<Attack_BaseProperties> usedRekkas;
@@ -83,7 +84,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         }
         curRekkaInput++;
         usedRekkas.Add(newProperty);
-        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, leewayTime);
+        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, AttackResetTime);
         _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess), rekkaInput._rekkaPortion[attack].attackAfflictionSet);
     }
     public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 
@@ -102,7 +103,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         _curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess, attackAfflictionSet);
         SetRekkaStateTrue();
         ResetCombo();
-        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,leewayTime);
+        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,AttackResetTime, rekkaLeewayTime);
         inRekkaState = true;
     }
     public Attack_CancelInfo GetCancelInfoType()
@@ -134,6 +135,10 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties main)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(main.counterHitDamageMult);
+    }
+    public void CloseSubAttackWindow()
+    {
+        ResetCombo();
     }
     public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
     {

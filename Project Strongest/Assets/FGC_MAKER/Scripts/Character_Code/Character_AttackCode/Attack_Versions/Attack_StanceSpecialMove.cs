@@ -10,6 +10,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     [SerializeField] private int curInput;
     [SerializeField] internal bool inStanceState;
     public int stanceHeldTime;
+    public int AttackResetTime;
     public AfflictionSet attackAfflictionSet;
 
     [SerializeField] private Character_Base _curBase;
@@ -125,7 +126,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             curInput = attack;
                Attack_BaseProperties newAttack = stanceInput.stanceAttack._stanceButtonInput._correctInput[attack].property;
             _curStanceState = StanceState.AttackStance;
-            newAttack.InputTimer.SetTimerType(TimerType.InStance, (stanceHeldTime * (1 / 60f)));
+            float stanceTime = stanceHeldTime * (1 / 60f);
+            float attackResetTime = AttackResetTime * (1 / 60f);
+            newAttack.InputTimer.SetTimerType(TimerType.InStance, attackResetTime);
             _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess), stanceInput.stanceAttack.attackAfflictionSet);
             ResetCombo();
         }
@@ -143,7 +146,9 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         _curBase.comboList3_0.ClearFollowUpAttack();
         _curBase._aManager.ReceiveAttack(stanceStartProperty, SendAttackOnSucess, attackAfflictionSet);
-        stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance,(stanceHeldTime * (1/60f)));
+        float stanceTime = stanceHeldTime * (1 / 60f);
+        float attackResetTime = AttackResetTime * (1 / 60f);
+        stanceStartProperty.InputTimer.SetTimerType(TimerType.InStance, attackResetTime, stanceTime);
         SetStanceStateTrue();
     }
     public void ResetAttackData()
@@ -182,6 +187,10 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
         }
     }
 
+    public void CloseSubAttackWindow()
+    {
+        ResetCombo();
+    }
     public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties main)
     {
         target._cDamageCalculator.ReceiveCounterHitMultiplier(main.counterHitDamageMult);

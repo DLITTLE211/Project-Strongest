@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FightingGame_FrameData;
 
 public class Character_InputTimer_Attacks : Character_InputTimer
 {
+    [SerializeField] protected float _subAttackTimer;
     public Character_Base _base;
     public TimerType _type;
     private bool throwLanded, superLanded;
@@ -12,17 +14,25 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     // Start is called before the first frame update
     public void ResetTimer()
     {
-        FrameCountTimer = StartFrameCountTimer;
-        CheckForInput = false;
-        _base._cComboDetection.ResetCombos();
-        _base._aManager.ClearAttacks();
+        if (!(FrameCountTimer > 0))
+        {
+            FrameCountTimer = StartFrameCountTimer;
+            CheckForInput = false;
+            _base._cComboDetection.ResetCombos();
+            _base._aManager.ClearAttacks();
+        }
+    }
+    public void CloseCurrentSubAttackWindow() 
+    {
+        _subAttackTimer = 0;
+        _base.comboList3_0.CloseSubAttackWindow();
     }
     public void SetStartingValues(float newTime)
     {
         _base._cComboDetection.inStance = false;
         _base._cComboDetection.inRekka = false;
-        StartFrameCountTimer = newTime;
-        FrameCountTimer = StartFrameCountTimer;
+        StartFrameCountTimer = 0.4f;
+        FrameCountTimer = newTime;
         CheckForInput = false;
     }
     public void ResetTimerSuccess()
@@ -30,9 +40,13 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         FrameCountTimer = StartFrameCountTimer;
     }
 
-    public void ResetTimeOnSpecialMove(float time)
+    public void ResetTimeOnSpecialMove(float time, float _subAttackTime = 0f)
     {
         _frameCountTimer = time;
+        if(_subAttackTime > 0f) 
+        {
+            _subAttackTimer = _subAttackTime;
+        }
     }
     // Update is called once per frame
     private void Update()
@@ -41,7 +55,6 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         {
             TimerTickDown();
         }
-      
     }
     public void TimerTickDown()
     {
@@ -65,20 +78,20 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             }
         }
     }
-    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.4f) 
+    public void SetTimerType(TimerType newType = TimerType.Normal, float newTime = 0.4f, float subAttackTime = 0f) 
     {
         if (newType != TimerType.Normal)
         {
             if (newType == TimerType.InRekka)
             {
-                SetStartRekkaTimerValues(newTime);
+                SetStartRekkaTimerValues(newTime, subAttackTime);
                 _type = newType;
                 return;
 
             }
             if (newType == TimerType.InStance)
             {
-                SetStartStanceTimerValues(newTime);
+                SetStartStanceTimerValues(newTime, subAttackTime);
                 _type = newType;
                 return;
             }
@@ -118,11 +131,17 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         FrameCountTimer = -1 / 60f;
         CountDownTimer();
     }
-    public void ClearAttackLanded()
+    public void ClearAttackLanded(Attack_CancelInfo cancelInfo = null)
     {
-        SetTimerType(TimerType.Normal);
-        FrameCountTimer = -1 / 60f;
-        CountDownTimer();
+        if (cancelInfo != null)
+        {
+            if (cancelInfo.nextAvailableAttackRoute.HasFlag(Cancel_State.NotCancellable))
+            {
+                SetTimerType(TimerType.Normal);
+                FrameCountTimer = -1 / 60f;
+                CountDownTimer();
+            }
+        }
         if (superLanded) 
         {
             superLanded = false;
@@ -133,12 +152,12 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         }
     }
 
-    void SetStartStanceTimerValues(float time) 
+    void SetStartStanceTimerValues(float mainTime,float stanceTime) 
     {
         _base._cComboDetection.inStance = true;
-        if (time > 0)
+        if (stanceTime > 0)
         {
-            ResetTimeOnSpecialMove((time));
+            ResetTimeOnSpecialMove(mainTime,stanceTime);
             permanentStance = false;
         }
         else 
@@ -146,15 +165,56 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             permanentStance = true;
         }
     }
-    void SetStartRekkaTimerValues(float time)
+    void SetStartRekkaTimerValues(float mainTime, float rekkaTime)
     {
-        float newSetTime = (time * (1 / 60f));
-        ResetTimeOnSpecialMove(newSetTime);
+        float newRekkaSetTime = (rekkaTime * (1 / 60f));
+        float newMainTime = (mainTime * (1 / 60f));
+        ResetTimeOnSpecialMove(newMainTime, newRekkaSetTime);
     }
 
     public void CountDownTimer()
     {
-        if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
+        switch (_type)
+        {
+            case TimerType.InRekka:
+                if (FrameCountTimer <= -Base_FrameCode.ONE_FRAME)
+                {
+                    SetTimerType();
+                    ResetTimer();
+                }
+                else
+                {
+                    FrameCountTimer -= Base_FrameCode.ONE_FRAME;
+                }
+                if (_subAttackTimer <= 0)
+                {
+                    CloseCurrentSubAttackWindow();
+                }
+                else
+                {
+                    _subAttackTimer -= Base_FrameCode.ONE_FRAME;
+                }
+                break;
+            default:
+                if (FrameCountTimer <= -Base_FrameCode.ONE_FRAME)
+                {
+                    ResetTimer();
+                }
+                else
+                {
+                    FrameCountTimer -= Base_FrameCode.ONE_FRAME;
+                }
+                if (_subAttackTimer <= 0)
+                {
+                    CloseCurrentSubAttackWindow();
+                }
+                else
+                {
+                    _subAttackTimer -= Base_FrameCode.ONE_FRAME;
+                }
+                break;
+        }
+        /*if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
         {
             if (FrameCountTimer <= -1 / 60f)
             {
@@ -179,7 +239,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
             {
                 FrameCountTimer -= 1 / 60f;
             }
-        }
+        }*/
     }
     public bool ReturnTimerLessThan(float timeComparison) 
     {

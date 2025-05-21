@@ -25,6 +25,7 @@ public interface IAttackFunctionality
     virtual MoveListAttackInfo CreateMoveListData() { return null; }
     virtual void DecreaseGatlingCount() { }
     virtual bool CheckAttackContains(Attack_BaseProperties newAttack) { return false; }
+    virtual void CloseSubAttackWindow() { }
     #endregion
 }
 

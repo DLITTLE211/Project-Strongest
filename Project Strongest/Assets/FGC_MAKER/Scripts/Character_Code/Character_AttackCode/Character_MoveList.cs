@@ -102,7 +102,10 @@ public class Character_MoveList : MonoBehaviour
         followUp = null;
         ReserveAllAttackGatlingReset();
     }
-
+    public void CloseSubAttackWindow() 
+    {
+        currentAttack.Value?.CloseSubAttackWindow();
+    }
 
     public void ExtractBaseProperties(Character_Base baseCharacterInfo)
     {

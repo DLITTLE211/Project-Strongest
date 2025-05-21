@@ -108,7 +108,15 @@ public class Character_Timer
         {
             ResetCount();
             lastDirectionalInput = newDirectionalInput;
-            string directionString = $"{ConvertLastInput(lastDirectionalInput.ToString())}";
+            string directionString = "";
+            if (lastDirectionalInput == 5) 
+            {
+                directionString = $"";
+            }
+            else 
+            {
+                directionString = $"{ConvertLastInput(lastDirectionalInput.ToString())}";
+            }
             mainString += directionString;
             numSize = true;
             newEntryRequired = true;
@@ -116,7 +124,15 @@ public class Character_Timer
         else 
         {
             IncreaseCount();
-            string directionString = $"{ConvertLastInput(lastDirectionalInput.ToString())}";
+            string directionString = "";
+            if (lastDirectionalInput == 5)
+            {
+                directionString = $"";
+            }
+            else
+            {
+                directionString = $"{ConvertLastInput(lastDirectionalInput.ToString())}";
+            }
             mainString += directionString;
         }
         if(lastAttackInput != newAttackInput) 

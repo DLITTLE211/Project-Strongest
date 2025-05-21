@@ -2348,6 +2348,7 @@ MonoBehaviour:
     curInput: 0
     inStanceState: 0
     stanceHeldTime: 150
+    AttackResetTime: 160
     attackAfflictionSet:
       _weakAffliction: 15
       _mediumAffliction: 15
@@ -2837,7 +2838,8 @@ MonoBehaviour:
         KnockDown: 4
     curRekkaInput: 0
     rekkaInputCount: 1
-    leewayTime: 65
+    rekkaLeewayTime: 60
+    AttackResetTime: 120
     attackAfflictionSet:
       _weakAffliction: 4
       _mediumAffliction: 7
@@ -3409,7 +3411,8 @@ MonoBehaviour:
         KnockDown: 2
     curRekkaInput: 0
     rekkaInputCount: 1
-    leewayTime: 120
+    rekkaLeewayTime: 60
+    AttackResetTime: 120
     attackAfflictionSet:
       _weakAffliction: 15
       _mediumAffliction: 15
