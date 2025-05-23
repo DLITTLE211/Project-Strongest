@@ -177,7 +177,7 @@ public class Character_Base : MonoBehaviour
     {
         activated = false;
         _side = hitboxSideDetection;
-        AddCharacterModel(choseAmplifiers,skinIndex);
+        AddCharacterModel(choseAmplifiers,skinIndex, NewID);
         InitButtons(setSubState, NewID);
         _cHitboxManager.SetupHitboxes(hitboxSideDetection + 1);
         //_cHitstop.SetCharacterAnimator(playerID, _cAnimator);
@@ -274,7 +274,7 @@ public class Character_Base : MonoBehaviour
         _moveForce = _baseMoveForce;
         _dashForce = _baseDashForce;
     }
-    void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex)
+    void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex, int newID = -1)
     {
         GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
 
@@ -283,7 +283,15 @@ public class Character_Base : MonoBehaviour
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
         Character_Animator _chosenCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
-
+        if (newID > -1)
+        {
+            string layerMaskName = newID == 0 ? "Outlined Player1" : "Outlined Player2";
+            _chosenCharacter.layer = LayerMask.NameToLayer(layerMaskName);
+            foreach (Transform child in _chosenCharacter.transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer(layerMaskName);
+            }
+        }
         _cSubStateController = _chosenCharacter.GetComponentInChildren<Character_SubStateController_Base>();
         _cSubStateController.SetStarterInformation(this);
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
