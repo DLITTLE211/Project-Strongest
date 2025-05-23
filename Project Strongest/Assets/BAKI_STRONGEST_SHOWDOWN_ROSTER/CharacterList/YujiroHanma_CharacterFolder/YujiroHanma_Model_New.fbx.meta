@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: YH_Model|Yujiro_Intro_Animation
-      takeName: YH_Model|Yujiro_Intro_Animation
-      internalID: -8945619450559840346
+      name: YH_Model|Yujiro_Intro_Animation_Start
+      takeName: YH_Model|Yujiro_Intro_Animation_Start
+      internalID: 3011140820007624835
       firstFrame: 0
-      lastFrame: 429
+      lastFrame: 314
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1454,11 +1454,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: YujiroHanma|Yujiro_Intro_Animation
-      takeName: YujiroHanma|Yujiro_Intro_Animation
-      internalID: -2007693274316484563
+      name: YujiroHanma|Yujiro_Intro_Animation_End
+      takeName: YujiroHanma|Yujiro_Intro_Animation_End
+      internalID: 4329534348314258469
       firstFrame: 0
-      lastFrame: 429
+      lastFrame: 119
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: YujiroHanma|Yujiro_Intro_Animation_Start
+      takeName: YujiroHanma|Yujiro_Intro_Animation_Start
+      internalID: -4786064389408641795
+      firstFrame: 0
+      lastFrame: 314
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2328,7 +2357,7 @@ ModelImporter:
       takeName: YujiroHanma|Yujiro_Super_236236LK
       internalID: -1185330712471824354
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 99
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2415,7 +2444,7 @@ ModelImporter:
       takeName: YujiroHanma|Yujiro_Super_Install_214214LK
       internalID: 926540811757950808
       firstFrame: 0
-      lastFrame: 79
+      lastFrame: 99
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2444,7 +2473,7 @@ ModelImporter:
       takeName: YujiroHanma|Yujiro_Super_Install_214214LK_Connected
       internalID: 586122830430254498
       firstFrame: 0
-      lastFrame: 199
+      lastFrame: 339
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
