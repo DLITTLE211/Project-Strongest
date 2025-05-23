@@ -216,42 +216,4 @@ public class InGameCameraController : MonoBehaviour
         bool checkCenterZ = (Mathf.Round(this.transform.position.z * 10) / 0.01f == Mathf.Round(comparison.z * 10) / 0.01f);
         return checkCenterX && checkCenterY && checkCenterZ;
     }
-
-
-    void RotateOnTarget(CustomCallback callback)
-    {
-        isTracking = false;
-        if (callback.snapMovement)
-        {
-
-        }
-        else 
-        {
-
-        }
-    }
-    void PositionChangeOnTarget(CustomCallback callback)
-    {
-        isTracking = false;
-        if (callback.snapMovement)
-        {
-
-        }
-        else
-        {
-
-        }
-    }
-    void ZoomOnTarget(CustomCallback callback)
-    {
-        isTracking = false;
-        if (callback.snapMovement)
-        {
-
-        }
-        else
-        {
-
-        }
-    }
 }

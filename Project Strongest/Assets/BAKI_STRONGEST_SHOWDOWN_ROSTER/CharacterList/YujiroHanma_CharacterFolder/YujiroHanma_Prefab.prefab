@@ -1034,8 +1034,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personalCamera: {fileID: 7317379689757004469}
+  _screenSpaceCanvas: {fileID: 0}
+  perspectiveCamera: {fileID: 0}
   orthoCamera: {fileID: 5468156525087845878}
-  orthoCameraAnim: {fileID: 0}
+  orthoCameraAnim: {fileID: 2771313786364344695}
   _base: {fileID: 0}
   _cAnimator: {fileID: 7870534508119086931}
   _demonActivation: 0
@@ -1290,15 +1292,24 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3e90f76ae6755f441a407ecd8fa37ce7, type: 2}
+    - target: {fileID: 7299629978959495685, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+      propertyPath: _subStateController
+      value: 
+      objectReference: {fileID: 7038203479419907724}
     - target: {fileID: 8895665265843812960, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
       propertyPath: m_Depth
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+--- !u!95 &2771313786364344695 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6257190041856926209, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+  m_PrefabInstance: {fileID: 8116522286957058934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &5468156525087845878 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4269805415241725568, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}

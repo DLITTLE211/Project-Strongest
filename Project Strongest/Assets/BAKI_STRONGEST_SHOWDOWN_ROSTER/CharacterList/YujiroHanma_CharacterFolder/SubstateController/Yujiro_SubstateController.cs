@@ -48,10 +48,6 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         _shirt.SetActive(!_demonActivation);
         SetAnimClipsOnChange(0);
     }
-    public override void SetCameraCanvas(Canvas _screenSpaceCanvas)
-    {
-        _screenSpaceCanvas.worldCamera = orthoCamera;
-    }
     public override void PlayVictoryWinAnimation()
     {
         _base.Deactivate();

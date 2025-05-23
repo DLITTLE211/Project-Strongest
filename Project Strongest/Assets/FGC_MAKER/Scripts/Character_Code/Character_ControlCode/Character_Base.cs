@@ -9,6 +9,8 @@ using FightingGame_FrameData;
 public class Character_Base : MonoBehaviour
 {
     public bool allowSecondIdleAnim;
+
+
     #region Character Profile Data
     [Header("__________Character Profile Data__________")]
     public Character_Profile characterProfile;
@@ -17,6 +19,7 @@ public class Character_Base : MonoBehaviour
 
     #region Script References
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
+    public MainGame_CameraController _mainGameCamera;
     public Character_SubStateController_Base _cSubStateController;
     public Character_Hitstop _cHitstop;
     public Character_AttackDetection _cADetection;
@@ -154,6 +157,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Misc. Variables
+    public Canvas screenSpaceCanvas;
     private float storedXVelocity, storedYVelocity;
     internal bool isLockedPause;
     IEnumerator ThrowTechRoutine;
@@ -489,6 +493,7 @@ public class Character_Base : MonoBehaviour
         mainCallbackDictionary.Add(HitPointCall.DealCustomDamage, opponentPlayer._cDamageCalculator.TakeCustomDamage);
         mainCallbackDictionary.Add(HitPointCall.ForceSideSwitch, _sideManager.ForceSideSwitch);
         mainCallbackDictionary.Add(HitPointCall.ActivateInstallProperties, _cSubStateController.PlayActivateInstallProperties);
+        mainCallbackDictionary.Add(HitPointCall.PlayCameraAnimation, _cSubStateController.PlayCameraAnimation);
     }
     #endregion
 

@@ -10,6 +10,7 @@ public class MainGame_CameraController : MonoBehaviour
     [SerializeField] private float minWidth;
     [SerializeField] private float maxWidth;
     [SerializeField] private float wallBoundBias;
+    [SerializeField] private Canvas _screenSpaceCanvas;
 
     [SerializeField] private float size;
     private Vector3 velocity;
@@ -224,5 +225,13 @@ public class MainGame_CameraController : MonoBehaviour
         bool checkCenterY = (Mathf.Round(this.transform.position.y * 10) / 0.001f == Mathf.Round(comparison.y * 10) / 0.001f);
         bool checkCenterZ = (Mathf.Round(this.transform.position.z * 10) / 0.01f == Mathf.Round(comparison.z * 10) / 0.01f);
         return checkCenterX && checkCenterY && checkCenterZ;
+    }
+    public void ResetCanvas()
+    {
+        _screenSpaceCanvas.worldCamera = orthoCamera;
+    }
+    public Vector3 ReturnCameraPos() 
+    {
+        return cameraObjectHolder.position;
     }
 }

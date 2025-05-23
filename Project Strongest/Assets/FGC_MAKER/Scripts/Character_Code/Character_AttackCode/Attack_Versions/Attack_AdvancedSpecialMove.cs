@@ -11,9 +11,7 @@ public abstract class AdvancedSpecialBase
     public List<Attack_Input> attackInput;
     public ButtonStateMachine attackInputState;
     public Attack_BaseProperties property;
-    public AnimationClip _cameraAnimation;
     public CustomAnimationField _customAnimationField;
-    public List<AttackHandler_Attack> _customAnimation;
     public AfflictionSet attackAfflictionSet;
     public abstract void ResetCombo();
 }
@@ -21,7 +19,6 @@ public abstract class AdvancedSpecialBase
 public class CustomAnimationField
 {
     public List<AttackHandler_Attack> _customAnimation;
-    public AnimationClip _cameraAnimation;
     public AfflictionSet attackAfflictionSet;
 }
 [Serializable]

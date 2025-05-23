@@ -1783,6 +1783,7 @@ MonoBehaviour:
   _frameCountTimer: 0
   _startFrameCountTimer: 0
   _checkForInput: 0
+  _subAttackTimer: 0
   _base: {fileID: 993311525}
   _type: 0
 --- !u!1 &89504891
@@ -1845,6 +1846,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+    allowNeutral: 0
   _cMAnyChangeInputLog:
     AttackName: 
     specialMoveTypeInput:
@@ -1855,6 +1857,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+    allowNeutral: 0
   _cMOnChangeInputLog:
     AttackName: 
     specialMoveTypeInput:
@@ -1865,6 +1868,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+    allowNeutral: 0
   lastInput: 0
 --- !u!1 &94634922
 GameObject:
@@ -1997,6 +2001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSecondIdleAnim: 0
   characterProfile: {fileID: 0}
+  _mainGameCamera: {fileID: 550802478}
   _cSubStateController: {fileID: 0}
   _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 498465949}
@@ -2052,6 +2057,11 @@ MonoBehaviour:
     startTime: 0.03333334
     hasStarted: 0
     hasEnded: 0
+    count: 0
+    lastDirectionalInput: 0
+    lastAttackInput: 
+    newDirectionalInput: 0
+    newAttackInput: 
     logString: []
   playerID: -1
   _side: 0
@@ -2140,6 +2150,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 1211425607}
   opponentPlayer: {fileID: 993311525}
+  screenSpaceCanvas: {fileID: 1077507987}
   verifyMoves: 0
   moveListIndex: 0
   callSource: 0
@@ -11886,6 +11897,7 @@ MonoBehaviour:
   minWidth: 0
   maxWidth: 0
   wallBoundBias: 1.75
+  _screenSpaceCanvas: {fileID: 1077507987}
   size: 0
   zPos: -2.5
   cameraObjectHolder: {fileID: 550802476}
@@ -12035,6 +12047,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+    allowNeutral: 0
   _cMAnyChangeInputLog:
     AttackName: 
     specialMoveTypeInput:
@@ -12045,6 +12058,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+    allowNeutral: 0
   _cMOnChangeInputLog:
     AttackName: 
     specialMoveTypeInput:
@@ -12055,6 +12069,7 @@ MonoBehaviour:
     moveType: 0
     normalAirAttackInfo: 0
     keyGroundCheck: 0
+    allowNeutral: 0
   lastInput: 0
 --- !u!1 &569047789
 GameObject:
@@ -19954,6 +19969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSecondIdleAnim: 0
   characterProfile: {fileID: 0}
+  _mainGameCamera: {fileID: 550802478}
   _cSubStateController: {fileID: 0}
   _cHitstop: {fileID: 1359521218}
   _cADetection: {fileID: 510088399}
@@ -20009,6 +20025,11 @@ MonoBehaviour:
     startTime: 0.03333334
     hasStarted: 0
     hasEnded: 0
+    count: 0
+    lastDirectionalInput: 0
+    lastAttackInput: 
+    newDirectionalInput: 0
+    newAttackInput: 
     logString: []
   playerID: -1
   _side: 0
@@ -20097,6 +20118,7 @@ MonoBehaviour:
   _subState: 2
   pSide: {fileID: 434338341}
   opponentPlayer: {fileID: 94923329}
+  screenSpaceCanvas: {fileID: 1077507987}
   verifyMoves: 0
   moveListIndex: 0
   callSource: 0
@@ -27501,6 +27523,7 @@ MonoBehaviour:
   _frameCountTimer: 0
   _startFrameCountTimer: 0
   _checkForInput: 0
+  _subAttackTimer: 0
   _base: {fileID: 94923329}
   _type: 0
 --- !u!1 &1372168102
