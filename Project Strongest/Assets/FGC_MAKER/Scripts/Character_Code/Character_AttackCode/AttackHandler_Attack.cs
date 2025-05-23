@@ -611,4 +611,5 @@ public enum HitPointCall
     EnemyLockPos = 1 << 27,
     EnemyUnlockPos = 1 << 28,
     ActivateInstallProperties = 1 << 29,
+    PlayCameraAnimation = 1 << 30,
 }

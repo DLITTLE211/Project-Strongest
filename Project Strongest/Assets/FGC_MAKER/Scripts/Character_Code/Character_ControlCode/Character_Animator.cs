@@ -581,37 +581,6 @@ public class Character_Animator : MonoBehaviour
             PlayNextAnimation(lossRound, 0.25f);
         }
     }
-    public void PlayVictoryAnim()
-    {
-        _base.Deactivate();
-        _base._cStateMachine.enabled = false;
-        _victoryAnim._animName = _victoryAnim._animationClip.name;
-        _victoryAnim.activatePointInFrames = _victoryAnim.activatePoint * Base_FrameCode.ONE_FRAME;
-        _victoryAnim._animLength = _victoryAnim._animationClip.length;
-        _victoryAnim._animHash = Animator.StringToHash(_victoryAnim._animName);
-        StartCoroutine(PlayAnimSequence(_victoryAnim));
-    }
-    IEnumerator PlayAnimSequence(VictoryAnimation _currentAction)
-    {
-        float frameCount = 0;
-        SetCanTransitionIdle(false);
-        bool pointHit = false;
-        float waitTime = Base_FrameCode.ONE_FRAME;
-        float endingFrame = _victoryAnim._animLength;
-        PlayNextAnimation(_victoryAnim._animHash, 0.25f);
-        while (frameCount <= endingFrame)
-        {
-            #region Mobility Anim Checks
-            if (frameCount > _victoryAnim.activatePointInFrames && !pointHit)
-            {
-                pointHit = true;
-                soda.gameObject.SetActive(true);
-            }
-            frameCount += waitTime;
-            yield return new WaitForSeconds(waitTime);
-            #endregion
-        }
-    }
     #endregion
 }
 [Serializable]
@@ -644,6 +613,7 @@ public class WidthPositionMarkerSet
 [Serializable]
 public class VictoryAnimation : MobilityOption_Anim
 {
+    public AnimationClip _cameraAnimationClip;
     public float activatePoint;
     public float activatePointInFrames;
 }

@@ -48,20 +48,20 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         _shirt.SetActive(!_demonActivation);
         SetAnimClipsOnChange(0);
     }
+    public override void SetCameraCanvas(Canvas _screenSpaceCanvas)
+    {
+        _screenSpaceCanvas.worldCamera = orthoCamera;
+    }
     public override void PlayVictoryWinAnimation()
     {
         _base.Deactivate();
+        
         _base._cStateMachine.enabled = false;
         _victoryAnimation._animName = _victoryAnimation._animationClip.name;
         _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Base_FrameCode.ONE_FRAME;
         _victoryAnimation._animLength = _victoryAnimation._animationClip.length;
         _victoryAnimation._animHash = Animator.StringToHash(_victoryAnimation._animName);
         StartCoroutine(PlayAnimSequence(_victoryAnimation));
-    }
-
-    public override bool VerifyInstallState()
-    {
-        return _demonActivation;
     }
 
     IEnumerator PlayAnimSequence(VictoryAnimation _currentAction)
@@ -72,6 +72,7 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         float waitTime = Base_FrameCode.ONE_FRAME;
         float endingFrame = _victoryAnimation._animLength;
         _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);
+        orthoCameraAnim.Play($"{_victoryAnimation._cameraAnimationClip.name}", 0, 1);
         while (frameCount <= endingFrame)
         {
             #region Mobility Anim Checks
@@ -84,4 +85,9 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
             #endregion
         }
     }
+    public override bool VerifyInstallState()
+    {
+        return _demonActivation;
+    }
+
 }
