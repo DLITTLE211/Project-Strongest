@@ -62,12 +62,14 @@ public class Character_SubStateController_Base : MonoBehaviour
     public void PlayCameraAnimation(CustomCallback func) 
     {
         AnimationClip cameraClip = func._cameraAnimation;
-        if (cameraClip != null) 
+        if (cameraClip != null)
         {
+            orthoCameraAnim.enabled = true;
             PlayCameraAnimationClip(cameraClip.name);
         }
-        else 
+        else
         {
+            orthoCameraAnim.enabled = false;
             PlayCameraFocusAnimation(func);
         }
     }
@@ -84,6 +86,7 @@ public class Character_SubStateController_Base : MonoBehaviour
     }
     public void PlayCameraFocusAnimation(CustomCallback callback)
     {
+        personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
         float fadeInSpeed = callback.fadeInSpeed;
         float fadeOutSpeed = callback.fadeOutSpeed;
         personalCamera.SetActive(true);

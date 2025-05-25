@@ -514,6 +514,7 @@ public class Character_Animator : MonoBehaviour
             CountUpNegativeFrames();
             SetCanTransitionIdle(true);
         }
+        _base._cSubStateController.EndCameraAnimation();
         _base._aFrameDataMeter.GetAdvantageValue(_frameData);
         KillAttackOnRoutineEnd();
         EndAnim();
