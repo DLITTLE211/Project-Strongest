@@ -495,9 +495,6 @@ AnimatorStateMachine:
     m_State: {fileID: -1770724908390832819}
     m_Position: {x: 70, y: 1320, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 2013087729357707312}
-    m_Position: {x: 390, y: 1370, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 6943636755866582635}
     m_Position: {x: -220, y: 1320, z: 0}
   - serializedVersion: 1
@@ -581,6 +578,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 5702008967981062761}
     m_Position: {x: 810, y: -140, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -247202160455482885}
+    m_Position: {x: 390, y: 1370, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1706,6 +1706,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-247202160455482885
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teen_Baki_Hanma|Baki_Ultra_236236LK_Connected
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 6239780125965298717, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-111004595082226935
 AnimatorState:
   serializedVersion: 6
@@ -2095,32 +2121,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -7523656820315286609, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &2013087729357707312
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Teen_Baki_Hanma|Baki_Super_236236LK_Connected
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 3120397125411222643, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
