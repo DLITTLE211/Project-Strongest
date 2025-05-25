@@ -68,7 +68,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         }
         else 
         {
-            PlayCameraFocusAnimation();
+            PlayCameraFocusAnimation(func);
         }
     }
     public void EndCameraAnimation()
@@ -82,8 +82,10 @@ public class Character_SubStateController_Base : MonoBehaviour
         personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
         orthoCameraAnim.CrossFade(animName, 0,0);
     }
-    public void PlayCameraFocusAnimation()
+    public void PlayCameraFocusAnimation(CustomCallback callback)
     {
+        float fadeInSpeed = callback.fadeInSpeed;
+        float fadeOutSpeed = callback.fadeOutSpeed;
         personalCamera.SetActive(true);
         SetCameraCanvas();
     }
