@@ -2270,6 +2270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fb8258fac9f7346948454b64e2f4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  personalCamera: {fileID: 0}
+  _screenSpaceCanvas: {fileID: 0}
+  perspectiveCamera: {fileID: 0}
+  orthoCamera: {fileID: 0}
+  orthoCameraAnim: {fileID: 0}
   _base: {fileID: 0}
   _cAnimator: {fileID: 2569374614122903550}
   demonActivation: 0
@@ -2278,6 +2283,7 @@ MonoBehaviour:
     _animName: 
     _animHash: 0
     _animLength: 0
+    _cameraAnimationClip: {fileID: 0}
     activatePoint: 0
     activatePointInFrames: 0
   _sodaBottle: {fileID: 4473234312870259765}
@@ -2438,6 +2444,7 @@ MonoBehaviour:
     _animName: 
     _animHash: 0
     _animLength: 0
+    _cameraAnimationClip: {fileID: 0}
     activatePoint: 50
     activatePointInFrames: 0
   soda: {fileID: 4473234312870259765}
@@ -2636,6 +2643,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6257190041856926209, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f03f0a7778fd35b42b2d6a78eb79d850, type: 2}
+    - target: {fileID: 7299629978959495685, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+      propertyPath: _subStateController
+      value: 
+      objectReference: {fileID: 5758720175762165648}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
