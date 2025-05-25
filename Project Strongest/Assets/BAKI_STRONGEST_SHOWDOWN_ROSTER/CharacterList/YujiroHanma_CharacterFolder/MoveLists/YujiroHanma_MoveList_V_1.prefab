@@ -103,7 +103,7 @@ MonoBehaviour:
           startup: 1
           activeWindows:
           - activeFrame: 1
-            inactiveFrame: 205
+            inactiveFrame: 215
           recoveryEnd: 0
           recoveryAmount: 0
           totalRecovery: 0
@@ -1229,7 +1229,7 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 7400000, guid: 751a93fdafc80f442921ae4aa29535df, type: 2}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 75
+          - hitFramePoints: 110
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1266,7 +1266,7 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 100
+          - hitFramePoints: 150
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1278,7 +1278,7 @@ MonoBehaviour:
             camRotation: {x: 0, y: 0, z: 0}
             snapMovement: 0
             customDamage:
-              rawAttackDamage: 10
+              rawAttackDamage: 15
               counterHitDamageMult: 1
               customDamageFieldStunValues:
                 hitstunValue: 30
@@ -1303,7 +1303,7 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 150
+          - hitFramePoints: 215
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1315,7 +1315,7 @@ MonoBehaviour:
             camRotation: {x: 0, y: 0, z: 0}
             snapMovement: 0
             customDamage:
-              rawAttackDamage: 25
+              rawAttackDamage: 35
               counterHitDamageMult: 1
               customDamageFieldStunValues:
                 hitstunValue: 30
