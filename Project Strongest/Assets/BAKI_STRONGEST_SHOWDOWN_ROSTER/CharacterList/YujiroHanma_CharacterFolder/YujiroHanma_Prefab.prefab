@@ -1041,12 +1041,23 @@ MonoBehaviour:
   _base: {fileID: 0}
   _cAnimator: {fileID: 7870534508119086931}
   _demonActivation: 0
-  _baseIdleAnim: {fileID: 4000092528517423821, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  _baseIdleFWalk: {fileID: 3484709746454959671, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  _baseIdleBWalk: {fileID: 5586251907646554288, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  _installIdleAnim: {fileID: -3921048611790706213, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  _installIdleFWalk: {fileID: 3182480399493883114, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
-  _installIdleBWalk: {fileID: 6991003643021642852, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+  _cameraAnims:
+  - AnimName: 
+    cameraSequence:
+    - ObjectPosition:
+        tweenSpeed: 0
+        PositionData: {x: 0, y: 0, z: 0}
+        RotationData: {x: 0, y: 0, z: 0, w: 0}
+      orthoCameraPositioning:
+        tweenSpeed: 0
+        PositionData: {x: 0, y: 0, z: 0}
+        RotationData: {x: 0, y: 0, z: 0, w: 0}
+        focalLength: 0
+      perspectiveCameraPositioning:
+        tweenSpeed: 0
+        PositionData: {x: 0, y: 0, z: 0}
+        RotationData: {x: 0, y: 0, z: 0, w: 0}
+        focalLength: 0
   _victoryAnimation:
     _animationClip: {fileID: 4334525343487623470, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
     _animName: 

@@ -33,19 +33,16 @@ public class Character_Position
     public float delayTurnActionTime = 0;
     [SerializeField] private float startDelayTime = 20f;
 
-    public void SetFacingState(Character_Face_Direction face) 
+    public void SetFacingState(Character_Face_Direction face)
     {
-        if (_directionFacing != face) 
+        switch (face)
         {
-            switch (face) 
-            {
-                case Character_Face_Direction.FacingLeft:
-                    TurnModel(leftFace, -1f, face);
-                    break;
-                case Character_Face_Direction.FacingRight:
-                    TurnModel(rightFace, 1f, face);
-                    break;
-            }
+            case Character_Face_Direction.FacingLeft:
+                TurnModel(leftFace, face);
+                break;
+            case Character_Face_Direction.FacingRight:
+                TurnModel(rightFace, face);
+                break;
         }
     }
     bool NeutralStateTurn() 
@@ -60,7 +57,7 @@ public class Character_Position
         return fullCheck;
     }
 
-    void TurnModel(Vector3 direction, float flipSide, Character_Face_Direction _face)
+    void TurnModel(Vector3 direction, Character_Face_Direction _face)
     {
         float speed = 0.15f;
         if (delayTurnActionTime > 0) 
@@ -83,26 +80,17 @@ public class Character_Position
         {
             return;
         }
-        if (modelTransform.localEulerAngles == direction)
+        if (_face == Character_Face_Direction.FacingRight)
         {
-            _directionFacing = _face;
-            return;
+            modelTransform.localScale = Vector3.one;
+            CollisionDetectionTransform.localPosition = new Vector3(-_base.characterProfile.hurtboxSizing.bias, CollisionDetectionTransform.localPosition.y, CollisionDetectionTransform.localPosition.z);
         }
-        modelTransform.localScale = new Vector3(1f, 1f, flipSide);
-        modelTransform.DORotate(direction, speed).OnStart(() =>
+        else if (_face == Character_Face_Direction.FacingLeft)
         {
-            if (_face == Character_Face_Direction.FacingRight)
-            {
-                CollisionDetectionTransform.DOLocalMoveX(-_base.characterProfile.hurtboxSizing.bias, speed);
-            }
-            else if (_face == Character_Face_Direction.FacingLeft)
-            {
-                CollisionDetectionTransform.DOLocalMoveX(_base.characterProfile.hurtboxSizing.bias, speed);
-            }
-        }).OnComplete(() =>
-        {
-            _directionFacing = _face; 
-        });
+            modelTransform.localScale = new Vector3(-1f, 1f, 1f);
+            CollisionDetectionTransform.localPosition = new Vector3(_base.characterProfile.hurtboxSizing.bias, CollisionDetectionTransform.localPosition.y, CollisionDetectionTransform.localPosition.z);
+        }
+        _directionFacing = _face;
     }
     public void SetModelTransform(Transform _modelTransform) 
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FightingGame_FrameData;
 using UnityEngine;
+using System;
 using DG.Tweening;
 using UnityEngine.Rendering;
 
@@ -81,15 +82,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         personalCamera.SetActive(true); 
         SetCameraCanvas();
         personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
-        string animationName = $"{animName.Remove(animName.Length-1)}";
-        if(_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
-        {
-            animationName += "L";
-        }
-        else 
-        {
-            animationName += "R";
-        }
+        string animationName = $"{animName}";
         int hash = Animator.StringToHash(animationName);
         orthoCameraAnim.CrossFade(hash, 0, 0);
     }

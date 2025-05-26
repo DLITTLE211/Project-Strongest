@@ -7,15 +7,6 @@ using System.Linq;
 public class Yujiro_SubstateController : Character_SubStateController_Base
 {
     public bool _demonActivation;
-    [Header("Base Idle Animation")]
-    public AnimationClip _baseIdleAnim;
-    public AnimationClip _baseIdleFWalk;
-    public AnimationClip _baseIdleBWalk;
-    [Space(20)]
-    [Header("Install Idle Animation")]
-    public AnimationClip _installIdleAnim;
-    public AnimationClip _installIdleFWalk;
-    public AnimationClip _installIdleBWalk;
 
     public VictoryAnimation _victoryAnimation;
     [SerializeField] private GameObject _shirt;
