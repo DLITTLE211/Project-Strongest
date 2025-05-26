@@ -247,7 +247,7 @@ MonoBehaviour:
       _mediumAffliction: 0
       _strongAffliction: 0
     movementPortionLength: 0
-    finalAttackButton: 0
+    finalAttackButton: 32
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     timeInAttackState: 0
@@ -308,13 +308,50 @@ MonoBehaviour:
           startup: 0
           activeWindows:
           - activeFrame: 25
-            inactiveFrame: 45
+            inactiveFrame: 165
           recoveryEnd: 0
-          recoveryAmount: 0
+          recoveryAmount: 24
           totalRecovery: 0
           _extraPoints:
           - hitFramePoints: 0
-            call: 262144
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 863e526adc28c8745a8b9a5a38f39b56, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
+          - hitFramePoints: 1
+            call: 33554432
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
@@ -346,17 +383,17 @@ MonoBehaviour:
                 Block_VKB_Level: 0
                 Block_Value: 0
               KnockDown: 4
-            _hurtboxType: 0
+            _hurtboxType: 7
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 2
-            call: 1048576
+          - hitFramePoints: 90
+            call: 2
             hitFrameBool: 0
             awaitEnum:
-              keyRef: 1
-              awaitingCheck: 2
-            Force: 1
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 13
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -387,457 +424,13 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
+          - hitFramePoints: 90
+            call: 4
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
+            Force: 4
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -913,43 +506,6 @@ MonoBehaviour:
           recoveryAmount: 0
           totalRecovery: 0
           _extraPoints:
-          - hitFramePoints: 0
-            call: 262144
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 16
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 4
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
           - hitFramePoints: 2
             call: 1048576
             hitFrameBool: 0
@@ -1016,6 +572,43 @@ MonoBehaviour:
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 6ff6d65f2840ab64bb3bcb5dbde9f08a, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 0
             call: 2097152
             hitFrameBool: 0
@@ -1216,9 +809,9 @@ MonoBehaviour:
               rawAttackDamage: 10
               counterHitDamageMult: 0
               customDamageFieldStunValues:
-                hitstunValue: 25
+                hitstunValue: 35
                 blockStunValue: 0
-                hitstopValue: 6
+                hitstopValue: 7
                 blockStopValue: 0
               hitLevel: 16
               isFinalAttack: 1
@@ -1238,7 +831,7 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 72
+          - hitFramePoints: 110
             call: 2
             hitFrameBool: 0
             awaitEnum:
@@ -1275,272 +868,13 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 72
+          - hitFramePoints: 110
             call: 4
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
             Force: 3
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -1646,11 +980,48 @@ MonoBehaviour:
           startup: 15
           activeWindows:
           - activeFrame: 35
-            inactiveFrame: 55
+            inactiveFrame: 120
           recoveryEnd: 0
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 8dbbf8f70f3c85c4b9f8cb87e0c3164d, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 4
             call: 33554432
             hitFrameBool: 0
@@ -1688,494 +1059,13 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 20
+          - hitFramePoints: 65
             call: 2
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
             Force: 9
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -2251,6 +1141,43 @@ MonoBehaviour:
           recoveryAmount: 35
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 10
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 10
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 4
+              isFinalAttack: 1
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 8
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 39b7087760e119c479d6b336d063d0fa, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 0
             call: 262144
             hitFrameBool: 0
@@ -2436,7 +1363,7 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 150
+          - hitFramePoints: 175
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -2448,7 +1375,7 @@ MonoBehaviour:
             camRotation: {x: 0, y: 0, z: 0}
             snapMovement: 0
             customDamage:
-              rawAttackDamage: 10
+              rawAttackDamage: 15
               counterHitDamageMult: 0
               customDamageFieldStunValues:
                 hitstunValue: 10
@@ -2548,11 +1475,48 @@ MonoBehaviour:
           startup: 0
           activeWindows:
           - activeFrame: 1
-            inactiveFrame: 90
+            inactiveFrame: 250
           recoveryEnd: 0
           recoveryAmount: 50
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 7
+            _cameraAnimation: {fileID: 7400000, guid: 30f691abb4f3a4b45ab3edfcd904a06f, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 1
             call: 33554432
             hitFrameBool: 0
@@ -2841,6 +1805,43 @@ MonoBehaviour:
           recoveryAmount: 40
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 3e3001f91e57a6e43b5c647b6f15dc8d, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 5
             call: 262144
             hitFrameBool: 0
@@ -3063,339 +2064,6 @@ MonoBehaviour:
             _cameraAnimation: {fileID: 0}
             fadeInSpeed: 0
             fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
-          - hitFramePoints: 0
-            call: 0
-            hitFrameBool: 0
-            awaitEnum:
-              keyRef: 0
-              awaitingCheck: 0
-            Force: 0
-            projectileSpeed: 0
-            camPos: {x: 0, y: 0, z: 0}
-            camRotation: {x: 0, y: 0, z: 0}
-            snapMovement: 0
-            customDamage:
-              rawAttackDamage: 0
-              counterHitDamageMult: 0
-              customDamageFieldStunValues:
-                hitstunValue: 0
-                blockStunValue: 0
-                hitstopValue: 0
-                blockStopValue: 0
-              hitLevel: 0
-              isFinalAttack: 0
-              isScaling: 0
-              lateralKBP:
-                Hit_HKB_Level: 0
-                Hit_Value: 0
-                Block_HKB_Level: 0
-                Block_Value: 0
-              verticalKBP:
-                Hit_VKB_Level: 0
-                Hit_Value: 0
-                Block_VKB_Level: 0
-                Block_Value: 0
-              KnockDown: 0
-            _hurtboxType: 0
-            _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -3520,6 +2188,43 @@ MonoBehaviour:
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 69c2a3eaaca6e8e4b8379bda032754ad, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 10
             call: 262144
             hitFrameBool: 0
@@ -3791,6 +2496,43 @@ MonoBehaviour:
           recoveryAmount: 15
           totalRecovery: 0
           _extraPoints:
+          - hitFramePoints: 0
+            call: 1073741824
+            hitFrameBool: 0
+            awaitEnum:
+              keyRef: 0
+              awaitingCheck: 0
+            Force: 0
+            projectileSpeed: 0
+            camPos: {x: 0, y: 0, z: 0}
+            camRotation: {x: 0, y: 0, z: 0}
+            snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              customDamageFieldStunValues:
+                hitstunValue: 0
+                blockStunValue: 0
+                hitstopValue: 0
+                blockStopValue: 0
+              hitLevel: 0
+              isFinalAttack: 0
+              isScaling: 0
+              lateralKBP:
+                Hit_HKB_Level: 0
+                Hit_Value: 0
+                Block_HKB_Level: 0
+                Block_Value: 0
+              verticalKBP:
+                Hit_VKB_Level: 0
+                Hit_Value: 0
+                Block_VKB_Level: 0
+                Block_Value: 0
+              KnockDown: 0
+            _hurtboxType: 0
+            _cameraAnimation: {fileID: 7400000, guid: 69c2a3eaaca6e8e4b8379bda032754ad, type: 2}
+            fadeInSpeed: 0
+            fadeOutSpeed: 0
           - hitFramePoints: 10
             call: 262144
             hitFrameBool: 0

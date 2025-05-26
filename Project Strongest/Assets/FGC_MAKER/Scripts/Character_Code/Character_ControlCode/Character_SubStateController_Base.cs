@@ -81,7 +81,14 @@ public class Character_SubStateController_Base : MonoBehaviour
         personalCamera.SetActive(true); 
         SetCameraCanvas();
         personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
-        orthoCameraAnim.CrossFade(animName, 0,0);
+        if(_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            orthoCameraAnim.CrossFade($"{animName}_L", 0, 0);
+        }
+        else
+        {
+            orthoCameraAnim.CrossFade(animName, 0, 0);
+        }
     }
     public void PlayCameraFocusAnimation(CustomCallback callback)
     {
