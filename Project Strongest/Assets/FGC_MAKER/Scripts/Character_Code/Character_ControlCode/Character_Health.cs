@@ -93,7 +93,6 @@ public class Character_Health : MonoBehaviour
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
         float debuffMultiplier = ReturnStunDebuffValue() * damageValue;
         float stunValue = (damageValue + debuffMultiplier) * 0.1f;
-        //_base._afflictionManager.CheckAllAfflictionsApplied(stunValue, AfflictionType.Stun);
         stunController.ApplyStun(stunValue);
         _base._afflictionManager.CheckSingleUseAfflictions();
     }

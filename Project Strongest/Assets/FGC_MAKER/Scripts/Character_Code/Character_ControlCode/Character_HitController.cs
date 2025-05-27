@@ -532,11 +532,26 @@ public class Character_HitController : MonoBehaviour
             currentCustomDamageField = null;
             currentProperty = null;
             currentHitstun = 0;
-            _base.Activate();
-            blockedAttack = false;
-            SetRecoverable();
-            _base._cHealth.StartHealthRegen();
+            CheckStunMeter(); 
         }
+    }
+    void CheckStunMeter()
+    {
+        if (_base._cHealth.stunController.IsSTUNNED)
+        {
+            _base._cHealth.stunController.ActivateStunDelay(OnEndHitStanding);
+        }
+        else
+        {
+            OnEndHitStanding();
+        }
+    }
+    void OnEndHitStanding() 
+    {
+        _base.Activate();
+        blockedAttack = false;
+        SetRecoverable();
+        _base._cHealth.StartHealthRegen();
     }
     IEnumerator DoDeathResponse(HitAnimationField curField)
     {
@@ -766,6 +781,22 @@ public class Character_HitController : MonoBehaviour
     }
     void EndingFunctionCalls() 
     {
+        CheckStunMeter_OnKnockdown();
+    }
+    void CheckStunMeter_OnKnockdown()
+    {
+        if (_base._cHealth.stunController.IsSTUNNED)
+        {
+            _base._cHealth.stunController.ActivateStunDelay(OnEndHitGrounded);
+        }
+        else
+        {
+            OnEndHitGrounded();
+        }
+    }
+    void OnEndHitGrounded() 
+    {
+
         SetRecoverable();
         if (bigHitRecovering)
         {

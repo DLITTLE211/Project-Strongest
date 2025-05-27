@@ -14,13 +14,10 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     // Start is called before the first frame update
     public void ResetTimer()
     {
-        if (!(FrameCountTimer > 0))
-        {
-            FrameCountTimer = StartFrameCountTimer;
-            CheckForInput = false;
-            _base._cComboDetection.ResetCombos();
-            _base._aManager.ClearAttacks();
-        }
+        FrameCountTimer = StartFrameCountTimer;
+        CheckForInput = false;
+        _base._cComboDetection.ResetCombos();
+        _base._aManager.ClearAttacks();
     }
     public void CloseCurrentSubAttackWindow() 
     {
@@ -104,6 +101,10 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         }
         else
         {
+            if (subAttackTime > 0f)
+            {
+                _subAttackTimer = subAttackTime;
+            }
             SetStartingValues(newTime);
             _type = newType;
             return;
@@ -186,7 +187,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 {
                     FrameCountTimer -= Base_FrameCode.ONE_FRAME;
                 }
-                if (_subAttackTimer <= 0)
+                if (_subAttackTimer < 0)
                 {
                     CloseCurrentSubAttackWindow();
                 }
@@ -204,7 +205,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 {
                     FrameCountTimer -= Base_FrameCode.ONE_FRAME;
                 }
-                if (_subAttackTimer <= 0)
+                if (_subAttackTimer < 0)
                 {
                     CloseCurrentSubAttackWindow();
                 }
@@ -214,32 +215,6 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 }
                 break;
         }
-        /*if (_type == TimerType.Normal ^ _type == TimerType.InRekka)
-        {
-            if (FrameCountTimer <= -1 / 60f)
-            {
-                if (_type == TimerType.InRekka)
-                {
-                    SetTimerType();
-                }
-                ResetTimer();
-            }
-            else
-            {
-                FrameCountTimer -= 1 / 60f;
-            }
-        }
-        else
-        {
-            if (FrameCountTimer <= -1 / 60f)
-            {
-                ResetTimer();
-            }
-            else
-            {
-                FrameCountTimer -= 1 / 60f;
-            }
-        }*/
     }
     public bool ReturnTimerLessThan(float timeComparison) 
     {

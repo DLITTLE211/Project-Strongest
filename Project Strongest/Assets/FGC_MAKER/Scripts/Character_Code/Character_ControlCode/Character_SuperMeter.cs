@@ -7,7 +7,6 @@ public class Character_SuperMeter : MonoBehaviour
 {
     public MainMeterController superMeter;
     public Character_Health controller;
-    public List<Amplifiers> curAmplifier;
 
     public TMP_Text meterTierText;
 
@@ -60,96 +59,49 @@ public class Character_SuperMeter : MonoBehaviour
         superMeter.meterSlider.maxValue = meterMaxThreshold;
     }
     #region Adding To Meter Value
-    bool checkPossibleTier(float calcValue)
-    {
-        return superMeter.currentValue + calcValue >= meterMaxThreshold;
-    }
-    bool checkMaxTier(float calcValue)
-    {
-        return fullMeterLevel + calcValue >= maxMeterLevel;
-    }
     void IncreaseMeterValue(float calcValue)
     {
         if(meterDebuffPercentage >= 0) 
         {
             calcValue = Mathf.Abs(calcValue * meterDebuffPercentage);
         }
-        if (!checkMaxTier(calcValue))
+        if (!(fullMeterLevel >= 120))
         {
-            if (checkPossibleTier(calcValue))
-            {
-                for (int i = 0; i < calcValue; i += 30)
-                {
-                    meterTier += 1;
-                }
-                SetMeterTierText();
-                superMeter.currentValue = 0;
-                superMeter.SetCurrentMeterValue(superMeter.currentValue);
-                fullMeterLevel += calcValue;
-            }
-            else
-            {
-                superMeter.currentValue += calcValue;
-                fullMeterLevel += calcValue;
-                superMeter.SetCurrentMeterValue(superMeter.currentValue);
-            }
+            fullMeterLevel += calcValue;
         }
-        else
+        else 
         {
-            meterTier = 4;
-            SetMeterTierText();
-            superMeter.currentValue = meterMaxThreshold;
-            fullMeterLevel = maxMeterLevel;
-            superMeter.SetCurrentMeterValue(superMeter.currentValue);
+            fullMeterLevel = 120;
         }
+        SetMeterValue();
     }
     #endregion
 
     #region Subtract Meter Value
-    bool checkLowerPossibleTier(float calcValue)
-    {
-        return superMeter.currentValue - (calcValue * meterMaxThreshold) <= 0;
-    }
-    bool checkMinTier(float calcValue)
-    {
-        return fullMeterLevel - (calcValue * meterMaxThreshold) <= 0;
-    }
     void DecreaseMeterValue(float calcValue)
     {
-        if (!checkMinTier(calcValue))
+        float subtractedValue = (calcValue * meterMaxThreshold);
+        fullMeterLevel -= subtractedValue;
+        SetMeterValue();
+    }
+    void SetMeterValue() 
+    {
+        meterTier = 0;
+        superMeter.currentValue = 0;
+        for (int i = 0; i < fullMeterLevel; i++)
         {
-            if (checkLowerPossibleTier(calcValue))
+            if (superMeter.currentValue >= 30)
             {
-                if(calcValue < 1)
-                {
-                    meterTier -= 1;
-                }
-                else
-                {
-                    meterTier -= calcValue;
-                }
-                SetMeterTierText();
-                float subtractedValue = (calcValue * meterMaxThreshold);
-                float meterValue = meterMaxThreshold + (superMeter.currentValue - subtractedValue);
-                fullMeterLevel -= subtractedValue;
-                superMeter.currentValue = meterValue;
-                superMeter.SetCurrentMeterValue(superMeter.currentValue);
+                meterTier += 1;
+                superMeter.currentValue = 0;
             }
             else
             {
-                superMeter.currentValue -= (calcValue * meterMaxThreshold);
-                fullMeterLevel -= (calcValue * meterMaxThreshold);
-                superMeter.SetCurrentMeterValue(superMeter.currentValue);
+                superMeter.currentValue += 1;
             }
         }
-        else
-        {
-            meterTier = 0;
-            SetMeterTierText();
-            superMeter.currentValue = 0;
-            fullMeterLevel = 0;
-            superMeter.SetCurrentMeterValue(superMeter.currentValue);
-        }
+        SetMeterTierText();
+        superMeter.SetCurrentMeterValue(superMeter.currentValue);
     }
     public void DecreaseMeterAmount(int amount)
     {
@@ -172,17 +124,12 @@ public class Character_SuperMeter : MonoBehaviour
         string meterTierValue = SpriteToTextColorUtility.AppendSpriteName($"{meterTier}", Color.white);
         meterTierText.text = meterTierValue;
     }
-    void AddAmplifier(Amplifiers amp)
-    {
-        curAmplifier.Add(amp);
-    }
 
     public bool CanTakeFromMeter(float meterRequirement) 
     {
         float _requiredMeter = meterRequirement * 30;
         return fullMeterLevel >= _requiredMeter;
     }
-
     public void AddMeter(float _scaledMeterGain)
     {
         IncreaseMeterValue(_scaledMeterGain);

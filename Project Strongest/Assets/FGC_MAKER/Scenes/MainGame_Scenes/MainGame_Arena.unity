@@ -4838,6 +4838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2932f0ae7fbca8a49bc968f8f4fe6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 94923329}
   stunMeter:
     meterSlider: {fileID: 227057914}
     startValue: 0
@@ -15531,6 +15532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2932f0ae7fbca8a49bc968f8f4fe6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 993311525}
   stunMeter:
     meterSlider: {fileID: 806051818}
     startValue: 0
@@ -29622,7 +29624,6 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 0
   controller: {fileID: 658162219}
-  curAmplifier: []
   meterTierText: {fileID: 300559541}
   meterTier: 0
   fullMeterLevel: 0
@@ -38595,7 +38596,6 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 0
   controller: {fileID: 658162219}
-  curAmplifier: []
   meterTierText: {fileID: 647831007}
   meterTier: 0
   fullMeterLevel: 0

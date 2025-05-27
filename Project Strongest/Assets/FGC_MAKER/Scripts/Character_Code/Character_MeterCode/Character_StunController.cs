@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using FightingGame_FrameData;
 
 public class Character_StunController : MonoBehaviour
 {
+    [SerializeField] private Character_Base _base;
     public MainMeterController stunMeter;
     IEnumerator RecoveryRoutine;
     public Gradient stunMeterColor;
@@ -13,9 +15,12 @@ public class Character_StunController : MonoBehaviour
     public float clearStunTimeGate;
     public float stunRecoverTime;
     public bool canRecover;
+    public bool IsSTUNNED;
+    Callback endStunSequenceFunc;
     // Start is called before the first frame update
     void Start()
     {
+        endStunSequenceFunc = null;
         SetStartStunValues();
     }
     public void SetStartStunValues() 
@@ -29,20 +34,41 @@ public class Character_StunController : MonoBehaviour
     }
     public void KillRegenTween() 
     {
+        if(endStunSequenceFunc != null) 
+        {
+            endStunSequenceFunc();
+            endStunSequenceFunc = null;
+        }
         if(RecoveryRoutine != null) 
         {
+            if (IsSTUNNED) 
+            {
+                IsSTUNNED = false;
+                DOTween.Complete(stunMeter.meterSlider);
+            }
+            else 
+            {
+                DOTween.Kill(stunMeter.meterSlider);
+            }
             StopCoroutine(RecoveryRoutine);
             RecoveryRoutine = null;
         }
-        DOTween.Kill(stunMeter.meterSlider);
     }
     public void ApplyStun(float stunAmount) 
     {
         KillRegenTween();
         stunMeter.currentValue += stunAmount;
         stunMeter.SetCurrentMeterValue(stunMeter.currentValue);
-        RecoveryRoutine = RecoverStunWaitTime();
-        StartCoroutine(RecoveryRoutine);
+        if(stunMeter.currentValue >= stunMeter.maxValue) 
+        {
+            IsSTUNNED = true;
+            _base._cHurtBox.SetHurboxState(HurtBoxType.Invincible);
+        }
+        else
+        {
+            RecoveryRoutine = RecoverStunWaitTime();
+            StartCoroutine(RecoveryRoutine);
+        }
     }
     void checkStunGradiet() 
     {
@@ -55,6 +81,29 @@ public class Character_StunController : MonoBehaviour
         {
             stunMeter.currentValue = stunMeter.meterSlider.value;
         }
+    }
+    public void ActivateStunDelay(Callback onFinishFunc) 
+    {
+        RecoveryRoutine = FullyStunRoutine(onFinishFunc);
+        StartCoroutine(RecoveryRoutine);
+    }
+    IEnumerator FullyStunRoutine(Callback onFinishFunc)
+    {
+        _base.Deactivate();
+        endStunSequenceFunc = onFinishFunc;
+        float totalStunTime = Base_FrameCode.ONE_FRAME * 174f;
+        _base._cHurtBox.SetHurboxState();
+        int dizzyAnimation = Animator.StringToHash("DizzyState");
+        _base._cAnimator.PlayNextAnimation(dizzyAnimation,0f,true);
+        stunMeter.meterSlider.DOValue(0, totalStunTime).OnUpdate(CheckMeterValue).OnComplete(() =>
+        {
+            SetFinalStunValue();
+        });
+        yield return new WaitForSeconds(totalStunTime);
+        _base.Activate();
+        IsSTUNNED = false;
+        endStunSequenceFunc();
+        endStunSequenceFunc = null; 
     }
     IEnumerator RecoverStunWaitTime()
     {

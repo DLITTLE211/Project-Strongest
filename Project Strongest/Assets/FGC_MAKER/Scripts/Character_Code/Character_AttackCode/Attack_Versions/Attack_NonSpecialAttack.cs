@@ -94,9 +94,15 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         }
         try
         {
+            float delayTime = leewayTime * (1 / 60f);
             if (_attackInput._correctInput.Count > 1)
             {
-                newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, (leewayTime * (1 / 60f)));
+                float subAttackTime = delayTime - (delayTime * 0.6f);
+                newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, delayTime, subAttackTime);
+            }
+            else 
+            {
+                newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, delayTime);
             }
             
             _curBase.comboList3_0.ClearFollowUpAttack();
@@ -107,6 +113,13 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
         {
             Debug.LogError($"{curAttack} is outside size of {SpecialAttackName} size. Returning...");
             return;
+        }
+    }
+    public void CloseSubAttackWindow()
+    {
+        if (_attackInput._correctInput.Count > 1)
+        {
+            ResetCombo();
         }
     }
     public bool CheckAttackContains(Attack_BaseProperties newAttack) 
