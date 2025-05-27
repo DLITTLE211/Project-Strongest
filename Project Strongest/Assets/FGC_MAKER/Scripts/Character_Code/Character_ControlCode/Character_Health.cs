@@ -1,0 +1,156 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
+using TMPro;
+
+public class Character_Health : MonoBehaviour
+{
+    [SerializeField] private MainGame_HealthDisparityChecker _disparityChecker;
+    [SerializeField] private Character_Base _base;
+    [SerializeField] private Image _chosenCharacterProfileImage;
+    [SerializeField] private TMP_Text _chosenCharacterName;
+    public MainMeterController health_Main;
+    public MainMeterController health_Recov;
+    public Character_StunController stunController;
+    public float recoverHealthRate;
+    public Affliction currentAffliction;
+    [Range(75f, 200f)] public float defenseValue;
+    public bool canRecover;
+    private Character_Profile curProfile;
+    IEnumerator healthRegenRoutine;
+    private float stunBuffValue;
+    public void ResetBuffs()
+    {
+        SetStunBuffValue();
+    }
+    public void SetStunBuffValue(float value = 0) 
+    {
+        stunBuffValue = value;
+    }
+    public void ClearRegenRoutine() 
+    {
+        if (healthRegenRoutine != null) 
+        {
+            StopCoroutine(healthRegenRoutine);
+            healthRegenRoutine = null;
+        }
+        DOTween.Kill(health_Main.meterSlider);
+    }
+    public bool TestIfDeadDamage(float damage)
+    {
+           bool mainHealthIsZero = (health_Main.currentValue - damage) <= 0;
+        float tenP = health_Main.maxValue * 0.1f;
+        bool recoveryHealthIsTenP = health_Recov.currentValue <= (tenP);
+        return mainHealthIsZero && recoveryHealthIsTenP;
+    }
+    public void ClearHealthValues()
+    {
+        health_Main.currentValue = 0;
+        health_Recov.currentValue = 0;
+    }
+    public void SetHealthInformation(Character_Profile profile)
+    {
+        curProfile = profile;
+        _chosenCharacterProfileImage.sprite = profile.CharacterProfileImage;
+        string charName = SpriteToTextColorUtility.AppendSpriteName(($"{profile.CharacterName}").ToUpper(), Color.white);
+        _chosenCharacterName.SetText(charName);
+        SetStartingHealthValues();
+    }
+    public void SetStartingHealthValues() 
+    {
+        health_Main.SetStartMeterValues(curProfile.MaxHealth, curProfile.MaxHealth);
+        health_Recov.SetStartMeterValues(curProfile.MaxHealth, curProfile.MaxHealth);
+        stunController.stunMeter.SetStartMeterValues(curProfile.MaxStunValue,0);
+        recoverHealthRate = curProfile.HealthRegenRate;
+    }
+    public void SetHealthAndStunOnSceneReset(float currentHealthPercent, float currentStunValue) 
+    {
+        ClearRegenRoutine();
+        stunController.KillRegenTween();
+        float healthAmount = health_Main.maxValue * (currentHealthPercent / 100f);
+        float stunAmount = stunController.stunMeter.maxValue * (currentStunValue / 100f);
+
+        health_Recov.SetCurrentMeterValue(healthAmount);
+        health_Recov.currentValue = healthAmount;
+        health_Main.SetCurrentMeterValue(healthAmount);
+        health_Main.currentValue = healthAmount;
+        CheckMeterValue();
+        stunController.stunMeter.SetCurrentMeterValue(stunAmount);
+        stunController.stunMeter.currentValue = stunAmount;
+    }
+    public void ApplyMainHealthDamage(float damageValue)
+    {
+        if (health_Main.currentValue >= curProfile.MaxHealth)
+        {
+            _base._amplifyController.DeactivateInstantPassiveAmplify();
+        }
+        ClearRegenRoutine();
+        _disparityChecker.UpdateMeterOnDamage();
+        canRecover = false;
+        health_Main.currentValue -= damageValue;
+        health_Main.SetCurrentMeterValue(health_Main.currentValue);
+        float debuffMultiplier = ReturnStunDebuffValue() * damageValue;
+        float stunValue = (damageValue + debuffMultiplier) * 0.1f;
+        stunController.ApplyStun(stunValue);
+        _base._afflictionManager.CheckSingleUseAfflictions();
+    }
+    float ReturnStunDebuffValue() 
+    {
+        if(stunBuffValue > 0) 
+        {
+            return stunBuffValue;
+        }
+        return 0;
+    }
+    public void StartHealthRegen()
+    {
+        healthRegenRoutine = RecoverHealthWaitTime();
+        StartCoroutine(healthRegenRoutine);
+    }
+    public void ApplyRecoveryHealthDamage(float damageValue)
+    {
+        health_Recov.currentValue -= damageValue;
+        health_Recov.SetCurrentMeterValue(health_Recov.currentValue);
+    }
+    IEnumerator RecoverHealthWaitTime()
+    {
+        IState hitState = _base._cStateMachine.hitStateRef;
+        while (_base._cStateMachine._playerState.current.State == hitState) 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        recoverHealth();
+    }
+    void CheckMeterValue()
+    {
+        if (health_Main.currentValue != health_Main.meterSlider.value)
+        {
+            health_Main.currentValue = health_Main.meterSlider.value;
+        }
+        _disparityChecker.UpdateMeterOnDamage();
+    }
+    public void recoverHealth()
+    {
+        if (health_Main.currentValue >= health_Recov.currentValue)
+        {
+            canRecover = false;
+            return;
+        }
+        else
+        {
+            canRecover = true;
+            health_Main.meterSlider.DOValue(health_Recov.currentValue, recoverHealthRate).OnUpdate(CheckMeterValue).OnComplete(() =>
+            {
+                SetFinalRecovValue();
+            });
+        }
+    }
+    public void SetFinalRecovValue()
+    {
+        health_Main.currentValue = health_Recov.currentValue;
+        health_Main.SetCurrentMeterValue(health_Main.currentValue);
+        canRecover = false;
+    }
+}

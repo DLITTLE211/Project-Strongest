@@ -1,0 +1,162 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using Rewired;
+using FightingGame_FrameData;
+[Serializable]
+public abstract class AdvancedSpecialBase
+{
+    public string specialMoveName;
+    public List<Attack_Input> attackInput;
+    public ButtonStateMachine attackInputState;
+    public Attack_BaseProperties property;
+    public CustomAnimationField _customAnimationField;
+    public AfflictionSet attackAfflictionSet;
+    public abstract void ResetCombo();
+}
+[Serializable]
+public class CustomAnimationField
+{
+    public List<AttackHandler_Attack> _customAnimation;
+    public AfflictionSet attackAfflictionSet;
+}
+[Serializable]
+public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctionality 
+{
+    [SerializeField] private int movementPortionLength;
+    [SerializeField] private char finalAttackButton;
+    [SerializeField] private Character_Base _curBase;
+    [SerializeField] private int framesBetweenAttacks;
+    [SerializeField] private int timeInAttackState;
+    public int currentCustomAnim;
+    #region Attack Base Code
+
+    public void SetStarterInformation(Character_Base _base)
+    {
+        _curBase = _base;
+        TurnInputsToString();
+        SetComboTimer();
+    }
+    public void TurnInputsToString()
+    {
+        try
+        {
+            for (int i = 0; i < attackInput.Count; i++)
+            {
+                attackInput[i].turnStringToArray();
+            }
+        }
+        catch (ArgumentNullException e)
+        {
+            DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step...");
+        }
+    }
+    public void SetComboTimer()
+    {
+        property.InputTimer = _curBase._cAttackTimer;
+    }
+    #endregion
+
+    public override void ResetCombo()
+    {
+        currentCustomAnim = 0;
+    }
+    #region Attack Functionality Code
+    public void PreformAttack(Callback SendAttackOnSucess)
+    {
+        ResetCombo();
+        if (property._moveType == MoveType.Super)
+        {
+            ResetCombo();
+            property.InputTimer.SetTimerType(TimerType.Super);
+        }
+        else 
+        {
+            float heldTime = timeInAttackState > 0 ? (float)timeInAttackState * Base_FrameCode.ONE_FRAME : 0.4f;
+            property.InputTimer.SetTimerType(TimerType.Special, heldTime);
+        }
+        _curBase.comboList3_0.ClearFollowUpAttack();
+        _curBase._aManager.ReceiveAttack(property, SendAttackOnSucess, attackAfflictionSet);
+    }
+    public void SendCounterHitInfo(Character_Base target, Attack_BaseProperties followUP = null)
+    {
+        target._cDamageCalculator.ReceiveCounterHitMultiplier(property.counterHitDamageMult);
+    }
+    public Attack_CancelInfo GetCancelInfoType() 
+    {
+        return property.cancelProperty;
+    }
+    public void SendSuccessfulDamageInfo(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
+    {
+        if (!blockedAttack)
+        {
+            SendCounterHitInfo(target);
+        }
+        target._cDamageCalculator.ReceiveDamage(property, blockedAttack, armoredAttack);
+    }
+    public void HandleSubAnimAttackInfo()
+    {
+        _customAnimationField._customAnimation[0].SetAttackAnim(_curBase._cAnimator);
+        _customAnimationField._customAnimation[0].AddRequiredCallbacks(_curBase);
+        _customAnimationField._customAnimation[0].AddCustomCallbacks(_customAnimationField._customAnimation[0]);
+        _curBase._cAnimator.StartThrowFrameCount(property, _customAnimationField._customAnimation[0], _customAnimationField.attackAfflictionSet);
+    }
+    public void HandleSuperMultipleAnimAttackInfo()
+    {
+        if (currentCustomAnim <= _customAnimationField._customAnimation.Count-1)
+        {
+            _curBase.opponentPlayer._cHitController.ClearHitResponseRoutine();
+            _curBase.opponentPlayer._cHitController.ClearRecoveryRoutine(true);
+            _curBase.opponentPlayer._cHitController.ForceLockHitAnim(HitLevel.SoaringHit);
+            _customAnimationField._customAnimation[currentCustomAnim].SetAttackAnim(_curBase._cAnimator);
+            _customAnimationField._customAnimation[currentCustomAnim].AddRequiredCallbacks(_curBase);
+            _customAnimationField._customAnimation[currentCustomAnim].AddCustomCallbacks(_customAnimationField._customAnimation[currentCustomAnim]);
+            _curBase._cAnimator.StartSuperFrameCount(property, currentCustomAnim, _customAnimationField._customAnimation.Count - 1, _customAnimationField._customAnimation[currentCustomAnim], () => PlayNextCustomAnim(), _customAnimationField.attackAfflictionSet);
+            return;
+        }
+        return;
+    }
+    public int GetCustomAnimLength() 
+    { 
+        return _customAnimationField._customAnimation.Count; 
+    }
+    public void PlayNextCustomAnim()
+    {
+        currentCustomAnim++;
+        HandleSuperMultipleAnimAttackInfo();
+    }
+    public MoveType GetAttackMoveType()
+    {
+        return property._moveType;
+    }
+
+    public void HandleDamageDealing(Character_Base attacker, Character_Base target, bool blockedAttack, Attack_BaseProperties main, Attack_BaseProperties followUp = null, bool armoredAttack = false)
+    {
+        SendSuccessfulDamageInfo(attacker, target, blockedAttack, main);
+        if (property._moveType == MoveType.Super)
+        {
+            if (!blockedAttack && !_curBase.opponentPlayer._cDamageCalculator.isDead)
+            {
+                HandleSuperMultipleAnimAttackInfo();
+            }
+        }
+        else
+        {
+            if (property._moveType == MoveType.Counter ^ property._moveType == MoveType.CommandGrab && !_curBase.opponentPlayer._cDamageCalculator.isDead)
+            {
+                HandleSubAnimAttackInfo();
+            }
+        }
+    }
+    public MoveListAttackInfo CreateMoveListData() 
+    {
+        string attackName = property._attackName;
+        string specialMoveInput = attackInput[0].attackString;
+        int _meterRequirement = property._meterRequirement;
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
+
+        return newMoveListAttackInfo;
+    }
+    #endregion
+}

@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using UnityEditor;
+using FightingGame_FrameData;
+
+[Serializable]
+public class Amplifiers : StatusEffect 
+{
+
+    public Character_Base _base;
+    [Header("Amplifier Type")]
+    public Effect_Amplify amplifier;
+    public DurationType durationType;
+    public FillType fillType;
+    public BuffType buffType;
+    public ActiveState currentState = ActiveState.Inactive;
+    public Color32 meterColor;
+    public Sprite amplifierImage;
+    [TextArea]public string AmplifierDescription;
+    [Space(15)]
+
+    [Header("Fill Meter Variables")]
+    public float fillRateInFrames;
+    [Range(10, 60)]public int fillRate;
+    [Range(10, 50)] public float activeDuration;
+    [Space(15)]
+
+
+    [Header("Percent Bonus Upon Activation")]
+    [Range(5, 45)] public float percentBonus;
+   
+    public void SetFillVariables() 
+    {
+        if (fillType == FillType.Instant)
+        {
+            fillRate = 1;
+            fillRateInFrames = 1f;
+        }
+        else
+        {
+            fillRateInFrames = Base_FrameCode.ONE_FRAME * (1 / (float)fillRate);
+        }
+    }
+    public virtual void DeactivateInstantPassiveAmplify()
+    {
+    }
+    public virtual void ActivateInstantPassiveAmplify()
+    {
+    }
+    public virtual void ActivatePassiveAmplify()
+    {
+    }
+    public virtual void ActivateEffect(Attack_BaseProperties _currentAttack = null, bool blockedAttack = false)
+    {
+    }
+    public virtual void ResetAmplifier() 
+    {
+
+    }
+}
+public enum FillType 
+{
+    Instant,
+    Standard,
+}
+public enum BuffType
+{
+    AttackBuff,
+    PassiveBuff,
+}

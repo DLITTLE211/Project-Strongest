@@ -1,0 +1,299 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce781af4dca183f49b5c73dda845874f, type: 3}
+  m_Name: YujiroHanma_Profile
+  m_EditorClassIdentifier: 
+  CharacterName: Yujiro Hanma
+  CharacterID: 2
+  CharacterProfileImage: {fileID: 21300000, guid: 78f2d209fc99ffc4b9a23a64c9ab7b89, type: 3}
+  CharacterSelectIcon: {fileID: 558435225, guid: d0dbff6024cbfbc4d8eb4729cb610132, type: 3}
+  Mass: 100
+  Height: 190
+  Weight: 120
+  hurtboxSizing:
+    radius: 0.25
+    hurtboxPosition: {x: 0.25, y: 0.25, z: -0.5}
+    hurtboxSizing: {x: 1, y: 2, z: 1.35}
+    bias: 0.15
+  collisionSizing:
+    headRadius: 0.35
+    headHeight: 0.27
+    headHurtboxPositioning: {x: 0.5, y: 0.48, z: 0}
+    bodyRadius: 0.75
+    bodyHeight: 0.99
+    bodyHurtboxPositioning: {x: 0.45, y: 0, z: 0}
+  MoveVelocity: 1.85
+  JumpForce: 350
+  InAirMoveForce: 115
+  dashSpeed: 4
+  MaxHealth: 150
+  MaxStunValue: 20
+  DefenseValue: 20
+  HealthRegenRate: 2
+  _characterSkins:
+    _modelMaterials:
+    - {fileID: 2100000, guid: e8f4e731ef7574b41bccffaaabc3c653, type: 2}
+    - {fileID: 2100000, guid: 52896a04a165dc643a6f59796ef07896, type: 2}
+    - {fileID: 2100000, guid: 7e1c9030b5e41584187628df16d57678, type: 2}
+    - {fileID: 2100000, guid: 582985df3f826c6498d6a2a9adf2f3c7, type: 2}
+    ColorSets:
+    - _imageSet:
+      - {fileID: 2800000, guid: 27688c43371e7a84fac7da13d303bcb2, type: 3}
+      - {fileID: 2800000, guid: 2f81cf39b50f9a046ab3b75e2af4ce30, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+      - {fileID: 2800000, guid: 2b6b312f59421204cb0e7a912b29e592, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: 9ee48ef5e67c02c45a5eaa3b3b2b99e2, type: 3}
+      - {fileID: 2800000, guid: 2d1bc762853e2a6498d288f2baf0afc7, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+      - {fileID: 2800000, guid: 78417aa569cc4bb4cbcc47838fa131f5, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: 5d29bb8934046c74abd99f191e4d95d2, type: 3}
+      - {fileID: 2800000, guid: 9847d3141480468409eb9a5909b6f759, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+      - {fileID: 2800000, guid: a182f8b55602fcb4bbd5d5e043875319, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: 29056c2527c667748b224a52fee9d6f3, type: 3}
+      - {fileID: 2800000, guid: 934a0255b4357ce4187caae6dd774180, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+      - {fileID: 2800000, guid: fe4d97e85fd412747af1a781a1387691, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: f73a5ffc9b5d6b54fb5cc2cf1efedd09, type: 3}
+      - {fileID: 2800000, guid: 1bcc63139b5756844a56afbd5637eb54, type: 3}
+      - {fileID: 2800000, guid: 094fe2e6780160f48befce168d54eab3, type: 3}
+      - {fileID: 2800000, guid: f3fd6956ee8b5274387c388883c25de0, type: 3}
+  characterModel: {fileID: 2619550513160664684, guid: 926b334e5591a5d47bce2b6a9b4e51c6, type: 3}
+  characterAnimator: {fileID: 0}
+  cAnimatorScript: {fileID: 0}
+  AllCharacterAnimations: []
+  CharacterModel: {fileID: 919132149155446097, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+  properHitResponseAnimations:
+  - anim: {fileID: 5333585320317765502, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.3166667
+    animName: YujiroHanma|Yujiro_AirHit_Light
+    animHash: 108617641
+    hitReactionType: 0
+    hitLevel: 2
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: -4216107869052558027, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.40000004
+    animName: YujiroHanma|Yujiro_AirHit_Medium
+    animHash: 1254971975
+    hitReactionType: 1
+    hitLevel: 4
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: -4216107869052558027, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.40000004
+    animName: YujiroHanma|Yujiro_AirHit_Medium
+    animHash: 1254971975
+    hitReactionType: 1
+    hitLevel: 4
+    isGroundedReaction: 0
+    isLowReaction: 1
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: -4216107869052558027, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.40000004
+    animName: YujiroHanma|Yujiro_AirHit_Medium
+    animHash: 1254971975
+    hitReactionType: 1
+    hitLevel: 8
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: 4162349555863517749, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.3166667
+    animName: YujiroHanma|Yujiro_Hit_Light_High
+    animHash: 1766819147
+    hitReactionType: 0
+    hitLevel: 2
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: -4090645854661383388, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.3166667
+    animName: YujiroHanma|Yujiro_Hit_Light_Low
+    animHash: 181000931
+    hitReactionType: 0
+    hitLevel: 2
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: 1196315301562031167, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.48333335
+    animName: YujiroHanma|Yujiro_Hit_Medium
+    animHash: 1936784582
+    hitReactionType: 0
+    hitLevel: 4
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: 7636061295350338935, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.48333335
+    animName: YujiroHanma|Yujiro_Hit_Scorpion
+    animHash: 1742507226
+    hitReactionType: 1
+    hitLevel: 256
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 4
+    _getupType: 0
+  - anim: {fileID: 7636061295350338935, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.48333335
+    animName: YujiroHanma|Yujiro_Hit_Scorpion
+    animHash: 1742507226
+    hitReactionType: 1
+    hitLevel: 256
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 4
+    _getupType: 0
+  - anim: {fileID: 1196315301562031167, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.48333335
+    animName: YujiroHanma|Yujiro_Hit_Medium
+    animHash: 1936784582
+    hitReactionType: 0
+    hitLevel: 4
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: -3872010929156810219, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.40000004
+    animName: YujiroHanma|Yujiro_Hit_Heavy
+    animHash: -1454949662
+    hitReactionType: 1
+    hitLevel: 8
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: 2830390384008958824, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.5666667
+    animName: YujiroHanma|Yujiro_Hit_Spiral
+    animHash: 1495069776
+    hitReactionType: 1
+    hitLevel: 32
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 12
+    _getupType: 0
+  - anim: {fileID: 1521647180942786592, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.9833334
+    animName: YujiroHanma|Yujiro_Hit_Crumple
+    animHash: 510721682
+    hitReactionType: 1
+    hitLevel: 16
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 8
+    _getupType: 0
+  - anim: {fileID: -4785177017596900535, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.5666667
+    animName: YujiroHanma|Yujiro_Hit_Recovery_Quick_Neutral
+    animHash: -1396989389
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 0
+  - anim: {fileID: 4986296797542415232, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.5666667
+    animName: YujiroHanma|Yujiro_Hit_Recovery_Quick_Backward
+    animHash: 1356959516
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 6
+    _getupType: 1
+  - anim: {fileID: 4415529809698128878, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 1.2333333
+    animName: YujiroHanma|Yujiro_Hit_Recovery_Slow
+    animHash: -730089819
+    hitReactionType: 4
+    hitLevel: 0
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 8
+    _getupType: 0
+  - anim: {fileID: -2498285957056581948, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.3166667
+    animName: YujiroHanma|Yujiro_AirHit_Recovery
+    animHash: 1794634559
+    hitReactionType: 4
+    hitLevel: 2
+    isGroundedReaction: 0
+    isLowReaction: 0
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: -6692137949967920395, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.15
+    animName: YujiroHanma|Yujiro_Crouching_Block_Light
+    animHash: -751867678
+    hitReactionType: 2
+    hitLevel: 64
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: -7653495333547315771, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.23333335
+    animName: YujiroHanma|Yujiro_Crouching_Block_GB
+    animHash: -1170756320
+    hitReactionType: 3
+    hitLevel: 128
+    isGroundedReaction: 1
+    isLowReaction: 1
+    knockdownAnimType: 2
+    _getupType: 0
+  - anim: {fileID: -5332321901400487405, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.15
+    animName: YujiroHanma|Yujiro_Standing_Block_Light
+    animHash: 1528746639
+    hitReactionType: 2
+    hitLevel: 64
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 0
+    _getupType: 0
+  - anim: {fileID: -429112501588761137, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    animLength: 0.23333335
+    animName: YujiroHanma|Yujiro_Standing_Block_GB
+    animHash: -517579608
+    hitReactionType: 3
+    hitLevel: 128
+    isGroundedReaction: 1
+    isLowReaction: 0
+    knockdownAnimType: 0
+    _getupType: 0
+  AmplifyAnim: {fileID: 1253794148237007616, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+  StandBlockAnim: {fileID: 3968772691804900743, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+  CrouchBlockAnim: {fileID: -183017691922941631, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+  _characterMoveList: {fileID: -3225154758481460539, guid: 0c0eff736da777a498a930ecb29fd6b4, type: 3}
+  moveListCount: 1
+  CharacterMoveListPrefab:
+  - {fileID: 3315631830582736349, guid: 0c0eff736da777a498a930ecb29fd6b4, type: 3}
+  _NewCharacterMobility: {fileID: 6891314296479737942, guid: 3870259135818f64ea73830440e84d6d, type: 3}
+  BasicCharacterInteractions: []
+  SpecialCharacterInteractions: []

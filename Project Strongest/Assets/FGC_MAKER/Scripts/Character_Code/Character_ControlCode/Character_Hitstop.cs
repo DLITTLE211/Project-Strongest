@@ -1,0 +1,46 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Threading.Tasks;
+using DG.Tweening;
+using FightingGame_FrameData;
+
+public class Character_Hitstop : MonoBehaviour
+{
+    [SerializeField] private MainGame_CameraController _cameraController;
+    [SerializeField] private Character_Animator p1, p2;
+    public MainGame_CameraController CameraController { get { return _cameraController; } }
+
+    IEnumerator hitStopSequence;
+    private void Start()
+    {
+        hitStopSequence = null;
+    }
+    public void TriggerHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target,Callback func)
+    {
+        if (hitStopSequence != null) 
+        {
+            StopCoroutine(hitStopSequence);
+            hitStopSequence = null;
+        }
+        hitStopSequence = HandleHitStop(lastAttack, rateOfIncrease, attacker, target, func);
+        StartCoroutine(hitStopSequence);
+    }
+    IEnumerator HandleHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target, Callback func)
+    {
+        float actualWaitTime = rateOfIncrease * Base_FrameCode.ONE_FRAME;
+        _cameraController.CallCameraShake(rateOfIncrease, lastAttack.attackMainStunValues.hitstopValue);
+        while (actualWaitTime > 0)
+        {
+            actualWaitTime -= (Base_FrameCode.ONE_FRAME);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+        }
+        yield return new WaitForSeconds(actualWaitTime);
+        hitStopSequence = null;
+        if (func != null)
+        {
+            func();
+        }
+    }
+}

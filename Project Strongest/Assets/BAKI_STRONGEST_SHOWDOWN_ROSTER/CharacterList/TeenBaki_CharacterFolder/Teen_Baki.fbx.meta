@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Baki_Model|Baki_AirHit_Light
-      takeName: Baki_Model|Baki_AirHit_Light
-      internalID: -3658049076703903782
+      name: Baki_Model|Baki_Special_236LP
+      takeName: Baki_Model|Baki_Special_236LP
+      internalID: -7801526828913931958
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 34
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -65,35 +65,6 @@ ModelImporter:
       name: Baki_Model|CameraAction
       takeName: Baki_Model|CameraAction
       internalID: 5016367392977096017
-      firstFrame: 0
-      lastFrame: 12
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Baki_Model|Shorts_BaseAction
-      takeName: Baki_Model|Shorts_BaseAction
-      internalID: -8058818232635490854
       firstFrame: 0
       lastFrame: 12
       wrapMode: 0
@@ -149,11 +120,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Shorts_Base|CameraAction
-      takeName: Shorts_Base|CameraAction
-      internalID: 2677237792496373890
+      name: Shorts_Base|Baki_Ultra_236236LK_Start
+      takeName: Shorts_Base|Baki_Ultra_236236LK_Start
+      internalID: -2347473981639402862
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 159
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -178,9 +149,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Shorts_Base|Shorts_BaseAction
-      takeName: Shorts_Base|Shorts_BaseAction
-      internalID: -4243931862160319047
+      name: Shorts_Base|CameraAction
+      takeName: Shorts_Base|CameraAction
+      internalID: 2677237792496373890
       firstFrame: 0
       lastFrame: 12
       wrapMode: 0
@@ -236,11 +207,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Full_Hair|Baki_Special_63214HP_Start
-      takeName: Full_Hair|Baki_Special_63214HP_Start
-      internalID: -4135873467322803123
+      name: Full_Hair|Baki_Win_LowHealth
+      takeName: Full_Hair|Baki_Win_LowHealth
+      internalID: -596437425140569526
       firstFrame: 0
-      lastFrame: 64
+      lastFrame: 279
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -268,35 +239,6 @@ ModelImporter:
       name: Full_Hair|CameraAction
       takeName: Full_Hair|CameraAction
       internalID: 4074132024238121036
-      firstFrame: 0
-      lastFrame: 12
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Full_Hair|Shorts_BaseAction
-      takeName: Full_Hair|Shorts_BaseAction
-      internalID: 6142218366011025220
       firstFrame: 0
       lastFrame: 12
       wrapMode: 0
@@ -1483,6 +1425,35 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_DizzyState
+      takeName: Teen_Baki_Hanma|Baki_DizzyState
+      internalID: -5455282258308137327
+      firstFrame: 0
+      lastFrame: 174
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Teen_Baki_Hanma|Baki_Hit_Crumple
       takeName: Teen_Baki_Hanma|Baki_Hit_Crumple
       internalID: 2207197074920698395
@@ -1661,7 +1632,7 @@ ModelImporter:
       takeName: Teen_Baki_Hanma|Baki_Hit_Scorpion
       internalID: 5208742648357843553
       firstFrame: 0
-      lastFrame: 14
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1720,6 +1691,35 @@ ModelImporter:
       internalID: -6196358560080764660
       firstFrame: 0
       lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_Intro_Animation
+      takeName: Teen_Baki_Hanma|Baki_Intro_Animation
+      internalID: 8675314445350143241
+      firstFrame: 0
+      lastFrame: 429
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1860,6 +1860,64 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_Lose_Animation
+      takeName: Teen_Baki_Hanma|Baki_Lose_Animation
+      internalID: -4206434030801380082
+      firstFrame: 0
+      lastFrame: 214
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_Mouth_Flap
+      takeName: Teen_Baki_Hanma|Baki_Mouth_Flap
+      internalID: -7949485526794881692
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Teen_Baki_Hanma|Baki_Parry_High
       takeName: Teen_Baki_Hanma|Baki_Parry_High
       internalID: 5320137326099974444
@@ -1976,9 +2034,38 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Teen_Baki_Hanma|Baki_Recovery_Quick
-      takeName: Teen_Baki_Hanma|Baki_Recovery_Quick
-      internalID: 5532375748658717885
+      name: Teen_Baki_Hanma|Baki_Recovery_Quick_Backward
+      takeName: Teen_Baki_Hanma|Baki_Recovery_Quick_Backward
+      internalID: 6889617363822583662
+      firstFrame: 0
+      lastFrame: 34
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_Recovery_Quick_Neutral
+      takeName: Teen_Baki_Hanma|Baki_Recovery_Quick_Neutral
+      internalID: -3696293777989950416
       firstFrame: 0
       lastFrame: 34
       wrapMode: 0
@@ -2335,7 +2422,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -2705,36 +2792,7 @@ ModelImporter:
       takeName: Teen_Baki_Hanma|Baki_Super_214214LP/HP_Whiff
       internalID: -7349924103190138807
       firstFrame: 0
-      lastFrame: 84
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Teen_Baki_Hanma|Baki_Super_236236LK_Connected
-      takeName: Teen_Baki_Hanma|Baki_Super_236236LK_Connected
-      internalID: 3120397125411222643
-      firstFrame: 0
-      lastFrame: 279
+      lastFrame: 199
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2850,7 +2908,36 @@ ModelImporter:
       takeName: Teen_Baki_Hanma|Baki_Ultra_236236HK
       internalID: -4431683996302900706
       firstFrame: 0
-      lastFrame: 149
+      lastFrame: 299
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_Ultra_236236LK_Connected
+      takeName: Teen_Baki_Hanma|Baki_Ultra_236236LK_Connected
+      internalID: 6239780125965298717
+      firstFrame: 0
+      lastFrame: 279
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2879,7 +2966,36 @@ ModelImporter:
       takeName: Teen_Baki_Hanma|Baki_Ultra_236236LK_Start
       internalID: 5464064686492668912
       firstFrame: 0
-      lastFrame: 104
+      lastFrame: 159
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Teen_Baki_Hanma|Baki_Victory_Screen
+      takeName: Teen_Baki_Hanma|Baki_Victory_Screen
+      internalID: 7313503615710657852
+      firstFrame: 0
+      lastFrame: 219
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2962,11 +3078,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Teen_Baki_Hanma|CameraAction
-      takeName: Teen_Baki_Hanma|CameraAction
-      internalID: 8791098596882936923
+      name: Teen_Baki_Hanma|Baki_Win_HighHealth
+      takeName: Teen_Baki_Hanma|Baki_Win_HighHealth
+      internalID: -824312650575286953
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 169
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2991,9 +3107,38 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Teen_Baki_Hanma|Shorts_BaseAction
-      takeName: Teen_Baki_Hanma|Shorts_BaseAction
-      internalID: 6984269003289516715
+      name: Teen_Baki_Hanma|Baki_Win_LowHealth
+      takeName: Teen_Baki_Hanma|Baki_Win_LowHealth
+      internalID: -3559418259091050866
+      firstFrame: 0
+      lastFrame: 279
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Teen_Baki_Hanma|CameraAction
+      takeName: Teen_Baki_Hanma|CameraAction
+      internalID: 8791098596882936923
       firstFrame: 0
       lastFrame: 12
       wrapMode: 0
@@ -3051,7 +3196,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.8
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -3106,7 +3251,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.8
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

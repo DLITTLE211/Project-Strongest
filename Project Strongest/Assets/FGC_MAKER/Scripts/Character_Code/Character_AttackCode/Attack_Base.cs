@@ -1,0 +1,214 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using Rewired;
+
+[Serializable]
+public class Attack_BaseProperties
+{
+    [Header("_______ATTACK IDENTIFICATION INFO______")]
+    public string _attackName;
+    [SerializeField] protected Character_InputTimer_Attacks _cTimer;
+    public Character_InputTimer_Attacks InputTimer 
+    { 
+        get { return _cTimer; } 
+        set { _cTimer = value; } 
+    }
+    #region Attack Damage Numbers
+    [Space(20)]
+    [Header("_______DAMAGE NUMBERS______")]
+    public float rawAttackDamage;
+    public float rawChipDamage;
+    public float counterHitDamageMult;
+
+    public Attack_StunValues attackMainStunValues;
+    [Space(20)]
+    public HitLevel hitLevel;
+    [SerializeField] public int attackHashes;
+    [Space(20)]
+    #endregion
+
+    [Header("_____REQUIREMENTS/RESTRICTIONS______")]
+    [Range(0, 3)] public int _meterRequirement;
+    public bool isInInstall;
+    public bool isNotInInstall;
+    [Range(0, 30)] public int _meterAwardedOnHit;
+    [Range(-10, 40)] public int attackScalingPercent;
+    public bool dashCancelable, JumpCancelable;
+
+    #region MoveType Properties
+    [Space(20)]
+    [Header("_______ATTACK PROPERTY INFORMATION_______")]
+    public AirAttackInfo _airInfo;
+    public Attack_CancelInfo cancelProperty;
+    public MoveType _moveType;
+    public AttackHandler_Attack AttackAnims;
+    public bool hitLanded;
+    public bool hitConnected;
+    public bool hitblocked;
+    #endregion
+
+    #region KnockBack/KnockDown Variables
+    [Space(20)]
+    [Header("______KNOCKDOWN INFORMATION______")]
+    public Horizontal_KnockBack LateralKB_Data; // Lateral KnockBack Properties
+    public Vertical_KnockBack VerticalKB_Data; // Vertical KnockBack Properties
+    public Attack_KnockDown KnockDown; // Vertical KnockBack Properties
+    #endregion
+    public void SetAttackAnims(Character_Animator animator)
+    {
+        hitConnected = false;
+        AttackAnims.SetAttackAnim(animator);
+        attackHashes = Animator.StringToHash(AttackAnims.animName);
+        SetChipDamageValue();
+    }
+    public void SetChipDamageValue()
+    {
+        rawChipDamage = (rawAttackDamage / 6.5f);
+    }
+    public Attack_BaseProperties()
+    {
+        _cTimer = null;
+        rawAttackDamage = 0;
+        rawChipDamage = 0;
+        counterHitDamageMult = 1;
+        isInInstall = false;
+        attackMainStunValues = new Attack_StunValues();
+
+        _meterRequirement = 0;
+        _meterAwardedOnHit = 0;
+        attackScalingPercent = 0;
+        dashCancelable = false;
+        JumpCancelable = false;
+
+        _airInfo = new AirAttackInfo();
+        cancelProperty = new Attack_CancelInfo();
+        _moveType = MoveType.Normal;
+        AttackAnims = new AttackHandler_Attack();
+        AttackAnims._frameData = new FrameData();
+        AttackAnims._hitCount = new HitCount(); 
+
+        LateralKB_Data = new Horizontal_KnockBack();
+        VerticalKB_Data = new Vertical_KnockBack();
+        KnockDown = Attack_KnockDown.NONE;
+    }
+}
+[Serializable]
+public class Attack_StunValues
+{
+    [Header("Stun Values")]
+    [Range(1, 500)] public int hitstunValue;
+    [Range(0, 500)] public float blockStunValue;
+    [Header("Stop Values")]
+    [Range(0, 100)] public int hitstopValue;
+    [Range(0, 50)] public int blockStopValue;
+}
+
+[Serializable]
+public class CustomDamageField 
+{
+    public float rawAttackDamage;
+    public float counterHitDamageMult;
+
+    public Attack_StunValues customDamageFieldStunValues;
+    [Space(20)]
+    public HitLevel hitLevel;
+    public bool isFinalAttack;
+    public bool isScaling;
+    public Horizontal_KnockBack lateralKBP; // Lateral KnockBack Properties
+    public Vertical_KnockBack verticalKBP; // Vertical KnockBack Properties
+    public Attack_KnockDown KnockDown; // Vertical KnockBack Properties
+}
+[Serializable]
+public class Attack_Input 
+{
+    public string attackString;
+    public char[] attackStringArray;
+    public void turnStringToArray() 
+    {
+        attackStringArray = attackString.ToCharArray();
+    }
+    public void ResetStringInfo() 
+    {
+        attackString = "";
+        attackStringArray = attackString.ToCharArray();
+    }
+    public Attack_Input(string _attackString, char[] _stringArray) 
+    {
+        attackString = _attackString;
+        attackStringArray = _stringArray;
+    }
+}
+[Serializable]
+public class Vertical_KnockBack
+{
+    public Attack_KnockBack_Vertical Hit_VKB_Level;
+    [Range(0f, 50f)] public float Hit_Value;
+
+    public Attack_KnockBack_Vertical Block_VKB_Level;
+    [Range(0f, 50f)] public float Block_Value;
+}
+[Serializable]
+public class Horizontal_KnockBack
+{
+    public Attack_KnockBack_Lateral Hit_HKB_Level;
+    [Range(0f, 50f)] public float Hit_Value;
+
+    public Attack_KnockBack_Lateral Block_HKB_Level;
+    [Range(0f, 50f)] public float Block_Value;
+}
+[Serializable]
+public enum Attack_KnockBack_Lateral
+{
+    No_KB,
+    Crumple,
+    Slight_KB,
+    Medium_KB,
+    Heavy_KB,
+    FullForceWallBounce,
+}
+[Serializable]
+public enum Attack_KnockBack_Vertical
+{
+    No_KUD,
+    KnockUP,
+    KnockDOWN,
+    GroundBounce,
+}
+[Serializable, Flags]
+public enum HitLevel
+{
+    SlightKnockback = 2,
+    MediumKnockback = 4,
+    SoaringHit = 8,
+    Crumple = 16,
+    Spiral = 32,
+    StandardBlock = 64,
+    GuardBreak = 128,
+    Scorpion = 256,
+}
+/*
+ * SKD = Soft KnockDown
+ * HKD = Hard KnockDown
+ */
+[Serializable, Flags]
+public enum Attack_KnockDown
+{
+    NONE = 2,
+    SKD = 4,
+    HKD = 8,
+}
+[Serializable]
+public enum AirAttackInfo
+{
+    GroundOnly,
+    AirOk,
+    AirOnly
+}
+[Serializable]
+public class AfflictionSet 
+{
+    public StatusEffect.Effect_Affliction _weakAffliction;
+    public StatusEffect.Effect_Affliction _mediumAffliction;
+    public StatusEffect.Effect_Affliction _strongAffliction;
+}

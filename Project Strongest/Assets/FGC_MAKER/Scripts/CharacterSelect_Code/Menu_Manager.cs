@@ -1,0 +1,218 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using System.Threading.Tasks;
+using UnityEngine.UI;
+using TMPro;
+using Rewired;
+using DG.Tweening;
+using UnityEngine.EventSystems;
+
+
+public class Menu_Manager : MonoBehaviour
+{
+    [SerializeField] private Menu_StateMachine _menuStateMachine;
+    [SerializeField] private CharacterSelect_Setup _characterSelect;
+    [SerializeField] private GameObject _mainMenuHolder;
+    [SerializeField] private GameObject _titleScreenHolder;
+    [SerializeField] private GameObject _mainCamera;
+    [SerializeField] private EventSystem _eventSystem; 
+    [SerializeField] private Player _mainMenuPlayer;
+    private int _mainMenuPlayerID;
+    public Character_AvailableID players;
+    [SerializeField] private MenuButtonHolder FirstMenuButtonLayer;
+    [Space(15)]
+    [SerializeField] private Image _backgroundImage,whiteFillerImage;
+    [SerializeField] private TMP_Text _titleText,_versionText;
+    public static GameModeSet currentMode;
+    public OutOfMatchGameState menuGameState;
+    Transform _titleTextTransform;
+    public static Menu_Manager instance;
+    public static bool subsequentLoad;
+    [SerializeField] private GameObject exitObject;
+    private void Start()
+    {
+        _mainCamera.SetActive(true);
+        Application.targetFrameRate = 60;
+        DontDestroyOnLoad(this);
+        instance = this;
+        SetTitlePage();
+    }
+    public async void SetTitlePage()
+    {
+        _menuStateMachine.CallTitleState();
+        //ToggleTitleState(true);
+        SetPlayerControllers();
+        ReInput.ControllerConnectedEvent += SetPlayerControllers;
+        ReInput.ControllerDisconnectedEvent += UnsetPlayerControllers;
+        menuGameState = OutOfMatchGameState.Title;
+    }
+    private void Update()
+    {
+        if (_mainMenuPlayer != null)
+        {
+            if (menuGameState == OutOfMatchGameState.Title)
+            {
+                TitleButtonFunction();
+            }
+        }
+    }
+    void TitleButtonFunction() 
+    {
+        if (_mainMenuPlayer.GetButtonDown("Select"))
+        {
+            if (exitObject.activeInHierarchy)
+            {
+                Application.Quit();
+            }
+            else
+            {
+                ActivateMainMenuPage();
+            }
+        }
+        if (_mainMenuPlayer.GetButtonDown("Cancel"))
+        {
+            if (exitObject.activeInHierarchy)
+            {
+                exitObject.SetActive(false);
+            }
+            else
+            {
+                exitObject.SetActive(true);
+            }
+        }
+    }
+    public async void ActivateMainMenuPage()
+    {
+        _menuStateMachine.CallMainMenuState();
+        menuGameState = OutOfMatchGameState.Menu;
+    }
+    public void DelayChosenPage(Callback func) 
+    {
+        func();
+        _mainCamera.SetActive(true);
+    }
+    void SetActiveButton() 
+    {
+        _eventSystem.firstSelectedGameObject = FirstMenuButtonLayer.buttonList[0].gameObject;
+        FirstMenuButtonLayer.buttonList[0].Select();
+    }
+    void SetPlayerControllers(ControllerStatusChangedEventArgs args = null)
+    {
+        string[] controllerNames = ReInput.controllers.GetJoystickNames();
+        if (controllerNames.Length <= 0)
+        {
+            return;
+        }
+        else
+        {
+            if (_mainMenuPlayer == null)
+            {
+                players.InitializePlayerControllers();
+                players.AddNewPlayer(0, controllerNames[0]);
+                //players.InitAvailableIDs();
+                //players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
+                //players.AddUsedID(players.joystickNames[0]);
+                SetCharacterSelectCursorState(0);
+            }
+        }
+    }
+    void UnsetPlayerControllers(ControllerStatusChangedEventArgs args = null)
+    {
+        _mainMenuPlayer.controllers.RemoveController(ControllerType.Joystick, players.characterIdentification.IDs[0]); 
+        _mainMenuPlayer = null;
+        _mainMenuPlayerID = -1;
+        if (ReInput.controllers.GetJoystickNames().Length <= 0)
+        {
+            players.InitializePlayerControllers();
+        }
+    }
+    void SetCharacterSelectCursorState(int ID)
+    {
+        int currentID = players.characterIdentification.IDs[ID];
+        _mainMenuPlayer = ReInput.players.GetPlayer(currentID);
+        _mainMenuPlayerID = ID;
+        _mainMenuPlayer.controllers.AddController(ControllerType.Joystick, currentID, true);
+        _mainMenuPlayer.controllers.maps.LoadMap(ControllerType.Joystick, currentID, $"UI_CanvasController", $"TestPlayer{_mainMenuPlayerID}");
+        SetActiveButton();
+    }
+    public void SetButtonHolderImages()
+    {
+        FirstMenuButtonLayer.SetImageObject(_backgroundImage);
+        FirstMenuButtonLayer.EnableButtons();
+    }
+    #region Training Button Response
+    public void TrainingSelected()
+    {
+        currentMode = new GameModeSet(GameMode.Training);
+        _menuStateMachine.CallPlayerSideState();
+    }
+    #endregion
+
+    #region Versus Button Response
+    public void VersusSelected()
+    {
+        currentMode = new GameModeSet(GameMode.Versus);
+        _menuStateMachine.CallPlayerSideState();
+    }
+    #endregion
+
+    #region Options Button Response
+    public void OptionsSelected()
+    {
+        //ToggleMainMenuState(false);
+    }
+    #endregion
+
+    public async void ExitSelected()
+    {
+        ToggleMainMenuState(false);
+        await Task.Delay(950);
+        ToggleTitleState(true);
+        menuGameState = OutOfMatchGameState.Title;
+        _menuStateMachine.CallTitleState();
+    }
+    void ToggleTitleState(bool state) 
+    {
+        _titleScreenHolder.SetActive(state);
+    }
+    void ToggleMainMenuState(bool state)
+    {
+        _mainMenuHolder.SetActive(state);
+    }
+
+}
+[Serializable]
+public class GameModeSet
+{
+    public GameMode gameMode;
+
+    public List<Callback> startupFunctions;
+    public GameModeSet (GameMode _gameMode) 
+    {
+        gameMode = _gameMode;
+    }
+    public void DoStartup() 
+    {
+        for (int i = 0; i < startupFunctions.Count; i++) 
+        {
+            startupFunctions[i]();
+        }
+    }
+}
+[Serializable]
+public enum GameMode 
+{
+    Training,
+    Versus,
+    Arcade,
+    Title,
+}
+[Serializable]
+public enum OutOfMatchGameState
+{
+    Title,
+    Menu,
+    Settings,
+}
