@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 
 public class Menu_StageSelectState : Menu_BaseState
 {
+    [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
     [SerializeField] private CSSubMenu_StageSelectController _stageSelectController;
     [SerializeField] private CharacterSelect_Setup _characterSelect;
     [SerializeField] private CharacterSelect_Cursor _player1_Cursor, _player2_Cursor;
     private bool allowUpdate;
     public override void OnEnter()
     {
+        _characterSelectController.Deactivate();
         _stageSelectController.Activate();
         StartCoroutine(DelayUpdateRoutine(0.85f));
     }
@@ -68,13 +70,10 @@ public class Menu_StageSelectState : Menu_BaseState
                 _stageSelectController.DeactivateRoundSelectObject();
                 return;
             }
-            if (_stageSelectController.stageSelected)
-            {
-                _stageSelectController.stageSelected = false;
-                //_characterSelect.SetChosenStage(null);
-                _stageSelectController.Deactivate();
-                _menuStateMachine.CallCharacterSelectState();
-            }
+            _stageSelectController.stageSelected = false;
+            //_characterSelect.SetChosenStage(null);
+            _stageSelectController.Deactivate();
+            _menuStateMachine.CallCharacterSelectState();
         }
     }
     public override void CycleLeft(CharacterSelect_Cursor _currentCursor)

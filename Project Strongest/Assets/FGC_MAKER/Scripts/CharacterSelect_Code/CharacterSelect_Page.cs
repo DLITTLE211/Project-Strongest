@@ -50,13 +50,24 @@ public class CharacterSelect_Page : MonoBehaviour
         colorSelectIndex = 0;
         Vector3 startPos = new Vector3(chosenCharacterImageObject.transform.localPosition.x + startXPos, 0, 0);
         chosenCharacterImageObject.transform.localPosition = startPos;
+        chosenCharacter = null;
     }
-    public void ResetNamePlatePosition()
+    public void ResetNamePlatePosition(bool clearData = false)
     {
         Sequence resetSequence = DOTween.Sequence();
         resetSequence.Append(_colorPickerTransform.DOLocalMove(_startColorPosition, 0.55f));
-        resetSequence.Append(_nameplateTransform.DOLocalMove(_startNtPosition, 0.45f));
+        resetSequence.Append(_nameplateTransform.DOLocalMove(_startNtPosition, 0.45f).OnComplete(() => 
+        {
+            if (clearData) 
+            {
+                ClearInfo();
+            }
+        }));
         resetSequence.Play();
+    }
+    public void DeactivateColorPanelPosition()
+    {
+        _colorPickerTransform.DOLocalMove(_startColorPosition, 1.15f).SetEase(Ease.OutBack);
     }
     public void ActivateColorPanelPosition()
     {

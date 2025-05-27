@@ -65,11 +65,8 @@ public class Character_SuperMeter : MonoBehaviour
         {
             calcValue = Mathf.Abs(calcValue * meterDebuffPercentage);
         }
-        if (!(fullMeterLevel >= 120))
-        {
-            fullMeterLevel += calcValue;
-        }
-        else 
+        fullMeterLevel += calcValue;
+        if (fullMeterLevel >= 120)
         {
             fullMeterLevel = 120;
         }
@@ -88,16 +85,20 @@ public class Character_SuperMeter : MonoBehaviour
     {
         meterTier = 0;
         superMeter.currentValue = 0;
-        for (int i = 0; i < fullMeterLevel; i++)
+        for (int i = 0; i <= fullMeterLevel; i++)
         {
+            superMeter.currentValue += 1;
             if (superMeter.currentValue >= 30)
             {
                 meterTier += 1;
-                superMeter.currentValue = 0;
-            }
-            else
-            {
-                superMeter.currentValue += 1;
+                if (meterTier < 4)
+                {
+                    superMeter.currentValue = 0;
+                }
+                else 
+                {
+                    meterTier = 4;
+                }
             }
         }
         SetMeterTierText();

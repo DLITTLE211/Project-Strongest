@@ -45,13 +45,20 @@ public class Menu_CharacterSelectState : Menu_BaseState
     }
     public override void Cancel(CharacterSelect_Cursor _currentCursor) 
     {
-        _characterSelect._menuStateMachine.CallAmplifierSelectState();
-        for (int i = 0; i < _characterSelect._playerCursors.Count; i++)
+        if(_currentCursor.cursorPage.chosenCharacter != null) 
         {
-            CharacterSelect_Cursor cursor = _characterSelect._playerCursors[i];
-            cursor.cursorPage.ResetNamePlatePosition();
+            _currentCursor.cursorPage.ResetNamePlatePosition(true);
         }
-        _characterSelectController.Deactivate();
+        else 
+        {
+            _characterSelect._menuStateMachine.CallAmplifierSelectState();
+            for (int i = 0; i < _characterSelect._playerCursors.Count; i++)
+            {
+                CharacterSelect_Cursor cursor = _characterSelect._playerCursors[i];
+                cursor.cursorPage.ResetNamePlatePosition(true);
+            }
+            _characterSelectController.Deactivate();
+        }
     }
     IEnumerator DelayUpdateRoutine(float time)
     {

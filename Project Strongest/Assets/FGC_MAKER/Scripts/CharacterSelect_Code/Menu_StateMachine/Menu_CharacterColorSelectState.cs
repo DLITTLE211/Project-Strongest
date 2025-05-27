@@ -19,10 +19,6 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
         _player1_Cursor.cursorPage.ActivateColorPanelPosition();
         _player2_Cursor.cursorPage.ActivateColorPanelPosition();
     }
-    public override void OnExit()
-    {
-        _characterSelectController.Deactivate();
-    }
     public override void OnUpdate()
     {
         if (allowUpdate)
@@ -40,6 +36,7 @@ public class Menu_CharacterColorSelectState : Menu_BaseState
     public override void Cancel(CharacterSelect_Cursor _currentCursor)
     {
         _currentCursor.SetColorLockState(false);
+        _currentCursor.cursorPage.DeactivateColorPanelPosition();
         _characterSelect._menuStateMachine.CallCharacterSelectState();
     }
     public override void CycleLeft(CharacterSelect_Cursor _currentCursor)
