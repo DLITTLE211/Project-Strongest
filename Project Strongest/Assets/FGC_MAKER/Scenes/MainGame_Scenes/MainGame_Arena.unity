@@ -4878,6 +4878,7 @@ MonoBehaviour:
   clearStunTimeGate: 5
   stunRecoverTime: 15
   canRecover: 0
+  IsSTUNNED: 0
 --- !u!114 &227057914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8406,7 +8407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.080000006, y: 0.439}
   m_AnchorMax: {x: 0.080000006, y: 0.439}
-  m_AnchoredPosition: {x: 38, y: -2}
+  m_AnchoredPosition: {x: 38, y: 0}
   m_SizeDelta: {x: 84.665, y: 662.3}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &393971323
@@ -12778,7 +12779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10}
   m_AnchorMin: {x: 0.12645833, y: 0.8162223}
   m_AnchorMax: {x: 0.12645833, y: 0.8162223}
-  m_AnchoredPosition: {x: -0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.5, y: 0}
   m_SizeDelta: {x: 245, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &643082889
@@ -15572,6 +15573,7 @@ MonoBehaviour:
   clearStunTimeGate: 5
   stunRecoverTime: 15
   canRecover: 0
+  IsSTUNNED: 0
 --- !u!114 &806051818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29272,6 +29274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cDState:
     _rSystem: {fileID: 1359521225}
+    players:
+    - {fileID: 993311525}
+    - {fileID: 94923329}
   _iCState:
     _rSystem: {fileID: 1359521225}
     WaitingTime: 10

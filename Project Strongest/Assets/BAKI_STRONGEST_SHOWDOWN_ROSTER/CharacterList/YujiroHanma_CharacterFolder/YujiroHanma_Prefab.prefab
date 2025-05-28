@@ -859,11 +859,19 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4800545675622748477, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800545675622748477, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 52896a04a165dc643a6f59796ef07896, type: 2}
     - target: {fileID: 4819996317329807768, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819996317329807768, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4819996317329807768, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
@@ -1056,7 +1064,16 @@ MonoBehaviour:
   orthoCameraAnim: {fileID: 2771313786364344695}
   _base: {fileID: 0}
   _cAnimator: {fileID: 7870534508119086931}
+  introAnimationComplete: 0
   _demonActivation: 0
+  _introAnimation:
+    introAnimationClips:
+    - {fileID: -4786064389408641795, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    - {fileID: 4329534348314258469, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+    _cameraAnimationClips:
+    - {fileID: 7400000, guid: 7dd422c0c5987144aa650d71fc90facb, type: 2}
+    - {fileID: 7400000, guid: 4da1d3dba55183a42ba716791270bb8e, type: 2}
+    introDialogue: {fileID: 0}
   _victoryAnimation:
     _animationClip: {fileID: 4334525343487623470, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
     _animName: 

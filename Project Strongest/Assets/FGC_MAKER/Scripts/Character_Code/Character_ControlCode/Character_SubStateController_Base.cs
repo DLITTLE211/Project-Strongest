@@ -15,6 +15,7 @@ public class Character_SubStateController_Base : MonoBehaviour
     [SerializeField] protected Animator orthoCameraAnim;
     [SerializeField] protected Character_Base _base;
     [SerializeField] protected Character_Animator _cAnimator;
+    public bool introAnimationComplete;
     protected float startSecondaryIdle = 10f;
     protected IEnumerator SecondIdleAnimRoutine;
     protected bool canPlaySecondIdle;
@@ -85,6 +86,15 @@ public class Character_SubStateController_Base : MonoBehaviour
         int hash = Animator.StringToHash(animationName);
         orthoCameraAnim.CrossFade(hash, 0, 0);
     }
+    public void PlayCameraAnimationClip(string animName)
+    {
+        personalCamera.SetActive(true);
+        SetCameraCanvas();
+        orthoCamera.cullingMask = LayerMask.GetMask(ReturnLayerMask(false));
+        personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
+        int hash = Animator.StringToHash(animName);
+        orthoCameraAnim.CrossFade(hash, 0, 0);
+    }
     string[] ReturnLayerMask(bool renderOpponent) 
     {
         if (renderOpponent) 
@@ -112,6 +122,55 @@ public class Character_SubStateController_Base : MonoBehaviour
     {
 
     }
+    public virtual void PlayIntroAnimation()
+    {
+        introAnimationComplete = true;
+        ResetCameraCanvas();
+    }
+
+    public IEnumerator PlayIntroSequence(IntroAnimationSequence sequence, Callback endFunc)
+    {
+        bool allowTalkPointInBetween = false;
+        if (sequence.introAnimationClips.Count > 1)
+        {
+            allowTalkPointInBetween = true;
+        }
+        for (int i = 0; i < sequence.introAnimationClips.Count; i++)
+        {
+            AnimationClip currentClip = sequence.introAnimationClips[i];
+            _base._cAnimator.PlayNextAnimation(Animator.StringToHash(currentClip.name), 0);
+            PlayCameraAnimationClip(sequence._cameraAnimationClips[i].name);
+            yield return new WaitForSeconds(sequence.introAnimationClips[i].length);
+            if (allowTalkPointInBetween)
+            {
+                if (i == sequence.introAnimationClips.Count - 1)
+                {
+                    StartCoroutine(PlayIntroDialogue(sequence, endFunc));
+                }
+                else
+                {
+                    StartCoroutine(PlayIntroDialogue(sequence, null));
+                }
+            }
+        }
+        if (!allowTalkPointInBetween) 
+        {
+            StartCoroutine(PlayIntroDialogue(sequence, endFunc));
+            yield break;
+        }
+        endFunc();
+    }
+    public IEnumerator PlayIntroDialogue(IntroAnimationSequence sequence, Callback endFunc)
+    {
+        if (sequence.introDialogue != null)
+        {
+            yield return new WaitForSeconds(sequence.introDialogue.length);
+        }
+        if (endFunc != null)
+        {
+            endFunc();
+        }
+    }
     public virtual void PlayVictoryWinAnimation()
     {
 
@@ -131,4 +190,11 @@ public class Character_SubStateController_Base : MonoBehaviour
     {
         _screenSpaceCanvas.worldCamera = orthoCamera;
     }
+}
+[Serializable]
+public class IntroAnimationSequence
+{
+    public List<AnimationClip> introAnimationClips;
+    public List<AnimationClip> _cameraAnimationClips;
+    public AudioClip introDialogue;
 }

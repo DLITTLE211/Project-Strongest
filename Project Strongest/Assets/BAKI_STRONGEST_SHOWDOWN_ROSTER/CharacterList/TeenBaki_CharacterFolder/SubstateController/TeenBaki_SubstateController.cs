@@ -6,6 +6,7 @@ using FightingGame_FrameData;
 public class TeenBaki_SubstateController : Character_SubStateController_Base
 {
     public bool demonActivation;
+    public IntroAnimationSequence _introAnimation;
     public VictoryAnimation _victoryAnimation;
     [SerializeField] private GameObject _sodaBottle;
 
@@ -16,6 +17,10 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
     public override void OnRoundReset()
     {
         demonActivation = false;
+    }
+    public override void PlayIntroAnimation()
+    {
+        StartCoroutine(PlayIntroSequence(_introAnimation, base.PlayIntroAnimation));
     }
     public override void PlayVictoryWinAnimation()
     {

@@ -4429,7 +4429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &515753408998192220
 Transform:
   m_ObjectHideFlags: 0
@@ -7074,7 +7074,7 @@ Transform:
   m_GameObject: {fileID: 507441014664153278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.986, y: 0, z: 0.06615448}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9206865828138592782}
@@ -7593,7 +7593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2645575696107485645
 Transform:
   m_ObjectHideFlags: 0
@@ -14190,7 +14190,12 @@ MonoBehaviour:
   orthoCameraAnim: {fileID: 0}
   _base: {fileID: 0}
   _cAnimator: {fileID: 0}
+  introAnimationComplete: 0
   demonActivation: 0
+  _introAnimation:
+    introAnimationClips: []
+    _cameraAnimationClips: []
+    introDialogue: {fileID: 0}
   _victoryAnimation:
     _animationClip: {fileID: 0}
     _animName: 

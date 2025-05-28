@@ -7,6 +7,7 @@ using System;
 [Serializable]
 public class Round_CharacterDialogueState : Round_BaseState
 {
+    public List<Character_Base> players;
     public Round_CharacterDialogueState(MainGame_RoundSystemController rSystem) : base(rSystem){}
     
     public override void OnEnter()
@@ -23,13 +24,15 @@ public class Round_CharacterDialogueState : Round_BaseState
     {
         await SayCharacterDialogue(/*dialogueSet*/);
     }
-    public async Task SayCharacterDialogue(/*DialogueSet dialogueSet*/) 
+    async Task SayCharacterDialogue(/*DialogueSet dialogueSet*/) 
     {
-        await Task.Delay(1000);
-        for (int i = 0; i < 3; i++) 
+        for (int i = 0; i < players.Count; i++) 
         {
-            Debug.Log($"Test Dialogue Sentence {i+1}");
-            await Task.Delay(1500);
+            players[i]._cSubStateController.PlayIntroAnimation();
+            while (!players[i]._cSubStateController.introAnimationComplete) 
+            {
+                await Task.Yield();
+            }
         }
         //TODO Character Dialogue Function
         /*

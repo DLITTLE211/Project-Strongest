@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcc7103c83b73949897b4cb64a1b31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _subStateController: {fileID: 0}
 --- !u!1 &1818163684000898708
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,8 +263,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -10
-  far clip plane: 900
+  near clip plane: -900
+  far clip plane: 1800
   field of view: 60
   orthographic: 1
   orthographic size: 1.65
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 1
+  m_RequiresDepthTextureOption: 0
   m_RequiresOpaqueTextureOption: 1
   m_CameraType: 1
   m_Cameras: []
@@ -318,7 +319,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 1
   m_Dithering: 1
-  m_ClearDepth: 1
+  m_ClearDepth: 0
   m_AllowXRRendering: 1
   m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0

@@ -24,6 +24,7 @@ public class Round_InitialCountdownState : Round_BaseState
         for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
         {
             GameManager.instance.players.totalPlayers[i].InitialReset();
+            GameManager.instance.players.totalPlayers[i]._cSubStateController.OnRoundReset();
         }
         GameManager.instance.winningCharacter = null;
         await Task.Delay(WaitingTime * 100);

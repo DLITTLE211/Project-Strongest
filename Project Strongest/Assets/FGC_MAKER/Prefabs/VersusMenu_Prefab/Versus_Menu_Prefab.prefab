@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSpawnPoint: {fileID: 4467277268016656437}
-  spawnedButton: {fileID: 900475604780615657, guid: 75ee168c6f058074fb696d6aef89d271, type: 3}
+  spawnedButton: {fileID: 2115272613314498392, guid: 75ee168c6f058074fb696d6aef89d271, type: 3}
   trainingButtonDictionary: []
   trainingMenuObject:
   - {fileID: 5362316512933898730}
@@ -2559,7 +2559,7 @@ PrefabInstance:
     - target: {fileID: 3724236437146886665, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 2291231308568565707}
+      objectReference: {fileID: 0}
     - target: {fileID: 3827921907882696191, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2858,17 +2858,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 272708099299298350, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}
   m_PrefabInstance: {fileID: 1145488301698957903}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2291231308568565707 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1164604050807346564, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}
-  m_PrefabInstance: {fileID: 1145488301698957903}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2794958563880469455 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2966789736765178240, guid: baf10281e29b23340b8d8d15a4d58246, type: 3}

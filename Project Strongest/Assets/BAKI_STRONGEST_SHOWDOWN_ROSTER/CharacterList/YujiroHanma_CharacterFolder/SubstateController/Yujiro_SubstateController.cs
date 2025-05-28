@@ -7,7 +7,7 @@ using System.Linq;
 public class Yujiro_SubstateController : Character_SubStateController_Base
 {
     public bool _demonActivation;
-
+    public IntroAnimationSequence _introAnimation;
     public VictoryAnimation _victoryAnimation;
     [SerializeField] private GameObject _shirt;
     private void Update()
@@ -39,6 +39,11 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         _shirt.SetActive(!_demonActivation);
         SetAnimClipsOnChange(0);
     }
+    public override void PlayIntroAnimation()
+    {
+        StartCoroutine(PlayIntroSequence(_introAnimation, base.PlayIntroAnimation));
+    }
+
     public override void PlayVictoryWinAnimation()
     {
         _base.Deactivate();
@@ -48,10 +53,10 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Base_FrameCode.ONE_FRAME;
         _victoryAnimation._animLength = _victoryAnimation._animationClip.length;
         _victoryAnimation._animHash = Animator.StringToHash(_victoryAnimation._animName);
-        StartCoroutine(PlayAnimSequence(_victoryAnimation));
+        StartCoroutine(PlayVictoryAnimSequence());
     }
 
-    IEnumerator PlayAnimSequence(VictoryAnimation _currentAction)
+    IEnumerator PlayVictoryAnimSequence()
     {
         float frameCount = 0;
         _cAnimator.SetCanTransitionIdle(false);

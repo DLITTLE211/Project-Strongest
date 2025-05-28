@@ -92,21 +92,6 @@ public class State_Idle : BaseState
         {
             _base._cSubStateController?.PlaySecondaryAnimation();
         }
-        //CallSecondaryIdleAnim();
-        /*if (!_base.isLockedPause)
-        {
-            if (canDoSecondaryIdle)
-            {
-                if (timeTillSecondaryIdle <= -Base_FrameCode.ONE_FRAME)
-                {
-                    
-                }
-                else
-                {
-                    timeTillSecondaryIdle -= Base_FrameCode.ONE_FRAME;
-                }
-            }
-        }*/
         base.OnUpdate();
     }
     public void CallSecondaryIdleAnim() 
@@ -169,15 +154,18 @@ public class State_Idle : BaseState
             blockingAttack = false;
         }
         bool canTransitionIdle = _cAnim.canTransitionIdle == true;
-        return Grounded && neutralInput && blockingAttack && lastAttackNull && lastMobilityNull && canTransitionIdle;
+        return Grounded && neutralInput && blockingAttack && lastAttackNull && lastMobilityNull && canTransitionIdle && _base.ACTIVATED;
     }
 
     void DummyIdleCheck()
     {
-        _base._cHurtBox.SetHurboxState();
-        _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
-        canDoSecondaryIdle = true;
-        timeTillSecondaryIdle = startSecondaryIdle;
+        if (_base.ACTIVATED)
+        {
+            _base._cHurtBox.SetHurboxState();
+            _cAnim.PlayNextAnimation(groundIdleHash, 2 * (1 / 60f));
+            canDoSecondaryIdle = true;
+            timeTillSecondaryIdle = startSecondaryIdle;
+        }
     }
     public override void OnExit()
     {
