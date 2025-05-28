@@ -143,8 +143,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 7400000, guid: 9c4539cd33de578469be66e760c5b832, type: 2}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 2
             call: 134217728
             hitFrameBool: 0
@@ -180,8 +179,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 80
             call: 536870912
             hitFrameBool: 0
@@ -217,8 +215,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 199
             call: 268435456
             hitFrameBool: 0
@@ -254,8 +251,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -389,8 +385,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 7400000, guid: 9e32401fdc4d3a240bfb0ba4ced4260c, type: 2}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 3
             call: 134217728
             hitFrameBool: 0
@@ -426,8 +421,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 25
             call: 268435456
             hitFrameBool: 0
@@ -463,8 +457,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -545,8 +538,7 @@ MonoBehaviour:
               KnockDown: 8
             _hurtboxType: 0
             _cameraAnimation: {fileID: 7400000, guid: 545397ca13e53574eb804869ca023301, type: 2}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 1
           - hitFramePoints: 48
             call: 262144
             hitFrameBool: 0
@@ -582,8 +574,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 60
             call: 262144
             hitFrameBool: 0
@@ -619,8 +610,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 70
             call: 262144
             hitFrameBool: 0
@@ -656,8 +646,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 80
             call: 262144
             hitFrameBool: 0
@@ -693,8 +682,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 100
             call: 262144
             hitFrameBool: 0
@@ -730,8 +718,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 110
             call: 262144
             hitFrameBool: 0
@@ -767,8 +754,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 130
             call: 262144
             hitFrameBool: 0
@@ -804,8 +790,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 150
             call: 262144
             hitFrameBool: 0
@@ -841,8 +826,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 175
             call: 262144
             hitFrameBool: 0
@@ -878,8 +862,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 190
             call: 262144
             hitFrameBool: 0
@@ -915,8 +898,7 @@ MonoBehaviour:
               KnockDown: 8
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1034,8 +1016,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 7400000, guid: 7474146c445e3904aba9a73f01c981b1, type: 2}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 1
           - hitFramePoints: 0
             call: 1073741824
             hitFrameBool: 0
@@ -1071,8 +1052,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 1
             call: 134217728
             hitFrameBool: 0
@@ -1108,8 +1088,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 10
             call: 268435456
             hitFrameBool: 0
@@ -1145,8 +1124,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 13
             call: 2
             hitFrameBool: 0
@@ -1182,8 +1160,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1264,8 +1241,7 @@ MonoBehaviour:
               KnockDown: 8
             _hurtboxType: 0
             _cameraAnimation: {fileID: 7400000, guid: 751a93fdafc80f442921ae4aa29535df, type: 2}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 1
           - hitFramePoints: 110
             call: 262144
             hitFrameBool: 0
@@ -1301,8 +1277,7 @@ MonoBehaviour:
               KnockDown: 8
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 150
             call: 262144
             hitFrameBool: 0
@@ -1338,8 +1313,7 @@ MonoBehaviour:
               KnockDown: 8
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 215
             call: 262144
             hitFrameBool: 0
@@ -1375,8 +1349,7 @@ MonoBehaviour:
               KnockDown: 8
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1494,8 +1467,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 7400000, guid: 7474146c445e3904aba9a73f01c981b1, type: 2}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 1
           - hitFramePoints: 8
             call: 134217728
             hitFrameBool: 0
@@ -1531,8 +1503,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 10
             call: 33554432
             hitFrameBool: 0
@@ -1568,8 +1539,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 7
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
           - hitFramePoints: 30
             call: 268435456
             hitFrameBool: 0
@@ -1605,8 +1575,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1845,8 +1814,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -1927,8 +1895,7 @@ MonoBehaviour:
               KnockDown: 4
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -2043,8 +2010,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -2253,8 +2219,7 @@ MonoBehaviour:
                       KnockDown: 0
                     _hurtboxType: 0
                     _cameraAnimation: {fileID: 0}
-                    fadeInSpeed: 0
-                    fadeOutSpeed: 0
+                    renderOpponent: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2390,8 +2355,7 @@ MonoBehaviour:
                 KnockDown: 0
               _hurtboxType: 0
               _cameraAnimation: {fileID: 0}
-              fadeInSpeed: 0
-              fadeOutSpeed: 0
+              renderOpponent: 0
           _hitCount:
             _count: 0
             _startCount: 0
@@ -2507,8 +2471,7 @@ MonoBehaviour:
                       KnockDown: 0
                     _hurtboxType: 0
                     _cameraAnimation: {fileID: 0}
-                    fadeInSpeed: 0
-                    fadeOutSpeed: 0
+                    renderOpponent: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -2627,8 +2590,7 @@ MonoBehaviour:
                       KnockDown: 0
                     _hurtboxType: 0
                     _cameraAnimation: {fileID: 0}
-                    fadeInSpeed: 0
-                    fadeOutSpeed: 0
+                    renderOpponent: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -3137,8 +3099,7 @@ MonoBehaviour:
                       KnockDown: 0
                     _hurtboxType: 0
                     _cameraAnimation: {fileID: 0}
-                    fadeInSpeed: 0
-                    fadeOutSpeed: 0
+                    renderOpponent: 0
                 _hitCount:
                   _count: 0
                   _startCount: 0
@@ -3462,8 +3423,7 @@ MonoBehaviour:
               KnockDown: 0
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
-            fadeInSpeed: 0
-            fadeOutSpeed: 0
+            renderOpponent: 0
         _hitCount:
           _count: 0
           _startCount: 0
@@ -3590,8 +3550,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3704,8 +3663,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3818,8 +3776,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -3844,7 +3801,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 0
+    leewayTime: 40
   - SpecialAttackName: Light Kick String Combo
     _attackInput:
       _correctInput:
@@ -4092,8 +4049,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4118,7 +4074,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 0
+    leewayTime: 40
   - SpecialAttackName: Heavy Punch String Combo
     _attackInput:
       _correctInput:
@@ -4214,8 +4170,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 1
@@ -4328,8 +4283,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4442,8 +4396,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -4468,7 +4421,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 0
+    leewayTime: 40
   - SpecialAttackName: Light Punch String Combo
     _attackInput:
       _correctInput:
@@ -4705,7 +4658,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 0
+    leewayTime: 40
   commandNormalAttacks:
   - SpecialAttackName: Downward Slam
     _attackInput:
@@ -4800,8 +4753,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5003,8 +4955,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5123,8 +5074,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5243,8 +5193,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -5945,8 +5894,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
               - hitFramePoints: 0
                 call: 0
                 hitFrameBool: 0
@@ -5982,8 +5930,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
               - hitFramePoints: 0
                 call: 0
                 hitFrameBool: 0
@@ -6019,8 +5966,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
               - hitFramePoints: 0
                 call: 0
                 hitFrameBool: 0
@@ -6056,8 +6002,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
               - hitFramePoints: 0
                 call: 0
                 hitFrameBool: 0
@@ -6093,8 +6038,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
               - hitFramePoints: 0
                 call: 0
                 hitFrameBool: 0
@@ -6130,8 +6074,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
               - hitFramePoints: 0
                 call: 0
                 hitFrameBool: 0
@@ -6167,8 +6110,7 @@ MonoBehaviour:
                   KnockDown: 0
                 _hurtboxType: 0
                 _cameraAnimation: {fileID: 0}
-                fadeInSpeed: 0
-                fadeOutSpeed: 0
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -6501,8 +6443,7 @@ MonoBehaviour:
             KnockDown: 4
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
-          fadeInSpeed: 0
-          fadeOutSpeed: 0
+          renderOpponent: 0
       _hitCount:
         _count: 0
         _startCount: 0
@@ -6652,8 +6593,7 @@ MonoBehaviour:
             KnockDown: 0
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
-          fadeInSpeed: 0
-          fadeOutSpeed: 0
+          renderOpponent: 0
         - hitFramePoints: 40
           call: 262144
           hitFrameBool: 0
@@ -6689,8 +6629,7 @@ MonoBehaviour:
             KnockDown: 4
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
-          fadeInSpeed: 0
-          fadeOutSpeed: 0
+          renderOpponent: 0
       _hitCount:
         _count: 0
         _startCount: 0

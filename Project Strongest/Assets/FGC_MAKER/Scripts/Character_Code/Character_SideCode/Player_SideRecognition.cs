@@ -83,12 +83,12 @@ public class Character_Position
         if (_face == Character_Face_Direction.FacingRight)
         {
             modelTransform.localScale = Vector3.one;
-            CollisionDetectionTransform.localPosition = new Vector3(-_base.characterProfile.hurtboxSizing.bias, CollisionDetectionTransform.localPosition.y, CollisionDetectionTransform.localPosition.z);
+            CollisionDetectionTransform.localPosition = new Vector3(_base.characterProfile.hurtboxSizing.RightFacingBias, CollisionDetectionTransform.localPosition.y, CollisionDetectionTransform.localPosition.z);
         }
         else if (_face == Character_Face_Direction.FacingLeft)
         {
             modelTransform.localScale = new Vector3(-1f, 1f, 1f);
-            CollisionDetectionTransform.localPosition = new Vector3(_base.characterProfile.hurtboxSizing.bias, CollisionDetectionTransform.localPosition.y, CollisionDetectionTransform.localPosition.z);
+            CollisionDetectionTransform.localPosition = new Vector3(_base.characterProfile.hurtboxSizing.LeftFacingBias, CollisionDetectionTransform.localPosition.y, CollisionDetectionTransform.localPosition.z);
         }
         _directionFacing = _face;
     }

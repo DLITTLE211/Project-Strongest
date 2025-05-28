@@ -18,10 +18,12 @@ public class Character_SubStateController_Base : MonoBehaviour
     protected float startSecondaryIdle = 10f;
     protected IEnumerator SecondIdleAnimRoutine;
     protected bool canPlaySecondIdle;
+    List<string> cameraLayers;
     public void SetStarterInformation(Character_Base newBase) 
     {
         _base = newBase;
         _screenSpaceCanvas = newBase.screenSpaceCanvas;
+        cameraLayers = new List<string>();
     }
     public virtual void OnRoundReset() 
     {
@@ -66,34 +68,41 @@ public class Character_SubStateController_Base : MonoBehaviour
         if (cameraClip != null)
         {
             orthoCameraAnim.enabled = true;
-            PlayCameraAnimationClip(cameraClip.name);
-        }
-        else
-        {
-            PlayCameraFocusAnimation(func);
+            PlayCameraAnimationClip(func);
         }
     }
     public void EndCameraAnimation()
     {
         ResetCameraCanvas();
     }
-    public void PlayCameraAnimationClip(string animName) 
+    public void PlayCameraAnimationClip(CustomCallback animName) 
     {
         personalCamera.SetActive(true); 
         SetCameraCanvas();
+        orthoCamera.cullingMask = LayerMask.GetMask(ReturnLayerMask(animName.renderOpponent));
         personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
-        string animationName = $"{animName}";
+        string animationName = $"{animName._cameraAnimation.name}";
         int hash = Animator.StringToHash(animationName);
         orthoCameraAnim.CrossFade(hash, 0, 0);
     }
-    public void PlayCameraFocusAnimation(CustomCallback callback)
+    string[] ReturnLayerMask(bool renderOpponent) 
     {
-        personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
-        personalCamera.SetActive(true);
-        orthoCameraAnim.enabled = false;
-        float fadeInSpeed = callback.fadeInSpeed;
-        float fadeOutSpeed = callback.fadeOutSpeed;
-        SetCameraCanvas();
+        if (renderOpponent) 
+        {
+            return new List<string> { "Default", "TransparentFX", "Ignore Raycast", "Outlined Objects", "Water", "UI", "Outlined Player1", "Outlined Player2" }.ToArray();
+        }
+        else 
+        {
+            if (_base.playerID == 0)
+            {
+                return new List<string> { "Default", "TransparentFX", "Ignore Raycast", "Outlined Objects", "Water", "UI", "Outlined Player1"}.ToArray();
+            }
+            else 
+            {
+                return new List<string> { "Default", "TransparentFX", "Ignore Raycast", "Outlined Objects", "Water", "UI", "Outlined Player2" }.ToArray();
+            }
+            
+        }
     }
     public virtual void PlayActivateInstallProperties(CustomCallback callback = null)
     {

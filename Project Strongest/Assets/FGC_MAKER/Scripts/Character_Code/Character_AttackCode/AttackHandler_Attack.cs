@@ -189,10 +189,10 @@ public class AttackHandler_Attack : AttackHandler_Base
 
         if (HitBox.hitboxProperties != null)
         {
+            _base._cHurtBox.SetHurboxState();
             if (HitBox.hitboxProperties._moveType == MoveType.Counter)
             {
                 extendedHitBox.CounterMoveProperty = null;
-                _base._cHurtBox.SetHurboxState();
             }
         }
 
@@ -267,8 +267,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     throwAttackCallbacks._frameData._extraPoints[i].awaitEnum,
                     _frameData._extraPoints[i]._hurtboxType,
                     _frameData._extraPoints[i]._cameraAnimation,
-                    _frameData._extraPoints[i].fadeInSpeed,
-                    _frameData._extraPoints[i].fadeOutSpeed);
+                    _frameData._extraPoints[i].renderOpponent);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -291,8 +290,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     _frameData._extraPoints[i].awaitEnum,
                     _frameData._extraPoints[i]._hurtboxType, 
                     _frameData._extraPoints[i]._cameraAnimation,
-                    _frameData._extraPoints[i].fadeInSpeed,
-                    _frameData._extraPoints[i].fadeOutSpeed);
+                    _frameData._extraPoints[i].renderOpponent);
                 customHitboxCallBacks.Add(customCallback);
             }
         }
@@ -544,9 +542,8 @@ public class CustomCallback
     public bool snapMovement;
     public CustomDamageField customDamage;
     public AnimationClip _cameraAnimation;
-    public float fadeInSpeed;
-    public float fadeOutSpeed;
     public HurtBoxType chosenType;
+    public bool renderOpponent;
     public CustomCallback (HitPointCall _customCall, 
         float _timeStamp, 
         bool _funcBool, 
@@ -557,7 +554,7 @@ public class CustomCallback
         bool isSnapping = false, 
         CustomDamageField _customDamage = null, 
         AwaitClass _awaitEnum = null,
-        HurtBoxType _chosenType = HurtBoxType.NoBlock,AnimationClip _cameraAnim = null, float _fadeInSpeed = 0, float _fadeOutSpeed = 0)
+        HurtBoxType _chosenType = HurtBoxType.NoBlock,AnimationClip _cameraAnim = null, bool _renderOpponent = true)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -571,8 +568,7 @@ public class CustomCallback
         awaitEnum = _awaitEnum;
         chosenType = _chosenType;
         _cameraAnimation = _cameraAnim;
-        fadeInSpeed = _fadeInSpeed;
-        fadeOutSpeed = _fadeOutSpeed;
+        renderOpponent = _renderOpponent;
     }
 }
 [Serializable]
@@ -588,7 +584,7 @@ public class ExtraFrameHitPoints
     public CustomDamageField customDamage;
     public HurtBoxType _hurtboxType;
     public AnimationClip _cameraAnimation;
-    public float fadeInSpeed, fadeOutSpeed;
+    public bool renderOpponent;
 }
 
 [Serializable, Flags]

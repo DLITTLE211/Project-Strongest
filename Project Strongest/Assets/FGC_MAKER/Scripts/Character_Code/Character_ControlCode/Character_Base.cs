@@ -163,7 +163,6 @@ public class Character_Base : MonoBehaviour
     IEnumerator ThrowTechRoutine;
     public bool verifyMoves; 
     [Range(0,71)]public int moveListIndex;
-
     IEnumerator ResetIdleRoutine;
 
     private Dictionary<WaitingEnumKey, AwaitCheck> awaitEnums;
@@ -286,11 +285,16 @@ public class Character_Base : MonoBehaviour
         if (newID > -1)
         {
             string layerMaskName = newID == 0 ? "Outlined Player1" : "Outlined Player2";
-            _chosenCharacter.layer = LayerMask.NameToLayer(layerMaskName);
-            foreach (Transform child in _chosenCharacter.transform)
-            {
-                child.gameObject.layer = LayerMask.NameToLayer(layerMaskName);
-            }
+            int objectLayerIndex = LayerMask.NameToLayer(layerMaskName);
+            _chosenCharacter.layer = objectLayerIndex;
+            SetLayerInformation(_chosenCharacter, _chosenCharacter_Animator,objectLayerIndex);
+        }
+        else 
+        {
+            string layerMaskName = "Outlined Player2";
+            int objectLayerIndex = LayerMask.NameToLayer(layerMaskName);
+            _chosenCharacter.layer = objectLayerIndex;
+            SetLayerInformation(_chosenCharacter, _chosenCharacter_Animator, objectLayerIndex);
         }
         _cSubStateController = _chosenCharacter.GetComponentInChildren<Character_SubStateController_Base>();
         _cSubStateController.SetStarterInformation(this);
@@ -298,7 +302,32 @@ public class Character_Base : MonoBehaviour
 
         SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier,skinIndex);
     }
+    void SetLayerInformation(GameObject _chosenCharacter, Character_Animator _chosenCharacter_Animator,int objectLayerIndex)
+    {
+        List<GameObject> childObjects = new List<GameObject>();
+        foreach (Transform child in _chosenCharacter.transform)
+        {
+            childObjects.Add(child.gameObject);
+        }
+        foreach (Transform child in _chosenCharacter_Animator.myAnim.transform)
+        {
+            childObjects.Add(child.gameObject);
+        }
+        for(int i = 0; i < _chosenCharacter_Animator._modelMeshCount.Count; i++)
+        {
+            childObjects.Add(_chosenCharacter_Animator._modelMeshCount[i].gameObject);
+            foreach (Transform child in _chosenCharacter_Animator._modelMeshCount[i].transform)
+            {
+                childObjects.Add(child.gameObject);
+            }
+        }
+        childObjects.Add(_chosenCharacter_Animator.hairMesh.gameObject);
 
+        for (int i = 0; i < childObjects.Count; i++)
+        {
+            childObjects[i].gameObject.layer = objectLayerIndex;
+        }
+    }
     void ResetInputLog()
     {
         _timer.SetLogString();

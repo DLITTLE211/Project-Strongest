@@ -23,7 +23,8 @@ MonoBehaviour:
     radius: 0.25
     hurtboxPosition: {x: 0, y: 0.08, z: -0.5}
     hurtboxSizing: {x: 1, y: 2.25, z: 1.7}
-    bias: 0.25
+    RightFacingBias: -0.25
+    LeftFacingBias: 0.25
   collisionSizing:
     headRadius: 0.35
     headHeight: 0.27

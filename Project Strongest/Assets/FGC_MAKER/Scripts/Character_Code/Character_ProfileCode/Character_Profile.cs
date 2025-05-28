@@ -101,7 +101,8 @@ public class Character_HurtBoxSizing
     public float radius;
     public Vector3 hurtboxPosition;
     public Vector3 hurtboxSizing;
-    public float bias;
+    public float RightFacingBias;
+    public float LeftFacingBias;
 }
 
 [Serializable]

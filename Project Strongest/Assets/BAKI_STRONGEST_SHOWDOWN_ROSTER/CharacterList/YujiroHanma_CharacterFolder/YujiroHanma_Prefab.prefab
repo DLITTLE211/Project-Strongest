@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -5888518309423656057, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5696675238118208132, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -657,6 +661,10 @@ PrefabInstance:
     - target: {fileID: -5174715520944009889, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5174715520944009889, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5107726335141695285, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Layer
@@ -855,6 +863,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 52896a04a165dc643a6f59796ef07896, type: 2}
     - target: {fileID: 4819996317329807768, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819996317329807768, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e8f4e731ef7574b41bccffaaabc3c653, type: 2}
@@ -901,6 +913,10 @@ PrefabInstance:
     - target: {fileID: 6316360192432367150, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316360192432367150, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6457800778018644480, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
       propertyPath: m_Layer
@@ -1041,23 +1057,6 @@ MonoBehaviour:
   _base: {fileID: 0}
   _cAnimator: {fileID: 7870534508119086931}
   _demonActivation: 0
-  _cameraAnims:
-  - AnimName: 
-    cameraSequence:
-    - ObjectPosition:
-        tweenSpeed: 0
-        PositionData: {x: 0, y: 0, z: 0}
-        RotationData: {x: 0, y: 0, z: 0, w: 0}
-      orthoCameraPositioning:
-        tweenSpeed: 0
-        PositionData: {x: 0, y: 0, z: 0}
-        RotationData: {x: 0, y: 0, z: 0, w: 0}
-        focalLength: 0
-      perspectiveCameraPositioning:
-        tweenSpeed: 0
-        PositionData: {x: 0, y: 0, z: 0}
-        RotationData: {x: 0, y: 0, z: 0, w: 0}
-        focalLength: 0
   _victoryAnimation:
     _animationClip: {fileID: 4334525343487623470, guid: 0f09068a6ae5e7d4586dc7407305513a, type: 3}
     _animName: 
