@@ -676,7 +676,14 @@ public class Character_HitController : MonoBehaviour
                 refField.RemoveAt(i);
             }
         }
-        return refField[0];
+        if(refField.Count > 0) 
+        {
+            return refField[0];
+        }
+        else 
+        {
+            return characterTotalHitReactions.getUpReactions[0];
+        }
     }
 
     public void ForceLockHitAnim(HitLevel _level)

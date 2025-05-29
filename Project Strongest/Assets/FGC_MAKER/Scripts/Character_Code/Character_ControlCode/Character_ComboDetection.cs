@@ -352,7 +352,10 @@ public class Character_ComboDetection : MonoBehaviour
                             {
                                 string normalButton = entry.Key.normalTypeInput[0].Substring(entry.Key.normalTypeInput[0].Length - 1);
                                 int normalButtonIndex = key.specialMoveTypeInput.attackString.IndexOf(normalButton);
-                                string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
+                                if (normalButtonIndex >= 0)
+                                {
+                                    string clearAttackButton = key.specialMoveTypeInput.attackString.Remove(normalButtonIndex);
+                                }
                                 //key.specialMoveTypeInput.attackString = clearAttackButton;
                                 key.currentAttackInput = "";
                                 Debug.Log(entry.Value);

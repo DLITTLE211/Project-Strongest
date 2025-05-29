@@ -181,9 +181,20 @@ public class GameManager : MonoBehaviour
     }
     public Character_Base CallPlayerDeathOnTimerEnd()
     {
-        if (players.totalPlayers[0]._cHealth.health_Main.currentValue > players.totalPlayers[1]._cHealth.health_Main.currentValue)
+        float leftPlayerHealth = leftPlayer._cHealth.ReturnHealthDisparity();
+        float rightPlayerHealth = rightPlayer._cHealth.ReturnHealthDisparity();
+        if (leftPlayerHealth == rightPlayerHealth) 
         {
-            winningCharacter = players.totalPlayers[0];
+            _RoundSystemController.AwardTieWin();
+        }
+        else 
+        {
+            winningCharacter = leftPlayerHealth < rightPlayerHealth ? leftPlayer : rightPlayer;
+            return winningCharacter;
+        }
+        /*if (leftPlayer._cHealth.health_Main.currentValue > rightPlayer._cHealth.health_Main.currentValue)
+        {
+            winningCharacter = leftPlayer;
             return winningCharacter;
         }
         if (players.totalPlayers[1]._cHealth.health_Main.currentValue > players.totalPlayers[0]._cHealth.health_Main.currentValue)
@@ -194,7 +205,7 @@ public class GameManager : MonoBehaviour
         if (players.totalPlayers[0]._cHealth.health_Main.currentValue == players.totalPlayers[1]._cHealth.health_Main.currentValue)
         {
             _RoundSystemController.AwardTieWin();
-        }
+        }*/
         return null;
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)
