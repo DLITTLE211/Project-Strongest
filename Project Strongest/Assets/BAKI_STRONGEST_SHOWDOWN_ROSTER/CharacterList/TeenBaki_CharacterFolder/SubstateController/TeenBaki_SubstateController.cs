@@ -16,11 +16,17 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
     }
     public override void OnRoundReset()
     {
+        _sodaBottle.gameObject.SetActive(false);
         demonActivation = false;
     }
     public override void PlayIntroAnimation()
     {
+        _sodaBottle.gameObject.SetActive(false);
         StartCoroutine(PlayIntroSequence(_introAnimation, base.PlayIntroAnimation));
+    }
+    public override bool VerifyInstallState()
+    {
+        return demonActivation;
     }
     public override void PlayVictoryWinAnimation()
     {
@@ -30,24 +36,21 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
         _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Base_FrameCode.ONE_FRAME;
         _victoryAnimation._animLength = _victoryAnimation._animationClip.length;
         _victoryAnimation._animHash = Animator.StringToHash(_victoryAnimation._animName);
-        StartCoroutine(PlayAnimSequence(_victoryAnimation));
-    }
-    public override bool VerifyInstallState()
-    {
-        return demonActivation;
+        StartCoroutine(PlayAnimSequence());
     }
 
-    IEnumerator PlayAnimSequence(VictoryAnimation _currentAction)
+    IEnumerator PlayAnimSequence()
     {
         float frameCount = 0;
         _cAnimator.SetCanTransitionIdle(false);
         bool pointHit = false;
         float waitTime = Base_FrameCode.ONE_FRAME;
         float endingFrame = _victoryAnimation._animLength;
+        PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name,false);
         _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);
         while (frameCount <= endingFrame)
         {
-            #region Mobility Anim Checks
+            #region Bottle Activation Check
             if (frameCount > _victoryAnimation.activatePointInFrames && !pointHit)
             {
                 pointHit = true;

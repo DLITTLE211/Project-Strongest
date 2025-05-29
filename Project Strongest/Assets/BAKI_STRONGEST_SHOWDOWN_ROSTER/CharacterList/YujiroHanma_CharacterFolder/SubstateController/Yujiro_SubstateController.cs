@@ -63,6 +63,7 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         bool pointHit = false;
         float waitTime = Base_FrameCode.ONE_FRAME;
         float endingFrame = _victoryAnimation._animLength;
+        PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name, false,true);
         _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);
         orthoCameraAnim.Play($"{_victoryAnimation._cameraAnimationClip.name}", 0, 1);
         while (frameCount <= endingFrame)

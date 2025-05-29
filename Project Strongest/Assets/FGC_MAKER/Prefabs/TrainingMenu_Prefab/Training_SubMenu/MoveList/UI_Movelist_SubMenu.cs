@@ -130,8 +130,8 @@ public class MoveListAttackInfo
 {
     public string AttackName;
     public string AttackInput;
-    public int meterRequirement;
-    public MoveListAttackInfo(string _name, string _input, int _m_requirement) 
+    public float meterRequirement;
+    public MoveListAttackInfo(string _name, string _input, float _m_requirement) 
     {
         AttackName = _name;
         AttackInput = _input;

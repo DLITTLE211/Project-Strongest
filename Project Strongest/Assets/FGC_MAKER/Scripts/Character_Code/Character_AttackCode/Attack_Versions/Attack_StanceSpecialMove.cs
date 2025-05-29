@@ -210,7 +210,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
     {
         string attackName = stanceStartProperty._attackName;
         string specialMoveInput = stanceInput._stanceInput[0].attackString;
-        int _meterRequirement = stanceStartProperty._meterRequirement;
+        float _meterRequirement = stanceStartProperty._meterRequirement;
         MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
         return newMoveListAttackInfo;

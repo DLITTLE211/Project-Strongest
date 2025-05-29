@@ -41,8 +41,8 @@ public class Attack_Manager : MonoBehaviour
     }
     public void ClearAttacks()
     {
-        if (_base._cAttackTimer._type == TimerType.Normal)
-        {
+        //if (_base._cAttackTimer._type == TimerType.Normal)
+        //{
             _AttackAnimQueue.Clear();
             _cAnimator.inputWindowOpen = true;
             Combo.Clear();
@@ -55,7 +55,7 @@ public class Attack_Manager : MonoBehaviour
                 IState attackingState = _base._cStateMachine.attackingStateRef;
                 _base.comboList3_0.ClearAttackData(currentState, attackingState);
             }
-        }
+        //}
     }
 
     public void ResetMoveHierarchy()
@@ -306,12 +306,15 @@ public class Attack_Manager : MonoBehaviour
             if (lastState.CurrentLevel == Cancel_State.Rekka_Input_FollowUp && newAttack.cancelProperty.CurrentLevel == Cancel_State.Rekka_Input_Start)
             {
                 Attack_RekkaSpecialMove curRekka = _base.comboList3_0.GetRekkaRouteAttack(newAttack);
-                if (curRekka.inRekkaState)
+                if (curRekka != null)
                 {
-                    if (!curRekka.usedRekkas.Contains(newAttack))
+                    if (curRekka.inRekkaState)
                     {
-                        Debug.Log("New Attack is within current activate Rekka. Doing action");
-                        return true;
+                        if (!curRekka.usedRekkas.Contains(newAttack))
+                        {
+                            Debug.Log("New Attack is within current activate Rekka. Doing action");
+                            return true;
+                        }
                     }
                 }
                 return false;

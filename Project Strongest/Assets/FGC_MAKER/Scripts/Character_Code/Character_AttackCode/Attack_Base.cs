@@ -29,10 +29,10 @@ public class Attack_BaseProperties
     #endregion
 
     [Header("_____REQUIREMENTS/RESTRICTIONS______")]
-    [Range(0, 3)] public int _meterRequirement;
+    [Range(0, 3)] public float _meterRequirement;
     public bool isInInstall;
     public bool isNotInInstall;
-    [Range(0, 30)] public int _meterAwardedOnHit;
+    [Range(0, 30)] public float _meterAwardedOnHit;
     [Range(-10, 40)] public int attackScalingPercent;
     public bool dashCancelable, JumpCancelable;
 

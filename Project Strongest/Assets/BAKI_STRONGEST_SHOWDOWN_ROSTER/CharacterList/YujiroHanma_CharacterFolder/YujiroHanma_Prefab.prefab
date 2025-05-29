@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personalCamera: {fileID: 7317379689757004469}
   _screenSpaceCanvas: {fileID: 0}
-  perspectiveCamera: {fileID: 0}
+  perspectiveCamera: {fileID: 851301730564661526}
   orthoCamera: {fileID: 5468156525087845878}
   orthoCameraAnim: {fileID: 2771313786364344695}
   _base: {fileID: 0}
@@ -1332,6 +1332,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+--- !u!20 &851301730564661526 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8895665265843812960, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}
+  m_PrefabInstance: {fileID: 8116522286957058934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2771313786364344695 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6257190041856926209, guid: b4d52e115a7e28a46b07f57de336f3e7, type: 3}

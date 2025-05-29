@@ -13,6 +13,7 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private AttackInputTypes _cMAnyChangeInputLog;
     [SerializeField] private AttackInputTypes _cMOnChangeInputLog;
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
+    private List<KeyValuePair<AttackInputTypes, IAttackFunctionality>> inputtedAttacks;
     private string curString;
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;
@@ -241,6 +242,7 @@ public class Character_ComboDetection : MonoBehaviour
                         if (refAttackType.Value != ActiveFollowUpAttackCheck.Value)
                         {
                             refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
+                            inputtedAttacks.Add(refAttackType);
                             if (followUpInputMoveTypes.Contains(refAttackType.Value.GetAttackMoveType()))
                             {
                                 ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
@@ -272,6 +274,7 @@ public class Character_ComboDetection : MonoBehaviour
                 if (_base._cStateMachine._playerState.current.State != _base._cStateMachine.hitStateRef)
                 {
                     MoveType indexMoveType = refAttackType.Value.GetAttackMoveType();
+                    inputtedAttacks.Add(refAttackType);
                     refAttackType.Value.PreformAttack(() => _base.comboList3_0.SetCurrentAttack(refAttackType));
                     if (followUpInputMoveTypes.Contains(indexMoveType))
                     {
@@ -315,11 +318,16 @@ public class Character_ComboDetection : MonoBehaviour
                         {
                             int motionEndIndex = keyRef.IndexOf(movementOnlyString[0]);
                             keyRef = keyRef.Substring(motionEndIndex);
-                            if (keyRef.Contains(attackButton)) 
+                            if (keyRef.Contains(attackButton))
                             {
-                                keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
-                                key.specialMoveTypeInput.attackString = keyRef;
-                                return entry;
+                                int lastButtonIndex = key.specialMoveTypeInput.attackString.Length - 1;
+                                string finalButton = key.specialMoveTypeInput.attackString[lastButtonIndex].ToString();
+                                if (finalButton == attackButton.ToString())
+                                {
+                                    keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                                    key.specialMoveTypeInput.attackString = keyRef;
+                                    return entry;
+                                }
                             }
                         }
                         continue;
@@ -389,7 +397,14 @@ public class Character_ComboDetection : MonoBehaviour
                             keyRef = keyRef.Substring(motionEndIndex);
                             if (keyRef.Contains(attackButton))
                             {
-                                return entry;
+                                int lastButtonIndex = key.specialMoveTypeInput.attackString.Length - 1;
+                                string finalButton = key.specialMoveTypeInput.attackString[lastButtonIndex].ToString();
+                                if (finalButton == attackButton.ToString())
+                                {
+                                    keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                                    key.specialMoveTypeInput.attackString = keyRef;
+                                    return entry;
+                                }
                             }
                         }
                     }
@@ -444,6 +459,8 @@ public class Character_ComboDetection : MonoBehaviour
                     if (KeyString.Contains(Comparison))
                     {
                         keyInput.currentAttackInput = "";
+
+                        inputtedAttacks.Add(ActiveFollowUpAttackCheck);
                         return i;
                     }
                 }
@@ -451,6 +468,7 @@ public class Character_ComboDetection : MonoBehaviour
                 {
                     if (keyInput.currentAttackInput.Contains(entry.normalTypeInput[i]))
                     {
+                        inputtedAttacks.Add(ActiveFollowUpAttackCheck);
                         return i;
                     }
                 }
@@ -514,6 +532,7 @@ public class Character_ComboDetection : MonoBehaviour
 
     public void PrimeCombos()
     {
+        inputtedAttacks = new List<KeyValuePair<AttackInputTypes, IAttackFunctionality>>();
         PrimeMobility();
         _base.CollectCharacterMovelist();
     }
@@ -534,6 +553,14 @@ public class Character_ComboDetection : MonoBehaviour
         {
             ActiveFollowUpAttackCheck.Value.ResetAttackData();
             ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(currentAttackInput, null);
+        }
+        if (inputtedAttacks != null)
+        {
+            for (int i = 0; i < inputtedAttacks.Count; i++)
+            {
+                inputtedAttacks[0].Value.ResetAttackData();
+                inputtedAttacks.RemoveAt(0);
+            }
         }
     }
     public void ResetMobilityString(bool isDashChecker)

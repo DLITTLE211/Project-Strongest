@@ -97,8 +97,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             float delayTime = leewayTime * (1 / 60f);
             if (_attackInput._correctInput.Count > 1)
             {
-                float subAttackTime = delayTime - (delayTime * 0.8f);
-                newNormalAttack.InputTimer.SetTimerType(TimerType.Normal, delayTime, subAttackTime);
+                newNormalAttack.InputTimer.SetTimerType(TimerType.Normal);
             }
             else 
             {
@@ -156,7 +155,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
     {
         string attackName = _attackInput._correctInput[0].property._attackName;
         string specialMoveInput = _attackInput._correctInput[0]._correctSequence.Contains("0") ? _attackInput._correctInput[0]._correctSequence.Remove(0): _attackInput._correctInput[0]._correctSequence;
-        int _meterRequirement = _attackInput._correctInput[0].property._meterRequirement;
+        float _meterRequirement = _attackInput._correctInput[0].property._meterRequirement;
         MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
         return newMoveListAttackInfo;

@@ -26,8 +26,16 @@ public class MainGame_Timer : MonoBehaviour
     {
         stopwatchTime -= Time.deltaTime;
         string currentTime = (int)stopwatchTime < 0 ? (0).ToString("n0") : ((int)stopwatchTime).ToString("n0");
-        string timerMessage = SpriteToTextColorUtility.AppendSpriteName($"TIMER \n {currentTime}", Color.white);
+        string timerMessage = SpriteToTextColorUtility.AppendSpriteName($"{currentTime}", Color.white);
         stopwatchText.text = timerMessage;// $"Timer \n {currentTime}";
+    }
+    public void PauseTimer() 
+    {
+        tickDownStopWatch = false;
+    }
+    public void ResumeTimer()
+    {
+        tickDownStopWatch = true;
     }
     public bool ReturnTimerOver() 
     {

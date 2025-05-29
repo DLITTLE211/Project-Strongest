@@ -496,7 +496,7 @@ MonoBehaviour:
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 9
+            Force: 11
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -3148,8 +3148,8 @@ MonoBehaviour:
           _strongAffliction: 0
     curInput: 0
     inStanceState: 0
-    stanceHeldTime: 90
-    AttackResetTime: 110
+    stanceHeldTime: 75
+    AttackResetTime: 80
     attackAfflictionSet:
       _weakAffliction: 15
       _mediumAffliction: 15
@@ -3513,8 +3513,8 @@ MonoBehaviour:
       _rekkaProperties: []
     curRekkaInput: 0
     rekkaInputCount: 1
-    rekkaLeewayTime: 60
-    AttackResetTime: 110
+    rekkaLeewayTime: 50
+    AttackResetTime: 65
     attackAfflictionSet:
       _weakAffliction: 1
       _mediumAffliction: 8
@@ -3966,8 +3966,8 @@ MonoBehaviour:
       _rekkaProperties: []
     curRekkaInput: 0
     rekkaInputCount: 2
-    rekkaLeewayTime: 60
-    AttackResetTime: 110
+    rekkaLeewayTime: 55
+    AttackResetTime: 65
     attackAfflictionSet:
       _weakAffliction: 15
       _mediumAffliction: 15
@@ -4419,8 +4419,8 @@ MonoBehaviour:
       _rekkaProperties: []
     curRekkaInput: 0
     rekkaInputCount: 2
-    rekkaLeewayTime: 60
-    AttackResetTime: 110
+    rekkaLeewayTime: 55
+    AttackResetTime: 65
     attackAfflictionSet:
       _weakAffliction: 15
       _mediumAffliction: 15
@@ -6183,11 +6183,11 @@ MonoBehaviour:
         property:
           _attackName: Flurry Punches
           _cTimer: {fileID: 0}
-          rawAttackDamage: 2.05
+          rawAttackDamage: 1.05
           rawChipDamage: 0
           counterHitDamageMult: 1.25
           attackMainStunValues:
-            hitstunValue: 15
+            hitstunValue: 10
             blockStunValue: 8
             hitstopValue: 3
             blockStopValue: 1
@@ -6196,7 +6196,7 @@ MonoBehaviour:
           _meterRequirement: 0
           isInInstall: 0
           isNotInInstall: 0
-          _meterAwardedOnHit: 4
+          _meterAwardedOnHit: 1.35
           attackScalingPercent: 10
           dashCancelable: 0
           JumpCancelable: 0
@@ -6403,11 +6403,11 @@ MonoBehaviour:
             Block_HKB_Level: 2
             Block_Value: 0.45
           VerticalKB_Data:
-            Hit_VKB_Level: 0
+            Hit_VKB_Level: 1
             Hit_Value: 9
             Block_VKB_Level: 0
-            Block_Value: 1.45
-          KnockDown: 2
+            Block_Value: 0
+          KnockDown: 6
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -6765,7 +6765,7 @@ MonoBehaviour:
             Hit_Value: 9
             Block_VKB_Level: 1
             Block_Value: 1.45
-          KnockDown: 4
+          KnockDown: 6
         attackInputState:
           _state: 0
           directionalInput: 0

@@ -18,9 +18,8 @@ public class Round_InitialCountdownState : Round_BaseState
     public async override void OnEnter()
     {
         GameManager.instance.stopWatchController.tickDownStopWatch = false;
-        GameManager.instance.stopWatchController.SetStartTimerValues();
         GameManager.instance.settingsController.SetTeleportPositions();
-        await Task.Delay(WaitingTime * 75);
+        GameManager.instance.stopWatchController.SetStartTimerValues();
         for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
         {
             GameManager.instance.players.totalPlayers[i].InitialReset();
@@ -44,7 +43,7 @@ public class Round_InitialCountdownState : Round_BaseState
         {
             PulseAndSetText(countDownText, $"Round {_rSystem.currentRound}!!");
         }
-        await Task.Delay(WaitingTime * 100);
+        await Task.Delay(1000);
         for (int i = 3; i > 0; i--) 
         {
             threeSecondCountDown = i;

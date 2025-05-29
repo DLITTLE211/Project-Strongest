@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
-    [SerializeField] private MainGame_Timer _stopWatchController;
+    [SerializeField] private MainGame_Timer _stopWatchController { get; set; }
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
 
     private List<ChosenCharacter> playerProfiles;

@@ -20,11 +20,13 @@ public class Character_SubStateController_Base : MonoBehaviour
     protected IEnumerator SecondIdleAnimRoutine;
     protected bool canPlaySecondIdle;
     List<string> cameraLayers;
+    bool introAudioComplete;
     public void SetStarterInformation(Character_Base newBase) 
     {
         _base = newBase;
         _screenSpaceCanvas = newBase.screenSpaceCanvas;
         cameraLayers = new List<string>();
+        introAudioComplete = false;
     }
     public virtual void OnRoundReset() 
     {
@@ -86,11 +88,14 @@ public class Character_SubStateController_Base : MonoBehaviour
         int hash = Animator.StringToHash(animationName);
         orthoCameraAnim.CrossFade(hash, 0, 0);
     }
-    public void PlayCameraAnimationClip(string animName)
+    public void PlayCameraAnimationClip(string animName, bool renderCanvas = false, bool renderOpponent = false)
     {
         personalCamera.SetActive(true);
-        SetCameraCanvas();
-        orthoCamera.cullingMask = LayerMask.GetMask(ReturnLayerMask(false));
+        if (renderCanvas)
+        {
+            SetCameraCanvas();
+        }
+        orthoCamera.cullingMask = LayerMask.GetMask(ReturnLayerMask(renderOpponent));
         personalCamera.transform.position = _base._mainGameCamera.ReturnCameraPos();
         int hash = Animator.StringToHash(animName);
         orthoCameraAnim.CrossFade(hash, 0, 0);
@@ -149,25 +154,34 @@ public class Character_SubStateController_Base : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(PlayIntroDialogue(sequence, null));
+                    StartCoroutine(PlayIntroDialogue(sequence,  null));
                 }
+                yield return new WaitUntil(() => introAudioComplete);
             }
         }
         if (!allowTalkPointInBetween) 
         {
             StartCoroutine(PlayIntroDialogue(sequence, endFunc));
+            yield return new WaitUntil(() => introAudioComplete);
             yield break;
         }
         endFunc();
     }
-    public IEnumerator PlayIntroDialogue(IntroAnimationSequence sequence, Callback endFunc)
+    public IEnumerator PlayIntroDialogue(IntroAnimationSequence sequence, Callback endFunc = null)
     {
         if (sequence.introDialogue != null)
         {
             yield return new WaitForSeconds(sequence.introDialogue.length);
+            introAudioComplete = true;
+        }
+        else
+        {
+            introAudioComplete = true;
         }
         if (endFunc != null)
         {
+            introAudioComplete = true;
+            yield return new WaitForSeconds(1.5f);
             endFunc();
         }
     }

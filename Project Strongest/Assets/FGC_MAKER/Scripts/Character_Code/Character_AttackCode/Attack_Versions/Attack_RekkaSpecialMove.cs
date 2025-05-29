@@ -163,7 +163,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     {
         string attackName = rekkaInput.mainAttackProperty._attackName;
         string specialMoveInput = rekkaInput.mainAttackInput[0].attackString;
-        int _meterRequirement = rekkaInput.mainAttackProperty._meterRequirement;
+        float _meterRequirement = rekkaInput.mainAttackProperty._meterRequirement;
         MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
 
         return newMoveListAttackInfo;

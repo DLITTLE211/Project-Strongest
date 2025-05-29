@@ -307,6 +307,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         if (_cAnimator.lastAttack._moveType == MoveType.Super)
         {
+            GameManager.instance.stopWatchController.PauseTimer();
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         hitCountTotal = lastAttack.AttackAnims._frameData.activeWindows.Count;
@@ -389,6 +390,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         if (_cAnimator.lastAttack._moveType == MoveType.Super)
         {
+            GameManager.instance.stopWatchController.PauseTimer();
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         hitCountTotal = customProp._frameData.activeWindows.Count;

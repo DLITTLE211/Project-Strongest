@@ -485,6 +485,7 @@ public class Character_Animator : MonoBehaviour
         }
         else if (_base._cAttackTimer._type == TimerType.Super && lastAttack._moveType == MoveType.Super)
         {
+            GameManager.instance.stopWatchController.ResumeTimer();
             _base._cAttackTimer.ClearSuperLanded();
         }
         else if (_base._cAttackTimer._type == TimerType.Throw && lastAttack._moveType == MoveType.Throw)
@@ -495,6 +496,10 @@ public class Character_Animator : MonoBehaviour
         {
             _base._cAttackTimer.ClearAttackLanded(thisAttack.cancelProperty);
             SetCanTransitionIdle(true);
+        }
+        if (GameManager.instance.stopWatchController.tickDownStopWatch == false)
+        {
+            GameManager.instance.stopWatchController.ResumeTimer();
         }
         if (thisAttack._moveType == MoveType.Throw)
         {
@@ -535,6 +540,7 @@ public class Character_Animator : MonoBehaviour
             {
                 if (curAnim >= animCount)
                 {
+                    GameManager.instance.stopWatchController.ResumeTimer();
                     _base._cAttackTimer.ClearSuperLanded();
                 }
             }
@@ -546,6 +552,10 @@ public class Character_Animator : MonoBehaviour
         else
         {
             _base._cAttackTimer.ClearAttackLanded(thisAttack.cancelProperty);
+        }
+        if (GameManager.instance.stopWatchController.tickDownStopWatch == false)
+        {
+            GameManager.instance.stopWatchController.ResumeTimer();
         }
         if (requiredHitboxCallBacks.Count == 1)
         {
