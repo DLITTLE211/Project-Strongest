@@ -128,7 +128,7 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             _curStanceState = StanceState.AttackStance;
             float stanceTime = stanceHeldTime * (1 / 60f);
             float attackResetTime = AttackResetTime * (1 / 60f);
-            newAttack.InputTimer.SetTimerType(TimerType.InStance, attackResetTime);
+            newAttack.InputTimer.SetTimerType(TimerType.Normal);
             _curBase._aManager.ReceiveAttack(newAttack, () => StanceFollowUpFunctions(newAttack, SendAttackOnSucess), stanceInput.stanceAttack.attackAfflictionSet);
             ResetCombo();
         }

@@ -913,7 +913,7 @@ MonoBehaviour:
       _mediumAffliction: 15
       _strongAffliction: 15
     movementPortionLength: 0
-    finalAttackButton: 0
+    finalAttackButton: 121
     _curBase: {fileID: 0}
     framesBetweenAttacks: 0
     timeInAttackState: 0
@@ -973,10 +973,10 @@ MonoBehaviour:
         hu_size: {x: 1.23, y: 0.8}
         _frameData:
           init: 0
-          startup: 16
+          startup: 28
           activeWindows:
-          - activeFrame: 17
-            inactiveFrame: 25
+          - activeFrame: 29
+            inactiveFrame: 36
           recoveryEnd: 0
           recoveryAmount: 50
           totalRecovery: 0
@@ -1278,7 +1278,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 150
+          - hitFramePoints: 138
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1314,7 +1314,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 215
+          - hitFramePoints: 198
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -3462,7 +3462,7 @@ MonoBehaviour:
       _correctInput:
       - _correctSequence: 5D
         correctAttack: 0
-        correctInput: 0
+        correctInput: 120
         moveInput: 0
         attackInput: 0
         property:
@@ -3575,7 +3575,7 @@ MonoBehaviour:
           directionalInput: 0
       - _correctSequence: 2A
         correctAttack: 0
-        correctInput: 0
+        correctInput: 121
         moveInput: 0
         attackInput: 0
         property:
@@ -3688,7 +3688,7 @@ MonoBehaviour:
           directionalInput: 0
       - _correctSequence: 2B
         correctAttack: 0
-        correctInput: 0
+        correctInput: 121
         moveInput: 0
         attackInput: 0
         property:

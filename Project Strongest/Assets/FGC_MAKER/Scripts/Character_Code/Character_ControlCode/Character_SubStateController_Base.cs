@@ -21,6 +21,7 @@ public class Character_SubStateController_Base : MonoBehaviour
     protected bool canPlaySecondIdle;
     List<string> cameraLayers;
     bool introAudioComplete;
+    public List<float> timeBetweenAnims;
     public void SetStarterInformation(Character_Base newBase) 
     {
         _base = newBase;
@@ -133,7 +134,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         ResetCameraCanvas();
     }
 
-    public IEnumerator PlayIntroSequence(IntroAnimationSequence sequence, float delayTimeAfterCompletion, Callback endFunc)
+    public IEnumerator PlayIntroSequence(IntroAnimationSequence sequence, List<float> delayTimeAfterCompletion, Callback endFunc)
     {
         bool allowTalkPointInBetween = false;
         if (sequence.introAnimationClips.Count > 1)
@@ -150,19 +151,19 @@ public class Character_SubStateController_Base : MonoBehaviour
             {
                 if (i == sequence.introAnimationClips.Count - 1)
                 {
-                    StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion,endFunc));
-                    yield return new WaitForSeconds(delayTimeAfterCompletion);
+                    StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion[i],endFunc));
+                    yield return new WaitForSeconds(delayTimeAfterCompletion[i]);
                 }
                 else
                 {
-                    StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion, null));
+                    StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion[i], null));
                 }
                 yield return new WaitUntil(() => introAudioComplete);
             }
         }
         if (!allowTalkPointInBetween) 
         {
-            StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion,endFunc));
+            StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion[0], endFunc));
             yield return new WaitUntil(() => introAudioComplete);
             yield break;
         }
@@ -186,7 +187,7 @@ public class Character_SubStateController_Base : MonoBehaviour
             endFunc();
         }
     }
-    public virtual void PlayVictoryWinAnimation()
+    public virtual void PlayVictoryWinAnimation(Callback endFunc)
     {
 
     }

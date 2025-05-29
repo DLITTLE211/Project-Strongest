@@ -15,7 +15,8 @@ public class Round_EndScreenState : Round_BaseState
     [SerializeField] private EndScreen_Controller endingScreen;
     public override void OnEnter()
     {
-        countDownText.gameObject.SetActive(true); 
+        countDownText.gameObject.SetActive(true);
+        GameManager.instance.stopWatchController.PauseTimer();
         for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
         {
             GameManager.instance.players.totalPlayers[i].Deactivate();
@@ -23,14 +24,15 @@ public class Round_EndScreenState : Round_BaseState
 
         if (GameManager.instance.winningCharacter != null)
         {
-            GameManager.instance.winningCharacter._cSubStateController.PlayVictoryWinAnimation();
-            PulseAndSetText(countDownText, $"Player {GameManager.instance.winningCharacter.playerID + 1} Wins!!");
+            GameManager.instance.winningCharacter._cSubStateController.PlayVictoryWinAnimation(CallEndScreen);
+            int winningSide = GameManager.instance.winningCharacter._side == 0 ? 1 : 2;
+            PulseAndSetText(countDownText, $"Player {winningSide} Wins!!");
         }
         else
         {
             PulseAndSetText(countDownText, $"Tie Game...");
+            CallEndScreen();
         }
-        CallEndScreen();
     }
     public async void CallEndScreen() 
     {
@@ -38,7 +40,7 @@ public class Round_EndScreenState : Round_BaseState
     }
     public async Task ActivateEndScreen()
     {
-        await Task.Delay(2500);
+        await Task.Delay(1000);
         endingScreen.gameObject.SetActive(true);
         countDownText.text = "";
         countDownText.gameObject.SetActive(false);

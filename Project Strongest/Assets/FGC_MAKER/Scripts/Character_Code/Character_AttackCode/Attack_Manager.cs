@@ -341,6 +341,7 @@ public class Attack_Manager : MonoBehaviour
                 }
                 else 
                 {
+                    _base._cAttackTimer.ResetTimer();
                     Debug.Log(" New Attack is not possible in this routing. Ending action");
                     return false;
                 }

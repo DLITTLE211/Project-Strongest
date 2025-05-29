@@ -22,13 +22,13 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
     public override void PlayIntroAnimation()
     {
         _sodaBottle.gameObject.SetActive(false);
-        StartCoroutine(PlayIntroSequence(_introAnimation,1.5f, base.PlayIntroAnimation));
+        StartCoroutine(PlayIntroSequence(_introAnimation,timeBetweenAnims, base.PlayIntroAnimation));
     }
     public override bool VerifyInstallState()
     {
         return demonActivation;
     }
-    public override void PlayVictoryWinAnimation()
+    public override void PlayVictoryWinAnimation(Callback endFunc)
     {
         _base.Deactivate();
         _base._cStateMachine.enabled = false;
@@ -36,10 +36,10 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
         _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Base_FrameCode.ONE_FRAME;
         _victoryAnimation._animLength = _victoryAnimation._animationClip.length;
         _victoryAnimation._animHash = Animator.StringToHash(_victoryAnimation._animName);
-        StartCoroutine(PlayAnimSequence());
+        StartCoroutine(PlayAnimSequence(endFunc));
     }
 
-    IEnumerator PlayAnimSequence()
+    IEnumerator PlayAnimSequence(Callback endFunc)
     {
         float frameCount = 0;
         _cAnimator.SetCanTransitionIdle(false);
@@ -60,5 +60,6 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
             yield return new WaitForSeconds(waitTime);
             #endregion
         }
+        endFunc();
     }
 }

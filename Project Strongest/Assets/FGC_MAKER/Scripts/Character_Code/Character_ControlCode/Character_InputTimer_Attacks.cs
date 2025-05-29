@@ -40,10 +40,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public void ResetTimeOnSpecialMove(float time, float _subAttackTime = 0f)
     {
         _frameCountTimer = time;
-        if(_subAttackTime > 0f) 
-        {
-            _subAttackTimer = _subAttackTime;
-        }
+        _subAttackTimer = _subAttackTime;
     }
     // Update is called once per frame
     private void Update()
@@ -101,10 +98,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         }
         else
         {
-            if (subAttackTime > 0f)
-            {
-                _subAttackTimer = subAttackTime;
-            }
+            _subAttackTimer = subAttackTime;
             SetStartingValues(newTime);
             _type = newType;
             return;

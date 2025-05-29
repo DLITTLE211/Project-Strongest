@@ -41,10 +41,10 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
     }
     public override void PlayIntroAnimation()
     {
-        StartCoroutine(PlayIntroSequence(_introAnimation, 1.85f, base.PlayIntroAnimation));
+        StartCoroutine(PlayIntroSequence(_introAnimation, timeBetweenAnims, base.PlayIntroAnimation));
     }
 
-    public override void PlayVictoryWinAnimation()
+    public override void PlayVictoryWinAnimation(Callback endFunc)
     {
         _base.Deactivate();
         
@@ -53,10 +53,10 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
         _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Base_FrameCode.ONE_FRAME;
         _victoryAnimation._animLength = _victoryAnimation._animationClip.length;
         _victoryAnimation._animHash = Animator.StringToHash(_victoryAnimation._animName);
-        StartCoroutine(PlayVictoryAnimSequence());
+        StartCoroutine(PlayVictoryAnimSequence(endFunc));
     }
 
-    IEnumerator PlayVictoryAnimSequence()
+    IEnumerator PlayVictoryAnimSequence(Callback endFunc)
     {
         _cAnimator.SetCanTransitionIdle(false);
         if (!_base.opponentPlayer._cDamageCalculator.isDead) 
@@ -68,7 +68,8 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
             PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name, false, true);
         }
         _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);
-        yield return null;
+        yield return new WaitForSeconds(_victoryAnimation._animLength+0.25f);
+        endFunc();
     }
     public override bool VerifyInstallState()
     {
