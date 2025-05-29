@@ -195,6 +195,10 @@ public class AttackHandler_Attack : AttackHandler_Base
                 extendedHitBox.CounterMoveProperty = null;
             }
         }
+        else 
+        { 
+            _base._cHurtBox.SetHurboxState(); 
+        }
 
         currentHitIndex++;
     }

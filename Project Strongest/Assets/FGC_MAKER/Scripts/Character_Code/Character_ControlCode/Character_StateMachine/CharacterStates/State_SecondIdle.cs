@@ -14,19 +14,25 @@ public class State_SecondIdle : BaseState
 
         if (_base._subState == Character_SubStates.Controlled)
         {
-            lastInput = _base.ReturnMovementInputs().Button_State.directionalInput;
-            if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+            if (_base.ACTIVATED)
             {
-                _cAnim.PlayNextAnimation(secondaryCrouchHash, 2 * (1 / 60f));
-            }
-            else
-            {
-                _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+                lastInput = _base.ReturnMovementInputs().Button_State.directionalInput;
+                if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
+                {
+                    _cAnim.PlayNextAnimation(secondaryCrouchHash, 2 * (1 / 60f));
+                }
+                else
+                {
+                    _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+                }
             }
         }
         else 
         {
-            _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+            if (_base.ACTIVATED)
+            {
+                _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+            }
         }
         _base.CallWaitAnimFinish(3.75f);
     }

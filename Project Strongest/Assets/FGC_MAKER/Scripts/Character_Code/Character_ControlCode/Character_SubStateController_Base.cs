@@ -133,7 +133,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         ResetCameraCanvas();
     }
 
-    public IEnumerator PlayIntroSequence(IntroAnimationSequence sequence, Callback endFunc)
+    public IEnumerator PlayIntroSequence(IntroAnimationSequence sequence, float delayTimeAfterCompletion, Callback endFunc)
     {
         bool allowTalkPointInBetween = false;
         if (sequence.introAnimationClips.Count > 1)
@@ -150,24 +150,25 @@ public class Character_SubStateController_Base : MonoBehaviour
             {
                 if (i == sequence.introAnimationClips.Count - 1)
                 {
-                    StartCoroutine(PlayIntroDialogue(sequence, endFunc));
+                    StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion,endFunc));
+                    yield return new WaitForSeconds(delayTimeAfterCompletion);
                 }
                 else
                 {
-                    StartCoroutine(PlayIntroDialogue(sequence,  null));
+                    StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion, null));
                 }
                 yield return new WaitUntil(() => introAudioComplete);
             }
         }
         if (!allowTalkPointInBetween) 
         {
-            StartCoroutine(PlayIntroDialogue(sequence, endFunc));
+            StartCoroutine(PlayIntroDialogue(sequence, delayTimeAfterCompletion,endFunc));
             yield return new WaitUntil(() => introAudioComplete);
             yield break;
         }
         endFunc();
     }
-    public IEnumerator PlayIntroDialogue(IntroAnimationSequence sequence, Callback endFunc = null)
+    public IEnumerator PlayIntroDialogue(IntroAnimationSequence sequence, float delayAfterCompletion, Callback endFunc = null)
     {
         if (sequence.introDialogue != null)
         {
@@ -181,7 +182,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         if (endFunc != null)
         {
             introAudioComplete = true;
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(delayAfterCompletion);
             endFunc();
         }
     }

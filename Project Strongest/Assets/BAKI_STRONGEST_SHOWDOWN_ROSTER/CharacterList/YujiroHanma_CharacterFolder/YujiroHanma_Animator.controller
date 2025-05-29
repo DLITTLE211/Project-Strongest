@@ -789,7 +789,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Lose_Animation
+  m_Name: Loss
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1575,7 +1575,7 @@ AnimatorStateMachine:
     m_Position: {x: 340, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4394395734282651516}
-    m_Position: {x: -20, y: 740, z: 0}
+    m_Position: {x: -330, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8694441896175096973}
     m_Position: {x: 210, y: 330, z: 0}
@@ -1665,7 +1665,7 @@ AnimatorStateMachine:
     m_Position: {x: 900, y: 970, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4546349261930340676}
-    m_Position: {x: -240, y: 640, z: 0}
+    m_Position: {x: -550, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2891330182843479941}
     m_Position: {x: 60, y: -200, z: 0}
@@ -1674,10 +1674,10 @@ AnimatorStateMachine:
     m_Position: {x: 480, y: -200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6714590019326016326}
-    m_Position: {x: -20, y: 640, z: 0}
+    m_Position: {x: -330, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3486624231456949354}
-    m_Position: {x: -20, y: 690, z: 0}
+    m_Position: {x: -330, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5212038325501022475}
     m_Position: {x: -360, y: 1370, z: 0}
@@ -1988,13 +1988,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InInstall
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2405,7 +2405,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Winning_LowHealth
+  m_Name: Win_LowHealth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2665,7 +2665,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YujiroHanma|Yujiro_Winning_HighHealth
+  m_Name: Win_HighHealth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

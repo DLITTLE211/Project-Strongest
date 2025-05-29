@@ -17,6 +17,8 @@ public class Round_ResultMatchState : Round_BaseState
         {
             GameManager.instance.players.totalPlayers[i].Deactivate();
         }
+
+        GameManager.instance.stopWatchController.tickDownStopWatch = false;
         if (GameManager.instance.winningCharacter != null)
         {
             PulseAndSetText(KO_Text, "KO!!");
@@ -24,7 +26,7 @@ public class Round_ResultMatchState : Round_BaseState
         }
         else
         {
-            PulseAndSetText(KO_Text, "TIME'S UP!!");
+            PulseAndSetText(KO_Text, "TIME OVER!!");
             CallAward(GameManager.instance.CallPlayerDeathOnTimerEnd());
         }
     }

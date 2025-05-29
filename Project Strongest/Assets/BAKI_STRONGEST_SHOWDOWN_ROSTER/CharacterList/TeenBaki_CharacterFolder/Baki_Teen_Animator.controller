@@ -556,10 +556,10 @@ AnimatorStateMachine:
     m_Position: {x: -320, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9075544522981977511}
-    m_Position: {x: -320, y: 300, z: 0}
+    m_Position: {x: -320, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4191157546377907479}
-    m_Position: {x: -320, y: 250, z: 0}
+    m_Position: {x: -320, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3722283696868790334}
     m_Position: {x: -540, y: 200, z: 0}
@@ -2315,7 +2315,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Win_LowHealth
+  m_Name: Loss
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2935,7 +2935,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Loss_Normal
+  m_Name: Win_LowHealth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

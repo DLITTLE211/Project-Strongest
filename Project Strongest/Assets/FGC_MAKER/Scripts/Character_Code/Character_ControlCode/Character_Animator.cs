@@ -572,7 +572,7 @@ public class Character_Animator : MonoBehaviour
     #region End Of Round Animation Handler
     protected static readonly int winPerfect = Animator.StringToHash("Win_HighHealth");
     protected static readonly int winNormal = Animator.StringToHash("Win_LowHealth");
-    protected static readonly int lossRound = Animator.StringToHash("Loss_Normal");
+    protected static readonly int lossRound = Animator.StringToHash("Loss");
     public void PlayRoundWinAnim() 
     {
         float halfWayMark = _base._cHealth.health_Main.maxValue / 2f;

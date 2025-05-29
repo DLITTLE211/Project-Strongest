@@ -41,7 +41,7 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
     }
     public override void PlayIntroAnimation()
     {
-        StartCoroutine(PlayIntroSequence(_introAnimation, base.PlayIntroAnimation));
+        StartCoroutine(PlayIntroSequence(_introAnimation, 1.85f, base.PlayIntroAnimation));
     }
 
     public override void PlayVictoryWinAnimation()
@@ -58,25 +58,17 @@ public class Yujiro_SubstateController : Character_SubStateController_Base
 
     IEnumerator PlayVictoryAnimSequence()
     {
-        float frameCount = 0;
         _cAnimator.SetCanTransitionIdle(false);
-        bool pointHit = false;
-        float waitTime = Base_FrameCode.ONE_FRAME;
-        float endingFrame = _victoryAnimation._animLength;
-        PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name, false,true);
-        _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);
-        orthoCameraAnim.Play($"{_victoryAnimation._cameraAnimationClip.name}", 0, 1);
-        while (frameCount <= endingFrame)
+        if (!_base.opponentPlayer._cDamageCalculator.isDead) 
         {
-            #region Mobility Anim Checks
-            if (frameCount > _victoryAnimation.activatePointInFrames && !pointHit)
-            {
-                pointHit = true;
-            }
-            frameCount += waitTime;
-            yield return new WaitForSeconds(waitTime);
-            #endregion
+            PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name, false);
         }
+        else
+        {
+            PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name, false, true);
+        }
+        _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);
+        yield return null;
     }
     public override bool VerifyInstallState()
     {

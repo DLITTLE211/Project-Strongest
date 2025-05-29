@@ -22,7 +22,7 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
     public override void PlayIntroAnimation()
     {
         _sodaBottle.gameObject.SetActive(false);
-        StartCoroutine(PlayIntroSequence(_introAnimation, base.PlayIntroAnimation));
+        StartCoroutine(PlayIntroSequence(_introAnimation,1.5f, base.PlayIntroAnimation));
     }
     public override bool VerifyInstallState()
     {
