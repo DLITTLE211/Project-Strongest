@@ -40,6 +40,11 @@ public class Round_EndScreenState : Round_BaseState
     }
     public async Task ActivateEndScreen()
     {
+        countDownText.DOFade(0f, 0.5f).OnComplete(() =>
+        {
+            countDownText.text = "";
+            countDownText.gameObject.SetActive(false);
+        });
         await Task.Delay(1000);
         endingScreen.gameObject.SetActive(true);
         countDownText.text = "";

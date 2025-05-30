@@ -20,7 +20,7 @@ public class MainGame_Timer : MonoBehaviour
             tickDownStopWatch = false;
             return;
         }
-        stopwatchText.text = $"{startingTime.ToString()}";
+        stopwatchText.text = SpriteToTextColorUtility.AppendSpriteName($"{startingTime.ToString()}", Color.white);
     }
     void UpdateTimer() 
     {

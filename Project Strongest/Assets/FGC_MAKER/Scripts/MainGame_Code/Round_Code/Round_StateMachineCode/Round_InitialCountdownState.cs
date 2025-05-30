@@ -12,11 +12,13 @@ public class Round_InitialCountdownState : Round_BaseState
 {
     public Round_InitialCountdownState(MainGame_RoundSystemController rSystem) : base(rSystem) { }
     [Range(1,10),SerializeField] private int WaitingTime;
+    [SerializeField] private GameObject overlayCanvas;
     [SerializeField] private TMP_Text countDownText;
     private int threeSecondCountDown;
     
     public async override void OnEnter()
     {
+        overlayCanvas.SetActive(true);
         GameManager.instance.stopWatchController.tickDownStopWatch = false;
         GameManager.instance.settingsController.SetTeleportPositions();
         GameManager.instance.stopWatchController.SetStartTimerValues();

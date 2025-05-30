@@ -8,10 +8,12 @@ using System;
 public class Round_CharacterDialogueState : Round_BaseState
 {
     public List<Character_Base> players;
+    [SerializeField] private GameObject overlayCanvas;
     public Round_CharacterDialogueState(MainGame_RoundSystemController rSystem) : base(rSystem){}
     
     public override void OnEnter()
     {
+        overlayCanvas.SetActive(false);
         GameManager.instance.winningCharacter = null;
         GameManager.instance.settingsController._pauseMenu.SetActive(false);
         _rSystem.p1_Signifiers.DisableRoundObjects();

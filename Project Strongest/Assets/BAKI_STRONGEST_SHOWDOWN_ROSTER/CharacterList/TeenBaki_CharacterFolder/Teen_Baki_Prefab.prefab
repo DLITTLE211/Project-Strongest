@@ -2306,7 +2306,11 @@ MonoBehaviour:
     - {fileID: 8675314445350143241, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     _cameraAnimationClips:
     - {fileID: 7400000, guid: 0e6712bfeebf52b4f8112c7a189f8a34, type: 2}
-    introDialogue: {fileID: 0}
+    introDialogue:
+      nextPlayedClip: {fileID: 8300000, guid: db26b1291f3282a4a8ba47302950b109, type: 3}
+      volume: 1
+      isLooped: 0
+      isOneShot: 1
   _victoryAnimation:
     _animationClip: {fileID: 7313503615710657852, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
     _animName: 

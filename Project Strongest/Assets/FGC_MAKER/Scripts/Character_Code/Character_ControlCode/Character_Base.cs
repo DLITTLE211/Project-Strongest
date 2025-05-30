@@ -22,6 +22,7 @@ public class Character_Base : MonoBehaviour
     public MainGame_CameraController _mainGameCamera;
     public Character_SubStateController_Base _cSubStateController;
     public Character_Hitstop _cHitstop;
+    public Character_AudioManager _cAudioManager;
     public Character_AttackDetection _cADetection;
     public Character_AfflictionManager _afflictionManager;
     public Character_AmplifyController _amplifyController;

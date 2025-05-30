@@ -171,9 +171,10 @@ public class Character_SubStateController_Base : MonoBehaviour
     }
     public IEnumerator PlayIntroDialogue(IntroAnimationSequence sequence, float delayAfterCompletion, Callback endFunc = null)
     {
-        if (sequence.introDialogue != null)
+        if (sequence.introDialogue != null && !introAudioComplete)
         {
-            yield return new WaitForSeconds(sequence.introDialogue.length);
+            _base._cAudioManager.PlayNextAudioClip(sequence.introDialogue);
+            yield return new WaitForSeconds(sequence.introDialogue.nextPlayedClip.length+0.25f);
             introAudioComplete = true;
         }
         else
@@ -212,5 +213,5 @@ public class IntroAnimationSequence
 {
     public List<AnimationClip> introAnimationClips;
     public List<AnimationClip> _cameraAnimationClips;
-    public AudioClip introDialogue;
+    public AudioClipData introDialogue;
 }
