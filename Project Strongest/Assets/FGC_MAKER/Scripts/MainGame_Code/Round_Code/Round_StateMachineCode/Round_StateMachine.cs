@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Round_StateMachine : MonoBehaviour
 {
+    [SerializeField] protected List<GameObject> canvasObjects;
     public Round_CharacterDialogueState _cDState;
     public Round_InitialCountdownState _iCState;
     public Round_ActiveMatchState _aMState;
@@ -30,8 +31,17 @@ public class Round_StateMachine : MonoBehaviour
         }
     }
 
-    public void CallCharacterDialogueState() 
+    public void SetCanvasObjectState(bool state)
     {
+        for (int i = 0; i < canvasObjects.Count; i++)
+        {
+            canvasObjects[i].SetActive(state);
+        }
+    }
+
+    public void CallCharacterDialogueState()
+    {
+        SetCanvasObjectState(true);
         SetCurrentState(_cDState);
     }
     public void CallInitialTimerState()
@@ -48,6 +58,7 @@ public class Round_StateMachine : MonoBehaviour
     }
     public void CallEndScreenState()
     {
+        SetCanvasObjectState(false);
         SetCurrentState(_eSState);
     }
 }

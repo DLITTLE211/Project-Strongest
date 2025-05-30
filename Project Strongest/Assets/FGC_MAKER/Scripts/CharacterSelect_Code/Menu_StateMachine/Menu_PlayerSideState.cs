@@ -19,6 +19,7 @@ public class Menu_PlayerSideState : Menu_BaseState
     IEnumerator activateRoutine;
     public override void OnEnter()
     {
+
         _stageSelecter.DeactivateRoundSelectObject();
         _stageSelecter.Deactivate();
         if (activateRoutine != null)
@@ -47,6 +48,9 @@ public class Menu_PlayerSideState : Menu_BaseState
         _characterSelect.CheckControllerState();
         _characterSelectController.SetPlayerControllers();
         _characterSelect.SetListeners();
+
+        _player1_Cursor.ClearAll();
+        _player2_Cursor.ClearAll();
         yield return new WaitForSeconds(0.25f);
         player1.InitSideIterator();
         player2.InitSideIterator();

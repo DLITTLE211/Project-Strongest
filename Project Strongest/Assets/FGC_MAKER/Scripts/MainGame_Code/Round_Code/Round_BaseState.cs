@@ -5,7 +5,7 @@ using System;
 using DG.Tweening;
 using TMPro;
 
-public class Round_BaseState 
+public class Round_BaseState
 {
     public MainGame_RoundSystemController _rSystem;
     public virtual void OnEnter()

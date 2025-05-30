@@ -25,6 +25,18 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public bool colorChosen;
     public bool allowChange;
     IEnumerator ChangeCharacterRoutine;
+
+    public void ClearAll()
+    {
+        SetColorLockState(false);
+        ClearHighlightedButton();
+        UnlockCharacterChoice();
+        if (cursorPage != null)
+        {
+            cursorPage.ClearInfo();
+            cursorPage.chosenAmplifier = null;
+        }
+    }
     public void SetColorLockState(bool state) 
     {
         colorChosen = state;
@@ -48,7 +60,10 @@ public class CharacterSelect_Cursor : MonoBehaviour
         {
             canChooseStage = false;
         }
-        cursorPage.characterName.text = "Choose Your Character";
+        if (cursorPage != null)
+        {
+            cursorPage.characterName.text = "Choose Your Character";
+        }
         cursorObject.transform.DOScale(0.65f, 0.15f);
     }
     public void ApplyCharacterData() 

@@ -28,6 +28,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         _screenSpaceCanvas = newBase.screenSpaceCanvas;
         cameraLayers = new List<string>();
         introAudioComplete = false;
+        canPlaySecondIdle = true;
     }
     public virtual void OnRoundReset() 
     {

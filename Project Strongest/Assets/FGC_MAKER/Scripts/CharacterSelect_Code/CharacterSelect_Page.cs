@@ -33,6 +33,7 @@ public class CharacterSelect_Page : MonoBehaviour
     }
     public void UpdateInfo(Character_Profile profile)
     {
+        
         Vector3 startPos = new Vector3(chosenCharacterImageObject.transform.localPosition.x+ startXPos,0,0);
         chosenCharacterImageObject.transform.localPosition = startPos;
         _characterIconImage.sprite = profile.CharacterProfileImage;

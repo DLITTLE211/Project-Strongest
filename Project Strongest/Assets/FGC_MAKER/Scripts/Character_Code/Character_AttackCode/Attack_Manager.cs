@@ -83,27 +83,27 @@ public class Attack_Manager : MonoBehaviour
     {
         if (!CheckStringPriority(Combo[0].cancelProperty, newAttack, newAttack.cancelProperty, isFirstAttack))
         {
-            Combo.RemoveAt(0);
+            RemoveAtIndex(0);
             return;
         }
         if (!CheckAttackRequiresNoInstall(newAttack))
         {
-            Combo.RemoveAt(0);
+            RemoveAtIndex(0);
             return;
         }
         if (!CheckAttackRequiresInstall(newAttack))
         {
-            Combo.RemoveAt(0);
+            RemoveAtIndex(0);
             return;
         }
         if (!CheckMeterCriteria(newAttack))
         {
-            Combo.RemoveAt(0);
+            RemoveAtIndex(0);
             return;
         }
         if (!CheckGroundCriteria(newAttack))
         {
-            Combo.RemoveAt(0);
+            RemoveAtIndex(0);
             return;
         }
         SetAttackOnSuccess();
@@ -113,34 +113,34 @@ public class Attack_Manager : MonoBehaviour
     {
         int newAttackHierarchy = (int)newAttack._moveType;
         int lastAttackHierachy = (int)curTypeHierarchy;
-        if (newAttackHierarchy < lastAttackHierachy) 
+        if (newAttackHierarchy < lastAttackHierachy)
         {
-            Combo.RemoveAt(index);
+            RemoveAtIndex(index);
             return;
         }
-        if (!CheckMoveType(newAttack, false, index)) 
+        if (!CheckMoveType(newAttack, false, index))
         {
-            Combo.RemoveAt(index);
+            RemoveAtIndex(index);
             return;
         }
         if (!CheckAttackRequiresInstall(newAttack))
         {
-            Combo.RemoveAt(index);
+            RemoveAtIndex(index);
             return;
         }
         if (!CheckAttackRequiresNoInstall(newAttack))
         {
-            Combo.RemoveAt(0);
+            RemoveAtIndex(0);
             return;
         }
         if (!CheckMeterCriteria(newAttack))
         {
-            Combo.RemoveAt(index);
+            RemoveAtIndex(index);
             return;
         }
         if (!CheckGroundCriteria(newAttack))
         {
-            Combo.RemoveAt(index);
+            RemoveAtIndex(index);
             return;
         }
         if (newAttack._moveType != MoveType.Rekka && _cAnimator.inRekkaState)
@@ -391,17 +391,15 @@ public class Attack_Manager : MonoBehaviour
         }
         _cAnimator.SetNextAttackStartVariables(attack, afflictionSet);
     }
-    void ClearRoutine() 
+    public void RemoveAtIndex(int index) 
     {
-        if(RechargeRoutine!= null) 
+        try 
         {
-            StopCoroutine(RechargeRoutine);
-            RechargeRoutine = null;
+            Combo.RemoveAt(index);
         }
-    }
-    IEnumerator RechargeGatlings() 
-    {
-        yield return new WaitForSeconds(2f);
- //       normalGatlingCount = 3;
+        catch(ArgumentOutOfRangeException) 
+        {
+            ClearAttacks();
+        }
     }
 }
