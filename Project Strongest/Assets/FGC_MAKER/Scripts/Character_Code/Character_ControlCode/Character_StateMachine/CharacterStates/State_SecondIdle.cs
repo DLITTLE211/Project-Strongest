@@ -8,7 +8,7 @@ public class State_SecondIdle : BaseState
     int lastInput;
     public override void OnEnter()
     {
-        _base._cHurtBox.SetHurboxState();
+        /*_base._cHurtBox.SetHurboxState();
         _base._cHurtBox.ResetExtendedHurtbox();
         _base._cHitboxManager.DisableAllHitboxes();
 
@@ -34,22 +34,22 @@ public class State_SecondIdle : BaseState
                 _cAnim.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
             }
         }
-        _base.CallWaitAnimFinish(3.75f);
+        _base.CallWaitAnimFinish(3.75f);*/
     }
 
     public override void OnUpdate()
     {
-        if (_base._subState == Character_SubStates.Controlled)
+       /* if (_base._subState == Character_SubStates.Controlled)
         {
             if (_base.ReturnMovementInputs().Button_State.directionalInput != lastInput)
             {
                 _base.allowSecondIdleAnim = false;
             }
         }
-        base.OnUpdate();
+        base.OnUpdate();*/
     }
     public override void OnExit()
     {
-        base.OnExit();
+        //base.OnExit();
     }
 }

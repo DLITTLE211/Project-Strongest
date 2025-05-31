@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using FightingGame_FrameData;
 using UnityEngine;
 using System;
-using DG.Tweening;
-using UnityEngine.Rendering;
 
 public class Character_SubStateController_Base : MonoBehaviour
 {
+    protected static readonly int secondaryIdleHash = Animator.StringToHash("Idle_2");
+    protected static readonly int secondaryCrouchHash = Animator.StringToHash("Crouch_2");
+
+    public float time;
     [SerializeField] protected GameObject personalCamera;
     [SerializeField] protected Canvas _screenSpaceCanvas;
     [SerializeField] protected Camera perspectiveCamera;
@@ -34,7 +36,7 @@ public class Character_SubStateController_Base : MonoBehaviour
     {
 
     }
-    public void PlaySecondaryAnimation()
+    public void PlaySecondaryAnimation(Callback replayBasicIdle)
     {
         if (canPlaySecondIdle)
         {
@@ -43,7 +45,7 @@ public class Character_SubStateController_Base : MonoBehaviour
                 StopCoroutine(SecondIdleAnimRoutine);
                 SecondIdleAnimRoutine = null;
             }
-            SecondIdleAnimRoutine = PlaySecondIdleAnimation();
+            SecondIdleAnimRoutine = PlaySecondIdleAnimation(replayBasicIdle);
             StartCoroutine(SecondIdleAnimRoutine);
         }
     }
@@ -51,9 +53,9 @@ public class Character_SubStateController_Base : MonoBehaviour
     {
         return true;
     }
-    IEnumerator PlaySecondIdleAnimation() 
+    IEnumerator PlaySecondIdleAnimation(Callback replayBasicIdle) 
     {
-        float time = 0;
+        time = 0;
         canPlaySecondIdle = false;
         while (time < startSecondaryIdle) 
         {
@@ -64,8 +66,36 @@ public class Character_SubStateController_Base : MonoBehaviour
             yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
         _base.TriggerSecondaryIdleAnim();
-        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+        CallSecondaryAnim();
+        yield return new WaitForSeconds(0.2f);
+        AnimatorClipInfo clipInfo = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0];
+        if (clipInfo.clip != null) 
+        {
+            float length = clipInfo.clip.length;
+            yield return new WaitForSeconds(length);
+        }
+        _base.allowSecondIdleAnim = false;
         canPlaySecondIdle = true;
+        replayBasicIdle();
+    }
+    void CallSecondaryAnim() 
+    {
+        if (_base._subState == Character_SubStates.Controlled)
+        {
+            if (_base.ACTIVATED)
+            {
+                int lastInput = _base.ReturnMovementInputs().Button_State.directionalInput;
+                int hashToPlay = lastInput <= 3 ? secondaryCrouchHash : secondaryIdleHash;
+                _base._cAnimator.PlayNextAnimation(hashToPlay, 2 * (1 / 60f));
+            }
+        }
+        else
+        {
+            if (_base.ACTIVATED)
+            {
+                _base._cAnimator.PlayNextAnimation(secondaryIdleHash, 2 * (1 / 60f));
+            }
+        }
     }
     public void PlayCameraAnimation(CustomCallback func) 
     {

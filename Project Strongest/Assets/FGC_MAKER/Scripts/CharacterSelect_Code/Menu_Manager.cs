@@ -111,9 +111,6 @@ public class Menu_Manager : MonoBehaviour
             {
                 players.InitializePlayerControllers();
                 players.AddNewPlayer(0, controllerNames[0]);
-                //players.InitAvailableIDs();
-                //players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
-                //players.AddUsedID(players.joystickNames[0]);
                 SetCharacterSelectCursorState(0);
             }
         }

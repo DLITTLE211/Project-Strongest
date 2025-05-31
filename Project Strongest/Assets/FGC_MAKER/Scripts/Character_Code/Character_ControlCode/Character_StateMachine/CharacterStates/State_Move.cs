@@ -53,17 +53,16 @@ public class State_Move : BaseState
     }
     void CheckRightFaceState(Character_ButtonInput moveInput)
     {
-        Character_ButtonInput _baseDirectionalInput = _base.ReturnMovementInputs();
-        if (_baseDirectionalInput != null)
+        if (moveInput != null)
         {
-            if (_baseDirectionalInput.Button_State.directionalInput == 4)
+            if (moveInput.Button_State.directionalInput == 4)
             {
                 if (!onBack)
                 {
                     HandleBackwardAnimation();
                 }
             }
-            if (_baseDirectionalInput.Button_State.directionalInput == 6)
+            if (moveInput.Button_State.directionalInput == 6)
             {
                 if (!onForward)
                 {
@@ -74,17 +73,16 @@ public class State_Move : BaseState
     }
     void CheckLeftFaceState(Character_ButtonInput moveInput)
     {
-        Character_ButtonInput _baseDirectionalInput = _base.ReturnMovementInputs();
-        if (_baseDirectionalInput != null)
+        if (moveInput != null)
         {
-            if (_baseDirectionalInput.Button_State.directionalInput == 4)
+            if (moveInput.Button_State.directionalInput == 4)
             {
                 if (!onForward)
                 {
                     HandleForwardAnimation();
                 }
             }
-            if (_baseDirectionalInput.Button_State.directionalInput == 6)
+            if (moveInput.Button_State.directionalInput == 6)
             {
                 if (!onBack)
                 {

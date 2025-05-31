@@ -19,9 +19,7 @@ public abstract class BaseState : IState
     protected readonly Character_Force _baseForce;
     public List<string> allAnimationNames;
     protected static readonly int groundIdleHash = Animator.StringToHash("Idle");
-    protected static readonly int secondaryIdleHash = Animator.StringToHash("Idle_2");
     protected static readonly int crouchHash = Animator.StringToHash("Crouch");
-    protected static readonly int secondaryCrouchHash = Animator.StringToHash("Crouch_2");
     protected static readonly int moveFHash = Animator.StringToHash("Walk_Forward");
     protected static readonly int moveBHash = Animator.StringToHash("Walk_Backward");
     protected const float _crossFade = 0.25f;

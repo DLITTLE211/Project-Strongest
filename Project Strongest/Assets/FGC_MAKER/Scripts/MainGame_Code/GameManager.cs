@@ -52,7 +52,9 @@ public class GameManager : MonoBehaviour
         instance = this;
         _stopWatchController = GetComponent<MainGame_Timer>();
         ReInput.ControllerConnectedEvent += SetupPlayers;
-        ReInput.ControllerDisconnectedEvent += DesyncPlayers;
+        ReInput.ControllerDisconnectedEvent += SetupPlayers;
+
+
         if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainGame_Arena"));
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
             LoadStageAsset();
             LoadPlayerAssets();
         }
+
+
         _gameModeSet = Menu_Manager.currentMode;
         _gameModeSet.startupFunctions = new List<Callback>();
         if (_gameModeSet.gameMode == GameMode.Training)
@@ -117,6 +121,19 @@ public class GameManager : MonoBehaviour
 
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)
     {
+        if (args != null)
+        {
+            if (args.controller != null)
+            {
+                players.SetPlayerCharacter(args.controllerId, Character_SubStates.Controlled);
+                playerProfiles[args.controllerId].subState = Character_SubStates.Controlled; 
+            }
+            else
+            {
+                players.SetPlayerCharacter(args.controllerId, Character_SubStates.Dummy);
+                playerProfiles[args.controllerId].subState = Character_SubStates.Dummy;
+            }
+        }
         for (int i = 0; i < players.totalPlayers.Count; i++)
         {
             if (!players.totalPlayers[i].gameObject.activeInHierarchy)
@@ -199,17 +216,18 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
-    public void DesyncPlayers(ControllerStatusChangedEventArgs args)
+   /* public void DesyncPlayers(ControllerStatusChangedEventArgs args)
     {
         players.RemovePlayer(args.controllerId);
-        for (int i = 0; i < players.totalPlayers.Count; i++) 
+        if (players.totalPlayers[0].playerID == args.controllerId) 
         {
-            if (!players.characterIdentification.IDs.Contains(players.totalPlayers[i].playerID)) 
-            {
-                players.totalPlayers[i].Initialize(Character_SubStates.Dummy,i, 0, null, -1);
-            }
+            players.totalPlayers[0].Initialize(Character_SubStates.Dummy, 0, 0, null, -1);
         }
-    }
+        else 
+        {
+            players.totalPlayers[1].Initialize(Character_SubStates.Dummy, 1, 0, null, -1);
+        }
+    }*/
 
     public void UnloadFightingArena()
     {
@@ -265,6 +283,10 @@ public class PlayerCharacter_Controller
         ID = _newID;
         ControllerName = _controllerName;
         subState = Character_SubStates.Controlled;
+    }
+    public void SetPlayer_State(Character_SubStates newState)
+    {
+        subState = newState;
     }
     public void SetPlayer_Controlled(Character_Base player) 
     {
@@ -362,15 +384,15 @@ public class Character_AvailableID
         }
         characterIdentification.RemoveEntry(ID);
     }
-    public void AddPlayerCharacter(Character_Base character)
+    public void SetPlayerCharacter(int ID,Character_SubStates newState)
     {
-        if (Player1.controllerPlayer == null)
+        if (Player1.ID == ID)
         {
-            Player1.SetPlayer_Controlled(character);
+            Player1.SetPlayer_State(newState);
         }
-        else if (Player2.controllerPlayer == null)
+        else if (Player2.ID == ID)
         {
-            Player1.SetPlayer_Controlled(character);
+            Player2.SetPlayer_State(newState);
         }
     }
 }

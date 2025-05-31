@@ -103,7 +103,7 @@ public class Character_Force : MonoBehaviour
     {
         List<IState> acceptableHoldStates = new List<IState>();
         acceptableHoldStates.Add(_base._cStateMachine.dashStateRef);
-        acceptableHoldStates.Add(_base._cStateMachine.secondIdleState);
+        //acceptableHoldStates.Add(_base._cStateMachine.secondIdleState);
         acceptableHoldStates.Add(_base._cStateMachine.idleStateRef);
         bool attackAwaitCondition = true;
         if (_base.opponentPlayer._cAnimator.CheckAttackState())

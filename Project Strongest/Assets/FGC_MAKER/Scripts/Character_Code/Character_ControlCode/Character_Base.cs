@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using FightingGame_FrameData;
 public class Character_Base : MonoBehaviour
 {
-    public bool allowSecondIdleAnim;
 
 
     #region Character Profile Data
@@ -158,9 +157,14 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Misc. Variables
+
+    private bool modelInitiated;
+    private bool comboInitiated;
+
     public Canvas screenSpaceCanvas;
     private float storedXVelocity, storedYVelocity;
     internal bool isLockedPause;
+    public bool allowSecondIdleAnim;
     IEnumerator ThrowTechRoutine;
     public bool verifyMoves; 
     [Range(0,71)]public int moveListIndex;
@@ -177,12 +181,18 @@ public class Character_Base : MonoBehaviour
     {
         activated = false;
         _side = hitboxSideDetection;
-        AddCharacterModel(choseAmplifiers,skinIndex, NewID);
+        if (!modelInitiated)
+        {
+            AddCharacterModel(choseAmplifiers, skinIndex, hitboxSideDetection);
+        }
         InitButtons(setSubState, NewID);
         _cHitboxManager.SetupHitboxes(hitboxSideDetection + 1);
         //_cHitstop.SetCharacterAnimator(playerID, _cAnimator);
         ResetInputLog();
-        InitCombos();
+        if (!comboInitiated)
+        {
+            InitCombos();
+        }
         SetAwaitEnums();
 
         _amplifyController.SetChosenAmplifier(choseAmplifiers);
@@ -274,7 +284,7 @@ public class Character_Base : MonoBehaviour
         _moveForce = _baseMoveForce;
         _dashForce = _baseDashForce;
     }
-    void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex, int newID = -1)
+    void AddCharacterModel(Amplifiers _chosenAmplifier, int skinIndex, int sideIndex = -1)
     {
         GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
 
@@ -283,25 +293,18 @@ public class Character_Base : MonoBehaviour
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
         Character_Animator _chosenCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
-        if (newID > -1)
-        {
-            string layerMaskName = newID == 0 ? "Outlined Player1" : "Outlined Player2";
-            int objectLayerIndex = LayerMask.NameToLayer(layerMaskName);
-            _chosenCharacter.layer = objectLayerIndex;
-            SetLayerInformation(_chosenCharacter, _chosenCharacter_Animator,objectLayerIndex);
-        }
-        else 
-        {
-            string layerMaskName = "Outlined Player2";
-            int objectLayerIndex = LayerMask.NameToLayer(layerMaskName);
-            _chosenCharacter.layer = objectLayerIndex;
-            SetLayerInformation(_chosenCharacter, _chosenCharacter_Animator, objectLayerIndex);
-        }
+
+        string layerMaskName = sideIndex == 0 ? "Outlined Player1" : "Outlined Player2";
+        int objectLayerIndex = LayerMask.NameToLayer(layerMaskName);
+        _chosenCharacter.layer = objectLayerIndex;
+        SetLayerInformation(_chosenCharacter, _chosenCharacter_Animator, objectLayerIndex);
+
         _cSubStateController = _chosenCharacter.GetComponentInChildren<Character_SubStateController_Base>();
         _cSubStateController.SetStarterInformation(this);
         pSide.thisPosition.SetModelTransform(_chosenCharacter.transform);
+        modelInitiated = true;
 
-        SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier,skinIndex);
+        SetPlayerModelInformation(_chosenCharacter_Animator, _chosenAmplifier, skinIndex);
     }
     void SetLayerInformation(GameObject _chosenCharacter, Character_Animator _chosenCharacter_Animator,int objectLayerIndex)
     {
@@ -345,6 +348,7 @@ public class Character_Base : MonoBehaviour
         GetCharacterMoveList();
         inputVisualiser = new List<AttackInputTypes>();
         _cComboDetection.PrimeCombos();
+        comboInitiated = true;
     }
     public void ResetAllProperties() 
     {
@@ -372,20 +376,12 @@ public class Character_Base : MonoBehaviour
     }
     void InitButtons(Character_SubStates setSubState, int NewID)
     {
-        switch (setSubState) 
+        if (setSubState == Character_SubStates.Controlled)
         {
-            case Character_SubStates.Controlled:
-                playerID = NewID;
-                _aFrameDataMeter.gameObject.SetActive(true);
-                DesyncVariables();
-                HandleButtonInitialization();
-                _subState = setSubState;
-                break;
-            case Character_SubStates.Dummy:
-                _subState = setSubState;
-                DesyncVariables();
-                playerID = -1;
-                break;
+            playerID = NewID;
+            _aFrameDataMeter.gameObject.SetActive(true);
+            HandleButtonInitialization();
+            _subState = setSubState;
         }
     }
     void DesyncVariables() 

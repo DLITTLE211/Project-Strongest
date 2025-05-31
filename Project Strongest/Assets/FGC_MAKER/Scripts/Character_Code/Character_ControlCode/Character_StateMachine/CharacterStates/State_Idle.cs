@@ -90,20 +90,16 @@ public class State_Idle : BaseState
     {
         if (!_base.isLockedPause)
         {
-            _base._cSubStateController?.PlaySecondaryAnimation();
+            if (_base._subState != Character_SubStates.Dummy)
+            {
+                _base._cSubStateController?.PlaySecondaryAnimation(PlayerCPUIdleCheck);
+            }
+            else 
+            {
+                _base._cSubStateController?.PlaySecondaryAnimation(DummyIdleCheck);
+            }
         }
         base.OnUpdate();
-    }
-    public void CallSecondaryIdleAnim() 
-    {
-        canDoSecondaryIdle = false;
-        _base.TriggerSecondaryIdleAnim();
-        ResetTime();
-    }
-    void ResetTime() 
-    {
-        timeTillSecondaryIdle = startSecondaryIdle;
-        canDoSecondaryIdle = true;
     }
     async void PlayerCPUIdleCheck()
     {

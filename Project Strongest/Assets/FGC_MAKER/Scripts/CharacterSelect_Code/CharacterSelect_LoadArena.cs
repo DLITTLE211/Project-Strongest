@@ -41,7 +41,8 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             _characterSelectSetup.TogglePlayerInfo(0),
             };
             await Task.WhenAll(tasks);
-            for(int i = 0; i < _characterSelectController._playerCursors.Count; i++) 
+            _characterSelectSetup.ClearListeners();
+            for (int i = 0; i < _characterSelectController._playerCursors.Count; i++) 
             {
                 CharacterSelect_Page currentPage = _characterSelectController._playerCursors[i].cursorPage;
                 currentPage.ResetNamePlatePosition();

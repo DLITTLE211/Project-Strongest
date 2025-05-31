@@ -26,7 +26,7 @@ public class General_FrameAdvantageCalculator : MonoBehaviour
         List<IState> acceptableState = new List<IState>() 
         {
             _hitPlayer._cStateMachine.idleStateRef,
-            _hitPlayer._cStateMachine.secondIdleState,
+            /*_hitPlayer._cStateMachine.secondIdleState,*/
             _hitPlayer._cStateMachine.moveStateRef,
             _hitPlayer._cStateMachine.crouchStateRef,
             _hitPlayer._cStateMachine.standBlockRef,
