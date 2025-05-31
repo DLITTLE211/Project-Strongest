@@ -169,16 +169,19 @@ public class Character_Force : MonoBehaviour
     {
         if (_base._cAnimator._lastAttackState == lastAttackState.nullified)
         {
-            switch (dInput.Button_State.directionalInput)
+            if (dInput != null)
             {
-                case 4:
-                    _myRB.drag = 1;
-                    _myRB.velocity = new Vector3(-Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
-                    break;
-                case 6:
-                    _myRB.drag = 1;
-                    _myRB.velocity = new Vector3(Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
-                    break;
+                switch (dInput.Button_State.directionalInput)
+                {
+                    case 4:
+                        _myRB.drag = 1;
+                        _myRB.velocity = new Vector3(-Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
+                        break;
+                    case 6:
+                        _myRB.drag = 1;
+                        _myRB.velocity = new Vector3(Mathf.RoundToInt(_base.MoveForce), _myRB.velocity.y, 0f);
+                        break;
+                }
             }
         }
     }

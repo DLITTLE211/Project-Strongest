@@ -20,10 +20,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private MainGame_RoundSystemController _RoundSystemController;
 
-
     [SerializeField] private MainGame_UIManager p1UIManager, p2UIManager;
     [SerializeField] private MainGame_Timer _stopWatchController { get; set; }
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
+    public string OnRoundEndStatement { get; private set; }
+
 
     private List<ChosenCharacter> playerProfiles;
     private Stage_StageAsset _chosenStage;
@@ -179,6 +180,10 @@ public class GameManager : MonoBehaviour
             _RoundSystemController.StateMachine.CallResultState();
         }
     }
+    public void SetOnRoundEndStatement(string message) 
+    {
+        OnRoundEndStatement = message;
+    }
     public Character_Base CallPlayerDeathOnTimerEnd()
     {
         float leftPlayerHealth = leftPlayer._cHealth.ReturnHealthDisparity();
@@ -192,20 +197,6 @@ public class GameManager : MonoBehaviour
             winningCharacter = leftPlayerHealth < rightPlayerHealth ? leftPlayer : rightPlayer;
             return winningCharacter;
         }
-        /*if (leftPlayer._cHealth.health_Main.currentValue > rightPlayer._cHealth.health_Main.currentValue)
-        {
-            winningCharacter = leftPlayer;
-            return winningCharacter;
-        }
-        if (players.totalPlayers[1]._cHealth.health_Main.currentValue > players.totalPlayers[0]._cHealth.health_Main.currentValue)
-        {
-            winningCharacter = players.totalPlayers[1];
-            return winningCharacter;
-        }
-        if (players.totalPlayers[0]._cHealth.health_Main.currentValue == players.totalPlayers[1]._cHealth.health_Main.currentValue)
-        {
-            _RoundSystemController.AwardTieWin();
-        }*/
         return null;
     }
     public void DesyncPlayers(ControllerStatusChangedEventArgs args)

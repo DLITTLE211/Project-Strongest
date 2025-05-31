@@ -66,20 +66,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(stanceInput.stanceKill._stanceButtonInput._correctInput[i].property._attackName);
         }
     }
-    #region Stance Class Code
-   /* public void PreformAttack(Character_Base curBase, StanceAttack action = null, int stanceAttackActionint = -1)
-    {
-        if (action != null)
-        {
-            curBase._aManager.ReceiveAttack(action._stanceButtonInput._correctInput[stanceAttackActionint].property);
-        }
-        else
-        {
-            SetStanceStateTrue();
-            curBase._aManager.ReceiveAttack(stanceStartProperty);
-        }
-    }*/
-    #endregion
 
     #region Interface Code
     public void SetStanceStateTrue()
@@ -173,7 +159,6 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttackFunctional
             if (!blockedAttack)
             {
                 SendCounterHitInfo(target, followUp);
-                //target._cDamageCalculator.TakeDamage(followUp);
             }
             target._cDamageCalculator.ReceiveDamage(followUp, blockedAttack, armoredAttack);
         }

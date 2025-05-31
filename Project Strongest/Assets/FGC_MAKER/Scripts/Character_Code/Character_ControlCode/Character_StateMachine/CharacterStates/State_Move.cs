@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 public class State_Move : BaseState
 {
     bool onBack, onForward;
+    OnMoveUpdate _onMoveUpdate;
+    delegate void OnMoveUpdate();
     public State_Move(Character_Base playerBase) : base(playerBase)
     {
     }
@@ -16,14 +18,19 @@ public class State_Move : BaseState
         _base._cHurtBox.ResetExtendedHurtbox();
         _base._cHitboxManager.DisableAllHitboxes();
         DebugMessageHandler.instance.DisplayErrorMessage(1, "Enter MoveState");
-        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+
+
+        Character_ButtonInput _baseDirectionalInput = _base.ReturnMovementInputs();
+        if (_base.pSide.thisPosition._directionFacing != Character_Face_Direction.Neither)
         {
-            CheckRightFaceState();
+            _onMoveUpdate = _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight ?
+                () => CheckRightFaceState(_baseDirectionalInput) :
+                () => CheckLeftFaceState(_baseDirectionalInput);
+
+            _onMoveUpdate();
+            _baseForce.SetWalkForce(_baseDirectionalInput);
         }
-        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
-        {
-            CheckLeftFaceState();
-        }
+
         float fourFrameWaitTime = 4 * (1 / 60f);
         int fourtimeInMS = (int)(fourFrameWaitTime * 1000f);
         await Task.Delay(fourtimeInMS);
@@ -32,48 +39,57 @@ public class State_Move : BaseState
     }
     public override void OnUpdate()
     {
-        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight)
+        Character_ButtonInput _baseDirectionalInput = _base.ReturnMovementInputs();
+        if (_base.pSide.thisPosition._directionFacing != Character_Face_Direction.Neither)
         {
-            CheckRightFaceState();
-        }
-        if (_base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
-        {
-            CheckLeftFaceState();
-        }
-        _baseForce.SetWalkForce(_base.ReturnMovementInputs());
-        base.OnUpdate();
-    }
-    void CheckRightFaceState()
-    {
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
-        {
-            if (!onBack)
-            {
-                HandleBackwardAnimation();
-            }
-        }
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
-        {
-            if (!onForward)
-            {
-                HandleForwardAnimation();
-            }
+            _onMoveUpdate = _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight ? 
+                () => CheckRightFaceState(_baseDirectionalInput) :
+                () => CheckLeftFaceState(_baseDirectionalInput);
+
+            _onMoveUpdate();
+            _baseForce.SetWalkForce(_baseDirectionalInput);
+            base.OnUpdate();
         }
     }
-    void CheckLeftFaceState() 
+    void CheckRightFaceState(Character_ButtonInput moveInput)
     {
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 4)
+        Character_ButtonInput _baseDirectionalInput = _base.ReturnMovementInputs();
+        if (_baseDirectionalInput != null)
         {
-            if (!onForward)
+            if (_baseDirectionalInput.Button_State.directionalInput == 4)
             {
-                HandleForwardAnimation();
+                if (!onBack)
+                {
+                    HandleBackwardAnimation();
+                }
+            }
+            if (_baseDirectionalInput.Button_State.directionalInput == 6)
+            {
+                if (!onForward)
+                {
+                    HandleForwardAnimation();
+                }
             }
         }
-        if (_base.ReturnMovementInputs().Button_State.directionalInput == 6)
+    }
+    void CheckLeftFaceState(Character_ButtonInput moveInput)
+    {
+        Character_ButtonInput _baseDirectionalInput = _base.ReturnMovementInputs();
+        if (_baseDirectionalInput != null)
         {
-            if (!onBack)
+            if (_baseDirectionalInput.Button_State.directionalInput == 4)
             {
-                HandleBackwardAnimation();
+                if (!onForward)
+                {
+                    HandleForwardAnimation();
+                }
+            }
+            if (_baseDirectionalInput.Button_State.directionalInput == 6)
+            {
+                if (!onBack)
+                {
+                    HandleBackwardAnimation();
+                }
             }
         }
     }

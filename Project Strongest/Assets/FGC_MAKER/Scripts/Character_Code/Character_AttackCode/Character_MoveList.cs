@@ -495,22 +495,7 @@ public class Character_MoveList : MonoBehaviour
             }
         }
         return null;
-    }/*
-    public (Attack_StanceSpecialMove, StanceAttack) GetInnerStanceAttack(Attack_BaseProperties attack)
-    {
-        for (int i = 0; i < stanceSpecials.Count; i++)
-        {
-            if (stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property == attack)
-            {
-                return (stanceSpecials[i], stanceSpecials[i].stanceInput.stanceAttack);
-            }
-            if (stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput[0].property == attack)
-            {
-                return (stanceSpecials[i], stanceSpecials[i].stanceInput.stanceKill);
-            }
-        }
-        return (null, null);
-    }*/
+    }
     #endregion
 
     #region Rekka Verification Code

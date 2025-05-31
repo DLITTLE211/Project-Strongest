@@ -26,11 +26,13 @@ public class Round_EndScreenState : Round_BaseState
         {
             GameManager.instance.winningCharacter._cSubStateController.PlayVictoryWinAnimation(CallEndScreen);
             int winningSide = GameManager.instance.winningCharacter._side == 0 ? 1 : 2;
-            PulseAndSetText(countDownText, $"Player {winningSide} Wins!!");
+            GameManager.instance.SetOnRoundEndStatement($"Player {winningSide} Wins!!");
+            PulseAndSetText(countDownText, GameManager.instance.OnRoundEndStatement);
         }
         else
         {
-            PulseAndSetText(countDownText, $"Tie Game...");
+            GameManager.instance.SetOnRoundEndStatement($"Tie Game...");
+            PulseAndSetText(countDownText, GameManager.instance.OnRoundEndStatement);
             CallEndScreen();
         }
     }

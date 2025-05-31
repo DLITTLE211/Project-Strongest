@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class EndScreen_Controller : MonoBehaviour
 {
+    [SerializeField] private TMP_Text HeaderText;
     [SerializeField] private Transform buttonSpawnPoint;
     [SerializeField] private GameObject spawnedButton;
     [SerializeField] private List<TrainingButtonObject> trainingButtonDictionary = new List<TrainingButtonObject>();
@@ -27,6 +28,7 @@ public class EndScreen_Controller : MonoBehaviour
     }
     public void SetupEndScreenButtons(EventSystem _eventSystem)
     {
+        HeaderText.SetText(SpriteToTextColorUtility.AppendSpriteName(GameManager.instance.OnRoundEndStatement.ToUpper(), Color.white));
         if (eventSystem == null)
         {
             eventSystem = _eventSystem;
@@ -111,8 +113,8 @@ public class EndScreen_Controller : MonoBehaviour
     }
     public void ActivateRematch()
     {
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadSceneAsync("MainGame_Arena", LoadSceneMode.Additive);
+        /*SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadSceneAsync("MainGame_Arena", LoadSceneMode.Additive);*/
         Debug.Log("Hit REMATCH");
     }
     public void ReturnToCharacterSelect()
