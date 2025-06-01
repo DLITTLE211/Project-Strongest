@@ -28,6 +28,10 @@ public class Round_CharacterDialogueState : Round_BaseState
     }
     async Task SayCharacterDialogue() 
     {
+        while (!GameManager.instance.awaitedLoadComplete) 
+        {
+            await Task.Yield();
+        }
         for (int i = 0; i < players.Count; i++) 
         {
             if (!players[i]._cSubStateController.introAnimationComplete)

@@ -16,6 +16,11 @@ public class VersusMenu_DisplayController : MonoBehaviour
 
     [SerializeField] private Image VersusImage;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
+        VersusImage.DOFade(0, 0);
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T)) 
@@ -23,16 +28,18 @@ public class VersusMenu_DisplayController : MonoBehaviour
             CloseAndDisplayPlayerData();
         }
     }
-    public void CloseAndDisplayPlayerData() 
+    public int index;
+    public void CloseAndDisplayPlayerData()
     {
         VersusImage.DOFade(0, 0);
-        UpperBorderObject.BorderObject.DOLocalMoveY(UpperBorderObject._endYPosition, 0.15f).SetEase(Ease.InOutElastic).OnComplete(() => 
+
+        UpperBorderObject.BorderObject.DOLocalMoveY(UpperBorderObject._endYPosition, 1.15f).SetEase(Ease.InBack).OnComplete(() => 
         {
             _leftPlayerDisplay.DisplayChosenPlayerData();
         });
-        BottomBorderObject.BorderObject.DOLocalMoveY(BottomBorderObject._endYPosition, 0.15f).SetEase(Ease.InOutElastic).OnComplete(() =>
+        BottomBorderObject.BorderObject.DOLocalMoveY(BottomBorderObject._endYPosition, 1.15f).SetEase(Ease.InBack).OnComplete(() =>
         {
-            _rightPlayerDisplay.DisplayChosenPlayerData();
+            _rightPlayerDisplay.DisplayChosenPlayerData(DisplayVersusImage);
         });
     }
     public void DisplayVersusImage() 
@@ -41,11 +48,19 @@ public class VersusMenu_DisplayController : MonoBehaviour
         VersusImage.transform.DOScale(1f, 0.35f);
         VersusImage.DOFade(1, 0.25f);
     }
+    public void OpenDisplay() 
+    {
+        UpperBorderObject.BorderObject.DOLocalMoveY(UpperBorderObject._startYPosition, 0f);
+        BottomBorderObject.BorderObject.DOLocalMoveY(BottomBorderObject._startYPosition, 0f);
+        _leftPlayerDisplay.OpenVersusSide();
+        _rightPlayerDisplay.OpenVersusSide();
+    }
 }
 
 [Serializable]
 public class BorderObject_Transform 
 {
     public Transform BorderObject;
+    public float _startYPosition;
     public float _endYPosition;
 }

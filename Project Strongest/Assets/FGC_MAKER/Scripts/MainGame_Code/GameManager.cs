@@ -40,6 +40,16 @@ public class GameManager : MonoBehaviour
     public MainGame_Timer stopWatchController { get { return _stopWatchController; } }
     public MainGame_SettingsController settingsController { get { return _settingsController; } }
     public MainGame_RoundSystemController RoundSystemController { get { return _RoundSystemController; } }
+
+    public bool awaitedLoadComplete;
+    private void Awake()
+    {
+        awaitedLoadComplete = false;
+    }
+    public void SetLoadComplete() 
+    {
+        awaitedLoadComplete = true;
+    }
     void Start()
     {
         players = CharacterSelect_LoadArena.curPlayerData;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 public class CharacterSelect_LoadArena : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuCamera;
+    [SerializeField] private VersusMenu_DisplayController _displayController;
     [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
     [SerializeField] private CSSubMenu_StageSelectController _stageSelectController;
     [SerializeField] private CharacterSelect_Setup _characterSelectSetup;
@@ -27,6 +28,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
 
     async Task LoadArena()
     {
+        DontDestroyOnLoad(_mainMenuCamera.gameObject);
         if (SceneManager.GetActiveScene().name == "MainGame_MenuScene")
         {
             curPlayerData = _characterSelectSetup.players;
@@ -34,24 +36,49 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             leftPlayerChosenProfile = _characterSelectController.GetLeftPlayerProfile();
             rightPlayerChosenProfile = _characterSelectController.GetRightPlayerProfile();
             chosenStage = _stageSelectController.GetChosenStage();
+            _displayController.CloseAndDisplayPlayerData();
             Task[] tasks = new Task[]
             {
             _characterSelectSetup.DisableCharacterCursors(),
-            //_characterSelectSetup.ToggleCharacterSelectInfo(false,0),
             _characterSelectSetup.TogglePlayerInfo(0),
             };
             await Task.WhenAll(tasks);
+            await Task.Delay(1500);
             _characterSelectSetup.ClearListeners();
-            for (int i = 0; i < _characterSelectController._playerCursors.Count; i++) 
+            for (int i = 0; i < _characterSelectController._playerCursors.Count; i++)
             {
                 CharacterSelect_Page currentPage = _characterSelectController._playerCursors[i].cursorPage;
                 currentPage.ResetNamePlatePosition();
             }
             _stageSelectController.ResetStagePositionData();
-            _mainMenuCamera.SetActive(false);
-            SceneManager.UnloadSceneAsync("MainGame_MenuScene");
-            SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
+            if (_characterSelectSetup.currentSet.gameMode != GameMode.Training)
+            {
+                AsyncOperation newOP = SceneManager.LoadSceneAsync("MainGame_Arena", LoadSceneMode.Additive);
+                newOP.completed += DelayEnableArenaObject;
+            }
+            else
+            {
+                _mainMenuCamera.SetActive(false);
+                SceneManager.UnloadSceneAsync("MainGame_MenuScene");
+                SceneManager.LoadSceneAsync("MainGame_Arena", LoadSceneMode.Additive);
+            }
         }
+    }
+    async void DelayEnableArenaObject(AsyncOperation lastOp)
+    {
+        lastOp.completed -= DelayEnableArenaObject;
+        await Task.Delay(2000);
+        AsyncOperation newOP = SceneManager.UnloadSceneAsync("MainGame_MenuScene");
+        newOP.completed += DelayDisableVersusObject;
+    }
+    async void DelayDisableVersusObject(AsyncOperation lastOp)
+    {
+        lastOp.completed -= DelayDisableVersusObject;
+        await Task.Delay(1500);
+        _displayController.OpenDisplay();
+        await Task.Delay(2000);
+        _mainMenuCamera.SetActive(false);
+        GameManager.instance.SetLoadComplete();
     }
     public void OnApplicationQuit()
     {
