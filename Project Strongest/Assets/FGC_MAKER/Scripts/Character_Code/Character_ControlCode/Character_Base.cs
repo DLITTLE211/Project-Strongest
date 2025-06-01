@@ -896,7 +896,7 @@ public class Character_Base : MonoBehaviour
                 opponentPlayer._cHitController.HandleHitState(_throwAttackData, _throwAttackData.attackMainStunValues.hitstopValue, _throwAttackData.attackMainStunValues.hitstunValue, 0,true);
                 _cForce.AddLateralForceOnCommand(-4f);
                 opponentPlayer._cForce.AddLateralForceOnCommand(-4f);
-                yield return new WaitForSeconds(20f * Time.smoothDeltaTime);
+                yield return new WaitForSeconds(20f * Base_FrameCode.ONE_FRAME);
                 opponentPlayer._cAnimator.SetCanTransitionIdle(true);
                 opponentPlayer._cAnimator.FullBaseAttackDataClear(_throwAttackData, _throwAttackData.AttackAnims._frameData);
                 _cHurtBox.throwTeched = false;
@@ -906,8 +906,8 @@ public class Character_Base : MonoBehaviour
                 
                 yield break;
             }
-            frameCount += Time.smoothDeltaTime;
-            yield return new WaitForSeconds(Time.smoothDeltaTime);
+            frameCount += Base_FrameCode.ONE_FRAME;
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
     }
     public void CheckAttackActive(bool forceClear = true)

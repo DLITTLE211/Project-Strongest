@@ -345,8 +345,8 @@ public class Character_HitController : MonoBehaviour
         currentCustomDamageField = currentAttack;
         ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
-        currentHitstun = (currentAttack.customDamageFieldStunValues.hitstunValue * Time.smoothDeltaTime);
-        currentHitstop = currentAttack.customDamageFieldStunValues.hitstopValue * Time.smoothDeltaTime;
+        currentHitstun = (currentAttack.customDamageFieldStunValues.hitstunValue * Base_FrameCode.ONE_FRAME);
+        currentHitstop = currentAttack.customDamageFieldStunValues.hitstopValue * Base_FrameCode.ONE_FRAME;
         if (hitReaction != null)
         {
             if (finalAttack) 
@@ -377,7 +377,7 @@ public class Character_HitController : MonoBehaviour
     }
     async void CallHitStopHitResponse(HitAnimationField curField)
     {
-        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 4 * Time.smoothDeltaTime, true);
+        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 4 * Base_FrameCode.ONE_FRAME, true);
     }
     void CheckAndStartHitResponse(HitAnimationField curField, float hitStunOverride = -1f)
     {
@@ -433,7 +433,7 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
-            hitStunAmount = (currentHitstun * Time.smoothDeltaTime);
+            hitStunAmount = (currentHitstun * Base_FrameCode.ONE_FRAME);
         }
         ClearRecoveryRoutine(true);
         SetStunMeterValue(hitStunAmount);
@@ -451,15 +451,15 @@ public class Character_HitController : MonoBehaviour
         
         while (currentHitstop > 0)
         {
-            currentHitstop -= Time.smoothDeltaTime;
+            currentHitstop -= Base_FrameCode.ONE_FRAME;
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.HitStop);
-            yield return new WaitForSeconds(Time.smoothDeltaTime);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
         while (hitStunAmount > 0)
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
@@ -468,16 +468,16 @@ public class Character_HitController : MonoBehaviour
                     yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
                     while (!_base._cHurtBox.IsGrounded())
                     {
-                        hitStunAmount -= (Time.smoothDeltaTime * _base._cHitstun.animSpeed);
-                        UpdateMeterValue(Time.smoothDeltaTime);
-                        yield return new WaitForSeconds(Time.smoothDeltaTime);
+                        hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                        UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                     }
                     hitStunAmount = 0;
                     ClearMeterValue();
                 }
-                hitStunAmount -= (Time.smoothDeltaTime * _base._cHitstun.animSpeed);
-                UpdateMeterValue(Time.smoothDeltaTime);
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
+                UpdateMeterValue(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
         hitStunAmount = 0;
@@ -507,7 +507,7 @@ public class Character_HitController : MonoBehaviour
         {
             if (!_base._cHurtBox.IsGrounded())
             {
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 HitAnimationField recoveryAnim = CheckRecoveryAnim(curField.knockdownAnimType);
                 _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
             }
@@ -596,7 +596,7 @@ public class Character_HitController : MonoBehaviour
     {
         currentProperty = currentAttack;
         currentHitstun = StunValue;
-        currentHitstop = StopValue * Time.smoothDeltaTime;
+        currentHitstop = StopValue * Base_FrameCode.ONE_FRAME;
         hitStunScaling = calculatedScaling;
     }
     public void ForceCustomLockAnim(CustomDamageField currentAttack, bool finalAttack)
@@ -724,7 +724,7 @@ public class Character_HitController : MonoBehaviour
     {
         float startDelayGetupTime = 0;
         int maxHoldTime = 40;
-        float holdInputTimeInFrames = maxHoldTime * Time.smoothDeltaTime;
+        float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
         bool isTeching;
         if (recoveryAnim.knockdownAnimType == Attack_KnockDown.HKD)
         {
@@ -753,7 +753,7 @@ public class Character_HitController : MonoBehaviour
                     {
                         while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
                         {
-                            startDelayGetupTime += Time.smoothDeltaTime;
+                            startDelayGetupTime += Base_FrameCode.ONE_FRAME;
                             if (HoldingAway())
                             {
                                 recoveryAnim = characterTotalHitReactions.backGetupReaction;
@@ -764,7 +764,7 @@ public class Character_HitController : MonoBehaviour
                             {
                                 isTeching = true;
                             }
-                            yield return new WaitForSeconds(Time.smoothDeltaTime);
+                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                         }
                     }
                 }
@@ -841,7 +841,7 @@ public class Character_HitController : MonoBehaviour
         while (_cAnimator.isHit) 
         {
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.Stun);
-            yield return new WaitForSeconds(Time.smoothDeltaTime);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
     }
     void ActivateOnTickRoutine() 

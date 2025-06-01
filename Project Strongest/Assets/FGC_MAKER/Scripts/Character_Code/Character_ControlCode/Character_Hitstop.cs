@@ -29,12 +29,12 @@ public class Character_Hitstop : MonoBehaviour
     }
     IEnumerator HandleHitStop(Attack_BaseProperties lastAttack, float rateOfIncrease, Character_Base attacker, Character_Base target, Callback func)
     {
-        float actualWaitTime = rateOfIncrease * Time.smoothDeltaTime;
+        float actualWaitTime = rateOfIncrease * Base_FrameCode.ONE_FRAME;
         _cameraController.CallCameraShake(rateOfIncrease, lastAttack.attackMainStunValues.hitstopValue);
         while (actualWaitTime > 0)
         {
-            actualWaitTime -= (Time.smoothDeltaTime);
-            yield return new WaitForSeconds(Time.smoothDeltaTime);
+            actualWaitTime -= (Base_FrameCode.ONE_FRAME);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
         yield return new WaitForSeconds(actualWaitTime);
         hitStopSequence = null;

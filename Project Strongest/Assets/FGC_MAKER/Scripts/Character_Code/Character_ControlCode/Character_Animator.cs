@@ -345,7 +345,7 @@ public class Character_Animator : MonoBehaviour
 
         _lastAnim = lastAttack.AttackAnims;
 
-        PlayNextAnimation(lastAttack.attackHashes, 2f*Time.smoothDeltaTime,true);
+        PlayNextAnimation(lastAttack.attackHashes, 2f* Base_FrameCode.ONE_FRAME, true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack, _attackAfflictionSet);
         StartCoroutine(BasicAttackRoutine);
     }
@@ -375,7 +375,7 @@ public class Character_Animator : MonoBehaviour
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
 
         _lastAnim = superCustom;
-        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2f * Time.smoothDeltaTime, true);
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2f * Base_FrameCode.ONE_FRAME, true);
         superCustom.SetIsFollowUpAttack(true);
         if (SuperAttackRoutine != null) 
         {

@@ -73,7 +73,7 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
         }
         else 
         {
-            float heldTime = timeInAttackState > 0 ? (float)timeInAttackState * Time.smoothDeltaTime : 0.4f;
+            float heldTime = timeInAttackState > 0 ? (float)timeInAttackState * Base_FrameCode.ONE_FRAME : 0.4f;
             property.InputTimer.SetTimerType(TimerType.Special, heldTime);
         }
         _curBase.comboList3_0.ClearFollowUpAttack();

@@ -91,7 +91,7 @@ public class Character_StunController : MonoBehaviour
     {
         _base.Deactivate();
         endStunSequenceFunc = onFinishFunc;
-        float totalStunTime = Time.smoothDeltaTime * 174f;
+        float totalStunTime = Base_FrameCode.ONE_FRAME * 174f;
         _base._cHurtBox.SetHurboxState();
         int dizzyAnimation = Animator.StringToHash("DizzyState");
         _base._cAnimator.PlayNextAnimation(dizzyAnimation,0f,true);

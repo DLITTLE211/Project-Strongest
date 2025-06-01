@@ -122,7 +122,7 @@ public class Character_AmplifyController : MonoBehaviour
     {
         _currentAction.CurBase._cHurtBox.SetHurboxState();
         _currentAction.activated = false;
-        float waitTime = Time.smoothDeltaTime;
+        float waitTime = Base_FrameCode.ONE_FRAME;
 
         float endingFrame = _currentAction.recoveryAmount + _currentAction.activationPoint;
         float endingPoint = endingFrame * waitTime;
@@ -208,7 +208,7 @@ public class Character_AmplifyOption : IBlockOption
     }
     public void PerformAction()
     {
-        _curBase._cAnimator.PlayNextAnimation(_animInformation._animHash, 2 * Time.smoothDeltaTime);
+        _curBase._cAnimator.PlayNextAnimation(_animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME);
     }
 }
 [Serializable]

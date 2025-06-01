@@ -34,6 +34,7 @@ public class Menu_Manager : MonoBehaviour
     private void Start()
     {
         _mainCamera.SetActive(true);
+        Screen.SetResolution(2560, 1440, FullScreenMode.FullScreenWindow, new RefreshRate() { numerator = 60, denominator = 1 });
         Application.targetFrameRate = 60;
         DontDestroyOnLoad(this);
         instance = this;

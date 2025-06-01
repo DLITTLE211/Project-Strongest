@@ -75,18 +75,18 @@ public class MainGame_CameraController : MonoBehaviour
     }
     IEnumerator ShakeCamera(float duration, int intensity)
     {
-        float durationInFrames = (duration / 2) * Time.smoothDeltaTime;
+        float durationInFrames = (duration / 2) * Base_FrameCode.ONE_FRAME;
         while (durationInFrames > 0)
         {
             if (GameManager.instance.settingsController._isPause)
             {
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
                 Shake(intensity);
-                durationInFrames -= Time.smoothDeltaTime;
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                durationInFrames -= Base_FrameCode.ONE_FRAME;
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
                 cameraObjectHolder.localPosition = startPos;
             }
         }
@@ -127,7 +127,7 @@ public class MainGame_CameraController : MonoBehaviour
     {
         if (orthoCamera.orthographicSize != newSize && cameraZoomTween == null)
         {
-            cameraZoomTween = orthoCamera.DOOrthoSize(newSize, 50f * Time.smoothDeltaTime);
+            cameraZoomTween = orthoCamera.DOOrthoSize(newSize, 50f * Base_FrameCode.ONE_FRAME);
             cameraZoomTween.Play();
             cameraZoomTween.OnComplete(() =>
             {

@@ -436,7 +436,7 @@ public class Character_Force : MonoBehaviour
                     sendingForce = false;
                     return;
                 }
-                _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Time.smoothDeltaTime, true);
+                _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
             }
             else
             {
@@ -457,10 +457,10 @@ public class Character_Force : MonoBehaviour
                     sendingForce = false;
                     return;
                 }
-                _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Time.smoothDeltaTime, true);
+                _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
             }
             _base.movementPC = _mInput.movementPriority;
-            _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Time.smoothDeltaTime, true);
+            _base._cAnimator.PlayNextAnimation(_mInput._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME, true);
             if (sendingForce == false)
             {
                DoForceOnDelay(_mInput);
@@ -470,7 +470,7 @@ public class Character_Force : MonoBehaviour
     }
     IEnumerator OnDelayDash(float speed)
     {
-        yield return new WaitForSeconds(Time.smoothDeltaTime);
+        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         _myRB.constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
         _myRB.AddForce(transform.right * speed, ForceMode.VelocityChange);
         sendingForce = false;

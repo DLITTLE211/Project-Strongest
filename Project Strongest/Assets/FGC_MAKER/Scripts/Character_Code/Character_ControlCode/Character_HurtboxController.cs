@@ -37,7 +37,7 @@ public class Character_HurtboxController : MonoBehaviour
     }
     public void SetCollisionHurtboxStartSize(Character_CollisionSizing HurtBoxSizing)
     {
-        throwTechTime = totalTechTime * Time.smoothDeltaTime;
+        throwTechTime = totalTechTime * Base_FrameCode.ONE_FRAME;
         throwTeched = false;
         collisionBox.SetBaseCollider(0.5f, _base.characterProfile.Height / 100f, HurtBoxSizing, ColliderType.Collision);
     }

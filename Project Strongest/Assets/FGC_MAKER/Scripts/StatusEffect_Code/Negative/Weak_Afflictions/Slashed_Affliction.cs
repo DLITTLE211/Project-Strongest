@@ -29,7 +29,7 @@ public class Slashed_Affliction : Affliction
         for(int i = 0; i < 5; i++)
         {
             _base._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
-            yield return new WaitForSeconds(Time.smoothDeltaTime * frameBetweenDotDamage);
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME * frameBetweenDotDamage);
         }
         KillSingleAffliction();
         currentState = ActiveState.Inactive;

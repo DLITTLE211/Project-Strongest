@@ -315,17 +315,17 @@ public class AttackHandler_Attack : AttackHandler_Base
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         hitCountTotal = lastAttack.AttackAnims._frameData.activeWindows.Count;
-        float totalFrameTime = Time.smoothDeltaTime * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
+        float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
         while (mainFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                float frameIterator = Time.smoothDeltaTime * _base._cHitstun.animSpeed;
-                float waitTime = Time.smoothDeltaTime / _base._cHitstun.animSpeed;
+                float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
+                float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
                 if (_base._cHitstun.animSpeed == 0.25f)
                 {
                     mainFrameCount = mainFrameCount - (mainFrameCount * _base._cHitstun.animSpeed);
@@ -337,7 +337,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     firstIndexCallback = GetRequiredFirstIndex();
                     if (firstIndexCallback != null)
                     {
-                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCallback.timeStamp;
+                        float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * firstIndexCallback.timeStamp;
                         if (mainFrameCount >= curFuncTimeStamp && firstIndexCallback.funcBool == false)
                         {
                             firstIndexCallback.func();
@@ -347,7 +347,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     firstIndexCustomCallback = GetCustomFirstIndex();
                     if (firstIndexCustomCallback != null)
                     {
-                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCustomCallback.timeStamp;
+                        float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * firstIndexCustomCallback.timeStamp;
                         if (mainFrameCount >= curFuncTimeStamp && firstIndexCustomCallback.funcBool == false)
                         {
                             _base.ReceiveCustomCallBack(firstIndexCustomCallback);
@@ -402,19 +402,19 @@ public class AttackHandler_Attack : AttackHandler_Base
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         hitCountTotal = customProp._frameData.activeWindows.Count;
-        float totalFrameTime = Time.smoothDeltaTime * (float)customProp._frameData.recoveryEnd;
+        float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
         
         while (customFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
-                float frameIterator = Time.smoothDeltaTime * _base._cHitstun.animSpeed;
-                float waitTime = Time.smoothDeltaTime / _base._cHitstun.animSpeed;
-                waitTime = waitTime == Mathf.Infinity ? 1f* Time.smoothDeltaTime : waitTime;
+                float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
+                float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
+                waitTime = waitTime == Mathf.Infinity ? 1f* Base_FrameCode.ONE_FRAME : waitTime;
                 if (_base._cHitstun.animSpeed == 0.25f)
                 {
                     customFrameCount = customFrameCount - (customFrameCount * _base._cHitstun.animSpeed);
@@ -423,11 +423,11 @@ public class AttackHandler_Attack : AttackHandler_Base
                 CustomCallback firstIndexCustomCallback = null;
                 try
                 {
-                    int individualFrame = (int)(customFrameCount / Time.smoothDeltaTime);
+                    int individualFrame = (int)(customFrameCount / Base_FrameCode.ONE_FRAME);
                     firstIndexCallback = GetRequiredFirstIndex();
                     if (firstIndexCallback != null)
                     {
-                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCallback.timeStamp;
+                        float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * firstIndexCallback.timeStamp;
                         if (customFrameCount >= curFuncTimeStamp && firstIndexCallback.funcBool == false)
                         {
                             firstIndexCallback.func();
@@ -437,7 +437,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                     firstIndexCustomCallback = GetCustomFirstIndex();
                     if (firstIndexCustomCallback != null)
                     {
-                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCustomCallback.timeStamp;
+                        float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * firstIndexCustomCallback.timeStamp;
                         if (customFrameCount >= curFuncTimeStamp && firstIndexCustomCallback.funcBool == false)
                         {
                             _base.ReceiveCustomCallBack(firstIndexCustomCallback, superIteratorCallback);

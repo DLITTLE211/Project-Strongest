@@ -68,9 +68,9 @@ public class Character_SubStateController_Base : MonoBehaviour
         {
             if (!_base.isLockedPause) 
             {
-                time += (1f/Time.smoothDeltaTime);
+                time += (1f/ Base_FrameCode.ONE_FRAME);
             }
-            yield return new WaitForSeconds((1f/Time.smoothDeltaTime));
+            yield return new WaitForSeconds((1f/ Base_FrameCode.ONE_FRAME));
         }
         if (allowPlaySecondIdle())
         {

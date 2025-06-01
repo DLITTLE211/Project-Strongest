@@ -73,12 +73,12 @@ public class Character_HitStun : MonoBehaviour
         {
             if (_cAnimator._base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
             else
             {
                 stunTime += Time.smoothDeltaTime;
-                yield return new WaitForSeconds(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
             }
         }
         animSpeed = 1f;

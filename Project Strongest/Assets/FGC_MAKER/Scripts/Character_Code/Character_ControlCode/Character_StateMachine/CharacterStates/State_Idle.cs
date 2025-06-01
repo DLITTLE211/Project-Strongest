@@ -112,7 +112,7 @@ public class State_Idle : BaseState
         }
         if (_base._cHurtBox.IsGrounded() && !_base._cBlockHandler.isBlocking && !_cAnim.isHit)
         {
-            _cAnim.PlayNextAnimation(groundIdleHash, 10 * Time.smoothDeltaTime);
+            _cAnim.PlayNextAnimation(groundIdleHash, 10 * Base_FrameCode.ONE_FRAME);
         }
         _base._aManager.ResetMoveHierarchy();
         canDoSecondaryIdle = true;

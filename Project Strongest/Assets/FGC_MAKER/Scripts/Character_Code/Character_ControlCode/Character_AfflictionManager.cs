@@ -59,7 +59,7 @@ public class Character_AfflictionManager : MonoBehaviour
         availableAfflictions.Add(currentSet._strongAffliction);
         afflictionSent = false;
         float frameCount = 0;
-        float maxTime = 60f * Time.smoothDeltaTime;
+        float maxTime = 60f * Base_FrameCode.ONE_FRAME;
         StatusEffect.Effect_Affliction inputtedAffliction = StatusEffect.Effect_Affliction.None;
         while (frameCount < maxTime && afflictionSent == false)
         {
@@ -67,8 +67,8 @@ public class Character_AfflictionManager : MonoBehaviour
             {
                 SendAfflicion(inputtedAffliction, afflicted);
             }
-            frameCount += Time.smoothDeltaTime;
-            yield return new WaitForSeconds(Time.smoothDeltaTime);
+            frameCount += Base_FrameCode.ONE_FRAME;
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
     }
     bool CheckInputForAffliction(List<StatusEffect.Effect_Affliction> totalAfflictions, out StatusEffect.Effect_Affliction inputtedAffliction) 
