@@ -68,13 +68,14 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     {
         lastOp.completed -= DelayEnableArenaObject;
         await Task.Delay(2000);
-        AsyncOperation newOP = SceneManager.UnloadSceneAsync("MainGame_MenuScene");
-        newOP.completed += DelayDisableVersusObject;
+        DelayDisableVersusObject(null);
+        /*AsyncOperation newOP = SceneManager.UnloadSceneAsync("MainGame_MenuScene");
+        newOP.completed += DelayDisableVersusObject;*/
     }
     async void DelayDisableVersusObject(AsyncOperation lastOp)
     {
-        lastOp.completed -= DelayDisableVersusObject;
-        await Task.Delay(1500);
+        //lastOp.completed -= DelayDisableVersusObject;
+        await Task.Delay(1850);
         _displayController.OpenDisplay();
         await Task.Delay(2000);
         _mainMenuCamera.SetActive(false);

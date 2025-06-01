@@ -9,7 +9,7 @@ using DG.Tweening;
 public class VersusMenu_DisplayObject : MonoBehaviour
 {
     [SerializeField] private PlayerData_Positioning playerDataObject;
-    [SerializeField] private CharacterSelect_Cursor _playerData;
+    [SerializeField] private CharacterSelect_Page _playerData;
     [SerializeField] private Image _playerImage;
     [SerializeField] private List<TMP_Text> _characterDataText;
     [SerializeField] private List<string> _profileDataMessages;
@@ -29,14 +29,15 @@ public class VersusMenu_DisplayObject : MonoBehaviour
     }
     public void SetPlayerInformation(Callback func) 
     {
-        if (_playerData.cursorPage.chosenCharacter != null) 
+        if (_playerData.chosenCharacter != null) 
         {
-            Character_Profile currentProfile = _playerData.cursorPage.chosenCharacter;
-            _profileDataMessages.Add($"Character Name {currentProfile.name}");
-            _profileDataMessages.Add($"Character Weight {currentProfile.Height}lbs");
-            _profileDataMessages.Add($"Character Height {currentProfile.Height}\"");
-            _profileDataMessages.Add($"Chosen Amplifier {currentProfile.name}");
-            _playerImage.sprite = _playerData.cursorPage.chosenCharacter.CharacterProfileImage;
+            Character_Profile currentProfile = _playerData.chosenCharacter;
+            Amplifiers currentAmplififer = _playerData.chosenAmplifier;
+            _profileDataMessages.Add($"Character Name {currentProfile.CharacterName}");
+            _profileDataMessages.Add($"Character Weight {currentProfile.Weight}lbs");
+            _profileDataMessages.Add($"Character Height {currentProfile.Height}cm.");
+            _profileDataMessages.Add($"Chosen Amplifier {currentAmplififer.name}");
+            _playerImage.sprite = _playerData.chosenCharacter.CharacterProfileImage;
         }
         else
         {

@@ -4075,11 +4075,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpperBorderObject:
     BorderObject: {fileID: 578759124}
-    _startYPosition: 1500
+    _startYPosition: 2750
     _endYPosition: 600
   BottomBorderObject:
     BorderObject: {fileID: 1612362661}
-    _startYPosition: -1500
+    _startYPosition: -2750
     _endYPosition: -550
   _leftPlayerDisplay: {fileID: 954283347}
   _rightPlayerDisplay: {fileID: 929467983}
@@ -8684,13 +8684,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDataObject:
     _objectTransform: {fileID: 929467982}
-    xStartPos: 2000
+    xStartPos: 3500
     xEndPos: 700
     playerinformationObject: {fileID: 2049175402}
     xInfoStartPos: 1000
     xInfoEndPos: 340
-  _playerData: {fileID: 1062440636}
-  _playerImage: {fileID: 517981593}
+  _playerData: {fileID: 299116882}
+  _playerImage: {fileID: 1120607694}
   _characterDataText:
   - {fileID: 1697155449}
   - {fileID: 891399434}
@@ -8863,12 +8863,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDataObject:
     _objectTransform: {fileID: 954283346}
-    xStartPos: -2000
+    xStartPos: -3500
     xEndPos: -570
     playerinformationObject: {fileID: 807258641}
     xInfoStartPos: -1000
     xInfoEndPos: 420
-  _playerData: {fileID: 1368814061}
+  _playerData: {fileID: 2113706678}
   _playerImage: {fileID: 517981593}
   _characterDataText:
   - {fileID: 1288109332}
@@ -12497,7 +12497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1066661554
 AudioListener:
   m_ObjectHideFlags: 0

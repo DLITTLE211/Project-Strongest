@@ -54,6 +54,7 @@ public class VersusMenu_DisplayController : MonoBehaviour
         BottomBorderObject.BorderObject.DOLocalMoveY(BottomBorderObject._startYPosition, 0f);
         _leftPlayerDisplay.OpenVersusSide();
         _rightPlayerDisplay.OpenVersusSide();
+        VersusImage.DOFade(0, 0.25f);
     }
 }
 
