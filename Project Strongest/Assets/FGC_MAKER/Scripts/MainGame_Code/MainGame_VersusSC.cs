@@ -11,8 +11,9 @@ public class MainGame_VersusSC : MainGame_SettingsController
     Sequence coverTweenSequence;
     private bool teleporting;
     [SerializeField] private Image _trainingCoverImage;
+    private float teleportTime;
 
-    public override void SetTeleportPositions()
+    public override void SetTeleportPositions(float teleportTime = 3 / 60f)
     {
         _pauseMenu.SetActive(false);
         _pauseMenu.GetComponent<VersusMenu_Controller>().SetupVersusButtons(_eventSystem);
@@ -20,14 +21,18 @@ public class MainGame_VersusSC : MainGame_SettingsController
 
         _pauseMenu.GetComponent<VersusMenu_Controller>().SetP1MoveListInformation(mainPlayer.comboList3_0, mainPlayer.characterProfile.CharacterName);
         _pauseMenu.GetComponent<VersusMenu_Controller>().SetP2MoveListInformation(secondaryPlayer.comboList3_0, secondaryPlayer.characterProfile.CharacterName);
-        StartCoroutine(DelayGetTeleportPositions());
+        StartCoroutine(DelayGetTeleportPositions(teleportTime));
     }
-    IEnumerator DelayGetTeleportPositions()
+    IEnumerator DelayGetTeleportPositions(float _teleportTime = 3 / 60f)
     {
-        yield return new WaitForSeconds(3 / 60f);
+        teleportTime = _teleportTime;
+        yield return new WaitForSeconds(teleportTime);
         centerPos = new TeleportPoint();
         centerPos.SetPositionPos("Center_TP");
-        _trainingCoverImage = GameObject.Find("Versus_ImageCover").GetComponent<Image>();
+        if (_trainingCoverImage == null)
+        {
+            _trainingCoverImage = GameObject.Find("Versus_ImageCover").GetComponent<Image>();
+        }
         StartCoroutine(TeleportTweenController(centerPos._leftSidePos, centerPos._rightSidePos));
     }
     IEnumerator TeleportTweenController(Vector3 pos1, Vector3 pos2)
@@ -40,7 +45,7 @@ public class MainGame_VersusSC : MainGame_SettingsController
         }
         teleporting = true;
         coverTweenSequence = DOTween.Sequence();
-        coverTweenSequence.Append(_trainingCoverImage.DOFade(1f, 0.15f));
+        coverTweenSequence.Append(_trainingCoverImage.DOFade(1f, teleportTime));
         coverTweenSequence.OnComplete(() =>
         {
             mainPlayer.transform.position = pos1;
@@ -50,8 +55,8 @@ public class MainGame_VersusSC : MainGame_SettingsController
         coverTweenSequence = null;
 
         yield return new WaitUntil(() => teleported);
-        yield return new WaitForSeconds(0.25f);
-        _trainingCoverImage.DOFade(0f, 0.15f);
+        yield return new WaitForSeconds(teleportTime);
+        _trainingCoverImage.DOFade(0f, teleportTime);
         teleporting = false;
         GameManager.instance._hitstopController.CameraController.ToggleWallState(true);
     }

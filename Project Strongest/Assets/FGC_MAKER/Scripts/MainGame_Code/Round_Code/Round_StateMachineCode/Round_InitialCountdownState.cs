@@ -24,7 +24,7 @@ public class Round_InitialCountdownState : Round_BaseState
         GameManager.instance.stopWatchController.SetStartTimerValues();
         for (int i = 0; i < GameManager.instance.players.totalPlayers.Count; i++)
         {
-            GameManager.instance.players.totalPlayers[i].InitialReset();
+            GameManager.instance.players.totalPlayers[i].InitialReset(true);
             GameManager.instance.players.totalPlayers[i]._cSubStateController.OnRoundReset();
         }
         GameManager.instance.winningCharacter = null;

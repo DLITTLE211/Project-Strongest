@@ -42,18 +42,18 @@ public class InGameCameraController : MonoBehaviour
     }
     IEnumerator ShakeCamera(float duration, int intensity) 
     {
-        float durationInFrames = (duration/2) * Base_FrameCode.ONE_FRAME;
+        float durationInFrames = (duration/2) * Time.smoothDeltaTime;
         while (durationInFrames > 0)
         {
             if (GameManager.instance.settingsController._isPause)
             {
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
             }
             else
             {
                 Shake(intensity);
-                durationInFrames -= Base_FrameCode.ONE_FRAME;
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                durationInFrames -= Time.smoothDeltaTime;
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
                 cameraObjectHolder.localPosition = startPos;
             }
         }

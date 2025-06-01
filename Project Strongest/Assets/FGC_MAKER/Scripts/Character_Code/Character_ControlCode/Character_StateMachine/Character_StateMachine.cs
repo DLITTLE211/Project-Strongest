@@ -381,7 +381,7 @@ public class Character_StateMachine : MonoBehaviour
             return false;
         }
     }
-    bool At_2Idle()
+    public bool At_2Idle()
     {
         bool notRecovering = _base._cHitController.ReturnNotRecovering();
         bool _canRecover = _base._cAnimator._canRecover;

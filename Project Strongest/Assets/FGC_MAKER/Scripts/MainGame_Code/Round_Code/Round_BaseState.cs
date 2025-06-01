@@ -14,6 +14,9 @@ public class Round_BaseState
     public virtual void OnExit() 
     {
     }
+    public virtual void SkipIntro()
+    {
+    }
     public virtual void Update() {}
     public virtual void OnGamePause(bool state) { }
     public Round_BaseState(MainGame_RoundSystemController rSystem)

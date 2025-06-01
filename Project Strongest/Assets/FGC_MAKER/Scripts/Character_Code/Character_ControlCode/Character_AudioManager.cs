@@ -26,6 +26,17 @@ public class Character_AudioManager : MonoBehaviour
             playSource.Play();
         }
     }
+    public void StopAudio()
+    {
+        if (oneShotSource.isPlaying) 
+        {
+            oneShotSource.Stop();
+        }
+        if (playSource.isPlaying) 
+        {
+            playSource.Stop();
+        }
+    }
 }
 [Serializable]
 public class AudioClipData 

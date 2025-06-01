@@ -31,6 +31,11 @@ public class Round_StateMachine : MonoBehaviour
         }
     }
 
+    public void SkipIntro()
+    {
+        _curState.SkipIntro();
+    }
+
     public void SetCanvasObjectState(bool state)
     {
         for (int i = 0; i < canvasObjects.Count; i++)

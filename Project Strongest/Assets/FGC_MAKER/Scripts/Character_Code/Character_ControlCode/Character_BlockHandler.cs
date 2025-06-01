@@ -47,7 +47,7 @@ public class Character_BlockHandler : MonoBehaviour
     public void ActivateBlockAnim(Character_BlockOption _currentAction, bool isStandBlock, bool isActivating)
     {
         KillCurrentRoutine();
-        _currentAction.CurBase._cAnimator.PlayNextAnimation(_currentAction._animInformation._animHash, 2 * Base_FrameCode.ONE_FRAME);
+        _currentAction.CurBase._cAnimator.PlayNextAnimation(_currentAction._animInformation._animHash, 2 * Time.smoothDeltaTime);
         BlockRoutine = PlayAnimSequence(_currentAction, isStandBlock, isActivating);
         StartCoroutine(BlockRoutine);
     }
@@ -67,7 +67,7 @@ public class Character_BlockHandler : MonoBehaviour
         }
         _currentAction.CurBase._cHurtBox.SetHurboxState();
         _currentAction.activated = false;
-        float waitTime = Base_FrameCode.ONE_FRAME;
+        float waitTime = Time.smoothDeltaTime;
         
         float endingFrame = isActivating ? _currentAction.activationPoint : _currentAction.recoveryAmount + _currentAction.activationPoint;
         float endingPoint = endingFrame * waitTime;

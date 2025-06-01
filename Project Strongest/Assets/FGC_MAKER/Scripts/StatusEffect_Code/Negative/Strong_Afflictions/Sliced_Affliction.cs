@@ -28,7 +28,7 @@ public class Sliced_Affliction : Affliction
         for (int i = 0; i < 8; i++)
         {
             _base._cDamageCalculator.ReceiveCustomAfflictionDamage(damageValue);
-            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME * frameBetweenDotDamage);
+            yield return new WaitForSeconds(Time.smoothDeltaTime * frameBetweenDotDamage);
         }
         KillSingleAffliction();
     }

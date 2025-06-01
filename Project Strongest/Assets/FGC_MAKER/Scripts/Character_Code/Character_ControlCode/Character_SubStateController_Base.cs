@@ -17,12 +17,14 @@ public class Character_SubStateController_Base : MonoBehaviour
     [SerializeField] protected Animator orthoCameraAnim;
     [SerializeField] protected Character_Base _base;
     [SerializeField] protected Character_Animator _cAnimator;
-    public bool introAnimationComplete;
     protected float startSecondaryIdle = 10f;
     protected IEnumerator SecondIdleAnimRoutine;
     protected bool canPlaySecondIdle;
     List<string> cameraLayers;
-    bool introAudioComplete;
+
+    public bool introAnimationComplete;
+    public bool introAudioComplete;
+
     public List<float> timeBetweenAnims;
     public void SetStarterInformation(Character_Base newBase) 
     {
@@ -35,6 +37,11 @@ public class Character_SubStateController_Base : MonoBehaviour
     public virtual void OnRoundReset() 
     {
 
+    }
+    public void ResetBools()
+    {
+        introAnimationComplete = false;
+        introAudioComplete = false;
     }
     public void PlaySecondaryAnimation(Callback replayBasicIdle)
     {
@@ -61,22 +68,29 @@ public class Character_SubStateController_Base : MonoBehaviour
         {
             if (!_base.isLockedPause) 
             {
-                time += Base_FrameCode.ONE_FRAME;
+                time += (1f/Time.smoothDeltaTime);
             }
-            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+            yield return new WaitForSeconds((1f/Time.smoothDeltaTime));
         }
-        _base.TriggerSecondaryIdleAnim();
-        CallSecondaryAnim();
-        yield return new WaitForSeconds(0.2f);
-        AnimatorClipInfo clipInfo = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0];
-        if (clipInfo.clip != null) 
+        if (allowPlaySecondIdle())
         {
-            float length = clipInfo.clip.length;
-            yield return new WaitForSeconds(length);
+            _base.TriggerSecondaryIdleAnim();
+            CallSecondaryAnim();
+            yield return new WaitForSeconds(0.2f);
+            AnimatorClipInfo clipInfo = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0];
+            if (clipInfo.clip != null)
+            {
+                float length = clipInfo.clip.length;
+                yield return new WaitForSeconds(length);
+            }
+            replayBasicIdle();
         }
         _base.allowSecondIdleAnim = false;
         canPlaySecondIdle = true;
-        replayBasicIdle();
+    }
+    bool allowPlaySecondIdle() 
+    {
+        return _base._cStateMachine.At_2Idle() && _base.allowSecondIdleAnim;
     }
     void CallSecondaryAnim() 
     {

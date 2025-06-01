@@ -115,6 +115,19 @@ public class EndScreen_Controller : MonoBehaviour
     {
         /*SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadSceneAsync("MainGame_Arena", LoadSceneMode.Additive);*/
+
+        GameManager.instance.settingsController.SetTeleportPositions(0);
+        List<Character_Base> players = GameManager.instance.players.totalPlayers;
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i]._cSubStateController != null)
+            {
+                players[i]._cStateMachine.enabled = true;
+                players[i]._cSubStateController.ResetBools();
+            }
+            GameManager.instance.players.totalPlayers[i].InitialReset(false);
+        }
+        GameManager.instance.RoundSystemController.StateMachine.CallCharacterDialogueState();
         Debug.Log("Hit REMATCH");
     }
     public void ReturnToCharacterSelect()

@@ -153,6 +153,10 @@ public class Character_Health : MonoBehaviour
         health_Main.SetCurrentMeterValue(health_Main.currentValue);
         canRecover = false;
     }
+    public float ReturnMeterDiscrepency()
+    {
+        return health_Main.currentValue/ health_Main.maxValue;
+    }
     public float ReturnHealthDisparity() 
     {
         return health_Main.maxValue - health_Main.currentValue;

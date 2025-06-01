@@ -19,7 +19,7 @@ public class MainGame_SettingsController : MonoBehaviour
             _eventSystem.SetSelectedGameObject(_object);
         }
     }
-    public virtual void SetTeleportPositions()
+    public virtual void SetTeleportPositions(float teleportTime = 3 / 60f)
     {
         //Nothing TODO
     }

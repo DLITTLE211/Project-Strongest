@@ -371,7 +371,7 @@ public class HurtBox : CollisionDetection
             }
             if (hitCount._refreshRate > 0)
             {
-                yield return new WaitForSeconds(hitCount._refreshRate * (Base_FrameCode.ONE_FRAME));
+                yield return new WaitForSeconds(hitCount._refreshRate * (Time.smoothDeltaTime));
             }
             curHit++;
         }

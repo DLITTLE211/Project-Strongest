@@ -98,7 +98,7 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
             sizingSequence.Play();
             CharacterSelect_Button csButton = activeCharacterSelectButtons[i].GetComponent<CharacterSelect_Button>();
             csButton.SetPosition();
-            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME*1.15f);
+            yield return new WaitForSeconds(0.015f);
         }
         for(int i = 0; i < activeCharacterSelectButtons.Count; i++)
         {

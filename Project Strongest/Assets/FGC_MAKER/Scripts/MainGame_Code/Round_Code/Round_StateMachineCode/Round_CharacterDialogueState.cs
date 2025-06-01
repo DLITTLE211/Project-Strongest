@@ -22,18 +22,21 @@ public class Round_CharacterDialogueState : Round_BaseState
         _rSystem.p2_Signifiers.SetRoundSignifier(CharacterSelect_LoadArena._roundInfo.winningRoundCount);
         TriggerDialogue();
     }
-    public async void TriggerDialogue(/*DialogueSet dialogueSet*/)
+    public async void TriggerDialogue()
     {
-        await SayCharacterDialogue(/*dialogueSet*/);
+        await SayCharacterDialogue();
     }
-    async Task SayCharacterDialogue(/*DialogueSet dialogueSet*/) 
+    async Task SayCharacterDialogue() 
     {
         for (int i = 0; i < players.Count; i++) 
         {
-            players[i]._cSubStateController.PlayIntroAnimation();
-            while (!players[i]._cSubStateController.introAnimationComplete) 
+            if (!players[i]._cSubStateController.introAnimationComplete)
             {
-                await Task.Yield();
+                players[i]._cSubStateController.PlayIntroAnimation();
+                while (!players[i]._cSubStateController.introAnimationComplete)
+                {
+                    await Task.Yield();
+                }
             }
         }
         //TODO Character Dialogue Function
@@ -45,6 +48,16 @@ public class Round_CharacterDialogueState : Round_BaseState
          * }
          */
         _rSystem.StateMachine.CallInitialTimerState();
+    }
+    public override void SkipIntro()
+    {
+        for (int i = players.Count-1; i >=0; i--)
+        {
+            players[i]._cSubStateController.introAnimationComplete = true;
+            players[i]._cSubStateController.introAudioComplete = true;
+            players[i]._cSubStateController.EndCameraAnimation();
+            players[i]._cAudioManager.StopAudio();
+        }
     }
     public override void OnExit()
     {

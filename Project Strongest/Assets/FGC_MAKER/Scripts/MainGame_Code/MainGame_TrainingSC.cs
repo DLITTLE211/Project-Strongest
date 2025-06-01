@@ -14,7 +14,7 @@ public class MainGame_TrainingSC : MainGame_SettingsController
     [SerializeField] private Image _trainingCoverImage;
     Sequence coverTweenSequence;
     private bool teleporting;
-    public override void SetTeleportPositions() 
+    public override void SetTeleportPositions(float teleportTime = 3 / 60f) 
     {
         teleportPositions = new Dictionary<int, Callback>();
         teleportPositions.Add(1, TeleportLeftInverse);
@@ -31,9 +31,9 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         _pauseMenu.GetComponent<TrainingMenu_Controller>().SetP1MoveListInformation(mainPlayer.comboList3_0, mainPlayer.characterProfile.CharacterName);
         _pauseMenu.GetComponent<TrainingMenu_Controller>().SetP2MoveListInformation(secondaryPlayer.comboList3_0, secondaryPlayer.characterProfile.CharacterName);
     }
-    IEnumerator DelayGetTeleportPositions()
+    IEnumerator DelayGetTeleportPositions(float teleportTime = 3 / 60f)
     {
-        yield return new WaitForSeconds(3 / 60f);
+        yield return new WaitForSeconds(teleportTime);
         leftPos = new TeleportPoint();
         centerPos = new TeleportPoint();
         rightPos = new TeleportPoint();

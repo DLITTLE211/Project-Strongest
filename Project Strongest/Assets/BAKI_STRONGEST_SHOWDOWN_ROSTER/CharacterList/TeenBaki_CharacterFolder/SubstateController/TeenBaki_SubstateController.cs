@@ -22,7 +22,7 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
     public override void PlayIntroAnimation()
     {
         _sodaBottle.gameObject.SetActive(false);
-        StartCoroutine(PlayIntroSequence(_introAnimation,timeBetweenAnims, base.PlayIntroAnimation));
+        StartCoroutine(PlayIntroSequence(_introAnimation, timeBetweenAnims, base.PlayIntroAnimation));
     }
     public override bool VerifyInstallState()
     {
@@ -33,7 +33,7 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
         _base.Deactivate();
         _base._cStateMachine.enabled = false;
         _victoryAnimation._animName = _victoryAnimation._animationClip.name;
-        _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Base_FrameCode.ONE_FRAME;
+        _victoryAnimation.activatePointInFrames = _victoryAnimation.activatePoint * Time.smoothDeltaTime;
         _victoryAnimation._animLength = _victoryAnimation._animationClip.length;
         _victoryAnimation._animHash = Animator.StringToHash(_victoryAnimation._animName);
         StartCoroutine(PlayAnimSequence(endFunc));
@@ -44,7 +44,7 @@ public class TeenBaki_SubstateController : Character_SubStateController_Base
         float frameCount = 0;
         _cAnimator.SetCanTransitionIdle(false);
         bool pointHit = false;
-        float waitTime = Base_FrameCode.ONE_FRAME;
+        float waitTime = Time.smoothDeltaTime;
         float endingFrame = _victoryAnimation._animLength;
         PlayCameraAnimationClip(_victoryAnimation._cameraAnimationClip.name,false);
         _cAnimator.PlayNextAnimation(_victoryAnimation._animHash, 0.25f);

@@ -172,14 +172,14 @@ public class Character_InputTimer_Attacks : Character_InputTimer
         switch (_type)
         {
             case TimerType.InRekka:
-                if (FrameCountTimer <= -Base_FrameCode.ONE_FRAME)
+                if (FrameCountTimer <= -Time.smoothDeltaTime)
                 {
                     SetTimerType();
                     ResetTimer();
                 }
                 else
                 {
-                    FrameCountTimer -= Base_FrameCode.ONE_FRAME;
+                    FrameCountTimer -= Time.smoothDeltaTime;
                 }
                 if (_subAttackTimer < 0)
                 {
@@ -187,17 +187,17 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 }
                 else
                 {
-                    _subAttackTimer -= Base_FrameCode.ONE_FRAME;
+                    _subAttackTimer -= Time.smoothDeltaTime;
                 }
                 break;
             default:
-                if (FrameCountTimer <= -Base_FrameCode.ONE_FRAME)
+                if (FrameCountTimer <= -Time.smoothDeltaTime)
                 {
                     ResetTimer();
                 }
                 else
                 {
-                    FrameCountTimer -= Base_FrameCode.ONE_FRAME;
+                    FrameCountTimer -= Time.smoothDeltaTime;
                 }
                 if (_subAttackTimer < 0)
                 {
@@ -205,7 +205,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
                 }
                 else
                 {
-                    _subAttackTimer -= Base_FrameCode.ONE_FRAME;
+                    _subAttackTimer -= Time.smoothDeltaTime;
                 }
                 break;
         }

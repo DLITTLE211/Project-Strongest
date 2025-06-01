@@ -22,8 +22,19 @@ public class Character_SystemButtons : MonoBehaviour
     }
     public void CheckSystemButtonPressed() 
     {
-        if (_base._subState != Character_SubStates.Controlled) { return; }
-        if (!_base.ACTIVATED) { return; }
+        if (_base._subState != Character_SubStates.Controlled) 
+        { 
+            return; 
+        }
+        if (!_base.ACTIVATED)
+        {
+            if (_base.player.GetButtonDown(_systemButtons[0].Button_Element.actionDescriptiveName))
+            {
+                //PauseButton
+                GameManager.instance.RoundSystemController.StateMachine.SkipIntro();
+            }
+            return; 
+        }
         if (_base.player.GetButtonDown(_systemButtons[0].Button_Element.actionDescriptiveName))
         {
             //PauseButton

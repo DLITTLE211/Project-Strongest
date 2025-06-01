@@ -384,19 +384,6 @@ public class Character_Base : MonoBehaviour
             _subState = setSubState;
         }
     }
-    void DesyncVariables() 
-    {
-        if (player != null)
-        {
-            // player.controllers.RemoveController(ControllerType.Joystick, playerID);
-            player.controllers.maps.AddMap(ControllerType.Joystick, playerID, _map);
-            //player.controllers.maps.RemoveMap(ControllerType.Joystick, playerID, $"TestPlayer", $"TestPlayer{playerID}");
-            player = null;
-            newElements = new ActionElementMap[0];
-            moveAxes.Clear();
-            attackButtons.Clear();
-        }
-    }
     void HandleButtonInitialization() 
     {
         player = ReInput.players.GetPlayer(playerID);
@@ -530,12 +517,14 @@ public class Character_Base : MonoBehaviour
         mainCallbackDictionary.Add(HitPointCall.PlayCameraAnimation, _cSubStateController.PlayCameraAnimation);
     }
     #endregion
-
-    public async void InitialReset()
+    public async void InitialReset(bool waitForTP)
     {
-        await ResetPlayerOnTeleport();
-        _cDamageCalculator.SetVictoryHitState(false);
+        if (waitForTP)
+        {
+            await ResetPlayerOnTeleport();
+        }
         _cDamageCalculator.isDead = false;
+        _cDamageCalculator.SetVictoryHitState(false);
         _cSuperMeter.SetStartValue();
         _cHealth.SetStartingHealthValues();
         _cHealth.stunController.SetStartStunValues();
@@ -545,7 +534,7 @@ public class Character_Base : MonoBehaviour
         {
             awaitCondition = true;
         }
-        _cAnimator.PlayNextAnimation(Animator.StringToHash("Idle"), 0);
+        _cAnimator.PlayNextAnimation(Animator.StringToHash("Idle"), 0, true);
     }
 
     public async void ReceiveCustomCallBack(CustomCallback callback, Callback superIteratorCallback = null) 
@@ -907,7 +896,7 @@ public class Character_Base : MonoBehaviour
                 opponentPlayer._cHitController.HandleHitState(_throwAttackData, _throwAttackData.attackMainStunValues.hitstopValue, _throwAttackData.attackMainStunValues.hitstunValue, 0,true);
                 _cForce.AddLateralForceOnCommand(-4f);
                 opponentPlayer._cForce.AddLateralForceOnCommand(-4f);
-                yield return new WaitForSeconds(20f * Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(20f * Time.smoothDeltaTime);
                 opponentPlayer._cAnimator.SetCanTransitionIdle(true);
                 opponentPlayer._cAnimator.FullBaseAttackDataClear(_throwAttackData, _throwAttackData.AttackAnims._frameData);
                 _cHurtBox.throwTeched = false;
@@ -917,8 +906,8 @@ public class Character_Base : MonoBehaviour
                 
                 yield break;
             }
-            frameCount += Base_FrameCode.ONE_FRAME;
-            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+            frameCount += Time.smoothDeltaTime;
+            yield return new WaitForSeconds(Time.smoothDeltaTime);
         }
     }
     public void CheckAttackActive(bool forceClear = true)

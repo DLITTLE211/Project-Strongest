@@ -315,48 +315,52 @@ public class AttackHandler_Attack : AttackHandler_Base
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         hitCountTotal = lastAttack.AttackAnims._frameData.activeWindows.Count;
-        float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
+        float totalFrameTime = Time.smoothDeltaTime * (float)lastAttack.AttackAnims._frameData.recoveryEnd;
         while (mainFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
             }
             else
             {
-                float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
-                float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
+                float frameIterator = Time.smoothDeltaTime * _base._cHitstun.animSpeed;
+                float waitTime = Time.smoothDeltaTime / _base._cHitstun.animSpeed;
                 if (_base._cHitstun.animSpeed == 0.25f)
                 {
                     mainFrameCount = mainFrameCount - (mainFrameCount * _base._cHitstun.animSpeed);
                 }
+                RequiredCallback firstIndexCallback = null;
+                CustomCallback firstIndexCustomCallback = null;
                 try
                 {
-                    float curFuncTimeStamp = Base_FrameCode.ONE_FRAME * requiredHitboxCallBacks[0].timeStamp;
-                    if (requiredHitboxCallBacks.Count > 0)
+                    firstIndexCallback = GetRequiredFirstIndex();
+                    if (firstIndexCallback != null)
                     {
-                        if (mainFrameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCallback.timeStamp;
+                        if (mainFrameCount >= curFuncTimeStamp && firstIndexCallback.funcBool == false)
                         {
-                            requiredHitboxCallBacks[0].func();
+                            firstIndexCallback.func();
                             requiredHitboxCallBacks.RemoveAt(0);
                         }
                     }
-                    if (customHitboxCallBacks != null)
+                    firstIndexCustomCallback = GetCustomFirstIndex();
+                    if (firstIndexCustomCallback != null)
                     {
-                        if (customHitboxCallBacks.Count > 0)
+                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCustomCallback.timeStamp;
+                        if (mainFrameCount >= curFuncTimeStamp && firstIndexCustomCallback.funcBool == false)
                         {
-                            if (mainFrameCount >= Base_FrameCode.ONE_FRAME * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
-                            {
-                                _base.ReceiveCustomCallBack(customHitboxCallBacks[0]);
-                                customHitboxCallBacks.RemoveAt(0);
-                            }
+                            _base.ReceiveCustomCallBack(firstIndexCustomCallback);
+                            customHitboxCallBacks.RemoveAt(0);
                         }
                     }
+
                     _base._aFrameDataMeter.UpdateFrame(_curFrameType);
                 }
                 catch (Exception e)
                 {
-                    //HitBox.DestroySelf();
+                    Debug.LogError(firstIndexCallback);
+                    Debug.LogError(firstIndexCustomCallback);
                     Debug.LogError(e.ToString());
                     mainFrameCount = lastAttack.AttackAnims.animLength + 1f;
                     Debug.Log("Null Check");
@@ -398,49 +402,51 @@ public class AttackHandler_Attack : AttackHandler_Base
             _base._cAttackTimer.PauseTimerOnSuperSuccess();
         }
         hitCountTotal = customProp._frameData.activeWindows.Count;
-        float totalFrameTime = Base_FrameCode.ONE_FRAME * (float)customProp._frameData.recoveryEnd;
+        float totalFrameTime = Time.smoothDeltaTime * (float)customProp._frameData.recoveryEnd;
         
         while (customFrameCount < totalFrameTime)
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
             }
             else
             {
-                float frameIterator = Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed;
-                float waitTime = Base_FrameCode.ONE_FRAME / _base._cHitstun.animSpeed;
-                waitTime = waitTime == Mathf.Infinity ? 1f* Base_FrameCode.ONE_FRAME : waitTime;
+                float frameIterator = Time.smoothDeltaTime * _base._cHitstun.animSpeed;
+                float waitTime = Time.smoothDeltaTime / _base._cHitstun.animSpeed;
+                waitTime = waitTime == Mathf.Infinity ? 1f* Time.smoothDeltaTime : waitTime;
                 if (_base._cHitstun.animSpeed == 0.25f)
                 {
                     customFrameCount = customFrameCount - (customFrameCount * _base._cHitstun.animSpeed);
                 }
+                RequiredCallback firstIndexCallback = null;
+                CustomCallback firstIndexCustomCallback = null;
                 try
                 {
-                    int individualFrame = (int)(customFrameCount / Base_FrameCode.ONE_FRAME);
-                    if (requiredHitboxCallBacks.Count > 0)
+                    int individualFrame = (int)(customFrameCount / Time.smoothDeltaTime);
+                    firstIndexCallback = GetRequiredFirstIndex();
+                    if (firstIndexCallback != null)
                     {
-                        if (individualFrame >= requiredHitboxCallBacks[0].timeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCallback.timeStamp;
+                        if (customFrameCount >= curFuncTimeStamp && firstIndexCallback.funcBool == false)
                         {
-                            requiredHitboxCallBacks[0].func();
+                            firstIndexCallback.func();
                             requiredHitboxCallBacks.RemoveAt(0);
                         }
                     }
-                    if (customHitboxCallBacks != null)
+                    firstIndexCustomCallback = GetCustomFirstIndex();
+                    if (firstIndexCustomCallback != null)
                     {
-                        if (customHitboxCallBacks.Count > 0)
+                        float curFuncTimeStamp = Time.smoothDeltaTime * firstIndexCustomCallback.timeStamp;
+                        if (customFrameCount >= curFuncTimeStamp && firstIndexCustomCallback.funcBool == false)
                         {
-                            if (individualFrame >= customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                            _base.ReceiveCustomCallBack(firstIndexCustomCallback, superIteratorCallback);
+                            if (firstIndexCustomCallback.awaitEnum.keyRef != WaitingEnumKey.NA)
                             {
-                                Debug.Log($"{customProp.animName}: CustomCallback 0, Hit!!, Frame: {individualFrame}");
-                                _base.ReceiveCustomCallBack(customHitboxCallBacks[0], superIteratorCallback);
-                                if (customHitboxCallBacks[0].awaitEnum.keyRef != WaitingEnumKey.NA) 
-                                {
-                                    customHitboxCallBacks.RemoveAt(0);
-                                    yield break;
-                                }
                                 customHitboxCallBacks.RemoveAt(0);
+                                yield break;
                             }
+                            customHitboxCallBacks.RemoveAt(0);
                         }
                     }
                     _base._aFrameDataMeter.UpdateFrame(_curFrameType);
@@ -462,6 +468,31 @@ public class AttackHandler_Attack : AttackHandler_Base
         _curFrameType = FrameType.Reset;
         Attack_BaseProperties thisAttack = HitBox?.hitboxProperties;
         _cAnimator.FullCustomAttackDataClear(thisAttack,curAnim,animCount,requiredHitboxCallBacks,_frameData);
+    }
+
+    RequiredCallback GetRequiredFirstIndex() 
+    {
+        if(requiredHitboxCallBacks != null) 
+        {
+            if(requiredHitboxCallBacks.Count > 0) 
+            {
+                return requiredHitboxCallBacks[0];
+            }
+            return null;
+        }
+        return null;
+    }
+    CustomCallback GetCustomFirstIndex()
+    {
+        if (customHitboxCallBacks != null)
+        {
+            if (customHitboxCallBacks.Count > 0)
+            {
+                return customHitboxCallBacks[0];
+            }
+            return null;
+        }
+        return null;
     }
 }
 

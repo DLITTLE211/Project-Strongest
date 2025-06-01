@@ -283,22 +283,22 @@ public class Character_HitController : MonoBehaviour
     {
         ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = null;
-        if (currentAttack != null) 
-        {
-            hitReaction = FindAnimationOfType(currentAttack);
-            if (hitReaction == null)
-            {
-                hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
-            }
-        }
+        HitLevel newDeathCheckLevel = HitLevel.SoaringHit;
+        bool isSlightCrumple = false;
+
         if (currentDamageField != null)
         {
-            hitReaction = FilterGroundLockReactions(currentDamageField.hitLevel);
-            if (hitReaction == null)
-            {
-                hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
-            }
+            isSlightCrumple = currentDamageField.hitLevel.HasFlag(HitLevel.Crumple) || currentDamageField.hitLevel.HasFlag(HitLevel.SlightKnockback);
         }
+        if (currentAttack != null)
+        {
+            isSlightCrumple = currentAttack.hitLevel.HasFlag(HitLevel.Crumple) || currentAttack.hitLevel.HasFlag(HitLevel.SlightKnockback);
+        }
+        if (isSlightCrumple) 
+        {
+            newDeathCheckLevel = HitLevel.Crumple;
+        }
+        hitReaction = FilterGroundLockReactions(newDeathCheckLevel);
         StartCoroutine(DoDeathResponse(hitReaction));
     }
     void SmallHitDetect(Attack_BaseProperties currentAttack = null)
@@ -345,8 +345,8 @@ public class Character_HitController : MonoBehaviour
         currentCustomDamageField = currentAttack;
         ClearRecoveryRoutine(true);
         HitAnimationField hitReaction = FilterGroundLockReactions(currentAttack.hitLevel);
-        currentHitstun = (currentAttack.customDamageFieldStunValues.hitstunValue * Base_FrameCode.ONE_FRAME);
-        currentHitstop = currentAttack.customDamageFieldStunValues.hitstopValue * Base_FrameCode.ONE_FRAME;
+        currentHitstun = (currentAttack.customDamageFieldStunValues.hitstunValue * Time.smoothDeltaTime);
+        currentHitstop = currentAttack.customDamageFieldStunValues.hitstopValue * Time.smoothDeltaTime;
         if (hitReaction != null)
         {
             if (finalAttack) 
@@ -377,7 +377,7 @@ public class Character_HitController : MonoBehaviour
     }
     async void CallHitStopHitResponse(HitAnimationField curField)
     {
-        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 4 * Base_FrameCode.ONE_FRAME, true);
+        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true, 4 * Time.smoothDeltaTime, true);
     }
     void CheckAndStartHitResponse(HitAnimationField curField, float hitStunOverride = -1f)
     {
@@ -433,7 +433,7 @@ public class Character_HitController : MonoBehaviour
         }
         else
         {
-            hitStunAmount = (currentHitstun * Base_FrameCode.ONE_FRAME);
+            hitStunAmount = (currentHitstun * Time.smoothDeltaTime);
         }
         ClearRecoveryRoutine(true);
         SetStunMeterValue(hitStunAmount);
@@ -451,15 +451,15 @@ public class Character_HitController : MonoBehaviour
         
         while (currentHitstop > 0)
         {
-            currentHitstop -= Base_FrameCode.ONE_FRAME;
+            currentHitstop -= Time.smoothDeltaTime;
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.HitStop);
-            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+            yield return new WaitForSeconds(Time.smoothDeltaTime);
         }
         while (hitStunAmount > 0)
         {
             if (_base.ReturnIfPaused())
             {
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
             }
             else
             {
@@ -468,16 +468,16 @@ public class Character_HitController : MonoBehaviour
                     yield return new WaitUntil(() => !_base._cHurtBox.IsGrounded());
                     while (!_base._cHurtBox.IsGrounded())
                     {
-                        hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                        UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                        yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                        hitStunAmount -= (Time.smoothDeltaTime * _base._cHitstun.animSpeed);
+                        UpdateMeterValue(Time.smoothDeltaTime);
+                        yield return new WaitForSeconds(Time.smoothDeltaTime);
                     }
                     hitStunAmount = 0;
                     ClearMeterValue();
                 }
-                hitStunAmount -= (Base_FrameCode.ONE_FRAME * _base._cHitstun.animSpeed);
-                UpdateMeterValue(Base_FrameCode.ONE_FRAME);
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                hitStunAmount -= (Time.smoothDeltaTime * _base._cHitstun.animSpeed);
+                UpdateMeterValue(Time.smoothDeltaTime);
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
             }
         }
         hitStunAmount = 0;
@@ -507,7 +507,7 @@ public class Character_HitController : MonoBehaviour
         {
             if (!_base._cHurtBox.IsGrounded())
             {
-                yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                yield return new WaitForSeconds(Time.smoothDeltaTime);
                 HitAnimationField recoveryAnim = CheckRecoveryAnim(curField.knockdownAnimType);
                 _base._cAnimator.PlayNextAnimation(recoveryAnim.animHash, 0, true);
             }
@@ -555,21 +555,12 @@ public class Character_HitController : MonoBehaviour
     }
     IEnumerator DoDeathResponse(HitAnimationField curField)
     {
-        _base._cAnimator.PlayNextAnimation(curField.animHash, 0, true);
+        _base._cAnimator.PlayDeathAnim(curField.animHash, 0);
         yield return new WaitForSeconds(curField.animLength);
-
-
-        if (curField.hitReactionType == HitReactionType.KnockdownHit)
-        {
-            ClearRecoveryRoutine(true);
-            _isRecovering = true;
-            recoverRoutine = DoRecovery(Attack_KnockDown.HKD, curField,true);
-            StartCoroutine(recoverRoutine);
-        }
-        else
+        if (curField.hitLevel != HitLevel.Crumple)
         {
             int animHash = Animator.StringToHash("Landing_After_AirHit");
-            _base._cAnimator.PlayNextAnimation(animHash, 0, true);
+            _base._cAnimator.PlayDeathAnim(animHash, 0);
             yield return new WaitForSeconds(0.4f);
         }
     }
@@ -605,7 +596,7 @@ public class Character_HitController : MonoBehaviour
     {
         currentProperty = currentAttack;
         currentHitstun = StunValue;
-        currentHitstop = StopValue * Base_FrameCode.ONE_FRAME;
+        currentHitstop = StopValue * Time.smoothDeltaTime;
         hitStunScaling = calculatedScaling;
     }
     public void ForceCustomLockAnim(CustomDamageField currentAttack, bool finalAttack)
@@ -733,7 +724,7 @@ public class Character_HitController : MonoBehaviour
     {
         float startDelayGetupTime = 0;
         int maxHoldTime = 40;
-        float holdInputTimeInFrames = maxHoldTime * Base_FrameCode.ONE_FRAME;
+        float holdInputTimeInFrames = maxHoldTime * Time.smoothDeltaTime;
         bool isTeching;
         if (recoveryAnim.knockdownAnimType == Attack_KnockDown.HKD)
         {
@@ -762,7 +753,7 @@ public class Character_HitController : MonoBehaviour
                     {
                         while (!isTeching && (startDelayGetupTime <= holdInputTimeInFrames))
                         {
-                            startDelayGetupTime += Base_FrameCode.ONE_FRAME;
+                            startDelayGetupTime += Time.smoothDeltaTime;
                             if (HoldingAway())
                             {
                                 recoveryAnim = characterTotalHitReactions.backGetupReaction;
@@ -773,7 +764,7 @@ public class Character_HitController : MonoBehaviour
                             {
                                 isTeching = true;
                             }
-                            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+                            yield return new WaitForSeconds(Time.smoothDeltaTime);
                         }
                     }
                 }
@@ -850,7 +841,7 @@ public class Character_HitController : MonoBehaviour
         while (_cAnimator.isHit) 
         {
             _base._aFrameDataMeter.UpdateFrameOnHit(FrameType.Stun);
-            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
+            yield return new WaitForSeconds(Time.smoothDeltaTime);
         }
     }
     void ActivateOnTickRoutine() 

@@ -107,14 +107,14 @@ public class AttackHandler_NewFrameDataMeter : MonoBehaviour
         {
             lastFrameDataType = type;
             message += $"{lastFrameDataType.ToString()}: {currentFrame}/";
-            _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType, currentFrame+1);
+            _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType, currentFrame + 1);
         }
         else
         {
             _refSingularFrameList[currentFrame].SetFrame_FrameType(lastFrameDataType);
         }
         int prevFrame = currentFrame - 1;
-        prevFrame = prevFrame < 0 ? _refSingularFrameList.Count-1 : prevFrame;
+        prevFrame = prevFrame < 0 ? _refSingularFrameList.Count - 1 : prevFrame;
         _refSingularFrameList[prevFrame].DisablePreviousFrameHighlight();
 
         currentFrame++;

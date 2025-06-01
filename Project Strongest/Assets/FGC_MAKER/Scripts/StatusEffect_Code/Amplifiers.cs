@@ -40,7 +40,7 @@ public class Amplifiers : StatusEffect
         }
         else
         {
-            fillRateInFrames = Base_FrameCode.ONE_FRAME * (1 / (float)fillRate);
+            fillRateInFrames = Time.smoothDeltaTime * (1 / (float)fillRate);
         }
     }
     public virtual void DeactivateInstantPassiveAmplify()

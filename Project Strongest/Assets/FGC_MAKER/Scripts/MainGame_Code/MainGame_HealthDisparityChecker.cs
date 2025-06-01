@@ -9,8 +9,8 @@ public class MainGame_HealthDisparityChecker : MonoBehaviour
     [SerializeField] private Character_Base leftPlayer, rightPlayer;
     public void UpdateMeterOnDamage() 
     {
-        _disparityMeter.minValue = -(leftPlayer._cHealth.health_Main.currentValue);
+        _disparityMeter.minValue = -(1 * (leftPlayer._cHealth.ReturnMeterDiscrepency()));
         _disparityMeter.value = 0;
-        _disparityMeter.maxValue = rightPlayer._cHealth.health_Main.currentValue;
+        _disparityMeter.maxValue = 1 * (rightPlayer._cHealth.ReturnMeterDiscrepency());
     }
 }

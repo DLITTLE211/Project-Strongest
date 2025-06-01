@@ -103,9 +103,21 @@ public class Character_Animator : MonoBehaviour
     {
         inRekkaState = state;
     }
-
+    public void PlayDeathAnim(int animHash, float crossFadeTime)
+    {
+        if (myAnim == null)
+        {
+            return;
+        }
+        myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+        shadowAnim.CrossFade(animHash, crossFadeTime, 0, 0);
+    }
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, float overrideTime = 0f, bool lockedHit = false, bool inReverse = false)
     {
+        if (_base._cDamageCalculator.isDead) 
+        {
+            return;
+        }
         if(lastHashPlayed != animHash) 
         {
             lastHashPlayed = animHash;
@@ -333,7 +345,7 @@ public class Character_Animator : MonoBehaviour
 
         _lastAnim = lastAttack.AttackAnims;
 
-        PlayNextAnimation(lastAttack.attackHashes, 2f*Base_FrameCode.ONE_FRAME,true);
+        PlayNextAnimation(lastAttack.attackHashes, 2f*Time.smoothDeltaTime,true);
         BasicAttackRoutine = lastAttack.AttackAnims.TickAnimFrameCount(lastAttack, _attackAfflictionSet);
         StartCoroutine(BasicAttackRoutine);
     }
@@ -363,7 +375,7 @@ public class Character_Animator : MonoBehaviour
         _base._cAttackTimer.PauseTimerOnSuperSuccess();
 
         _lastAnim = superCustom;
-        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2f * Base_FrameCode.ONE_FRAME, true);
+        PlayNextAnimation(Animator.StringToHash(superCustom.animName), 2f * Time.smoothDeltaTime, true);
         superCustom.SetIsFollowUpAttack(true);
         if (SuperAttackRoutine != null) 
         {
