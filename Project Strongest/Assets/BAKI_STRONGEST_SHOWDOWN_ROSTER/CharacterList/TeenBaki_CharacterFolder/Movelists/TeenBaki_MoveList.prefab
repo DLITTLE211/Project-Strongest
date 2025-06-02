@@ -376,8 +376,8 @@ MonoBehaviour:
           init: 0
           startup: 15
           activeWindows:
-          - activeFrame: 35
-            inactiveFrame: 50
+          - activeFrame: 30
+            inactiveFrame: 70
           recoveryEnd: 0
           recoveryAmount: 35
           totalRecovery: 0
@@ -490,13 +490,13 @@ MonoBehaviour:
             _hurtboxType: 7
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 35
-            call: 2
+          - hitFramePoints: 40
+            call: 268435456
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 11
+            Force: 9
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -526,13 +526,13 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 45
-            call: 268435456
+          - hitFramePoints: 55
+            call: 2
             hitFrameBool: 0
             awaitEnum:
               keyRef: 0
               awaitingCheck: 0
-            Force: 9
+            Force: 11
             projectileSpeed: 0
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
@@ -1337,7 +1337,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 25
+          - hitFramePoints: 35
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1373,7 +1373,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 35
+          - hitFramePoints: 50
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1409,7 +1409,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 60
+          - hitFramePoints: 70
             call: 4194304
             hitFrameBool: 0
             awaitEnum:
@@ -1445,7 +1445,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 70
+          - hitFramePoints: 89
             call: 262144
             hitFrameBool: 0
             awaitEnum:
@@ -1481,7 +1481,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 80
+          - hitFramePoints: 90
             call: 2
             hitFrameBool: 0
             awaitEnum:
@@ -1517,7 +1517,7 @@ MonoBehaviour:
             _hurtboxType: 0
             _cameraAnimation: {fileID: 0}
             renderOpponent: 0
-          - hitFramePoints: 80
+          - hitFramePoints: 91
             call: 4
             hitFrameBool: 0
             awaitEnum:
@@ -8091,7 +8091,7 @@ MonoBehaviour:
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
           renderOpponent: 0
-        - hitFramePoints: 45
+        - hitFramePoints: 55
           call: 262144
           hitFrameBool: 0
           awaitEnum:
@@ -8421,7 +8421,7 @@ MonoBehaviour:
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
           renderOpponent: 0
-        - hitFramePoints: 45
+        - hitFramePoints: 55
           call: 262144
           hitFrameBool: 0
           awaitEnum:
