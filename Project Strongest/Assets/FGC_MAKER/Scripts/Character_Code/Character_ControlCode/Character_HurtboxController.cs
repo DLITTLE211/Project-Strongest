@@ -93,7 +93,7 @@ public class Character_HurtboxController : MonoBehaviour
             Collider[] cols = Physics.OverlapBox
                 (collisionBox.currentCollider.bounds.center,
                 collisionBox.currentCollider.bounds.extents,
-                collisionBox.currentCollider.transform.rotation);
+                collisionBox.currentCollider.transform.rotation, LayerMask.GetMask("Stage"));
             foreach (Collider c in cols)
             {
                 if (c.transform.root == transform.root)

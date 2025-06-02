@@ -53,8 +53,13 @@ public class Character_ColliderPush : MonoBehaviour
 
     void PushBackObject(Collider otherPlayer)
     {
-        opponentFace = otherPlayer.gameObject.GetComponentInParent<Character_Base>();
-        opponentFace._cForce.beingPushed = true;
-        opponentFace._cForce.InstantForceAway(-pushBackMultiplier);
+        bool selfNotGrounded = !_base._cHurtBox.IsGrounded();
+        bool otherGrounded = _base.opponentPlayer._cHurtBox.IsGrounded();
+        if (selfNotGrounded && otherGrounded)
+        {
+            opponentFace = otherPlayer.gameObject.GetComponentInParent<Character_Base>();
+            opponentFace._cForce.beingPushed = true;
+            opponentFace._cForce.InstantForceAway(-pushBackMultiplier);
+        }
     }
 }

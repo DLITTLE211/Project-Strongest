@@ -68,13 +68,13 @@ public class Character_SubStateController_Base : MonoBehaviour
         {
             if (!_base.isLockedPause) 
             {
-                time += (1f/ Base_FrameCode.ONE_FRAME);
+                time += Base_FrameCode.ONE_FRAME;
             }
-            yield return new WaitForSeconds((1f/ Base_FrameCode.ONE_FRAME));
+            yield return new WaitForSeconds(Base_FrameCode.ONE_FRAME);
         }
+        _base.TriggerSecondaryIdleAnim();
         if (allowPlaySecondIdle())
         {
-            _base.TriggerSecondaryIdleAnim();
             CallSecondaryAnim();
             yield return new WaitForSeconds(0.2f);
             AnimatorClipInfo clipInfo = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0];
@@ -90,7 +90,8 @@ public class Character_SubStateController_Base : MonoBehaviour
     }
     bool allowPlaySecondIdle() 
     {
-        return _base._cStateMachine.At_2Idle() && _base.allowSecondIdleAnim;
+        bool inIdle = _base._cStateMachine.At_2Idle();
+        return inIdle && _base.allowSecondIdleAnim;
     }
     void CallSecondaryAnim() 
     {

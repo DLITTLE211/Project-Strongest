@@ -22,7 +22,7 @@ MonoBehaviour:
   hurtboxSizing:
     radius: 0.25
     hurtboxPosition: {x: 0.25, y: 0.25, z: -0.5}
-    hurtboxSizing: {x: 1, y: 2, z: 1.35}
+    hurtboxSizing: {x: 1, y: 1.85, z: 1.35}
     RightFacingBias: -0.25
     LeftFacingBias: -0.25
   collisionSizing:
@@ -30,7 +30,7 @@ MonoBehaviour:
     headHeight: 0.27
     headHurtboxPositioning: {x: 0.5, y: 0.48, z: 0}
     bodyRadius: 0.75
-    bodyHeight: 0.99
+    bodyHeight: 1.07
     bodyHurtboxPositioning: {x: 0.45, y: 0, z: 0}
   MoveVelocity: 1.85
   JumpForce: 350

@@ -36,7 +36,10 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             leftPlayerChosenProfile = _characterSelectController.GetLeftPlayerProfile();
             rightPlayerChosenProfile = _characterSelectController.GetRightPlayerProfile();
             chosenStage = _stageSelectController.GetChosenStage();
-            _displayController.CloseAndDisplayPlayerData();
+            if (_characterSelectSetup.currentSet.gameMode != GameMode.Training)
+            {
+                _displayController.CloseAndDisplayPlayerData();
+            }
             Task[] tasks = new Task[]
             {
             _characterSelectSetup.DisableCharacterCursors(),
@@ -59,7 +62,6 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             else
             {
                 _mainMenuCamera.SetActive(false);
-                SceneManager.UnloadSceneAsync("MainGame_MenuScene");
                 SceneManager.LoadSceneAsync("MainGame_Arena", LoadSceneMode.Additive);
             }
         }
@@ -68,13 +70,10 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     {
         lastOp.completed -= DelayEnableArenaObject;
         await Task.Delay(2000);
-        DelayDisableVersusObject(null);
-        /*AsyncOperation newOP = SceneManager.UnloadSceneAsync("MainGame_MenuScene");
-        newOP.completed += DelayDisableVersusObject;*/
+        DelayDisableVersusObject();
     }
-    async void DelayDisableVersusObject(AsyncOperation lastOp)
+    async void DelayDisableVersusObject()
     {
-        //lastOp.completed -= DelayDisableVersusObject;
         await Task.Delay(1850);
         _displayController.OpenDisplay();
         await Task.Delay(2000);
