@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 using System.Threading.Tasks;
 
 public class CharacterSelect_LoadArena : MonoBehaviour
 {
+    [SerializeField] private TMP_Text text;
     [SerializeField] private GameObject _mainMenuCamera;
     [SerializeField] private VersusMenu_DisplayController _displayController;
     [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
@@ -38,6 +40,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             chosenStage = _stageSelectController.GetChosenStage();
             if (_characterSelectSetup.currentSet.gameMode != GameMode.Training)
             {
+                text.text = $" is Display Active{_displayController.gameObject.activeInHierarchy}";
                 _displayController.CloseAndDisplayPlayerData();
             }
             Task[] tasks = new Task[]

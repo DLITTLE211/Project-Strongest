@@ -8,6 +8,7 @@ using DG.Tweening;
 
 public class VersusMenu_DisplayController : MonoBehaviour
 {
+    [SerializeField] private TMP_Text text;
     [SerializeField] private BorderObject_Transform UpperBorderObject;
     [SerializeField] private BorderObject_Transform BottomBorderObject;
 
@@ -21,16 +22,10 @@ public class VersusMenu_DisplayController : MonoBehaviour
         DontDestroyOnLoad(this);
         VersusImage.DOFade(0, 0);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T)) 
-        {
-            CloseAndDisplayPlayerData();
-        }
-    }
     public int index;
     public void CloseAndDisplayPlayerData()
     {
+        text.text += $" is BorderObject Active{UpperBorderObject.BorderObject.gameObject.activeInHierarchy}";
         VersusImage.DOFade(0, 0);
 
         UpperBorderObject.BorderObject.DOLocalMoveY(UpperBorderObject._endYPosition, 1.15f).SetEase(Ease.InBack).OnComplete(() => 
