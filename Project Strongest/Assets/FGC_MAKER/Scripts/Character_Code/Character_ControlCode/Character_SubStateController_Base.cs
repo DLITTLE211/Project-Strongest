@@ -83,7 +83,10 @@ public class Character_SubStateController_Base : MonoBehaviour
                 float length = clipInfo.clip.length;
                 yield return new WaitForSeconds(length);
             }
-            replayBasicIdle();
+            if (allowPlaySecondIdle())
+            {
+                replayBasicIdle();
+            }
         }
         _base.allowSecondIdleAnim = false;
         canPlaySecondIdle = true;

@@ -253,14 +253,13 @@ public class CollisionDetection : MonoBehaviour
 
     public void ClearAdditionalHit(HitBox _hitbox)
     {
-        _hitbox.hitboxProperties.hitLanded = false;
-        /*if (_hitbox != null) 
+        try
         {
-            if(_hitbox.hitboxProperties != null)
-            {
-                _hitbox.hitboxProperties.hitLanded = false;
-            }
-            DestroyHitbox(_hitbox);
-        }*/
+            _hitbox.hitboxProperties.hitLanded = false;
+        }
+        catch (NullReferenceException) 
+        {
+            return;
+        }
     }
 }
