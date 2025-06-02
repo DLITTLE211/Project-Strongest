@@ -8,7 +8,6 @@ using DG.Tweening;
 
 public class VersusMenu_DisplayObject : MonoBehaviour
 {
-    [SerializeField] private TMP_Text text;
     [SerializeField] private PlayerData_Positioning playerDataObject;
     [SerializeField] private CharacterSelect_Page _playerData;
     [SerializeField] private Image _playerImage;
@@ -61,7 +60,6 @@ public class VersusMenu_DisplayObject : MonoBehaviour
         playerDataObject._objectTransform.DOLocalMoveX(playerDataObject.xEndPos,1.15f);
         playerDataObject.playerinformationObject.DOLocalMoveX(playerDataObject.xInfoStartPos, 0f);
         playerDataObject.playerinformationObject.DOLocalMoveX(playerDataObject.xInfoEndPos, 1.15f);
-        text.text += $" is Player Data Active{playerDataObject._objectTransform.gameObject.activeInHierarchy}";
         if (func != null)
         {
             func();
