@@ -62,11 +62,18 @@ public class Character_SubStateController_Base : MonoBehaviour
     }
     IEnumerator PlaySecondIdleAnimation(Callback replayBasicIdle) 
     {
+        IState currentState = null;
         time = 0;
         canPlaySecondIdle = false;
         while (time < startSecondaryIdle) 
         {
-            if (!_base.isLockedPause) 
+            currentState = _base._cStateMachine._playerState.current.State;
+            if (!CheckIfInIdle(currentState)) 
+            {
+                time = 0;
+                yield break;
+            }
+                if (!_base.isLockedPause) 
             {
                 time += Base_FrameCode.ONE_FRAME;
             }
@@ -77,6 +84,11 @@ public class Character_SubStateController_Base : MonoBehaviour
         {
             CallSecondaryAnim();
             yield return new WaitForSeconds(0.2f);
+            if (!CheckIfInIdle(currentState))
+            {
+                time = 0;
+                yield break;
+            }
             AnimatorClipInfo clipInfo = _base._cAnimator.myAnim.GetCurrentAnimatorClipInfo(0)[0];
             if (clipInfo.clip != null)
             {
@@ -85,11 +97,20 @@ public class Character_SubStateController_Base : MonoBehaviour
             }
             if (allowPlaySecondIdle())
             {
+                if (!CheckIfInIdle(currentState))
+                {
+                    time = 0;
+                    yield break;
+                }
                 replayBasicIdle();
             }
         }
         _base.allowSecondIdleAnim = false;
         canPlaySecondIdle = true;
+    }
+    bool CheckIfInIdle(IState currentState) 
+    {
+        return currentState == _base._cStateMachine.idleStateRef;
     }
     bool allowPlaySecondIdle() 
     {

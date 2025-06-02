@@ -77,8 +77,9 @@ public class CharacterSelect_LoadArena : MonoBehaviour
         await Task.Delay(1850);
         _displayController.OpenDisplay();
         await Task.Delay(2000);
-        _mainMenuCamera.SetActive(false);
         GameManager.instance.SetLoadComplete();
+        await Task.Delay(10);
+        _mainMenuCamera.SetActive(false);
     }
     public void OnApplicationQuit()
     {
