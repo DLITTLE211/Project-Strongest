@@ -287,10 +287,6 @@ public class Character_ComboDetection : MonoBehaviour
                     {
                         ActiveFollowUpAttackCheck = new KeyValuePair<AttackInputTypes, IAttackFunctionality>(refAttackType.Key, refAttackType.Value);
                     }
-                    else
-                    {
-                        ResetCombos();
-                    }
                     Debug.Log("attack found");
                 }
             }

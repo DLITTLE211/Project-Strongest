@@ -92,7 +92,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             return;
         }
         curRekkaInput++;
-        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, AttackResetTime);
+        rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, AttackResetTime, rekkaLeewayTime);
         _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess), rekkaInput._rekkaPortion[attack].attackAfflictionSet);
     }
     public void RekkaFollowUpFunctions(Attack_BaseProperties newProperty, Callback SendAttackOnSucess) 

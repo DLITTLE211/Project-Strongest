@@ -4778,11 +4778,11 @@ MonoBehaviour:
           _meterAwardedOnHit: 4
           attackScalingPercent: 19
           dashCancelable: 0
-          JumpCancelable: 1
+          JumpCancelable: 0
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 128
-            nextAvailableAttackRoute: 473440
+            CurrentLevel: 8
+            nextAvailableAttackRoute: 474992
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -4980,7 +4980,7 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 6C
+      - _correctSequence: 5C
         correctAttack: 0
         correctInput: 32
         moveInput: 0
@@ -5095,7 +5095,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 60
+    leewayTime: 40
   - SpecialAttackName: Standing Light Punch
     _attackInput:
       _correctInput:
@@ -5398,13 +5398,13 @@ MonoBehaviour:
             Hit_Value: 8
             Block_VKB_Level: 0
             Block_Value: 1.25
-          KnockDown: 2
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 60
+    leewayTime: 40
   - SpecialAttackName: Standing Heavy Punch
     _attackInput:
       _correctInput:
@@ -5749,7 +5749,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 60
+    leewayTime: 40
   - SpecialAttackName: Standing Light Kick
     _attackInput:
       _correctInput:
@@ -6058,7 +6058,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 60
+    leewayTime: 40
   - SpecialAttackName: Standing Heavy Kick
     _attackInput:
       _correctInput:
@@ -6090,7 +6090,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             CurrentLevel: 512
-            nextAvailableAttackRoute: 474112
+            nextAvailableAttackRoute: 474144
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -6183,11 +6183,11 @@ MonoBehaviour:
         property:
           _attackName: Flurry Punches
           _cTimer: {fileID: 0}
-          rawAttackDamage: 1.05
+          rawAttackDamage: 2.05
           rawChipDamage: 0
           counterHitDamageMult: 1.25
           attackMainStunValues:
-            hitstunValue: 10
+            hitstunValue: 15
             blockStunValue: 8
             hitstopValue: 3
             blockStopValue: 1
@@ -6314,7 +6314,7 @@ MonoBehaviour:
             blockStunValue: 4
             hitstopValue: 7
             blockStopValue: 1
-          hitLevel: 96
+          hitLevel: 68
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
@@ -6403,17 +6403,17 @@ MonoBehaviour:
             Block_HKB_Level: 2
             Block_Value: 0.45
           VerticalKB_Data:
-            Hit_VKB_Level: 1
+            Hit_VKB_Level: 0
             Hit_Value: 9
             Block_VKB_Level: 0
-            Block_Value: 0
-          KnockDown: 4
+            Block_Value: 1.45
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 60
+    leewayTime: 40
   commandNormalAttacks:
   - SpecialAttackName: Jumping Jaw Strike
     _attackInput:
