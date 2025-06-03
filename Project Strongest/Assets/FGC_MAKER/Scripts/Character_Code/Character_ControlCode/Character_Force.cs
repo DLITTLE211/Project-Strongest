@@ -484,6 +484,20 @@ public class Character_Force : MonoBehaviour
     public void SendKnockBackOnHit(Attack_BaseProperties property,bool blockedAttack)
     {
         _base.UnlockPosWithoutStorage();
+        /*
+         * float H_Knockback = 0;
+         * float V_KnockUp = 0;
+         * VerticalKnockbackData newVKU= property.GetVerticalKnockUpData(blockedAttack);
+         * float verticalMultiplier = property.Level == KnockDown ? -1 : 1;
+         * HorizontalKnockbackData newHKB= property.GetHorizontalKnockBackData(blockedAttack);
+         * float horizontalMultiplier = _side.thisPosition._directionFacing == _direction.FacingRight ? -1 : 1;
+         * 
+         * H_Knockback = horizontalMultiplier * newHKB.HitValue;
+         * V_KnockUp = verticalMultiplier * (Mathf.Abs(newVKU.HitValue) - _base._cDamageCalculator.GetCurrentScaling());
+         * 
+         * _myRB.AddForce(transform.right * H_Knockback, ForceMode.VelocityChange); 
+         * _myRB.AddForce(transform.up * V_KnockUp, ForceMode.VelocityChange);
+         */
         float H_KnockBack = 0;
         float V_KnockDown = 0;
         if (blockedAttack) 
@@ -534,6 +548,10 @@ public class Character_Force : MonoBehaviour
             else if (property._airInfo == AirAttackInfo.AirOnly)
             {
                 if (_base._cHurtBox.IsGrounded() == false)
+                {
+                    _myRB.AddForce(transform.up * -V_KnockDown, ForceMode.VelocityChange);
+                }
+                else
                 {
                     _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
                 }
