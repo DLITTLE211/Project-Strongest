@@ -1928,7 +1928,7 @@ MonoBehaviour:
     property:
       _attackName: Demon Aura Attack
       _cTimer: {fileID: 0}
-      rawAttackDamage: 0
+      rawAttackDamage: 10
       rawChipDamage: 0
       counterHitDamageMult: 1
       attackMainStunValues:
@@ -1975,7 +1975,7 @@ MonoBehaviour:
           recoveryAmount: 20
           totalRecovery: 0
           _extraPoints:
-          - hitFramePoints: 20
+          - hitFramePoints: 15
             call: 1048576
             hitFrameBool: 0
             awaitEnum:
@@ -2433,7 +2433,7 @@ MonoBehaviour:
                   - activeFrame: 14
                     inactiveFrame: 20
                   recoveryEnd: 0
-                  recoveryAmount: 10
+                  recoveryAmount: 15
                   totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 5
@@ -2552,7 +2552,7 @@ MonoBehaviour:
                   - activeFrame: 21
                     inactiveFrame: 27
                   recoveryEnd: 0
-                  recoveryAmount: 15
+                  recoveryAmount: 20
                   totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 9
@@ -2978,7 +2978,7 @@ MonoBehaviour:
                   - activeFrame: 13
                     inactiveFrame: 20
                   recoveryEnd: 0
-                  recoveryAmount: 15
+                  recoveryAmount: 17
                   totalRecovery: 0
                   _extraPoints: []
                 _hitCount:
@@ -3061,7 +3061,7 @@ MonoBehaviour:
                   - activeFrame: 20
                     inactiveFrame: 25
                   recoveryEnd: 0
-                  recoveryAmount: 12
+                  recoveryAmount: 19
                   totalRecovery: 0
                   _extraPoints:
                   - hitFramePoints: 4
@@ -6403,12 +6403,12 @@ MonoBehaviour:
         startup: 0
         activeWindows:
         - activeFrame: 3
-          inactiveFrame: 100
+          inactiveFrame: 65
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 20
         totalRecovery: 5
         _extraPoints:
-        - hitFramePoints: 40
+        - hitFramePoints: 50
           call: 262144
           hitFrameBool: 0
           awaitEnum:
@@ -6553,9 +6553,9 @@ MonoBehaviour:
         startup: 0
         activeWindows:
         - activeFrame: 3
-          inactiveFrame: 100
+          inactiveFrame: 65
         recoveryEnd: 0
-        recoveryAmount: 0
+        recoveryAmount: 20
         totalRecovery: 5
         _extraPoints:
         - hitFramePoints: 10
@@ -6594,7 +6594,7 @@ MonoBehaviour:
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
           renderOpponent: 0
-        - hitFramePoints: 40
+        - hitFramePoints: 50
           call: 262144
           hitFrameBool: 0
           awaitEnum:

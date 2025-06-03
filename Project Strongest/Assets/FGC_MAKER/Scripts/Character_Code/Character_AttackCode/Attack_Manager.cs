@@ -37,7 +37,11 @@ public class Attack_Manager : MonoBehaviour
     }
     public Attack_CancelInfo GetLastCancelInfo() 
     {
-        return Combo[Combo.Count - 1].cancelProperty;
+        if (Combo.Count > 0)
+        {
+            return Combo[Combo.Count - 1].cancelProperty;
+        }
+        return null;
     }
     public void ClearAttacks()
     {

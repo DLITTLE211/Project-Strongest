@@ -3148,8 +3148,8 @@ MonoBehaviour:
           _strongAffliction: 0
     curInput: 0
     inStanceState: 0
-    stanceHeldTime: 75
-    AttackResetTime: 80
+    stanceHeldTime: 80
+    AttackResetTime: 90
     attackAfflictionSet:
       _weakAffliction: 15
       _mediumAffliction: 15
@@ -4778,11 +4778,11 @@ MonoBehaviour:
           _meterAwardedOnHit: 4
           attackScalingPercent: 19
           dashCancelable: 0
-          JumpCancelable: 0
+          JumpCancelable: 1
           _airInfo: 0
           cancelProperty:
-            CurrentLevel: 8
-            nextAvailableAttackRoute: 474992
+            CurrentLevel: 128
+            nextAvailableAttackRoute: 473440
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -6090,7 +6090,7 @@ MonoBehaviour:
           _airInfo: 0
           cancelProperty:
             CurrentLevel: 512
-            nextAvailableAttackRoute: 474144
+            nextAvailableAttackRoute: 474112
           _moveType: 3
           AttackAnims:
             playerAnim: {fileID: 0}
@@ -6314,7 +6314,7 @@ MonoBehaviour:
             blockStunValue: 4
             hitstopValue: 7
             blockStopValue: 1
-          hitLevel: 68
+          hitLevel: 96
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
@@ -6407,7 +6407,7 @@ MonoBehaviour:
             Hit_Value: 9
             Block_VKB_Level: 0
             Block_Value: 0
-          KnockDown: 6
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -6672,7 +6672,7 @@ MonoBehaviour:
             blockStunValue: 2
             hitstopValue: 6
             blockStopValue: 0
-          hitLevel: 68
+          hitLevel: 96
           attackHashes: 0
           _meterRequirement: 0
           isInInstall: 0
@@ -6765,7 +6765,7 @@ MonoBehaviour:
             Hit_Value: 9
             Block_VKB_Level: 1
             Block_Value: 1.45
-          KnockDown: 6
+          KnockDown: 4
         attackInputState:
           _state: 0
           directionalInput: 0
@@ -6829,7 +6829,43 @@ MonoBehaviour:
               recoveryEnd: 12
               recoveryAmount: 2
               totalRecovery: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 8
+                call: 4
+                hitFrameBool: 0
+                awaitEnum:
+                  keyRef: 0
+                  awaitingCheck: 0
+                Force: -7
+                projectileSpeed: 0
+                camPos: {x: 0, y: 0, z: 0}
+                camRotation: {x: 0, y: 0, z: 0}
+                snapMovement: 0
+                customDamage:
+                  rawAttackDamage: 0
+                  counterHitDamageMult: 0
+                  customDamageFieldStunValues:
+                    hitstunValue: 0
+                    blockStunValue: 0
+                    hitstopValue: 0
+                    blockStopValue: 0
+                  hitLevel: 0
+                  isFinalAttack: 0
+                  isScaling: 0
+                  lateralKBP:
+                    Hit_HKB_Level: 0
+                    Hit_Value: 0
+                    Block_HKB_Level: 0
+                    Block_Value: 0
+                  verticalKBP:
+                    Hit_VKB_Level: 0
+                    Hit_Value: 0
+                    Block_VKB_Level: 0
+                    Block_Value: 0
+                  KnockDown: 0
+                _hurtboxType: 0
+                _cameraAnimation: {fileID: 0}
+                renderOpponent: 0
             _hitCount:
               _count: 0
               _startCount: 0
@@ -6919,7 +6955,7 @@ MonoBehaviour:
                 awaitEnum:
                   keyRef: 0
                   awaitingCheck: 0
-                Force: -15
+                Force: -10
                 projectileSpeed: 0
                 camPos: {x: 0, y: 0, z: 0}
                 camRotation: {x: 0, y: 0, z: 0}

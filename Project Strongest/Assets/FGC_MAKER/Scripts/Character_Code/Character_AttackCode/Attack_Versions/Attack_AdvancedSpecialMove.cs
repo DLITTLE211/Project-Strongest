@@ -97,10 +97,13 @@ public class Attack_AdvancedSpecialMove : AdvancedSpecialBase, IAttackFunctional
     }
     public void HandleSubAnimAttackInfo()
     {
-        _customAnimationField._customAnimation[0].SetAttackAnim(_curBase._cAnimator);
-        _customAnimationField._customAnimation[0].AddRequiredCallbacks(_curBase);
-        _customAnimationField._customAnimation[0].AddCustomCallbacks(_customAnimationField._customAnimation[0]);
-        _curBase._cAnimator.StartThrowFrameCount(property, _customAnimationField._customAnimation[0], _customAnimationField.attackAfflictionSet);
+        if (_customAnimationField._customAnimation.Count > 0)
+        {
+            _customAnimationField._customAnimation[0].SetAttackAnim(_curBase._cAnimator);
+            _customAnimationField._customAnimation[0].AddRequiredCallbacks(_curBase);
+            _customAnimationField._customAnimation[0].AddCustomCallbacks(_customAnimationField._customAnimation[0]);
+            _curBase._cAnimator.StartThrowFrameCount(property, _customAnimationField._customAnimation[0], _customAnimationField.attackAfflictionSet);
+        }
     }
     public void HandleSuperMultipleAnimAttackInfo()
     {

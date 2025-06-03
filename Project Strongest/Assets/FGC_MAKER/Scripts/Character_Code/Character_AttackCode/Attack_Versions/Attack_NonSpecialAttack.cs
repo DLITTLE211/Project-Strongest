@@ -69,9 +69,17 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttackFunctiona
             Debug.LogError($"Current Attack input exceeds string count. Returning...");
             return;
         }
-        if (!_attackInput._correctInput[curAttack-1].property.hitConnected)
+        try
         {
-            Debug.LogError($"Previous Attack in string did not connect. Returning...");
+            if (!_attackInput._correctInput[curAttack - 1].property.hitConnected)
+            {
+                Debug.LogError($"Previous Attack in string did not connect. Returning...");
+                return;
+            }
+        }
+        catch (ArgumentOutOfRangeException) 
+        {
+            Debug.LogError($"Attack button does not exist in string normal. Returning...");
             return;
         }
         Attack_BaseProperties newNormalAttack = _attackInput._correctInput[curAttack].property;

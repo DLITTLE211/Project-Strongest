@@ -11,6 +11,7 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public TimerType _type;
     private bool throwLanded, superLanded;
     private bool permanentStance;
+    bool subTimerReset;
     // Start is called before the first frame update
     public void ResetTimer()
     {
@@ -21,8 +22,12 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     }
     public void CloseCurrentSubAttackWindow() 
     {
-        _subAttackTimer = 0;
-        _base.comboList3_0.CloseSubAttackWindow();
+        if (!subTimerReset)
+        {
+            _subAttackTimer = 0;
+            _base.comboList3_0.CloseSubAttackWindow();
+            subTimerReset = true;
+        }
     }
     public void SetStartingValues(float newTime)
     {
@@ -34,13 +39,20 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     }
     public void ResetTimerSuccess()
     {
-        FrameCountTimer = StartFrameCountTimer;
+        if (FrameCountTimer < StartFrameCountTimer)
+        {
+            FrameCountTimer = StartFrameCountTimer;
+        }
     }
 
     public void ResetTimeOnSpecialMove(float time, float _subAttackTime = 0f)
     {
         _frameCountTimer = time;
         _subAttackTimer = _subAttackTime;
+        if(_subAttackTime > 0f) 
+        {
+            subTimerReset = false;
+        }
     }
     // Update is called once per frame
     private void Update()

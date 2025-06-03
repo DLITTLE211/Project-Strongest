@@ -69,6 +69,14 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
         curRekkaInput = 0;
         usedRekkas = new List<Attack_BaseProperties>();
     }
+    public  Attack_BaseProperties ReturnIndexedRekka(int index) 
+    {
+        return rekkaInput._rekkaProperties[index]; 
+    }
+    public bool ReturnUsedRekkas(Attack_BaseProperties property)
+    {
+        return usedRekkas.Contains(property);
+    }
     public void DoFollowUpAttack(int attack, Callback SendAttackOnSucess)
     {
         Attack_BaseProperties newProperty = rekkaInput._rekkaPortion[attack].individualRekkaAttack._correctInput[0].property;
@@ -77,13 +85,13 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
             Debug.LogError($"Attack: \"{newProperty._attackName}\" has already been used. Returning...");
             return;
         }
+        usedRekkas.Add(newProperty);
         if (curRekkaInput >= rekkaInputCount)
         {
             Debug.LogError($"Rekka Input Allowance exceeded. Returning");
             return;
         }
         curRekkaInput++;
-        usedRekkas.Add(newProperty);
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka, AttackResetTime);
         _curBase._aManager.ReceiveAttack(newProperty, () => RekkaFollowUpFunctions(newProperty, SendAttackOnSucess), rekkaInput._rekkaPortion[attack].attackAfflictionSet);
     }
@@ -100,9 +108,9 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttackFunctional
     public void PreformAttack(Callback SendAttackOnSucess)
     {
         _curBase.comboList3_0.ClearFollowUpAttack();
+        ResetCombo();
         _curBase._aManager.ReceiveAttack(rekkaInput.mainAttackProperty,SendAttackOnSucess, attackAfflictionSet);
         SetRekkaStateTrue();
-        ResetCombo();
         rekkaInput.mainAttackProperty.InputTimer.SetTimerType(TimerType.InRekka,AttackResetTime, rekkaLeewayTime);
         inRekkaState = true;
     }

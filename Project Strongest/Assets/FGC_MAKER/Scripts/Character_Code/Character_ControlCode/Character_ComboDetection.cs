@@ -13,6 +13,7 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private AttackInputTypes _cMAnyChangeInputLog;
     [SerializeField] private AttackInputTypes _cMOnChangeInputLog;
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
+    public KeyValuePair<AttackInputTypes, IAttackFunctionality> FollowUpCheck { get { return ActiveFollowUpAttackCheck; } }
     private List<KeyValuePair<AttackInputTypes, IAttackFunctionality>> inputtedAttacks;
     private string curString;
     private char[] curStringArray;
@@ -196,6 +197,12 @@ public class Character_ComboDetection : MonoBehaviour
                         }
                         if (followUpAttackIndex > -1)
                         {
+                            Attack_BaseProperties inputtedRekkaFollowUp = ActiveFollowUpAttackCheck.Value.ReturnIndexedRekka(followUpAttackIndex);
+                            bool containsRekka = ActiveFollowUpAttackCheck.Value.ReturnUsedRekkas(inputtedRekkaFollowUp);
+                            if (containsRekka) 
+                            {
+                                return;
+                            }
                             ActiveFollowUpAttackCheck.Value.DoFollowUpAttack(followUpAttackIndex, () => _base.comboList3_0.SetCurrentAttack(ActiveFollowUpAttackCheck));
                         }
                         else
@@ -378,35 +385,39 @@ public class Character_ComboDetection : MonoBehaviour
         for (int i = 0; i < _base.CharacterMoveListAttacks.Count; i++)
         {
             entry = _base.CharacterMoveListAttacks.ElementAt(i);
-            if (!_base._aManager.GetLastCancelInfo().nextAvailableAttackRoute.HasFlag(entry.Value.GetCancelInfoType().CurrentLevel)) 
+            Attack_CancelInfo _currentCancelInfo = _base._aManager.GetLastCancelInfo();
+            if (_currentCancelInfo != null)
             {
-                continue;
-            }
-            MoveType currentMoveType = entry.Value.GetAttackMoveType();
-            int moveTypeIndex = (int)currentMoveType;
-            if (moveTypeIndex > 3)
-            {
-                if (entry.Key.specialMoveTypeInput != null)
+                if (!_currentCancelInfo.nextAvailableAttackRoute.HasFlag(entry.Value.GetCancelInfoType().CurrentLevel))
                 {
-                    string moveInDict = entry.Key.specialMoveTypeInput.attackString;
-                    string keyRef = key.specialMoveTypeInput.attackString;
-                    if (entry.Key.specialMoveTypeInput.attackString.Length > 0)
+                    continue;
+                }
+                MoveType currentMoveType = entry.Value.GetAttackMoveType();
+                int moveTypeIndex = (int)currentMoveType;
+                if (moveTypeIndex > 3)
+                {
+                    if (entry.Key.specialMoveTypeInput != null)
                     {
-                        string attackButton = moveInDict.Substring(moveInDict.Length - 1);
-                        string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
-                        if (keyRef.Contains(movementOnlyString))
+                        string moveInDict = entry.Key.specialMoveTypeInput.attackString;
+                        string keyRef = key.specialMoveTypeInput.attackString;
+                        if (entry.Key.specialMoveTypeInput.attackString.Length > 0)
                         {
-                            int motionEndIndex = keyRef.IndexOf(movementOnlyString[0]);
-                            keyRef = keyRef.Substring(motionEndIndex);
-                            if (keyRef.Contains(attackButton))
+                            string attackButton = moveInDict.Substring(moveInDict.Length - 1);
+                            string movementOnlyString = moveInDict.Remove(moveInDict.Length - 1);
+                            if (keyRef.Contains(movementOnlyString))
                             {
-                                int lastButtonIndex = key.specialMoveTypeInput.attackString.Length - 1;
-                                string finalButton = key.specialMoveTypeInput.attackString[lastButtonIndex].ToString();
-                                if (finalButton == attackButton.ToString())
+                                int motionEndIndex = keyRef.IndexOf(movementOnlyString[0]);
+                                keyRef = keyRef.Substring(motionEndIndex);
+                                if (keyRef.Contains(attackButton))
                                 {
-                                    keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
-                                    key.specialMoveTypeInput.attackString = keyRef;
-                                    return entry;
+                                    int lastButtonIndex = key.specialMoveTypeInput.attackString.Length - 1;
+                                    string finalButton = key.specialMoveTypeInput.attackString[lastButtonIndex].ToString();
+                                    if (finalButton == attackButton.ToString())
+                                    {
+                                        keyRef = keyRef.Remove(keyRef.IndexOf(attackButton), attackButton.Length);
+                                        key.specialMoveTypeInput.attackString = keyRef;
+                                        return entry;
+                                    }
                                 }
                             }
                         }

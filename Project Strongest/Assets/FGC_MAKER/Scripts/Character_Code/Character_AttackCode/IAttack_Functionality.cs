@@ -15,6 +15,9 @@ public interface IAttackFunctionality
     #endregion
 
     #region Virtual Functions
+
+    virtual Attack_BaseProperties ReturnIndexedRekka(int index) { return null; }
+    virtual bool ReturnUsedRekkas(Attack_BaseProperties property) { return false; }
     virtual int GetCustomAnimLength() { return -1; }
     virtual void DoFollowUpKill(int kill) { }
     virtual void DoFollowUpAttack(Character_ButtonInput buttonInput,int attack, Callback SendAttackOnSucess) { }
