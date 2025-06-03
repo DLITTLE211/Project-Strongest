@@ -179,7 +179,7 @@ public class Character_SubStateController_Base : MonoBehaviour
         }
         else 
         {
-            if (_base.playerID == 0)
+            if (_base._side == 0)
             {
                 return new List<string> { "Default", "TransparentFX", "Ignore Raycast", "Outlined Objects", "Water", "UI", "Outlined Player1"}.ToArray();
             }

@@ -6403,12 +6403,12 @@ MonoBehaviour:
         startup: 0
         activeWindows:
         - activeFrame: 3
-          inactiveFrame: 120
+          inactiveFrame: 100
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 5
         _extraPoints:
-        - hitFramePoints: 45
+        - hitFramePoints: 40
           call: 262144
           hitFrameBool: 0
           awaitEnum:
@@ -6423,9 +6423,9 @@ MonoBehaviour:
             rawAttackDamage: 12
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 18
+              hitstunValue: 25
               blockStunValue: 0
-              hitstopValue: 4
+              hitstopValue: 8
               blockStopValue: 0
             hitLevel: 256
             isFinalAttack: 1
@@ -6553,7 +6553,7 @@ MonoBehaviour:
         startup: 0
         activeWindows:
         - activeFrame: 3
-          inactiveFrame: 120
+          inactiveFrame: 100
         recoveryEnd: 0
         recoveryAmount: 0
         totalRecovery: 5
@@ -6594,7 +6594,7 @@ MonoBehaviour:
           _hurtboxType: 0
           _cameraAnimation: {fileID: 0}
           renderOpponent: 0
-        - hitFramePoints: 45
+        - hitFramePoints: 40
           call: 262144
           hitFrameBool: 0
           awaitEnum:
@@ -6609,9 +6609,9 @@ MonoBehaviour:
             rawAttackDamage: 12
             counterHitDamageMult: 0
             customDamageFieldStunValues:
-              hitstunValue: 18
+              hitstunValue: 25
               blockStunValue: 0
-              hitstopValue: 4
+              hitstopValue: 8
               blockStopValue: 0
             hitLevel: 256
             isFinalAttack: 1

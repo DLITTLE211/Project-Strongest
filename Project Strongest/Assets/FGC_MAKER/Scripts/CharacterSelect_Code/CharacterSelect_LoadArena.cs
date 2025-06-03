@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 public class CharacterSelect_LoadArena : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuCamera;
+    [SerializeField] private GameObject _displayControllerObject;
     [SerializeField] private VersusMenu_DisplayController _displayController;
     [SerializeField] private CSSubMenu_CharacterSelectController _characterSelectController;
     [SerializeField] private CSSubMenu_StageSelectController _stageSelectController;
@@ -39,6 +40,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             chosenStage = _stageSelectController.GetChosenStage();
             if (_characterSelectSetup.currentSet.gameMode != GameMode.Training)
             {
+                _displayControllerObject.SetActive(true);
                 _displayController.CloseAndDisplayPlayerData();
             }
             Task[] tasks = new Task[]
@@ -81,6 +83,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
         GameManager.instance.SetLoadComplete();
         await Task.Delay(10);
         _mainMenuCamera.SetActive(false);
+        _displayControllerObject.SetActive(false);
     }
     public void OnApplicationQuit()
     {
