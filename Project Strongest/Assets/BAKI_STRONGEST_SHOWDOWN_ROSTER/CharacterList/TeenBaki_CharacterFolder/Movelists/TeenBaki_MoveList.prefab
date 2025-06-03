@@ -3513,8 +3513,8 @@ MonoBehaviour:
       _rekkaProperties: []
     curRekkaInput: 0
     rekkaInputCount: 1
-    rekkaLeewayTime: 50
-    AttackResetTime: 65
+    rekkaLeewayTime: 60
+    AttackResetTime: 75
     attackAfflictionSet:
       _weakAffliction: 1
       _mediumAffliction: 8
@@ -4980,7 +4980,7 @@ MonoBehaviour:
         attackInputState:
           _state: 0
           directionalInput: 0
-      - _correctSequence: 5C
+      - _correctSequence: 6C
         correctAttack: 0
         correctInput: 32
         moveInput: 0
@@ -5095,7 +5095,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 40
+    leewayTime: 60
   - SpecialAttackName: Standing Light Punch
     _attackInput:
       _correctInput:
@@ -5398,13 +5398,13 @@ MonoBehaviour:
             Hit_Value: 8
             Block_VKB_Level: 0
             Block_Value: 1.25
-          KnockDown: 4
+          KnockDown: 2
         attackInputState:
           _state: 0
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 40
+    leewayTime: 60
   - SpecialAttackName: Standing Heavy Punch
     _attackInput:
       _correctInput:
@@ -5749,7 +5749,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 40
+    leewayTime: 60
   - SpecialAttackName: Standing Light Kick
     _attackInput:
       _correctInput:
@@ -6058,7 +6058,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 40
+    leewayTime: 60
   - SpecialAttackName: Standing Heavy Kick
     _attackInput:
       _correctInput:
@@ -6413,7 +6413,7 @@ MonoBehaviour:
           directionalInput: 0
     curInput: 0
     curAttack: 0
-    leewayTime: 40
+    leewayTime: 60
   commandNormalAttacks:
   - SpecialAttackName: Jumping Jaw Strike
     _attackInput:

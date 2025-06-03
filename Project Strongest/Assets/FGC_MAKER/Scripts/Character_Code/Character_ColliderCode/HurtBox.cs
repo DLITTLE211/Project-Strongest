@@ -258,6 +258,7 @@ public class HurtBox : CollisionDetection
     void ReceiveCounterData()
     {
         Character_Base Base_Target = currentHitbox.GetComponentInParent<Character_Base>();
+        currentHitbox.DestroySelf();
         Character_Base Base_Attacker = target.GetComponentInParent<Character_Base>();
         if (Base_Target._cHitController.Recovering)
         {
