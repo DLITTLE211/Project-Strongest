@@ -15,7 +15,6 @@ public interface IAttackFunctionality
     #endregion
 
     #region Virtual Functions
-
     virtual Attack_BaseProperties ReturnIndexedRekka(int index) { return null; }
     virtual bool ReturnUsedRekkas(Attack_BaseProperties property) { return false; }
     virtual int GetCustomAnimLength() { return -1; }
@@ -26,7 +25,6 @@ public interface IAttackFunctionality
     virtual void SetFollowUpAttackInt() {}
     virtual void ResetAttackData() { }
     virtual MoveListAttackInfo CreateMoveListData() { return null; }
-    virtual void DecreaseGatlingCount() { }
     virtual bool CheckAttackContains(Attack_BaseProperties newAttack) { return false; }
     virtual void CloseSubAttackWindow() { }
     #endregion

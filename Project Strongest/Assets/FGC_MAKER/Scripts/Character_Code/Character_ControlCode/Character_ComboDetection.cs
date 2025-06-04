@@ -14,7 +14,7 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private AttackInputTypes _cMOnChangeInputLog;
     [SerializeField] private KeyValuePair<AttackInputTypes, IAttackFunctionality> ActiveFollowUpAttackCheck;
     public KeyValuePair<AttackInputTypes, IAttackFunctionality> FollowUpCheck { get { return ActiveFollowUpAttackCheck; } }
-    private List<KeyValuePair<AttackInputTypes, IAttackFunctionality>> inputtedAttacks;
+    public List<KeyValuePair<AttackInputTypes, IAttackFunctionality>> inputtedAttacks { get; private set; }
     private string curString;
     private char[] curStringArray;
     private Character_ButtonInput lastAddedinput;

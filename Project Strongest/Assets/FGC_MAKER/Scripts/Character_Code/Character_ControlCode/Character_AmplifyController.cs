@@ -145,7 +145,7 @@ public class Character_AmplifyController : MonoBehaviour
     {
         if (chosenAmplifier != null)
         {
-            if (allowFill)
+            if (allowFill && _base.ACTIVATED)
             {
                 AllowFillMeter();
             }

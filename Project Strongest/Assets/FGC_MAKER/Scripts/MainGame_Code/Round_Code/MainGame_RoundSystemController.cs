@@ -18,6 +18,10 @@ public class MainGame_RoundSystemController : MonoBehaviour
         currentRound = 1;
         _StateMachine.CallCharacterDialogueState();
     }
+    public void ResetRoundCount()
+    {
+        currentRound = 1;
+    }
     public bool FinalRound() 
     {
         return currentRound >= CharacterSelect_LoadArena._roundInfo.winningRoundCount;

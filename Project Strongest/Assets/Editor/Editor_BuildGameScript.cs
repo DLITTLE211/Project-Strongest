@@ -18,7 +18,7 @@ public class Editor_BuildGameScript : MonoBehaviour
         var rootFolder = $"{FolderDestination}/";
         DateTime currentTimeOfGeneration = DateTime.Now;
         string date = $"{currentTimeOfGeneration.Month}_{currentTimeOfGeneration.Day}";
-        var buildFolder = Path.Combine(rootFolder, $"BAKI_SS_TESTBUILD_{date}");
+        var buildFolder = Path.Combine(rootFolder, $"BAKI_UF_TESTBUILD_{date}");
         /* Delete existing Build Folder if it exists */
         FileUtil.DeleteFileOrDirectory(buildFolder);
 

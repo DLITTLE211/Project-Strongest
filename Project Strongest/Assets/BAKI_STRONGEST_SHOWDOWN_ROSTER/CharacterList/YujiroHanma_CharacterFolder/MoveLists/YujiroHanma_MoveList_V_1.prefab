@@ -257,6 +257,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -463,6 +467,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -904,6 +912,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       attackAfflictionSet:
         _weakAffliction: 4
         _mediumAffliction: 6
@@ -1166,6 +1178,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -1355,6 +1371,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       attackAfflictionSet:
         _weakAffliction: 2
         _mediumAffliction: 7
@@ -1416,7 +1436,7 @@ MonoBehaviour:
         attackType: 1
         hb_placement: {x: 1.39, y: 0.25, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
-        hb_size: {x: 1.154, y: 0.85}
+        hb_size: {x: 1.154, y: 1.15}
         extendedHitBox: {fileID: 0}
         hurtType: 0
         hu_placement: {x: 1.25, y: 0.25, z: 0}
@@ -1581,6 +1601,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -1689,6 +1713,10 @@ MonoBehaviour:
           _startCount: 1
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -1820,6 +1848,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -1901,6 +1933,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       attackAfflictionSet:
         _weakAffliction: 1
         _mediumAffliction: 5
@@ -2016,6 +2052,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -2103,6 +2143,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -2225,6 +2269,10 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+                _newAfflictSet:
+                  _weakAffliction: 0
+                  _mediumAffliction: 0
+                  _strongAffliction: 0
               hitLanded: 0
               hitConnected: 0
               hitblocked: 0
@@ -2361,6 +2409,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -2477,6 +2529,10 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+                _newAfflictSet:
+                  _weakAffliction: 0
+                  _mediumAffliction: 0
+                  _strongAffliction: 0
               hitLanded: 0
               hitConnected: 0
               hitblocked: 0
@@ -2596,6 +2652,10 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+                _newAfflictSet:
+                  _weakAffliction: 0
+                  _mediumAffliction: 0
+                  _strongAffliction: 0
               hitLanded: 0
               hitConnected: 0
               hitblocked: 0
@@ -2670,6 +2730,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -2736,6 +2800,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -2823,6 +2891,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -2903,6 +2975,10 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+                _newAfflictSet:
+                  _weakAffliction: 0
+                  _mediumAffliction: 0
+                  _strongAffliction: 0
               hitLanded: 0
               hitConnected: 0
               hitblocked: 0
@@ -2986,6 +3062,10 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+                _newAfflictSet:
+                  _weakAffliction: 0
+                  _mediumAffliction: 0
+                  _strongAffliction: 0
               hitLanded: 0
               hitConnected: 0
               hitblocked: 0
@@ -3105,6 +3185,10 @@ MonoBehaviour:
                   _startCount: 0
                   _refreshRate: 0
                   _startRefreshRate: 0
+                _newAfflictSet:
+                  _weakAffliction: 0
+                  _mediumAffliction: 0
+                  _strongAffliction: 0
               hitLanded: 0
               hitConnected: 0
               hitblocked: 0
@@ -3179,6 +3263,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -3245,6 +3333,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -3311,6 +3403,10 @@ MonoBehaviour:
             _startCount: 0
             _refreshRate: 0
             _startRefreshRate: 0
+          _newAfflictSet:
+            _weakAffliction: 0
+            _mediumAffliction: 0
+            _strongAffliction: 0
         hitLanded: 0
         hitConnected: 0
         hitblocked: 0
@@ -3429,6 +3525,10 @@ MonoBehaviour:
           _startCount: 0
           _refreshRate: 0
           _startRefreshRate: 0
+        _newAfflictSet:
+          _weakAffliction: 0
+          _mediumAffliction: 0
+          _strongAffliction: 0
       hitLanded: 0
       hitConnected: 0
       hitblocked: 0
@@ -3556,6 +3656,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -3669,6 +3773,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -3782,6 +3890,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -3865,6 +3977,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -3942,6 +4058,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4055,6 +4175,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4176,6 +4300,10 @@ MonoBehaviour:
               _startCount: 1
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4289,6 +4417,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4402,6 +4534,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4485,6 +4621,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4562,6 +4702,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4639,6 +4783,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4759,6 +4907,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4842,6 +4994,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -4961,6 +5117,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5080,6 +5240,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5199,6 +5363,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5283,6 +5451,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5366,6 +5538,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5449,12 +5625,16 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
           LateralKB_Data:
             Hit_HKB_Level: 2
-            Hit_Value: 1.5
+            Hit_Value: 2.75
             Block_HKB_Level: 0
             Block_Value: 0
           VerticalKB_Data:
@@ -5532,6 +5712,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5615,6 +5799,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5698,6 +5886,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -5781,6 +5973,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -6116,6 +6312,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -6199,6 +6399,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -6282,6 +6486,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -6366,6 +6574,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -6449,6 +6661,10 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
+      _newAfflictSet:
+        _weakAffliction: 0
+        _mediumAffliction: 0
+        _strongAffliction: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
@@ -6516,6 +6732,10 @@ MonoBehaviour:
               _startCount: 0
               _refreshRate: 0
               _startRefreshRate: 0
+            _newAfflictSet:
+              _weakAffliction: 0
+              _mediumAffliction: 0
+              _strongAffliction: 0
           hitLanded: 0
           hitConnected: 0
           hitblocked: 0
@@ -6635,6 +6855,10 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
+      _newAfflictSet:
+        _weakAffliction: 0
+        _mediumAffliction: 0
+        _strongAffliction: 0
     curInput: 0
     curAttack: 0
     lastDirection: 0
@@ -6692,6 +6916,10 @@ MonoBehaviour:
         _startCount: 0
         _refreshRate: 0
         _startRefreshRate: 0
+      _newAfflictSet:
+        _weakAffliction: 0
+        _mediumAffliction: 0
+        _strongAffliction: 0
     hitLanded: 0
     hitConnected: 0
     hitblocked: 0

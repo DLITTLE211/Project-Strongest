@@ -49,7 +49,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     int currentHitIndex;
     int hitCountTotal;
     Character_Face_Direction currentFacingDirection;
-    AfflictionSet _newAfflictSet;
+    public AfflictionSet _newAfflictSet;
     public void SetIsFollowUpAttack(bool state) 
     {
         isFollowUpAttack = state;

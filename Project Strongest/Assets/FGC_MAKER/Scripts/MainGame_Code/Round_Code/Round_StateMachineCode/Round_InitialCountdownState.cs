@@ -19,6 +19,7 @@ public class Round_InitialCountdownState : Round_BaseState
     public async override void OnEnter()
     {
         overlayCanvas.SetActive(true);
+        GameManager.instance.ResetRoundCount();
         GameManager.instance.stopWatchController.tickDownStopWatch = false;
         GameManager.instance.settingsController.SetTeleportPositions();
         GameManager.instance.stopWatchController.SetStartTimerValues();
