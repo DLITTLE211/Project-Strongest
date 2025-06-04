@@ -194,7 +194,10 @@ public class GameManager : MonoBehaviour
         {
             _settingsController.SetTeleportPositions();
         }
-        _RoundSystemController.Initialize();
+        if (_RoundSystemController.enabled)
+        {
+            _RoundSystemController.Initialize();
+        }
     }
     public void ResetRoundCount() 
     {
