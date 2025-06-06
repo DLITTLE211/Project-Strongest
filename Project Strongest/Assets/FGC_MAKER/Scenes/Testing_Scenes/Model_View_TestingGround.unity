@@ -363,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &534808886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: 26833692be3ad0245aa2e6df3e189812, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: d3489a3f1a14275459279a99921fd00c, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -1331,15 +1331,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064787197}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56da3c96d28811c4884557f12890352a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text1: {fileID: 534808888}
   text2: {fileID: 1562056128}
-  testString1: "(abcdefghijklmnopqrstuvwxyz.,?123456789\u221E)\n"
-  testString2: "123456789\u221E"
+  testString1: "(abcdefghijklmnopqrstuvwxyz.,=?1;:23456789\u221E\\*-_/)\n"
+  testString2: 
 --- !u!1 &1364707919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1562056127
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1515,8 +1515,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -1155.5051}
+  m_AnchoredPosition: {x: 0, y: -273.59}
+  m_SizeDelta: {x: 0, y: -1166.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562056128
 MonoBehaviour:
@@ -1538,7 +1538,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "<sprite name=\"0\"><sprite name=\"1\"><sprite name=\"2\"><sprite name=\"3\"><sprite
+    name=\"4\"><sprite name=\"5\"><sprite name=\"6\"><sprite name=\"7\"><sprite name=\"8\"><sprite
+    name=\"9\"><sprite name=\"\u221E\">"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1557,7 +1559,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: 26833692be3ad0245aa2e6df3e189812, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: d3489a3f1a14275459279a99921fd00c, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -1565,7 +1567,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 245.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14183,6 +14185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fb8258fac9f7346948454b64e2f4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
   personalCamera: {fileID: 0}
   _screenSpaceCanvas: {fileID: 0}
   perspectiveCamera: {fileID: 0}
@@ -14191,11 +14194,17 @@ MonoBehaviour:
   _base: {fileID: 0}
   _cAnimator: {fileID: 0}
   introAnimationComplete: 0
+  introAudioComplete: 0
+  timeBetweenAnims: []
   demonActivation: 0
   _introAnimation:
     introAnimationClips: []
     _cameraAnimationClips: []
-    introDialogue: {fileID: 0}
+    introDialogue:
+      nextPlayedClip: {fileID: 0}
+      volume: 0
+      isLooped: 0
+      isOneShot: 0
   _victoryAnimation:
     _animationClip: {fileID: 0}
     _animName: 
