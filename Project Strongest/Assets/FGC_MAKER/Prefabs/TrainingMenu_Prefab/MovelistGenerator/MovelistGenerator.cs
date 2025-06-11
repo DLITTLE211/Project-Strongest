@@ -12,18 +12,17 @@ public class MovelistGenerator : MonoBehaviour
 
     public void SetMovelist(Character_MoveList moveList, MoveListObject moveListObject)
     {
-        GameObject SuperPageTransform = GameObject.Instantiate(movelistPage, _pageTransform);
-        GridLayoutGroup superGrid = SuperPageTransform.GetComponentInChildren<GridLayoutGroup>();
-        TMP_Text tMP_Text = SuperPageTransform.GetComponentInChildren<TMP_Text>();
         if (moveList.BasicSuperAttacks.Count > 0)
         {
-            tMP_Text.SetText($"{moveList.BasicSuperAttacks[0].GetAttackMoveType()}");
+            moveListObject._layoutGroup.constraintCount = moveList.BasicSuperAttacks.Count >= 6 ? 2 : 1;
+            string message = $"{moveList.BasicSuperAttacks[0].GetAttackMoveType()}";
+            moveListObject.HeaderText.SetText(SpriteToTextColorUtility.AppendSpriteName(message.ToUpper(),Color.white));
             for (int i = moveList.BasicSuperAttacks.Count - 1; i > -1; i--)
             {
-                MakeAndSetText(moveList.BasicSuperAttacks[i].CreateMoveListData(), superGrid.transform);
+                MakeAndSetText(moveList.BasicSuperAttacks[i].CreateMoveListData(), moveListObject._layoutGroup.transform);
             }
         }
-
+        return;
         for (int i = moveList.CommandThrows.Count - 1; i > -1; i--)
         {
             MakeAndSetText(moveList.CommandThrows[i].CreateMoveListData(), moveListObject.moveListInformationTarget);

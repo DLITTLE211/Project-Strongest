@@ -19,13 +19,31 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         if (P1_MoveList.dataFilled == false)
         {
             GameObject playerMovelist = GameObject.Instantiate(_baseGenerator.gameObject, MovelistTransformObject);
+            playerMovelist.name = "Player1_MoveList";
             P1_MoveList.moveListInformationTarget = playerMovelist.transform;
+            P1_MoveList.HeaderText = playerMovelist.GetComponentInChildren<TMP_Text>();
+            P1_MoveList._layoutGroup = playerMovelist.GetComponentInChildren<GridLayoutGroup>();
             P1_MoveList._moveListObject = playerMovelist.GetComponent<MovelistGenerator>();
             P1_MoveList.MoveListName = characterName;
             _characterMoveListHeader.text = $"Player 1: {P1_MoveList.MoveListName} MOVE LIST";
             P1_MoveList._moveListObject.SetMovelist(moveList, P1_MoveList);
             P1_MoveList.dataFilled = true;
-            //SetMovelist(moveList, P1_MoveList);
+        }
+    }
+    public void SetMovelistData(MoveListObject _moveListObject, Character_MoveList moveList, string characterName) 
+    {
+        if (_moveListObject.dataFilled == false)
+        {
+            GameObject playerMovelist = GameObject.Instantiate(_baseGenerator.gameObject, MovelistTransformObject);
+            playerMovelist.name = "Player1_MoveList";
+            _moveListObject.moveListInformationTarget = playerMovelist.transform;
+            _moveListObject.HeaderText = playerMovelist.GetComponentInChildren<TMP_Text>();
+            _moveListObject._layoutGroup = playerMovelist.GetComponentInChildren<GridLayoutGroup>();
+            _moveListObject._moveListObject = playerMovelist.GetComponent<MovelistGenerator>();
+            _moveListObject.MoveListName = characterName;
+            _characterMoveListHeader.text = $"Player 1: {P1_MoveList.MoveListName} MOVE LIST";
+            _moveListObject._moveListObject.SetMovelist(moveList, P1_MoveList);
+            _moveListObject.dataFilled = true;
         }
     }
     public void SetPlayer2MoveListData(Character_MoveList moveList, string characterName)
@@ -128,6 +146,8 @@ public class MoveListObject
 {
     public Transform moveListInformationTarget;
     public MovelistGenerator _moveListObject;
+    public GridLayoutGroup _layoutGroup;
+    public TMP_Text HeaderText;
     public string MoveListName;
     public bool dataFilled;
 }

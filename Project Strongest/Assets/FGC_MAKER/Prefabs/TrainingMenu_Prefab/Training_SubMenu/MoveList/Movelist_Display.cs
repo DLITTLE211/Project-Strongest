@@ -11,9 +11,9 @@ public class Movelist_Display : MonoBehaviour
     public void SetTextData(MoveListAttackInfo newAttack)
     {
         string meterAddendum = newAttack.meterRequirement > 1 ? "bars of meter" : "bar of meter";
-        string meterMessage = newAttack.meterRequirement > 0 ? $"<size={16}>(requires {newAttack.meterRequirement} {meterAddendum})" : "";
+        string meterMessage = newAttack.meterRequirement > 0 ? $"(requires {newAttack.meterRequirement} {meterAddendum})" : "";
 
-        NameTextObject.SetText(SpriteToTextColorUtility.AppendSpriteName($"{newAttack.AttackName} {meterMessage}", Color.white));
+        NameTextObject.SetText(SpriteToTextColorUtility.AppendSpriteName($"{newAttack.AttackName.ToUpper()} {meterMessage.ToUpper()}", Color.white));
         InputTextObject.SetText(SpriteToTextColorUtility.AppendSpriteName($"{newAttack.AttackInput}", Color.white));
     }
 }
