@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: d9ef1d47f3012444699af481248c9d22
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 1
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 1_Direction
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 6778
+        width: 1422
+        height: 1413
+      alignment: 9
+      pivot: {x: 0.5443038, y: 0.49186128}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f05fee6eada09541a42d941ce2d26ea
+      internalID: -1733139733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2_Direction
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 6452
+        width: 1234
+        height: 1739
+      alignment: 9
+      pivot: {x: 0.47487843, y: 0.58711904}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ba5b067accec74a878c50e00095fd9
+      internalID: -268885559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_Direction
+      rect:
+        serializedVersion: 2
+        x: 2661
+        y: 6801
+        width: 1382
+        height: 1390
+      alignment: 9
+      pivot: {x: 0.42402315, y: 0.48345324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b80b9f0e339d3e4b803365f747bfc42
+      internalID: -714794844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_Direction
+      rect:
+        serializedVersion: 2
+        x: 4045
+        y: 6959
+        width: 1735
+        height: 1232
+      alignment: 9
+      pivot: {x: 0.62651294, y: 0.41720778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f62564ef4bc5d774ca00c5f36877733d
+      internalID: 800570077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 5_Direction
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 6959
+        width: 1234
+        height: 1232
+      alignment: 9
+      pivot: {x: 0.47487843, y: 0.41720778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a34f35086ed6f4a8b8287fe82e8892
+      internalID: -1974761260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6_Direction
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 5218
+        width: 1784
+        height: 1232
+      alignment: 9
+      pivot: {x: 0.32847533, y: 0.41720778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26363bc0c3ea1b9428f14fb116ff0932
+      internalID: -1273292163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 7_Direction
+      rect:
+        serializedVersion: 2
+        x: 1787
+        y: 5060
+        width: 1370
+        height: 1390
+      alignment: 9
+      pivot: {x: 0.5270073, y: 0.36978418}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59fd1ba49fc418541b04fe4051702005
+      internalID: -1441424464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 8_Direction
+      rect:
+        serializedVersion: 2
+        x: 3159
+        y: 4766
+        width: 1234
+        height: 1684
+      alignment: 9
+      pivot: {x: 0.47487843, y: 0.30522564}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0462b7a32d598344685bdddf03acae78
+      internalID: -152092980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 9_Direction
+      rect:
+        serializedVersion: 2
+        x: 4395
+        y: 5126
+        width: 1456
+        height: 1324
+      alignment: 9
+      pivot: {x: 0.40247253, y: 0.3882175}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ed2c9e292f92354ea775a4ffdea3c3a
+      internalID: 1184417613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: A_Button
+      rect:
+        serializedVersion: 2
+        x: 5853
+        y: 5041
+        width: 1411
+        height: 1409
+      alignment: 9
+      pivot: {x: 0.48334515, y: 0.42938253}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd8e97317421a4e4195110496cc71681
+      internalID: 356613139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: B_Button
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 3355
+        width: 1411
+        height: 1409
+      alignment: 9
+      pivot: {x: 0.48334515, y: 0.42938253}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 282ddab51b85a764ab9b6fecdc5bed5a
+      internalID: -1540457124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Center_Button_1
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 4079
+        width: 1268
+        height: 685
+      alignment: 9
+      pivot: {x: 0.4731861, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5725a49aeb85dd0498d274beb6baebfb
+      internalID: -7931799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Center_Button_2
+      rect:
+        serializedVersion: 2
+        x: 2684
+        y: 4079
+        width: 1268
+        height: 685
+      alignment: 9
+      pivot: {x: 0.4731861, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21355a696bc45344e88cefdefc7980eb
+      internalID: -215910539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Center_Button_3
+      rect:
+        serializedVersion: 2
+        x: 3954
+        y: 4079
+        width: 1268
+        height: 685
+      alignment: 9
+      pivot: {x: 0.4731861, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d43e51ec62503b842b2ce2cf4bde72cb
+      internalID: -654874807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LB_Button
+      rect:
+        serializedVersion: 2
+        x: 5224
+        y: 4059
+        width: 1251
+        height: 705
+      alignment: 9
+      pivot: {x: 0.4940048, y: 0.2680851}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67055d2af2d0d6f47ae035e3f85bd19e
+      internalID: 2087496957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LS_Button
+      rect:
+        serializedVersion: 2
+        x: 6477
+        y: 3684
+        width: 1224
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.4852941, y: 0.19074073}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 259a4e6a6d7b9fd4295e423fe93420a3
+      internalID: -434972072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LT_Button
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2069
+        width: 859
+        height: 1284
+      alignment: 9
+      pivot: {x: 0.46332946, y: 0.45482865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a46a4050d9336f4087571b7c92b0915
+      internalID: -797747695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RB_Button
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 2648
+        width: 1251
+        height: 705
+      alignment: 9
+      pivot: {x: 0.4940048, y: 0.2680851}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2276c7db51bd53c41be0d100fdb19952
+      internalID: -1984871051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RS_Button
+      rect:
+        serializedVersion: 2
+        x: 2115
+        y: 2297
+        width: 1224
+        height: 1056
+      alignment: 9
+      pivot: {x: 0.4852941, y: 0.19507575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e5d5777f9156f54b842efc192d6e59d
+      internalID: 1498554174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RT_Button
+      rect:
+        serializedVersion: 2
+        x: 3341
+        y: 2069
+        width: 859
+        height: 1284
+      alignment: 9
+      pivot: {x: 0.46332946, y: 0.45482865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97c65a0372314154eafa1549dd9eba5d
+      internalID: -1643760775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: X_button
+      rect:
+        serializedVersion: 2
+        x: 4202
+        y: 1944
+        width: 1411
+        height: 1409
+      alignment: 9
+      pivot: {x: 0.48334515, y: 0.42938253}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fb392f319629004ea15490e3a418ad6
+      internalID: -482102544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Y_Button
+      rect:
+        serializedVersion: 2
+        x: 5615
+        y: 1944
+        width: 1411
+        height: 1409
+      alignment: 9
+      pivot: {x: 0.48334515, y: 0.42938253}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84e33a4d7cf4a8d44a84bcea14ddc331
+      internalID: -877489638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d788e74672ba4d44a8b14a83ab5e3ccb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      1_Direction: -1733139733
+      2_Direction: -268885559
+      3_Direction: -714794844
+      4_Direction: 800570077
+      5_Direction: -1974761260
+      6_Direction: -1273292163
+      7_Direction: -1441424464
+      8_Direction: -152092980
+      9_Direction: 1184417613
+      A_Button: 356613139
+      B_Button: -1540457124
+      Center_Button_1: -7931799
+      Center_Button_2: -215910539
+      Center_Button_3: -654874807
+      LB_Button: 2087496957
+      LS_Button: -434972072
+      LT_Button: -797747695
+      RB_Button: -1984871051
+      RS_Button: 1498554174
+      RT_Button: -1643760775
+      X_button: -482102544
+      Y_Button: -877489638
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -10,26 +10,32 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
 {
     [SerializeField] private TMP_Text _characterMoveListHeader;
     [SerializeField] private GameObject TextSample;
+    [SerializeField] private Transform MovelistTransformObject;
+    [SerializeField] private MovelistGenerator _baseGenerator;
     [SerializeField] private MoveListObject P1_MoveList;
     [SerializeField] private MoveListObject P2_MoveList;
     public void SetPlayer1MoveListData(Character_MoveList moveList, string characterName) 
     {
         if (P1_MoveList.dataFilled == false)
         {
+            GameObject playerMovelist = GameObject.Instantiate(_baseGenerator.gameObject, MovelistTransformObject);
+            P1_MoveList.moveListInformationTarget = playerMovelist.transform;
+            P1_MoveList._moveListObject = playerMovelist.GetComponent<MovelistGenerator>();
             P1_MoveList.MoveListName = characterName;
-            SetMovelist(moveList, P1_MoveList);
-            P1_MoveList.dataFilled = true;
             _characterMoveListHeader.text = $"Player 1: {P1_MoveList.MoveListName} MOVE LIST";
+            P1_MoveList._moveListObject.SetMovelist(moveList, P1_MoveList);
+            P1_MoveList.dataFilled = true;
+            //SetMovelist(moveList, P1_MoveList);
         }
     }
     public void SetPlayer2MoveListData(Character_MoveList moveList, string characterName)
     {
-        if (P2_MoveList.dataFilled == false)
+        /*if (P2_MoveList.dataFilled == false)
         {
             P2_MoveList.MoveListName = characterName;
             SetMovelist(moveList, P2_MoveList);
             P2_MoveList.dataFilled = true;
-        }
+        }*/
         CycleMovelist();
     }
     public void SetMovelist(Character_MoveList moveList, MoveListObject moveListObject)
@@ -84,7 +90,7 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
     }
     public void CycleMovelist() 
     {
-        if (P1_MoveList.moveListInformationTarget.gameObject.activeInHierarchy) 
+       /* if (P1_MoveList.moveListInformationTarget.gameObject.activeInHierarchy) 
         {
             P1_MoveList.moveListInformationTarget.gameObject.SetActive(false);
             P2_MoveList.moveListInformationTarget.gameObject.SetActive(true);
@@ -101,7 +107,7 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
             P2_MoveList.moveListInformationTarget.gameObject.SetActive(false);
             P1_MoveList.moveListInformationTarget.gameObject.SetActive(true);
             _characterMoveListHeader.text = $"Player 1: {P1_MoveList.MoveListName} MOVE LIST";
-        }
+        }*/
         
     }
 
@@ -120,8 +126,8 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
 [Serializable]
 public class MoveListObject 
 {
-    public GameObject moveListObject;
     public Transform moveListInformationTarget;
+    public MovelistGenerator _moveListObject;
     public string MoveListName;
     public bool dataFilled;
 }
