@@ -31,13 +31,13 @@ public class TrainingMenu_Controller : MonoBehaviour
         DeactivateMenuOnStart();
     }
 
-    public void SetP1MoveListInformation(Character_MoveList movelist,string characterName) 
+    public void SetP1MoveListInformation(Character_MoveList movelist,string characterName, int playerID) 
     {
-        movelistMenu.SetPlayer1MoveListData(movelist, characterName);
+        movelistMenu.SetPlayer1MoveListData(movelist, characterName, playerID);
     }
-    public void SetP2MoveListInformation(Character_MoveList movelist, string characterName)
+    public void SetP2MoveListInformation(Character_MoveList movelist, string characterName, int playerID)
     {
-        movelistMenu.SetPlayer2MoveListData(movelist, characterName);
+        movelistMenu.SetPlayer2MoveListData(movelist, characterName, playerID);
     }
     public void SetupTrainingButtons(EventSystem _eventSystem)
     {

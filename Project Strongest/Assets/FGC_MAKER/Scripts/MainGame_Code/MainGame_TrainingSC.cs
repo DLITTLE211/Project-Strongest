@@ -28,8 +28,8 @@ public class MainGame_TrainingSC : MainGame_SettingsController
         _pauseMenu.GetComponent<TrainingMenu_Controller>().SetupTrainingButtons(_eventSystem);
         _eventSystem.firstSelectedGameObject = null;
 
-        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetP1MoveListInformation(mainPlayer.comboList3_0, mainPlayer.characterProfile.CharacterName);
-        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetP2MoveListInformation(secondaryPlayer.comboList3_0, secondaryPlayer.characterProfile.CharacterName);
+        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetP1MoveListInformation(mainPlayer.comboList3_0, mainPlayer.characterProfile.CharacterName, mainPlayer._side);
+        _pauseMenu.GetComponent<TrainingMenu_Controller>().SetP2MoveListInformation(secondaryPlayer.comboList3_0, secondaryPlayer.characterProfile.CharacterName, secondaryPlayer._side);
     }
     IEnumerator DelayGetTeleportPositions(float teleportTime = 3 / 60f)
     {

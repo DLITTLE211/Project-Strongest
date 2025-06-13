@@ -19,8 +19,8 @@ public class MainGame_VersusSC : MainGame_SettingsController
         _pauseMenu.GetComponent<VersusMenu_Controller>().SetupVersusButtons(_eventSystem);
         _eventSystem.firstSelectedGameObject = null;
 
-        _pauseMenu.GetComponent<VersusMenu_Controller>().SetP1MoveListInformation(mainPlayer.comboList3_0, mainPlayer.characterProfile.CharacterName);
-        _pauseMenu.GetComponent<VersusMenu_Controller>().SetP2MoveListInformation(secondaryPlayer.comboList3_0, secondaryPlayer.characterProfile.CharacterName);
+        _pauseMenu.GetComponent<VersusMenu_Controller>().SetP1MoveListInformation(mainPlayer.comboList3_0, mainPlayer.characterProfile.CharacterName, mainPlayer._side);
+        _pauseMenu.GetComponent<VersusMenu_Controller>().SetP2MoveListInformation(secondaryPlayer.comboList3_0, secondaryPlayer.characterProfile.CharacterName, secondaryPlayer._side);
         StartCoroutine(DelayGetTeleportPositions(teleportTime));
     }
     IEnumerator DelayGetTeleportPositions(float _teleportTime = 3 / 60f)
