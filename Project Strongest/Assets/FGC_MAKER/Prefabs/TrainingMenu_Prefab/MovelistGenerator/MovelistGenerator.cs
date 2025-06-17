@@ -10,6 +10,7 @@ public class MovelistGenerator : MonoBehaviour
     [SerializeField] private Transform _pageTransform;
     [SerializeField] private GameObject movelistPage;
     [SerializeField] private GameObject TextSample;
+    [SerializeField] private GameObject TextSample_Group;
     public List<GameObject> MovelistPages;
     [SerializeField] private int pageIndex;
 
@@ -71,15 +72,15 @@ public class MovelistGenerator : MonoBehaviour
             List<MoveListAttackInfo> stringNormalList = new List<MoveListAttackInfo>();
             for (int i = 0; i < moveList.stringNormalAttacks.Count; i++)
             {
-                stringNormalList.Add(moveList.stringNormalAttacks[i].CreateMoveListData());
+                stringNormalList.Clear();
                 for (int j = 0; j < moveList.stringNormalAttacks[i]._attackInput._correctInput.Count; j++)
                 {
                     Attack_BaseInput curStanceAttack = moveList.stringNormalAttacks[i]._attackInput._correctInput[j];
-                    stringNormalList.Add(curStanceAttack.CreateMoveListData());
+                    stringNormalList.Add(curStanceAttack.CreateMoveListData(moveList.stringNormalAttacks[i].SpecialAttackName));
                 }
+                BuildLayeredPageData(sNPage, stringNormalList, "String Normal Attacks");
             }
             MovelistPages.Add(sNPage);
-            BuildPageData(sNPage, stringNormalList, "String Normal Attacks");
         }
         #endregion
 
@@ -106,15 +107,16 @@ public class MovelistGenerator : MonoBehaviour
             List<MoveListAttackInfo> rekkaList = new List<MoveListAttackInfo>();
             for (int i = 0; i < moveList.rekkaSpecials.Count; i++)
             {
+                rekkaList.Clear();
                 rekkaList.Add(moveList.rekkaSpecials[i].CreateMoveListData());
                 for (int j = 0; j < moveList.rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++)
                 {
                     Attack_BaseInput curStanceAttack = moveList.rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[0];
-                    rekkaList.Add(curStanceAttack.CreateMoveListData());
+                    rekkaList.Add(curStanceAttack.CreateMoveListData(moveList.rekkaSpecials[i].RekkaSpecialAttack_Name));
                 }
+                BuildLayeredPageData(rekkaPage, rekkaList, "Rekka Attacks");
             }
             MovelistPages.Add(rekkaPage);
-            BuildPageData(rekkaPage, rekkaList, "Rekka Attacks");
         }
         #endregion
 
@@ -126,15 +128,16 @@ public class MovelistGenerator : MonoBehaviour
             List<MoveListAttackInfo> StanceList = new List<MoveListAttackInfo>();
             for (int i = 0; i < moveList.stanceSpecials.Count; i++)
             {
+                StanceList.Clear();
                 StanceList.Add(moveList.stanceSpecials[i].CreateMoveListData());
                 for (int j = 0; j < moveList.stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput.Count; j++)
                 {
                     Attack_BaseInput curStanceAttack = moveList.stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput[j];
-                    StanceList.Add(curStanceAttack.CreateMoveListData());
+                    StanceList.Add(curStanceAttack.CreateMoveListData(moveList.stanceSpecials[i].StanceSpecialAttack_Name));
                 }
+                BuildLayeredPageData(stancePage, StanceList, "Stance Attacks");
             }
             MovelistPages.Add(stancePage);
-            BuildPageData(stancePage, StanceList, "Stance Attacks");
         }
         #endregion
 
@@ -210,6 +213,32 @@ public class MovelistGenerator : MonoBehaviour
             MovelistPages[i].SetActive(activeState);
         }
     }
+    #region Layered Data Generation
+    public void BuildLayeredPageData(GameObject CurrentPage, List<MoveListAttackInfo> attackTypeData, string headerMessage)
+    {
+        TMP_Text headerText = CurrentPage.GetComponentInChildren<TMP_Text>();
+        headerText.SetText(SpriteToTextColorUtility.AppendSpriteName(headerMessage.ToUpper(), Color.white));
+        GridLayoutGroup layout = CurrentPage.GetComponentInChildren<GridLayoutGroup>();
+        GameObject curMoveTextAsset = GameObject.Instantiate(TextSample_Group, layout.transform);
+        curMoveTextAsset.GetComponentInChildren<TMP_Text>().SetText(attackTypeData[0].SpecialAttackName);
+        layout.cellSize = new Vector2(390,180);
+        layout.spacing = new Vector2(35, 20);
+        layout.padding.top = 40;
+        layout.constraintCount = 2;
+        curMoveTextAsset.GetComponent<Movelist_Display>().SetTextData(attackTypeData[0]);
+        for (int i = 1; i < attackTypeData.Count; i++)
+        {
+            MakeAndSetLayeredText(attackTypeData[i], curMoveTextAsset.GetComponentInChildren<GridLayoutGroup>().transform);
+        }
+    }
+    public void MakeAndSetLayeredText(MoveListAttackInfo newAttack, Transform location)
+    {
+        GameObject curMoveTextAsset = GameObject.Instantiate(TextSample, location);
+        Movelist_Display objectDisplay = curMoveTextAsset.GetComponent<Movelist_Display>();
+        objectDisplay.SetTextData(newAttack);
+    }
+    #endregion
+    #region Base Data Generation
     public void BuildPageData(GameObject CurrentPage, List<MoveListAttackInfo> attackTypeData, string headerMessage) 
     {
         TMP_Text headerText = CurrentPage.GetComponentInChildren<TMP_Text>();
@@ -227,6 +256,7 @@ public class MovelistGenerator : MonoBehaviour
         Movelist_Display objectDisplay = curMoveTextAsset.GetComponent<Movelist_Display>();
         objectDisplay.SetTextData(newAttack);
     }
+    #endregion
     public void SetGridLayoutSizing(GridLayoutGroup currentLayout, int count) 
     {
         Vector2 sizing = new Vector2(391, 75);

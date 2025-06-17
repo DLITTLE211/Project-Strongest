@@ -42,12 +42,12 @@ public class Attack_BaseInput
         property.SetChipDamageValue();
         property.attackHashes = Animator.StringToHash(property.AttackAnims.animName);
     }
-    public MoveListAttackInfo CreateMoveListData()
+    public MoveListAttackInfo CreateMoveListData(string specialAttackName = "")
     {
         string attackName = property._attackName;
         string specialMoveInput = _correctSequence.Contains("0") ?_correctSequence.Remove(0,1) : _correctSequence;
         float _meterRequirement = property._meterRequirement;
-        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement);
+        MoveListAttackInfo newMoveListAttackInfo = new MoveListAttackInfo(attackName, specialMoveInput, _meterRequirement, specialAttackName);
 
         return newMoveListAttackInfo;
     }

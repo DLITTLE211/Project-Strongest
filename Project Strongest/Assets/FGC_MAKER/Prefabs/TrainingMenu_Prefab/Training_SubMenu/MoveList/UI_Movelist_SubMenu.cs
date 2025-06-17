@@ -20,6 +20,7 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         if (P1_MoveList.dataFilled == false)
         {
             SetMovelistData(P1_MoveList, moveList, characterName, playerID);
+            _characterMoveListHeader.text = P1_MoveList.headerMessage;
             activeMoveList = P1_MoveList;
         }
     }
@@ -43,6 +44,7 @@ public class UI_Movelist_SubMenu : UI_SubMenuBase
         if (P2_MoveList.dataFilled == false)
         {
             SetMovelistData(P2_MoveList, moveList, characterName, playerID);
+            P2_MoveList.moveListInformationTarget.gameObject.SetActive(false);
         }
     }
     public void CycleMovelist()
@@ -69,11 +71,13 @@ public class MoveListObject
 [Serializable]
 public class MoveListAttackInfo
 {
+    public string SpecialAttackName;
     public string AttackName;
     public string AttackInput;
     public float meterRequirement;
-    public MoveListAttackInfo(string _name, string _input, float _m_requirement) 
+    public MoveListAttackInfo(string _name, string _input, float _m_requirement, string _specialAttackName = "") 
     {
+        SpecialAttackName = _specialAttackName;
         AttackName = _name;
         AttackInput = _input;
         meterRequirement = _m_requirement;
