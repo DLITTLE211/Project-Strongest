@@ -200,14 +200,20 @@ public class CSSubMenu_CharacterSelectController : CharacterSelect_SubMenuBase
         }
         if (curCursor.cursorPage.chosenCharacter != null)
         {
-            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(curCursor.cursorPage.chosenCharacter, curCursor.cursorPage.chosenAmplifier, curCursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
+            Character_Profile _chosenCharacter = curCursor.cursorPage.chosenCharacter;
+            int randomAmplifier = UnityEngine.Random.Range(0, _AmplifyPageController.ActiveAmplifiers.Count - 1);
+            Amplifiers chosenAmplifier = curCursor.cursorPage.chosenAmplifier != null ? curCursor.cursorPage.chosenAmplifier : _AmplifyPageController.ActiveAmplifiers[randomAmplifier];
+            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_chosenCharacter, chosenAmplifier, curCursor.ChosenPlayerSide, colorIndex, Character_SubStates.Controlled);
             return rightPlayerCharacter;
         }
-        return RandomizeChoice(_characterSelect.player2, curCursor);
+        ChosenCharacter _randomizedCharacter = RandomizeChoice(_characterSelect.player2, curCursor);
+        curCursor.cursorPage.chosenCharacter = _randomizedCharacter.chosenCharacter;
+        curCursor.cursorPage.chosenAmplifier = _randomizedCharacter.chosenAmplifier;
+        return _randomizedCharacter;
     }
     public ChosenCharacter RandomizeChoice(ChooseSide_Object chosenSide, CharacterSelect_Cursor cursorObject)
     {
-        int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);
+        int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count);
         int randomAmplifier = UnityEngine.Random.Range(0, _AmplifyPageController.ActiveAmplifiers.Count - 1);
         int colorIndex = _playerCursors[1].cursorPage.colorSelectIndex;
         if (_playerCursors[0].cursorPage.chosenCharacter == _activeProfiles[randomProfile])
