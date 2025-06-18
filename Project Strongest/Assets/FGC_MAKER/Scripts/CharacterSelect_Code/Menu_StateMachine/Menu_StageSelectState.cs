@@ -64,14 +64,13 @@ public class Menu_StageSelectState : Menu_BaseState
     {
         if (_currentCursor.canChooseStage)
         {
+            _stageSelectController.DeactivateRoundSelectObject();
             if (_stageSelectController.roundCountSelected)
             {
                 _stageSelectController.roundCountSelected = false;
-                _stageSelectController.DeactivateRoundSelectObject();
                 return;
             }
             _stageSelectController.stageSelected = false;
-            //_characterSelect.SetChosenStage(null);
             _stageSelectController.Deactivate();
             _menuStateMachine.CallCharacterSelectState();
         }
