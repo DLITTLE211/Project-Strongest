@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce781af4dca183f49b5c73dda845874f, type: 3}
+  m_Name: Baki_Young_Profile
+  m_EditorClassIdentifier: 
+  CharacterName: Baki (Young)
+  CharacterID: 3
+  CharacterProfileImage: {fileID: 1312054844, guid: 6b03428a6ccacab4790e908f83d3b3e7, type: 3}
+  CharacterSelectIcon: {fileID: 0}
+  Mass: 90
+  Height: 155
+  Weight: 152
+  hurtboxSizing:
+    radius: 0
+    hurtboxPosition: {x: 0, y: 0, z: 0}
+    hurtboxSizing: {x: 0, y: 0, z: 0}
+    RightFacingBias: 0
+    LeftFacingBias: 0
+  collisionSizing:
+    headRadius: 0
+    headHeight: 0
+    headHurtboxPositioning: {x: 0, y: 0, z: 0}
+    bodyRadius: 0
+    bodyHeight: 0
+    bodyHurtboxPositioning: {x: 0, y: 0, z: 0}
+  MoveVelocity: 1.95
+  JumpForce: 315
+  InAirMoveForce: 115
+  dashSpeed: 0
+  MaxHealth: 185
+  MaxStunValue: 30
+  DefenseValue: 45
+  HealthRegenRate: 4.5
+  _characterSkins:
+    _modelMaterials: []
+    ColorSets: []
+  characterModel: {fileID: 0}
+  characterAnimator: {fileID: 0}
+  cAnimatorScript: {fileID: 0}
+  AllCharacterAnimations: []
+  CharacterModel: {fileID: 0}
+  properHitResponseAnimations: []
+  AmplifyAnim: {fileID: 0}
+  StandBlockAnim: {fileID: 0}
+  CrouchBlockAnim: {fileID: 0}
+  _characterMoveList: {fileID: 0}
+  moveListCount: 1
+  CharacterMoveListPrefab: []
+  _NewCharacterMobility: {fileID: 0}
+  BasicCharacterInteractions: []
+  SpecialCharacterInteractions: []
