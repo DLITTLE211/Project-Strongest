@@ -41,8 +41,43 @@ MonoBehaviour:
   DefenseValue: 45
   HealthRegenRate: 4.5
   _characterSkins:
-    _modelMaterials: []
-    ColorSets: []
+    _modelMaterials:
+    - {fileID: 2100000, guid: 38e4c301f93035d4a9ee0568b5c1693a, type: 2}
+    - {fileID: 2100000, guid: a26102fb47faa984e80b3d65fd993e56, type: 2}
+    - {fileID: 2100000, guid: 65f82f6cf17aec24f8791c44edc75966, type: 2}
+    - {fileID: 2100000, guid: f00095988c450614e82a6cbe1d0b445e, type: 2}
+    - {fileID: 2100000, guid: 3dc34dd4624b23949a9564e567525221, type: 2}
+    ColorSets:
+    - _imageSet:
+      - {fileID: 2800000, guid: 384ccf642ea4acc4ba777d8ca960f37c, type: 3}
+      - {fileID: 2800000, guid: 61923bd4a5eeec046a4b88962a2a2b82, type: 3}
+      - {fileID: 2800000, guid: 809a0af6bf1cda049ae803b45dd5cfcd, type: 3}
+      - {fileID: 2800000, guid: d8e20d7fe9f4c3a4581e7beea23e227d, type: 3}
+      - {fileID: 2800000, guid: b3aa7a85d4dca3141b0aaa7e66aec226, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: 83aae684ac9d79740b2685091a695549, type: 3}
+      - {fileID: 2800000, guid: c9b92cfbd5c876342ade1cc7bd610bb2, type: 3}
+      - {fileID: 2800000, guid: 6e7e3128af6dcc04ea223feec7d0ed09, type: 3}
+      - {fileID: 2800000, guid: d8e20d7fe9f4c3a4581e7beea23e227d, type: 3}
+      - {fileID: 2800000, guid: b3aa7a85d4dca3141b0aaa7e66aec226, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: fe2ac41fdf59ccd41a545a9ec8d63567, type: 3}
+      - {fileID: 2800000, guid: f0ee69d1d058c1845a3ff05ca35b56cb, type: 3}
+      - {fileID: 2800000, guid: 2395bae5a47a90a41aa638029d5571df, type: 3}
+      - {fileID: 2800000, guid: d8e20d7fe9f4c3a4581e7beea23e227d, type: 3}
+      - {fileID: 2800000, guid: b3aa7a85d4dca3141b0aaa7e66aec226, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: c9171d14657c7ff499a1dd83afb2ebca, type: 3}
+      - {fileID: 2800000, guid: 4a0fb2ca4b1c3e940a8c447a6791f7ec, type: 3}
+      - {fileID: 2800000, guid: cf228b01831038b43aabc75e767ad5d2, type: 3}
+      - {fileID: 2800000, guid: d8e20d7fe9f4c3a4581e7beea23e227d, type: 3}
+      - {fileID: 2800000, guid: b3aa7a85d4dca3141b0aaa7e66aec226, type: 3}
+    - _imageSet:
+      - {fileID: 2800000, guid: 9f9271355aad8484f9d43fc51c83f3ea, type: 3}
+      - {fileID: 2800000, guid: 285baa655e581fb4f86e22d1f5c4ca61, type: 3}
+      - {fileID: 2800000, guid: 29022ceca7b80814d8ede292c5600c95, type: 3}
+      - {fileID: 2800000, guid: d8e20d7fe9f4c3a4581e7beea23e227d, type: 3}
+      - {fileID: 2800000, guid: b3aa7a85d4dca3141b0aaa7e66aec226, type: 3}
   characterModel: {fileID: 0}
   characterAnimator: {fileID: 0}
   cAnimatorScript: {fileID: 0}
