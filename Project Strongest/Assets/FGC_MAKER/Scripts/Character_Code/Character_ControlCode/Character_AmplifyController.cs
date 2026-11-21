@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -44,27 +43,21 @@ public class Character_AmplifyController : MonoBehaviour
     }
     public void DeactivateInstantPassiveAmplify()
     {
-        if (chosenAmplifier == null)
-        {
-            return;
-        }
-        if (chosenAmplifier.currentState == ActiveState.Inactive)
-        {
-            return;
-        }
-        if (chosenAmplifier.durationType != DurationType.Permenant)
-        {
-            return;
-        }
-        if (chosenAmplifier.fillType != FillType.Instant)
-        {
-            return;
-        }
-        if (chosenAmplifier.amplifier != StatusEffect.Effect_Amplify.Perfectionist)
+        if (CheckChosenInstantAmplifier()) 
         {
             return;
         }
         chosenAmplifier.DeactivateInstantPassiveAmplify();
+    }
+    bool CheckChosenInstantAmplifier() 
+    {
+        bool _isChosenNull = chosenAmplifier == null;
+        if (_isChosenNull) return true;
+        bool _isChosenInactive = chosenAmplifier?.currentState == ActiveState.Inactive;
+        bool _isChosenDurationTimed = chosenAmplifier?.durationType == DurationType.Timed;
+        bool isChosenFillStandard = chosenAmplifier?.fillType == FillType.Standard;
+        bool isChosenNotPerfection = chosenAmplifier?.amplifier != StatusEffect.Effect_Amplify.Perfectionist;
+        return _isChosenNull && _isChosenInactive && _isChosenDurationTimed && isChosenFillStandard && isChosenNotPerfection;
     }
     public void ActivateInstantPassiveAmplify()
     {

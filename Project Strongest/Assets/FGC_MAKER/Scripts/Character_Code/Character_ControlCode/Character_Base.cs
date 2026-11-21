@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 using FightingGame_FrameData;
 public class Character_Base : MonoBehaviour
 {
-
-
     #region Character Profile Data
     [Header("__________Character Profile Data__________")]
     public Character_Profile characterProfile;
@@ -600,10 +598,6 @@ public class Character_Base : MonoBehaviour
             _cADetection.CheckButtonPressed(attackButtons);
             _cADetection.CallReturnButton();
             _timer.TimerCountDown();
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && verifyMoves) 
-        {
-            TEST_ATTACKPROPERTY(moveListIndex);
         }
     }
     bool SetBoolStates(bool check = false) 

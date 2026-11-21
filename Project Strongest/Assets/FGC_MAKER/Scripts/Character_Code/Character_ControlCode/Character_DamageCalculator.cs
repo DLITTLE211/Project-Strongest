@@ -5,27 +5,28 @@ using System.Collections.Generic;
 
 public class Character_DamageCalculator : MonoBehaviour
 {
-    [SerializeField] private float curRawDamage,curChipDamage;
-    [SerializeField] private float calculatedDamage;
-    [SerializeField] private float calculatedRecovDamage;
-    [SerializeField] private float calculatedScaling;
-    [SerializeField] private float calculatedMeterScaling;
+    [SerializeField] private TMP_Text _damageText;
+    private float damageTextAmount;
+    private bool victoryHit;
+    private bool allowDeathCheck;
 
-    [SerializeField] private float counterHitMult; 
-    [SerializeField] private float afflictionDebuffDamage;
+    private float curRawDamage,curChipDamage;
+    private float calculatedDamage;
+    private float calculatedRecovDamage;
+    private float calculatedScaling;
+    private float calculatedMeterScaling;
 
-    [SerializeField] private float buffDamageMultiplier;
-    [SerializeField] private float chipBuffDamageMultiplier;
-    [SerializeField] private float buffDefensiveMultiplier;
+    private float counterHitMult; 
+    private float afflictionDebuffDamage;
+
+    private float buffDamageMultiplier;
+    private float chipBuffDamageMultiplier;
+    private float buffDefensiveMultiplier;
 
     public Character_Health _healtController;
     public Character_ComboCounter _oppCounter;
     public Character_Base _base;
 
-    [SerializeField] private TMP_Text _damageText;
-    float damageTextAmount;
-    bool victoryHit;
-    bool allowDeathCheck;
     public bool isDead;
     #region Damage Functions
     private void Start()

@@ -1,14 +1,31 @@
+using FightingGame_FrameData;
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 public class Character_InputDetection : MonoBehaviour
 {
     [SerializeField] private Character_Base _base;
+    [SerializeField] private Dictionary<Vector2, int> moveAxes;
     private int lastNum;
     public bool isTerrified;
     private void Start()
     {
+        SetupMoveAxes();
+    }
+    void SetupMoveAxes()
+    {
         lastNum = 5;
+        moveAxes = new Dictionary<Vector2, int>();
+        int startingValue = 1;
+        for (int yAxis = -1; yAxis < 2; yAxis++) 
+        {
+            for (int xAxis = -1; xAxis < 2; xAxis++)
+            {
+                moveAxes.Add(new Vector2(xAxis,yAxis),startingValue);
+                startingValue++;
+            }
+        }
     }
     public void ReceiveInput()
     {
@@ -20,72 +37,35 @@ public class Character_InputDetection : MonoBehaviour
             _base.yVal = _base.player.GetAxisRaw(_base.moveAxes[5].Button_Element.actionId);
         }
         catch (ArgumentOutOfRangeException) { return; }
-        //Will need to be revised
      
+        int _terrifierMultiplier = isTerrified ? -1 : 1;
         _base.xVal = (_base.xVal >= _base.controllerYield.positiveXYield) ? 1 : ((_base.xVal <= -_base.controllerYield.negativeXYield) ? -1 : 0);
         _base.yVal = (_base.yVal >= _base.controllerYield.positiveYYield) ? 1 : ((_base.yVal <= -_base.controllerYield.negativeXYield) ? -1 : 0);
-        if (isTerrified)
-        {
+        _base.numpadVector.x = _base.xVal * _terrifierMultiplier;
+        _base.numpadVector.y = _base.yVal * _terrifierMultiplier;
 
-            _base.numpadVector.x = -_base.xVal;
-            _base.numpadVector.y = -_base.yVal;
-        }
-        else
-        {
-
-            _base.numpadVector.x = _base.xVal;
-            _base.numpadVector.y = _base.yVal;
-        }
         ConvertVector(_base.numpadVector);
     }
-    async void ConvertVector(Vector2 vector)
+    async void ConvertVector(Vector2 moveAxis)
     {
-        string directionalInput = ($"{vector.x},{vector.y}");
-        switch (directionalInput)
+        int _outputValue = -1;
+        if (moveAxes.TryGetValue(moveAxis, out _outputValue)) 
         {
-            case "-1,-1":
-                _base.numpadValue = 1;
-                break;
-            case "0,-1":
-                _base.numpadValue = 2;
-                break;
-            case "1,-1":
-                _base.numpadValue = 3;
-                break;
-            case "-1,0":
-                _base.numpadValue = 4;
-                break;
-            case "0,0":
-                _base.numpadValue = 5;
-                break;
-            case "1,0":
-                _base.numpadValue = 6;
-                break;
-            case "-1,1":
-                _base.numpadValue = 7;
-                break;
-            case "0,1":
-                _base.numpadValue = 8;
-                break;
-            case "1,1":
-                _base.numpadValue = 9;
-                break;
-            default:
-                break;
+            _base.numpadValue = _outputValue;
+            _base.widget.GetAxisLocation(_base.numpadValue);
+            _base._timer.UpdateInputLogger(_base.moveAxes[0]);
+            if (lastNum != _base.numpadValue)
+            {
+                lastNum = _base.numpadValue;
+            }
+            await SendDirectionInputToCombo();
         }
-        _base.widget.GetAxisLocation(_base.numpadValue);
-        _base._timer.UpdateInputLogger(_base.moveAxes[0]);
-        if (lastNum != _base.numpadValue)
-        {
-            lastNum = _base.numpadValue;
-        }
-        await SendDirectionInputToCombo();
     }
     async Task SendDirectionInputToCombo() 
     {
-        float TwoFrameDelay = (2 * (1 / 60f));
+        float TwoFrameDelay = (2 * Base_FrameCode.ONE_FRAME);
         int delayInMS = (int)(TwoFrameDelay * 1000f);
-        await Task.Delay(delayInMS);
+        await Task.Delay(TimeSpan.FromSeconds(TwoFrameDelay));
         _base.ReturnInputValue(_base.numpadValue);
     }
 }

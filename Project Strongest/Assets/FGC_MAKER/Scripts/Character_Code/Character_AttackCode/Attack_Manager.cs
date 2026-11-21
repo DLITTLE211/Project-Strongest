@@ -256,25 +256,11 @@ public class Attack_Manager : MonoBehaviour
         switch (newAttack._airInfo) 
         {
             case AirAttackInfo.GroundOnly:
-                if (_base._cHurtBox.IsGrounded())
-                {
-                    return true;
-                }
-                else 
-                {
-                    return false;
-                }
+                return _base._cHurtBox.IsGrounded();
             case AirAttackInfo.AirOk:
                 return true;
             case AirAttackInfo.AirOnly:
-                if (!(_base._cHurtBox.IsGrounded()))
-                {
-                    return true;
-                }
-                else 
-                {
-                    return false;
-                }
+                return !_base._cHurtBox.IsGrounded();
         }
         return false;
     }
